@@ -1,0 +1,991 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns="http://www.irs.gov/efile" xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.irs.gov/efile" elementFormDefault="qualified" attributeFormDefault="unqualified">
+
+	<xsd:annotation>
+		<xsd:documentation>
+			<Description>IRS e-file Schema - IRS Form 1116 Foreign Tax Credit</Description>
+			<TaxYear>2018</TaxYear>
+			<MaturityLevel>Final Release</MaturityLevel>
+			<ReleaseDate>February 13, 2019</ReleaseDate>
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:include schemaLocation="../../../Common/efileTypes.xsd"/>
+
+	<!-- ===================================================================== -->
+	<!-- =========================== IRS Form 1116 =========================== -->
+	<!-- ===================================================================== -->
+
+	<xsd:element name="IRS1116">
+		<xsd:annotation>
+			<xsd:documentation>IRS Form 1116</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:complexContent>
+				<xsd:extension base="IRS1116Type">
+					<xsd:attributeGroup ref="DocumentAttributes">
+						<xsd:annotation>
+							<xsd:documentation>Common return document attributes</xsd:documentation>
+						</xsd:annotation>
+					</xsd:attributeGroup>
+					<xsd:attribute name="documentName" type="xsd:string" fixed="IRS1116">
+						<xsd:annotation>
+							<xsd:documentation>IRS internal use only. To avoid error in the return  do not include the attribute name or value.</xsd:documentation>
+						</xsd:annotation>
+					</xsd:attribute>
+					<xsd:attribute name="referenceDocumentId" type="IdListType">
+						<xsd:annotation>
+							<xsd:documentation>List of document ID's of forms  schedules  supporting info. etc. attached to this form</xsd:documentation>
+						</xsd:annotation>
+					</xsd:attribute>
+					<xsd:attribute name="referenceDocumentName" type="StringType" fixed="FinancialServicesActiveFinancingIncomeStatement ElectionToUseExchangeRateStatement ForeignAuditExplanationStatement"/>
+				</xsd:extension>
+			</xsd:complexContent>
+		</xsd:complexType>
+	</xsd:element>
+
+	<xsd:complexType name="IRS1116Type">
+		<xsd:annotation>
+			<xsd:documentation>Content model for Form 1116</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+
+			<!-- Alternative Minimum Tax Code -->
+			<xsd:element name="AlternativeMinimumTaxCd" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Alternative Minimum Tax Code</Description>
+						<ELFFieldNumber>0010</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+				<xsd:simpleType>
+					<xsd:restriction base="StringType">
+						<xsd:enumeration value="AMT"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+
+			<xsd:choice>
+			        <!-- Foreign Income Section 951A Indicator -->
+				<xsd:element name="ForeignIncmSection951AInd" type="CheckboxType">
+					<xsd:annotation>
+						<xsd:documentation>
+							<Description>Foreign Income Section 951A Indicator</Description>
+							<LineNumber>a</LineNumber>
+						</xsd:documentation>
+					</xsd:annotation>
+				</xsd:element>
+				<!-- Foreign Branch Income Indicator -->
+				<xsd:element name="ForeignBranchIncomeInd" type="CheckboxType">
+					<xsd:annotation>
+						<xsd:documentation>
+							<Description>Foreign Branch Income Indicator</Description>
+							<LineNumber>b</LineNumber>
+						</xsd:documentation>
+					</xsd:annotation>
+				</xsd:element>
+				<!-- Foreign Income Passive Category Indicator -->
+				<xsd:element name="ForeignIncPassiveCategoryInd" type="CheckboxType">
+					<xsd:annotation>
+						<xsd:documentation>
+							<Description>Foreign Income Passive Category Indicator</Description>
+							<LineNumber>c</LineNumber>
+							<ELFFieldNumber>0020</ELFFieldNumber>
+						</xsd:documentation>
+					</xsd:annotation>
+				</xsd:element>
+				<!-- Foreign Income General Category Indicator -->
+				<xsd:element name="ForeignIncGeneralCategoryInd" type="CheckboxType">
+					<xsd:annotation>
+						<xsd:documentation>
+							<Description>Foreign Income General Category Indicator</Description>
+							<LineNumber>d</LineNumber>
+							<ELFFieldNumber>0080</ELFFieldNumber>
+						</xsd:documentation>
+					</xsd:annotation>
+				</xsd:element>
+				<!-- Foreign Income Section 901(j) Indicator -->
+				<xsd:element name="ForeignIncSection901jInd" type="CheckboxType">
+					<xsd:annotation>
+						<xsd:documentation>
+							<Description>Foreign Income Section 901(j) Indicator</Description>
+							<LineNumber>e</LineNumber>
+							<ELFFieldNumber>0093</ELFFieldNumber>
+						</xsd:documentation>
+					</xsd:annotation>
+				</xsd:element>
+				<!-- Foreign Income Resourced Treaty Indicator -->
+				<xsd:element name="ForeignIncResourcedTreatyInd" type="CheckboxType">
+					<xsd:annotation>
+						<xsd:documentation>
+							<Description>Foreign Income Resourced Treaty Indicator</Description>
+							<LineNumber>f</LineNumber>
+							<ELFFieldNumber>0096</ELFFieldNumber>
+						</xsd:documentation>
+					</xsd:annotation>
+				</xsd:element>
+				<!-- Foreign Income Lump Sum Distributions Indicator -->
+				<xsd:element name="ForeignIncLumpSumDistribInd" type="CheckboxType">
+					<xsd:annotation>
+						<xsd:documentation>
+							<Description>Foreign Income Lump Sum Distributions Indicator</Description>
+							<LineNumber>g</LineNumber>
+							<ELFFieldNumber>0098</ELFFieldNumber>
+						</xsd:documentation>
+					</xsd:annotation>
+				</xsd:element>
+			</xsd:choice>
+
+			<!-- Residence Foreign Country Name -->
+			<xsd:element name="ResidenceForeignCountryCd" type="AllCountriesType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Residence Foreign Country Name</Description>
+						<LineNumber>h</LineNumber>
+						<ELFFieldNumber>0100</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Foreign Regulated Investment Comp Code -->
+			<xsd:element name="ForeignRegulatedInvestmtCompCd" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Foreign Regulated Investment Comp Code</Description>
+						<LineNumber>i</LineNumber>
+						<ELFFieldNumber>0110</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+				<xsd:simpleType>
+					<xsd:restriction base="StringType">
+						<xsd:enumeration value="RIC"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+
+			<!-- Foreign Income High Taxed Kickout Code -->
+			<xsd:element name="ForeignIncHighTaxedKickOutCd" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Foreign Income High Taxed Kickout Code</Description>
+						<LineNumber>i</LineNumber>
+						<ELFFieldNumber>0120</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+				<xsd:simpleType>
+					<xsd:restriction base="StringType">
+						<xsd:enumeration value="HTKO"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+
+			<!-- Foreign Tax Credit Source -->
+			<xsd:element name="ForeignTaxCreditSource" minOccurs="0" maxOccurs="unbounded">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:choice>
+							<!-- Foreign Tax Credit Splitting Event Code -->
+							<xsd:element name="ForeignTaxCrSplittingEventCd" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>
+										<Description>Foreign Tax Credit Splitting Event Code</Description>
+										<LineNumber>i(A-C)</LineNumber>
+										<ELFFieldNumber>0130 0150 0170</ELFFieldNumber>
+									</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="StringType">
+										<xsd:enumeration value="909 INCOME"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<!-- Foreign Country Name -->
+							<xsd:element name="ForeignCountryCd" type="CountryType" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>
+										<Description>Foreign Country Name</Description>
+										<LineNumber>i(A-C)</LineNumber>
+										<ELFFieldNumber>0130 0150 0170</ELFFieldNumber>
+									</xsd:documentation>
+								</xsd:annotation>
+							</xsd:element>
+						</xsd:choice>
+						<!-- Foreign Gross Income Amount -->
+						<xsd:element name="ForeignGrossIncomeAmt" type="USAmountType" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Foreign Gross Income Amount</Description>
+									<LineNumber>1a(A-C)</LineNumber>
+									<ELFFieldNumber>0140 0160 0180</ELFFieldNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						<!-- Foreign Income Related Expenses Amount -->
+						<xsd:element name="ForeignIncRelatedExpensesAmt" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Foreign Income Related Expenses Amount</Description>
+									<LineNumber>2(A-C)</LineNumber>
+									<ELFFieldNumber>0200 0320 0440</ELFFieldNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+							<xsd:complexType>
+								<xsd:simpleContent>
+									<xsd:extension base="USAmountType">
+										<xsd:attribute name="referenceDocumentId" type="IdListType"/>
+										<xsd:attribute name="referenceDocumentName" type="StringType" fixed="ForeignIncmRelatedExpensesStmt">
+											<xsd:annotation>
+												<xsd:documentation>
+													<ELFFieldNumber>0205 0325 0445</ELFFieldNumber>
+												</xsd:documentation>
+											</xsd:annotation>
+										</xsd:attribute>
+									</xsd:extension>
+								</xsd:simpleContent>
+							</xsd:complexType>
+						</xsd:element>
+						<!-- Itemized Or Standard Deduction Amount -->
+						<xsd:element name="ItemizedOrStandardDeductionAmt" type="USAmountType" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Itemized Or Standard Deduction Amount</Description>
+									<LineNumber>3a(A-C)</LineNumber>
+									<ELFFieldNumber>0210 0330 0450</ELFFieldNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						<!-- Other Deductions Not Related Amount -->
+						<xsd:element name="OtherDeductionsNotRelatedAmt" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Other Deductions Not Related Amount</Description>
+									<LineNumber>3b(A-C)</LineNumber>
+									<ELFFieldNumber>0220 0340 0460</ELFFieldNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+							<xsd:complexType>
+								<xsd:simpleContent>
+									<xsd:extension base="USAmountType">
+										<xsd:attribute name="referenceDocumentId" type="IdListType"/>
+										<xsd:attribute name="referenceDocumentName" type="StringType" fixed="OtherDeductionsNotRelatedStatement">
+											<xsd:annotation>
+												<xsd:documentation>
+													<ELFFieldNumber>0225 0345 0465</ELFFieldNumber>
+												</xsd:documentation>
+											</xsd:annotation>
+										</xsd:attribute>
+									</xsd:extension>
+								</xsd:simpleContent>
+							</xsd:complexType>
+						</xsd:element>
+						<!-- Total Deduction Amount -->
+						<xsd:element name="TotalDeductionAmt" type="USAmountType" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Total Deduction Amount</Description>
+									<LineNumber>3c(A-C)</LineNumber>
+									<ELFFieldNumber>0230 0350 0470</ELFFieldNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						<!-- Gross Foreign Source Income Amount -->
+						<xsd:element name="GrossForeignSourceIncomeAmt" type="USAmountType" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Gross Foreign Source Income Amount</Description>
+									<LineNumber>3d(A-C)</LineNumber>
+									<ELFFieldNumber>0240 0260 0480</ELFFieldNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						<!-- Gross Income Amount -->
+						<xsd:element name="GrossIncomeAmt" type="USAmountType" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Gross Income Amount</Description>
+									<LineNumber>3e(A-C)</LineNumber>
+									<ELFFieldNumber>0250 0370 0490</ELFFieldNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						<!-- Foreign Income Percentage -->
+						<xsd:element name="ForeignIncomePct" type="RatioType" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Foreign Income Percentage</Description>
+									<LineNumber>3f(A-C)</LineNumber>
+									<ELFFieldNumber>0260 0380 0500</ELFFieldNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						<!-- Pro Rata Deductions Not Related Amount -->
+						<xsd:element name="ProRataDeductionsNotRelatedAmt" type="USAmountType" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Pro Rata Deductions Not Related Amount</Description>
+									<LineNumber>3g(A-C)</LineNumber>
+									<ELFFieldNumber>0270 0390 0510</ELFFieldNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						<!-- Apportioned Home Mortgage Interest Expenses Amount -->
+						<xsd:element name="ApportionedHomeMortgIntExpAmt" type="USAmountType" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Apportioned Home Mortgage Interest Expenses Amount</Description>
+									<LineNumber>4a(A-C)</LineNumber>
+									<ELFFieldNumber>0280 0400 0520</ELFFieldNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						<!-- Apportioned Other Interest Expenses Amount -->
+						<xsd:element name="ApportionedOtherInterestExpAmt" type="USAmountType" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Apportioned Other Interest Expenses Amount</Description>
+									<LineNumber>4b(A-C)</LineNumber>
+									<ELFFieldNumber>0290 0410 0530</ELFFieldNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						<!-- Foreign Source Loss Amount -->
+						<xsd:element name="ForeignSourceLossAmt" type="USAmountType" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Foreign Source Loss Amount</Description>
+									<LineNumber>5(A-C)</LineNumber>
+									<ELFFieldNumber>0300 0420 0540</ELFFieldNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						<!-- Foreign Income Net Deductions and Losses Amount -->
+						<xsd:element name="ForeignIncNetDeductAndLossAmt" type="USAmountType" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Foreign Income Net Deductions and Losses Amount</Description>
+									<LineNumber>6(A-C)</LineNumber>
+									<ELFFieldNumber>0310 0430 0550</ELFFieldNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						<xsd:choice>
+							<!-- Foreign Taxes Paid or Accrued Date -->
+							<xsd:element name="ForeignTaxesPaidOrAccruedDt" type="DateType" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>
+										<Description>Foreign Taxes Paid or Accrued Date</Description>
+										<LineNumber>l(A-C)</LineNumber>
+										<ELFFieldNumber>0600 0700 0800</ELFFieldNumber>
+									</xsd:documentation>
+								</xsd:annotation>
+							</xsd:element>
+							<!-- Foreign Tax Special Type Code -->
+							<xsd:element name="ForeignTaxSpecialTypeCd" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>
+										<Description>Foreign Tax Special Type Code</Description>
+										<LineNumber>l(A-C)</LineNumber>
+										<ELFFieldNumber>0600 0700 0800</ELFFieldNumber>
+									</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="StringType">
+										<xsd:enumeration value="1099 TAX"/>
+										<xsd:enumeration value="909 TAX"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+						</xsd:choice>
+						<!-- Foreign Tax Withheld on Dividend Amount -->
+						<xsd:element name="ForeignTaxWithheldOnDivAmt" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Foreign Tax Withheld on Dividend Amount</Description>
+									<LineNumber>m(A-C)</LineNumber>
+									<ELFFieldNumber>0610 0710 0810</ELFFieldNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+							<xsd:complexType>
+								<xsd:simpleContent>
+									<xsd:extension base="ForeignAmountType">
+										<xsd:attribute name="referenceDocumentId" type="IdListType"/>
+										<xsd:attribute name="referenceDocumentName" type="StringType" fixed="ForeignTaxWithheldOnDividendsStatement">
+											<xsd:annotation>
+												<xsd:documentation>
+													<ELFFieldNumber>0615 0715 0815</ELFFieldNumber>
+												</xsd:documentation>
+											</xsd:annotation>
+										</xsd:attribute>
+									</xsd:extension>
+								</xsd:simpleContent>
+							</xsd:complexType>
+						</xsd:element>
+						<!-- Foreign Tax Withheld on Rent Amount -->
+						<xsd:element name="ForeignTaxWithheldOnRentAmt" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Foreign Tax Withheld on Rent Amount</Description>
+									<LineNumber>n(A-C)</LineNumber>
+									<ELFFieldNumber>0620 0720 0820</ELFFieldNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+							<xsd:complexType>
+								<xsd:simpleContent>
+									<xsd:extension base="ForeignAmountType">
+										<xsd:attribute name="referenceDocumentId" type="IdListType"/>
+										<xsd:attribute name="referenceDocumentName" type="StringType" fixed="ForeignTaxWithheldOnRentsAndRoyaltiesStatement">
+											<xsd:annotation>
+												<xsd:documentation>
+													<ELFFieldNumber>0625 0725 0825</ELFFieldNumber>
+												</xsd:documentation>
+											</xsd:annotation>
+										</xsd:attribute>
+									</xsd:extension>
+								</xsd:simpleContent>
+							</xsd:complexType>
+						</xsd:element>
+						<!-- Foreign Tax Withheld on Interest Amount -->
+						<xsd:element name="ForeignTaxWithheldOnIntAmt" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Foreign Tax Withheld on Interest Amount</Description>
+									<LineNumber>o(A-C)</LineNumber>
+									<ELFFieldNumber>0630 0730 0830</ELFFieldNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+							<xsd:complexType>
+								<xsd:simpleContent>
+									<xsd:extension base="ForeignAmountType">
+										<xsd:attribute name="referenceDocumentId" type="IdListType"/>
+										<xsd:attribute name="referenceDocumentName" type="StringType" fixed="ForeignTaxWithheldOnInterestStatement">
+											<xsd:annotation>
+												<xsd:documentation>
+													<ELFFieldNumber>0635 0735 0835</ELFFieldNumber>
+												</xsd:documentation>
+											</xsd:annotation>
+										</xsd:attribute>
+									</xsd:extension>
+								</xsd:simpleContent>
+							</xsd:complexType>
+						</xsd:element>
+						<!-- Other Currency Tax Paid Amount -->
+						<xsd:element name="OtherCurrencyTaxPaidAmt" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Other Currency Tax Paid Amount</Description>
+									<LineNumber>p(A-C)</LineNumber>
+									<ELFFieldNumber>0640 0740 0840</ELFFieldNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+							<xsd:complexType>
+								<xsd:simpleContent>
+									<xsd:extension base="ForeignAmountType">
+										<xsd:attribute name="referenceDocumentId" type="IdListType"/>
+										<xsd:attribute name="referenceDocumentName" type="StringType" fixed="OtherCurrencyTaxPaidStatement">
+											<xsd:annotation>
+												<xsd:documentation>
+													<ELFFieldNumber>0645 0745 0845</ELFFieldNumber>
+												</xsd:documentation>
+											</xsd:annotation>
+										</xsd:attribute>
+									</xsd:extension>
+								</xsd:simpleContent>
+							</xsd:complexType>
+						</xsd:element>
+						<!-- US Tax Withheld on Dividend Amount -->
+						<xsd:element name="USTaxWithheldOnDividendAmt" type="USAmountType" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>US Tax Withheld on Dividend Amount</Description>
+									<LineNumber>q(A-C)</LineNumber>
+									<ELFFieldNumber>0650 0750 0850</ELFFieldNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						<!-- US Tax Withheld on Rent Amount -->
+						<xsd:element name="USTaxWithheldOnRentAmt" type="USAmountType" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>US Tax Withheld on Rent Amount</Description>
+									<LineNumber>r(A-C)</LineNumber>
+									<ELFFieldNumber>0660 0760 0860</ELFFieldNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						<!-- US Tax Withheld on Interest Amount -->
+						<xsd:element name="USTaxWithheldOnInterestAmt" type="USAmountType" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>US Tax Withheld on Interest Amount</Description>
+									<LineNumber>s(A-C)</LineNumber>
+									<ELFFieldNumber>0670 0770 0870</ELFFieldNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						<!-- US Dollar Other Foreign Tax Paid Amount -->
+						<xsd:element name="USDollarOtherForeignTaxPaidAmt" type="USAmountType" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>US Dollar Other Foreign Tax Paid Amount</Description>
+									<LineNumber>t(A-C)</LineNumber>
+									<ELFFieldNumber>0680 0780 0880</ELFFieldNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						<!-- Total Foreign Tax Paid or Accrued Amount -->
+						<xsd:element name="TotalForeignTaxesPaidOrAccrAmt" type="USAmountType" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Total Foreign Tax Paid or Accrued Amount</Description>
+									<LineNumber>u(A-C)</LineNumber>
+									<ELFFieldNumber>0690 0790 0890</ELFFieldNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+
+			<xsd:choice minOccurs="0">
+				<!-- Income From Foreign Source Type Code -->
+				<xsd:element name="IncomeFromForeignSourceTypeCd" minOccurs="0">
+					<xsd:annotation>
+						<xsd:documentation>
+							<Description>Income From Foreign Source Type Code</Description>
+							<LineNumber>1a</LineNumber>
+							<ELFFieldNumber>0185</ELFFieldNumber>
+						</xsd:documentation>
+					</xsd:annotation>
+					<xsd:simpleType>
+						<xsd:restriction base="StringType">
+							<xsd:enumeration value="DIVIDENDS"/>
+							<xsd:enumeration value="WAGES"/>
+						</xsd:restriction>
+					</xsd:simpleType>
+				</xsd:element>
+				<!-- Income From Foreign Source Text -->
+				<xsd:element name="IncomeFromForeignSourceTxt" type="LineExplanationType" minOccurs="0">
+					<xsd:annotation>
+						<xsd:documentation>
+							<Description>Income From Foreign Source Text</Description>
+							<LineNumber>1a</LineNumber>
+							<ELFFieldNumber>0185</ELFFieldNumber>
+						</xsd:documentation>
+					</xsd:annotation>
+				</xsd:element>
+			</xsd:choice>
+
+			<!-- Total Foreign Gross Income Amount -->
+			<xsd:element name="TotalForeignGrossIncomeAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Total Foreign Gross Income Amount</Description>
+						<LineNumber>1a</LineNumber>
+						<ELFFieldNumber>0190</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Alternative Basis Compensation Source Indicator -->
+			<xsd:element name="AltBasisCompensationSourceInd" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Alternative Basis Compensation Source Indicator</Description>
+						<LineNumber>1b</LineNumber>
+						<ELFFieldNumber>0194</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+				<xsd:complexType>
+					<xsd:simpleContent>
+						<xsd:extension base="CheckboxType">
+							<xsd:attribute name="referenceDocumentId" type="IdListType"/>
+							<xsd:attribute name="referenceDocumentName" type="StringType" fixed="AltBasisCompensationSourceStatement">
+								<xsd:annotation>
+									<xsd:documentation>
+										<ELFFieldNumber>0195</ELFFieldNumber>
+									</xsd:documentation>
+								</xsd:annotation>
+							</xsd:attribute>
+						</xsd:extension>
+					</xsd:simpleContent>
+				</xsd:complexType>
+			</xsd:element>
+
+			<!-- Total Deduction or Loss Amount -->
+			<xsd:element name="TotalDeductionOrLossAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Total Deduction or Loss Amount</Description>
+						<LineNumber>6</LineNumber>
+						<ELFFieldNumber>0560</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Net Foreign Taxable Income Loss Amount -->
+			<xsd:element name="NetForeignTaxableIncomeLossAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Net Foreign Taxable Income Loss Amount</Description>
+						<LineNumber>7</LineNumber>
+						<ELFFieldNumber>0570</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<xsd:choice>
+				<!-- Foreign Taxes Paid Credit Indicator -->
+				<xsd:element name="ForeignTaxesPaidCreditInd" type="CheckboxType" minOccurs="0">
+					<xsd:annotation>
+						<xsd:documentation>
+							<Description>Foreign Taxes Paid Credit Indicator</Description>
+							<LineNumber>j</LineNumber>
+							<ELFFieldNumber>0580</ELFFieldNumber>
+						</xsd:documentation>
+					</xsd:annotation>
+				</xsd:element>
+				<!-- Foreign Taxes Accrued Credit Indicator -->
+				<xsd:element name="ForeignTaxesAccruedCreditInd" type="CheckboxType" minOccurs="0">
+					<xsd:annotation>
+						<xsd:documentation>
+							<Description>Foreign Taxes Accrued Credit Indicator</Description>
+							<LineNumber>k</LineNumber>
+							<ELFFieldNumber>0590</ELFFieldNumber>
+						</xsd:documentation>
+					</xsd:annotation>
+				</xsd:element>
+			</xsd:choice>
+
+			<!-- Total Foreign Taxes Paid or Accrued Amount -->
+			<xsd:element name="TotalForeignTaxesPaidOrAccrAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Total Foreign Taxes Paid or Accrued Amount</Description>
+						<LineNumber>8</LineNumber>
+						<ELFFieldNumber>0910</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Line 9 - Use value from line 8-->
+
+			<!-- Foreign Tax Credit Carryback Or Carryover Amount -->
+			<xsd:element name="ForeignTaxCrCarrybackOrOverAmt" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Foreign Tax Credit Carryback Or Carryover Amount</Description>
+						<LineNumber>10</LineNumber>
+						<ELFFieldNumber>0940</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+				<xsd:complexType>
+					<xsd:simpleContent>
+						<xsd:extension base="USAmountType">
+							<xsd:attribute name="referenceDocumentId" type="IdListType"/>
+							<xsd:attribute name="referenceDocumentName" type="StringType" fixed="ForeignTaxCrCarrybackComputationStatement">
+								<xsd:annotation>
+									<xsd:documentation>
+										<ELFFieldNumber>0950</ELFFieldNumber>
+									</xsd:documentation>
+								</xsd:annotation>
+							</xsd:attribute>
+						</xsd:extension>
+					</xsd:simpleContent>
+				</xsd:complexType>
+			</xsd:element>
+
+			<!-- Foreign Gross Tax Paid or Accrued Amount -->
+			<xsd:element name="ForeignGrossTaxPaidOrAccrAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Foreign Gross Tax Paid or Accrued Amount</Description>
+						<LineNumber>11</LineNumber>
+						<ELFFieldNumber>0960</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Foreign Tax Reduction Amount -->
+			<xsd:element name="ForeignTaxReductionAmt" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Foreign Tax Reduction Amount</Description>
+						<LineNumber>12</LineNumber>
+						<ELFFieldNumber>0970</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+				<xsd:complexType>
+					<xsd:simpleContent>
+						<xsd:extension base="USAmountNNType">
+							<xsd:attribute name="referenceDocumentId" type="IdListType"/>
+							<xsd:attribute name="referenceDocumentName" type="StringType" fixed="ForeignTaxReductionStatement">
+								<xsd:annotation>
+									<xsd:documentation>
+										<ELFFieldNumber>0980</ELFFieldNumber>
+									</xsd:documentation>
+								</xsd:annotation>
+							</xsd:attribute>
+						</xsd:extension>
+					</xsd:simpleContent>
+				</xsd:complexType>
+			</xsd:element>
+
+			<!-- Foreign Income High Tax Kickout Adjustment Amount -->
+			<xsd:element name="ForeignIncHighTaxKickOutAdjAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Foreign Income High Tax Kickout Adjustment Amount</Description>
+						<LineNumber>13</LineNumber>
+						<ELFFieldNumber>0986</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Foreign Tax Available for Credit Reduction Amount -->
+			<xsd:element name="ForeignTaxAvailableForCrRedAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Foreign Tax Available for Credit Reduction Amount</Description>
+						<LineNumber>14</LineNumber>
+						<ELFFieldNumber>0990</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Foreign Taxable Income or Loss Amount -->
+			<xsd:element name="ForeignTaxableIncomeOrLossAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Foreign Taxable Income or Loss Amount</Description>
+						<LineNumber>15</LineNumber>
+						<ELFFieldNumber>1000</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Foreign Income Net Adjustment Amount -->
+			<xsd:element name="ForeignIncomeNetAdjustmentAmt" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Foreign Income Net Adjustment Amount</Description>
+						<LineNumber>16</LineNumber>
+						<ELFFieldNumber>1010</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+				<xsd:complexType>
+					<xsd:simpleContent>
+						<xsd:extension base="USAmountType">
+							<xsd:attribute name="referenceDocumentId" type="IdListType"/>
+							<xsd:attribute name="referenceDocumentName" type="StringType" fixed="ForeignIncomeNetAdjustmentStatement">
+								<xsd:annotation>
+									<xsd:documentation>
+										<ELFFieldNumber>1020</ELFFieldNumber>
+									</xsd:documentation>
+								</xsd:annotation>
+							</xsd:attribute>
+						</xsd:extension>
+					</xsd:simpleContent>
+				</xsd:complexType>
+			</xsd:element>
+
+			<!-- Foreign Net Taxable Income Amount -->
+			<xsd:element name="ForeignNetTaxableIncomeAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Foreign Net Taxable Income Amount</Description>
+						<LineNumber>17</LineNumber>
+						<ELFFieldNumber>1030</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Foreign Taxable Income Before Exemption Amount -->
+			<xsd:element name="ForeignTaxableIncBfExemptAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Foreign Taxable Income Before Exemption Amount</Description>
+						<LineNumber>18</LineNumber>
+						<ELFFieldNumber>1040</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Foreign Taxable Income Before Exemption Rate -->
+			<xsd:element name="ForeignTaxableIncBfExemptRt" type="RatioType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Foreign Taxable Income Before Exemption Rate</Description>
+						<LineNumber>19</LineNumber>
+						<ELFFieldNumber>1050</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Tax from Tax Return Amount -->
+			<xsd:element name="TaxFromTaxReturnAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Tax from Tax Return Amount</Description>
+						<LineNumber>20</LineNumber>
+						<ELFFieldNumber>1060</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Maximum Allowed Foreign Tax Credit Amount -->
+			<xsd:element name="MaxAllowedForeignTaxCreditAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Maximum Allowed Foreign Tax Credit Amount</Description>
+						<LineNumber>21</LineNumber>
+						<ELFFieldNumber>1070</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Gross Foreign Tax Credit Amount -->
+			<xsd:element name="GrossForeignTaxCreditAmt" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Gross Foreign Tax Credit Amount</Description>
+						<LineNumber>22</LineNumber>
+						<ELFFieldNumber>1090</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+				<xsd:complexType>
+					<xsd:simpleContent>
+						<xsd:extension base="USAmountType">
+							<xsd:attribute name="foreignIncomeLumpSumDistribCd" type="StringType" fixed="LSD">
+								<xsd:annotation>
+									<xsd:documentation>
+										<ELFFieldNumber>1080</ELFFieldNumber>
+									</xsd:documentation>
+								</xsd:annotation>
+							</xsd:attribute>
+						</xsd:extension>
+					</xsd:simpleContent>
+				</xsd:complexType>
+			</xsd:element>
+
+			<!-- Foreign Income Section 951A Credit Amount -->
+			<xsd:element name="ForeignIncmSection951ACrAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Foreign Income Section 951A Credit Amount</Description>
+						<LineNumber>23</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Foreign Branch Income Credit Amount -->
+			<xsd:element name="ForeignBranchIncomeCrAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Foreign Branch Income Credit Amount</Description>
+						<LineNumber>24</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Foreign Passive Income Tax Credit Amount -->
+			<xsd:element name="ForeignPassiveIncTaxCreditAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Foreign Passive Income Tax Credit Amount</Description>
+						<LineNumber>25</LineNumber>
+						<ELFFieldNumber>1100</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Foreign General Income Tax Credit Amount -->
+			<xsd:element name="ForeignGeneralIncTaxCreditAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Foreign General Income Tax Credit Amount</Description>
+						<LineNumber>26</LineNumber>
+						<ELFFieldNumber>1160</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Foreign Income Section 901j Credit Amount -->
+			<xsd:element name="ForeignIncmSection901jCrAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Foreign Income Section 901j Credit Amount</Description>
+						<LineNumber>27</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			
+			<!-- Foreign Income Resourced Treaty Tax Credit Amount -->
+			<xsd:element name="ForeignIncRsrcdTreatyTaxCrAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Foreign Income Resourced Treaty Tax Credit Amount</Description>
+						<LineNumber>28</LineNumber>
+						<ELFFieldNumber>1175</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Foreign Income Lump Sum Distribution Credit Amount -->
+			<xsd:element name="ForeignIncLumpSumDistribCrAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Foreign Income Lump Sum Distribution Credit Amount</Description>
+						<LineNumber>29</LineNumber>
+						<ELFFieldNumber>1177</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Tentative Foreign Tax Credit Amount -->
+			<xsd:element name="TentativeForeignTaxCreditAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Tentative Foreign Tax Credit Amount</Description>
+						<LineNumber>30</LineNumber>
+						<ELFFieldNumber>1180</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Smaller of Return Tax or Foreign Tax Credit Amount -->
+			<xsd:element name="SmllrOfRtnTaxOrForeignTaxCrAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Smaller of Return Tax or Foreign Tax Credit Amount</Description>
+						<LineNumber>31</LineNumber>
+						<ELFFieldNumber>1185</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Initial Boycott Credit Reduction Amount -->
+			<xsd:element name="IntlBoycottCreditReductionAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Initial Boycott Credit Reduction Amount</Description>
+						<LineNumber>32</LineNumber>
+						<ELFFieldNumber>1190</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Foreign Tax Credit Amount -->
+			<xsd:element name="ForeignTaxCreditAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Foreign Tax Credit Amount</Description>
+						<LineNumber>33</LineNumber>
+						<ELFFieldNumber>1200</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+		</xsd:sequence>
+	</xsd:complexType>
+
+</xsd:schema>

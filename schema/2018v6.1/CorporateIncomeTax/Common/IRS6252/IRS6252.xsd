@@ -1,0 +1,564 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.irs.gov/efile" targetNamespace="http://www.irs.gov/efile" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xsd:annotation>
+		<xsd:documentation>
+			<Description>IRS e-file Schema - Form 6252</Description>
+			<TaxYear>2018</TaxYear>
+			<MaturityLevel>Final Release</MaturityLevel>
+			<ReleaseDate>February 13, 2019</ReleaseDate>
+		</xsd:documentation>
+	</xsd:annotation>
+	<xsd:include schemaLocation="../../../Common/efileTypes.xsd"/>
+
+
+	<!-- =============================================================== -->
+	<!-- ======================  IRS Form 6252 ========================= -->
+	<!-- =============================================================== -->
+
+	<xsd:element name="IRS6252">
+		<xsd:annotation>
+			<xsd:documentation>IRS Form 6252</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:complexContent>
+				<xsd:extension base="IRS6252Type">
+					<xsd:attributeGroup ref="DocumentAttributes">
+						<xsd:annotation>
+							<xsd:documentation>Common return document attributes</xsd:documentation>
+						</xsd:annotation>
+					</xsd:attributeGroup>
+					<xsd:attribute name="documentName" type="xsd:string" fixed="IRS6252">
+						<xsd:annotation>
+							<xsd:documentation>IRS internal use only. To avoid error in the return, do not include the attribute name or value.</xsd:documentation>
+						</xsd:annotation>
+					</xsd:attribute>
+				</xsd:extension>
+			</xsd:complexContent>
+		</xsd:complexType>
+	</xsd:element>
+
+	<xsd:complexType name="IRS6252Type">
+		<xsd:annotation>
+			<xsd:documentation>Content model for Form 6252</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+
+			<!-- Description of Property -->
+			<xsd:element name="PropertyDesc" type="LineExplanationType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Description of property</Description>
+						<LineNumber>1</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Date Acquired -->
+			<xsd:element name="AcquiredDt" type="DateType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Date acquired</Description>
+						<LineNumber>2a</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Date Sold -->
+			<xsd:element name="SoldDt" type="DateType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Date sold</Description>
+						<LineNumber>2b</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Was the Property Sold to Related Party? -->
+			<xsd:element name="PropertySoldToRelatedPartyInd" type="BooleanType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Indicates the property was sold to related party after May 14, 1980</Description>
+						<LineNumber>3</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Was the Property Sold to Related Party a Marketable Security? -->
+			<xsd:element name="PropSoldRltdPartyMrktblSecInd" type="BooleanType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Indicates the property sold to related party was a marketable security</Description>
+						<LineNumber>4</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Part I: Gross Profit and Contract Price -->
+
+			<!-- Selling Price Including Mortgages and Other Debts -->
+			<xsd:element name="SellingPriceIncludingMortgAmt" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Selling price including mortgages and other debts. Do not include interest whether stated or unstated</Description>
+						<LineNumber>5</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+				<xsd:complexType>
+					<xsd:simpleContent>
+						<xsd:extension base="USAmountType">
+							<xsd:attribute name="referenceDocumentId" type="IdListType"/>
+							<xsd:attribute name="referenceDocumentName" type="StringType" fixed="ComputationOfGainSchedule"/>
+						</xsd:extension>
+					</xsd:simpleContent>
+				</xsd:complexType>
+			</xsd:element>
+
+			<!-- Mortgages, Debts, and Other Liabilities the Buyer Assumed -->
+			<xsd:element name="MortgageIndebtednessAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Mortgages, debts, and other liabilities the buyer assumed or took the property subject to.</Description>
+						<LineNumber>6</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Selling Price Less Mortgage Indebtedness -->
+			<xsd:element name="SellingPriceLessMortgIndbtAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Selling Price less mortgage indebtedness. Subtract line 6 from 5.</Description>
+						<LineNumber>7</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Cost or Other Basis of Property Sold -->
+			<xsd:element name="CostOrOtherBasisPropSoldAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Cost or other basis of property sold</Description>
+						<LineNumber>8</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Depreciation Allowed or Allowable -->
+			<xsd:element name="DepreciationAllowedAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Depreciation allowed or allowable</Description>
+						<LineNumber>9</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Adjusted Basis -->
+			<xsd:element name="AdjustedBasisAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Adjusted basis. Subtract line 9 from line 8</Description>
+						<LineNumber>10</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Commissions and Other Expenses of Sale -->
+			<xsd:element name="CommissionsOtherExpnsOfSaleAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Commissions and other expenses of sale</Description>
+						<LineNumber>11</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Income Recapture from Form 4797, Part III -->
+			<xsd:element name="TotalSectionPropertyAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Income recapture from Form 4797, Part III</Description>
+						<LineNumber>12</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Sum of lines 10, 11, and 12 -->
+			<xsd:element name="SumOfAdjBssCommIncmRcptrAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Sum of lines 10, 11, and 12</Description>
+						<LineNumber>13</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Subtract line 13 from line 5 -->
+			<xsd:element name="SumLessAdjBssCommIncmRcptrAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Subtract line 13 from line 5. If zero or less, do not complete the rest of this form</Description>
+						<LineNumber>14</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Excluded Gain Amount -->
+			<xsd:element name="ExcludedGainAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>If the property described on line 1 above was your main home, enter the amount of excluded gain.  Otherwise, enter 0</Description>
+						<LineNumber>15</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Gross Profit -->
+			<xsd:element name="GrossProfitAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Gross profit. Subtract line 15 from line 14</Description>
+						<LineNumber>16</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Line 13 Subtracted from Line 6 -->
+			<xsd:element name="NetAdjBasisCommIncmRcptrAmt" type="USAmountNNType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Line 13 subtracted from line 6. If zero or less, enter -0-</Description>
+						<LineNumber>17</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Contract Price -->
+			<xsd:element name="ContractPriceAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Contract price. Sum of line 7 and line 17</Description>
+						<LineNumber>18</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Part II: Installment Sale Income -->
+
+			<!-- Gross Profit Percentage -->
+			<xsd:element name="GrossProfitRatioPct" type="RatioType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Gross profit percentage. Line 16 divided by line 18</Description>
+						<LineNumber>19</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Amount from Line 17 If this is the year of sale. Otherwise, enter -0- -->
+			<xsd:element name="YearOfSaleAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>If this is the year of sale, amount from line 17. Otherwise, -0-</Description>
+						<LineNumber>20</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Payments Received During Year -->
+			<xsd:element name="PaymentsReceivedCurrentYearAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Payments received during year. Interest not included, whether stated or unstated</Description>
+						<LineNumber>21</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Sum of lines 20 and 21 -->
+			<xsd:element name="SumYearOfSaleAndPymtsRcvdAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Sum of lines 20 and 21</Description>
+						<LineNumber>22</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Payments Received in Prior Years -->
+			<xsd:element name="PaymentsReceivedPriorYearAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Payments received in prior years. Interest not included, whether stated or unstated</Description>
+						<LineNumber>23</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Installment Sale Income -->
+			<xsd:element name="InstallmentSaleIncomeAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Installment sale income. Line 22 multiplied by line 19</Description>
+						<LineNumber>24</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Ordinary Income Part -->
+			<xsd:element name="OrdinaryIncomePartAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Part of line 24 that is ordinary income under the recapture rules</Description>
+						<LineNumber>25</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Line 25 Subtracted from Line 24 -->
+			<xsd:element name="InstalSaleLessOrdnryIncmAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Line 25 subtracted from line 24</Description>
+						<LineNumber>26</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Part III: Related Party Installment Sale Income -->
+
+			<!-- Name of Related Party -->
+			<xsd:element name="RelatedPartyName" type="BusinessNameType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Name of related party</Description>
+						<LineNumber>27</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Address of Related Party - choice between US Address or Foreign Address -->
+			<xsd:choice minOccurs="0">
+
+				<!-- Address of Related Party -->
+				<xsd:element name="RelatedPartyUSAddress" type="USAddressType">
+					<xsd:annotation>
+						<xsd:documentation>
+							<Description>US address of related party</Description>
+							<LineNumber>27</LineNumber>
+						</xsd:documentation>
+					</xsd:annotation>
+				</xsd:element>
+
+				<!-- Foreign Address of Related Party -->
+				<xsd:element name="RelatedPartyForeignAddress" type="ForeignAddressType">
+					<xsd:annotation>
+						<xsd:documentation>
+							<Description>Foreign address of related party</Description>
+						</xsd:documentation>
+					</xsd:annotation>
+				</xsd:element>
+
+			</xsd:choice>
+
+			<!-- Taxpayer ID for Related Party (EIN or SSN or Missing EIN Reason) -->
+			<xsd:choice minOccurs="0">
+				<xsd:element name="RelatedPartyEIN" type="EINType">
+					<xsd:annotation>
+						<xsd:documentation>
+							<Description>EIN of related party</Description>
+							<LineNumber>27</LineNumber>
+						</xsd:documentation>
+					</xsd:annotation>
+				</xsd:element>
+
+				<xsd:element name="RelatedPartySSN" type="SSNType">
+					<xsd:annotation>
+						<xsd:documentation>
+							<Description>SSN of related party</Description>
+							<LineNumber>27</LineNumber>
+						</xsd:documentation>
+					</xsd:annotation>
+				</xsd:element>
+
+				<!-- Missing EIN Reason -->
+				<xsd:element name="MissingEINReasonCd">
+					<xsd:annotation>
+						<xsd:documentation>
+							<Description>Missing EIN reason</Description>
+							<LineNumber>27</LineNumber>
+						</xsd:documentation>
+					</xsd:annotation>
+					<xsd:simpleType>
+						<xsd:restriction base="StringType">
+							<xsd:enumeration value="APPLD FOR"/>
+							<xsd:enumeration value="FOREIGNUS"/>
+						</xsd:restriction>
+					</xsd:simpleType>
+				</xsd:element>
+			</xsd:choice>
+
+			<!-- Did the Related Party Resell or Dispose of the Property? -->
+			<xsd:element name="SecondDispositionInd" type="BooleanType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Indicates the related party resold or disposed of the property</Description>
+						<LineNumber>28</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Was the Second Disposition More Than 2 Years After the First Disposition? -->
+			<xsd:element name="SndDisposMore2YrsAftrFirstInd" type="CheckboxType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Indicates The second disposition was more than 2 years after the first disposition</Description>
+						<LineNumber>29a</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Date of Disposition  -->
+			<xsd:element name="DispositionDt" type="DateType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Date of disposition</Description>
+						<LineNumber>29a</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Was the First Disposition a Sale or Exchange of Stock to the Issuing Corporation?  -->
+			<xsd:element name="FirstDisposSaleExchangeStkInd" type="CheckboxType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Indicates the first disposition was a sale or exchange of stock to the issuing corporation</Description>
+						<LineNumber>29b</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Was the Second Disposition was an Involuntary Conversion and the Threat of Conversion Occurred After the First Disposition? -->
+			<xsd:element name="SecondDisposInvlntryCnvrtInd" type="CheckboxType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Indicates the second disposition was an involuntary conversion and the threat of conversion occurred after the first disposition</Description>
+						<LineNumber>29c</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Did the second disposition occurr after the death of the original seller or buyer? -->
+			<xsd:element name="SecondDisposAfterDeathSellrInd" type="CheckboxType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Indicates the second disposition occurred after the death of the original seller or buyer</Description>
+						<LineNumber>29d</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Can it be established to the satisfaction of the IRS that tax avoidance was not a principal purpose
+for either of the dispositions? -->
+			<xsd:element name="NotToAvoidTaxInd" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Indicates it can be established to the satisfaction of the IRS that tax avoidance was not a principal purpose
+for either of the dispositions</Description>
+						<LineNumber>29e</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+				<xsd:complexType>
+					<xsd:simpleContent>
+						<xsd:extension base="CheckboxType">
+							<xsd:attribute name="referenceDocumentId" type="IdListType"/>
+							<xsd:attribute name="referenceDocumentName" type="StringType" fixed="ExplanationOfDisposNotToAvoidTaxStatement"/>
+						</xsd:extension>
+					</xsd:simpleContent>
+				</xsd:complexType>
+			</xsd:element>
+
+			<!-- Selling Price of Property Sold by Related Party -->
+			<xsd:element name="RealizedAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Selling price of property sold by related party</Description>
+						<LineNumber>30</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Contract Price from Line 18 for Year of First Sale -->
+			<xsd:element name="FirstYearContractPriceAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Contract price from line 18 for year of first sale</Description>
+						<LineNumber>31</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Enter the smaller of line 30 or line 31 -->
+			<xsd:element name="SmllrRealizedOrContractPrcAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Smaller of line 30 or line 31</Description>
+						<LineNumber>32</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Total payments received by the end of your current tax year -->
+			<xsd:element name="TotalPaymentsReceivedAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Total payments received by the end of your current tax year</Description>
+						<LineNumber>33</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Line 33 Subtracted From Line 32 -->
+			<xsd:element name="TotalPaymentsRcvdLessPrcAmt" type="USAmountNNType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Line 33 subtracted from line 32. If zero or less, enter -0-</Description>
+						<LineNumber>34</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Line 34 Multiplied by the Gross Profit Percentage on Line 19 for Year of First Sale -->
+			<xsd:element name="TotPymtPrcTimesGroPrftPctAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Line 34 multiplied by the gross profit percentage on line 19 for year of first sale</Description>
+						<LineNumber>35</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Part of Line 35 that is Ordinary Income Under the Recapture Rules -->
+			<xsd:element name="OrdinaryIncmUndRecaptureRlsAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Part of line 35 that is ordinary income under the recapture rules</Description>
+						<LineNumber>36</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Line 36 Subtracted from Line 35 -->
+			<xsd:element name="PaymentPriceLessOrdnryIncmAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Line 36 subtracted from line 35</Description>
+						<LineNumber>37</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+		</xsd:sequence>
+	</xsd:complexType>
+
+</xsd:schema>

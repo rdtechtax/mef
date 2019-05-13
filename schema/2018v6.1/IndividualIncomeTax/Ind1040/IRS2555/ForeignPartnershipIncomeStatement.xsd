@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.irs.gov/efile" targetNamespace="http://www.irs.gov/efile" elementFormDefault="qualified" attributeFormDefault="unqualified">
+
+	<xsd:annotation>
+		<xsd:documentation>
+			<Description>IRS Individual Income Tax Schema - Foreign Partnership Income Statement</Description>
+			<Purpose>Allowable share of income for personal services performed; In a partnership. List partnership's name and address and type of income</Purpose>
+			<TaxYear>2018</TaxYear>
+			<MaturityLevel>Final Release</MaturityLevel>
+			<ReleaseDate>February 13, 2019</ReleaseDate>
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:include schemaLocation="../../../Common/efileTypes.xsd"/>
+	
+	<!-- ===================================================================================== -->
+	<!-- ==========================  Foreign Partnership Income Statement  ============================= -->
+	<!-- ===================================================================================== -->
+	
+	<xsd:element name="ForeignPartnershipIncomeStmt">
+		<xsd:annotation>
+			<xsd:documentation>Foreign Partnership Income Statement</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:complexContent>
+				<xsd:extension base="ForeignPartnershipIncomeStmtType">
+					<xsd:attributeGroup ref="DocumentAttributes">
+						<xsd:annotation>
+							<xsd:documentation>Common return document attributes</xsd:documentation>
+						</xsd:annotation>
+					</xsd:attributeGroup>
+					<xsd:attribute name="documentName" type="xsd:string" fixed="ForeignPartnershipIncomeStatement">
+						<xsd:annotation>
+							<xsd:documentation>IRS internal use only. To avoid error in the return, do not include the attribute name or value.</xsd:documentation>
+						</xsd:annotation>
+					</xsd:attribute>
+				</xsd:extension>
+			</xsd:complexContent>
+		</xsd:complexType>
+	</xsd:element>
+	
+	<xsd:complexType name="ForeignPartnershipIncomeStmtType">
+		<xsd:annotation>
+			<xsd:documentation>Content model for Foreign Partnership Income Statement</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+	         <xsd:element name="ForeignPartnershipIncomeGrp" type="ForeignPartnershipIncomeGrpType" minOccurs="0" maxOccurs="100"/>	 
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="ForeignPartnershipIncomeGrpType">
+	      <xsd:sequence>
+			<xsd:element name="PartnershipOrSCorporationNm" type="BusinessNameLine1Type" minOccurs="0"/>
+			<xsd:element name="ForeignAddress" type="ForeignAddressType" minOccurs="0"/>
+			<xsd:element name="OtherIncomeDesc" type="LineExplanationType" minOccurs="0"/>
+	      </xsd:sequence>
+	</xsd:complexType>
+
+</xsd:schema>

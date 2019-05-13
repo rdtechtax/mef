@@ -1,0 +1,358 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.irs.gov/efile" targetNamespace="http://www.irs.gov/efile" elementFormDefault="qualified" attributeFormDefault="unqualified">
+
+	<xsd:annotation>
+		<xsd:documentation>
+			<Description>IRS e-file U.S. Nonresident Alien Income Tax Schema - IRS Form RRB-1042S Statement for Nonresident Alien Recipients of Payments by the Railroad Retirement Board</Description>
+			<TaxYear>2018</TaxYear>
+			<MaturityLevel>Final Release</MaturityLevel>
+			<ReleaseDate>February 13, 2019</ReleaseDate>
+		</xsd:documentation>
+	</xsd:annotation>
+	
+	<xsd:include schemaLocation="../../../Common/efileTypes.xsd"/>
+	
+	<!-- ====================================================================== -->
+	<!-- ========================= IRS Form RRB-1042S ========================= -->
+	<!-- ====================================================================== -->
+	
+	<xsd:element name="IRSRRB1042S">
+		<xsd:annotation>
+			<xsd:documentation>IRS Form RRB-1042S</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:complexContent>
+				<xsd:extension base="IRSRRB1042SType">
+					<xsd:attributeGroup ref="DocumentAttributes">
+						<xsd:annotation>
+							<xsd:documentation>Common return document attributes</xsd:documentation>
+						</xsd:annotation>
+					</xsd:attributeGroup>
+					<xsd:attribute name="documentName" type="xsd:string" fixed="IRSRRB1042S">
+						<xsd:annotation>
+							<xsd:documentation>IRS internal use only. To avoid error in the return do not include the attribute name or value.</xsd:documentation>
+						</xsd:annotation>
+					</xsd:attribute>
+					<xsd:attribute name="referenceDocumentId" type="IdListType">
+						<xsd:annotation>
+							<xsd:documentation>List of document ID's of forms, schedules, supporting info. etc. attached to this form</xsd:documentation>
+						</xsd:annotation>
+					</xsd:attribute>
+					<xsd:attribute name="referenceDocumentName" type="TextType" fixed="GeneralDependencySmall"/>
+				</xsd:extension>
+			</xsd:complexContent>
+		</xsd:complexType>
+	</xsd:element>
+	
+	<xsd:complexType name="IRSRRB1042SType">
+		<xsd:annotation>
+			<xsd:documentation>Content model for Form RRB-1042S</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+				
+			<!-- Form Id -->
+			<xsd:element name="FormId" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Form Id</Description>
+					</xsd:documentation>
+				</xsd:annotation>
+				<xsd:simpleType>
+					<xsd:restriction base="TextType">
+						<xsd:maxLength value="10"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			
+			<!-- Income Type Code -->
+			<xsd:element name="IncomeTypeCd">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Income type code</Description>
+						<LineNumber>1</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+				<xsd:simpleType>
+					<xsd:restriction base="TextType">
+						<xsd:enumeration value="98"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			
+			<!-- Person Name -->
+			<xsd:element name="PersonNm" type="PersonNameType">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Person name</Description>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			
+			<!-- Choice between US Address or Foreign Address -->
+			<xsd:choice>
+			
+				<!-- US Address -->
+				<xsd:element name="USAddress" type="USAddressType" >
+					<xsd:annotation>
+						<xsd:documentation>
+							<Description>US Address</Description>
+						</xsd:documentation>
+					</xsd:annotation>
+				</xsd:element>
+				
+				<!-- Foreign Address -->
+				<xsd:element name="ForeignAddress" type="ForeignAddressType">
+					<xsd:annotation>
+						<xsd:documentation>
+							<Description>Foreign Address</Description>
+						</xsd:documentation>
+					</xsd:annotation>
+				</xsd:element>
+				
+			</xsd:choice>
+			
+			<!-- Chapter Type Code -->
+			<xsd:element name="ChapterTypeCd">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Chapter type code</Description>
+						<LineNumber>2</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+				<xsd:simpleType>
+					<xsd:restriction base="TextType">
+						<xsd:enumeration value="3"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			
+			<!-- Chapter 3 Status Code -->
+			<xsd:element name="Chapter3StatusCd">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Chapter 3 status code</Description>
+						<LineNumber>3</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+				<xsd:simpleType>
+					<xsd:restriction base="TextType">
+						<xsd:enumeration value="02"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			
+			<!-- Chapter 4 Status Code -->
+			<xsd:element name="Chapter4StatusCd">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Chapter 4 status code</Description>
+						<LineNumber>4</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+				<xsd:simpleType>
+					<xsd:restriction base="TextType">
+						<xsd:enumeration value="02"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			
+			<!-- Claim Number -->
+			<xsd:element name="ClaimNum" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Claim number</Description>
+						<LineNumber>5</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+				<xsd:simpleType>
+					<xsd:restriction base="TextType">
+						<xsd:maxLength value="50"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			
+			<!-- Payee Code -->
+			<xsd:element name="PayeeCd" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Payee code</Description>
+						<LineNumber>5</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+				<xsd:simpleType>
+					<xsd:restriction base="TextType">
+						<xsd:maxLength value="50"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			
+			<!-- SSN -->
+			<xsd:element name="SSN" type="SSNType" >
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>SSN</Description>
+						<LineNumber>6</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			
+			<!-- Recipient Chapter 3 Status Code -->
+			<xsd:element name="RecipientChapter3StatusCd">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Recipient chapter 3 status code</Description>
+						<LineNumber>7</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+				<xsd:simpleType>
+					<xsd:restriction base="TextType">
+						<xsd:enumeration value="16"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			
+			<!-- Birth Date -->                                               
+			<xsd:element name="BirthDt" type="DateType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Birth date</Description>
+						<LineNumber>8</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>	
+
+			<!-- Gross Social Security Equivalent Benefit Portion of Tier 1 Paid Amount -->
+			<xsd:element name="GrossSocSecBnftTier1PaidAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Gross social security equivalent benefit portion of tier 1 paid amount</Description>
+						<LineNumber>9</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			
+			<!-- Social Security Equivalent Benefit Portion of Tier 1 Repaid to Railroad Retirement Board Amount -->
+			<xsd:element name="SocSecBnftTier1RepaidRRBAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Social security equivalent benefit portion of tier 1 repaid to railroad retirement board amount</Description>
+						<LineNumber>10</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			
+			<!-- Net Social Security Equivalent Benefit Portion of Tier 1 Paid Amount -->
+			<xsd:element name="NetSocSecBnftTier1PaidAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Net social security equivalent benefit portion of tier 1 paid amount</Description>
+						<LineNumber>11</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			
+			<!-- Federal Income Tax Withheld Amount -->
+			<xsd:element name="FederalIncomeTaxWithheldAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Federal income tax withheld amount</Description>
+						<LineNumber>12</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			
+			<!-- Social Security Equivalent Benefit Portion of Tier 1 Paid One Year Prior Amount -->
+			<xsd:element name="SocSecBnftTier1PaidPrYr1Amt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Social security equivalent benefit portion of tier 1 paid one year prior amount</Description>
+						<LineNumber>13</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			
+			<!-- Social Security Equivalent Benefit Portion of Tier 1 Paid Two Years Prior Amount -->
+			<xsd:element name="SocSecBnftTier1PaidPrYr2Amt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Social security equivalent benefit portion of tier 1 paid two years prior amount</Description>
+						<LineNumber>14</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			
+			<!-- Social Security Equivalent Benefit Portion of Tier 1 Paid Three or More Years Prior Amount -->
+			<xsd:element name="SocSecBnftTier1PaidBfrPrYr2Amt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Social security equivalent benefit portion of tier 1 paid three or more years prior amount</Description>
+						<LineNumber>15</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			
+			<!-- Country Code-->
+			<xsd:element name="CountryCd" type="CountryType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Country code</Description>
+						<LineNumber>16</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			
+			<!-- Tax Rate -->
+			<xsd:element name="TaxRt" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Tax rate</Description>
+						<LineNumber>17</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+				<xsd:simpleType>
+					<xsd:restriction base="SmallRatioType">
+						<xsd:enumeration value=".0000"/>
+						<xsd:enumeration value=".1500"/>
+						<xsd:enumeration value=".3000"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			
+			<!-- Exemption Code -->
+			<xsd:element name="ExemptionCd" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Exemption code</Description>
+						<LineNumber>18</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+				<xsd:simpleType>
+					<xsd:restriction base="TextType">
+						<xsd:enumeration value="04"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			
+			<!-- Total Medicare Premium Amount -->
+			<xsd:element name="TotalMedicarePremiumAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Total medicare premium amount</Description>
+						<LineNumber>19</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			
+			<!-- Worker's Compensation Offset Amount -->
+			<xsd:element name="WorkersCompensationOffsetAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Worker's compensation offset amount</Description>
+						<LineNumber>20</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:schema>

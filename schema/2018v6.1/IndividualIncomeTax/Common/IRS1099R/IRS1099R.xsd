@@ -1,0 +1,478 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.irs.gov/efile" targetNamespace="http://www.irs.gov/efile" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xsd:annotation>
+		<xsd:documentation>
+			<Description>IRS e-file Individual Income Tax Schema - IRS Form 1099-R Distributions From Pensions, Annuities, Retirement or Profit-Sharing Plans, IRAs, Insurance Contracts, etc.</Description>
+			<TaxYear>2018</TaxYear>
+			<MaturityLevel>Final Release</MaturityLevel>
+			<ReleaseDate>February 13, 2019</ReleaseDate>
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:include schemaLocation="../../../Common/efileTypes.xsd"/>
+
+
+	<!-- =============================================================== -->
+	<!-- ====================== IRS Form 1099-R ======================== -->
+	<!-- =============================================================== -->
+
+
+	<xsd:element name="IRS1099R">
+		<xsd:annotation>
+			<xsd:documentation>IRS Form 1099-R</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:complexContent>
+				<xsd:extension base="IRS1099RType">
+					<xsd:attributeGroup ref="DocumentAttributes">
+						<xsd:annotation>
+							<xsd:documentation>Common return document attributes</xsd:documentation>
+						</xsd:annotation>
+					</xsd:attributeGroup>
+					<xsd:attribute name="documentName" type="xsd:string" fixed="IRS1099R">
+						<xsd:annotation>
+							<xsd:documentation>IRS internal use only. To avoid error in the return, do not include the attribute name or value.</xsd:documentation>
+						</xsd:annotation>
+					</xsd:attribute>
+				</xsd:extension>
+			</xsd:complexContent>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:complexType name="IRS1099RType">
+		<xsd:annotation>
+			<xsd:documentation>Content model for Form 1099-R</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<!-- Corrected Box -->
+			<xsd:element name="CorrectedInd" type="CheckboxType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Corrected box</Description>
+						<ELFFieldNumber>0010</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Payer Name Control (-->
+			<xsd:element name="PayerNameControlTxt" type="BusinessNameControlType">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Payer name control</Description>
+						<ELFFieldNumber>0015</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Payers Name -->
+			<xsd:element name="PayerName" type="BusinessNameType">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Payers Name</Description>
+						<ELFFieldNumber>0020 0025</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Address Choice -->
+			<xsd:choice minOccurs="0">
+				<!-- Payers Address -->
+				<xsd:element name="PayerUSAddress" type="OtherUSAddressType" minOccurs="0">
+					<xsd:annotation>
+						<xsd:documentation>
+							<Description>Payers US address</Description>
+							<ELFFieldNumber>0030 0040 0042 0044</ELFFieldNumber>
+						</xsd:documentation>
+					</xsd:annotation>
+				</xsd:element>
+				<xsd:element name="PayerForeignAddress" type="OtherForeignAddressType" minOccurs="0">
+					<xsd:annotation>
+						<xsd:documentation>
+							<Description>Payers foreign address</Description>
+							<ELFFieldNumber>0030 0040 0042 0044</ELFFieldNumber>
+						</xsd:documentation>
+					</xsd:annotation>
+				</xsd:element>
+			</xsd:choice>
+			<!-- Payer Identification Number -->
+			<xsd:element name="PayerEIN" type="EINType">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Payer Identification Number</Description>
+						<ELFFieldNumber>0050</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:choice minOccurs="0">
+				<!-- Recipient's SSN -->
+				<xsd:element name="RecipientSSN" type="SSNType" minOccurs="0">
+					<xsd:annotation>
+						<xsd:documentation>
+							<Description>Recipient's SSN</Description>
+							<ELFFieldNumber>0060</ELFFieldNumber>
+						</xsd:documentation>
+					</xsd:annotation>
+				</xsd:element>
+				<!-- Recipient's EIN -->
+				<xsd:element name="RecipientEIN" type="EINType" minOccurs="0">
+					<xsd:annotation>
+						<xsd:documentation>
+							<Description>Recipient's EIN</Description>
+						</xsd:documentation>
+					</xsd:annotation>
+				</xsd:element>
+			</xsd:choice>
+			<!-- Recipients Name -->
+			<xsd:element name="RecipientNm" type="PersonNameType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Recipients Name</Description>
+						<ELFFieldNumber>0070</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Address Choice -->
+			<xsd:choice minOccurs="0">
+				<!-- Recipients Address -->
+				<xsd:element name="RecipientUSAddress" type="OtherUSAddressType" minOccurs="0">
+					<xsd:annotation>
+						<xsd:documentation>
+							<Description>Recipients US address</Description>
+							<ELFFieldNumber>0080 0085 0090 0092 0094</ELFFieldNumber>
+						</xsd:documentation>
+					</xsd:annotation>
+				</xsd:element>
+				<xsd:element name="RecipientForeignAddress" type="OtherForeignAddressType" minOccurs="0">
+					<xsd:annotation>
+						<xsd:documentation>
+							<Description>Recipients foreign address</Description>
+							<ELFFieldNumber>0080 0085 0090 0092 0094</ELFFieldNumber>
+						</xsd:documentation>
+					</xsd:annotation>
+				</xsd:element>
+			</xsd:choice>
+			<!-- Payer Recipient Account Number -->
+			<xsd:element name="PayerRecipientAccountNum" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>The payer's account number for distributions to a recipient</Description>
+						<ELFFieldNumber>0100</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+				<xsd:simpleType>
+					<xsd:restriction base="TextType">
+						<xsd:maxLength value="30"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			
+			<!-- Payment Date -->
+			<xsd:element name="PaymentDt" type="DateType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Payment Date</Description>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Gross Distribution -->
+			<xsd:element name="GrossDistributionAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Gross distribution amount</Description>
+						<LineNumber>1</LineNumber>
+						<ELFFieldNumber>0110</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Taxable Amount -->
+			<xsd:element name="TaxableAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Taxable amount</Description>
+						<LineNumber>2a</LineNumber>
+						<ELFFieldNumber>0120</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Taxable Amount Not Determined Ind -->
+			<xsd:element name="TxblAmountNotDeterminedInd" type="CheckboxType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Taxable amount not determined indicator</Description>
+						<LineNumber>2b</LineNumber>
+						<ELFFieldNumber>0130</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Total Distribution Ind -->
+			<xsd:element name="TotalDistributionInd" type="CheckboxType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Total distribution indicator</Description>
+						<LineNumber>2b</LineNumber>
+						<ELFFieldNumber>0140</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Capital Gain -->
+			<xsd:element name="CapitalGainAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Capital gain amount</Description>
+						<LineNumber>3</LineNumber>
+						<ELFFieldNumber>0150</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Federal Income Tax Withheld -->
+			<xsd:element name="FederalIncomeTaxWithheldAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Federal income tax withheld amount</Description>
+						<LineNumber>4</LineNumber>
+						<ELFFieldNumber>0160</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Employee Contributions -->
+			<xsd:element name="EmployeeContributionsAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Employee contributions amount</Description>
+						<LineNumber>5</LineNumber>
+						<ELFFieldNumber>0170</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Net Unrealized Securities Appreciation -->
+			<xsd:element name="NetUnrlzdSecuritiesApprcnAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Net unrealized securities appreciation amount</Description>
+						<LineNumber>6</LineNumber>
+						<ELFFieldNumber>0180</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- F1099R Distribution Code -->
+			<xsd:element name="F1099RDistributionCd" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>a code that identifies a type of distribution from an IRA, SEP IRA or Simple IRA</Description>
+						<LineNumber>7</LineNumber>
+						<ELFFieldNumber>0190</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:pattern value="[A-Za-z0-9]{1,2}"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<!-- IRA SEP Simple Ind -->
+			<xsd:element name="IRASEPSIMPLEInd" type="CheckboxType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>IRA SEP simple indicator</Description>
+						<LineNumber>7</LineNumber>
+						<ELFFieldNumber>0200</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Other Distribution -->
+			<xsd:element name="OtherDistributionAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Other distribution amount</Description>
+						<LineNumber>8</LineNumber>
+						<ELFFieldNumber>0210</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Recipients Other Distribution Percentage -->
+			<xsd:element name="RcpntOthDistributionPct" type="RatioType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Recipients other distribution percentage</Description>
+						<LineNumber>8</LineNumber>
+						<ELFFieldNumber>0220</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Recipients Total Distribution Percentage -->
+			<xsd:element name="RcpntTotalDistributionPct" type="RatioType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Recipients total distribution percentage</Description>
+						<LineNumber>9a</LineNumber>
+						<ELFFieldNumber>0230</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Recipients Total Contributions -->
+			<xsd:element name="TotalEmployeeContributionsAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Recipients total contributions amount</Description>
+						<LineNumber>9b</LineNumber>
+						<ELFFieldNumber>0231</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- IRR Allocated -->
+			<xsd:element name="IRRAllocatedAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>IRR allocated amount</Description>
+						<LineNumber>10</LineNumber>
+						<ELFFieldNumber>0234</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Designated ROTH act first year date -->
+			<xsd:element name="DesignatedROTHAcctFirstYr" type="YearType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Designated ROTH act first year date</Description>
+						<LineNumber>11</LineNumber>
+						<ELFFieldNumber>0237</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- FATCA Filing Requirement Indicator -->
+			<xsd:element name="FATCAFilingRequirementInd" type="CheckboxType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>FATCA filing requirement indicator</Description>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="F1099RStateLocalTaxGrp" type="F1099RStateLocalTaxGrpType" minOccurs="0" maxOccurs="unbounded">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>F1099R State Local Tax Group</Description>
+						<LineNumber>12 - 17</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Standard or Non-standard Code -->
+			<xsd:element name="StandardOrNonStandardCd">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Standard code</Description>
+						<ELFFieldNumber>0340</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+				<xsd:simpleType>
+					<xsd:restriction base="StringType">
+						<xsd:enumeration value="N"/>
+						<xsd:enumeration value="S"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<!-- Beginning of Table -->
+	<xsd:complexType name="F1099RStateLocalTaxGrpType">
+		<xsd:sequence>
+			<xsd:element name="F1099RStateTaxGrp" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>F1099R State Tax Group</Description>
+						<LineNumber>12 - 14</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+				<xsd:complexType>
+					<xsd:sequence>
+						<!-- State Tax Withheld -->
+						<xsd:element name="StateTaxWithheldAmt" type="USAmountType" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>State Tax Withheld amount</Description>
+									<LineNumber>12</LineNumber>
+									<ELFFieldNumber>0240</ELFFieldNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						<!-- State Abbreviation Code -->
+						<xsd:element name="StateAbbreviationCd" type="StateType" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>State abbreviation code</Description>
+									<LineNumber>13</LineNumber>
+									<ELFFieldNumber>0246</ELFFieldNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						<!-- Payers State I.D. Number -->
+						<xsd:element name="PayerStateIdNum" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Payers state I.D. number</Description>
+									<LineNumber>13</LineNumber>
+									<ELFFieldNumber>0250</ELFFieldNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+							<xsd:simpleType>
+								<xsd:restriction base="TextType">
+									<xsd:maxLength value="16"/>
+								</xsd:restriction>
+							</xsd:simpleType>
+						</xsd:element>
+						<!-- State Distribution -->
+						<xsd:element name="StateDistributionAmt" type="USAmountType" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>State distribution amount</Description>
+									<LineNumber>14</LineNumber>
+									<ELFFieldNumber>0255</ELFFieldNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						<!-- Local Tax Withheld -->
+						<xsd:element name="F1099RLocalTaxGrp" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>F1099R Local Tax Group</Description>
+									<LineNumber>15 - 17</LineNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+							<xsd:complexType>
+								<xsd:sequence>
+									<xsd:element name="LocalTaxWithheldAmt" type="USAmountType" minOccurs="0">
+										<xsd:annotation>
+											<xsd:documentation>
+												<Description>Local tax withheld amount</Description>
+												<LineNumber>15</LineNumber>
+												<ELFFieldNumber>0260</ELFFieldNumber>
+											</xsd:documentation>
+										</xsd:annotation>
+									</xsd:element>
+									<!-- Name of Locality -->
+									<xsd:element name="LocalityNm" type="ShortDescriptionType" minOccurs="0">
+										<xsd:annotation>
+											<xsd:documentation>
+												<Description>Name of locality</Description>
+												<LineNumber>16</LineNumber>
+												<ELFFieldNumber>0270</ELFFieldNumber>
+											</xsd:documentation>
+										</xsd:annotation>
+									</xsd:element>
+									<!-- Local Distribution -->
+									<xsd:element name="LocalDistributionAmt" type="USAmountType" minOccurs="0">
+										<xsd:annotation>
+											<xsd:documentation>
+												<Description>Local distribution amount</Description>
+												<LineNumber>17</LineNumber>
+												<ELFFieldNumber>0275</ELFFieldNumber>
+											</xsd:documentation>
+										</xsd:annotation>
+									</xsd:element>
+								</xsd:sequence>
+							</xsd:complexType>
+						</xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	<!-- End of Table -->
+</xsd:schema>

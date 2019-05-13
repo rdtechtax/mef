@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema targetNamespace="http://www.irs.gov/efile" xmlns="http://www.irs.gov/efile" xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.0">
+
+	<xsd:annotation>
+		<xsd:documentation>
+			<Description>IRS e-file U.S. Nonresident Alien Income Tax Schema - Owned Trust Value Statement</Description>
+			<Purpose>Optional Statement - List the total value of all assets held by trusts that you are considered to own for tax purposes. You must attach a statement to Form 8854 that lists each trust separately. Include the EIN (if any) for each trust. Describe the assets and liabilities (using the categories on this balance sheet) from your interest in each trust.</Purpose>
+			<TaxYear>2018</TaxYear>
+			<MaturityLevel>Final Release</MaturityLevel>
+			<ReleaseDate>February 13, 2019</ReleaseDate>
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:include schemaLocation="../../../Common/efileTypes.xsd" />
+
+	<!-- ========================================= -->
+	<!-- ====== Owned Trust Value Statement ====== -->
+	<!-- ========================================= -->
+
+	<xsd:element name="OwnedTrustValueStatement">
+		<xsd:annotation>
+			<xsd:documentation>Owned Trust Value Statement</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:complexContent>
+				<xsd:extension base="OwnedTrustValueStatementType">
+					<xsd:attributeGroup ref="DocumentAttributes">
+						<xsd:annotation>
+							<xsd:documentation>Common return document attributes</xsd:documentation>
+						</xsd:annotation>
+					</xsd:attributeGroup>
+					<xsd:attribute name="documentName" type="TextType" fixed="OwnedTrustValueStatement">
+						<xsd:annotation>
+							<xsd:documentation>IRS internal use only. To avoid error in the return, do not include the attribute name or value.</xsd:documentation>
+						</xsd:annotation>
+					</xsd:attribute>
+				</xsd:extension>
+			</xsd:complexContent>
+		</xsd:complexType>
+	</xsd:element>
+
+	<xsd:complexType name="OwnedTrustValueStatementType">
+		<xsd:annotation>
+			<xsd:documentation>Owned Trust Value Statement</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<!-- Assets Held By Trust Section 671679 -->
+			<xsd:element name="AssetsHeldByTrSect671679Grp" minOccurs="0" maxOccurs="1000">
+				<xsd:complexType>
+					<xsd:sequence>
+						<!-- Trust Name -->
+						<xsd:element name="TrustName" type="BusinessNameType" minOccurs="0"/>
+						<!-- Trust EIN -->
+						<xsd:element name="TrustEIN" type="EINType" minOccurs="0"/>
+						<!-- Description -->
+						<xsd:element name="Desc" type="LineExplanationType"/>
+						<!-- Fair Market Value Amount -->
+						<xsd:element name="FairMarketValueAmt" type="USAmountType"/>
+						<!-- U.S. Adjusted Basis Amount -->
+						<xsd:element name="USAdjustedBasisAmt" type="USAmountType"/>
+						<!-- Gain Or Loss Amount -->
+						<xsd:element name="GainOrLossAmt" type="USAmountType"/>
+						<!-- Fair Market Value On Beginning Of U.S. Residency Amount -->
+						<xsd:element name="FMVBegngDtUSResAmt" type="USAmountType" minOccurs="0"/>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+
+</xsd:schema>

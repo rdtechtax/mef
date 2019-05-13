@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns="http://www.irs.gov/efile" xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.irs.gov/efile" elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.0">
+
+	<xsd:annotation>
+		<xsd:documentation>
+			<Description>IRS e-file Individual Income Tax Schema - Wages Not Shown Schedule</Description>
+			<Purpose>This schedule is used to show specific literals and the amount you received</Purpose>
+			<TaxYear>2018</TaxYear>
+			<MaturityLevel>Final Release</MaturityLevel>
+			<ReleaseDate>February 13, 2019</ReleaseDate>
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:include schemaLocation="../../../Common/efileTypes.xsd"/>
+
+	<!-- =========================================================== -->
+	<!-- ================ Wages Not Shown Schedule ================= -->
+	<!-- =========================================================== -->
+
+	<xsd:element name="WagesNotShownSchedule">
+		<xsd:annotation>
+			<xsd:documentation>Wages Not Shown Schedule</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:complexContent>
+				<xsd:extension base="WagesNotShownScheduleType">
+					<xsd:attributeGroup ref="DocumentAttributes">
+						<xsd:annotation>
+							<xsd:documentation>Common return document attributes</xsd:documentation>
+						</xsd:annotation>
+					</xsd:attributeGroup>
+					<xsd:attribute name="documentName" type="StringType" fixed="WagesNotShownSchedule">
+						<xsd:annotation>
+							<xsd:documentation>IRS internal use only. To avoid error in the return, do not include the attribute name or value.</xsd:documentation>
+						</xsd:annotation>
+					</xsd:attribute>
+				</xsd:extension>
+			</xsd:complexContent>
+		</xsd:complexType>
+	</xsd:element>
+
+	<xsd:complexType name="WagesNotShownScheduleType">
+		<xsd:annotation>
+			<xsd:documentation>Content model for Wages Not Shown Schedule</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+
+			<xsd:element name="WagesNotShownSch" type="WagesNotShownSchType" minOccurs="0" maxOccurs="20"/>
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="WagesNotShownSchType">
+		<xsd:sequence>
+
+			<!-- Wages Literal -->
+			<xsd:element name="WagesLiteralCd">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Wages literal</Description>
+					</xsd:documentation>
+				</xsd:annotation>
+				<xsd:simpleType>
+					<xsd:restriction base="StringType">
+						<xsd:enumeration value="DFC"/>
+						<xsd:enumeration value="PRI"/>
+						<xsd:enumeration value="HSH"/>
+						<xsd:enumeration value="PSO"/>
+						<xsd:enumeration value="SCH"/>
+						<xsd:enumeration value="FEC"/>
+						<xsd:enumeration value="EXCESS ALLOWANCE"/>
+						<xsd:enumeration value="F8919"/>
+						<xsd:enumeration value="AB"/>
+						<xsd:enumeration value="SNE"/>
+						<xsd:enumeration value="PYAB"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+
+			<!-- Wages not shown Amount -->
+			<xsd:element name="WagesNotShownAmt" type="USAmountType">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Wages not shown amount amount</Description>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+		</xsd:sequence>
+	</xsd:complexType>
+
+</xsd:schema>

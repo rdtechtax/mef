@@ -1,0 +1,254 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.irs.gov/efile" targetNamespace="http://www.irs.gov/efile" elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.0">
+	<xsd:annotation>
+		<xsd:documentation>
+			<Description>IRS e-file Schema - IRS Form 4137</Description>
+			<TaxYear>2018</TaxYear>
+			<MaturityLevel>Final Release</MaturityLevel>
+			<ReleaseDate>February 13, 2019</ReleaseDate>
+		</xsd:documentation>
+	</xsd:annotation>
+	<xsd:include schemaLocation="../../../Common/efileTypes.xsd"/>
+	<!--==================================================================-->
+	<!--============================ IRS4137 ===============================-->
+	<!--==================================================================-->
+	<xsd:element name="IRS4137">
+		<xsd:annotation>
+			<xsd:documentation>IRS Form 4137</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:complexContent>
+				<xsd:extension base="IRS4137Type">
+					<xsd:attributeGroup ref="DocumentAttributes">
+						<xsd:annotation>
+							<xsd:documentation>Common return document attributes</xsd:documentation>
+						</xsd:annotation>
+					</xsd:attributeGroup>
+					<xsd:attribute name="documentName" type="xsd:string" fixed="IRS4137"/>
+				</xsd:extension>
+			</xsd:complexContent>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:complexType name="IRS4137Type">
+		<xsd:annotation>
+			<xsd:documentation>Content model for IRS4137</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<!--Person Name -->
+			<xsd:element name="PersonNm" type="PersonNameType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Person Name</Description>
+						<ELFFieldNumber>0010</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!--Social Security Number -->
+			<xsd:element name="SSN" type="SSNType">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Social Security Number</Description>
+						<ELFFieldNumber>0020</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="UnreportedTipIncomePerEmployer" minOccurs="0" maxOccurs="unbounded">
+				<xsd:complexType>
+					<xsd:sequence>
+						<!--Employer Name -->
+						<xsd:element name="EmployerName" type="BusinessNameType">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Employer Name</Description>
+									<LineNumber>1A(a) 1B(a) 1C(a) 1D(a) 1E(a)</LineNumber>
+									<ELFFieldNumber>0030 0050 0070 0090 0110</ELFFieldNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						
+						<xsd:choice>
+							<!--Employee EIN -->
+							<xsd:element name="EmployerEIN" type="EINType">
+								<xsd:annotation>
+									<xsd:documentation>
+										<Description>Employer EIN</Description>
+										<LineNumber>1A(b) 1B(b) 1C(b) 1D(b) 1E(b)</LineNumber>
+										<ELFFieldNumber>0035 0055 0075 0095 0115</ELFFieldNumber>
+									</xsd:documentation>
+								</xsd:annotation>
+							</xsd:element>
+							<!--Applied For Employer Identification Number Reason Code -->
+							<xsd:element name="AppliedForEINReasonCd">
+								<xsd:annotation>
+									<xsd:documentation>
+										<Description>Applied For Employer Identification Number Reason Code</Description>
+										<LineNumber>1A(b) 1B(b) 1C(b) 1D(b) 1E(b)</LineNumber>
+										<ELFFieldNumber>0035 0055 0075 0095 0115</ELFFieldNumber>
+									</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="StringType">
+										<xsd:enumeration value="APPLIED FOR"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+						</xsd:choice>
+						<!--Total Tips Received Amount -->
+						<xsd:element name="TotalTipsReceivedAmt" type="USAmountType">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Total Tips Received Amount</Description>
+									<LineNumber>1A(c) 1B(c) 1C(c) 1D(c) 1E(c)</LineNumber>
+									<ELFFieldNumber>0040 0060 0080 0100 0120</ELFFieldNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						<!--Total Tips Reported Amount -->
+						<xsd:element name="TotalTipsReportedAmt" type="USAmountType">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Total Tips Reported Amount</Description>
+									<LineNumber>1A(d) 1B(d) 1C(d) 1D(d) 1E(d)</LineNumber>
+									<ELFFieldNumber>0045 0065 0085 0105 0125</ELFFieldNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<!--Total Tips Received Amount -->
+			<xsd:element name="TotalTipsReceivedAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Total Tips Received Amount</Description>
+						<LineNumber>2</LineNumber>
+						<ELFFieldNumber>0160</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!--Total Tips Reported Amount -->
+			<xsd:element name="TotalTipsReportedAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Total Tips Reported Amount</Description>
+						<LineNumber>3</LineNumber>
+						<ELFFieldNumber>0170</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!--Total Tips Received Minus Reported Amount -->
+			<xsd:element name="TotalTipsReceivedMinusRptAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Total Tips Received Minus Reported Amount</Description>
+						<LineNumber>4</LineNumber>
+						<ELFFieldNumber>0180</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!--Incidental Cash And Tips Amount -->
+			<xsd:element name="IncidentalCashAndTipsAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Incidental Cash And Tips Amount</Description>
+						<LineNumber>5</LineNumber>
+						<ELFFieldNumber>0190</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!--Net Unreported Minus Incidental Amount -->
+			<xsd:element name="NetUnreportedMinusIncdntlAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Net Unreported Minus Incidental Amount</Description>
+						<LineNumber>6</LineNumber>
+						<ELFFieldNumber>0200</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!--Social Security Wages And Tips Amount -->
+			<xsd:element name="SocialSecurityWagesAndTipsAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Social Security Wages And Tips Amount</Description>
+						<LineNumber>8</LineNumber>
+						<ELFFieldNumber>0210</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!--Net Wage Subject To Social Security Tax Amount -->
+			<xsd:element name="NetWageSubjectToSocSecTaxAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Net Wage Subject To Social Security Tax Amount</Description>
+						<LineNumber>9</LineNumber>
+						<ELFFieldNumber>0220</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!--Government Employee Tip Amount -->
+			<xsd:element name="GovernmentEmployeeTipAmt" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Government Employee Tip Amount</Description>
+						<LineNumber>10</LineNumber>
+						<ELFFieldNumber>0227</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+				<xsd:complexType>
+					<xsd:simpleContent>
+						<xsd:extension base="USAmountType">
+							<xsd:attribute name="governmentEmployeeTipCd" type="StringType" fixed="1.45% TIPS">
+								<xsd:annotation>
+									<xsd:documentation>
+										<ELFFieldNumber>0224</ELFFieldNumber>
+									</xsd:documentation>
+								</xsd:annotation>
+							</xsd:attribute>
+						</xsd:extension>
+					</xsd:simpleContent>
+				</xsd:complexType>
+			</xsd:element>
+			<!--Unreported Tips Subject To Social Security Amount -->
+			<xsd:element name="UnreportedTipsSubjToSocSecAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Unreported Tips Subject To Social Security Amount</Description>
+						<LineNumber>10</LineNumber>
+						<ELFFieldNumber>0230</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!--Social Security Tax Tip Amount -->
+			<xsd:element name="SocialSecurityTaxTipAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Social Security Tax Tip Amount</Description>
+						<LineNumber>11</LineNumber>
+						<ELFFieldNumber>0240</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!--Medicare Tax Tips Amount -->
+			<xsd:element name="MedicareTaxTipsAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Medicare Tax Tips Amount</Description>
+						<LineNumber>12</LineNumber>
+						<ELFFieldNumber>0290</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!--Social Security Medicare Tax Unreported Tip Amount -->
+			<xsd:element name="SocSecMedicareTaxUnrptdTipAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Social Security Medicare Tax Unreported Tip Amount</Description>
+						<LineNumber>13</LineNumber>
+						<ELFFieldNumber>0300</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:schema>

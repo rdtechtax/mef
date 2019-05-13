@@ -1,0 +1,593 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.irs.gov/efile" targetNamespace="http://www.irs.gov/efile" elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.0">
+	<xsd:annotation>
+		<xsd:documentation>
+			<Description>IRS e-file Schema - IRS Form 4835</Description>
+			<TaxYear>2018</TaxYear>
+			<MaturityLevel>Final Release</MaturityLevel>
+			<ReleaseDate>February 13, 2019</ReleaseDate>
+		</xsd:documentation>
+	</xsd:annotation>
+	<xsd:include schemaLocation="../../../Common/efileTypes.xsd"/>
+	<!--==================================================================-->
+	<!--============================= IRS4835 ============================-->
+	<!--==================================================================-->
+	<xsd:element name="IRS4835">
+		<xsd:annotation>
+			<xsd:documentation>IRS Form 4835</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:complexContent>
+				<xsd:extension base="IRS4835Type">
+					<xsd:attributeGroup ref="DocumentAttributes">
+						<xsd:annotation>
+							<xsd:documentation>Common return document attributes</xsd:documentation>
+						</xsd:annotation>
+					</xsd:attributeGroup>
+					<xsd:attribute name="documentName" type="xsd:string" fixed="IRS4835"/>
+				</xsd:extension>
+			</xsd:complexContent>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:complexType name="IRS4835Type">
+		<xsd:annotation>
+			<xsd:documentation>Content model for IRS4835</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<!--EIN -->
+			<xsd:element name="EIN" type="EINType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>EIN</Description>
+						<ELFFieldNumber>0010</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Actively Participated Indicator -->
+			<xsd:element name="ActivelyParticipatedInd" type="BooleanType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Actively participated indicator</Description>
+						<LineNumber>A</LineNumber>
+						<ELFFieldNumber>0030 0035</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!--Part I  Gross Farm Rental Income - Based on Production-->
+			<!--Livestock And Crop Income Amount -->
+			<xsd:element name="LivestockAndCropIncomeAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Livestock And Crop Income Amount</Description>
+						<LineNumber>1</LineNumber>
+						<ELFFieldNumber>0050</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!--Cooperative Distributions -->
+			<xsd:element name="CooperativeDistributionsAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Cooperative Distributions</Description>
+						<LineNumber>2a</LineNumber>
+						<ELFFieldNumber>0060</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!--Cooperative Distribution Taxable Amount -->
+			<xsd:element name="CooperativeDistriTxblAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Cooperative Distribution Taxable Amount</Description>
+						<LineNumber>2b</LineNumber>
+						<ELFFieldNumber>0075</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!--Agricultural Program Payments -->
+			<xsd:element name="AgriculturalProgramPymtAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Agricultural Program Payments</Description>
+						<LineNumber>3a</LineNumber>
+						<ELFFieldNumber>0090</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!--Agricultural Program Payment Taxable Amount -->
+			<xsd:element name="AgriculturalProgramPymtTxblAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Agricultural Program Payment Taxable Amount</Description>
+						<LineNumber>3b</LineNumber>
+						<ELFFieldNumber>0095</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!--CCC Loans Reported Under Election -->
+			<xsd:element name="CCCLoanReportedElectionAmt" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>CCC Loans Reported Under Election</Description>
+						<LineNumber>4a</LineNumber>
+						<ELFFieldNumber>0110</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+				<xsd:complexType>
+						<xsd:simpleContent>
+							<xsd:extension base="USAmountType">
+								<xsd:attribute name="referenceDocumentId" type="IdListType"/>
+								<xsd:attribute name="referenceDocumentName" type="StringType" fixed="CCCLoanDetailCashMethodStatement"/>
+							</xsd:extension>
+						</xsd:simpleContent>
+				</xsd:complexType>
+			</xsd:element>
+			<!--CCC Loans Forfeited -->
+			<xsd:element name="CCCLoansForfeitedAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>CCC Loans Forfeited</Description>
+						<LineNumber>4b</LineNumber>
+						<ELFFieldNumber>0112</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!--CCC Loans Forfeited Taxable Amount -->
+			<xsd:element name="CCCLoansForfeitedTaxableAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>CCC Loans Forfeited Taxable Amount</Description>
+						<LineNumber>4c</LineNumber>
+						<ELFFieldNumber>0115</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!--Crop Insurance Proceeds And Disaster Payment -->
+			<xsd:element name="CropInsProcAndDsstrPymtAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Crop Insurance Proceeds And Disaster Payment</Description>
+						<LineNumber>5a</LineNumber>
+						<ELFFieldNumber>0120</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!--Crop Insurance Processible And Disaster Payment Taxable Amount -->
+			<xsd:element name="CropInsProcAndDsstrPymtTxblAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Crop Insurance Processible And Disaster Payment Taxable Amount</Description>
+						<LineNumber>5b</LineNumber>
+						<ELFFieldNumber>0122</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!--Election To Defer Crop Insurance Processible -->
+			<xsd:element name="ElectionDeferCropInsProcInd" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Election To Defer Crop Insurance Processible</Description>
+						<LineNumber>5c</LineNumber>
+						<ELFFieldNumber>0124</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+				<xsd:complexType>
+						<xsd:simpleContent>
+							<xsd:extension base="CheckboxType">
+								<xsd:attribute name="referenceDocumentId" type="IdListType"/>
+								<xsd:attribute name="referenceDocumentName" type="StringType" fixed="PostponementOfCropInsuranceAndDisasterPaymentsStatement"/>
+							</xsd:extension>
+						</xsd:simpleContent>
+				</xsd:complexType>
+			</xsd:element>
+			<!--Crop Insurance Processible Deferred From Previous Tax Year -->
+			<xsd:element name="CropInsProcDefrdPrevTYAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Crop Insurance Processible Deferred From Previous Tax Year</Description>
+						<LineNumber>5d</LineNumber>
+						<ELFFieldNumber>0126</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!--Other Income Including Gasoline Fuel Tax Credit -->
+			<xsd:element name="OthIncmIncludingGasFuelTxCrAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Other Income Including Gasoline Fuel Tax Credit</Description>
+						<LineNumber>6</LineNumber>
+						<ELFFieldNumber>0140</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!--Gross Farm Rental Income Amount -->
+			<xsd:element name="GrossFarmRentalIncomeAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Gross Farm Rental Income Amount</Description>
+						<LineNumber>7</LineNumber>
+						<ELFFieldNumber>0150</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!--Part II  Expenses - Farm Rental Property-->
+			<!--Car And Truck Expenses -->
+			<xsd:element name="CarAndTruckExpensesAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Car And Truck Expenses</Description>
+						<LineNumber>8</LineNumber>
+						<ELFFieldNumber>0165</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!--Chemicals Expenses -->
+			<xsd:element name="ChemicalExpenseAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Chemicals Expenses</Description>
+						<LineNumber>9</LineNumber>
+						<ELFFieldNumber>0170</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!--Conservation Expenses -->
+			<xsd:element name="ConservationExpenseAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Conservation Expenses</Description>
+						<LineNumber>10</LineNumber>
+						<ELFFieldNumber>0180</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!--Custom Hire Expenses -->
+			<xsd:element name="CustomHireExpenseAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Custom Hire Expenses</Description>
+						<LineNumber>11</LineNumber>
+						<ELFFieldNumber>0185</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!--Depreciation And Sector 179 Expense Deduction -->
+			<xsd:element name="DeprecAndSect179ExpnsDedAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Depreciation And Sector 179 Expense Deduction</Description>
+						<LineNumber>12</LineNumber>
+						<ELFFieldNumber>0190</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!--Employee Benefit Program Expenses -->
+			<xsd:element name="EmployeeBenefitProgramAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Employee Benefit Program Expenses</Description>
+						<LineNumber>13</LineNumber>
+						<ELFFieldNumber>0200</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!--Feed Purchased Expenses -->
+			<xsd:element name="FeedPurchasedExpenseAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Feed Purchased Expenses</Description>
+						<LineNumber>14</LineNumber>
+						<ELFFieldNumber>0210</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!--Fertilizer And Lime Expenses -->
+			<xsd:element name="FertilizerAndLimeExpenseAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Fertilizer And Lime Expenses</Description>
+						<LineNumber>15</LineNumber>
+						<ELFFieldNumber>0220</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!--Freight And Trucking Expenses -->
+			<xsd:element name="FreightAndTruckingExpenseAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Freight And Trucking Expenses</Description>
+						<LineNumber>16</LineNumber>
+						<ELFFieldNumber>0230</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!--Gasoline Fuel And Oil Expenses -->
+			<xsd:element name="GasolineFuelAndOilExpenseAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Gasoline Fuel And Oil Expenses</Description>
+						<LineNumber>17</LineNumber>
+						<ELFFieldNumber>0240</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!--Insurance Expenses -->
+			<xsd:element name="InsuranceAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Insurance Expenses</Description>
+						<LineNumber>18</LineNumber>
+						<ELFFieldNumber>0250</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!--Mortgage Interest Expense Amount -->
+			<xsd:element name="MortgageInterestPaidBanksAmt" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Mortgage Interest Expense Amount</Description>
+						<LineNumber>19a</LineNumber>
+						<ELFFieldNumber>0260</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+				<xsd:complexType>
+						<xsd:simpleContent>
+							<xsd:extension base="USAmountType">
+								<xsd:attribute name="referenceDocumentId" type="IdListType"/>
+								<xsd:attribute name="referenceDocumentName" type="StringType" fixed="ExplanationOfAdditionalInterestDeductionStatement"/>
+							</xsd:extension>
+						</xsd:simpleContent>
+				</xsd:complexType>
+			</xsd:element>
+			<!--Other Interest Expenses -->
+			<xsd:element name="MortgageInterestPaidOtherAmt" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Other Interest Expenses</Description>
+						<LineNumber>19b</LineNumber>
+						<ELFFieldNumber>0270</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+				<xsd:complexType>
+						<xsd:simpleContent>
+							<xsd:extension base="USAmountType">
+								<xsd:attribute name="referenceDocumentId" type="IdListType"/>
+								<xsd:attribute name="referenceDocumentName" type="StringType" fixed="Form1098RecipientsStatement"/>
+								<xsd:attribute name="attachmentIndicatorCd" type="TextType" fixed="SEE ATTACHED"/>
+							</xsd:extension>
+						</xsd:simpleContent>
+				</xsd:complexType>
+			</xsd:element>
+			<!--Labor Hired Expenses -->
+			<xsd:element name="LaborHiredExpenseAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Labor Hired Expenses</Description>
+						<LineNumber>20</LineNumber>
+						<ELFFieldNumber>0280</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!--Pension And Profit Sharing Expenses -->
+			<xsd:element name="PensionProfitSharingPlansAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Pension And Profit Sharing Expenses</Description>
+						<LineNumber>21</LineNumber>
+						<ELFFieldNumber>0320</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!--Vehicle Machinery And Equipment Rent Lease Expenses -->
+			<xsd:element name="MachineryAndEquipmentRentAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Vehicle Machinery And Equipment Rent Lease Expenses</Description>
+						<LineNumber>22a</LineNumber>
+						<ELFFieldNumber>0330</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!--Other Rent Or Lease Expenses -->
+			<xsd:element name="OtherBusinessPropertyRentAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Other Rent Or Lease Expenses</Description>
+						<LineNumber>22b</LineNumber>
+						<ELFFieldNumber>0335</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!--Repairs And Maintenance Expenses -->
+			<xsd:element name="RepairsAndMaintenanceAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Repairs And Maintenance Expenses</Description>
+						<LineNumber>23</LineNumber>
+						<ELFFieldNumber>0340</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!--Seeds And Plants Expenses -->
+			<xsd:element name="SeedAndPlantExpenseAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Seeds And Plants Expenses</Description>
+						<LineNumber>24</LineNumber>
+						<ELFFieldNumber>0350</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!--Storage And Warehousing Expenses -->
+			<xsd:element name="StorageAndWarehousingExpnsAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Storage And Warehousing Expenses</Description>
+						<LineNumber>25</LineNumber>
+						<ELFFieldNumber>0370</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!--Supplies Expenses -->
+			<xsd:element name="SuppliesAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Supplies Expenses</Description>
+						<LineNumber>26</LineNumber>
+						<ELFFieldNumber>0380</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!--Taxes Expense -->
+			<xsd:element name="TaxExpenseAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Taxes Expense</Description>
+						<LineNumber>27</LineNumber>
+						<ELFFieldNumber>0390</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!--Utilities Expenses -->
+			<xsd:element name="UtilitiesAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Utilities Expenses</Description>
+						<LineNumber>28</LineNumber>
+						<ELFFieldNumber>0400</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!--Veterinary Breeding Medicine Expenses -->
+			<xsd:element name="VtrnryBreedingMedicineExpnsAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Veterinary Breeding Medicine Expenses</Description>
+						<LineNumber>29</LineNumber>
+						<ELFFieldNumber>0410</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!--Other Expense OtherFarmTypeExpenseType-->
+			<xsd:element name="OtherExpenseDetail" type="OtherExpensesType" minOccurs="0" maxOccurs="unbounded">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Other Expense</Description>
+						<LineNumber>30a-g</LineNumber>
+						<ELFFieldNumber>0420 0430 0440 0450 0460 0470 0480 0490 0500 0510 0511 0512 0513 0514</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Section 263A Indicator Code -->
+			<xsd:element name="Section263AIndicatorCd" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Section 263A Indicator Code</Description>
+						<LineNumber>30g</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+				<xsd:simpleType>
+					<xsd:restriction base="StringType">
+						<xsd:enumeration value="263A"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<!--Total Expenses -->
+			<xsd:element name="TotalExpensesAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Total Expenses</Description>
+						<LineNumber>31</LineNumber>
+						<ELFFieldNumber>0600</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!--Net Farmland Rental Income Or Loss Amount -->
+			<xsd:element name="NetFarmRentalIncomeOrLossAmt" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Net Farmland Rental Income Or Loss Amount</Description>
+						<LineNumber>32</LineNumber>
+						<ELFFieldNumber>0610</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+				<xsd:complexType>
+					<xsd:simpleContent>
+						<xsd:extension base="USAmountType">
+							<xsd:attribute name="passiveActivityLossLiteralCd">
+								<xsd:annotation>
+									<xsd:documentation>
+										<Description>Passive Activity Loss Literal Code</Description>
+										<LineNumber>32</LineNumber>
+										<ELFFieldNumber>0605</ELFFieldNumber>
+									</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="StringType">
+										<xsd:enumeration value="PAL"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:attribute>
+						</xsd:extension>
+					</xsd:simpleContent>
+				</xsd:complexType>
+			</xsd:element>
+			
+			<!-- Subsidy Received Indicator -->
+			<!-- Reserved       Note: No Entry on this line
+			<xsd:element name="SubsidyReceivedInd" type="BooleanType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Subsidy Received Indicator</Description>
+						<LineNumber>33</LineNumber>
+						<ELFFieldNumber>NL</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			-->
+			
+			<xsd:choice minOccurs="0">
+				<!--All Investment Is At Risk -->
+				<xsd:element name="AllInvestmentIsAtRiskInd" type="CheckboxType" minOccurs="0">
+					<xsd:annotation>
+						<xsd:documentation>
+							<Description>All Investment Is At Risk</Description>
+							<LineNumber>34a</LineNumber>
+							<ELFFieldNumber>0615</ELFFieldNumber>
+						</xsd:documentation>
+					</xsd:annotation>
+				</xsd:element>
+				<!--Some Investment Is Not At Risk -->
+				<xsd:element name="SomeInvestmentIsNotAtRiskInd" type="CheckboxType" minOccurs="0">
+					<xsd:annotation>
+						<xsd:documentation>
+							<Description>Some Investment Is Not At Risk</Description>
+							<LineNumber>34b</LineNumber>
+							<ELFFieldNumber>0620</ELFFieldNumber>
+						</xsd:documentation>
+					</xsd:annotation>
+				</xsd:element>
+			</xsd:choice>
+			<!--Farmland Rental Deductible Loss Amount -->
+			<xsd:element name="FarmRentalDeductibleLossAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Farmland Rental Deductible Loss Amount</Description>
+						<LineNumber>34c</LineNumber>
+						<ELFFieldNumber>0630</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>	
+	
+	<!-- Type for repeating group 'OtherExpense' in Part II -->
+	<xsd:complexType name="OtherExpensesType">
+		<xsd:sequence>
+			<!-- Description -->
+			<xsd:element name="Desc" type="ShortDescriptionType" minOccurs="0"/>
+			<!-- Amount -->
+			<xsd:element name="Amt" type="USAmountType" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:schema>

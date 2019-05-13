@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns="http://www.irs.gov/efile" xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.irs.gov/efile" elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.0">
+
+	<xsd:annotation>
+		<xsd:documentation>
+			<Description>IRS e-file Schema - Model O and Model S Certificate Statement</Description>
+			<TaxYear>2018</TaxYear>
+			<MaturityLevel>Final Release</MaturityLevel>
+			<ReleaseDate>February 13, 2019</ReleaseDate>
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:include schemaLocation="../../../Common/efileTypes.xsd"/>
+
+
+	<!-- ===================================================================== -->
+	<!-- ============  Model O and Model S Certificate Statement  ============ -->
+	<!-- ===================================================================== -->
+
+	<xsd:element name="ModelOModelSCertificateStmt">
+		<xsd:annotation>
+			<xsd:documentation>Model O and Model S certificate statement</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:complexContent>
+				<xsd:extension base="ModelOModelSCertificateStmtType">
+					<xsd:attributeGroup ref="DocumentAttributes">
+						<xsd:annotation>
+							<xsd:documentation>Common return document attributes</xsd:documentation>
+						</xsd:annotation>
+					</xsd:attributeGroup>
+					<xsd:attribute name="documentName" type="xsd:string" fixed="ModelOAndModelSCertificateStatement">
+						<xsd:annotation>
+							<xsd:documentation>IRS internal use only. To avoid error in the return, do not include the attribute name or value.</xsd:documentation>
+						</xsd:annotation>
+					</xsd:attribute>
+				</xsd:extension>
+			</xsd:complexContent>
+		</xsd:complexType>
+	</xsd:element>
+
+	<xsd:complexType name="ModelOModelSCertificateStmtType">
+		<xsd:annotation>
+			<xsd:documentation>Content model for Model O and Model S certificate statement</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+
+			<!-- Certificate for Model O and Model S -->
+			<xsd:element name="CertForModelOAndModelS" type="CertForModelOAndModelSType" minOccurs="0" maxOccurs="unbounded">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Certificate for Model O and Model S</Description>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<!-- Type for Certificate for Model O and Model S -->
+	<xsd:complexType name="CertForModelOAndModelSType">
+		<xsd:sequence>
+
+			<!-- Certificate Identification Number -->
+			<xsd:element name="CertificateIdentificationNum" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Certificate identification number</Description>
+					</xsd:documentation>
+				</xsd:annotation>
+				<xsd:simpleType>
+					<xsd:restriction base="TextType">
+						<xsd:maxLength value="25"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+
+			<!-- Total Gallons of Biodiesel -->
+			<xsd:element name="TotBiodieselOrRnwblDslGalsQty" type="FuelGallonsType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Total gallons of biodiesel</Description>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Total Gallons Claimed on Schedule 3 (Form 8849) -->
+			<xsd:element name="TotalGallonsClmSch3Frm8849Qty" type="FuelGallonsType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Total gallons claimed on Schedule 3 (Form 8849)</Description>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Total Gallons Claimed on Schedule C (Form 720) -->
+			<xsd:element name="TotalGallonsClmSchCFrm720Qty" type="FuelGallonsType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Total gallons claimed on Schedule C (Form 720)</Description>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+		</xsd:sequence>
+	</xsd:complexType>
+
+</xsd:schema>

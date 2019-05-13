@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.irs.gov/efile" targetNamespace="http://www.irs.gov/efile" elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.0">
+
+	<xsd:annotation>
+		<xsd:documentation>
+			<Description>IRS e-file Schema - Carryforward General Business Credit Computation</Description>
+			<TaxYear>2018</TaxYear>
+			<MaturityLevel>Final Release</MaturityLevel>
+			<ReleaseDate>February 13, 2019</ReleaseDate>
+		</xsd:documentation>
+	</xsd:annotation>
+	
+	<xsd:include schemaLocation="../../../Common/efileTypes.xsd"/>
+	
+	<!-- ========================================================= -->
+	<!-- ====== Carryforward General Business Credit Computation ======= -->
+	<!-- ========================================================= -->
+	
+	<xsd:element name="CarryforwardGeneralBusinessCr">
+		<xsd:annotation>
+			<xsd:documentation>Carryforward General Business Credit Computation</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:complexContent>
+				<xsd:extension base="CarryforwardGeneralBusinessCrType">
+					<xsd:attributeGroup ref="DocumentAttributes">
+						<xsd:annotation>
+							<xsd:documentation>Common return document attributes</xsd:documentation>
+						</xsd:annotation>
+					</xsd:attributeGroup>
+					<xsd:attribute name="documentName" type="StringType" fixed="CarryforwardGeneralBusinessCr">
+						<xsd:annotation>
+							<xsd:documentation>IRS internal use only. To avoid error in the return, do not include the attribute name or value.</xsd:documentation>
+						</xsd:annotation>
+					</xsd:attribute>
+				</xsd:extension>
+			</xsd:complexContent>
+		</xsd:complexType>
+	</xsd:element>
+	
+	<xsd:complexType name="CarryforwardGeneralBusinessCrType">
+		<xsd:annotation>
+			<xsd:documentation>Carryforward of Genereal Business or ESOP Credit Computation</xsd:documentation>
+		</xsd:annotation>
+		
+		<xsd:sequence>
+		
+			<!-- Credit Identification -->
+			<xsd:element name="CreditIdentificationTxt" type="LineExplanationType">
+				<xsd:annotation>
+					<xsd:documentation>Credit identification</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			
+			<!-- The Tax Year the Credit Originated -->
+			<xsd:element name="CreditOriginatedTaxYr" type="DateType">
+				<xsd:annotation>
+					<xsd:documentation>The Tax Year the Credit Originated</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			
+			<!-- The Amount of the Credit -->
+			<xsd:element name="CreditAmt" type="USAmountNNType">
+				<xsd:annotation>
+					<xsd:documentation>The Amount of the Credit</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			
+			<!-- The Amount Allowed for that Year -->
+			<xsd:element name="CreditAllowedForYrAmt" type="USAmountNNType">
+				<xsd:annotation>
+					<xsd:documentation>The Amount Allowed for that Year</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			
+			<!-- For Each Carryback Year, the Year and the Amount of Credit Allowed After the Carryback Was Applied -->
+			<xsd:element name="CarrybackCrRemainingGrp" type="CarryforwardCarrybackType" minOccurs="0" maxOccurs="unbounded">
+				<xsd:annotation>
+					<xsd:documentation>For Each Carryback Year, the Year and the Amount of Credit Allowed After the Carryback Was Applied</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			
+			<!-- For Each Carryforward Year, the Year and the Amount of Credit Allowed After the Carryforward Was Applied -->
+			<xsd:element name="CarryforwardCrRemainingGrp" type="CarryforwardCarrybackType" minOccurs="0" maxOccurs="unbounded">
+				<xsd:annotation>
+					<xsd:documentation>For Each Carryforward Year, the Year and the Amount of Credit Allowed After the Carryforward Was Applied</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			
+		</xsd:sequence>
+	</xsd:complexType>	
+  
+	<xsd:complexType name="CarryforwardCarrybackType">
+		<xsd:sequence>
+		
+			<!-- For Each Carryforward or Carryback Year, the Year the Credit Was Applied -->
+			<xsd:element name="CarryYr" type="DateType">
+				<xsd:annotation>
+					<xsd:documentation>For Each Carryforward or Carryback Year, the Year the Credit Was Applied</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			
+			<!-- For Each Carryforward or Carryback Year, the Amount of the Credit Allowed After the Carryforward or Carryback Was Applied -->
+			<xsd:element name="CarryAllowedAmt" type="USAmountNNType">
+				<xsd:annotation>
+					<xsd:documentation>For Each Carryforward or Carryback Year, the Amount of the Credit Allowed After the Carryforward or Carryback Was Applied</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+		
+	</xsd:complexType>
+</xsd:schema>

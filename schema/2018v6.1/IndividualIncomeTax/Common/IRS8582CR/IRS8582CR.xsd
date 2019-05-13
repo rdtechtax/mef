@@ -1,0 +1,642 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.irs.gov/efile" targetNamespace="http://www.irs.gov/efile" elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.0">
+	<xsd:annotation>
+		<xsd:documentation>
+			<Description>IRS e-file Schema - IRS Form 8582-CR Passive Activity Credit Limitations</Description>
+			<TaxYear>2018</TaxYear>
+			<MaturityLevel>Final Release</MaturityLevel>
+			<ReleaseDate>February 13, 2019</ReleaseDate>
+		</xsd:documentation>
+	</xsd:annotation>
+	
+	<xsd:include schemaLocation="../../../Common/efileTypes.xsd"/>
+	
+	<!--=====================================================================-->
+	<!--========================= IRS Form 8582-CR ==========================-->
+	<!--=====================================================================-->
+	
+	<xsd:element name="IRS8582CR">
+		<xsd:annotation>
+			<xsd:documentation>IRS Form 8582-CR</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:complexContent>
+				<xsd:extension base="IRS8582CRType">
+					<xsd:attributeGroup ref="DocumentAttributes">
+						<xsd:annotation>
+							<xsd:documentation>Common return document attributes</xsd:documentation>
+						</xsd:annotation>
+					</xsd:attributeGroup>
+					<xsd:attribute name="documentName" type="xsd:string" fixed="IRS8582CR"/>
+				</xsd:extension>
+			</xsd:complexContent>
+		</xsd:complexType>
+	</xsd:element>
+
+	<xsd:complexType name="IRS8582CRType">
+		<xsd:annotation>
+			<xsd:documentation>Content model for IRS Form 8582-CR</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+
+			<xsd:element name="RentalCreditGrp" minOccurs="0">
+				<xsd:complexType>
+					<xsd:sequence>
+						<!--Current Year Credit Amount -->
+						<xsd:element name="CurrentYearCreditAmt" type="USAmountType" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Current Year Credit Amount</Description>
+									<LineNumber>1a</LineNumber>
+									<ELFFieldNumber>0010</ELFFieldNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						<!--Prior Unallowed Credit Amount -->
+						<xsd:element name="PriorUnallowedCreditAmt" type="USAmountType" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Prior Unallowed Credit Amount</Description>
+									<LineNumber>1b</LineNumber>
+									<ELFFieldNumber>0020</ELFFieldNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						<!--Total Credit Amount -->
+						<xsd:element name="TotalCreditAmt" type="USAmountType" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Total Credit Amount</Description>
+									<LineNumber>1c</LineNumber>
+									<ELFFieldNumber>0030</ELFFieldNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+
+			<xsd:element name="RehabilitationCreditGrp" minOccurs="0">
+				<xsd:complexType>
+					<xsd:sequence>
+						<!--Current Year Credit Amount -->
+						<xsd:element name="CurrentYearCreditAmt" type="USAmountType" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Current Year Credit Amount</Description>
+									<LineNumber>2a</LineNumber>
+									<ELFFieldNumber>0040</ELFFieldNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						<!--Prior Unallowed Credit Amount -->
+						<xsd:element name="PriorUnallowedCreditAmt" type="USAmountType" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Prior Unallowed Credit Amount</Description>
+									<LineNumber>2b</LineNumber>
+									<ELFFieldNumber>0050</ELFFieldNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						<!--Total Credit Amount -->
+						<xsd:element name="TotalCreditAmt" type="USAmountType" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Total Credit Amount</Description>
+									<LineNumber>2c</LineNumber>
+									<ELFFieldNumber>0060</ELFFieldNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+
+			<xsd:element name="LowIncomeCreditGrp" minOccurs="0">
+				<xsd:complexType>
+					<xsd:sequence>
+						<!--Current Year Credit Amount -->
+						<xsd:element name="CurrentYearCreditAmt" type="USAmountType" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Current Year Credit Amount</Description>
+									<LineNumber>3a</LineNumber>
+									<ELFFieldNumber>0070</ELFFieldNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						<!--Prior Unallowed Credit Amount -->
+						<xsd:element name="PriorUnallowedCreditAmt" type="USAmountType" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Prior Unallowed Credit Amount</Description>
+									<LineNumber>3b</LineNumber>
+									<ELFFieldNumber>0080</ELFFieldNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						<!--Total Credit Amount -->
+						<xsd:element name="TotalCreditAmt" type="USAmountType" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Total Credit Amount</Description>
+									<LineNumber>3c</LineNumber>
+									<ELFFieldNumber>0090</ELFFieldNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+
+			<xsd:element name="AllPassiveCreditGrp" minOccurs="0">
+				<xsd:complexType>
+					<xsd:sequence>
+						<!--Other Current Year Amount -->
+						<xsd:element name="OtherCurrentYearAmt" type="USAmountType" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Other Current Year Amount</Description>
+									<LineNumber>4a</LineNumber>
+									<ELFFieldNumber>0100</ELFFieldNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						<!--Other Prior Unallowed Amount -->
+						<xsd:element name="OtherPriorUnallowedAmt" type="USAmountType" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Other Prior Unallowed Amount</Description>
+									<LineNumber>4b</LineNumber>
+									<ELFFieldNumber>0110</ELFFieldNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						<!--Total Other Credits Amount -->
+						<xsd:element name="TotalOtherCreditsAmt" type="USAmountType" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Total Other Credits Amount</Description>
+									<LineNumber>4c</LineNumber>
+									<ELFFieldNumber>0120</ELFFieldNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+
+			<!--Total Credit Amount -->
+			<xsd:element name="TotalCreditAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Total Credit Amount</Description>
+						<LineNumber>5</LineNumber>
+						<ELFFieldNumber>0130</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!--Net Passive Income Tax Amount -->
+			<xsd:element name="NetPassiveIncomeTaxAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Net Passive Income Tax Amount</Description>
+						<LineNumber>6</LineNumber>
+						<ELFFieldNumber>0140</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!--Total Credit Minus Tax Amount -->
+			<xsd:element name="TotalCreditMinusTaxAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Total Credit Minus Tax Amount</Description>
+						<LineNumber>7</LineNumber>
+						<ELFFieldNumber>0150</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<xsd:element name="SpecialAllowActiveGrp" minOccurs="0">
+				<xsd:complexType>
+					<xsd:sequence>
+						<!--Smaller Amount -->
+						<xsd:element name="SmallerAmt" type="USAmountType" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Smaller Amount</Description>
+									<LineNumber>8</LineNumber>
+									<ELFFieldNumber>0160</ELFFieldNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						<!--Total Archer MSA Distribution Amount -->
+						<xsd:element name="TotalArcherMSADistributionAmt" type="USAmountType" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Total Archer MSA Distribution Amount</Description>
+									<LineNumber>9</LineNumber>
+									<ELFFieldNumber>0170</ELFFieldNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						<!--Modified Adjusted Gross Income Amount -->
+						<xsd:element name="ModifiedAGIAmt" type="USAmountType" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Modified Adjusted Gross Income Amount</Description>
+									<LineNumber>10</LineNumber>
+									<ELFFieldNumber>0180</ELFFieldNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						<!--Net Adjusted Gross Income Amount -->
+						<xsd:element name="NetAGIAmt" type="USAmountType" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Net Adjusted Gross Income Amount</Description>
+									<LineNumber>11</LineNumber>
+									<ELFFieldNumber>0190</ELFFieldNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						<!--Percent Net Adjusted Gross Income Amount -->
+						<xsd:element name="PercentNetAGIAmt" type="USAmountNNType" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Percent Net Adjusted Gross Income Amount</Description>
+									<LineNumber>12</LineNumber>
+									<ELFFieldNumber>0200</ELFFieldNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						<!--Allowed Rental Realty Loss Amount -->
+						<xsd:element name="AllowedRentalRealtyLossAmt" type="USAmountType" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Allowed Rental Realty Loss Amount</Description>
+									<LineNumber>13a</LineNumber>
+									<ELFFieldNumber>0203</ELFFieldNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						<!--Final Revitalization Amount -->
+						<xsd:element name="FinalRevitalizationAmt" type="USAmountType" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Final Revitalization Amount</Description>
+									<LineNumber>13b</LineNumber>
+									<ELFFieldNumber>0206</ELFFieldNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						<!--Net Loss Limit Amount -->
+						<xsd:element name="NetLossLimitAmt" type="USAmountType" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Net Loss Limit Amount</Description>
+									<LineNumber>13c</LineNumber>
+									<ELFFieldNumber>0210</ELFFieldNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						<!--Taxable Amount -->
+						<xsd:element name="TaxableAmt" type="USAmountType" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Taxable Amount</Description>
+									<LineNumber>14</LineNumber>
+									<ELFFieldNumber>0220</ELFFieldNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						<!--Attributable Tax Amount -->
+						<xsd:element name="AttributableTaxAmt" type="USAmountType" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Attributable Tax Amount</Description>
+									<LineNumber>15</LineNumber>
+									<ELFFieldNumber>0230</ELFFieldNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						<!--Smallest Tax Amount -->
+						<xsd:element name="SmallestTaxAmt" type="USAmountType" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Smallest Tax Amount</Description>
+									<LineNumber>16</LineNumber>
+									<ELFFieldNumber>0240</ELFFieldNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+
+			<xsd:element name="SpecialAllowRehabGrp" minOccurs="0">
+				<xsd:complexType>
+					<xsd:sequence>
+						<!--Total Credit Minus Tax Amount -->
+						<xsd:element name="TotalCreditMinusTaxAmt" type="USAmountType" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Total Credit Minus Tax Amount</Description>
+									<LineNumber>17</LineNumber>
+									<ELFFieldNumber>0260</ELFFieldNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						<!--Smallest Tax Amount -->
+						<xsd:element name="SmallestTaxAmt" type="USAmountType" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Smallest Tax Amount</Description>
+									<LineNumber>18</LineNumber>
+									<ELFFieldNumber>0270</ELFFieldNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						<!--Net Tax Amount -->
+						<xsd:element name="NetTaxAmt" type="USAmountType" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Net Tax Amount</Description>
+									<LineNumber>19</LineNumber>
+									<ELFFieldNumber>0280</ELFFieldNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						<!--Credit Or Net Tax Amount -->
+						<xsd:element name="CreditOrNetTaxAmt" type="USAmountType" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Credit Or Net Tax Amount</Description>
+									<LineNumber>20</LineNumber>
+									<ELFFieldNumber>0290</ELFFieldNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						<!--Total Archer MSA Distribution Amount -->
+						<xsd:element name="TotalArcherMSADistributionAmt" type="USAmountType" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Total Archer MSA Distribution Amount</Description>
+									<LineNumber>21</LineNumber>
+									<ELFFieldNumber>0300</ELFFieldNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						<!--Modified Adjusted Gross Income Amount -->
+						<xsd:element name="ModifiedAGIAmt" type="USAmountPosType" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Modified Adjusted Gross Income Amount</Description>
+									<LineNumber>22</LineNumber>
+									<ELFFieldNumber>0310</ELFFieldNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						<!--Net Adjusted Gross Income Amount -->
+						<xsd:element name="NetAGIAmt" type="USAmountType" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Net Adjusted Gross Income Amount</Description>
+									<LineNumber>23</LineNumber>
+									<ELFFieldNumber>0320</ELFFieldNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						<!--Percent Net Adjusted Gross Income Amount -->
+						<xsd:element name="PercentNetAGIAmt" type="USAmountNNType" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Percent Net Adjusted Gross Income Amount</Description>
+									<LineNumber>24</LineNumber>
+									<ELFFieldNumber>0330</ELFFieldNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						<!--Allowed Rental Realty Loss Amount -->
+						<xsd:element name="AllowedRentalRealtyLossAmt" type="USAmountType" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Allowed Rental Realty Loss Amount</Description>
+									<LineNumber>25a</LineNumber>
+									<ELFFieldNumber>0333</ELFFieldNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						<!--Final Revitalization Amount -->
+						<xsd:element name="FinalRevitalizationAmt" type="USAmountType" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Final Revitalization Amount</Description>
+									<LineNumber>25b</LineNumber>
+									<ELFFieldNumber>0336</ELFFieldNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						<!--Sum Of Special Allowance Real Estate Activity Amount -->
+						<xsd:element name="SumOfSpecialAllwncREActyAmt" type="USAmountType" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Sum Of Special Allowance Real Estate Activity Amount</Description>
+									<LineNumber>25c</LineNumber>
+									<ELFFieldNumber>0340</ELFFieldNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						<!--Taxable Amount -->
+						<xsd:element name="TaxableAmt" type="USAmountType" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Taxable Amount</Description>
+									<LineNumber>26</LineNumber>
+									<ELFFieldNumber>0350</ELFFieldNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						<!--Attributable Tax Amount -->
+						<xsd:element name="AttributableTaxAmt" type="USAmountType" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Attributable Tax Amount</Description>
+									<LineNumber>27</LineNumber>
+									<ELFFieldNumber>0360</ELFFieldNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						<!--Repeated Tax Amount -->
+						<xsd:element name="RepeatedTaxAmt" type="USAmountType" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Repeated Tax Amount</Description>
+									<LineNumber>28</LineNumber>
+									<ELFFieldNumber>0370</ELFFieldNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						<!--Adjusted Tax Amount -->
+						<xsd:element name="AdjustedTaxAmt" type="USAmountType" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Adjusted Tax Amount</Description>
+									<LineNumber>29</LineNumber>
+									<ELFFieldNumber>0380</ELFFieldNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						<!--Smallest Rehab Tax Amount -->
+						<xsd:element name="SmallestRehabTaxAmt" type="USAmountType" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Smallest Rehab Tax Amount</Description>
+									<LineNumber>30</LineNumber>
+									<ELFFieldNumber>0390</ELFFieldNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+
+			<xsd:element name="SpecialAllowLowIncomeGrp" minOccurs="0">
+				<xsd:complexType>
+					<xsd:sequence>
+						<!--Net Tax Amount -->
+						<xsd:element name="NetTaxAmt" type="USAmountType" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Net Tax Amount</Description>
+									<LineNumber>31</LineNumber>
+									<ELFFieldNumber>0400</ELFFieldNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						<!--Smallest Tax Amount -->
+						<xsd:element name="SmallestTaxAmt" type="USAmountType" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Smallest Tax Amount</Description>
+									<LineNumber>32</LineNumber>
+									<ELFFieldNumber>0410</ELFFieldNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						<!--Adjusted Tax Amount -->
+						<xsd:element name="AdjustedTaxAmt" type="USAmountType" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Adjusted Tax Amount</Description>
+									<LineNumber>33</LineNumber>
+									<ELFFieldNumber>0420</ELFFieldNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						<!--Credit Or Net Tax Amount -->
+						<xsd:element name="CreditOrNetTaxAmt" type="USAmountType" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Credit Or Net Tax Amount</Description>
+									<LineNumber>34</LineNumber>
+									<ELFFieldNumber>0430</ELFFieldNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						<!--Attributable Tax Amount -->
+						<xsd:element name="AttributableTaxAmt" type="USAmountType" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Attributable Tax Amount</Description>
+									<LineNumber>35</LineNumber>
+									<ELFFieldNumber>0440</ELFFieldNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						<!--Tax Amount -->
+						<xsd:element name="TaxAmt" type="USAmountType" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Tax Amount</Description>
+									<LineNumber>36</LineNumber>
+									<ELFFieldNumber>0450</ELFFieldNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+
+			<!--Allowed Credits Amount -->
+			<xsd:element name="AllowedCreditsAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Allowed Credits Amount</Description>
+						<LineNumber>37</LineNumber>
+						<ELFFieldNumber>0460</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Election To Increase Basis Indicator -->
+			<xsd:element name="ElectToIncreaseBasisInd" type="CheckboxType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Election To Increase Basis Indicator</Description>
+						<LineNumber>38</LineNumber>
+						<ELFFieldNumber>0470</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!--Disposed Passive Activity Name -->
+			<xsd:element name="DisposedPassiveActivityNm" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Disposed Passive Activity Name</Description>
+						<LineNumber>39</LineNumber>
+						<ELFFieldNumber>0480</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+				<xsd:simpleType>
+					<xsd:restriction base="TextType">
+						<xsd:maxLength value="35"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+
+			<!--Property Description Text -->
+			<xsd:element name="PropertyDesc" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Property Description Text</Description>
+						<LineNumber>40</LineNumber>
+						<ELFFieldNumber>0490</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+				<xsd:simpleType>
+					<xsd:restriction base="TextType">
+						<xsd:maxLength value="80"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+
+			<!--Unallowed Credit Reduction Amount -->
+			<xsd:element name="UnallowedCreditReductionAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Unallowed Credit Reduction Amount</Description>
+						<LineNumber>41</LineNumber>
+						<ELFFieldNumber>0500</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+		</xsd:sequence>
+	</xsd:complexType>
+
+</xsd:schema>

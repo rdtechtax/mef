@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema targetNamespace="http://www.irs.gov/efile" xmlns="http://www.irs.gov/efile" xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.0">
+
+	<xsd:annotation>
+		<xsd:documentation>
+			<Description>IRS e-file Nonresident Alien Income Tax Schema - Revoke Resident Spouse Statement</Description>
+			<Purpose>Optional Statement - The spouse who revokes the resident alien election choice must attach a signed statement declaring that the choice is being revoked. Publication 519.</Purpose>
+			<TaxYear>2018</TaxYear>
+			<MaturityLevel>Final Release</MaturityLevel>
+			<ReleaseDate>February 13, 2019</ReleaseDate>
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:include schemaLocation="../../../Common/efileTypes.xsd" />
+
+	<!-- ========================================================= -->
+	<!-- ====== Revoke Resident Spouse Statement ======= -->
+	<!-- ========================================================= -->
+
+	<xsd:element name="RevokeResidentSpouseStatement">
+		<xsd:annotation>
+			<xsd:documentation>Revoke Resident Spouse Statement</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:complexContent>
+				<xsd:extension base="RevokeResidentSpouseStatementType">
+					<xsd:attributeGroup ref="DocumentAttributes">
+						<xsd:annotation>
+							<xsd:documentation>Common return document attributes</xsd:documentation>
+						</xsd:annotation>
+					</xsd:attributeGroup>
+					<xsd:attribute name="documentName" type="TextType" fixed="RevokeResidentSpouseStatement">
+						<xsd:annotation>
+							<xsd:documentation>IRS internal use only. To avoid error in the return, do not include the attribute name or value.</xsd:documentation>
+						</xsd:annotation>
+					</xsd:attribute>
+				</xsd:extension>
+			</xsd:complexContent>
+		</xsd:complexType>
+	</xsd:element>
+
+	<xsd:complexType name="RevokeResidentSpouseStatementType">
+		<xsd:annotation>
+			<xsd:documentation>Content model for Revoke Resident Spouse Statement</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<!-- Name and Address of Spouse -->
+			<xsd:element name="SpouseNameAndAddress" type="NameAndAddressType" minOccurs="0"/>
+			<!-- Spouse Taxpayer Identification Number -->
+			<xsd:element name="SpouseTIN" type="SSNType" minOccurs="0"/>
+			<!-- Revocating Party Name and Address for deceased Spouse -->
+			<xsd:element name="PartyRevocationNameAndAddress" type="NameAndAddressType" minOccurs="0"/>
+			<!-- State of Community Property -->
+			<xsd:element name="CommunityPropertyStateCd" minOccurs="0" maxOccurs="9">
+				<xsd:simpleType>
+					<xsd:restriction base="TextType">
+						<xsd:enumeration value="AZ"/>
+						<xsd:enumeration value="CA"/>
+						<xsd:enumeration value="ID"/>
+						<xsd:enumeration value="LA"/>
+						<xsd:enumeration value="NV"/>
+						<xsd:enumeration value="NM"/>
+						<xsd:enumeration value="TX"/>
+						<xsd:enumeration value="WA"/>
+						<xsd:enumeration value="WI"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<!-- Foreign Country for Community Property -->
+			<xsd:element name="CommunityPropertyFrgnCntryCd" type="CountryType" minOccurs="0" maxOccurs="10"/>
+			<!-- Additional explanation if needed by filer -->
+			<xsd:element name="AdditionalExplanationTxt" type="ShortExplanationType" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+
+</xsd:schema>

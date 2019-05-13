@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.irs.gov/efile" targetNamespace="http://www.irs.gov/efile" elementFormDefault="qualified" attributeFormDefault="unqualified">
+ <xsd:annotation>
+    <xsd:documentation>
+       <Description>IRS e-file Individual Income Tax Schema - Change In Valuations Statement</Description>
+       <Purpose>Explain the changes in determining quantities, costs or valuations between opening and closing inventory</Purpose>
+       <TaxYear>2018</TaxYear>
+		<MaturityLevel>Final Release</MaturityLevel>
+		<ReleaseDate>February 13, 2019</ReleaseDate>
+    </xsd:documentation>
+ </xsd:annotation>
+
+<xsd:include schemaLocation="../../../Common/efileTypes.xsd"/>
+
+
+	<!-- ========================================================== -->
+	<!-- =================  Change In Valuations Statement  ======= -->
+	<!-- ========================================================== -->
+
+	<xsd:element name="ChangeInValuationsStatement">
+		<xsd:annotation>
+			<xsd:documentation>Change In Valuations Statement</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:complexContent>
+				<xsd:extension base="ChangeInValuationsStatementType">
+					<xsd:attributeGroup ref="DocumentAttributes">
+						<xsd:annotation>
+							<xsd:documentation>Common return document attributes</xsd:documentation>
+						</xsd:annotation>
+					</xsd:attributeGroup>
+					<xsd:attribute name="documentName" type="xsd:string" fixed="ChangeInValuationsStatement">
+						<xsd:annotation>
+							<xsd:documentation>IRS internal use only. To avoid error in the return, do not include the attribute name or value.</xsd:documentation>
+						</xsd:annotation>
+					</xsd:attribute>
+				</xsd:extension>
+			</xsd:complexContent>
+		</xsd:complexType>
+	</xsd:element>
+
+	<xsd:complexType name="ChangeInValuationsStatementType">
+		<xsd:annotation>
+			<xsd:documentation>Content model for Change In Valuations Statement</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="Desc" type="ExplanationType" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+
+</xsd:schema>

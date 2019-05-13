@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns="http://www.irs.gov/efile" xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.irs.gov/efile" elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.0">
+
+	<xsd:annotation>
+		<xsd:documentation>
+			<Description>IRS e-file Individual Income Tax Schema - Other Tax Statement</Description>
+			<Purpose>If you have other tax that needs to be specified as other tax then attach a statement showing specific literals and the amount</Purpose>
+			<TaxYear>2018</TaxYear>
+			<MaturityLevel>Final Release</MaturityLevel>
+			<ReleaseDate>February 13, 2019</ReleaseDate>
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:include schemaLocation="../../../Common/efileTypes.xsd"/>
+
+	<!-- =========================================================== -->
+	<!-- =================== Other Tax Statement =================== -->
+	<!-- =========================================================== -->
+
+	<xsd:element name="OtherTaxStatement">
+		<xsd:annotation>
+			<xsd:documentation>Other Tax Statement</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:complexContent>
+				<xsd:extension base="OtherTaxStatementType">
+					<xsd:attributeGroup ref="DocumentAttributes">
+						<xsd:annotation>
+							<xsd:documentation>Common return document attributes</xsd:documentation>
+						</xsd:annotation>
+					</xsd:attributeGroup>
+					<xsd:attribute name="documentName" type="StringType" fixed="OtherTaxStatement">
+						<xsd:annotation>
+							<xsd:documentation>IRS internal use only. To avoid error in the return, do not include the attribute name or value.</xsd:documentation>
+						</xsd:annotation>
+					</xsd:attribute>
+				</xsd:extension>
+			</xsd:complexContent>
+		</xsd:complexType>
+	</xsd:element>
+
+	<xsd:complexType name="OtherTaxStatementType">
+		<xsd:annotation>
+			<xsd:documentation>Content model for Other Tax Statement</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+
+			<xsd:element name="OtherTaxStmt" type="OtherTaxStmtType" minOccurs="0" maxOccurs="100"/>
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="OtherTaxStmtType">
+		<xsd:sequence>
+
+			<xsd:choice minOccurs="0">
+				<!-- Other Tax Literal -->
+				<xsd:element name="OtherTaxLitCd">
+					<xsd:annotation>
+						<xsd:documentation>
+							<Description>Other tax literal</Description>
+						</xsd:documentation>
+					</xsd:annotation>
+					<xsd:simpleType>
+						<xsd:restriction base="StringType">
+							<xsd:enumeration value="EPP"/>
+							<xsd:enumeration value="S72P"/>
+							<xsd:enumeration value="UT"/>
+							<xsd:enumeration value="453A(C)"/>
+							<xsd:enumeration value="ADT"/>
+							<xsd:enumeration value="SEC 72(M)(5)"/>
+							<xsd:enumeration value="453(L)3"/>
+							<xsd:enumeration value="NQDC"/>
+							<xsd:enumeration value="ISC"/>
+							<xsd:enumeration value="HDHP"/>
+							<xsd:enumeration value="FITPP"/>
+							<xsd:enumeration value="LIHCR"/>
+							<xsd:enumeration value="ICR"/>
+							<xsd:enumeration value="FMSR"/>
+							<xsd:enumeration value="FROM FORM 8697"/>
+							<xsd:enumeration value="IECR"/>
+							<xsd:enumeration value="ECCFR"/>
+							<xsd:enumeration value="NMCR"/>
+							<xsd:enumeration value="HSA"/>
+							<xsd:enumeration value="AMVCR"/>
+							<xsd:enumeration value="ARPCR"/>
+							<xsd:enumeration value="FROM FORM 8866"/>
+							<xsd:enumeration value="MSA"/>
+							<xsd:enumeration value="MED MSA"/>
+							<xsd:enumeration value="457A"/>
+							<xsd:enumeration value="8834R"/>
+							<xsd:enumeration value="8936R"/>
+							<xsd:enumeration value="1260(B)"/>
+							<xsd:enumeration value="FROM FORM 1040NR"/>
+							<xsd:enumeration value="FROM FORM 8959"/>
+							<xsd:enumeration value="FROM FORM 8960"/>
+							<xsd:enumeration value="1291INT"/>
+							<xsd:enumeration value="1294DT"/>
+							<xsd:enumeration value="1294INT"/>
+						</xsd:restriction>
+					</xsd:simpleType>
+				</xsd:element>
+				<!-- Other Tax Text -->
+				<xsd:element name="OtherTaxTxt">
+					<xsd:annotation>
+						<xsd:documentation>
+							<Description>Other tax text</Description>
+						</xsd:documentation>
+					</xsd:annotation>
+					<xsd:simpleType>
+						<xsd:restriction base="TextType">
+							<xsd:maxLength value="50"/>
+						</xsd:restriction>
+					</xsd:simpleType>
+				</xsd:element>
+ 			</xsd:choice>
+
+			<!-- Other Tax Amount -->
+			<xsd:element name="OtherTaxAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Other tax amount</Description>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+		</xsd:sequence>
+	</xsd:complexType>
+
+</xsd:schema>

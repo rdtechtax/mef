@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.irs.gov/efile" targetNamespace="http://www.irs.gov/efile" elementFormDefault="qualified" attributeFormDefault="unqualified">
+
+<xsd:annotation>
+		 <xsd:documentation>
+		   <Description>IRS e-file Individual Income Tax Schema - Beginning Of Year Inventory Difference Statement</Description>
+		   <Purpose>If you are changing your method of accounting beginning with this tax year, refigure last year's closing inventory using your new method of accounting and enter the result on line 35. If there is a difference between last year's closing inventory and the refigured amount, attach an explanation and take it into account when figuring your section 481(a) adjustment.</Purpose>
+		   <TaxYear>2018</TaxYear>
+			<MaturityLevel>Final Release</MaturityLevel>
+			<ReleaseDate>February 13, 2019</ReleaseDate>
+	  </xsd:documentation>
+ </xsd:annotation>
+
+<xsd:include schemaLocation="../../../Common/efileTypes.xsd"/>
+
+
+	<!-- ============================================================================ -->
+	<!-- =================  Beginning Of Year Inventory Difference Statement  ======= -->
+	<!-- ============================================================================ -->
+
+	<xsd:element name="BeginningOfYrInvntryDiffStmt">
+		<xsd:annotation>
+			<xsd:documentation>Beginning Of Year Inventory Difference Statement</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:complexContent>
+				<xsd:extension base="BeginningOfYrInvntryDiffStmtType">
+					<xsd:attributeGroup ref="DocumentAttributes">
+						<xsd:annotation>
+							<xsd:documentation>Common return document attributes</xsd:documentation>
+						</xsd:annotation>
+					</xsd:attributeGroup>
+					<xsd:attribute name="documentName" type="xsd:string" fixed="BeginningOfYearInventoryDifferenceStatement">
+						<xsd:annotation>
+							<xsd:documentation>IRS internal use only. To avoid error in the return, do not include the attribute name or value.</xsd:documentation>
+						</xsd:annotation>
+					</xsd:attribute>
+				</xsd:extension>
+			</xsd:complexContent>
+		</xsd:complexType>
+	</xsd:element>
+
+	<xsd:complexType name="BeginningOfYrInvntryDiffStmtType">
+		<xsd:annotation>
+			<xsd:documentation>Content model for Beginning Of Year Inventory Difference Statement</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="Desc" type="ExplanationType" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+
+</xsd:schema>

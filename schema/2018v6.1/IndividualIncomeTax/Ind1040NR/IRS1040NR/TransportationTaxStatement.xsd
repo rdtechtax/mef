@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema targetNamespace="http://www.irs.gov/efile" xmlns="http://www.irs.gov/efile" xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.0">
+
+	<xsd:annotation>
+		<xsd:documentation>
+			<Description>IRS e-file Nonresident Alien Income Tax Schema - Transportation Tax Statement</Description>
+			<Purpose>Optional Statement - If Transportation Income subject to the 4% tax has been identified, attach a statement. Publication 519.</Purpose>
+			<TaxYear>2018</TaxYear>
+			<MaturityLevel>Final Release</MaturityLevel>
+			<ReleaseDate>February 13, 2019</ReleaseDate>
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:include schemaLocation="../../../Common/efileTypes.xsd" />
+
+	<!-- ========================================================= -->
+	<!-- ====== Transportation Tax Statement ======= -->
+	<!-- ========================================================= -->
+
+	<xsd:element name="TransportationTaxStatement">
+		<xsd:annotation>
+			<xsd:documentation>Transportation Tax Statement</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:complexContent>
+				<xsd:extension base="TransportationTaxStatementType">
+					<xsd:attributeGroup ref="DocumentAttributes">
+						<xsd:annotation>
+							<xsd:documentation>Common return document attributes</xsd:documentation>
+						</xsd:annotation>
+					</xsd:attributeGroup>
+					<xsd:attribute name="documentName" type="TextType" fixed="TransportationTaxStatement">
+						<xsd:annotation>
+							<xsd:documentation>IRS internal use only. To avoid error in the return, do not include the attribute name or value.</xsd:documentation>
+						</xsd:annotation>
+					</xsd:attribute>
+				</xsd:extension>
+			</xsd:complexContent>
+		</xsd:complexType>
+	</xsd:element>
+
+	<xsd:complexType name="TransportationTaxStatementType">
+		<xsd:annotation>
+			<xsd:documentation>Content model for Transportation Tax Statement</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="TransportationServiceGrp" minOccurs="0" maxOccurs="100">
+				<xsd:complexType>
+					<xsd:sequence>
+						<!-- Transportation Services Performed  -->
+						<xsd:element name="ServiceTypeTxt" type="LineExplanationType" minOccurs="0"/>
+						<!-- Vessel Name -->
+						<xsd:element name="VesselOrAircraftNm" type="LineExplanationType" minOccurs="0"/>
+						<!-- Vessel or Aircraft Registration Number -->
+						<xsd:element name="VesselOrAircraftIDNum" type="AlphaNumericType" minOccurs="0"/>
+						<!-- Income Derived for Each Service -->
+						<xsd:element name="USSourceGrossTransIncmAmt" type="USAmountType" minOccurs="0"/>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<!-- Total Transportation Income Derived for All Services for Calendar Year -->
+			<xsd:element name="TotalUSSourceGrossTransIncmAmt" type="USAmountType" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+
+</xsd:schema>

@@ -1,0 +1,661 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<xsd:schema targetNamespace="http://www.irs.gov/efile" xmlns="http://www.irs.gov/efile" xmlns:efile="http://www.irs.gov/efile" xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.0">
+
+	<xsd:annotation>
+		<xsd:documentation>
+			<Description>IRS e-file Individual Income Tax Schema - IRS Form 8962 Premium Tax Credit (PTC)</Description>
+			<TaxYear>2018</TaxYear>
+			<MaturityLevel>Final Release</MaturityLevel>
+			<ReleaseDate>February 13, 2019</ReleaseDate>
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:include schemaLocation="../../../Common/efileTypes.xsd"/>
+	
+	<!--==================================================================-->
+	<!--========================= IRS Form 8962 ==========================-->
+	<!--==================================================================-->
+	
+	<xsd:element name="IRS8962">
+		<xsd:annotation>
+			<xsd:documentation>IRS Form 8962</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:complexContent>
+				<xsd:extension base="IRS8962Type">
+					<xsd:attributeGroup ref="DocumentAttributes">
+						<xsd:annotation>
+							<xsd:documentation>Common return document attributes</xsd:documentation>
+						</xsd:annotation>
+					</xsd:attributeGroup>
+					<xsd:attribute name="documentName" type="xsd:string" fixed="IRS8962"/>
+					<xsd:attribute name="referenceDocumentId" type="IdListType">
+						<xsd:annotation>
+							<xsd:documentation>List of document ID's of forms, schedules, supporting info. etc. attached to this schedule</xsd:documentation>
+						</xsd:annotation>
+					</xsd:attribute>
+					<xsd:attribute name="referenceDocumentName" type="StringType" fixed="GeneralDependencySmall GeneralDependencyMedium BinaryAttachment" />
+				</xsd:extension>
+			</xsd:complexContent>
+		</xsd:complexType>
+	</xsd:element>
+
+	<xsd:complexType name="IRS8962Type">
+		<xsd:annotation>
+			<xsd:documentation>Content model for Form 8962</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+
+			<!--Qualified Small Employer Health Reimbursement Arrangement (QSEHRA) -->
+			<xsd:element name="QSEHRAInd" type="BooleanType">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Qualified small employer health reimbursement arrangement (QSEHRA)</Description>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			
+			<!--Married filing separately exception indicator -->
+			<xsd:element name="MarriedFilingSeparatelyExcInd" type="CheckboxType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Married filing separately exception indicator</Description>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Part I: Annual and Monthly Contribution Amount -->
+
+			<!--Family size -->
+			<xsd:element name="TotalExemptionsCnt" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Family size</Description>
+						<LineNumber>1</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+				<xsd:simpleType>
+					<xsd:restriction base="IntegerNNType">
+						<xsd:totalDigits value="2"/>
+					</xsd:restriction>
+				</xsd:simpleType> 
+			</xsd:element>
+
+			<!--Modified AGI -->
+			<xsd:element name="ModifiedAGIAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Modified AGI</Description>
+						<LineNumber>2a</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!--Dependent modified AGI -->
+			<xsd:element name="TotalDependentsModifiedAGIAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Dependent modified AGI</Description>
+						<LineNumber>2b</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!--Household Income -->
+			<xsd:element name="HouseholdIncomeAmt" type="USAmountNNType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Household Income</Description>
+						<LineNumber>3</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			
+			<!--Federal Poverty Level -->
+			<xsd:element name="PovertyLevelAmt" type="USAmountNNType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Federal Poverty Level</Description>
+						<LineNumber>4</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!--Federal Poverty Table Locations Code -->
+			<xsd:element name="FederalPovertyTableLocCd" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Federal Poverty Table Locations Code</Description>
+						<LineNumber>4a-4c</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+				<xsd:simpleType>
+					<xsd:restriction base="TextType">
+						<!-- Alaska "A", Hawaii "B", Other 48 states and DC "C" -->
+						<xsd:enumeration value="A"/>
+						<xsd:enumeration value="B"/>
+						<xsd:enumeration value="C"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+
+			<!--Household Income as a Percentage of Federal Poverty Level -->
+			<xsd:element name="FederalPovertyLevelPct" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Household Income as a Percentage of Federal Poverty Level</Description>
+						<LineNumber>5</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+				<xsd:simpleType>
+					<xsd:restriction base="IntegerNNType">
+						<xsd:totalDigits value="3"/>
+					</xsd:restriction>
+				</xsd:simpleType> 
+			</xsd:element>
+
+			<!--Did you enter 401% on line 5? -->
+			<xsd:element name="FederalPovertyLevelPct401Ind" type="BooleanType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Did you enter 401% on line 5?</Description>
+						<LineNumber>6</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!--Applicable Figure -->
+			<xsd:element name="ApplicableFigureRt" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Applicable Figure</Description>
+						<LineNumber>7</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+				<xsd:simpleType>
+					<xsd:restriction base="RatioType">
+						<xsd:totalDigits value="4" />
+						<xsd:fractionDigits value="4" />
+						<xsd:maxInclusive value=".9999" />
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+
+			<!--Annual Contribution for Health Care -->
+			<xsd:element name="AnnualContributionAmt" type="USAmountNNType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Annual Contribution for Health Care</Description>
+						<LineNumber>8a</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!--Monthly Contribution for Health Care -->
+			<xsd:element name="MonthlyContriHealthCareCvrAmt" type="USAmountNNType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Monthly Contribution for Health Care</Description>
+						<LineNumber>8b</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			
+			<!-- Part II: Premium Tax Credit Claim and Reconciliation of Advance Payment of Premium Tax Credit -->
+			
+			<!--Share a policy with another taxpayer or get married and want to use the alternative calculation -->
+			<xsd:element name="SharePolicyMarriedAltCalcInd" type="BooleanType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Share a policy with another taxpayer or get married and want to use the alternative calculation</Description>
+						<LineNumber>9</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!--Full Year Coverage 1095-A Indicator -->
+			<xsd:element name="FullYrCoverage1095AInd" type="BooleanType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Full Year Coverage 1095-A Indicator</Description>
+						<LineNumber>10</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			
+			<!-- Choice between AnnualPTCCalculationGrp and MonthlyPTCCalculationGrp -->
+			<xsd:choice minOccurs="0">
+
+				<xsd:element name="AnnualPTCCalculationGrp">
+					<xsd:complexType>
+						<xsd:sequence>	
+
+							<!--Annual Premium Amount -->
+							<xsd:element name="AnnualPremiumAmt" type="USAmountNNType" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>
+										<Description>Annual Premium Amount</Description>
+										<LineNumber>11a</LineNumber>				
+									</xsd:documentation>
+								</xsd:annotation>
+							</xsd:element>	
+
+							<!--Annual Premium SLCSP Amount -->
+							<xsd:element name="AnnualPremiumSLCSPAmt" type="USAmountNNType" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>
+										<Description>Annual Premium SLCSP Amount</Description>
+										<LineNumber>11b</LineNumber>				
+									</xsd:documentation>
+								</xsd:annotation>
+							</xsd:element>	
+
+							<!--Annual Contribution Amount -->
+							<xsd:element name="AnnualContributionAmt" type="USAmountNNType" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>
+										<Description>Annual Contribution Amount</Description>
+										<LineNumber>11c</LineNumber>				
+									</xsd:documentation>
+								</xsd:annotation>
+							</xsd:element>	
+
+							<!--Annual Maximum Premium Assistance Amount -->
+							<xsd:element name="AnnualMaxPremiumAssistanceAmt" type="USAmountNNType" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>
+										<Description>Annual Maximum Premium Assistance Amount</Description>
+										<LineNumber>11d</LineNumber>				
+									</xsd:documentation>
+								</xsd:annotation>
+							</xsd:element>	
+
+							<!--Annual Premium Tax Credit Allowed Amount -->
+							<xsd:element name="AnnualPremiumTaxCreditAllwAmt" type="USAmountNNType" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>
+										<Description>Annual Premium Tax Credit Allowed Amount</Description>
+										<LineNumber>11e</LineNumber>				
+									</xsd:documentation>
+								</xsd:annotation>
+							</xsd:element>	
+
+							<!--Annual Advanced PTC Amount -->
+							<xsd:element name="AnnualAdvancedPTCAmt" type="USAmountNNType" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>
+										<Description>Annual Advanced PTC Amount</Description>
+										<LineNumber>11f</LineNumber>				
+									</xsd:documentation>
+								</xsd:annotation>
+							</xsd:element>
+
+						</xsd:sequence>
+					</xsd:complexType>
+				</xsd:element>
+
+				<xsd:element name="MonthlyPTCCalculationGrp" maxOccurs="12">
+					<xsd:complexType>
+						<xsd:sequence>
+
+							<!--Month Code -->
+							<xsd:element name="MonthCd">
+								<xsd:annotation>
+									<xsd:documentation>
+										<Description>Month Code</Description>
+										<LineNumber>12-23</LineNumber>
+									</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="TextType">
+										<xsd:enumeration value="JANUARY"/>
+										<xsd:enumeration value="FEBRUARY"/>
+										<xsd:enumeration value="MARCH"/>
+										<xsd:enumeration value="APRIL"/>
+										<xsd:enumeration value="MAY"/>
+										<xsd:enumeration value="JUNE"/>
+										<xsd:enumeration value="JULY"/>
+										<xsd:enumeration value="AUGUST"/>
+										<xsd:enumeration value="SEPTEMBER"/>
+										<xsd:enumeration value="OCTOBER"/>
+										<xsd:enumeration value="NOVEMBER"/>
+										<xsd:enumeration value="DECEMBER"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+
+							<!--Monthly Premium Amount -->
+							<xsd:element name="MonthlyPremiumAmt" type="USAmountNNType" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>
+										<Description>Monthly Premium Amount</Description>
+										<LineNumber>12a-23a</LineNumber>				
+									</xsd:documentation>
+								</xsd:annotation>
+							</xsd:element>
+
+							<!--Monthly Premium SLCSP Amount -->
+							<xsd:element name="MonthlyPremiumSLCSPAmt" type="USAmountNNType" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>
+										<Description>Monthly Premium SLCSP Amount</Description>
+										<LineNumber>12b-23b</LineNumber>				
+									</xsd:documentation>
+								</xsd:annotation>
+							</xsd:element>
+
+							<!--Monthly Contribution Amount -->
+							<xsd:element name="MonthlyContributionAmt" type="USAmountNNType" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>
+										<Description>Monthly Contribution Amount</Description>
+										<LineNumber>12c-23c</LineNumber>				
+									</xsd:documentation>
+								</xsd:annotation>
+							</xsd:element>
+
+							<!--Monthly Maximum Premium Assistance Amount -->
+							<xsd:element name="MonthlyMaxPremiumAssistanceAmt" type="USAmountNNType" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>
+										<Description>Monthly Maximum Premium Assistance Amount</Description>
+										<LineNumber>12d-23d</LineNumber>				
+									</xsd:documentation>
+								</xsd:annotation>
+							</xsd:element>
+
+							<!--Monthly Premium Tax Credit Allowed Amount -->
+							<xsd:element name="MonthlyPremiumTaxCreditAllwAmt" type="USAmountNNType" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>
+										<Description>Monthly Premium Tax Credit Allowed Amount</Description>
+										<LineNumber>12e-23e</LineNumber>				
+									</xsd:documentation>
+								</xsd:annotation>
+							</xsd:element>
+
+							<!--Monthly Advanced PTC Amount -->
+							<xsd:element name="MonthlyAdvancedPTCAmt" type="USAmountNNType" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>
+										<Description>Monthly Advanced PTC Amount</Description>
+										<LineNumber>12f-23f</LineNumber>				
+									</xsd:documentation>
+								</xsd:annotation>
+							</xsd:element>
+
+						</xsd:sequence>
+					</xsd:complexType>
+				</xsd:element>
+
+			</xsd:choice>
+			
+			<!--Total Premium Tax Credit -->
+			<xsd:element name="TotalPremiumTaxCreditAmt" type="USAmountNNType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Total Premium Tax Credit</Description>
+						<LineNumber>24</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			
+			<!--Advance Payment of PTC -->
+			<xsd:element name="TotalAdvancedPTCAmt" type="USAmountNNType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Advance Payment of PTC</Description>
+						<LineNumber>25</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			
+			<!--Premium Tax Credit -->		
+			<xsd:element name="ReconciledPremiumTaxCreditAmt" type="USAmountNNType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Premium Tax Credit</Description>
+						<LineNumber>26</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Part III: Repayment of Excess Advance Payment of the Premium Tax Credit -->
+
+			<!--Excess Advance Payment of PTC -->
+			<xsd:element name="ExcessAdvncPaymentAmt" type="USAmountNNType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Excess Advance Payment of PTC</Description>
+						<LineNumber>27</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!--Repayment Limitation -->
+			<xsd:element name="AdditionalTaxLimitationAmt" type="USAmountNNType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Repayment Limitation</Description>
+						<LineNumber>28</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!--Excess Advance Premium Tax Credit Repayment -->
+			<xsd:element name="PremiumTaxCreditTaxLiabAmt" type="USAmountNNType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Excess Advance Premium Tax Credit Repayment</Description>
+						<LineNumber>29</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Part IV: Shared Policy Allocation -->
+
+			<xsd:element name="SharedPolicyAllocationGrp" minOccurs="0" maxOccurs="99">
+				<xsd:complexType>
+					<xsd:sequence>
+
+						<!--Policy Number -->
+						<xsd:element name="PolicyNum">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Policy Number</Description>
+									<LineNumber>30a-33a</LineNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+							<xsd:simpleType>
+								<xsd:restriction base="TextType">
+									<xsd:pattern value="[A-Za-z0-9 \-:_]{1,15}"/>
+								</xsd:restriction>
+							</xsd:simpleType>
+						</xsd:element>
+						
+						<!--SSN of other taxpayer -->
+						<xsd:element name="SSN" type="SSNType">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>SSN of other taxpayer</Description>
+									<LineNumber>30b-33b</LineNumber>			
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						
+						<!--Allocation start month -->
+						<xsd:element name="StartMonthNumberCd" type="MonthNumberCdType">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Allocation start month</Description>
+									<LineNumber>30c-33c</LineNumber>			
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						
+						<!--Allocation stop month -->
+						<xsd:element name="EndMonthNumberCd" type="MonthNumberCdType">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Allocation stop month</Description>
+									<LineNumber>30d-33d</LineNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						
+						<!--Monthly Premium Percentage -->
+						<xsd:element name="MonthlyPremiumPct" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Monthly Premium Percentage</Description>
+									<LineNumber>30e-33e</LineNumber>			
+								</xsd:documentation>
+							</xsd:annotation>
+							<xsd:simpleType>
+								<xsd:restriction base="RatioType">
+									<xsd:totalDigits value="3" />
+									<xsd:fractionDigits value="2" />
+								</xsd:restriction>
+							</xsd:simpleType>
+						</xsd:element>
+						
+						<!--Monthly Premium SLCSP Percentage -->
+						<xsd:element name="MonthlyPremiumSLCSPPct" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Monthly Premium SLCSP Percentage</Description>
+									<LineNumber>30f-33f</LineNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+							<xsd:simpleType>
+								<xsd:restriction base="RatioType">
+									<xsd:totalDigits value="3" />
+									<xsd:fractionDigits value="2" />
+								</xsd:restriction>
+							</xsd:simpleType>
+						</xsd:element>
+						
+						<!--Advanced Payment of the PTC Percentage -->
+						<xsd:element name="MonthlyAdvancedPTCPct" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Advanced Payment of the PTC Percentage</Description>
+									<LineNumber>30g-33g</LineNumber>			
+								</xsd:documentation>
+							</xsd:annotation>
+							<xsd:simpleType>
+								<xsd:restriction base="RatioType">
+									<xsd:totalDigits value="3" />
+									<xsd:fractionDigits value="2" />
+								</xsd:restriction>
+							</xsd:simpleType>
+						</xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+
+			<!--Completed shared policy allocation for all Forms 1095-A -->
+			<xsd:element name="SharedPolicyAllocationInfoInd" type="BooleanType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Completed shared policy allocation for all Forms 1095-A</Description>
+						<LineNumber>34</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Part V: Alternative Calculation for Year of Marriage -->
+
+			<xsd:element name="AltCalcForMarriagePrimaryGrp" type="AltCalcForMarriageGrpType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Alternative entries for your SSN</Description>
+						<LineNumber>35</LineNumber>			
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<xsd:element name="AltCalcForMarriageSpouseGrp" type="AltCalcForMarriageGrpType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Alternative entries for your spouse's SSN</Description>
+						<LineNumber>36</LineNumber>			
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			
+		</xsd:sequence>
+	</xsd:complexType>
+	
+	<!-- ==== Locally defined types ======= -->
+
+	<!-- Alternative Calculation for Marriage Group type - used by lines 35 and 36 -->
+	<xsd:complexType name="AltCalcForMarriageGrpType">
+		<xsd:sequence>
+	
+			<!--Alternative family size -->
+			<xsd:element name="FamilySizeCnt">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Alternative family size</Description>
+						<LineNumber>35a, 36a</LineNumber>			
+					</xsd:documentation>
+				</xsd:annotation>
+				<xsd:simpleType>
+					<xsd:restriction base="IntegerPosType">
+               			<xsd:totalDigits value="2"/>
+               		</xsd:restriction>
+				</xsd:simpleType> 
+			</xsd:element>
+
+			<!--Monthly contribution -->
+			<xsd:element name="MonthlyContributionAmt" type="USAmountNNType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Monthly contribution</Description>
+						<LineNumber>35b, 36b</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+	
+			<!--Alternative start month -->
+			<xsd:element name="StartMonthNumberCd" type="MonthNumberCdType">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Alternative start month</Description>
+						<LineNumber>35c, 36c</LineNumber>			
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!--Alternative stop month -->
+			<xsd:element name="EndMonthNumberCd" type="MonthNumberCdType">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Alternative stop month</Description>
+						<LineNumber>35d, 36d</LineNumber>			
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<!-- Month Number Code type - TextType with restrictions, used by lines 30-33, 35, 36, Columns c and d -->
+	<xsd:simpleType name="MonthNumberCdType">
+		<xsd:restriction base="TextType">
+			<xsd:enumeration value="01"/>
+			<xsd:enumeration value="02"/>
+			<xsd:enumeration value="03"/>
+			<xsd:enumeration value="04"/>
+			<xsd:enumeration value="05"/>
+			<xsd:enumeration value="06"/>
+			<xsd:enumeration value="07"/>
+			<xsd:enumeration value="08"/>
+			<xsd:enumeration value="09"/>
+			<xsd:enumeration value="10"/>
+			<xsd:enumeration value="11"/>
+			<xsd:enumeration value="12"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+
+</xsd:schema>

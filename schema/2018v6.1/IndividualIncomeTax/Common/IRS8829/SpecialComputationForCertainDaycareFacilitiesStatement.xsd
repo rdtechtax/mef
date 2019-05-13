@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns="http://www.irs.gov/efile" xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.irs.gov/efile" elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.0">
+
+	<xsd:annotation>
+		<xsd:documentation>
+			<Description>Special Computation for Certain Daycare Facilities Statement</Description>
+			<purpose>On Form 8829, if the part of your home used as a daycare facility included areas used exclusively for business as well as other areas used only partly for business, attach your computation and enter See attached computation directly above the percentage you entered on line 7</purpose>
+			<TaxYear>2018</TaxYear>
+			<MaturityLevel>Final Release</MaturityLevel>
+			<ReleaseDate>February 13, 2019</ReleaseDate>
+		</xsd:documentation>		
+	</xsd:annotation>
+	
+	<xsd:include schemaLocation="../../../Common/efileTypes.xsd"/>
+	
+	<!-- ================================================================================================== -->
+	<!-- =================  Special Computation for Certain Daycare Facilities Statement  ================= -->
+	<!-- ================================================================================================== -->
+	
+	<xsd:element name="SpclCmptForCrtnDycareFcltsStmt">
+		<xsd:annotation>
+			<xsd:documentation>Special computation for certain daycare facilities statement</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:complexContent>
+				<xsd:extension base="SpecialComputationType">
+					<xsd:attributeGroup ref="DocumentAttributes">
+						<xsd:annotation>
+							<xsd:documentation>Common return document attributes</xsd:documentation>
+						</xsd:annotation>
+					</xsd:attributeGroup>
+					<xsd:attribute name="documentName" type="xsd:string" fixed="SpecialComputationForCertainDaycareFacilitiesStatement">
+						<xsd:annotation>
+							<xsd:documentation>IRS internal use only. To avoid error in the return, do not include the attribute name or value.</xsd:documentation>
+						</xsd:annotation>
+					</xsd:attribute>
+				</xsd:extension>
+			</xsd:complexContent>
+		</xsd:complexType>
+	</xsd:element>
+	
+	<xsd:complexType name="SpecialComputationType">
+		<xsd:annotation>
+			<xsd:documentation>Content model for special computation for certain daycare facilities statement</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="ComputationDesc" type="ExplanationType" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>	
+	
+</xsd:schema>

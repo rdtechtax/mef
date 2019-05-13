@@ -1,0 +1,256 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.irs.gov/efile" targetNamespace="http://www.irs.gov/efile" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xsd:annotation>
+		<xsd:documentation>
+			<Description>IRS e-file Individual Income Tax Schema - IRS Form 8880 Credit for Qualified Retirement Savings Contributions</Description>
+			<TaxYear>2018</TaxYear>
+			<MaturityLevel>Final Release</MaturityLevel>
+			<ReleaseDate>February 13, 2019</ReleaseDate>
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:include schemaLocation="../../../Common/efileTypes.xsd"/>
+
+
+ <!-- =============================================================== -->
+ <!-- ====================== IRS Form 8880 ========================== -->
+ <!-- =============================================================== -->
+
+
+ <xsd:element name="IRS8880">
+    <xsd:annotation>
+       <xsd:documentation>IRS Form 8880</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+       <xsd:complexContent>
+          <xsd:extension base="IRS8880Type">
+             <xsd:attributeGroup ref="DocumentAttributes">
+                <xsd:annotation>
+                   <xsd:documentation>Common return document attributes</xsd:documentation>
+                </xsd:annotation>
+             </xsd:attributeGroup>
+             <xsd:attribute name="documentName" type="xsd:string" fixed="IRS8880">
+                <xsd:annotation>
+                   <xsd:documentation>IRS internal use only. To avoid error in the return, do not include the attribute name or value.</xsd:documentation>
+                </xsd:annotation>
+             </xsd:attribute>
+          </xsd:extension>
+       </xsd:complexContent>
+    </xsd:complexType>
+ </xsd:element>
+
+ <xsd:complexType name="IRS8880Type">
+    <xsd:annotation>
+       <xsd:documentation>Content model for Form 8880</xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence>
+
+<!-- Primary Roth IRA for Current Year -->
+       <xsd:element name="PrimaryRothIRAForCurrentYrAmt" type="USAmountType" minOccurs="0">
+          <xsd:annotation>
+             <xsd:documentation>
+                <Description>Primary Roth IRA for current year amount</Description>
+                <LineNumber>1a</LineNumber>
+				 <ELFFieldNumber>0010</ELFFieldNumber>                                 
+			</xsd:documentation>
+          </xsd:annotation>
+       </xsd:element>
+       
+       <!-- Spouse Roth IRA for Current Year -->
+       <xsd:element name="SpouseRothIRAForCurrentYrAmt" type="USAmountType" minOccurs="0">
+          <xsd:annotation>
+             <xsd:documentation>
+                <Description>Spouse Roth IRA for current year amount</Description>
+                <LineNumber>1b</LineNumber>
+				<ELFFieldNumber>0020</ELFFieldNumber>                                              
+			</xsd:documentation>
+          </xsd:annotation>
+       </xsd:element>
+       
+       <!-- Primary Contributions -->
+       <xsd:element name="PrimaryContributionsAmt" type="USAmountType" minOccurs="0">
+          <xsd:annotation>
+             <xsd:documentation>
+                <Description>Primary contributions amount</Description>
+                <LineNumber>2a</LineNumber>
+				<ELFFieldNumber>0030</ELFFieldNumber>                                              
+			</xsd:documentation>
+          </xsd:annotation>
+       </xsd:element>
+       
+       <!-- Spouse Contributions -->
+       <xsd:element name="SpouseContributionsAmt" type="USAmountType" minOccurs="0">
+          <xsd:annotation>
+             <xsd:documentation>
+                <Description>Spouse contributions amount</Description>
+                <LineNumber>2b</LineNumber>
+				<ELFFieldNumber>0040</ELFFieldNumber>                                              
+			</xsd:documentation>
+          </xsd:annotation>
+       </xsd:element>
+       
+       <!-- Add Primary Roth IRA to Current Year Contribution -->
+       <xsd:element name="AddPrimRothIRAToCYContriAmt" type="USAmountType" minOccurs="0">
+          <xsd:annotation>
+             <xsd:documentation>
+                <Description>Add primary Roth IRA to current year contribution amount</Description>
+                <LineNumber>3a</LineNumber>
+				<ELFFieldNumber>0050</ELFFieldNumber>                                              
+				</xsd:documentation>
+          </xsd:annotation>
+       </xsd:element>
+       
+       <!-- Add Spouse Roth IRA to Current Year Contribution -->
+       <xsd:element name="AddSpRothIRAToCYContriAmt" type="USAmountType" minOccurs="0">
+          <xsd:annotation>
+             <xsd:documentation>
+                <Description>Add spouse Roth IRA to current year contribution amount</Description>
+                <LineNumber>3b</LineNumber>
+				<ELFFieldNumber>0060</ELFFieldNumber>                                              
+			</xsd:documentation>
+          </xsd:annotation>
+       </xsd:element>
+       
+       <!-- Primary Taxable Distributions -->
+       <xsd:element name="PrimTaxableDistributionsAmt" type="USAmountType" minOccurs="0">
+          <xsd:annotation>
+             <xsd:documentation>
+                <Description>Primary taxable distributions amount</Description>
+                <LineNumber>4a</LineNumber>
+				<ELFFieldNumber>0070</ELFFieldNumber>                                              
+			</xsd:documentation>
+          </xsd:annotation>
+       </xsd:element>
+       
+       <!-- Spouses Taxable Distributions -->
+       <xsd:element name="SpsTaxableDistributionsAmt" type="USAmountType" minOccurs="0">
+          <xsd:annotation>
+             <xsd:documentation>
+                <Description>Spouses taxable distributions amount</Description>
+                <LineNumber>4b</LineNumber>
+				<ELFFieldNumber>0080</ELFFieldNumber>                                              
+			</xsd:documentation>
+          </xsd:annotation>
+       </xsd:element>
+       
+       <!-- Calculate Primary Distribution from Total Amount -->
+       <xsd:element name="CalculatePrimDistribFromTotAmt" type="USAmountType" minOccurs="0">
+          <xsd:annotation>
+             <xsd:documentation>
+                <Description>Calculate primary distribution from total amount</Description>
+                <LineNumber>5a</LineNumber>
+				<ELFFieldNumber>0090</ELFFieldNumber>                                              
+			</xsd:documentation>
+          </xsd:annotation>
+       </xsd:element>
+       
+       <!-- Calculate Spouses Distribution from Total Amount -->
+       <xsd:element name="CalculateSpsDistribFromTotAmt" type="USAmountType" minOccurs="0">
+          <xsd:annotation>
+             <xsd:documentation>
+                <Description>Calculate spouces distribution from total amount</Description>
+                <LineNumber>5b</LineNumber>
+				<ELFFieldNumber>0100</ELFFieldNumber>                                              
+			</xsd:documentation>
+          </xsd:annotation>
+       </xsd:element>
+       
+       <!-- Primary Smaller of Calculation amount -->
+       <xsd:element name="PrimSmallerOfCalculationAmt" type="USAmountNNType" minOccurs="0">
+          <xsd:annotation>
+             <xsd:documentation>
+                <Description>Primary smaller of calculation amount</Description>
+                <LineNumber>6a</LineNumber>
+				<ELFFieldNumber>0110</ELFFieldNumber>                                              
+			</xsd:documentation>
+          </xsd:annotation>
+       </xsd:element>
+       
+       <!-- Spouses Smaller of Calculation Amount -->
+       <xsd:element name="SpsSmallerOfCalculationAmt" type="USAmountNNType" minOccurs="0">
+          <xsd:annotation>
+             <xsd:documentation>
+                <Description>Spouses smaller of calculation amount</Description>
+                <LineNumber>6b</LineNumber>
+				<ELFFieldNumber>0120</ELFFieldNumber>                                              
+			</xsd:documentation>
+          </xsd:annotation>
+       </xsd:element>
+       
+       <!-- Total line 6a and 6b -->
+       <xsd:element name="TotalCalculatedAmt" type="USAmountType" minOccurs="0">
+          <xsd:annotation>
+             <xsd:documentation>
+                <Description>Total line 6a and 6b</Description>
+                <LineNumber>7</LineNumber>
+				<ELFFieldNumber>0130</ELFFieldNumber>                                              
+			</xsd:documentation>
+          </xsd:annotation>
+       </xsd:element>
+       
+       <!-- Adjusted Gross Income From Tax Return -->
+       <xsd:element name="TaxReturnAGIAmt" type="USAmountType" minOccurs="0">
+          <xsd:annotation>
+             <xsd:documentation>
+                <Description>Adjusted gross income from tax return</Description>
+                <LineNumber>8</LineNumber>
+				<ELFFieldNumber>0140</ELFFieldNumber>                                              
+			</xsd:documentation>
+          </xsd:annotation>
+       </xsd:element>
+       
+       <!-- Qualified Retirement Savings Decimal Amount -->
+       <xsd:element name="QlfyRetirementSavDecimalAmt" minOccurs="0">
+          <xsd:annotation>
+             <xsd:documentation>
+                <Description>Qualified retirement Savings Decimal amount</Description>
+                <LineNumber>9</LineNumber>
+				<ELFFieldNumber>0150</ELFFieldNumber>                                              
+			</xsd:documentation>
+          </xsd:annotation>
+       <xsd:simpleType>
+            <xsd:restriction base="DecimalType">
+               <xsd:enumeration value="0.0"/>
+               <xsd:enumeration value="0.1"/>
+               <xsd:enumeration value="0.2"/>
+               <xsd:enumeration value="0.5"/>
+			</xsd:restriction>
+          </xsd:simpleType>
+		</xsd:element>
+		
+       <!-- Multiply Calculation by Decimal Amount -->
+       <xsd:element name="CalculatedAmtByDecimalAmt" type="USAmountType" minOccurs="0">
+          <xsd:annotation>
+             <xsd:documentation>
+                <Description>Multiply calculated amount by decimal amount</Description>
+                <LineNumber>10</LineNumber>
+				<ELFFieldNumber>0160</ELFFieldNumber>                                              
+			</xsd:documentation>
+          </xsd:annotation>
+       </xsd:element>
+       
+       <!-- Subtract Credits from Tax Amount -->
+       <xsd:element name="CalculatedCreditsFromTaxAmt" type="USAmountType" minOccurs="0">
+          <xsd:annotation>
+             <xsd:documentation>
+                <Description>Subtract credits from tax amount</Description>
+                <LineNumber>11</LineNumber>
+				<ELFFieldNumber>0190</ELFFieldNumber>                                              
+			</xsd:documentation>
+          </xsd:annotation>
+       </xsd:element>
+       
+       <!-- Credit for Qualified Retirement Savings -->
+       <xsd:element name="CrQualifiedRetirementSavAmt" type="USAmountType" minOccurs="0">
+          <xsd:annotation>
+             <xsd:documentation>
+                <Description>Credit for qualified retirement savings amount</Description>
+                <LineNumber>12</LineNumber>
+				<ELFFieldNumber>0200</ELFFieldNumber>                                              
+			</xsd:documentation>
+          </xsd:annotation>
+       </xsd:element>
+
+    </xsd:sequence>
+ </xsd:complexType>
+</xsd:schema>

@@ -1,0 +1,545 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns="http://www.irs.gov/efile" xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.irs.gov/efile" elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.0">
+	<xsd:annotation>
+		<xsd:documentation>
+			<Description>IRS e-file Income Tax Schema - IRS Form W-2 Wage and Tax Statement</Description>
+			<TaxYear>2018</TaxYear>
+			<MaturityLevel>Final Release</MaturityLevel>
+			<ReleaseDate>February 13, 2019</ReleaseDate>
+		</xsd:documentation>
+	</xsd:annotation>
+	<xsd:include schemaLocation="../../../Common/efileTypes.xsd"/>
+	<!-- =============================================================== -->
+	<!-- ======================= IRS Form W-2 ========================== -->
+	<!-- =============================================================== -->
+	<xsd:element name="IRSW2">
+		<xsd:annotation>
+			<xsd:documentation>IRS Form W-2</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:complexContent>
+				<xsd:extension base="IRSW2Type">
+					<xsd:attributeGroup ref="DocumentAttributes">
+						<xsd:annotation>
+							<xsd:documentation>Common return document attributes</xsd:documentation>
+						</xsd:annotation>
+					</xsd:attributeGroup>
+					<xsd:attribute name="documentName" type="xsd:string" fixed="IRSW2">
+						<xsd:annotation>
+							<xsd:documentation>IRS internal use only. To avoid error in the return, do not include the attribute name or value.</xsd:documentation>
+						</xsd:annotation>
+					</xsd:attribute>
+				</xsd:extension>
+			</xsd:complexContent>
+		</xsd:complexType>
+	</xsd:element>
+
+	<xsd:complexType name="IRSW2Type">
+		<xsd:annotation>
+			<xsd:documentation>Content model for Form W-2</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<!-- Corrected W2 Indicator -->
+			<xsd:element name="CorrectedW2Ind" type="CheckboxType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Corrected W2 Indicator</Description>
+						<ELFFieldNumber>0010</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Employee SSN -->
+			<xsd:element name="EmployeeSSN" type="SSNType">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Employee SSN</Description>
+						<LineNumber>a</LineNumber>
+						<ELFFieldNumber>0035</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Employer EIN -->
+			<xsd:element name="EmployerEIN" type="EINType">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Employer EIN</Description>
+						<LineNumber>b</LineNumber>
+						<ELFFieldNumber>0040</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Employer Name Control -->
+			<xsd:element name="EmployerNameControlTxt" type="BusinessNameControlType">
+				<xsd:annotation>
+					<xsd:documentation>
+						<LineNumber>c</LineNumber>
+						<ELFFieldNumber>0045</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Employer Name -->
+			<xsd:element name="EmployerName" type="BusinessNameType">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Employer name</Description>
+						<LineNumber>c</LineNumber>
+						<ELFFieldNumber>0050 0055</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Employer Address -->
+			<xsd:choice>
+				<!-- Employer US Address -->
+				<xsd:element name="EmployerUSAddress" type="USAddressType">
+					<xsd:annotation>
+						<xsd:documentation>
+							<Description>Employer US address</Description>
+							<LineNumber>c</LineNumber>
+							<ELFFieldNumber>0060 0070 0073 0075</ELFFieldNumber>
+						</xsd:documentation>
+					</xsd:annotation>
+				</xsd:element>
+				<!-- Employer Foreign Address -->
+				<xsd:element name="EmployerForeignAddress" type="OtherForeignAddressType">
+					<xsd:annotation>
+						<xsd:documentation>
+							<Description>Employer foreign address</Description>
+							<LineNumber>c</LineNumber>
+							<ELFFieldNumber>0060 0070 0073 0075</ELFFieldNumber>
+						</xsd:documentation>
+					</xsd:annotation>
+				</xsd:element>
+			</xsd:choice>
+			<!-- Control Number -->
+			<xsd:element name="ControlNum" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Control number</Description>
+						<LineNumber>d</LineNumber>
+						<ELFFieldNumber>0085</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+				<xsd:simpleType>
+					<xsd:restriction base="TextType">
+						<xsd:maxLength value="14"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<!-- Employee Name -->
+			<xsd:element name="EmployeeNm" type="PersonNameType">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Employee name</Description>
+						<LineNumber>e</LineNumber>
+						<ELFFieldNumber>0090</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Employee Address -->
+			<xsd:choice>
+				<!-- Employee US Address -->
+				<xsd:element name="EmployeeUSAddress" type="USAddressType">
+					<xsd:annotation>
+						<xsd:documentation>
+							<Description>EmployeeUS address</Description>
+							<LineNumber>f</LineNumber>
+							<ELFFieldNumber>0100 0105 0110 0113 0115</ELFFieldNumber>
+						</xsd:documentation>
+					</xsd:annotation>
+				</xsd:element>
+				<!-- Employee Foreign Address -->
+				<xsd:element name="EmployeeForeignAddress" type="OtherForeignAddressType">
+					<xsd:annotation>
+						<xsd:documentation>
+							<Description>Employee foreign address</Description>
+							<LineNumber>f</LineNumber>
+							<ELFFieldNumber>0100 0105 0110 0113 0115</ELFFieldNumber>
+						</xsd:documentation>
+					</xsd:annotation>
+				</xsd:element>
+			</xsd:choice>
+			<!-- Wages Amount -->
+			<xsd:element name="WagesAmt" type="USAmountNNType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Wages amount</Description>
+						<LineNumber>1</LineNumber>
+						<ELFFieldNumber>0120</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Withholding Amount -->
+			<xsd:element name="WithholdingAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Withholding amount</Description>
+						<LineNumber>2</LineNumber>
+						<ELFFieldNumber>0130</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Social Security Wages Amount -->
+			<xsd:element name="SocialSecurityWagesAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Social Security wages amount</Description>
+						<LineNumber>3</LineNumber>
+						<ELFFieldNumber>0140</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Social Security Tax Amount -->
+			<xsd:element name="SocialSecurityTaxAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Social Security tax amount</Description>
+						<LineNumber>4</LineNumber>
+						<ELFFieldNumber>0150</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Medicare Wages and TipsAmount -->
+			<xsd:element name="MedicareWagesAndTipsAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Medicare wages and tips amount</Description>
+						<LineNumber>5</LineNumber>
+						<ELFFieldNumber>0160</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Medicare Tax Withheld Amount -->
+			<xsd:element name="MedicareTaxWithheldAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Medicare tax withheld amount</Description>
+						<LineNumber>6</LineNumber>
+						<ELFFieldNumber>0170</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Social Security Tips Amount -->
+			<xsd:element name="SocialSecurityTipsAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Social security tips amount</Description>
+						<LineNumber>7</LineNumber>
+						<ELFFieldNumber>0180</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Allocated Tips Amount -->
+			<xsd:element name="AllocatedTipsAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Allocated tips amount</Description>
+						<LineNumber>8</LineNumber>
+						<ELFFieldNumber>0190</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- W-2 Verification Code -->
+			<xsd:element name="W2VerificationCd" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>W-2 verification code</Description>
+						<LineNumber>9</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+				<xsd:simpleType>
+					<xsd:restriction base="StringType">
+						<xsd:pattern value="[0-9A-F]{16}"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<!-- Dependent Care Benefits Amount -->
+			<xsd:element name="DependentCareBenefitsAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Dependent care benefits amount</Description>
+						<LineNumber>10</LineNumber>
+						<ELFFieldNumber>0210</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Nonqualified Plans Amount -->
+			<xsd:element name="NonqualifiedPlansAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Nonqualified plans amount</Description>
+						<LineNumber>11</LineNumber>
+						<ELFFieldNumber>0220</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="EmployersUseGrp" minOccurs="0" maxOccurs="unbounded">
+				<xsd:complexType>
+					<xsd:sequence>
+						<!-- Employer's Use Code -->
+			            <xsd:element name="EmployersUseCd" minOccurs="0">
+			            	<xsd:annotation>
+			            		<xsd:documentation>
+			            			<Description>Employer's Use Code</Description>
+									<LineNumber>12a</LineNumber>
+			               			<ELFFieldNumber>0242</ELFFieldNumber>
+			               		</xsd:documentation>
+			              	</xsd:annotation>
+			               	<xsd:simpleType>
+			              	    <xsd:restriction base="xsd:string">		                 		  
+									<xsd:pattern value="[A-HJ-NP-TV-WY-Z]{1,2}"/>							        
+								</xsd:restriction>
+		                    </xsd:simpleType>
+			            </xsd:element>
+			            <!-- Prior Year USERRA Contribution -->
+			            <xsd:element name="PriorUSERRAContributionYr" minOccurs="0">
+			            	<xsd:annotation>
+			                	<xsd:documentation>
+									<Description>Prior Year USERRA Contribution</Description>
+			                       	<LineNumber>12a</LineNumber>
+			                       	<ELFFieldNumber>0244</ELFFieldNumber>
+			                    </xsd:documentation>
+			                </xsd:annotation>
+			                <xsd:simpleType>
+								<xsd:restriction base="xsd:integer">
+							        <xsd:pattern value="[0-9][0-9]"/>							        
+		                        </xsd:restriction>
+		                    </xsd:simpleType>
+			            </xsd:element>
+						<!-- Employer's Use Amount -->
+						<xsd:element name="EmployersUseAmt" type="USAmountNNType" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Employer's Use Amount</Description>
+									<LineNumber>12a</LineNumber>
+									<ELFFieldNumber>0246</ELFFieldNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<!-- Statutory Employee Ind -->
+			<xsd:element name="StatutoryEmployeeInd" type="CheckboxType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Statutory Employee Ind</Description>
+						<LineNumber>13</LineNumber>
+						<ELFFieldNumber>0265</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Retirement Plan Ind -->
+			<xsd:element name="RetirementPlanInd" type="CheckboxType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Retirement Plan Ind</Description>
+						<LineNumber>13</LineNumber>
+						<ELFFieldNumber>0267</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Third-Party Sick Pay Ind -->
+			<xsd:element name="ThirdPartySickPayInd" type="CheckboxType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Third-Party Sick Pay Ind</Description>
+						<LineNumber>13</LineNumber>
+						<ELFFieldNumber>0269</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Other Deducts/Benefits Cd -->
+			<xsd:element name="OtherDeductionsBenefitsGrp" type="USItemizedEntryType" minOccurs="0" maxOccurs="unbounded">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Other Deducts/Benefits Cd</Description>
+						<LineNumber>14</LineNumber>
+						<ELFFieldNumber>0270 0272</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="W2StateLocalTaxGrp" type="W2StateLocalTaxGrpType" minOccurs="0" maxOccurs="unbounded">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>W2 State Local Tax Group</Description>
+						<LineNumber>15 - 20</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Standard or Non Standard Code  -->
+			<xsd:element name="StandardOrNonStandardCd">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Standard or Non Standard Code</Description>
+						<LineNumber/>
+						<ELFFieldNumber>0590</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+				<xsd:simpleType>
+					<xsd:restriction base="StringType">
+						<xsd:enumeration value="N"/>
+						<xsd:enumeration value="S"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<!-- W-2 Security Information -->
+			<xsd:element name="W2SecurityInformation" minOccurs="0">
+				<xsd:complexType>
+					<xsd:sequence>
+						<!-- W-2 Download Code -->
+						<xsd:element name="W2DownloadCd" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>W-2 Download Code</Description>
+								</xsd:documentation>
+							</xsd:annotation>
+							<xsd:simpleType>
+								<xsd:restriction base="TextType">
+									<xsd:enumeration value="0"/>
+									<xsd:enumeration value="1"/>
+									<xsd:enumeration value="2"/>
+									<xsd:enumeration value="9"/>
+								</xsd:restriction>
+							</xsd:simpleType>
+						</xsd:element>
+						<!-- W-2 Download Result Code -->
+						<xsd:element name="W2DownloadResultCd" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>W-2 Download Result Code</Description>
+								</xsd:documentation>
+							</xsd:annotation>
+							<xsd:simpleType>
+								<xsd:restriction base="TextType">
+									<xsd:enumeration value="0"/>
+									<xsd:enumeration value="1"/>
+								</xsd:restriction>
+							</xsd:simpleType>
+						</xsd:element>
+						<!-- W-2 Download Failed Attempt Count -->
+						<xsd:element name="W2DownloadFailedAttemptCnt" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>W-2 Download Failed Attempt Count</Description>
+								</xsd:documentation>
+							</xsd:annotation>
+							<xsd:simpleType>
+								<xsd:restriction base="IntegerNNType">
+									<xsd:totalDigits value="3"/>
+								</xsd:restriction>
+							</xsd:simpleType>
+						</xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<!-- Beginning of Table -->
+	<xsd:complexType name="W2StateLocalTaxGrpType">
+		<xsd:sequence>
+			<!-- State  -->
+			<xsd:element name="W2StateTaxGrp" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>W2 State Tax Group</Description>
+						<LineNumber>15 - 17</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+				<xsd:complexType>
+					<xsd:sequence>
+						<!-- Employer's State Abbreviation Code -->
+						<xsd:element name="StateAbbreviationCd" type="StateType" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>State Abbreviation Code</Description>
+									<LineNumber>15</LineNumber>
+									<ELFFieldNumber>0370</ELFFieldNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						<!-- Employer's State ID Number -->
+						<xsd:element name="EmployerStateIdNum" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Employer's State ID Number</Description>
+									<LineNumber>15</LineNumber>
+									<ELFFieldNumber>0380</ELFFieldNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+							<xsd:simpleType>
+								<xsd:restriction base="TextType">
+									<xsd:maxLength value="16"/>
+								</xsd:restriction>
+							</xsd:simpleType>
+						</xsd:element>
+						<!-- State Wages -->
+						<xsd:element name="StateWagesAmt" type="USAmountType" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>State Wages Amount</Description>
+									<LineNumber>16</LineNumber>
+									<ELFFieldNumber>0390</ELFFieldNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						<!-- State Income Tax Amount -->
+						<xsd:element name="StateIncomeTaxAmt" type="USAmountType" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>State Income Tax Amount</Description>
+									<LineNumber>17</LineNumber>
+									<ELFFieldNumber>0400</ELFFieldNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						<!-- Local  -->
+						<xsd:element name="W2LocalTaxGrp" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>W2 Local Tax Group</Description>
+									<LineNumber>18 - 20</LineNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+							<xsd:complexType>
+								<xsd:sequence>
+									<!-- Local Wages/Tips Amount -->
+									<xsd:element name="LocalWagesAndTipsAmt" type="USAmountType" minOccurs="0">
+										<xsd:annotation>
+											<xsd:documentation>
+												<Description>Local Wages/Tips Amount</Description>
+												<LineNumber>18</LineNumber>
+												<ELFFieldNumber>0405</ELFFieldNumber>
+											</xsd:documentation>
+										</xsd:annotation>
+									</xsd:element>
+									<!-- Local Income Tax Amount -->
+									<xsd:element name="LocalIncomeTaxAmt" type="USAmountType" minOccurs="0">
+										<xsd:annotation>
+											<xsd:documentation>
+												<Description>Local Income Tax Amount</Description>
+												<LineNumber>19</LineNumber>
+												<ELFFieldNumber>0407</ELFFieldNumber>
+											</xsd:documentation>
+										</xsd:annotation>
+									</xsd:element>
+									<!-- Name of Locality -->
+									<xsd:element name="LocalityNm" type="ShortDescriptionType" minOccurs="0">
+										<xsd:annotation>
+											<xsd:documentation>
+												<Description>Name of Locality</Description>
+												<LineNumber>20</LineNumber>
+												<ELFFieldNumber>0410</ELFFieldNumber>
+											</xsd:documentation>
+										</xsd:annotation>
+									</xsd:element>
+								</xsd:sequence>
+							</xsd:complexType>
+						</xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	<!-- End of Table -->
+</xsd:schema>

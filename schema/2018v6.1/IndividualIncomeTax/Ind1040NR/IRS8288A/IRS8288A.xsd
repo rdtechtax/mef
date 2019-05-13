@@ -1,0 +1,338 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.irs.gov/efile" targetNamespace="http://www.irs.gov/efile" elementFormDefault="qualified" attributeFormDefault="unqualified">
+
+	<xsd:annotation>
+		<xsd:documentation>
+			<Description>IRS e-file U.S. Nonresident Alien Income Tax Schema - IRS Form 8288-A Statement of Withholding on Dispositions by Foreign Persons of U.S. Real Property Interests</Description>
+			<TaxYear>2018</TaxYear>
+			<MaturityLevel>Final Release</MaturityLevel>
+			<ReleaseDate>February 13, 2019</ReleaseDate>
+		</xsd:documentation>
+	</xsd:annotation>
+	
+	<xsd:include schemaLocation="../../../Common/efileTypes.xsd"/>
+	
+	<!-- ======================================================================== -->
+	<!-- ============================ IRS Form 8288-A =========================== -->
+	<!-- ======================================================================== -->
+	
+	<xsd:element name="IRS8288A">
+		<xsd:annotation>
+			<xsd:documentation>IRS Form 8288-A</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:complexContent>
+				<xsd:extension base="IRS8288AType">
+					<xsd:attributeGroup ref="DocumentAttributes">
+						<xsd:annotation>
+							<xsd:documentation>Common return document attributes</xsd:documentation>
+						</xsd:annotation>
+					</xsd:attributeGroup>
+					<xsd:attribute name="documentName" type="xsd:string" fixed="IRS8288A">
+						<xsd:annotation>
+							<xsd:documentation>IRS internal use only. To avoid error in the return do not include the attribute name or value.</xsd:documentation>
+						</xsd:annotation>
+					</xsd:attribute>
+				</xsd:extension>
+			</xsd:complexContent>
+		</xsd:complexType>
+	</xsd:element>
+	
+	<xsd:complexType name="IRS8288AType">
+		<xsd:annotation>
+			<xsd:documentation>Content model for Form 8288-A</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+		
+			<xsd:choice>
+				<!-- Transferee Person Name -->
+				<xsd:element name="TransfereePersonNm" type="PersonNameType">
+					<xsd:annotation>
+						<xsd:documentation>
+							<Description>Transferee person name</Description>
+						</xsd:documentation>
+					</xsd:annotation>
+				</xsd:element>
+				<!-- Transferee Name -->
+				<xsd:element name="TransfereeName" type="BusinessNameType">
+					<xsd:annotation>
+						<xsd:documentation>
+							<Description>Transferee name</Description>
+						</xsd:documentation>
+					</xsd:annotation>
+				</xsd:element>
+			</xsd:choice>
+			
+			<xsd:choice>
+				<!-- U.S. Transferee Address -->
+				<xsd:element name="TransfereeUSAddress" type="USAddressType">
+					<xsd:annotation>
+						<xsd:documentation>
+							<Description>Transferee U.S. address</Description>
+						</xsd:documentation>
+					</xsd:annotation>
+				</xsd:element>
+				<!-- Transferee Foreign Address -->
+				<xsd:element name="TransfereeForeignAddress" type="ForeignAddressType">
+					<xsd:annotation>
+						<xsd:documentation>
+							<Description>Transferee foreign address</Description>
+						</xsd:documentation>
+					</xsd:annotation>
+				</xsd:element>
+			</xsd:choice>
+			
+			<xsd:choice>
+				<!-- Transferee SSN -->
+				<xsd:element name="TransfereeSSN" type="SSNType">
+					<xsd:annotation>
+						<xsd:documentation>
+							<Description>Transferee SSN</Description>
+						</xsd:documentation>
+					</xsd:annotation>
+				</xsd:element>
+				<!-- Transferee EIN -->
+				<xsd:element name="TransfereeEIN" type="EINType">
+					<xsd:annotation>
+						<xsd:documentation>
+							<Description>Transferee EIN</Description>
+						</xsd:documentation>
+					</xsd:annotation>
+				</xsd:element>
+			</xsd:choice>
+			
+			<!-- Foreign Person Subject To Withholding -->
+			<xsd:element name="ForeignPersonSubjectToWthldGrp">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:choice>
+							<!-- SSN -->
+							<xsd:element name="SSN" type="SSNType">
+								<xsd:annotation>
+									<xsd:documentation>
+										<Description>SSN</Description>
+									</xsd:documentation>
+								</xsd:annotation>
+							</xsd:element>
+							<!-- EIN -->
+							<xsd:element name="EIN" type="EINType">
+								<xsd:annotation>
+									<xsd:documentation>
+										<Description>EIN</Description>
+									</xsd:documentation>
+								</xsd:annotation>
+							</xsd:element>
+						</xsd:choice>
+						<xsd:choice>
+							<!-- Business Name-->
+							<xsd:element name="BusinessName" type="BusinessNameType">
+								<xsd:annotation>
+									<xsd:documentation>
+										<Description>Business name</Description>
+									</xsd:documentation>
+								</xsd:annotation>
+							</xsd:element>
+							<!-- Person Full Name-->
+							<xsd:element name="PersonFullName" type="PersonFullNameType">
+								<xsd:annotation>
+									<xsd:documentation>
+										<Description>Person full name</Description>
+									</xsd:documentation>
+								</xsd:annotation>
+							</xsd:element>
+						</xsd:choice>
+						<!-- In Care Of Name -->
+						<xsd:element name="InCareOfNm" type="InCareOfNameType" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>In care of name</Description>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						<xsd:choice>
+							<!-- Seller Foreign Address -->
+							<xsd:element name="SellerForeignAddressGrp">
+								<xsd:complexType>
+									<xsd:sequence>
+										<!-- Foreign Address -->
+										<xsd:element name="ForeignAddress" type="ForeignAddressType">
+											<xsd:annotation>
+												<xsd:documentation>
+													<Description>Foreign address</Description>
+												</xsd:documentation>
+											</xsd:annotation>
+										</xsd:element>
+										<!-- Country Code -->
+										<xsd:element name="CountryCd" type="CountryType" minOccurs="0">
+											<xsd:annotation>
+												<xsd:documentation>
+													<Description>Country code</Description>
+													<LineNumber>7</LineNumber>
+												</xsd:documentation>
+											</xsd:annotation>
+										</xsd:element>
+										<!-- Separate Mailing Address -->
+										<xsd:element name="SeparateMailingAddress" minOccurs="0">
+											<xsd:complexType>
+												<xsd:sequence>
+													<xsd:choice>
+														<!-- U.S. Address -->
+														<xsd:element name="USAddress" type="USAddressType">
+															<xsd:annotation>
+																<xsd:documentation>
+																	<Description>U.S. Address</Description>
+																</xsd:documentation>
+															</xsd:annotation>
+														</xsd:element>
+														<!-- Foreign Address -->
+														<xsd:element name="ForeignAddress" type="ForeignAddressType">
+															<xsd:annotation>
+																<xsd:documentation>
+																	<Description>Foreign Address</Description>
+																</xsd:documentation>
+															</xsd:annotation>
+														</xsd:element>
+													</xsd:choice>
+												</xsd:sequence>
+											</xsd:complexType>
+										</xsd:element>
+									</xsd:sequence>
+								</xsd:complexType>
+							</xsd:element>
+							<!-- Seller Separate Mailing Address -->
+							<xsd:element name="SellerSeparateMailingAddrGrp">
+								<xsd:complexType>
+									<xsd:sequence>
+										<!-- Country Code -->
+										<xsd:element name="CountryCd" type="CountryType">
+											<xsd:annotation>
+												<xsd:documentation>
+													<Description>Country code</Description>
+													<LineNumber>7</LineNumber>
+												</xsd:documentation>
+											</xsd:annotation>
+										</xsd:element>
+										<!-- Separate Mailing Address -->
+										<xsd:element name="SeparateMailingAddress">
+											<xsd:complexType>
+												<xsd:sequence>
+													<xsd:choice>
+														<!-- U.S. Address -->
+														<xsd:element name="USAddress" type="USAddressType">
+															<xsd:annotation>
+																<xsd:documentation>
+																	<Description>U.S. Address</Description>
+																</xsd:documentation>
+															</xsd:annotation>
+														</xsd:element>
+														<!-- Foreign Address -->
+														<xsd:element name="ForeignAddress" type="ForeignAddressType">
+															<xsd:annotation>
+																<xsd:documentation>
+																	<Description>Foreign Address</Description>
+																</xsd:documentation>
+															</xsd:annotation>
+														</xsd:element>
+													</xsd:choice>
+												</xsd:sequence>
+											</xsd:complexType>
+										</xsd:element>
+									</xsd:sequence>
+								</xsd:complexType>
+							</xsd:element>
+						</xsd:choice>
+						<!-- Transfer Date -->
+						<xsd:element name="TransferDt" type="DateType">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Transfer date</Description>
+									<LineNumber>1</LineNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						<!-- Federal Income Tax Withheld Amount -->
+						<xsd:element name="FederalIncomeTaxWithheldAmt" type="USAmountType">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Federal income tax withheld amount</Description>
+									<LineNumber>2</LineNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						<!-- Realized Amount -->
+						<xsd:element name="RealizedAmt" type="USAmountType">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Realized amount</Description>
+									<LineNumber>3</LineNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						<!-- Gain Recognized On Transfer Amount -->
+						<xsd:element name="GainRecognizedOnTransferAmt" type="USAmountType" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Gain recognized on transfer amount</Description>
+									<LineNumber>4</LineNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						<!-- Property Description -->
+						<xsd:element name="PropertyDesc">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Property description</Description>
+									<LineNumber>5</LineNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+							<xsd:simpleType>
+								<xsd:restriction base="TextType">
+									<xsd:pattern value="[A-Za-z0-9 ]+" />
+									<xsd:maxLength value="70" />
+								</xsd:restriction>
+							</xsd:simpleType>
+						</xsd:element>
+						<xsd:choice>
+							<!-- Individual Indicator -->
+							<xsd:element name="IndividualInd" type="CheckboxType" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>
+										<Description>Individual indicator</Description>
+										<LineNumber>6</LineNumber>
+									</xsd:documentation>
+								</xsd:annotation>
+							</xsd:element>
+							<!-- Corporation Indicator -->
+							<xsd:element name="CorporationInd" type="CheckboxType" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>
+										<Description>Corporation indicator</Description>
+										<LineNumber>6</LineNumber>
+									</xsd:documentation>
+								</xsd:annotation>
+							</xsd:element>
+							<!-- Other Withholding Type Code -->
+							<xsd:element name="OtherWithholdingTypeCd" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>
+										<Description>Other withholding type code</Description>
+										<LineNumber>6</LineNumber>
+									</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="TextType">
+										<xsd:enumeration value="PARTNERSHIP"/>
+										<xsd:enumeration value="TRUST"/>
+										<xsd:enumeration value="ESTATE"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+						</xsd:choice>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+				
+		</xsd:sequence>
+	</xsd:complexType>
+
+</xsd:schema>

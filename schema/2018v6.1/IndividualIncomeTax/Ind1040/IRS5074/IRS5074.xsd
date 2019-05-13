@@ -1,0 +1,432 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.irs.gov/efile" targetNamespace="http://www.irs.gov/efile" elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.0">
+	<xsd:annotation>
+		<xsd:documentation>
+			<Description>IRS e-file Schema - IRS Form 5074 Allocation of Individual Income Tax to Guam or the Commonwealth of the Northern Mariana Islands (CNMI)</Description>
+			<TaxYear>2018</TaxYear>
+			<MaturityLevel>Final Release</MaturityLevel>
+			<ReleaseDate>February 13, 2019</ReleaseDate>
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:include schemaLocation="../../../Common/efileTypes.xsd"/>
+
+	<!--==================================================================-->
+	<!--======================== IRS Form 5074 ===========================-->
+	<!--==================================================================-->
+
+	<xsd:element name="IRS5074">
+		<xsd:annotation>
+			<xsd:documentation>IRS Form 5074</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:complexContent>
+				<xsd:extension base="IRS5074Type">
+					<xsd:attributeGroup ref="DocumentAttributes">
+						<xsd:annotation>
+							<xsd:documentation>Common return document attributes</xsd:documentation>
+						</xsd:annotation>
+					</xsd:attributeGroup>
+					<xsd:attribute name="documentName" type="xsd:string" fixed="IRS5074"/>
+				</xsd:extension>
+			</xsd:complexContent>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:complexType name="IRS5074Type">
+		<xsd:annotation>
+			<xsd:documentation>Content model for IRS Form 5074</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="GUAMAllocationGroup" type="AllocationGroupType" minOccurs="0"/>
+			<xsd:element name="CNMIAllocationGroup" type="AllocationGroupType" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="AllocationGroupType">
+		<xsd:sequence>
+			<!--PART I Income From Guam or the CNMI Reported on Form 1040-->
+			<!--Wages Salaries And Tips Amount -->
+			<xsd:element name="WagesSalariesAndTipsAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Wages Salaries And Tips Amount</Description>
+						<LineNumber>1</LineNumber>
+						<ELFFieldNumber>0120 0125</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!--Taxable Interest Amount -->
+			<xsd:element name="TaxableInterestAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Taxable Interest Amount</Description>
+						<LineNumber>2</LineNumber>
+						<ELFFieldNumber>0130 0135</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!--Ordinary Dividends Amount -->
+			<xsd:element name="OrdinaryDividendsAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Ordinary Dividends Amount</Description>
+						<LineNumber>3</LineNumber>
+						<ELFFieldNumber>0140 0145</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!--Taxable Refund Credit Offset Local Income Tax Amount -->
+			<xsd:element name="TxblRefCrOffsetLocalIncmTaxAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Taxable Refund Credit Offset Local Income Tax Amount</Description>
+						<LineNumber>4</LineNumber>
+						<ELFFieldNumber>0150 0155</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!--Alimony Received Amount -->
+			<xsd:element name="AlimonyReceivedAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Alimony Received Amount</Description>
+						<LineNumber>5</LineNumber>
+						<ELFFieldNumber>0160 0165</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!--Business Income Loss Amount -->
+			<xsd:element name="BusinessIncomeLossAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Business Income Loss Amount</Description>
+						<LineNumber>6</LineNumber>
+						<ELFFieldNumber>0170 0175</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!--Capital Gain Or Loss Amount -->
+			<xsd:element name="CapitalGainLossAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Capital Gain Or Loss Amount</Description>
+						<LineNumber>7</LineNumber>
+						<ELFFieldNumber>0180 0185</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!--Other Gain Loss Amount -->
+			<xsd:element name="OtherGainLossAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Other Gain Loss Amount</Description>
+						<LineNumber>8</LineNumber>
+						<ELFFieldNumber>0190 0195</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!--Taxable Individual Retirement Account Amount -->
+			<xsd:element name="TaxableIRAAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Taxable Individual Retirement Account Amount</Description>
+						<LineNumber>9</LineNumber>
+						<ELFFieldNumber>0200 0205</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!--Pensions Annuities Amount -->
+			<xsd:element name="PensionsAnnuitiesAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Pensions Annuities Amount</Description>
+						<LineNumber>10</LineNumber>
+						<ELFFieldNumber>0210 0215</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!--Rental Real Estate Income Loss Amount -->
+			<xsd:element name="RentalRealEstateIncomeLossAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Rental Real Estate Income Loss Amount</Description>
+						<LineNumber>11</LineNumber>
+						<ELFFieldNumber>0220 0225</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!--Farm Income Loss Amount -->
+			<xsd:element name="FarmIncomeLossAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Farm Income Loss Amount</Description>
+						<LineNumber>12</LineNumber>
+						<ELFFieldNumber>0230 0235</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!--Unemployment Compensation Amount -->
+			<xsd:element name="UnemploymentCompAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Unemployment Compensation Amount</Description>
+						<LineNumber>13</LineNumber>
+						<ELFFieldNumber>0240 0245</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!--Taxable Social Security Amount -->
+			<xsd:element name="TaxableSocSecAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Taxable Social Security Amount</Description>
+						<LineNumber>14</LineNumber>
+						<ELFFieldNumber>0250 0255</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!--Total Other Income Amount -->
+			<xsd:element name="TotalOtherIncomeAmt" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Total Other Income Amount</Description>
+						<LineNumber>15</LineNumber>
+						<ELFFieldNumber>0265 0275</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+				<xsd:complexType>
+					<xsd:simpleContent>
+						<xsd:extension base="USAmountType">
+							<xsd:attribute name="referenceDocumentId" type="IdListType"/>
+							<xsd:attribute name="referenceDocumentName" type="StringType" fixed="GUAMCNMIOtherIncomeStatement">
+								<xsd:annotation>
+									<xsd:documentation>
+										<ELFFieldNumber>0260 0270</ELFFieldNumber>
+									</xsd:documentation>
+								</xsd:annotation>
+							</xsd:attribute>
+						</xsd:extension>
+					</xsd:simpleContent>
+				</xsd:complexType>
+			</xsd:element>
+			<!--Total Income Amount -->
+			<xsd:element name="TotalIncomeAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Total Income Amount</Description>
+						<LineNumber>16</LineNumber>
+						<ELFFieldNumber>0280 0285</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!--PART II Adjusted Gross Income From Guam or the CNMI Reported on Form 1040-->
+			
+			<!-- 	Educator Expense Amount -->
+			<xsd:element name="EducatorExpensesAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Educator Expense Amount</Description>
+						<LineNumber>17</LineNumber>
+						<ELFFieldNumber>0290 0295</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element> 
+			<!--Business Expense Reservists And Others Amount -->
+			<xsd:element name="BusExpnsReservistsAndOthersAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Business Expense Reservists And Others Amount</Description>
+						<LineNumber>18</LineNumber>
+						<ELFFieldNumber>0300 0305</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!--Health Savings Account Deduction Amount -->
+			<xsd:element name="HealthSavingsAccountDedAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Health Savings Account Deduction Amount</Description>
+						<LineNumber>19</LineNumber>
+						<ELFFieldNumber>0310 0315</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!--Moving Expense Amount -->
+			<xsd:element name="MovingExpenseAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Moving Expense Amount</Description>
+						<LineNumber>20</LineNumber>
+						<ELFFieldNumber>0320 0325</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Deductible Part Of Self Employment Tax Amount -->
+			<xsd:element name="DeductibleSelfEmploymentTaxAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Deductible Part Of Self Employment Tax Amount</Description>
+						<LineNumber>21</LineNumber>
+						<ELFFieldNumber>0330 0335</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!--Self Employed SEP SIMPLE Qualified Plans Amount -->
+			<xsd:element name="SelfEmpldSepSimpleQlfyPlansAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Self Employed SEP SIMPLE Qualified Plans Amount</Description>
+						<LineNumber>22</LineNumber>
+						<ELFFieldNumber>0340 0345</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!--Self Employed Health Insurance Deduction Amount -->
+			<xsd:element name="SelfEmpldHealthInsDedAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Self Employed Health Insurance Deduction Amount</Description>
+						<LineNumber>23</LineNumber>
+						<ELFFieldNumber>0350 0355</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!--Penalty On Early Withdrawal Of Savings Amount -->
+			<xsd:element name="PnltyOnErlyWthdrwOfSavingsAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Penalty On Early Withdrawal Of Savings Amount</Description>
+						<LineNumber>24</LineNumber>
+						<ELFFieldNumber>0360 0365</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!--Individual Retirement Account Deduction Amount -->
+			<xsd:element name="IRADeductionAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Individual Retirement Account Deduction Amount</Description>
+						<LineNumber>25</LineNumber>
+						<ELFFieldNumber>0380 0385</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!--Student Loan Interest Deduction Amount -->
+			<xsd:element name="StudentLoanInterestDedAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Student Loan Interest Deduction Amount</Description>
+						<LineNumber>26</LineNumber>
+						<ELFFieldNumber>0390 0395</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			
+			<!--	Tuition And Fees Deduction Amount -->
+			<xsd:element name="TuitionAndFeesDedAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Tuition And Fees Deduction Amount</Description>
+						<LineNumber>27</LineNumber>
+						<ELFFieldNumber>0400 0405</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			
+			<!--Other Deductions From 1040 Total Amount -->
+			<xsd:element name="OtherDeductionsFrom1040TotAmt" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Other Deductions From 1040 Total Amount</Description>
+						<LineNumber>28</LineNumber>
+						<ELFFieldNumber>0415 0425</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+				<xsd:complexType>
+					<xsd:simpleContent>
+						<xsd:extension base="USAmountType">
+							<xsd:attribute name="referenceDocumentId" type="IdListType"/>
+							<xsd:attribute name="referenceDocumentName" type="StringType" fixed="GUAMCNMIOtherDeductionsFrom1040Statement">
+								<xsd:annotation>
+									<xsd:documentation>
+										<ELFFieldNumber>0410 0420</ELFFieldNumber>
+									</xsd:documentation>
+								</xsd:annotation>
+							</xsd:attribute>
+						</xsd:extension>
+					</xsd:simpleContent>
+				</xsd:complexType>
+			</xsd:element>
+			<!--Total Adjustments Amount -->
+			<xsd:element name="TotalAdjustmentsAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Total Adjustments Amount</Description>
+						<LineNumber>28</LineNumber>
+						<ELFFieldNumber>0430 0435</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!--Adjusted Gross Income Amount -->
+			<xsd:element name="AdjustedGrossIncomeAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Adjusted Gross Income Amount</Description>
+						<LineNumber>29</LineNumber>
+						<ELFFieldNumber>0440 0445</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!--PART III Payments of Income to Guam or the CNMI-->
+			<!--Estimated Tax Payment Filed With Territory Amount -->
+			<xsd:element name="EstTaxPymntFldWithTerritoryAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Estimated Tax Payment Filed With Territory Amount</Description>
+						<LineNumber>30</LineNumber>
+						<ELFFieldNumber>0450 0455</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!--United States Government Civilian Income Tax Withheld Amount -->
+			<xsd:element name="USGovCivIncomeTaxWithheldAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>United States Government Civilian Income Tax Withheld Amount</Description>
+						<LineNumber>31</LineNumber>
+						<ELFFieldNumber>0460 0465</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!--United States Armed Forces Income Tax Withholding Amount -->
+			<xsd:element name="USArmedForcesIncomeTaxWthldAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>United States Armed Forces Income Tax Withholding Amount</Description>
+						<LineNumber>32</LineNumber>
+						<ELFFieldNumber>0470 0475</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!--Territory Income Tax Withheld Amount -->
+			<xsd:element name="TerritoryIncomeTaxWithheldAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Territory Income Tax Withheld Amount</Description>
+						<LineNumber>33</LineNumber>
+						<ELFFieldNumber>0480 0485</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!--Total Payments Amount -->
+			<xsd:element name="TotalPaymentsAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Total Payments Amount</Description>
+						<LineNumber>34</LineNumber>
+						<ELFFieldNumber>0490 0495</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:schema>

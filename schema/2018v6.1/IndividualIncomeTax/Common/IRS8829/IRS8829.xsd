@@ -1,0 +1,686 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.irs.gov/efile" targetNamespace="http://www.irs.gov/efile" elementFormDefault="qualified" attributeFormDefault="unqualified">
+
+	<xsd:annotation>
+		<xsd:documentation>
+			<Description>IRS e-file Individual Income Tax Schema - IRS Form 8829 Expenses for Business Use of Your Home</Description>
+			<TaxYear>2018</TaxYear>
+			<MaturityLevel>Final Release</MaturityLevel>
+			<ReleaseDate>February 13, 2019</ReleaseDate>
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:include schemaLocation="../../../Common/efileTypes.xsd"/>
+
+	<!-- ================================================================== -->
+	<!-- ========================= IRS Form 8829 ========================== -->
+	<!-- ================================================================== -->
+
+	<xsd:element name="IRS8829">
+		<xsd:annotation>
+			<xsd:documentation>IRS Form 8829</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:complexContent>
+				<xsd:extension base="IRS8829Type">
+					<xsd:attributeGroup ref="DocumentAttributes">
+						<xsd:annotation>
+							<xsd:documentation>Common return document attributes</xsd:documentation>
+						</xsd:annotation>
+					</xsd:attributeGroup>
+					<xsd:attribute name="documentName" type="xsd:string" fixed="IRS8829">
+						<xsd:annotation>
+							<xsd:documentation>IRS internal use only. To avoid error in the return, do not include the attribute name or value.</xsd:documentation>
+						</xsd:annotation>
+					</xsd:attribute>
+				</xsd:extension>
+			</xsd:complexContent>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:complexType name="IRS8829Type">
+		<xsd:annotation>
+			<xsd:documentation>Content model for IRS Form 8829</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<!-- Name of Proprietor -->
+			<xsd:element name="ProprietorNm" type="PersonNameType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Name of Proprietor</Description>
+						<LineNumber/>
+						<ELFFieldNumber>0010</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- SSN of Proprietor -->
+			<xsd:element name="SSN" type="SSNType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>SSN of Proprietor</Description>
+						<LineNumber/>
+						<ELFFieldNumber>0020</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Part I  Part of Your Home Used for Business -->
+			<!-- Business Use Square Feet -->
+			<xsd:element name="BusinessUseSquareFeetCnt" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Business Use Square Feet</Description>
+						<LineNumber>1</LineNumber>
+						<ELFFieldNumber>0030</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:integer">
+						<xsd:totalDigits value="6"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<!-- Total Home Square Feet -->
+			<xsd:element name="TotalAreaOfHomeCnt" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Total Home Square Feet</Description>
+						<LineNumber>2</LineNumber>
+						<ELFFieldNumber>0040</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:integer">
+						<xsd:totalDigits value="6"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<!-- Business Square Feet Percent -->
+			<xsd:element name="BusinessSquareFeetPct" type="RatioType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Business Square Feet Percent</Description>
+						<LineNumber>3</LineNumber>
+						<ELFFieldNumber>0050</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Business Use Hours -->
+			<xsd:element name="BusinessUseHoursCnt" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Business Use Hours</Description>
+						<LineNumber>4</LineNumber>
+						<ELFFieldNumber>0060</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:integer">
+						<xsd:totalDigits value="4"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<!-- Total Hours Available -->
+			<xsd:element name="TotalHoursAvailableCnt" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Total Hours Available</Description>
+						<LineNumber>5</LineNumber>
+						<ELFFieldNumber>0065</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:integer">
+						<xsd:totalDigits value="4"/>
+						<xsd:maxInclusive value="8760"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<!-- Business Hours Percent -->
+			<xsd:element name="BusinessHoursPct" type="RatioType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Business Hours Percent</Description>
+						<LineNumber>6</LineNumber>
+						<ELFFieldNumber>0070</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Business Percentage  -->
+			<xsd:element name="BusinessPct" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Business Percentage</Description>
+						<LineNumber>7</LineNumber>
+						<ELFFieldNumber>0080</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+				<xsd:complexType>
+					<xsd:simpleContent>
+						<xsd:extension base="RatioType">
+							<xsd:attribute name="referenceDocumentId" type="IdListType"/>
+							<xsd:attribute name="referenceDocumentName" type="StringType" fixed="SpecialComputationForCertainDaycareFacilitiesStatement">
+								<xsd:annotation>
+									<xsd:documentation>
+										<ELFFieldNumber>0085</ELFFieldNumber>
+									</xsd:documentation>
+								</xsd:annotation>
+							</xsd:attribute>
+						</xsd:extension>
+					</xsd:simpleContent>
+				</xsd:complexType>
+			</xsd:element>
+			<!-- Part II Figure Your Allowable Deduction -->
+			<!-- Tentative Profit/Loss Schedule C -->
+			<xsd:element name="HomeBusinessGainOrLossAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Tentative Profit/Loss Schedule C</Description>
+						<LineNumber>8</LineNumber>
+						<ELFFieldNumber>0090</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Casualty Losses Direct -->
+			<xsd:element name="CasualtyLossesDirectAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Casualty Losses Direct</Description>
+						<LineNumber>9a</LineNumber>
+						<ELFFieldNumber>0100</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Casualty Losses Indirect -->
+			<xsd:element name="CasualtyLossesIndirectAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Casualty Losses Indirect</Description>
+						<LineNumber>9b</LineNumber>
+						<ELFFieldNumber>0110</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Deductible Mortgage Interest Direct -->
+			<xsd:element name="DeductibleMortgageIntDirectAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Deductible Mortgage Interest Direct</Description>
+						<LineNumber>10a</LineNumber>
+						<ELFFieldNumber>0120</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Deductible Mortgage Interest Indirect -->
+			<xsd:element name="DeductibleMortgageIntIndrAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Deductible Mortgage Interest Indirect</Description>
+						<LineNumber>10b</LineNumber>
+						<ELFFieldNumber>0130</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Real Estate Taxes Direct -->
+			<xsd:element name="RealEstateTaxesDirectAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Real Estate Taxes Direct</Description>
+						<LineNumber>11a</LineNumber>
+						<ELFFieldNumber>0140</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Real Estate Taxes Indirect -->
+			<xsd:element name="RealEstateTaxesIndirectAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Real Estate Taxes Indirect</Description>
+						<LineNumber>11b</LineNumber>
+						<ELFFieldNumber>0150</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Direct Deducted Subtotal -->
+			<xsd:element name="DirectDeductedExpnssSubtlAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Direct Deducted Subtotal</Description>
+						<LineNumber>12a</LineNumber>
+						<ELFFieldNumber>0160</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Indirect Deducted Subtotal -->
+			<xsd:element name="IndirectDeductedExpnssSubtlAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Indirect Deducted Subtotal</Description>
+						<LineNumber>12b</LineNumber>
+						<ELFFieldNumber>0170</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Allowable Indirect Deducted Expenses -->
+			<xsd:element name="AllowableIndrDeductedExpnssAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Allowable Indirect Deducted Expenses</Description>
+						<LineNumber>13b</LineNumber>
+						<ELFFieldNumber>0180</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Deductible Net -->
+			<xsd:element name="DirectAndIndirectExpnsSubtlAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Deductible Net</Description>
+						<LineNumber>14</LineNumber>
+						<ELFFieldNumber>0190</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Reduced Profit/Loss -->
+			<xsd:element name="HomeBusinessIncomeAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Reduced Profit/Loss</Description>
+						<LineNumber>15</LineNumber>
+						<ELFFieldNumber>0200</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Non-Deductible Mortgage Interest Direct -->
+			<xsd:element name="ExcessMortgageIntDirectAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Non-Deductible Mortgage Interest Direct</Description>
+						<LineNumber>16a</LineNumber>
+						<ELFFieldNumber>0210</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Non-Deductible Mortgage Interest Indirect -->
+			<xsd:element name="ExcessMortgageIntIndirectAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Non-Deductible Mortgage Interest Indirect</Description>
+						<LineNumber>16b</LineNumber>
+						<ELFFieldNumber>0220</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Excess RealEstate Taxes Direct Amount -->
+			<xsd:element name="ExcessRealEstateTxsDirectAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Excess RealEstate Taxes Direct Amount</Description>
+						<LineNumber>17a</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Excess RealEstate Taxes Indirect Amount -->
+			<xsd:element name="ExcessRealEstateTxsIndirectAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Excess RealEstate Taxes Indirect Amount</Description>
+						<LineNumber>17b</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Insurance Direct -->
+			<xsd:element name="InsuranceDirectAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Insurance Direct</Description>
+						<LineNumber>18a</LineNumber>
+						<ELFFieldNumber>0230</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Insurance Indirect -->
+			<xsd:element name="InsuranceIndirectAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Insurance Indirect</Description>
+						<LineNumber>18b</LineNumber>
+						<ELFFieldNumber>0240</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Rent Direct -->
+			<xsd:element name="RentDirectAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Rent Direct</Description>
+						<LineNumber>19a</LineNumber>
+						<ELFFieldNumber>0245</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Rent Indirect -->
+			<xsd:element name="RentIndirectAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Rent Indirect</Description>
+						<LineNumber>19b</LineNumber>
+						<ELFFieldNumber>0247</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Repairs/Maint. Direct -->
+			<xsd:element name="RepairsAndMaintDirectAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Repairs/Maint. Direct</Description>
+						<LineNumber>20a</LineNumber>
+						<ELFFieldNumber>0250</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Repairs/Maint. Indirect -->
+			<xsd:element name="RepairsAndMaintIndirectAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Repairs/Maint. Indirect</Description>
+						<LineNumber>20b</LineNumber>
+						<ELFFieldNumber>0260</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Utilities Direct -->
+			<xsd:element name="UtilitiesDirectAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Utilities Direct</Description>
+						<LineNumber>21a</LineNumber>
+						<ELFFieldNumber>0270</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Utilities Indirect -->
+			<xsd:element name="UtilitiesIndirectAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Utilities Indirect</Description>
+						<LineNumber>21b</LineNumber>
+						<ELFFieldNumber>0280</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Other Expenses Direct -->
+			<xsd:element name="OtherExpensesDirectAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Other Expenses Direct</Description>
+						<LineNumber>22a</LineNumber>
+						<ELFFieldNumber>0290</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Other Expenses Indirect -->
+			<xsd:element name="OtherExpensesIndirectAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Other Expenses Indirect</Description>
+						<LineNumber>22b</LineNumber>
+						<ELFFieldNumber>0300</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Direct Non-Deducted Subtotal -->
+			<xsd:element name="DirectNondeductedSubtotalAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Direct Non-Deducted Subtotal</Description>
+						<LineNumber>23a</LineNumber>
+						<ELFFieldNumber>0310</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Indirect Non-Deducted Subtotal -->
+			<xsd:element name="IndirectNondeductedSubtotalAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Indirect Non-Deducted Subtotal</Description>
+						<LineNumber>23b</LineNumber>
+						<ELFFieldNumber>0320</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Allowable Indirect Non-Deducted Expenses -->
+			<xsd:element name="AllwblIndrNondeductedExpnssAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Allowable Indirect Non-Deducted Expenses</Description>
+						<LineNumber>24</LineNumber>
+						<ELFFieldNumber>0330</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Operating Expenses Carryover -->
+			<xsd:element name="OperatingExpensesCarryoverAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Operating Expenses Carryover</Description>
+						<LineNumber>25</LineNumber>
+						<ELFFieldNumber>0340</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Non-Deductible Net -->
+			<xsd:element name="NondeductibleNetExpensesAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Non-Deductible Net</Description>
+						<LineNumber>26</LineNumber>
+						<ELFFieldNumber>0350</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Allowable Operating Expenses -->
+			<xsd:element name="AllowableOperatingExpensesAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Allowable Operating Expenses</Description>
+						<LineNumber>27</LineNumber>
+						<ELFFieldNumber>0360</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Casualty Loss and Depreciation Limit -->
+			<xsd:element name="CsltyLossesAndDeprecLimitAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Casualty Loss and Depreciation Limit</Description>
+						<LineNumber>28</LineNumber>
+						<ELFFieldNumber>0370</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Non-Deductible Casualty Loss -->
+			<xsd:element name="ExcessCasualtyLossesAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Non-Deductible Casualty Loss</Description>
+						<LineNumber>29</LineNumber>
+						<ELFFieldNumber>0380</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Home Depreciation Part III -->
+			<!-- Use value from Line 42 -->
+			<!-- <ELFFieldNumber>0390</ELFFieldNumber> -->
+			<!-- Excess Casualty Losses &amp; Deprec. Carryover -->
+			<xsd:element name="CyovExCsltyLossesAndDeprecAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Excess Casualty Losses &amp; Deprec. Carryover</Description>
+						<LineNumber>31</LineNumber>
+						<ELFFieldNumber>0400</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Casualty Losses and Depreciation Net -->
+			<xsd:element name="CasualtyLossesAndDeprecNetAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Casualty Losses and Depreciation Net</Description>
+						<LineNumber>32</LineNumber>
+						<ELFFieldNumber>0410</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Allowable Casualty Losses and Depreciation -->
+			<xsd:element name="AllwblExCsltyLossesDeprecAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Allowable Casualty Losses and Depreciation</Description>
+						<LineNumber>33</LineNumber>
+						<ELFFieldNumber>0420</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Total Allowable Expenses -->
+			<xsd:element name="TotalAllowableExpensesAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Total Allowable Expenses</Description>
+						<LineNumber>34</LineNumber>
+						<ELFFieldNumber>0430</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Form 4684 Casualty Losses -->
+			<xsd:element name="CasualtyLossPortionAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Form 4684 Casualty Losses</Description>
+						<LineNumber>35</LineNumber>
+						<ELFFieldNumber>0440</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Schedule C Allowable Expenses -->
+			<xsd:element name="AllowableHomeBusExpnssSchCAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Schedule C Allowable Expenses</Description>
+						<LineNumber>36</LineNumber>
+						<ELFFieldNumber>0450</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Part III Depreciation of Your Home -->
+			<!-- Home Adjusted Basis or Fair Market -->
+			<xsd:element name="HomeAdjBasisOrFairMarketAmt" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Home Adjusted Basis or Fair Market</Description>
+						<LineNumber>37</LineNumber>
+						<ELFFieldNumber>0460</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+				<xsd:complexType>
+					<xsd:simpleContent>
+						<xsd:extension base="USAmountType">
+							<xsd:attribute name="referenceDocumentId" type="IdListType"/>
+							<xsd:attribute name="referenceDocumentName" type="StringType" fixed="CostOrOtherBasisOfAdditionsAndImprovementsSchedule">
+								<xsd:annotation>
+									<xsd:documentation>
+										<ELFFieldNumber>0465</ELFFieldNumber>
+									</xsd:documentation>
+								</xsd:annotation>
+							</xsd:attribute>
+						</xsd:extension>
+					</xsd:simpleContent>
+				</xsd:complexType>
+			</xsd:element>
+			<!-- Land Value -->
+			<xsd:element name="ValueOfLandAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Land Value</Description>
+						<LineNumber>38</LineNumber>
+						<ELFFieldNumber>0470</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Building Value -->
+			<xsd:element name="BasisOfBuildingAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Building Value</Description>
+						<LineNumber>39</LineNumber>
+						<ELFFieldNumber>0480</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Building Value-Business -->
+			<xsd:element name="BusinessBasisOfBuildingAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Building Value-Business</Description>
+						<LineNumber>40</LineNumber>
+						<ELFFieldNumber>0490</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Home Depreciation Percent -->
+			<xsd:element name="DepreciationPct" type="RatioType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Home Depreciation Percent</Description>
+						<LineNumber>41</LineNumber>
+						<ELFFieldNumber>0500</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Allowable Home Depreciation -->
+			<xsd:element name="AllowableHomeDepreciationAmt" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Allowable Home Depreciation</Description>
+						<LineNumber>42</LineNumber>
+						<ELFFieldNumber>0510</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+				<xsd:complexType>
+					<xsd:simpleContent>
+						<xsd:extension base="USAmountType">
+							<xsd:attribute name="referenceDocumentId" type="IdListType"/>
+							<xsd:attribute name="referenceDocumentName" type="StringType" fixed="DepreciationComputationSchedule IRS4562">
+								<xsd:annotation>
+									<xsd:documentation>
+										<ELFFieldNumber>0515 NL</ELFFieldNumber>
+									</xsd:documentation>
+								</xsd:annotation>
+							</xsd:attribute>
+						</xsd:extension>
+					</xsd:simpleContent>
+				</xsd:complexType>
+			</xsd:element>
+			<!-- Part IV Carryover of Unallowed Expenses to 2019 -->
+			<!-- Unallowed Operating Expenses -->
+			<xsd:element name="OperatingExpensesAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Unallowed Operating Expenses</Description>
+						<LineNumber>43</LineNumber>
+						<ELFFieldNumber>0520</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Unallowed Excess Casualty Losses and Depreciation -->
+			<xsd:element name="ExcessCsltyLossesAndDeprecAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Unallowed Excess Casualty Losses and Depreciation</Description>
+						<LineNumber>44</LineNumber>
+						<ELFFieldNumber>0530</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:schema>

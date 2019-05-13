@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.irs.gov/efile" targetNamespace="http://www.irs.gov/efile" elementFormDefault="qualified" attributeFormDefault="unqualified">
+
+	<xsd:annotation>
+		<xsd:documentation>
+			<Description>IRS Individual Income Tax Schema - Excluding Income In Prior Year Statement</Description>
+			<Purpose>If you are excluding income under this rule, do not include this income in Part IV.  Instead, attach a statement to Form 2555 showing how you figured the exclusion.</Purpose>
+			<TaxYear>2018</TaxYear>
+			<MaturityLevel>Final Release</MaturityLevel>
+			<ReleaseDate>February 13, 2019</ReleaseDate>
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:include schemaLocation="../../../Common/efileTypes.xsd"/>
+	
+	<!-- ===================================================================================== -->
+	<!-- ==================  Excluding Income In Prior Year Statement  ======================= -->
+	<!-- ===================================================================================== -->
+	
+	<xsd:element name="ExcludingIncomeInPriorYearStmt">
+		<xsd:annotation>
+			<xsd:documentation>Excluding Income In Prior Year Statement</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:complexContent>
+				<xsd:extension base="ExclIncomeInPriorYearStmtType">
+					<xsd:attributeGroup ref="DocumentAttributes">
+						<xsd:annotation>
+							<xsd:documentation>Common return document attributes</xsd:documentation>
+						</xsd:annotation>
+					</xsd:attributeGroup>
+					<xsd:attribute name="documentName" type="xsd:string" fixed="ExcludingIncomeInPriorYearStatement">
+						<xsd:annotation>
+							<xsd:documentation>IRS internal use only. To avoid error in the return, do not include the attribute name or value.</xsd:documentation>
+						</xsd:annotation>
+					</xsd:attribute>
+				</xsd:extension>
+			</xsd:complexContent>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:complexType name="ExclIncomeInPriorYearStmtType">
+		<xsd:annotation>
+			<xsd:documentation>Excluding Income In Prior Year Statement</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="ShortExplanationTxt" type="ShortExplanationType">
+				<xsd:annotation>
+					<xsd:documentation>
+						<ELFFieldNumber>NL</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="ExcludedIncomeAmt" type="USAmountType">
+				<xsd:annotation>
+					<xsd:documentation>
+						<ELFFieldNumber>NL</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:schema>

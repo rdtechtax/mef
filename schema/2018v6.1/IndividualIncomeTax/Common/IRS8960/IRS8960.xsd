@@ -1,0 +1,426 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.irs.gov/efile" attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://www.irs.gov/efile" version="1.0">
+
+	<xsd:annotation>
+		<xsd:documentation>
+			<Description>IRS e-file Schema - IRS Form 8960 Net Investment Income Tax - Individuals, Estates, and Trusts</Description>
+			<TaxYear>2018</TaxYear>
+			<MaturityLevel>Final Release</MaturityLevel>
+			<ReleaseDate>February 13, 2019</ReleaseDate>
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:include schemaLocation="../../../Common/efileTypes.xsd"/>
+
+	<!-- ==================================================================== -->
+	<!-- ========================== IRS Form 8960 =========================== -->
+	<!-- ==================================================================== -->
+
+	<xsd:element name="IRS8960">
+		<xsd:annotation>
+			<xsd:documentation>IRS Form 8960</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:complexContent>
+				<xsd:extension base="IRS8960Type">
+					<xsd:attributeGroup ref="DocumentAttributes">
+						<xsd:annotation>
+							<xsd:documentation>Common return document attributes</xsd:documentation>
+						</xsd:annotation>
+					</xsd:attributeGroup>
+
+					<xsd:attribute name="documentName" type="xsd:string" fixed="IRS8960">
+						<xsd:annotation>
+							<xsd:documentation>IRS internal use only. To avoid error in the return, do not include the attribute name or value.</xsd:documentation>
+						</xsd:annotation>
+					</xsd:attribute>
+
+					<xsd:attribute name="referenceDocumentId" type="IdListType">
+						<xsd:annotation>
+							<xsd:documentation>List of document ID's of forms, schedules, supporting info. etc. attached to this form</xsd:documentation>
+						</xsd:annotation>
+					</xsd:attribute>
+					<xsd:attribute name="referenceDocumentName" type="StringType" fixed="GeneralDependencySmall"/>
+
+				</xsd:extension>
+			</xsd:complexContent>
+		</xsd:complexType>
+	</xsd:element>
+
+	<xsd:complexType name="IRS8960Type">
+		<xsd:annotation>
+			<xsd:documentation>Content model for Form 8960</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+
+			<!-- Part I  Investment Income -->
+
+			<!-- Section 6013(g) Indicator -->
+			<xsd:element name="Section6013gInd" type="CheckboxType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>IRC Section 6013(g) Indicator</Description>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Section 6013(h) Indicator -->
+			<xsd:element name="Section6013hInd" type="CheckboxType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>IRC Section 6013(h) Indicator</Description>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Regulation Section 1.1411-10(g) Indicator -->
+			<xsd:element name="RegSection1141110gInd" type="CheckboxType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Regulation Section 1.1411-10(g) Indicator</Description>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Taxable Interest Amount -->
+			<xsd:element name="TaxableInterestAmt" type="USAmountNNType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Taxable Interest Amount</Description>
+						<LineNumber>1</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Ordinary Dividends Amount -->
+			<xsd:element name="OrdinaryDividendsAmt" type="USAmountNNType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Ordinary Dividends Amount</Description>
+						<LineNumber>2</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Annuites -->
+			<xsd:element name="AnnuitesFromNonQlfPlansAmt" type="USAmountNNType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Annuites</Description>
+						<LineNumber>3</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Net Rental Income Or Loss Amount -->
+			<xsd:element name="NetRentalIncomeOrLossAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Net Rental Income Or Loss Amount</Description>
+						<LineNumber>4a</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Adjusted Net Income Or Loss Non-Section 1411 Amount -->
+			<xsd:element name="AdjNetIncmOrLossNonSect1411Amt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Adjusted Net Income Or Loss Non-Section 1411 Amount</Description>
+						<LineNumber>4b</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Rental Real Estate And Adjusted Net Income Or Loss Amount -->
+			<xsd:element name="RentalREAndAdjNetIncmOrLossAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Rental Real Estate And Adjusted Net Income Or Loss Amount</Description>
+						<LineNumber>4c</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Property Disposition Gain Or Loss Amount -->
+			<xsd:element name="PropertyDisposGainOrLossAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Property Disposition Gain Or Loss Amount</Description>
+						<LineNumber>5a</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Non-NIIT Property Disposition Gain Or Loss Amount -->
+			<xsd:element name="NonNIITPropDisposGainOrLossAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Non-NIIT Property Disposition Gain Or Loss Amount</Description>
+						<LineNumber>5b</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Adjustment From Disposition Of Stock Amount -->
+			<xsd:element name="AdjFromDisposOfStockAmt" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Adjustment From Disposition Of Stock Amount</Description>
+						<LineNumber>5c</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+				<xsd:complexType>
+					<xsd:simpleContent>
+						<xsd:extension base="USAmountType">
+							<xsd:attribute name="referenceDocumentId" type="IdListType"/>
+							<xsd:attribute name="referenceDocumentName" type="StringType" fixed="InterestDispositionStatement"/>
+						</xsd:extension>
+					</xsd:simpleContent>
+				</xsd:complexType>
+			</xsd:element>
+
+			<!-- Gain Or Loss From Disposition Amount -->
+			<xsd:element name="GainOrLossFromDisposAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Gain Or Loss From Disposition Amount</Description>
+						<LineNumber>5d</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Adjustments to investment income for certain CFCs and PFICs -->
+			<xsd:element name="CFCAndPFICInvstIncmChangesAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Adjustments to investment income for certain CFCs and PFICs</Description>
+						<LineNumber>6</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Other Investment Income Or Loss Amount -->
+			<xsd:element name="OtherInvestmentIncomeOrLossAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Other Investment Income Or Loss Amount</Description>
+						<LineNumber>7</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Total Income Amount -->
+			<xsd:element name="TotalIncomeAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Total Income Amount</Description>
+						<LineNumber>8</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Part II  Investment Expenses Allocable to Investment Income and Modifications -->
+
+			<!-- Investment Interest Amount -->
+			<xsd:element name="InvestmentInterestAmt" type="USAmountNNType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Investment Interest Amount</Description>
+						<LineNumber>9a</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- State Local And Foreign Income Tax Amount -->
+			<xsd:element name="StateLocalForeignIncomeTaxAmt" type="USAmountNNType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>State Local And Foreign Income Tax Amount</Description>
+						<LineNumber>9b</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Miscellaneous Investment Expense Amount -->
+			<xsd:element name="MiscInvestmentExpenseAmt" type="USAmountNNType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Miscellaneous Investment Expense Amount</Description>
+						<LineNumber>9c</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Investment Expense Amount -->
+			<xsd:element name="InvestmentExpenseAmt" type="USAmountNNType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Investment Expense Amount</Description>
+						<LineNumber>9d</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Additional Modification Amount -->
+			<xsd:element name="AdditionalModificationAmt" type="USAmountNNType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Additional Modification Amount</Description>
+						<LineNumber>10</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Total Deduction Modification Amount -->
+			<xsd:element name="TotalDeductionModificationAmt" type="USAmountNNType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Total Deduction Modification Amount</Description>
+						<LineNumber>11</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Part III  Tax Computation -->
+
+			<!-- Net Investment Income Amount -->
+			<xsd:element name="NetInvestmentIncomeAmt" type="USAmountNNType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Net Investment Income Amount</Description>
+						<LineNumber>12</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Individuals -->
+
+			<!-- Modified Adjusted Gross Income Amount -->
+			<xsd:element name="ModifiedAGIAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Modified Adjusted Gross Income Amount</Description>
+						<LineNumber>13</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Filing Threshold Amount -->
+			<xsd:element name="FilingThresholdAmt" type="USAmountNNType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Filing Threshold Amount</Description>
+						<LineNumber>14</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Modified Adjusted Gross Income Less Threshold Amount -->
+			<xsd:element name="MAGILessThresholdAmt" type="USAmountNNType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Modified Adjusted Gross Income Less Threshold Amount</Description>
+						<LineNumber>15</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Smaller Of Income Or Modified AGI Less Threshold Amount -->
+			<xsd:element name="SmllrIncmOrMAGILessThrshldAmt" type="USAmountNNType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Smaller Of Income Or Modified AGI Less Threshold Amount</Description>
+						<LineNumber>16</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Individual Net Investment Income Tax Amount -->
+			<xsd:element name="IndivNetInvstIncomeTaxAmt" type="USAmountNNType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Individual Net Investment Income Tax Amount</Description>
+						<LineNumber>17</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Estates and Trusts -->
+
+			<!-- Line 18a - Use value from Line 12 'NetInvestmentIncomeAmt' -->
+
+			<!-- Income Distribution Deduction Amount -->
+			<xsd:element name="IncomeDistributionDeductionAmt" type="USAmountNNType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Income Distribution Deduction Amount</Description>
+						<LineNumber>18b</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Undistributed Net Income Amount -->
+			<xsd:element name="UndistributedNetIncomeAmt" type="USAmountNNType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Undistributed Net Income Amount</Description>
+						<LineNumber>18c</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Adjusted Gross Income Amount -->
+			<xsd:element name="AdjustedGrossIncomeAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Adjusted Gross Income Amount</Description>
+						<LineNumber>19a</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Trusts Estates Highest Tax Bracket Amount -->
+			<xsd:element name="TrustEstHighestTaxBracketAmt" type="USAmountNNType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Trusts Estates Highest Tax Bracket Amount</Description>
+						<LineNumber>19b</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Adjusted Gross Income Less Trusts Estates Highest Tax Bracket Amount -->
+			<xsd:element name="AGILessTrustEstHighestTaxAmt" type="USAmountNNType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Adjusted Gross Income Less Trusts Estates Highest Tax Bracket Amount</Description>
+						<LineNumber>19c</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Smaller Of Undistributed Income Or Adjusted Gross Income Less Tax Amount -->
+			<xsd:element name="SmllrUndistrIncmAGILessTaxAmt" type="USAmountNNType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Smaller Of Undistributed Income Or Adjusted Gross Income Less Tax Amount</Description>
+						<LineNumber>20</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Estates And Trusts Net Investment Income Tax Amount -->
+			<xsd:element name="EstTrustNetInvstIncomeTaxAmt" type="USAmountNNType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Estates And Trusts Net Investors Income Tax Amount</Description>
+						<LineNumber>21</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+		</xsd:sequence>
+	</xsd:complexType>
+
+</xsd:schema>

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.irs.gov/efile" targetNamespace="http://www.irs.gov/efile" elementFormDefault="qualified" attributeFormDefault="unqualified">
+
+	<xsd:annotation>
+		<xsd:documentation>
+			<Description>IRS e-file Individual Income Tax Schema - Revoke Choice Of Exclusion Statement</Description>
+			<Purpose>Once you choose to claim an exclusion that choice remains in effect for that year and all future years unless it revoked.  To revoke your choice, you must attach a statement to your return for the first year you do not wish to claim the exclusion(s).  If you revoke your choice, you can not claim the exclusion(s) for your next 5 tax years without the approval of the Internal Revenue Service.</Purpose>
+			<TaxYear>2018</TaxYear>
+			<MaturityLevel>Final Release</MaturityLevel>
+			<ReleaseDate>February 13, 2019</ReleaseDate>
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:include schemaLocation="../../../Common/efileTypes.xsd"/>
+	
+	<!-- ===================================================================================== -->
+	<!-- =====================  Revoke Choice Of Exclusion Statement  ======================== -->
+	<!-- ===================================================================================== -->
+	
+	<xsd:element name="RevokeChoiceOfExclusionStmt">
+		<xsd:annotation>
+			<xsd:documentation>Revoke Choice Of Exclusion Statement</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:complexContent>
+				<xsd:extension base="RevokeChoiceOfExclusionStmtType">
+					<xsd:attributeGroup ref="DocumentAttributes">
+						<xsd:annotation>
+							<xsd:documentation>Common return document attributes</xsd:documentation>
+						</xsd:annotation>
+					</xsd:attributeGroup>
+					<xsd:attribute name="documentName" type="xsd:string" fixed="RevokeChoiceOfExclusionStatement">
+						<xsd:annotation>
+							<xsd:documentation>IRS internal use only. To avoid error in the return, do not include the attribute name or value.</xsd:documentation>
+						</xsd:annotation>
+					</xsd:attribute>
+				</xsd:extension>
+			</xsd:complexContent>
+		</xsd:complexType>
+	</xsd:element>
+	
+	<xsd:complexType name="RevokeChoiceOfExclusionStmtType">
+		<xsd:annotation>
+			<xsd:documentation>Content model for Revoke Choice Of Exclusion Statement</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="ShortExplanationTxt" type="ShortExplanationType" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:schema>

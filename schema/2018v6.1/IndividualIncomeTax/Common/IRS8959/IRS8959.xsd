@@ -1,0 +1,333 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.irs.gov/efile" attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://www.irs.gov/efile" version="1.0">
+	<xsd:annotation>
+		<xsd:documentation>
+			<Description>IRS e-file Schema - IRS Form 8959 Additional Medicare Tax</Description>
+			<TaxYear>2018</TaxYear>
+			<MaturityLevel>Final Release</MaturityLevel>
+			<ReleaseDate>February 13, 2019</ReleaseDate>
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:include schemaLocation="../../../Common/efileTypes.xsd"/>
+
+	<!-- =====================================================================-->
+	<!-- =========================== IRS Form 8959 ===========================-->
+	<!-- =====================================================================-->
+
+	<xsd:element name="IRS8959">
+		<xsd:annotation>
+			<xsd:documentation>IRS Form 8959</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:complexContent>
+				<xsd:extension base="IRS8959Type">
+					<xsd:attributeGroup ref="DocumentAttributes">
+						<xsd:annotation>
+							<xsd:documentation>Common return document attributes</xsd:documentation>
+						</xsd:annotation>
+					</xsd:attributeGroup>
+					<xsd:attribute name="documentName" type="xsd:string" fixed="IRS8959"/>
+
+					<xsd:attribute name="referenceDocumentId" type="IdListType">
+						<xsd:annotation>
+							<xsd:documentation>List of document ID's of forms, schedules, supporting info. etc. attached to this form</xsd:documentation>
+						</xsd:annotation>
+					</xsd:attribute>
+					<xsd:attribute name="referenceDocumentName" type="StringType" fixed="GeneralDependencySmall">
+					</xsd:attribute>
+
+				</xsd:extension>
+			</xsd:complexContent>
+		</xsd:complexType>
+	</xsd:element>
+
+	<xsd:complexType name="IRS8959Type">
+		<xsd:annotation>
+			<xsd:documentation>Content model for Form 8959</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+
+			<!-- Group for Parts I, II, III, and IV -->
+			<xsd:element name="AdditionalTaxGrp" minOccurs="0">
+				<xsd:complexType>
+					<xsd:sequence>
+
+						<!-- Filing Status Threshold Code (used in Part I, II, and III) -->
+						<xsd:element name="FilingStatusThresholdCd">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Filing Status Threshold Code</Description>
+									<LineNumber>5, 9, or 15</LineNumber>
+									<ELFFieldNumber/>
+								</xsd:documentation>
+							</xsd:annotation>
+							<xsd:simpleType>
+								<xsd:restriction base="StringType">
+									<xsd:enumeration value="125000"/>
+									<xsd:enumeration value="200000"/>
+									<xsd:enumeration value="250000"/>
+								</xsd:restriction>
+							</xsd:simpleType>
+						</xsd:element>
+
+						<!-- Part I  Additional Medicare Tax on Medicare Wages -->
+
+						<xsd:element name="AdditionalMedicareTaxGrp" minOccurs="0">
+							<xsd:complexType>
+								<xsd:sequence>
+
+									<!-- Total W-2 Medicare Wages And Tips Amount -->
+									<xsd:element name="TotalW2MedicareWagesAndTipsAmt" type="USAmountType" minOccurs="0">
+										<xsd:annotation>
+											<xsd:documentation>
+												<Description>Total W-2 Medicare Wages And Tips Amount</Description>
+												<LineNumber>1</LineNumber>
+												<ELFFieldNumber/>
+											</xsd:documentation>
+										</xsd:annotation>
+									</xsd:element>
+
+									<!-- Total Unreported Medicare Tips Amount -->
+									<xsd:element name="TotalUnreportedMedicareTipsAmt" type="USAmountType" minOccurs="0">
+										<xsd:annotation>
+											<xsd:documentation>
+												<Description>Total Unreported Medicare Tips Amount</Description>
+												<LineNumber>2</LineNumber>
+												<ELFFieldNumber/>
+											</xsd:documentation>
+										</xsd:annotation>
+									</xsd:element>
+
+									<!-- Total Wages With No Withholding Amount -->
+									<xsd:element name="TotalWagesWithNoWithholdingAmt" type="USAmountType" minOccurs="0">
+										<xsd:annotation>
+											<xsd:documentation>
+												<Description>Total Wages With No Withholding Amount</Description>
+												<LineNumber>3</LineNumber>
+												<ELFFieldNumber/>
+											</xsd:documentation>
+										</xsd:annotation>
+									</xsd:element>
+
+									<!-- Total Medicare Wages And Tips Amount -->
+									<xsd:element name="TotalMedicareWagesAndTipsAmt" type="USAmountType">
+										<xsd:annotation>
+											<xsd:documentation>
+												<Description>Total Medicare Wages And Tips Amount</Description>
+												<LineNumber>4</LineNumber>
+												<ELFFieldNumber/>
+											</xsd:documentation>
+										</xsd:annotation>
+									</xsd:element>
+
+									<!-- Note that Line 5 is placed directly under 'AdditionalTaxGrp' -->
+
+									<!-- Wages Tips Subject To Additional Medicare Tax Amount -->
+									<xsd:element name="WagesTipsSubjToAddlMedcrTaxAmt" type="USAmountNNType">
+										<xsd:annotation>
+											<xsd:documentation>
+												<Description>Wages Tips Subject To Additional Medicare Tax Amount</Description>
+												<LineNumber>6</LineNumber>
+												<ELFFieldNumber/>
+											</xsd:documentation>
+										</xsd:annotation>
+									</xsd:element>
+
+									<!-- Additional Medicare Tax Amount -->
+									<xsd:element name="AdditionalMedicareTaxAmt" type="USAmountType">
+										<xsd:annotation>
+											<xsd:documentation>
+												<Description>Additional Medicare Tax Amount</Description>
+												<LineNumber>7</LineNumber>
+												<ELFFieldNumber/>
+											</xsd:documentation>
+										</xsd:annotation>
+									</xsd:element>
+
+								</xsd:sequence>
+							</xsd:complexType>
+						</xsd:element>
+
+						<!-- Part II  Additional Medicare Tax on Self-Employment Income -->
+
+						<xsd:element name="AddnlSelfEmploymentTaxGrp" minOccurs="0">
+							<xsd:complexType>
+								<xsd:sequence>
+
+									<!-- Total Self-Employment Income Amount -->
+									<xsd:element name="TotalSelfEmploymentIncomeAmt" type="USAmountType">
+										<xsd:annotation>
+											<xsd:documentation>
+												<Description>Total Self-Employment Income Amount</Description>
+												<LineNumber>8</LineNumber>
+												<ELFFieldNumber/>
+											</xsd:documentation>
+										</xsd:annotation>
+									</xsd:element>
+
+									<!-- Note that Line 9 is placed directly under 'AdditionalTaxGrp' -->
+
+									<!-- Line 10 - Use value from Line 4 -->
+
+									<!-- Medicare Wages Tips Below Threshold Amount -->
+									<xsd:element name="MedcrWagesTipsBelowThrshldAmt" type="USAmountNNType" minOccurs="0">
+										<xsd:annotation>
+											<xsd:documentation>
+												<Description>Medicare Wages Tips Below Threshold Amount</Description>
+												<LineNumber>11</LineNumber>
+												<ELFFieldNumber/>
+											</xsd:documentation>
+										</xsd:annotation>
+									</xsd:element>
+
+									<!-- Self-Employment Income Subject To Added Self-employment Tax Amount -->
+									<xsd:element name="SEIncomeSubjToAddSETaxAmt" type="USAmountNNType" minOccurs="0">
+										<xsd:annotation>
+											<xsd:documentation>
+												<Description>Self-Employment Income Subject To Added Self-employment Tax Amount</Description>
+												<LineNumber>12</LineNumber>
+												<ELFFieldNumber/>
+											</xsd:documentation>
+										</xsd:annotation>
+									</xsd:element>
+
+									<!-- Additional Self-Employment Tax Amount -->
+									<xsd:element name="AddlSelfEmploymentTaxAmt" type="USAmountType" minOccurs="0">
+										<xsd:annotation>
+											<xsd:documentation>
+												<Description>Additional Self-Employment Tax Amount</Description>
+												<LineNumber>13</LineNumber>
+												<ELFFieldNumber/>
+											</xsd:documentation>
+										</xsd:annotation>
+									</xsd:element>
+
+								</xsd:sequence>
+							</xsd:complexType>
+						</xsd:element>
+
+						<!-- Part III  Tier I Employee Additional Medicare Tax on Railroad Retirement Compensation -->
+
+						<xsd:element name="AddnlRailroadRetirementTaxGrp" minOccurs="0">
+							<xsd:complexType>
+								<xsd:sequence>
+
+									<!-- Total Railroad Retirement compensation Amount -->
+									<xsd:element name="TotalRailroadRetirementCompAmt" type="USAmountType">
+										<xsd:annotation>
+											<xsd:documentation>
+												<Description>Total Railroad Retirement compensation Amount</Description>
+												<LineNumber>14</LineNumber>
+												<ELFFieldNumber/>
+											</xsd:documentation>
+										</xsd:annotation>
+									</xsd:element>
+
+									<!-- Note that Line 15 is placed directly under 'AdditionalTaxGrp' -->
+
+									<!-- Railroad Retirement compensation Subject To Additional Railroad Retirement Tax Amount -->
+									<xsd:element name="RRTCompSubjToAddRRTTaxAmt" type="USAmountNNType" minOccurs="0">
+										<xsd:annotation>
+											<xsd:documentation>
+												<Description>Railroad Retirement compensation Subject To Additional Railroad Retirement Tax Amount</Description>
+												<LineNumber>16</LineNumber>
+												<ELFFieldNumber/>
+											</xsd:documentation>
+										</xsd:annotation>
+									</xsd:element>
+
+									<!-- Additional Railroad Retirement Tax Amount -->
+									<xsd:element name="AddlRailroadRetirementTaxAmt" type="USAmountType" minOccurs="0">
+										<xsd:annotation>
+											<xsd:documentation>
+												<Description>Additional Railroad Retirement Tax Amount</Description>
+												<LineNumber>17</LineNumber>
+												<ELFFieldNumber/>
+											</xsd:documentation>
+										</xsd:annotation>
+									</xsd:element>
+
+								</xsd:sequence>
+							</xsd:complexType>
+						</xsd:element>
+
+						<!-- Part IV  Total Additional Medicare Tax -->
+
+						<!-- Total Additional Medicare And Railroad Retirement Tax Amount -->
+						<xsd:element name="TotalAMRRTTaxAmt" type="USAmountType">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Total Additional Medicare And Railroad Retirement Tax Amount</Description>
+									<LineNumber>18</LineNumber>
+									<ELFFieldNumber/>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+
+			<!-- Part V  Withholding Reconciliation -->
+
+			<!-- Total W-2 Medicare Tax Withheld Amount -->
+			<xsd:element name="TotalW2MedicareTaxWithheldAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Total W-2 Medicare Tax Withheld Amount</Description>
+						<LineNumber>19</LineNumber>
+						<ELFFieldNumber/>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Line 20 - Use value from Line 1 -->
+
+			<!-- Total Medicare Tax Amount -->
+			<xsd:element name="TotalMedicareTaxAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Total Medicare Tax Amount</Description>
+						<LineNumber>21</LineNumber>
+						<ELFFieldNumber/>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Additional Medicare Tax Withholding Amount -->
+			<xsd:element name="AddnlMedicareTaxWithholdingAmt" type="USAmountNNType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Additional Medicare Tax Withholding Amount</Description>
+						<LineNumber>22</LineNumber>
+						<ELFFieldNumber/>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Total W-2 Additional Railroad Retirement Tax Amount -->
+			<xsd:element name="TotalW2AddlRRTTaxAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Total W-2 Additional Railroad Retirement Tax Amount</Description>
+						<LineNumber>23</LineNumber>
+						<ELFFieldNumber/>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Additional Medicare Railroad Retirement Tax Withholding Amount -->
+			<xsd:element name="AddlMedcrRRTTaxWithholdingAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Additional Medicare Railroad Retirement Tax Withholding Amount</Description>
+						<LineNumber>24</LineNumber>
+						<ELFFieldNumber/>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:schema>

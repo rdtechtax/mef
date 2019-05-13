@@ -1,0 +1,227 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.irs.gov/efile" targetNamespace="http://www.irs.gov/efile" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xsd:annotation>
+		<xsd:documentation>
+			<Description>IRS e-file Individual Income Tax Schema - IRS Form 8885 Health Coverage Tax Credit</Description>
+			<TaxYear>2018</TaxYear>
+			<MaturityLevel>Final Release</MaturityLevel>
+			<ReleaseDate>February 13, 2019</ReleaseDate>
+		</xsd:documentation>
+	</xsd:annotation>
+	<xsd:include schemaLocation="../../../Common/efileTypes.xsd"/>
+	<!-- =============================================================== -->
+	<!-- ====================== IRS Form 8885 ========================== -->
+	<!-- =============================================================== -->
+	<xsd:element name="IRS8885">
+		<xsd:annotation>
+			<xsd:documentation>IRS Form 8885</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:complexContent>
+				<xsd:extension base="IRS8885Type">
+					<xsd:attributeGroup ref="DocumentAttributes">
+						<xsd:annotation>
+							<xsd:documentation>Common return document attributes</xsd:documentation>
+						</xsd:annotation>
+					</xsd:attributeGroup>
+					<xsd:attribute name="documentName" type="xsd:string" fixed="IRS8885">
+						<xsd:annotation>
+							<xsd:documentation>IRS internal use only. To avoid error in the return, do not include the attribute name or value.</xsd:documentation>
+						</xsd:annotation>
+					</xsd:attribute>
+				</xsd:extension>
+			</xsd:complexContent>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:complexType name="IRS8885Type">
+		<xsd:annotation>
+			<xsd:documentation>Content model for Form 8885</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+
+			<xsd:element name="PersonNm" type="PersonNameType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Person Name</Description>
+						<ELFFieldNumber>NL</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			
+			<xsd:element name="RecipientSSN" type="SSNType">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Recipients SSN</Description>
+						<ELFFieldNumber>0020</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Part I Election To Take the Health Coverage Tax Credit -->
+
+			<!-- Month selection -->
+			<xsd:element name="HealthCvrTaxCrJanuaryInd" type="CheckboxType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>January checkbox selection</Description>
+						<LineNumber>1</LineNumber>
+						<ELFFieldNumber>0035</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="HealthCvrTaxCrFebruaryInd" type="CheckboxType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>February checkbox selection</Description>
+						<LineNumber>1</LineNumber>
+						<ELFFieldNumber>0045</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Month selection -->
+			<xsd:element name="HealthCvrTaxCrMarchInd" type="CheckboxType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>March checkbox selection</Description>
+						<LineNumber>1</LineNumber>
+						<ELFFieldNumber>0055</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Month selection -->
+			<xsd:element name="HealthCvrTaxCrAprilInd" type="CheckboxType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>April checkbox selection</Description>
+						<LineNumber>1</LineNumber>
+						<ELFFieldNumber>0065</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Month selection -->
+			<xsd:element name="HealthCvrTaxCrMayInd" type="CheckboxType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>May checkbox selection</Description>
+						<LineNumber>1</LineNumber>
+						<ELFFieldNumber>0075</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Month selection -->
+			<xsd:element name="HealthCvrTaxCrJuneInd" type="CheckboxType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>June checkbox selection</Description>
+						<LineNumber>1</LineNumber>
+						<ELFFieldNumber>0085</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Month selection -->
+			<xsd:element name="HealthCvrTaxCrJulyInd" type="CheckboxType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>July checkbox selection</Description>
+						<LineNumber>1</LineNumber>
+						<ELFFieldNumber>0095</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Month selection -->
+			<xsd:element name="HealthCvrTaxCrAugustInd" type="CheckboxType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>August checkbox selection</Description>
+						<LineNumber>1</LineNumber>
+						<ELFFieldNumber>0105</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Month selection -->
+			<xsd:element name="HealthCvrTaxCrSeptemberInd" type="CheckboxType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>September checkbox selection</Description>
+						<LineNumber>1</LineNumber>
+						<ELFFieldNumber>0115</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Month selection -->
+			<xsd:element name="HealthCvrTaxCrOctoberInd" type="CheckboxType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>October checkbox selection</Description>
+						<LineNumber>1</LineNumber>
+						<ELFFieldNumber>0125</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Month selection -->
+			<xsd:element name="HealthCvrTaxCrNovemberInd" type="CheckboxType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>November checkbox selection</Description>
+						<LineNumber>1</LineNumber>
+						<ELFFieldNumber>0135</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Month selection -->
+			<xsd:element name="HealthCvrTaxCrDecemberInd" type="CheckboxType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>December checkbox selection</Description>
+						<LineNumber>1</LineNumber>
+						<ELFFieldNumber>0145</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			
+			<!-- Part II - Health Coverage Tax Credit -->
+
+			<!-- Health Plan Paid Amount -->
+			<xsd:element name="HealthPlanPaidAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Health Plan Paid Amount</Description>
+						<LineNumber>2</LineNumber>
+						<ELFFieldNumber>0190 0195</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Health Plan Paid with MSA or HSA -->
+			<xsd:element name="HealthPlanPaidWithMSAOrHSAAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+						<xsd:documentation>
+						<Description>Health Plan Paid with MSA or HSA</Description>
+						<LineNumber>3</LineNumber>
+						<ELFFieldNumber>0200 0205</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Health Plan Paid Less MSA and NEG -->
+			<xsd:element name="HealthPlanPaidLessMSAAndNEGAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Health Plan Paid Less MSA and NEG</Description>
+						<LineNumber>4</LineNumber>
+						<ELFFieldNumber>0210 0220</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Health Coverage Tax Credit Amount -->
+			<xsd:element name="HealthCoverageTaxCreditAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Health Coverage Tax Credit Amount</Description>
+						<LineNumber>5</LineNumber>
+						<ELFFieldNumber>0250</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:schema>

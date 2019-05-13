@@ -1,0 +1,306 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.irs.gov/efile" targetNamespace="http://www.irs.gov/efile" elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.0">
+	<xsd:annotation>
+		<xsd:documentation>
+			<Description>IRS e-file Schema - IRS Form 2210-F Underpayment of Estimated Tax by Farmers and Fishermen</Description>
+			<TaxYear>2018</TaxYear>
+			<MaturityLevel>Final Release</MaturityLevel>
+			<ReleaseDate>February 13, 2019</ReleaseDate>
+		</xsd:documentation>
+	</xsd:annotation>
+	<xsd:include schemaLocation="../../../Common/efileTypes.xsd"/>
+	<!--==================================================================-->
+	<!--========================= IRS Form 2210-F ========================-->
+	<!--==================================================================-->
+	<xsd:element name="IRS2210F">
+		<xsd:annotation>
+			<xsd:documentation>IRS Form 2210-F</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:complexContent>
+				<xsd:extension base="IRS2210FType">
+					<xsd:attributeGroup ref="DocumentAttributes">
+						<xsd:annotation>
+							<xsd:documentation>Common return document attributes</xsd:documentation>
+						</xsd:annotation>
+					</xsd:attributeGroup>
+					<xsd:attribute name="documentName" type="xsd:string" fixed="IRS2210F">
+						<xsd:annotation>
+							<xsd:documentation>IRS internal use only. To avoid error in the return, do not include the attribute name or value.</xsd:documentation>
+						</xsd:annotation>
+					</xsd:attribute>
+				</xsd:extension>
+			</xsd:complexContent>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:complexType name="IRS2210FType">
+		<xsd:annotation>
+			<xsd:documentation>Content model for Form 2210-F</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<!--Part I Reasons for Filing-->
+			<!--Penalty Waiver Request Indicator -->
+			<xsd:element name="PenaltyWaiverRequestInd" type="CheckboxType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Penalty Waiver Request Indicator</Description>
+						<LineNumber>A</LineNumber>
+						<ELFFieldNumber>0013</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!--Joint Return Indicator -->
+			<xsd:element name="JointReturnInd" type="CheckboxType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Joint Return Indicator</Description>
+						<LineNumber>B</LineNumber>
+						<ELFFieldNumber>0016</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!--Part II Figure Your Payment-->
+			<!--Current Year Tax After Credits Amount -->
+			<xsd:element name="CurrentYearTaxAfterCreditsAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Current Year Tax After Credits Amount</Description>
+						<LineNumber>1</LineNumber>
+						<ELFFieldNumber>0020</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!--Other Taxes Amount -->
+			<xsd:element name="OtherTaxesAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Other Taxes Amount</Description>
+						<LineNumber>2</LineNumber>
+						<ELFFieldNumber>0030</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!--Total Tax After Credit And Other Tax Amount -->
+			<xsd:element name="TotalTaxAfterCrAndOtherTaxAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Total Tax After Credit And Other Tax Amount</Description>
+						<LineNumber>3</LineNumber>
+						<ELFFieldNumber>0040</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!--Earned Income Credit Amount -->
+			<xsd:element name="EarnedIncomeCreditAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Earned Income Credit Amount</Description>
+						<LineNumber>4a</LineNumber>
+						<ELFFieldNumber>0050</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!--Additional Child Tax Credit Amount -->
+			<xsd:element name="AdditionalChildTaxCreditAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Additional Child Tax Credit Amount</Description>
+						<LineNumber>4b</LineNumber>
+						<ELFFieldNumber>0055</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!--Refundable Education Credit Amount -->
+			<xsd:element name="RefundableAmerOppCreditAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Refundable Education Credit Amount</Description>
+						<LineNumber>4c</LineNumber>
+						<ELFFieldNumber>0057</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!--Fuel Tax Credit Amount -->
+			<xsd:element name="FuelTaxCreditAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Fuel Tax Credit Amount</Description>
+						<LineNumber>4d</LineNumber>
+						<ELFFieldNumber>0060</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Reconciled Premium Tax Credit Amount -->
+			<xsd:element name="ReconciledPremiumTaxCreditAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Reconciled Premium Tax Credit Amount</Description>
+						<LineNumber>4e</LineNumber>
+						<ELFFieldNumber>0070</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Section 1341(a)(5)(B) Credit Amount -->
+			<xsd:element name="Section1341a5BCreditAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Credit Determined Under Section 1341(a)(5)(B)</Description>
+						<LineNumber>4f</LineNumber>
+						<ELFFieldNumber>0071</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Health Coverage Tax Credit Amount -->
+			<xsd:element name="HealthCoverageTaxCreditAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Health Coverage Tax Credit Amount</Description>
+						<LineNumber>4g</LineNumber>
+						<ELFFieldNumber>0072</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!--Farm Or Fisherman Credit Subtotal Amount -->
+			<xsd:element name="FarmOrFishermanCrSubtotalAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Farm Or Fisherman Credit Subtotal Amount</Description>
+						<LineNumber>5</LineNumber>
+						<ELFFieldNumber>0075</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!--Current Year Tax Amount -->
+			<xsd:element name="CurrentYearTaxAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Current Year Tax Amount</Description>
+						<LineNumber>6</LineNumber>
+						<ELFFieldNumber>0080</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!--Current Year Tax Calculated Amount -->
+			<xsd:element name="CurrentYearTaxCalculatedAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Current Year Tax Calculated Amount</Description>
+						<LineNumber>7</LineNumber>
+						<ELFFieldNumber>0090</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!--Withholding Taxes Amount -->
+			<xsd:element name="WithholdingTaxesAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Withholding Taxes Amount</Description>
+						<LineNumber>8</LineNumber>
+						<ELFFieldNumber>0100</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!--Net Tax Due Amount -->
+			<xsd:element name="NetTaxDueAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Net Tax Due Amount</Description>
+						<LineNumber>9</LineNumber>
+						<ELFFieldNumber>0110</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!--Prior Year Tax Amount -->
+			<xsd:element name="PriorYearTaxAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Prior Year Tax Amount</Description>
+						<LineNumber>10</LineNumber>
+						<ELFFieldNumber>0120</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!--Required Annual Payment Amount -->
+			<xsd:element name="RequiredAnnualPaymentAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Required Annual Payment Amount</Description>
+						<LineNumber>11</LineNumber>
+						<ELFFieldNumber>0130</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!--Estimated Tax Payments And Other Taxes Amount -->
+			<xsd:element name="EstTaxPaymentsAndOtherTaxesAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Estimated Tax Payments And Other Taxes Amount</Description>
+						<LineNumber>12</LineNumber>
+						<ELFFieldNumber>0140</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!--Underpayment Amount -->
+			<xsd:element name="UnderpaymentAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Underpayment Amount</Description>
+						<LineNumber>13</LineNumber>
+						<ELFFieldNumber>0150</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!--Part III Figure the Penalty-->
+			<!--Earlier Of Payment Or Tax Due Date -->
+			<xsd:element name="EarlierOfPaymentOrTaxDueDt" type="DateType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Earlier Of Payment Or Tax Due Date</Description>
+						<LineNumber>14</LineNumber>
+						<ELFFieldNumber>0160</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!--Penalty Day Count -->
+			<xsd:element name="PenaltyDayCnt" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Penalty Day Count</Description>
+						<LineNumber>15</LineNumber>
+						<ELFFieldNumber>0170</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+				<xsd:simpleType>
+					<xsd:restriction base="IntegerType">
+						<xsd:totalDigits value="3"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<!--Penalty Amount -->
+			<xsd:element name="PenaltyAmt" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Penalty Amount</Description>
+						<LineNumber>16</LineNumber>
+						<ELFFieldNumber>0180</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+				<xsd:complexType>
+					<xsd:simpleContent>
+						<xsd:extension base="USAmountType">
+							<xsd:attribute name="requestedPenaltyWaiverAmt" type="USAmountType">
+								<xsd:annotation>
+									<xsd:documentation>
+										<ELFFieldNumber>0176</ELFFieldNumber>
+									</xsd:documentation>
+								</xsd:annotation>
+							</xsd:attribute>
+							<xsd:attribute name="referenceDocumentId" type="IdListType"/>
+							<xsd:attribute name="referenceDocumentName" type="StringType" fixed="WaiverExplanationStatement"/>
+						</xsd:extension>
+					</xsd:simpleContent>
+				</xsd:complexType>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:schema>

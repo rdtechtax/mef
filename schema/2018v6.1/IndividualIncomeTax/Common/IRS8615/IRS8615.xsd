@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.irs.gov/efile" targetNamespace="http://www.irs.gov/efile" elementFormDefault="qualified" attributeFormDefault="unqualified">
+
+	<xsd:annotation>
+		<xsd:documentation>
+			<Description>IRS e-file Individual Income Tax Schema - IRS 8615 Tax for Certain Children Who Have Investment Income of More Than $1900</Description>
+			<TaxYear>2018</TaxYear>
+			<MaturityLevel>Final Release</MaturityLevel>
+			<ReleaseDate>February 13, 2019</ReleaseDate>
+		</xsd:documentation>
+	</xsd:annotation>
+	
+	<xsd:include schemaLocation="../../../Common/efileTypes.xsd"/>
+	
+	<!-- ======================================================================== -->
+	<!-- ======================  IRS 8615 ============ ============================= -->
+	<!-- ======================================================================== -->
+	
+	<xsd:element name="IRS8615">
+		<xsd:annotation>
+			<xsd:documentation>IRS 8615 Tax for Certain Children Who Have Investment Income of More Than $1,900</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:complexContent>
+				<xsd:extension base="IRS8615Type">
+					<xsd:attributeGroup ref="DocumentAttributes">
+						<xsd:annotation>
+							<xsd:documentation>Common return document attributes</xsd:documentation>
+						</xsd:annotation>
+					</xsd:attributeGroup>
+					<xsd:attribute name="documentName" type="xsd:string" fixed="IRS8615">
+						<xsd:annotation>
+							<xsd:documentation>IRS internal use only. To avoid error in the return, do not include the attribute name or value.</xsd:documentation>
+						</xsd:annotation>
+					</xsd:attribute>
+				</xsd:extension>
+			</xsd:complexContent>
+		</xsd:complexType>
+	</xsd:element>
+	
+	<xsd:complexType name="IRS8615Type">
+		<xsd:annotation>
+			<xsd:documentation>Content model for IRS 8615</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			
+			<!-- Parent's Name-->
+			<xsd:element name="ParentNm">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Parent's Name</Description>
+						<LineNumber>A</LineNumber>
+						<ELFFieldNumber>0040</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+				<xsd:simpleType>
+					<xsd:restriction base="TextType">
+						<xsd:maxLength value="50"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>	
+
+			<!-- Parent's Name-->
+			<xsd:element name="ParentNameControlTxt" type="PersonNameControlType">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Parent's Name Control</Description>
+						<LineNumber>A</LineNumber>
+						<ELFFieldNumber>0045</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>	
+
+			<!-- SSN-->
+			<xsd:element name="SSN" type="SSNType">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>SSN</Description>
+						<LineNumber>B</LineNumber>
+						<ELFFieldNumber>0050</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>	
+			
+			<!--Part I Net Unearned Income -->
+			
+			<xsd:element name="ChildInvestmentIncomeAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Child Investment Income</Description>
+						<LineNumber>1</LineNumber>
+						<ELFFieldNumber>0070</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			
+			<!-- Kiddie Deduction Amount -->
+			<xsd:element name="KiddieDeductionAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Child Deduction Amount</Description>
+						<LineNumber>2</LineNumber>
+						<ELFFieldNumber>0080</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+						
+			<xsd:element name="ChildUnearnedIncomeAdjustedAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Child Unearned Income Adjusted Amount</Description>
+						<LineNumber>3</LineNumber>
+						<ELFFieldNumber>0090</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			
+			<xsd:element name="ChildTaxableIncomeAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Child Taxable Income Amount</Description>
+						<LineNumber>4</LineNumber>
+						<ELFFieldNumber>0100</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			
+			<xsd:element name="ChildNetInvestmentIncomeAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Child Net Investment Income Amount</Description>
+						<LineNumber>5</LineNumber>
+						<ELFFieldNumber>0110</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			
+			<!-- Part II Tax -->
+			<xsd:element name="ChildNetIncomeAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Child Net Income Amount</Description>
+						<LineNumber>6</LineNumber>
+						<ELFFieldNumber>0230</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>	
+			
+			<xsd:element name="ChildUnearnedIncomeInd" type="CheckboxType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Child Unearned Income</Description>
+						<LineNumber>7</LineNumber>
+						<ELFFieldNumber>0233</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>	
+			
+			<xsd:element name="ChildNetIncomeTaxAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Child Net Income Tax Amount</Description>
+						<LineNumber>7</LineNumber>
+						<ELFFieldNumber>0250</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>	
+			
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<!-- =========================================================== -->
+	<!-- ============= Local types, types for repeating groups etc. ============= -->
+	<!-- =========================================================== -->
+	
+	<!-- Individual Return Filing Status Cd -->
+	<xsd:simpleType name="FilingStatusCdType">
+		<xsd:restriction base="TextType">
+			<xsd:enumeration value="1"/>
+			<xsd:enumeration value="2"/>
+			<xsd:enumeration value="3"/>
+			<xsd:enumeration value="4"/>
+			<xsd:enumeration value="5"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	
+</xsd:schema>

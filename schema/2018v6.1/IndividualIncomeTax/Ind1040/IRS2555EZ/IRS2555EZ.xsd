@@ -1,0 +1,542 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.irs.gov/efile" targetNamespace="http://www.irs.gov/efile" elementFormDefault="qualified" attributeFormDefault="unqualified">
+
+	<xsd:annotation>
+		<xsd:documentation>
+			<Description>IRS e-file Individual Income Tax Schema - IRS Form 2555-EZ Foreign Earned Income Exclusion</Description>
+			<TaxYear>2018</TaxYear>
+			<MaturityLevel>Final Release</MaturityLevel>
+			<ReleaseDate>February 13, 2019</ReleaseDate>
+		</xsd:documentation>
+	</xsd:annotation>
+	
+	<xsd:include schemaLocation="../../../Common/efileTypes.xsd"/>
+	
+	<!-- =================================================================== -->
+	<!-- ======================== IRS Form 2555-EZ ========================= -->
+	<!-- =================================================================== -->
+	
+	<xsd:element name="IRS2555EZ">
+		<xsd:annotation>
+			<xsd:documentation>IRS Form 2555-EZ</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:complexContent>
+				<xsd:extension base="IRS2555EZType">
+					<xsd:attributeGroup ref="DocumentAttributes">
+						<xsd:annotation>
+							<xsd:documentation>Common return document attributes</xsd:documentation>
+						</xsd:annotation>
+					</xsd:attributeGroup>
+					<xsd:attribute name="documentName" type="xsd:string" fixed="IRS2555EZ">
+						<xsd:annotation>
+							<xsd:documentation>IRS internal use only. To avoid error in the return do not include the attribute name or value.</xsd:documentation>
+						</xsd:annotation>
+					</xsd:attribute>
+					<xsd:attribute name="referenceDocumentId" type="IdListType">
+						<xsd:annotation>
+							<xsd:documentation>List of document ID's of forms schedules supporting info. etc. attached to this form</xsd:documentation>
+						</xsd:annotation>
+					</xsd:attribute>
+					<xsd:attribute name="referenceDocumentName" type="StringType" fixed="ForeignEarnedIncomeWaiverOfTimeRequirementsStatement">
+						<xsd:annotation>
+							<xsd:documentation>
+								<ELFFieldNumber>NL</ELFFieldNumber>
+							</xsd:documentation>
+						</xsd:annotation>
+					</xsd:attribute>
+					<xsd:attribute name="claimFrgnEarnIncWaiverCd" type="TextType" fixed="CLAIMING WAIVER"/>
+				</xsd:extension>
+			</xsd:complexContent>
+		</xsd:complexType>
+	</xsd:element>	
+	
+	<xsd:complexType name="IRS2555EZType">
+		<xsd:annotation>
+				<xsd:documentation>Content model for Form 2555-EZ</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+		
+			<!-- Name -->
+			<xsd:element name="NameLine1Txt" type="NameLine1Type">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Name</Description>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			
+			<!-- SSN  -->
+			<xsd:element name="SSN" type="SSNType">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>SSN</Description>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- ===== Part I ====== -->
+			
+			<!-- Bona Fide Resident Indicator -->
+			<xsd:element name="BonaFideResidentInd" type="BooleanType">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Bona Fide Resident Indicator</Description>
+						<LineNumber>1a</LineNumber>
+						<ELFFieldNumber>0010 0020</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<xsd:element name="TaxpayerBonaFideResGrp" minOccurs="0">
+				<xsd:complexType>
+					<xsd:sequence>
+
+						<!-- Bona Fide Residence Begin Date -->
+						<xsd:element name="BonaFideResidenceBeginDt" type="DateType">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Bona Fide Residence Begin Date</Description>
+									<LineNumber>1b</LineNumber>
+									<ELFFieldNumber>0030</ELFFieldNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						
+						<xsd:choice>
+							<!-- Bona Fide Residence End Date -->
+							<xsd:element name="BonaFideResidenceEndDt" type="DateType">
+								<xsd:annotation>
+									<xsd:documentation>
+										<Description>Bona Fide Residence End Date</Description>
+										<LineNumber>1b</LineNumber>
+										<ELFFieldNumber>0040</ELFFieldNumber>
+									</xsd:documentation>
+								</xsd:annotation>
+							</xsd:element>
+							<!-- Bona Fide Residence Continued Code -->
+							<xsd:element name="BonaFideResidenceContinuedCd">
+								<xsd:annotation>
+									<xsd:documentation>
+										<Description>Bona Fide Residence Continued Code</Description>
+										<LineNumber>1b</LineNumber>
+										<ELFFieldNumber>0040</ELFFieldNumber>
+									</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="TextType">
+										<xsd:enumeration value="CONTINUES"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+						</xsd:choice>
+
+					</xsd:sequence>
+				</xsd:complexType> 		
+			</xsd:element>	
+
+			<!-- Physical Presence Indicator -->
+			<xsd:element name="PhysicalPresenceInd" type="BooleanType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Physical Presence Indicator</Description>
+						<LineNumber>2a</LineNumber>
+						<ELFFieldNumber>0050 0060</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			
+			<xsd:element name="TaxpayerPhysicalPresenceGrp" minOccurs="0">
+				<xsd:complexType>
+					<xsd:sequence>
+
+						<!-- Physical Presence Begin Date -->
+						<xsd:element name="PhysicalPresenceBeginDt" type="DateType">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Physical Presence Begin Date</Description>
+									<LineNumber>2b</LineNumber>
+									<ELFFieldNumber>0070</ELFFieldNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						
+						<!-- Physical Presence End Date -->
+						<xsd:element name="PhysicalPresenceEndDt" type="DateType">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Physical Presence End Date</Description>
+									<LineNumber>2b</LineNumber>
+									<ELFFieldNumber>0080</ELFFieldNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						
+					</xsd:sequence>
+				</xsd:complexType> 		
+			</xsd:element>	
+
+			<!-- Tax Home Test Indicator -->
+			<xsd:element name="TaxHomeTestInd" type="BooleanType">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Tax Home Test Indicator</Description>
+						<LineNumber>3</LineNumber>
+						<ELFFieldNumber>0090 0100</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			
+			<!-- ===== Part II ===== -->
+			<!-- Foreign Address -->
+			<xsd:element name="ForeignAddress" type="ForeignAddressType">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Foreign Address</Description>
+						<LineNumber>4</LineNumber>
+						<ELFFieldNumber>0110 0111 0112 0113 0114 0115</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			
+			<!-- Occupation -->
+			<xsd:element name="OccupationTxt" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Occupation</Description>
+						<LineNumber>5</LineNumber>
+						<ELFFieldNumber>0120</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+				<xsd:simpleType>
+					<xsd:restriction base="TextType">
+						<xsd:maxLength value="35"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			
+			<!-- Employer Name -->
+			<xsd:element name="EmployerName" type="BusinessNameType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Employer Name</Description>
+						<LineNumber>6</LineNumber>
+						<ELFFieldNumber>0130</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			
+			<!-- Employer US Address -->
+			<xsd:element name="EmployerUSAddress" type="USAddressType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Employer US Address</Description>
+						<LineNumber>7</LineNumber>
+						<ELFFieldNumber>0140 0141 0142 0143 0144</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			
+			<!-- Employer Foreign Address -->
+			<xsd:element name="EmployerForeignAddress" type="ForeignAddressType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Employer Foreign Address</Description>
+						<LineNumber>8</LineNumber>
+						<ELFFieldNumber>0150 0151 0152 0153 0154 0155</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			
+			<!-- Employer United States Company Indicator -->
+			<xsd:element name="EmployerUnitedStatesCompanyInd" type="CheckboxType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Employer United States Company Indicator</Description>
+						<LineNumber>9a</LineNumber>
+						<ELFFieldNumber>0160</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			
+			<!-- Employer Foreign Entity Indicator -->
+			<xsd:element name="EmployerForeignEntityInd" type="CheckboxType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Employer Foreign Entity Indicator</Description>
+						<LineNumber>9b</LineNumber>
+						<ELFFieldNumber>0170</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			
+			<!-- Other Employer Type Group -->
+			<xsd:element name="OtherEmployerTypeGroup" minOccurs="0">
+				<xsd:complexType>
+					<xsd:sequence>
+						<!-- Other Employer Type Indicator -->
+						<xsd:element name="OtherEmployerTypeInd" type="CheckboxType">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Other Employer Type Indicator</Description>
+									<LineNumber>9c</LineNumber>
+									<ELFFieldNumber>0180</ELFFieldNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>				
+						<!-- Other Employer Type Description Text -->
+						<xsd:element name="OtherEmployerDesc">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Other Employer Type Description Text</Description>
+									<LineNumber>9c</LineNumber>
+									<ELFFieldNumber>0190</ELFFieldNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+							<xsd:simpleType>
+								<xsd:restriction base="TextType">
+									<xsd:maxLength value="35"/>
+								</xsd:restriction>
+							</xsd:simpleType>
+						</xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			
+			<!-- Last Foreign Earned Income Exclusion Claimed Year -->
+			<xsd:element name="LastFrgnEarnIncExclClaimedYr" type="YearType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Last Foreign Earned Income Exclusion Claimed Year</Description>
+						<LineNumber>10a</LineNumber>
+						<ELFFieldNumber>0200</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			
+			<xsd:choice>
+				<!-- No Foreign Exclusion Previously Filed Indicator -->
+				<xsd:element name="NoFrgnEarnIncExclPrevFiledInd" type="CheckboxType">
+					<xsd:annotation>
+						<xsd:documentation>
+							<Description>No Foreign Exclusion Previously Filed Indicator</Description>
+							<LineNumber>10b</LineNumber>
+							<ELFFieldNumber>0210</ELFFieldNumber>
+						</xsd:documentation>
+					</xsd:annotation>
+				</xsd:element>
+				
+				<!-- Foreign Earned Income Exclusion Revoked Indicator -->
+				<xsd:element name="ForeignEarnIncExclRevokedInd" type="BooleanType" minOccurs="0">
+					<xsd:annotation>
+						<xsd:documentation>
+							<Description>Foreign Earned Income Exclusion Revoked Indicator</Description>
+							<LineNumber>10c</LineNumber>
+							<ELFFieldNumber>0220 0230</ELFFieldNumber>
+						</xsd:documentation>
+					</xsd:annotation>
+				</xsd:element>
+			</xsd:choice>
+			
+			<!-- Foreign Earned Income Exclusion Revoked Tax Year -->
+			<xsd:element name="ForeignEarnIncExclRevokeTaxYr" type="YearType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Foreign Earned Income Exclusion Revoked Tax Year</Description>
+						<LineNumber>10d</LineNumber>
+						<ELFFieldNumber>0240</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			
+			<!-- Tax Home Group -->
+			<xsd:element name="TaxHomeGroup" minOccurs="0" maxOccurs="50">
+				<xsd:complexType>
+					<xsd:sequence>
+						<!-- Tax Home Description Text -->
+						<xsd:element name="TaxHomeDesc" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Tax Home Description Text</Description>
+									<LineNumber>11a</LineNumber>
+									<ELFFieldNumber>0250</ELFFieldNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+							<xsd:simpleType>
+								<xsd:restriction base="TextType">
+									<xsd:maxLength value="35"/>
+								</xsd:restriction>
+							</xsd:simpleType>
+						</xsd:element>
+						<!-- Established Date -->
+						<xsd:element name="EstablishedDt" type="DateType" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Established Date</Description>
+									<LineNumber>11a</LineNumber>
+									<ELFFieldNumber>0260</ELFFieldNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+		
+			<!-- Citizen Country Name -->
+			<xsd:element name="CitizenCountryNm" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Citizen Country Name</Description>
+						<LineNumber>11b</LineNumber>
+						<ELFFieldNumber>0270</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+				<xsd:simpleType>
+					<xsd:restriction base="TextType">
+						<xsd:maxLength value="35"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			
+			<!-- ======== Part III ====== -->
+			<!-- Presence In The US Group -->
+			<xsd:element name="PresenceInTheUSGroup" minOccurs="0" maxOccurs="unbounded">
+				<xsd:complexType>
+					<xsd:sequence>
+						<!-- Arrived In US Date -->
+						<xsd:element name="ArrivedInUSDt" type="DateType" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Arrived In US Date</Description>
+									<LineNumber>12a</LineNumber>
+									<ELFFieldNumber>0290 0330 0370 0410 0450 0490 0530 0570 0610</ELFFieldNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						
+						<!-- Departed US Date -->
+						<xsd:element name="DepartedUSDt" type="DateType" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Departed US Date</Description>
+									<LineNumber>12b</LineNumber>
+									<ELFFieldNumber>0300 0340 0380 0420 0460 0500 0540 0580 0620</ELFFieldNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						
+						<!-- Business Days Count -->
+						<xsd:element name="BusinessDaysCnt" type="NumberOfDaysType" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Business Days Count</Description>
+									<LineNumber>12c</LineNumber>
+									<ELFFieldNumber>0310 0350 0390 0430 0470 0510 0550 0590 0630</ELFFieldNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						
+						<!-- Business Income Earned Amount -->
+						<xsd:element name="BusinessIncomeEarnedAmt" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Business Income Earned Amount</Description>
+									<LineNumber>12d</LineNumber>
+									<ELFFieldNumber>0320 0360 0400 0440 0480 0520 0560 0600 0640</ELFFieldNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+							<xsd:complexType>
+								<xsd:simpleContent>
+									<xsd:extension base="USAmountType">
+										<xsd:attribute name="referenceDocumentId" type="IdListType"/>
+										<xsd:attribute name="referenceDocumentName" type="StringType" fixed="USEarnedIncomeComputationStatement">
+											<xsd:annotation>
+												<xsd:documentation>
+													<ELFFieldNumber>0645</ELFFieldNumber>
+												</xsd:documentation>
+											</xsd:annotation>
+										</xsd:attribute>
+									</xsd:extension>
+								</xsd:simpleContent>
+							</xsd:complexType>
+						</xsd:element>		
+										
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			
+			<!-- ===== Part IV ===== -->
+			<!-- Foreign Earned Income Exclusion Qualifying Days Count -->
+			<xsd:element name="ForeignEarnIncmExclQlfyDaysCnt" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Foreign Earned Income Exclusion Qualifying Days Count</Description>
+						<LineNumber>14</LineNumber>
+						<ELFFieldNumber>1160</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+				<xsd:simpleType>
+					<xsd:restriction base="NumberOfDaysType">
+						<xsd:totalDigits value="3"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			
+			<!-- Foreign Earned Exclusion Qualifying 366 Days Indicator -->
+			<xsd:element name="FrgnEarnIncExclQlfy366DaysInd" type="BooleanType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Foreign Earned Exclusion Qualifying 366 Days Indicator</Description>
+						<LineNumber>15</LineNumber>
+						<ELFFieldNumber>1165 1175</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			
+			<!-- Foreign Earned Income Exclusion Percentage -->
+			<xsd:element name="ForeignEarnedIncExclusionPct" type="RatioType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Foreign Earned Income Exclusion Percentage</Description>
+						<LineNumber>15</LineNumber>
+						<ELFFieldNumber>1180</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			
+			<!-- Tentative Foreign Earned Income Exclusion Amount -->
+			<xsd:element name="TentForeignEarnedIncomeExclAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Tentative Foreign Earned Income Exclusion Amount</Description>
+						<LineNumber>16</LineNumber>
+						<ELFFieldNumber>1200</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			
+			<!-- Total Foreign Earned Income Amount -->
+			<xsd:element name="TotalForeignEarnedIncomeAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Total Foreign Earned Income Amount</Description>
+						<LineNumber>17</LineNumber>
+						<ELFFieldNumber>1210</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			
+			<!-- Foreign Earned Income Exclusion Amount -->
+			<xsd:element name="ForeignEarnedIncExclusionAmt" type="USAmountPosType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Foreign Earned Income Exclusion Amount</Description>
+						<LineNumber>18</LineNumber>
+						<ELFFieldNumber>1260</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:schema>

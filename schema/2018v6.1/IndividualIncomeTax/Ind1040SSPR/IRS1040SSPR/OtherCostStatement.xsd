@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns="http://www.irs.gov/efile" xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.irs.gov/efile" elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.0">
+
+	<xsd:annotation>
+		<xsd:documentation>
+			<Description>IRS e-file U.S. Self-Employment Tax Return Schema - Other Cost Statement</Description>
+			<Purpose>Attach a statement showing specific types of costs and the amounts</Purpose> 
+			<TaxYear>2018</TaxYear>
+			<MaturityLevel>Final Release</MaturityLevel>
+			<ReleaseDate>February 13, 2019</ReleaseDate>
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:include schemaLocation="../../../Common/efileTypes.xsd"/>
+
+	<!-- =========================================================== -->
+	<!-- =============== Other Cost Statement =============== -->
+	<!-- =========================================================== -->
+
+	<xsd:element name="OtherCostStatement">
+		<xsd:annotation>
+			<xsd:documentation>Other Cost Statement</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:complexContent>
+				<xsd:extension base="OtherCostStatementType">
+					<xsd:attributeGroup ref="DocumentAttributes">
+						<xsd:annotation>
+							<xsd:documentation>Common return document attributes</xsd:documentation>
+						</xsd:annotation>
+					</xsd:attributeGroup>
+					<xsd:attribute name="documentName" type="StringType" fixed="OtherCostStatement">
+						<xsd:annotation>
+							<xsd:documentation>IRS internal use only. To avoid error in the return, do not include the attribute name or value.</xsd:documentation>
+						</xsd:annotation>
+					</xsd:attribute>
+				</xsd:extension>
+			</xsd:complexContent>
+		</xsd:complexType>
+	</xsd:element>
+
+	<xsd:complexType name="OtherCostStatementType">
+		<xsd:annotation>
+			<xsd:documentation>Content model for Other Cost Statement</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+
+			<xsd:element name="OtherCostStmt" type="OtherCostStmtType" minOccurs="0" maxOccurs="100"/>
+
+			<!-- Total Other Cost Amount -->
+			<xsd:element name="TotalOtherCostAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Total other cost amount</Description>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="OtherCostStmtType">
+		<xsd:sequence>
+			
+			<!-- Other Cost Type -->
+			<xsd:element name="OtherCostTypeDesc" type="ExplanationType">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Other cost type</Description>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		  
+			<!-- Other Cost Amount -->
+			<xsd:element name="OtherCostAmt" type="USAmountType">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Other cost amount</Description>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+		</xsd:sequence>
+	</xsd:complexType>
+
+</xsd:schema>

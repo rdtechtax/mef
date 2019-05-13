@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns="http://www.irs.gov/efile" xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.irs.gov/efile" elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.0">
+	
+	<xsd:annotation>
+		<xsd:documentation>
+			<Description>IRS e-file Individual Income Tax Schema - Primary Taxpayer Medicare MSA Statement</Description>
+			<Purpose>If both you and your spouse received distributions, complete a separate Form 8853, Section B, for each spouse.  Enter “statement” across the top of each Form 8853, fill in the name and SSN, and complete Section B.  Next, add lines 10, 11, 12, and 13b from the two statement Forms 8853 and enter those totals on the respective lines of the controlling Form 8853 (the combined Form 8853 for both spouses). If either spouse checked the box on line 13a of the statement Form 8853, check the box on the controlling Form 8853. Attach the two statement Forms 8853 to your tax return after the controlling Form 8853.</Purpose>
+			<TaxYear>2018</TaxYear>
+			<MaturityLevel>Final Release</MaturityLevel>
+			<ReleaseDate>February 13, 2019</ReleaseDate>
+		</xsd:documentation>
+	</xsd:annotation>
+	
+	<xsd:include schemaLocation="../../../Common/efileTypes.xsd"/>
+	
+	<!-- =================================================================== -->
+	<!-- ============  Primary Taxpayer Medicare MSA Statement  ============ -->
+	<!-- =================================================================== -->
+	
+	<xsd:element name="PrimaryTaxpayerMedicareMSAStmt">
+		<xsd:annotation>
+			<xsd:documentation>Primary Taxpayer Medicare MSA Statement</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:complexContent>
+				<xsd:extension base="PrimaryTaxpayerMedicareMSAStmtType">
+					<xsd:attributeGroup ref="DocumentAttributes">
+						<xsd:annotation>
+							<xsd:documentation>Common return document attributes</xsd:documentation>
+						</xsd:annotation>
+					</xsd:attributeGroup>
+					<xsd:attribute name="documentName" type="StringType" fixed="PrimaryTaxpayerMedicareMSAStatement">
+						<xsd:annotation>
+							<xsd:documentation>IRS internal use only. To avoid error in the return, do not include the attribute name or value.</xsd:documentation>
+						</xsd:annotation>
+					</xsd:attribute>
+				</xsd:extension>
+			</xsd:complexContent>
+		</xsd:complexType>
+	</xsd:element>
+
+	<xsd:complexType name="PrimaryTaxpayerMedicareMSAStmtType">
+		<xsd:annotation>
+			<xsd:documentation>Content model for Primary Taxpayer Medicare MSA Statement</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<!-- Total Medicare MSA Distribution Amount -->
+			<xsd:element name="TotalMedicareMSADistriAmt" type="USAmountType" minOccurs="0"/>
+			
+			<!-- Medicare MSA Unreimbursed Qualifying Medical Expenses Amount -->
+			<xsd:element name="MedicareMSAUnrmbQualMedExpAmt" type="USAmountType" minOccurs="0"/>
+			
+			<!-- Taxable Medicare MSA Distributions Amount -->
+			<xsd:element name="TaxableMedicareMSADistriAmt" type="USAmountType" minOccurs="0"/>
+			
+			<!-- Medicare MSA Distributions Meet Tax Exclusion Indicator -->
+			<xsd:element name="MedicareMSADistriMeetTaxExcInd" type="CheckboxType" minOccurs="0"/>
+			
+			<!-- Medicare MSA Additional Distributions Tax Amount -->
+			<xsd:element name="MedicareMSAAddnlDistriTaxAmt" type="USAmountType" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+
+</xsd:schema>

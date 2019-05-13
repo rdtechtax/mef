@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema targetNamespace="http://www.irs.gov/efile" xmlns="http://www.irs.gov/efile" xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.0">
+
+	<xsd:annotation>
+		<xsd:documentation>
+			<Description>IRS e-file U.S. Nonresident Alien Income Tax Schema - Other Assets Not Included Statement</Description>
+			<Purpose>Optional Statement - Attach a statement describing and listing the total value of any other assets you have that are not included on lines 1 through 18.</Purpose>
+			<TaxYear>2018</TaxYear>
+			<MaturityLevel>Final Release</MaturityLevel>
+			<ReleaseDate>February 13, 2019</ReleaseDate>
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:include schemaLocation="../../../Common/efileTypes.xsd" />
+
+	<!-- ================================================= -->
+	<!-- ====== Other Assets Not Included Statement ====== -->
+	<!-- ================================================= -->
+
+	<xsd:element name="OtherAssetsNotIncludedStmt">
+		<xsd:annotation>
+			<xsd:documentation>Other Assets Not Included Statement</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:complexContent>
+				<xsd:extension base="OtherAssetsNotIncludedStmtType">
+					<xsd:attributeGroup ref="DocumentAttributes">
+						<xsd:annotation>
+							<xsd:documentation>Common return document attributes</xsd:documentation>
+						</xsd:annotation>
+					</xsd:attributeGroup>
+					<xsd:attribute name="documentName" type="TextType" fixed="OtherAssetsNotIncludedStatement">
+						<xsd:annotation>
+							<xsd:documentation>IRS internal use only. To avoid error in the return, do not include the attribute name or value.</xsd:documentation>
+						</xsd:annotation>
+					</xsd:attribute>
+				</xsd:extension>
+			</xsd:complexContent>
+		</xsd:complexType>
+	</xsd:element>
+
+	<xsd:complexType name="OtherAssetsNotIncludedStmtType">
+		<xsd:annotation>
+			<xsd:documentation>Other Assets Not Included Statement</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<!-- Other Assets Not Included -->
+			<xsd:element name="OtherAssetsNotIncludedGrp" minOccurs="0" maxOccurs="1000">
+				<xsd:complexType>
+					<xsd:sequence>
+						<!-- Description -->
+						<xsd:element name="Desc" type="LineExplanationType"/>
+						<!-- Fair Market Value Amount -->
+						<xsd:element name="FairMarketValueAmt" type="USAmountType"/>
+						<!-- U.S. Adjusted Basis Amount -->
+						<xsd:element name="USAdjustedBasisAmt" type="USAmountType"/>
+						<!-- Gain Or Loss Amount -->
+						<xsd:element name="GainOrLossAmt" type="USAmountType"/>
+						<!-- Fair Market Value On Beginning Date Of U.S. Residency Amount -->
+						<xsd:element name="FMVBegngDtUSResAmt" type="USAmountType" minOccurs="0"/>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+
+</xsd:schema>

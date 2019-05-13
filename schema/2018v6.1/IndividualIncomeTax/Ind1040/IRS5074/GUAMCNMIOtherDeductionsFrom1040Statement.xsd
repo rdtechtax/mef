@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.irs.gov/efile" targetNamespace="http://www.irs.gov/efile" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xsd:annotation>
+		<xsd:documentation>
+			<Description>IRS Individual Income Tax Schema - GUAM CNMI Other Deductions From 1040 Statement</Description>
+			<Purpose>Attach a statement listing the type and amount of deductions reported on Form 1040 attributable to your GUAM or CNMI income</Purpose>
+			<TaxYear>2018</TaxYear>
+			<MaturityLevel>Final Release</MaturityLevel>
+			<ReleaseDate>February 13, 2019</ReleaseDate>
+		</xsd:documentation>
+	</xsd:annotation>
+	<xsd:include schemaLocation="../../../Common/efileTypes.xsd"/>
+	<!-- ===================================================================================== -->
+	<!-- =================== GUAM CNMI Other Deductions From 1040 Statement   ========================= -->
+	<!-- ===================================================================================== -->
+	<xsd:element name="GUAMCNMIOtherDedFrom1040Stmt">
+		<xsd:annotation>
+			<xsd:documentation>GUAM CNMI Other Deductions From 1040 Statement</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:complexContent>
+				<xsd:extension base="GUAMCNMIOtherDedFrom1040StmtType">
+					<xsd:attributeGroup ref="DocumentAttributes">
+						<xsd:annotation>
+							<xsd:documentation>Common return document attributes</xsd:documentation>
+						</xsd:annotation>
+					</xsd:attributeGroup>
+					<xsd:attribute name="documentName" type="xsd:string" fixed="GUAMCNMIOtherDeductionsFrom1040Statement">
+						<xsd:annotation>
+							<xsd:documentation>IRS internal use only. To avoid error in the return, do not include the attribute name or value.</xsd:documentation>
+						</xsd:annotation>
+					</xsd:attribute>
+				</xsd:extension>
+			</xsd:complexContent>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:complexType name="GUAMCNMIOtherDedFrom1040StmtType">
+		<xsd:annotation>
+			<xsd:documentation>GUAM CNMI Other Deductions From 1040 Statement</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="GUAMCNMIOtherDedFrom1040Grp" minOccurs="0" maxOccurs="unbounded">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="OtherAdjustmentsDesc" type="LineExplanationType" minOccurs="0"/>
+						<xsd:element name="OtherAdjustmentsAmt" type="USAmountType" minOccurs="0"/>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:schema>

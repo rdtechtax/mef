@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns="http://www.irs.gov/efile" xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.irs.gov/efile" elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.0">
+
+	<xsd:annotation>
+		<xsd:documentation>
+			<Description>IRS e-file Individual Income Tax Schema - Form 1098 Recipient Name, TIN And Address Statement</Description>
+			<Purpose>If you paid deductible mortgage interest but did not receive a Form 1098 from the recipient, attach a statement showing the name, identifying number, and address of that person</Purpose>
+			<TaxYear>2018</TaxYear>
+			<MaturityLevel>Final Release</MaturityLevel>
+			<ReleaseDate>February 13, 2019</ReleaseDate>
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:include schemaLocation="../../../Common/efileTypes.xsd"/>
+
+	<!-- ======================================================================== -->
+	<!-- ============ Form 1098 Recipient Name TIN And Address Statement ============ -->
+	<!-- ======================================================================== -->
+
+	<xsd:element name="F1098RecpntNmTINAddrStatement">
+		<xsd:annotation>
+			<xsd:documentation>Form 1098 Recipient Name,TIN And Address Statement</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:complexContent>
+				<xsd:extension base="F1098RecpntNmTINAddrStatementType">
+					<xsd:attributeGroup ref="DocumentAttributes">
+						<xsd:annotation>
+							<xsd:documentation>Common return document attributes</xsd:documentation>
+						</xsd:annotation>
+					</xsd:attributeGroup>
+					<xsd:attribute name="documentName" type="StringType" fixed="Form1098RecipientNameTINAndAddressStatement">
+						<xsd:annotation>
+							<xsd:documentation>IRS internal use only. To avoid error in the return, do not include the attribute name or value.</xsd:documentation>
+						</xsd:annotation>
+					</xsd:attribute>
+				</xsd:extension>
+			</xsd:complexContent>
+		</xsd:complexType>
+	</xsd:element>
+
+	<xsd:complexType name="F1098RecpntNmTINAddrStatementType">
+		<xsd:annotation>
+			<xsd:documentation>Content model for Form 1098 Recipient Name, TIN And Address Statement</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+
+			<xsd:element name="Form1098RecipientNmTINAddrStmt" type="Form1098RecipientNmTINAddrStmt" minOccurs="0" maxOccurs="unbounded"/>
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="Form1098RecipientNmTINAddrStmt">
+		<xsd:sequence>
+
+			<!-- Name of Person Who Received Form 1098 -->
+			<xsd:element name="PersonNm" type="PersonNameType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Name of person who received deductible mortgage interest</Description>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			
+			<!-- Identifying Number - choice between SSN or EIN -->
+			<xsd:choice minOccurs="0">
+			
+				<!-- Identifying Number EIN -->
+				<xsd:element name="EIN" type="EINType">
+					<xsd:annotation>
+						<xsd:documentation>
+							<Description>Identifying Number EIN</Description>
+						</xsd:documentation>
+					</xsd:annotation>
+				</xsd:element>
+				<!-- Identifying Number SSN -->				
+				<xsd:element name="SSN" type="SSNType">
+					<xsd:annotation>
+						<xsd:documentation>
+							<Description>Identifying Number SSN</Description>
+						</xsd:documentation>
+					</xsd:annotation>
+				</xsd:element>		
+			</xsd:choice>
+
+
+			<!-- Address - choice between US Address or Foreign Address -->
+			<xsd:choice minOccurs="0">
+
+				<!-- US Address -->
+				<xsd:element name="USAddress" type="OtherUSAddressType">
+					<xsd:annotation>
+						<xsd:documentation>
+							<Description>US Address</Description>
+						</xsd:documentation>
+					</xsd:annotation>
+				</xsd:element>
+
+				<!-- Foreign Address -->
+				<xsd:element name="ForeignAddress" type="OtherForeignAddressType">
+					<xsd:annotation>
+						<xsd:documentation>
+							<Description>Foreign Address</Description>
+						</xsd:documentation>
+					</xsd:annotation>
+				</xsd:element>
+
+			</xsd:choice>
+
+
+		</xsd:sequence>
+	</xsd:complexType>
+
+</xsd:schema>

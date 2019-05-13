@@ -1,0 +1,532 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.irs.gov/efile" targetNamespace="http://www.irs.gov/efile" elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.0">
+
+	<xsd:annotation>
+
+		<xsd:documentation>
+
+			<Description>IRS e-file Corporate Income Tax Schema - Adjustment to Taxable Income Schedule</Description>
+
+			<TaxYear>2018</TaxYear>
+
+			<MaturityLevel>Final Release</MaturityLevel>
+
+			<ReleaseDate>February 13, 2019</ReleaseDate>
+
+		</xsd:documentation>
+
+	</xsd:annotation>
+
+
+
+	<xsd:include schemaLocation="../../../Common/efileTypes.xsd"/>
+
+
+
+	<!-- =================================================================== -->
+
+	<!-- ================= Adjustment to Taxable Income Schedule ================= -->
+
+	<!-- =================================================================== -->
+
+	
+
+	<xsd:element name="AdjustmentToTaxableIncomeSch">
+
+		<xsd:annotation>
+
+			<xsd:documentation>Adjustment to Taxable Income Schedule</xsd:documentation>
+
+		</xsd:annotation>
+
+		<xsd:complexType>
+
+			<xsd:complexContent>
+
+				<xsd:extension base="AdjustmentToTaxableIncomeSchType">
+
+					<xsd:attributeGroup ref="DocumentAttributes">
+
+						<xsd:annotation>
+
+							<xsd:documentation>Common return document attributes</xsd:documentation>
+
+						</xsd:annotation>
+
+					</xsd:attributeGroup>
+
+					<xsd:attribute name="documentName" type="xsd:string" fixed="AdjustmentToTaxableIncomeSchedule">
+
+						<xsd:annotation>
+
+							<xsd:documentation>IRS internal use only. To avoid error in the return, do not include the attribute name or value.</xsd:documentation>
+
+						</xsd:annotation>
+
+					</xsd:attribute>
+
+				</xsd:extension>
+
+			</xsd:complexContent>
+
+		</xsd:complexType>
+
+	</xsd:element>
+
+	
+
+	<xsd:complexType name="AdjustmentToTaxableIncomeSchType">
+
+		<xsd:annotation>
+
+			<xsd:documentation>Content model for Adjustment to Taxable Income Schedule</xsd:documentation>
+
+		</xsd:annotation>
+
+		<xsd:sequence>
+
+		
+
+			<!-- Property Depreciation Amount Info  (repeating group) -->
+
+			<xsd:element name="PropertyDepreciatedInfo" type="PropertyDepreciatedInfoType" minOccurs="0" maxOccurs="unbounded">
+
+				<xsd:annotation>
+
+					<xsd:documentation>
+
+						<Description> Property depreciation amount info (repeating group)</Description>
+
+					</xsd:documentation>
+
+				</xsd:annotation>
+
+			</xsd:element>
+
+			
+
+			<!-- Other Adjustments Info (repeating group) -->
+
+			<xsd:element name="OtherAdjustmentsInfo" type="OtherAdjustmentsInfoType" minOccurs="0" maxOccurs="unbounded">
+
+				<xsd:annotation>
+
+					<xsd:documentation>
+
+						<Description>Other adjustments Info (repeating group)</Description>
+
+					</xsd:documentation>
+
+				</xsd:annotation>
+
+			</xsd:element>
+
+			
+
+			<!-- Net of All Property Depreciation And All Other Adjustments (repeating group) -->
+
+			<xsd:element name="NetAdjustmentsInfo" minOccurs="0" maxOccurs="unbounded">
+
+				<xsd:annotation>
+
+					<xsd:documentation>
+
+						<Description>Net of all property depreciation and all other adjustment (repeating group)</Description>
+
+					</xsd:documentation>
+
+				</xsd:annotation>
+
+				<xsd:complexType>
+
+					<xsd:sequence>
+
+					
+
+						<!-- Year -->
+
+						<xsd:element name="Yr" type="YearType" minOccurs="0">
+
+							<xsd:annotation>
+
+								<xsd:documentation>
+
+									<Description>Year</Description>
+
+								</xsd:documentation>
+
+							</xsd:annotation>
+
+						</xsd:element>
+
+						
+
+						<!-- Net of All Property Depreciation And All Other Adjustment for Applicable Year -->
+
+						<xsd:element name="NetOfAllPropAndOtherAdjForPY" type="USAmountType" minOccurs="0">
+
+							<xsd:annotation>
+
+								<xsd:documentation>
+
+									<Description>iv.	Net of all property depreciation and all other adjustment for aplicable year</Description>
+
+								</xsd:documentation>
+
+							</xsd:annotation>
+
+						</xsd:element>	
+
+											
+
+					</xsd:sequence>
+
+				</xsd:complexType>
+
+			</xsd:element>
+
+		
+
+		</xsd:sequence>
+
+	</xsd:complexType>
+
+
+
+	
+
+	<!--  ===== Repeating Group Type: Property Depreciation Amount Info  ==== -->
+
+	<xsd:complexType name="PropertyDepreciatedInfoType">
+
+		<xsd:sequence>
+
+		
+
+			<!-- Year -->
+
+			<xsd:element name="Yr" type="YearType" minOccurs="0">
+
+				<xsd:annotation>
+
+					<xsd:documentation>
+
+						<Description>Year</Description>
+
+					</xsd:documentation>
+
+				</xsd:annotation>
+
+			</xsd:element>
+
+			
+
+			<!-- Depreciation Amounts Info (Repeating Group)-->
+
+			<xsd:element name="DepreciationAmountsInfo" minOccurs="0" maxOccurs="unbounded">
+
+				<xsd:annotation>
+
+					<xsd:documentation>
+
+						<Description>i. Depreciation Amounts info (repeating group)</Description>
+
+					</xsd:documentation>
+
+				</xsd:annotation>
+
+				<xsd:complexType>
+
+					<xsd:sequence>
+
+								
+
+						<!-- Name of Property Depreciated Under the Forecast Method to Which this Form Applies -->
+
+						<xsd:element name="PropertyDesc" type="LineExplanationType" minOccurs="0">
+
+							<xsd:annotation>
+
+								<xsd:documentation>
+
+									<Description>Name of Property depreciated under the forecast method to which this form applies</Description>
+
+								</xsd:documentation>
+
+							</xsd:annotation>
+
+						</xsd:element>
+
+						
+
+						<!-- 1. Column A: Amount  of Depreciation Previously Deducted Based on Estimated Future Income -->
+
+						<xsd:element name="DeprecDeductedForPYColmAAmt" type="USAmountType" minOccurs="0">
+
+							<xsd:annotation>
+
+								<xsd:documentation>
+
+									<Description>1.	Column A: Amount  of depreciation previously deducted based on estimated future income</Description>
+
+								</xsd:documentation>
+
+							</xsd:annotation>
+
+						</xsd:element>
+
+						
+
+						<!-- 2. Column B: Amount of Depreciation Allowable for Prior Year -->
+
+						<xsd:element name="DeprecAllowableForPYColmBAmt" type="USAmountType" minOccurs="0">
+
+							<xsd:annotation>
+
+								<xsd:documentation>
+
+									<Description>2.	Column B: Amount of depreciation allowable for prior year</Description>
+
+								</xsd:documentation>
+
+							</xsd:annotation>
+
+						</xsd:element>
+
+								
+
+					</xsd:sequence>
+
+				</xsd:complexType>
+
+			</xsd:element>
+
+			
+
+			<!-- Total of All Property Depreciation for Year-->
+
+			<xsd:element name="TotalPropertyDeprecColmAAmt" type="USAmountType" minOccurs="0">
+
+				<xsd:annotation>
+
+					<xsd:documentation>
+
+						<Description>Total amount of column A for year</Description>
+
+					</xsd:documentation>
+
+				</xsd:annotation>
+
+			</xsd:element>
+
+			
+
+			<!-- Total of All Property Depreciation for Year-->
+
+			<xsd:element name="TotalPropertyDeprecColmBAmt" type="USAmountType" minOccurs="0">
+
+				<xsd:annotation>
+
+					<xsd:documentation>
+
+						<Description>Total amount of column B for year</Description>
+
+					</xsd:documentation>
+
+				</xsd:annotation>
+
+			</xsd:element>
+
+			
+
+			<!-- Net of All Property Depreciation for Year  -->
+
+			<xsd:element name="NetTotPropertyDeprecForPYAmt" type="USAmountType" minOccurs="0">
+
+				<xsd:annotation>
+
+					<xsd:documentation>
+
+						<Description>iv.	Net of all property depreciation for year</Description>
+
+					</xsd:documentation>
+
+				</xsd:annotation>
+
+			</xsd:element>
+
+	
+
+		</xsd:sequence>
+
+	</xsd:complexType>
+
+	
+
+	<!--  ===== Repeating Group Type: Other Adjustments Info ==== -->
+
+	<xsd:complexType name="OtherAdjustmentsInfoType">
+
+		<xsd:sequence>
+
+		
+
+			<!-- Year -->
+
+			<xsd:element name="Yr" type="YearType" minOccurs="0">
+
+				<xsd:annotation>
+
+					<xsd:documentation>
+
+						<Description>Year</Description>
+
+					</xsd:documentation>
+
+				</xsd:annotation>
+
+			</xsd:element>
+
+			
+
+			<!-- Other Adjustment Amounts Info (Repeating Group)-->
+
+			<xsd:element name="OtherAdjAmountsInfo" minOccurs="0" maxOccurs="unbounded">
+
+				<xsd:annotation>
+
+					<xsd:documentation>
+
+						<Description>v. Other Adjustment Amounts (repeating group)</Description>
+
+					</xsd:documentation>
+
+				</xsd:annotation>
+
+				<xsd:complexType>
+
+					<xsd:sequence>
+
+					
+
+						<!-- Type of Adjustment -->
+
+						<xsd:element name="AdjustmentTypeDesc" type="LineExplanationType" minOccurs="0">
+
+							<xsd:annotation>
+
+								<xsd:documentation>
+
+									<Description>Type of Adjustment</Description>
+
+								</xsd:documentation>
+
+							</xsd:annotation>
+
+						</xsd:element>
+
+						
+
+						<!-- a. Column A: Amount of Any Other Adjustments -->
+
+						<xsd:element name="OthAdjChgPrevDeductedColmAAmt" type="USAmountType" minOccurs="0">
+
+							<xsd:annotation>
+
+								<xsd:documentation>
+
+									<Description>a.	Column A: Amount of Any other Adjustments resulting from a change in depreciation of depreciation previously deducted</Description>
+
+								</xsd:documentation>
+
+							</xsd:annotation>
+
+						</xsd:element>
+
+						
+
+						<!-- b. Column B: Amount of Any Other Adjustments -->
+
+						<xsd:element name="OthAdjChgPrevAllowableColmBAmt" type="USAmountType" minOccurs="0">
+
+							<xsd:annotation>
+
+								<xsd:documentation>
+
+									<Description>b.	Column B: Amount of Any other Adjustments resulting from a change in depreciation of depreciation allowable for prior year</Description>
+
+								</xsd:documentation>
+
+							</xsd:annotation>
+
+						</xsd:element>
+
+													
+
+					</xsd:sequence>
+
+				</xsd:complexType>
+
+			</xsd:element>
+
+			
+
+			<!-- a. Column A: Total of All Other Adjustments for Year-->
+
+			<xsd:element name="TotalOtherAdjustmentColmAAmt" type="USAmountType" minOccurs="0">
+
+				<xsd:annotation>
+
+					<xsd:documentation>
+
+						<Description>a. Column A: Total ofAll Other Adjustments for year</Description>
+
+					</xsd:documentation>
+
+				</xsd:annotation>
+
+			</xsd:element>
+
+			
+
+			<!-- b. Column B: Total of All Other Adjustments for Year-->
+
+			<xsd:element name="TotalOtherAdjustmentColmBAmt" type="USAmountType" minOccurs="0">
+
+				<xsd:annotation>
+
+					<xsd:documentation>
+
+						<Description>b. Column B: Total of All Other Adjustments for year</Description>
+
+					</xsd:documentation>
+
+				</xsd:annotation>
+
+			</xsd:element>
+
+			
+
+			<!-- Net All Other Adjustment for Year  -->
+
+			<xsd:element name="NetTotOtherAdjustmentsForPYAmt" type="USAmountType" minOccurs="0">
+
+				<xsd:annotation>
+
+					<xsd:documentation>
+
+						<Description>iv.	Net all other adjustment for year</Description>
+
+					</xsd:documentation>
+
+				</xsd:annotation>
+
+			</xsd:element>
+
+		
+
+		</xsd:sequence>
+
+	</xsd:complexType>
+
+</xsd:schema>

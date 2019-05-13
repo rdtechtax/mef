@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.irs.gov/efile" targetNamespace="http://www.irs.gov/efile" elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.0">
+	<xsd:annotation>
+		<xsd:documentation>
+			<Description>IRS e-file Schema - IRS Form 4952</Description>
+			<TaxYear>2018</TaxYear>
+			<MaturityLevel>Final Release</MaturityLevel>
+			<ReleaseDate>February 13, 2019</ReleaseDate>
+		</xsd:documentation>
+	</xsd:annotation>
+	<xsd:include schemaLocation="../../../Common/efileTypes.xsd"/>
+	<!--==================================================================-->
+	<!--============================== IRS4952 =============================-->
+	<!--==================================================================-->
+	<xsd:element name="IRS4952">
+		<xsd:annotation>
+			<xsd:documentation>IRS Form 4952</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:complexContent>
+				<xsd:extension base="IRS4952Type">
+					<xsd:attributeGroup ref="DocumentAttributes">
+						<xsd:annotation>
+							<xsd:documentation>Common return document attributes</xsd:documentation>
+						</xsd:annotation>
+					</xsd:attributeGroup>
+					<xsd:attribute name="documentName" type="xsd:string" fixed="IRS4952"/>
+				</xsd:extension>
+			</xsd:complexContent>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:complexType name="IRS4952Type">
+		<xsd:annotation>
+			<xsd:documentation>Content model for IRS4952</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<!--Part I - Total Investment Interest Expense-->
+			<!--Investment Interest Expense Amount -->
+			<xsd:element name="InvestmentInterestExpenseAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Investment Interest Expense Amount</Description>
+						<LineNumber>1</LineNumber>
+						<ELFFieldNumber>0010</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!--Prior Year Disallow Invsmt Interests Exported Amount -->
+			<xsd:element name="PriorYrDisallowInvsmtIntExpAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Prior Year Disallow Invsmt Interests Exported Amount</Description>
+						<LineNumber>2</LineNumber>
+						<ELFFieldNumber>0020</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!--Total Investment Interest Exported Amount -->
+			<xsd:element name="TotalInvestmentInterestExpAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Total Investment Interest Exported Amount</Description>
+						<LineNumber>3</LineNumber>
+						<ELFFieldNumber>0030</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!--Part II - Net Investment Income-->
+			<!--Investment Property Gross Income Amount -->
+			<xsd:element name="InvestmentPropGrossIncomeAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Investment Property Gross Income Amount</Description>
+						<LineNumber>4a</LineNumber>
+						<ELFFieldNumber>0032</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!--Investment Property Qual Dividends Amount -->
+			<xsd:element name="InvestmentPropQualDividendsAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Investment Property Qual Dividends Amount</Description>
+						<LineNumber>4b</LineNumber>
+						<ELFFieldNumber>0070</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!--Investment Property Net Gross Incorporated Amount -->
+			<xsd:element name="InvestmentPropNetGrossIncAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Investment Property Net Gross Incorporated Amount</Description>
+						<LineNumber>4c</LineNumber>
+						<ELFFieldNumber>0080</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!--Investment Property Net Disposal Gaining Amount -->
+			<xsd:element name="InvestmentPropNetDispGainAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Investment Property Net Disposal Gaining Amount</Description>
+						<LineNumber>4d</LineNumber>
+						<ELFFieldNumber>0090</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!--Property Dspstn Capitalized Gaining Invoice Incorporated Amount -->
+			<xsd:element name="PropertyDspstnCapGainInvIncAmt" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Property Dspstn Capitalized Gaining Invoice Incorporated Amount</Description>
+						<LineNumber>4e</LineNumber>
+						<ELFFieldNumber>0100</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+				<xsd:complexType>
+					<xsd:simpleContent>
+						<xsd:extension base="USAmountType">
+							<xsd:attribute name="investmentPropGainElectedCd">
+								<xsd:annotation>
+									<xsd:documentation>
+										<Description>Investment Property Gain Elected Code</Description>
+										<ELFFieldNumber>0102</ELFFieldNumber>
+									</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="StringType">
+										<xsd:enumeration value="ELEC"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:attribute>
+							<xsd:attribute name="investmentPropGainElectedAmt" type="USAmountType">
+								<xsd:annotation>
+									<xsd:documentation>
+										<Description>Investment Property Gain Elected Amount</Description>
+										<ELFFieldNumber>0104</ELFFieldNumber>
+									</xsd:documentation>
+								</xsd:annotation>
+							</xsd:attribute>
+						</xsd:extension>
+					</xsd:simpleContent>
+				</xsd:complexType>
+			</xsd:element>
+			<!--Investment Net Gain Lesser Small Amount -->
+			<xsd:element name="InvestmentNetGainLessSmallAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Investment Net Gain Lesser Small Amount</Description>
+						<LineNumber>4f</LineNumber>
+						<ELFFieldNumber>0110</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!--Investment Income Election Amount -->
+			<xsd:element name="InvestmentIncomeElectionAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Investment Income Election Amount</Description>
+						<LineNumber>4g</LineNumber>
+						<ELFFieldNumber>0120</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!--Investment Income Amount -->
+			<xsd:element name="InvestmentIncomeAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Investment Income Amount</Description>
+						<LineNumber>4h</LineNumber>
+						<ELFFieldNumber>0130</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!--Investment Expense Amount -->
+			<xsd:element name="InvestmentExpenseAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Investment Expense Amount</Description>
+						<LineNumber>5</LineNumber>
+						<ELFFieldNumber>0140</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!--Net Investment Income Amount -->
+			<xsd:element name="NetInvestmentIncomeAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Net Investment Income Amount</Description>
+						<LineNumber>6</LineNumber>
+						<ELFFieldNumber>0150</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!--Part III - Investment Interest Expense Deduction-->
+			<!--Disallowed Carry Forward Exported Amount -->
+			<xsd:element name="DisallowedCarryForwardExpAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Disallowed Carry Forward Exported Amount</Description>
+						<LineNumber>7</LineNumber>
+						<ELFFieldNumber>0160</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!--Investment Interest Exported Deduction Amount -->
+			<xsd:element name="InvestmentInterestExpDeductAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Investment Interest Exported Deduction Amount</Description>
+						<LineNumber>8</LineNumber>
+						<ELFFieldNumber>0170</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:schema>

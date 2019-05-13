@@ -1,0 +1,617 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns="http://www.irs.gov/efile" xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.irs.gov/efile" elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.0">
+
+	<xsd:annotation>
+		<xsd:documentation>
+			<Description>IRS e-file Schema - IRS 1040 Schedule SE Self-Employment Tax</Description>
+			<TaxYear>2018</TaxYear>
+			<MaturityLevel>Final Release</MaturityLevel>
+			<ReleaseDate>February 13, 2019</ReleaseDate>
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:include schemaLocation="../../../Common/efileTypes.xsd"/>
+
+	<!-- =============================================================== -->
+	<!-- ===================== IRS 1040 Schedule SE ==================== -->
+	<!-- =============================================================== -->
+
+	<xsd:element name="IRS1040ScheduleSE">
+		<xsd:annotation>
+			<xsd:documentation>IRS 1040 Schedule SE</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:complexContent>
+				<xsd:extension base="IRS1040ScheduleSEType">
+					<xsd:attributeGroup ref="DocumentAttributes">
+						<xsd:annotation>
+							<xsd:documentation>Common return document attributes</xsd:documentation>
+						</xsd:annotation>
+					</xsd:attributeGroup>
+					<xsd:attribute name="documentName" type="xsd:string" fixed="IRS1040ScheduleSE">
+						<xsd:annotation>
+							<xsd:documentation>IRS internal use only. To avoid error in the return, do not include the attribute name or value.</xsd:documentation>
+						</xsd:annotation>
+					</xsd:attribute>
+					<xsd:attribute name="referenceDocumentId" type="IdListType">
+						<xsd:annotation>
+							<xsd:documentation>List of document ID's of forms, schedules, supporting info. etc. attached to this form</xsd:documentation>
+						</xsd:annotation>
+					</xsd:attribute>
+					<xsd:attribute name="referenceDocumentName" type="StringType" fixed="AllowableSEExpenseExplanationStatement"/>
+				</xsd:extension>
+			</xsd:complexContent>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:complexType name="IRS1040ScheduleSEType">
+		<xsd:annotation>
+			<xsd:documentation>Content model for Schedule SE</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<!-- Name of person with self-employment income -->
+			<xsd:element name="PersonNm" type="PersonNameType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Name of person with self-employment income</Description>
+						<ELFFieldNumber>0010</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Social Security Number of person with self-employment income -->
+			<xsd:element name="SSN" type="SSNType">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Social Security Number of person with self-employment income</Description>
+						<ELFFieldNumber>0020</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Choice of Short Schedule SE or Long Schedule SE -->
+			<xsd:choice minOccurs="0">
+				<!-- Section A - Short Schedule SE -->
+				<xsd:element name="ShortScheduleSE" type="ShortScheduleSEType"/>
+				<!-- Section B - Long Schedule SE -->
+				<xsd:element name="LongScheduleSE" type="LongScheduleSEType"/>
+			</xsd:choice>
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<!-- =============== Section A - Short Schedule SE =============== -->
+	<xsd:complexType name="ShortScheduleSEType">
+		<xsd:sequence>
+			<!-- Net farm profit or loss -->
+			<xsd:element name="NetFarmProfitLossAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Net farm profit or loss</Description>
+						<LineNumber>Section A Line 1a</LineNumber>
+						<ELFFieldNumber>0030</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Conservation Reserve Program Amount -->
+			<xsd:element name="ConservationReserveProgPymtAmt" type="USAmountNNType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Conservation Reserve Program Payments</Description>
+						<LineNumber>Section A Line 1b</LineNumber>
+						<ELFFieldNumber>0035</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Net profit or loss, other than farming -->
+			<xsd:element name="NetNonFarmProfitLossAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Net profit or loss other than farming</Description>
+						<LineNumber>Section A Line 2</LineNumber>
+						<ELFFieldNumber>0040</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Total net earnings or loss -->
+			<xsd:element name="SETotalNetEarningsOrLossAmt" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Total net earnings or loss</Description>
+						<LineNumber>Section A Line 3</LineNumber>
+						<ELFFieldNumber>0070</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+				<xsd:complexType>
+					<xsd:simpleContent>
+						<xsd:extension base="USAmountType">
+							<xsd:attribute name="selfEmploymentTaxExemptCd">
+								<xsd:annotation>
+									<xsd:documentation>
+										<LineNumber>Section A Line 3</LineNumber>
+										<ELFFieldNumber>0050</ELFFieldNumber>
+									</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="StringType">
+										<xsd:enumeration value="EXEMPT-NOTARY"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:attribute>
+							<xsd:attribute name="selfEmploymentTaxExemptAmt" type="USAmountType">
+								<xsd:annotation>
+									<xsd:documentation>
+										<LineNumber>Section A Line 3</LineNumber>
+										<ELFFieldNumber>0055</ELFFieldNumber>
+									</xsd:documentation>
+								</xsd:annotation>
+							</xsd:attribute>
+							<xsd:attribute name="chap11BankruptcyIncomeCd">
+								<xsd:annotation>
+									<xsd:documentation>
+										<LineNumber>Section A Line 3</LineNumber>
+										<ELFFieldNumber>0057</ELFFieldNumber>
+									</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="StringType">
+										<xsd:enumeration value="CHAP 11 BANKRUPTCY INCOME"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:attribute>
+							<xsd:attribute name="chap11BankruptcyIncomeAmt" type="USAmountType">
+								<xsd:annotation>
+									<xsd:documentation>
+										<LineNumber>Section A Line 3</LineNumber>
+										<ELFFieldNumber>0059</ELFFieldNumber>
+									</xsd:documentation>
+								</xsd:annotation>
+							</xsd:attribute>
+							<xsd:attribute name="communityIncmTaxedToSpouseCd">
+								<xsd:annotation>
+									<xsd:documentation>
+										<LineNumber>Section A Line 3</LineNumber>
+										<ELFFieldNumber>0061</ELFFieldNumber>
+									</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="StringType">
+										<xsd:enumeration value="COMMUNITY INCOME TAXED TO SPOUSE"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:attribute>
+							<xsd:attribute name="communityIncmTaxedToSpouseAmt" type="USAmountType">
+								<xsd:annotation>
+									<xsd:documentation>
+										<LineNumber>Section A Line 3</LineNumber>
+										<ELFFieldNumber>0063</ELFFieldNumber>
+									</xsd:documentation>
+								</xsd:annotation>
+							</xsd:attribute>
+							<xsd:attribute name="exemptCommunityIncomeCd">
+								<xsd:annotation>
+									<xsd:documentation>
+										<LineNumber>Section A Line 3</LineNumber>
+										<ELFFieldNumber>0065</ELFFieldNumber>
+									</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="StringType">
+										<xsd:enumeration value="EXEMPT COMMUNITY INCOME"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:attribute>
+							<xsd:attribute name="exemptCommunityIncomeAmt" type="USAmountType">
+								<xsd:annotation>
+									<xsd:documentation>
+										<LineNumber>Section A Line 3</LineNumber>
+										<ELFFieldNumber>0067</ELFFieldNumber>
+									</xsd:documentation>
+								</xsd:annotation>
+							</xsd:attribute>
+							<xsd:attribute name="additionalIncomeOrLossCd">
+								<xsd:annotation>
+									<xsd:documentation>
+										<LineNumber>Section A Line 3</LineNumber>
+										<ELFFieldNumber>NL</ELFFieldNumber>
+									</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="TextType">
+										<xsd:maxLength value="20"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:attribute>
+							<xsd:attribute name="additionalIncomeOrLossAmt" type="USAmountType">
+								<xsd:annotation>
+									<xsd:documentation>
+										<LineNumber>Section A Line 3</LineNumber>
+										<ELFFieldNumber>NL</ELFFieldNumber>
+									</xsd:documentation>
+								</xsd:annotation>
+							</xsd:attribute>
+						</xsd:extension>
+					</xsd:simpleContent>
+				</xsd:complexType>
+			</xsd:element>
+			<!-- Net earnings from self-employment -->
+			<xsd:element name="MinimumProfitForSETaxAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Net earnings from self-employment</Description>
+						<LineNumber>Section A Line 4</LineNumber>
+						<ELFFieldNumber>0075</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Self-employment tax -->
+			<xsd:element name="SelfEmploymentTaxAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Self-employment tax</Description>
+						<LineNumber>Section A Line 5</LineNumber>
+						<ELFFieldNumber>0160</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Deduction for self-employment tax -->
+			<xsd:element name="DeductibleSelfEmploymentTaxAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Deduction for self-employment tax</Description>
+						<LineNumber>Section A Line 6</LineNumber>
+						<ELFFieldNumber>0165</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<!-- ==================== Section B - Long Schedule SE ==================== -->
+	<xsd:complexType name="LongScheduleSEType">
+		<xsd:sequence>
+			<!-- =============== Section B Part I - Self-Employment Tax ================ -->
+			<!-- Exempt Form 4361 Indicator -->
+			<xsd:element name="ExemptForm4361Ind" type="CheckboxType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Exempt Form 4361 indicator</Description>
+						<LineNumber>Section B Line A</LineNumber>
+						<ELFFieldNumber>0025</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Net farm profit or loss -->
+			<xsd:element name="NetFarmProfitLossAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Net farm profit or loss</Description>
+						<LineNumber>Section B Line 1a</LineNumber>
+						<ELFFieldNumber>0030</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Conservation Reserve Program Amount -->
+			<xsd:element name="ConservationReserveProgPymtAmt" type="USAmountNNType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Conservation Reserve Program Payments</Description>
+						<LineNumber>Section B Line 1b</LineNumber>
+						<ELFFieldNumber>0035</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Net profit or loss, other than farming -->
+			<xsd:element name="NetNonFarmProfitLossAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Net profit or loss</Description>
+						<LineNumber>Section B Line 2</LineNumber>
+						<ELFFieldNumber>0040</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Total net earnings or loss -->
+			<xsd:element name="SETotalNetEarningsOrLossAmt" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Total net earnings or loss</Description>
+						<LineNumber>Section B Line 3</LineNumber>
+						<ELFFieldNumber>0070</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+				<xsd:complexType>
+					<xsd:simpleContent>
+						<xsd:extension base="USAmountType">
+							<xsd:attribute name="selfEmploymentTaxExemptCd">
+								<xsd:annotation>
+									<xsd:documentation>
+										<LineNumber>Section B Line 3</LineNumber>
+										<ELFFieldNumber>0050</ELFFieldNumber>
+									</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="StringType">
+										<xsd:enumeration value="EXEMPT-NOTARY"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:attribute>
+							<xsd:attribute name="selfEmploymentTaxExemptAmt" type="USAmountType">
+								<xsd:annotation>
+									<xsd:documentation>
+										<LineNumber>Section B Line 3</LineNumber>
+										<ELFFieldNumber>0060</ELFFieldNumber>
+									</xsd:documentation>
+								</xsd:annotation>
+							</xsd:attribute>
+							<xsd:attribute name="chap11BankruptcyIncomeCd">
+								<xsd:annotation>
+									<xsd:documentation>
+										<LineNumber>Section B Line 3</LineNumber>
+										<ELFFieldNumber>0057</ELFFieldNumber>
+									</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="StringType">
+										<xsd:enumeration value="CHAP 11 BANKRUPTCY INCOME"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:attribute>
+							<xsd:attribute name="chap11BankruptcyIncomeAmt" type="USAmountType">
+								<xsd:annotation>
+									<xsd:documentation>
+										<LineNumber>Section B Line 3</LineNumber>
+										<ELFFieldNumber>0059</ELFFieldNumber>
+									</xsd:documentation>
+								</xsd:annotation>
+							</xsd:attribute>
+							<xsd:attribute name="communityIncmTaxedToSpouseCd">
+								<xsd:annotation>
+									<xsd:documentation>
+										<LineNumber>Section B Line 3</LineNumber>
+										<ELFFieldNumber>0061</ELFFieldNumber>
+									</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="StringType">
+										<xsd:enumeration value="COMMUNITY INCOME TAXED TO SPOUSE"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:attribute>
+							<xsd:attribute name="communityIncmTaxedToSpouseAmt" type="USAmountType">
+								<xsd:annotation>
+									<xsd:documentation>
+										<LineNumber>Section B Line 3</LineNumber>
+										<ELFFieldNumber>0063</ELFFieldNumber>
+									</xsd:documentation>
+								</xsd:annotation>
+							</xsd:attribute>
+							<xsd:attribute name="exemptCommunityIncomeCd">
+								<xsd:annotation>
+									<xsd:documentation>
+										<LineNumber>Section B Line 3</LineNumber>
+										<ELFFieldNumber>0065</ELFFieldNumber>
+									</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="StringType">
+										<xsd:enumeration value="EXEMPT COMMUNITY INCOME"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:attribute>
+							<xsd:attribute name="exemptCommunityIncomeAmt" type="USAmountType">
+								<xsd:annotation>
+									<xsd:documentation>
+										<LineNumber>Section B Line 3</LineNumber>
+										<ELFFieldNumber>0067</ELFFieldNumber>
+									</xsd:documentation>
+								</xsd:annotation>
+							</xsd:attribute>
+							<xsd:attribute name="additionalIncomeOrLossCd">
+								<xsd:annotation>
+									<xsd:documentation>
+										<LineNumber>Section B Line 3</LineNumber>
+										<ELFFieldNumber>NL</ELFFieldNumber>
+									</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="TextType">
+										<xsd:maxLength value="20"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:attribute>
+							<xsd:attribute name="additionalIncomeOrLossAmt" type="USAmountType">
+								<xsd:annotation>
+									<xsd:documentation>
+										<LineNumber>Section B Line 3</LineNumber>
+										<ELFFieldNumber>NL</ELFFieldNumber>
+									</xsd:documentation>
+								</xsd:annotation>
+							</xsd:attribute>
+						</xsd:extension>
+					</xsd:simpleContent>
+				</xsd:complexType>
+			</xsd:element>
+			<!-- Minimum profit for self-employment tax -->
+			<xsd:element name="MinimumProfitForSETaxAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Minimum profit for self-employment tax</Description>
+						<LineNumber>Section B Line 4a</LineNumber>
+						<ELFFieldNumber>0075</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Optional method amount -->
+			<xsd:element name="OptionalMethodAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Optional method</Description>
+						<LineNumber>Section B Line 4b</LineNumber>
+						<ELFFieldNumber>0077</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Combined self-employment tax -->
+			<xsd:element name="CombinedSEAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Combined self-employment tax</Description>
+						<LineNumber>Section B Line 4c</LineNumber>
+						<ELFFieldNumber>0079</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Church employee income -->
+			<xsd:element name="W2WagesFromChurchesAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Church employee income</Description>
+						<LineNumber>Section B Line 5a</LineNumber>
+						<ELFFieldNumber>0081</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Minimum allowable church wages -->
+			<xsd:element name="MinAllowableChurchWagesAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Minimum allowable church wages</Description>
+						<LineNumber>Section B Line 5b</LineNumber>
+						<ELFFieldNumber>0082</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Net earnings from self-employment -->
+			<xsd:element name="CombinedSEAndChurchWagesAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Net earnings from self-employment</Description>
+						<LineNumber>Section B Line 6</LineNumber>
+						<ELFFieldNumber>0084</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Section B Line 7 No Entry: MaxCombinedWages (ELF Field Number NL0085, Use Value Preprinted On Form) -->
+			<!-- SST Wages RRT Comp Amount -->
+			<xsd:element name="SSTWagesRRTCompAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>SST wages RRT comp amount</Description>
+						<LineNumber>Section B Line 8a</LineNumber>
+						<ELFFieldNumber>0088</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Unreported Tips Amount -->
+			<xsd:element name="UnreportedTipsAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Unreported tips</Description>
+						<LineNumber>Section B Line 8b</LineNumber>
+						<ELFFieldNumber>0090</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Wages Subject to Social Security Tax -->
+			<xsd:element name="WagesSubjectToSSTAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Wages subject to social security tax</Description>
+						<LineNumber>Section B Line 8c</LineNumber>
+						<ELFFieldNumber>0095</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Total Wages and Unreported Tips Amount -->
+			<xsd:element name="TotalWagesAndUnreportedTipsAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Total wages and unreported tips</Description>
+						<LineNumber>Section B Line 8d</LineNumber>
+						<ELFFieldNumber>0100</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Allowable SE Amount -->
+			<xsd:element name="AllowableSEAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Allowable self-employment</Description>
+						<LineNumber>Section B Line 9</LineNumber>
+						<ELFFieldNumber>0110</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Tax Base Amount -->
+			<xsd:element name="TaxBaseAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Tax base</Description>
+						<LineNumber>Section B Line 10</LineNumber>
+						<ELFFieldNumber>0150</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- SE Base Amount -->
+			<xsd:element name="SEBaseAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Self-Employment base</Description>
+						<LineNumber>Section B Line 11</LineNumber>
+						<ELFFieldNumber>0159</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Self-Employment Tax -->
+			<xsd:element name="SelfEmploymentTaxAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Self-Employment tax</Description>
+						<LineNumber>Section B Line 12</LineNumber>
+						<ELFFieldNumber>0160</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Deduction for self-employment tax -->
+			<xsd:element name="DeductibleSelfEmploymentTaxAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Deduction for self-employment tax</Description>
+						<LineNumber>Section B Line 13</LineNumber>
+						<ELFFieldNumber>0165</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- ===== Section B Part II - Optional Methods To Figure Net Earnings ===== -->
+			<!-- Section B Line 14 No Entry: MaxIncomeOptMethods (ELF Field Number NL0168, Use Value Preprinted On Form) -->
+			<!-- Farm option method amount -->
+			<xsd:element name="SETaxFarmOptionalMethodAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Farm option method</Description>
+						<LineNumber>Section B Line 15</LineNumber>
+						<ELFFieldNumber>0170</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Non-Farm Option Method Amount -->
+			<xsd:element name="SETaxNonFarmOptionalBaseAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Non-Farm opt method</Description>
+						<LineNumber>Section B Line 16</LineNumber>
+						<ELFFieldNumber>0180</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Non-Farm Option Base Amount -->
+			<xsd:element name="SETaxNonFarmOptionalMethodAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Non-Farm opt base</Description>
+						<LineNumber>Section B Line 17</LineNumber>
+						<ELFFieldNumber>0190</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:schema>

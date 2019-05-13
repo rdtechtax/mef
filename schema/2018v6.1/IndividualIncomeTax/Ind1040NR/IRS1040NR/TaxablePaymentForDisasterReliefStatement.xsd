@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema targetNamespace="http://www.irs.gov/efile" xmlns="http://www.irs.gov/efile" xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.0">
+
+	<xsd:annotation>
+		<xsd:documentation>
+			<Description>IRS e-file Nonresident Alien Income Tax Schema - Taxable Payment for Disaster Relief Statement</Description>
+			<Purpose>Optional Statement - Other Income – Taxable part of disaster relief; If any of the disaster relief payment is taxable, attach a statement showing the total 1) payment received and 2) how the taxable portion was figured.</Purpose>
+			<TaxYear>2018</TaxYear>
+			<MaturityLevel>Final Release</MaturityLevel>
+			<ReleaseDate>February 13, 2019</ReleaseDate>
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:include schemaLocation="../../../Common/efileTypes.xsd" />
+
+	<!-- ========================================================= -->
+	<!-- ====== Taxable Payment for Disaster Relief Statement ======= -->
+	<!-- ========================================================= -->
+
+	<xsd:element name="TxblPaymentDisasterReliefStmt">
+		<xsd:annotation>
+			<xsd:documentation>Taxable Payment for Disaster Relief Statement</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:complexContent>
+				<xsd:extension base="TxblPaymentDisasterReliefStmtType">
+					<xsd:attributeGroup ref="DocumentAttributes">
+						<xsd:annotation>
+							<xsd:documentation>Common return document attributes</xsd:documentation>
+						</xsd:annotation>
+					</xsd:attributeGroup>
+					<xsd:attribute name="documentName" type="TextType" fixed="TaxablePaymentForDisasterReliefStatement">
+						<xsd:annotation>
+							<xsd:documentation>IRS internal use only. To avoid error in the return, do not include the attribute name or value.</xsd:documentation>
+						</xsd:annotation>
+					</xsd:attribute>
+				</xsd:extension>
+			</xsd:complexContent>
+		</xsd:complexType>
+	</xsd:element>
+
+	<xsd:complexType name="TxblPaymentDisasterReliefStmtType">
+		<xsd:annotation>
+			<xsd:documentation>Content model for Taxable Payment for Disaster Relief Statement</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<!-- Total Disaster Payment Received -->
+			<xsd:element name="TotDsstrReliefPymtRcvdAmt" type="USAmountType" minOccurs="0"/>
+			<!-- Taxable Portion of Disaster Payment Received -->
+			<xsd:element name="TxblDsstrReliefPymtRcvdTxt" type="ShortExplanationType" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+
+</xsd:schema>

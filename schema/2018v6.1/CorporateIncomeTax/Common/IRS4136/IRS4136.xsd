@@ -1,0 +1,2285 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns="http://www.irs.gov/efile" xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.irs.gov/efile" elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.0">
+
+	<xsd:annotation>
+		<xsd:documentation>
+			<Description>IRS e-file Schema - Form 4136</Description>
+			<TaxYear>2018</TaxYear>
+			<MaturityLevel>Final Release</MaturityLevel>
+			<ReleaseDate>February 13, 2019</ReleaseDate>
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:include schemaLocation="../../../Common/efileTypes.xsd"/>
+
+
+	<!-- ============================================================ -->
+	<!-- =======================  IRS Form 4136 ===================== -->
+	<!-- ============================================================ -->
+
+
+	<xsd:element name="IRS4136">
+		<xsd:annotation>
+			<xsd:documentation>IRS Form 4136</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:complexContent>
+				<xsd:extension base="IRS4136Type">
+					<xsd:attributeGroup ref="DocumentAttributes">
+						<xsd:annotation>
+							<xsd:documentation>Common return document attributes</xsd:documentation>
+						</xsd:annotation>
+					</xsd:attributeGroup>
+					<xsd:attribute name="documentName" type="xsd:string" fixed="IRS4136">
+						<xsd:annotation>
+							<xsd:documentation>IRS internal use only. To avoid error in the return, do not include the attribute name or value.</xsd:documentation>
+						</xsd:annotation>
+					</xsd:attribute>
+
+					<xsd:attribute name="referenceDocumentId" type="IdListType"/>
+					<xsd:attribute name="referenceDocumentName" type="StringType" fixed="BinaryAttachment GeneralDependencySmall"/>
+
+				</xsd:extension>
+			</xsd:complexContent>
+		</xsd:complexType>
+	</xsd:element>
+
+	<xsd:complexType name="IRS4136Type">
+		<xsd:annotation>
+			<xsd:documentation>Content model for Form 4136</xsd:documentation>
+		</xsd:annotation>
+
+		<xsd:sequence>
+
+
+			<!-- ===== Line 1: Nontaxable Use of Gasoline and Gasohol ===== -->
+
+
+			<!-- Off-Highway Business Use of Gasoline - Gallons -->
+			<xsd:element name="OffHwyBusUseGasolineGalsQty" type="FuelGallonsType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Off-highway business use of gasoline in gallons</Description>
+						<LineNumber>1a(c)</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Use of Gasoline on a Farm for Farming Purposes - Gallons -->
+			<xsd:element name="FarmingPurposesGasolineGalsQty" type="FuelGallonsType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Use of gasoline on a farm for farming purposes</Description>
+						<LineNumber>1b(c)</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Other Nontaxable Use of Gasoline -->
+			<xsd:element name="OtherNontaxableUseOfGasoline" type="GasoholType" minOccurs="0" maxOccurs="7">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Other nontaxable use of gasoline</Description>
+						<LineNumber>1c</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Nontaxable Use of Gasoline - Credit -->
+			<xsd:element name="NontaxableUseOfGasolineCrAmt" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Nontaxable use of gasoline credit</Description>
+						<LineNumber>1c(d)</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+				<xsd:complexType>
+					<xsd:simpleContent>
+						<xsd:extension base="USAmountNNType">
+							<xsd:attribute name="creditReferenceNum" type="StringType" fixed="362" use="required"/>
+						</xsd:extension>
+					</xsd:simpleContent>
+				</xsd:complexType>
+			</xsd:element>
+
+			<!--Exported Noxtaxable Use of Gasoline - Gallons -->
+			<xsd:element name="ExportedNontxUseGasGalsQty" type="FuelGallonsType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Exported noxtaxable use of gasoline - gallons</Description>
+						<LineNumber>1d(c)</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!--Exported Noxtaxable Use of Gasoline - Credit -->
+			<xsd:element name="ExportedNontxUseOfGasCrAmt" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Exported noxtaxable use of gasoline - credit</Description>
+						<LineNumber>1d(d)</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+				<xsd:complexType>
+					<xsd:simpleContent>
+						<xsd:extension base="USAmountNNType">
+							<xsd:attribute name="creditReferenceNum" type="StringType" fixed="411" use="required"/>
+						</xsd:extension>
+					</xsd:simpleContent>
+				</xsd:complexType>
+			</xsd:element>
+
+			<!-- Commercial Aviation Use of Gasoline - Gallons -->
+			<xsd:element name="AviationGasolineGallonsQty" type="FuelGallonsType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Gasoline use in commercial aviation (other than foreign trade)</Description>
+						<LineNumber>2a(c)</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Commercial Aviation Use of Gasoline - Credit -->
+			<xsd:element name="AviationGasolineCreditAmt" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Amount of credit for gasoline use in commercial aviation (other than foreign trade)</Description>
+						<LineNumber>2a(d)</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+				<xsd:complexType>
+					<xsd:simpleContent>
+						<xsd:extension base="USAmountNNType">
+							<xsd:attribute name="creditReferenceNum" type="StringType" fixed="354" use="required"/>
+						</xsd:extension>
+					</xsd:simpleContent>
+				</xsd:complexType>
+			</xsd:element>
+
+			<!-- Other Nontaxable Use of Aviation Gasoline -->
+			<xsd:element name="AviationNontxUseGasGalsQty" type="AviationFuelGasolineType" minOccurs="0" maxOccurs="8">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Other nontaxable use of aviation gasoline</Description>
+						<LineNumber>2b(a)</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Other Nontaxable Use of Aviation Gasoline - Credit -->
+			<xsd:element name="AviationNontxGasCrAmt" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Amount of credit for other nontaxable use of aviation gasoline</Description>
+						<LineNumber>2b(d)</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+				<xsd:complexType>
+					<xsd:simpleContent>
+						<xsd:extension base="USAmountNNType">
+							<xsd:attribute name="creditReferenceNum" type="StringType" fixed="324" use="required"/>
+						</xsd:extension>
+					</xsd:simpleContent>
+				</xsd:complexType>
+			</xsd:element>
+
+			<!-- Exported Nontaxable Aviation Gasoline - Gallons -->
+			<xsd:element name="ExpNontxAviationGasGalsQty" type="FuelGallonsType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Exported nontaxable aviation gasoline - gallons</Description>
+						<LineNumber>2c(c)</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Exported Nontaxable Aviation Gasoline - Credit -->
+			<xsd:element name="ExpNontxAviationGasCrAmt" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Exported nontaxable aviation gasoline - credit</Description>
+						<LineNumber>2c(d)</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+				<xsd:complexType>
+					<xsd:simpleContent>
+						<xsd:extension base="USAmountNNType">
+							<xsd:attribute name="creditReferenceNum" type="StringType" fixed="412" use="required"/>
+						</xsd:extension>
+					</xsd:simpleContent>
+				</xsd:complexType>
+			</xsd:element>
+
+			<!-- LUST Tax Aviation Fuels - Gallons -->
+			<xsd:element name="LUSTTxAvnFuelFrgnTradeGalsQty" type="FuelGallonsType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Exported nontaxable aviation gasoline - gallons</Description>
+						<LineNumber>2d(c)</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- LUST Tax Aviation Fuel - Credit -->
+			<xsd:element name="LUSTTxAvnFuelFrgnTradeCrAmt" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>LUST tax aviation fuel - credit</Description>
+						<LineNumber>2d(d)</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+				<xsd:complexType>
+					<xsd:simpleContent>
+						<xsd:extension base="USAmountNNType">
+							<xsd:attribute name="creditReferenceNum" type="StringType" fixed="433" use="required"/>
+						</xsd:extension>
+					</xsd:simpleContent>
+				</xsd:complexType>
+			</xsd:element>
+
+			<!-- Exception to Nontaxable Use of Undyed Diesel -->
+			<xsd:element name="UndyedDieselUseExceptionInd" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Diesel fuel contains visible evidence of dye</Description>
+						<LineNumber>3</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+				<xsd:complexType>
+					<xsd:simpleContent>
+						<xsd:extension base="CheckboxType">
+							<xsd:attribute name="referenceDocumentId" type="IdListType"/>
+							<xsd:attribute name="referenceDocumentName" type="StringType" fixed="EvidenceOfDyedDieselFuelStatement"/>
+						</xsd:extension>
+					</xsd:simpleContent>
+				</xsd:complexType>
+			</xsd:element>
+
+			<!-- Nontaxable Use of Undyed Diesel Fuel -->
+			<xsd:element name="NontaxableUseOfUndyedDiesel" type="UndyedDieselKeroseneType" minOccurs="0" maxOccurs="8">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Nontaxable use of undyed diesel fuel</Description>
+						<LineNumber>3a(a)</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Use on Farm Undyed Diesel Fuel - Gallons -->
+			<xsd:element name="FarmPrpsUndyedDslFuelGalsQty" type="FuelGallonsType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Use on farm undyed diesel fuel - gallons</Description>
+						<LineNumber>3b(c)</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Use on Farm Undyed Diesel Fuel/Nontaxable - Credit -->
+			<xsd:element name="FarmPrpsUndyedDslFuelCrAmt" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Use on farm undyed diesel fuel/nontaxable - credit</Description>
+						<LineNumber>3b(d)</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+				<xsd:complexType>
+					<xsd:simpleContent>
+						<xsd:extension base="USAmountNNType">
+							<xsd:attribute name="creditReferenceNum" type="StringType" fixed="360" use="required"/>
+						</xsd:extension>
+					</xsd:simpleContent>
+				</xsd:complexType>
+			</xsd:element>
+
+			<!-- Train Use of Undyed Diesel - Gallons -->
+			<xsd:element name="TrainUseOfUndyedDieselGalsQty" type="FuelGallonsType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Use of undyed diesel fuel in trains</Description>
+						<LineNumber>3c(c)</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Train Use of Undyed Diesel - Credit -->
+			<xsd:element name="TrainUseOfUndyedDieselCrAmt" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Amount of credit for use of undyed diesel fuel in trains</Description>
+						<LineNumber>3c(d)</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+				<xsd:complexType>
+					<xsd:simpleContent>
+						<xsd:extension base="USAmountNNType">
+							<xsd:attribute name="creditReferenceNum" type="StringType" fixed="353" use="required"/>
+						</xsd:extension>
+					</xsd:simpleContent>
+				</xsd:complexType>
+			</xsd:element>
+
+			<!-- Bus Use of Undyed Diesel - Gallons -->
+			<xsd:element name="BusUseOfUndyedDieselGalsQty" type="FuelGallonsType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Use of undyed diesel fuel in buses</Description>
+						<LineNumber>3d(c)</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Bus Use of Undyed Diesel - Credit -->
+			<xsd:element name="BusUseOfUndyedDieselCreditAmt" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Amount of credit for use of Undyed diesel fuel in buses</Description>
+						<LineNumber>3d(d)</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+				<xsd:complexType>
+					<xsd:simpleContent>
+						<xsd:extension base="USAmountNNType">
+							<xsd:attribute name="creditReferenceNum" type="StringType" fixed="350" use="required"/>
+						</xsd:extension>
+					</xsd:simpleContent>
+				</xsd:complexType>
+			</xsd:element>
+
+			<!-- Exported Undyed Diesel Fuel - Gallons -->
+			<xsd:element name="ExpUndyedDieselFuelGalsQty" type="FuelGallonsType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Exported undyed diesel fuel - Gallons</Description>
+						<LineNumber>3e(c)</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Exported Undyed Diesel Fuel - Credit -->
+			<xsd:element name="ExpUndyedDieselFuelCreditAmt" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Exported undyed diesel fuel - Credit</Description>
+						<LineNumber>3e(d)</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+				<xsd:complexType>
+					<xsd:simpleContent>
+						<xsd:extension base="USAmountNNType">
+							<xsd:attribute name="creditReferenceNum" type="StringType" fixed="413" use="required"/>
+						</xsd:extension>
+					</xsd:simpleContent>
+				</xsd:complexType>
+			</xsd:element>
+
+			<!-- Exception to Nontaxable Use of Undyed Kerosene -->
+			<xsd:element name="UndyedKeroseneUseExceptionInd" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Kerosene contains visible evidence of dye</Description>
+						<LineNumber>4</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+				<xsd:complexType>
+					<xsd:simpleContent>
+						<xsd:extension base="CheckboxType">
+							<xsd:attribute name="referenceDocumentId" type="IdListType"/>
+							<xsd:attribute name="referenceDocumentName" type="StringType" fixed="EvidenceOfDyedKeroseneStatement"/>
+						</xsd:extension>
+					</xsd:simpleContent>
+				</xsd:complexType>
+			</xsd:element>
+
+			<!-- Nontaxable Use of Undyed Kerosene -->
+			<xsd:element name="NontaxableUseOfUndyedKerosene" type="UndyedDieselKeroseneType" minOccurs="0" maxOccurs="8">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Nontaxable use of undyed kerosene</Description>
+						<LineNumber>4a(a)</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Use on a Farm for Farming purposes - Gallons -->
+			<xsd:element name="FarmPrpsUndyedKeroseneGalsQty" type="FuelGallonsType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Use on a farm for farming purposes - Gallons</Description>
+						<LineNumber>4b(c)</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Use on a Farm for Farming purposes - Credit -->
+			<xsd:element name="FarmPrpsUndyedKeroseneCrAmt" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Use on a farm for farming purposes - Credit</Description>
+						<LineNumber>4b(d)</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+				<xsd:complexType>
+					<xsd:simpleContent>
+						<xsd:extension base="USAmountNNType">
+							<xsd:attribute name="creditReferenceNum" type="StringType" fixed="346" use="required"/>
+						</xsd:extension>
+					</xsd:simpleContent>
+				</xsd:complexType>
+			</xsd:element>
+
+			<!-- Undyed Kerosene used in Buses - Gallons -->
+			<xsd:element name="BusUseOfUndyedKeroseneGalsQty" type="FuelGallonsType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Undyed Kerosene used in Buses - Gallons</Description>
+						<LineNumber>4c(c)</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Bus Use of Undyed Kerosene  - Credit -->
+			<xsd:element name="BusUseOfUndyedKeroseneCrAmt" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Amount of credit for use of Undyed kerosene in buses</Description>
+						<LineNumber>4c(d)</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+				<xsd:complexType>
+					<xsd:simpleContent>
+						<xsd:extension base="USAmountNNType">
+							<xsd:attribute name="creditReferenceNum" type="StringType" fixed="347" use="required"/>
+						</xsd:extension>
+					</xsd:simpleContent>
+				</xsd:complexType>
+			</xsd:element>
+
+			<!-- Exported Undyed Kerosene - Gallons -->
+			<xsd:element name="ExportedUndyedKeroseneGalsQty" type="FuelGallonsType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Exported undyed kerosene - Gallons</Description>
+						<LineNumber>4d(c)</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Exported Undyed Kerosene - Credit -->
+			<xsd:element name="ExportedUndyedKeroseneCrAmt" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Exported undyed kerosene - Credit</Description>
+						<LineNumber>4d(d)</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+				<xsd:complexType>
+					<xsd:simpleContent>
+						<xsd:extension base="USAmountNNType">
+							<xsd:attribute name="creditReferenceNum" type="StringType" fixed="414" use="required"/>
+						</xsd:extension>
+					</xsd:simpleContent>
+				</xsd:complexType>
+			</xsd:element>
+
+			<!-- Nontaxable Use of Undyed Kerosene Taxed at $.044 -->
+			<xsd:element name="NontxUseUndyedKrsnTxdAt044" type="NontaxableUseTaxedAt044Type" minOccurs="0" maxOccurs="8">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Nontaxable use of undyed kerosene taxed at $.044</Description>
+						<LineNumber>4e</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Nontaxable Use of Undyed Kerosene Taxed at $.044 - Credit -->
+			<xsd:element name="NontxUseUndyedKrsnTxd044CrAmt" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Nontaxable use taxed at $.044 - Credit</Description>
+						<LineNumber>4e(d)</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+				<xsd:complexType>
+					<xsd:simpleContent>
+						<xsd:extension base="USAmountNNType">
+							<xsd:attribute name="creditReferenceNum" type="StringType" fixed="377" use="required"/>
+						</xsd:extension>
+					</xsd:simpleContent>
+				</xsd:complexType>
+			</xsd:element>
+
+			<!-- Nontaxable Use of Undyed Kerosene Taxed at $.219 -->
+			<xsd:element name="NontxUseUndyedKrsnTxd219" type="NontaxableUseTaxed219Type" minOccurs="0" maxOccurs="8">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Nontaxable use taxed at $.219</Description>
+						<LineNumber>4f</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Nontaxable Use of Undyed Kerosene taxed at $.219 - Credit -->
+			<xsd:element name="NontxUseUndyedKrsnTxd219CrAmt" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Nontaxable use taxed at $.219 - Credit</Description>
+						<LineNumber>4f(d)</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+				<xsd:complexType>
+					<xsd:simpleContent>
+						<xsd:extension base="USAmountNNType">
+							<xsd:attribute name="creditReferenceNum" type="StringType" fixed="369" use="required"/>
+						</xsd:extension>
+					</xsd:simpleContent>
+				</xsd:complexType>
+			</xsd:element>
+
+			<!-- Kerosene Taxed at $.244 - Gallons -->
+			<xsd:element name="KeroseneUsedInAvnTxd244GalsQty" type="FuelGallonsType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Kerosene taxed at $.244 - Gallons</Description>
+						<LineNumber>5a(c)</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Kerosene Taxed at $.244 - Credit -->
+			<xsd:element name="KeroseneUsedInAvnTxd244CrAmt" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Kerosene taxed at $.244 - Credit</Description>
+						<LineNumber>5a(d)</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+				<xsd:complexType>
+					<xsd:simpleContent>
+						<xsd:extension base="USAmountNNType">
+							<xsd:attribute name="creditReferenceNum" type="StringType" fixed="417" use="required"/>
+						</xsd:extension>
+					</xsd:simpleContent>
+				</xsd:complexType>
+			</xsd:element>
+
+			<!-- Kerosene Taxed at $.219 - Gallons -->
+			<xsd:element name="KeroseneUsedInAvnTxd219GalsQty" type="FuelGallonsType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Kerosene taxed at $.219 - Gallons</Description>
+						<LineNumber>5b(c)</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Kerosene Taxed at $.219 - Credit -->
+			<xsd:element name="KeroseneUsedInAvnTxd219CrAmt" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Kerosene taxed at $.219 - Credit</Description>
+						<LineNumber>5b(d)</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+				<xsd:complexType>
+					<xsd:simpleContent>
+						<xsd:extension base="USAmountNNType">
+							<xsd:attribute name="creditReferenceNum" type="StringType" fixed="355" use="required"/>
+						</xsd:extension>
+					</xsd:simpleContent>
+				</xsd:complexType>
+			</xsd:element>
+
+			<!-- Nontaxable Use Kerosene Used in NonCommercial Aviation Taxed At $.244 -->
+			<xsd:element name="NonTxKrsnUsedInAvnTxd244" type="NoncommercialAviationKeroseneType" minOccurs="0" maxOccurs="7">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Nontaxable use kerosene used in noncommercial aviation taxed at $.244</Description>
+						<LineNumber>5c(a)</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Nontaxable Use Taxed At $.244 - Credit -->
+			<xsd:element name="NonTxKrsnUsedInAvnTxd244CrAmt" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Nontaxable use taxed at $.244 - Credit</Description>
+						<LineNumber>5c(d)</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+				<xsd:complexType>
+					<xsd:simpleContent>
+						<xsd:extension base="USAmountNNType">
+							<xsd:attribute name="creditReferenceNum" type="StringType" fixed="346" use="required"/>
+						</xsd:extension>
+					</xsd:simpleContent>
+				</xsd:complexType>
+			</xsd:element>
+
+			<!-- Nontaxable Use Kerosene Used in NonCommercial Aviation Taxed At $.219 -->
+			<xsd:element name="NonTxKrsnUsedInAvnTxd219" type="NoncommercialAviationKeroseneType" minOccurs="0" maxOccurs="7">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Nontaxable use kerosene used in noncommercial aviation taxed at $.219</Description>
+						<LineNumber>5d(a)</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Nontaxable Use Taxed At $.219 - Credit -->
+			<xsd:element name="NonTxKrsnUsedInAvnTxd219CrAmt" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Nontaxable use taxed at $.219 - Credit</Description>
+						<LineNumber>5d(d)</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+				<xsd:complexType>
+					<xsd:simpleContent>
+						<xsd:extension base="USAmountNNType">
+							<xsd:attribute name="creditReferenceNum" type="StringType" fixed="369" use="required"/>
+						</xsd:extension>
+					</xsd:simpleContent>
+				</xsd:complexType>
+			</xsd:element>
+
+			<!-- LUST Tax Aviation Fuel -->
+			<xsd:element name="LUSTTxKrsnAvnFrgnTrdGalsQty" type="FuelGallonsType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>LUST tax aviation fuel</Description>
+						<LineNumber>5e(c)</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- LUST Tax Aviation Fuel - Credit -->
+			<xsd:element name="LUSTTxKrsnAvnFrgnTrdCrAmt" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>LUST tax aviation fuel - Credit</Description>
+						<LineNumber>5e(d)</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+				<xsd:complexType>
+					<xsd:simpleContent>
+						<xsd:extension base="USAmountNNType">
+							<xsd:attribute name="creditReferenceNum" type="StringType" fixed="433" use="required"/>
+						</xsd:extension>
+					</xsd:simpleContent>
+				</xsd:complexType>
+			</xsd:element>
+
+			<!-- Registration No. for Undyed Diesel Fuel -->
+			<xsd:element name="UndyedDieselRegistrationNum" type="RegistrationNumType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Registration no. for ultimate vendor of undyed diesel fuel</Description>
+						<LineNumber>6</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Exception to Undyed Diesel Sales -->
+			<xsd:element name="SalesUndyedDieselExceptionInd" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Diesel fuel sales that contain visible evidence of dye</Description>
+						<LineNumber>6</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+				<xsd:complexType>
+					<xsd:simpleContent>
+						<xsd:extension base="CheckboxType">
+							<xsd:attribute name="referenceDocumentId" type="IdListType"/>
+							<xsd:attribute name="referenceDocumentName" type="StringType" fixed="EvidenceOfDyedDieselFuelSoldStatement ToWhomDieselFuelSoldStatement"/>
+						</xsd:extension>
+					</xsd:simpleContent>
+				</xsd:complexType>
+			</xsd:element>
+
+			<!-- State or Local Gov Undyed Diesel - Gallons -->
+			<xsd:element name="SlsUndyedDslStLclGovtGalsQty" type="FuelGallonsType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>State or local gov undyed diesel - Gallons</Description>
+						<LineNumber>6a(c)</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- State or Local Gov Undyed Diesel - Credit -->
+			<xsd:element name="SlsUndyedDslUseStLclGovtCrAmt" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>State or local gov undyed diesel - Credit</Description>
+						<LineNumber>6a(d)</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+				<xsd:complexType>
+					<xsd:simpleContent>
+						<xsd:extension base="USAmountNNType">
+							<xsd:attribute name="creditReferenceNum" type="StringType" fixed="360" use="required"/>
+						</xsd:extension>
+					</xsd:simpleContent>
+				</xsd:complexType>
+			</xsd:element>
+
+			<!-- Use of Undyed Diesel Fuel in buses - Gallons -->
+			<xsd:element name="SlsUndyedDieselUseBusGalsQty" type="FuelGallonsType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Use of undyed diesel fuel in buses - Gallons</Description>
+						<LineNumber>6b(c)</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Use of Undyed Diesel Fuel in buses - Credit -->
+			<xsd:element name="SlsUndyedDieselUseBusCrAmt" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Amount of credit for use of Undyed diesel fuel in buses</Description>
+						<LineNumber>6b(d)</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+				<xsd:complexType>
+					<xsd:simpleContent>
+						<xsd:extension base="USAmountNNType">
+							<xsd:attribute name="creditReferenceNum" type="StringType" fixed="350" use="required"/>
+						</xsd:extension>
+					</xsd:simpleContent>
+				</xsd:complexType>
+			</xsd:element>
+
+			<!-- Registration No. for Undyed Kerosene -->
+			<xsd:element name="UndyedKeroseneRegistrationNum" type="RegistrationNumType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Registration no. for ultimate vendor of undyed kerosene </Description>
+						<LineNumber>7</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Exception to Undyed Kerosene Sales -->
+			<xsd:element name="SlsUndyedKeroseneExceptionInd" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Kerosene sales that contain visible evidence of dye</Description>
+						<LineNumber>7</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+				<xsd:complexType>
+					<xsd:simpleContent>
+						<xsd:extension base="CheckboxType">
+							<xsd:attribute name="referenceDocumentId" type="IdListType"/>
+							<xsd:attribute name="referenceDocumentName" type="StringType" fixed="EvidenceOfDyedKeroseneSoldStatement"/>
+						</xsd:extension>
+					</xsd:simpleContent>
+				</xsd:complexType>
+			</xsd:element>
+
+			<!-- Use of Kerosene by a State or Local Government - Gallons -->
+			<xsd:element name="SlsUndyedKrsnStLclGovtGalsQty" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Use of kerosene by a state or local government</Description>
+						<LineNumber>7a(c)</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+				<xsd:complexType>
+					<xsd:simpleContent>
+						<xsd:extension base="FuelGallonsType">
+							<xsd:attribute name="referenceDocumentId" type="IdListType"/>
+                           	<xsd:attribute name="referenceDocumentName" type="StringType" fixed="ToWhomKeroseneFuelSoldStatement"/>
+						</xsd:extension>
+					</xsd:simpleContent>
+				</xsd:complexType>
+			</xsd:element>
+
+			<!-- Sales of Kerosene from a Blocked Pump - Gallons -->
+			<xsd:element name="SlsUndyedKrsnBlockPumpGalsQty" type="FuelGallonsType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Sales of kerosene from a blocked pump</Description>
+						<LineNumber>7b(c)</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Sales of Kerosene from a Blocked Pump - Credit -->
+			<xsd:element name="SlsUndyedKrsnBlockPumpCrAmt" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Sales of kerosene from a blocked pump</Description>
+						<LineNumber>7b(d)</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+				<xsd:complexType>
+					<xsd:simpleContent>
+						<xsd:extension base="USAmountNNType">
+							<xsd:attribute name="creditReferenceNum" type="StringType" fixed="346" use="required"/>
+						</xsd:extension>
+					</xsd:simpleContent>
+				</xsd:complexType>
+			</xsd:element>
+
+			<!-- Use in Certain Buses - Gallons -->
+			<xsd:element name="SlsUndyedKrsnUseBusGalsQty" type="FuelGallonsType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Use in certain buses</Description>
+						<LineNumber>7c(c)</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Use in Certain Buses - Credit -->
+			<xsd:element name="SlsUndyedKrsnUseBusCrAmt" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Amount of credit for use in certain buses</Description>
+						<LineNumber>7c(d)</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+				<xsd:complexType>
+					<xsd:simpleContent>
+						<xsd:extension base="USAmountNNType">
+							<xsd:attribute name="creditReferenceNum" type="StringType" fixed="347" use="required"/>
+						</xsd:extension>
+					</xsd:simpleContent>
+				</xsd:complexType>
+			</xsd:element>
+
+			<!-- Registration No. for Registered Vendors of Aviation-Graded Kerosene -->
+			<xsd:element name="KeroseneForAvnRegistrationNum" type="RegistrationNumType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Registration No. for Registered Vendors of Aviation-Graded Kerosene</Description>
+						<LineNumber>8</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Use In Commercial Aviation Taxed At $.219 - Gallons -->
+			<xsd:element name="SlsKrsnUsedInAvnTxd219GalsQty" type="FuelGallonsType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Use in commercial aviation taxed at $.219</Description>
+						<LineNumber>8a(c)</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Use In Commercial Aviation Taxed At $.219 -->
+			<xsd:element name="SlsKrsnUsedInAvnTxd219CrAmt" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Use in commercial aviation taxed at $.219</Description>
+						<LineNumber>8a(d)</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+				<xsd:complexType>
+					<xsd:simpleContent>
+						<xsd:extension base="USAmountNNType">
+							<xsd:attribute name="creditReferenceNum" type="StringType" fixed="355" use="required"/>
+						</xsd:extension>
+					</xsd:simpleContent>
+				</xsd:complexType>
+			</xsd:element>
+
+			<!-- Use In Commercial Aviation Taxed At $.244 - Gallons -->
+			<xsd:element name="SlsKrsnUsedInAvnTxd244GalsQty" type="FuelGallonsType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Use in commercial aviation taxed at $.244 - Gallons</Description>
+						<LineNumber>8b(c)</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Use In Commercial Aviation Taxed At $.244 - Credit -->
+			<xsd:element name="SlsKrsnUsedInAvnTxd244CrAmt" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Use in commercial aviation taxed at $.244 - Credit</Description>
+						<LineNumber>8b(d)</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+				<xsd:complexType>
+					<xsd:simpleContent>
+						<xsd:extension base="USAmountNNType">
+							<xsd:attribute name="creditReferenceNum" type="StringType" fixed="417" use="required"/>
+						</xsd:extension>
+					</xsd:simpleContent>
+				</xsd:complexType>
+			</xsd:element>
+
+			<!-- Nonexempt Use In Non-Commercial Aviation - Gallons -->
+			<xsd:element name="SlsKrsnNnxmptUseInAvnGalsQty" type="FuelGallonsType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Nonexempt use in non-commercial aviation - Gallons</Description>
+						<LineNumber>8c(c)</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Nonexempt Use In Non-Commercial Aviation - Credit -->
+			<xsd:element name="SlsKrsnNnxmptUseInAvnCrAmt" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Nonexempt use in non-commercial aviation - Credit</Description>
+						<LineNumber>8c(d)</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+				<xsd:complexType>
+					<xsd:simpleContent>
+						<xsd:extension base="USAmountNNType">
+							<xsd:attribute name="creditReferenceNum" type="StringType" fixed="418" use="required"/>
+						</xsd:extension>
+					</xsd:simpleContent>
+				</xsd:complexType>
+			</xsd:element>
+
+			<!-- Other Nontaxable Use Taxed At $.244 -->
+			<xsd:element name="OtherNontaxableUseTaxedAt244" type="AviationGradeKeroseneType" minOccurs="0" maxOccurs="8">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Other nontaxable use taxed at $.244</Description>
+						<LineNumber>8d(a)</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Other Nontaxable Use Taxed At $.244 - Credit -->
+			<xsd:element name="SlsKrsnOthNontxTxd244CrAmt" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Other nontaxable use taxed at $.244 - Credit</Description>
+						<LineNumber>8d(d)</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+				<xsd:complexType>
+					<xsd:simpleContent>
+						<xsd:extension base="USAmountNNType">
+							<xsd:attribute name="creditReferenceNum" type="StringType" fixed="346" use="required"/>
+						</xsd:extension>
+					</xsd:simpleContent>
+				</xsd:complexType>
+			</xsd:element>
+
+			<!-- Other Nontaxable Use Taxed At $.219 -->
+			<xsd:element name="OtherNontaxableUseTaxedAt219" type="AviationGradeKeroseneType" minOccurs="0" maxOccurs="8">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Other nontaxable use taxed at $.219</Description>
+						<LineNumber>8e(a)</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Other Nontaxable Use Taxed At $.219 -->
+			<xsd:element name="SlsKrsnOthNontxTxd219CrAmt" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Other nontaxable use taxed at $.219</Description>
+						<LineNumber>8e(d)</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+				<xsd:complexType>
+					<xsd:simpleContent>
+						<xsd:extension base="USAmountNNType">
+							<xsd:attribute name="creditReferenceNum" type="StringType" fixed="369" use="required"/>
+						</xsd:extension>
+					</xsd:simpleContent>
+				</xsd:complexType>
+			</xsd:element>
+
+			<!-- LUST Tax Aviation Fuels - Gallons -->
+			<xsd:element name="LUSTTxSlsKrsnAvnFrgnTrdGalsQty" type="FuelGallonsType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Exported nontaxable aviation gasoline - gallons</Description>
+						<LineNumber>8f(c)</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- LUST Tax Aviation Fuel - Credit -->
+			<xsd:element name="LUSTTxSlsKrsnAvnFrgnTrdCrAmt" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>LUST tax aviation fuel - credit</Description>
+						<LineNumber>8f(d)</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+				<xsd:complexType>
+					<xsd:simpleContent>
+						<xsd:extension base="USAmountNNType">
+							<xsd:attribute name="creditReferenceNum" type="StringType" fixed="433" use="required"/>
+						</xsd:extension>
+					</xsd:simpleContent>
+				</xsd:complexType>
+			</xsd:element>
+
+			<!-- Reserved -->
+			<xsd:element name="AlcoholFuelCrRegistrationNum" type="RegistrationNumType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Reserved</Description>
+						<LineNumber>9</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Registration No. for Biodiesel or Renewable Diesel Mixture Credit -->
+			<xsd:element name="BiodieselRnwblRegistrationNum" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Registration No. for biodiesel mixture credit</Description>
+						<LineNumber>10</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+				<xsd:complexType>
+					<xsd:simpleContent>
+						<xsd:extension base="RegistrationNumType">
+							<xsd:attribute name="referenceDocumentId" type="IdListType"/>
+							<xsd:attribute name="referenceDocumentName" type="StringType" fixed="ModelOAndModelSCertificateStatement"/>
+						</xsd:extension>
+					</xsd:simpleContent>
+				</xsd:complexType>			</xsd:element>
+
+			<!-- Biodiesel Mixture Other Than Agri-Biodiesel - Gallons -->
+			<xsd:element name="BiodieselMixtureGallonsQty" type="FuelGallonsType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Biodiesel mixture other than agri-biodiesel - gallons</Description>
+						<LineNumber>10a(c)</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Biodiesel Mixture Other Than Agri-Biodiesel - Credit -->
+			<xsd:element name="BiodieselMixtureCreditAmt" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Biodiesel mixture other than agri-biodiesel - credit</Description>
+						<LineNumber>10a(d)</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+				<xsd:complexType>
+					<xsd:simpleContent>
+						<xsd:extension base="USAmountNNType">
+							<xsd:attribute name="referenceDocumentId" type="IdListType"/>
+				                       	<xsd:attribute name="referenceDocumentName" type="StringType" fixed="BiodieselResellerStatement"/>
+							<xsd:attribute name="creditReferenceNum" type="StringType" fixed="388" use="required"/>
+						</xsd:extension>
+					</xsd:simpleContent>
+				</xsd:complexType>
+			</xsd:element>
+
+			<!-- Agri-Biodiesel Mixture - Gallons -->
+			<xsd:element name="AgriBiodieselMixtureGallonsQty" type="FuelGallonsType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Agri-biodiesel mixture - gallons</Description>
+						<LineNumber>10b(c)</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Agri-Biodiesel Mixture - Credit -->
+			<xsd:element name="AgriBiodieselMixtureCreditAmt" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Agri-biodiesel mixture - credit</Description>
+						<LineNumber>10b(d)</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+				<xsd:complexType>
+					<xsd:simpleContent>
+						<xsd:extension base="USAmountNNType">
+							<xsd:attribute name="creditReferenceNum" type="StringType" fixed="390" use="required"/>
+						</xsd:extension>
+					</xsd:simpleContent>
+				</xsd:complexType>
+			</xsd:element>
+
+			<!-- Renewable Diesel Mixture - Gallons -->
+			<xsd:element name="RenewableDieselMixtureGalsQty" type="FuelGallonsType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Renewable diesel mixture - gallons</Description>
+						<LineNumber>10c(c)</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Renewable Diesel Mixture - Credit -->
+			<xsd:element name="RenewableDieselMixtureCrAmt" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Renewable diesel mixture - credit</Description>
+						<LineNumber>10c(d)</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+				<xsd:complexType>
+					<xsd:simpleContent>
+						<xsd:extension base="USAmountNNType">
+							<xsd:attribute name="creditReferenceNum" type="StringType" fixed="307" use="required"/>
+						</xsd:extension>
+					</xsd:simpleContent>
+				</xsd:complexType>
+			</xsd:element>
+
+			<!-- Liquified Petroleum Gas -->
+			<xsd:element name="NontxLiquifiedPetroleumGas" type="AlternativeFuelsType" minOccurs="0" maxOccurs="9">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Liquified petroleum gas</Description>
+						<LineNumber>11a(a)</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Liquified Petroleum Gas - Business -->
+			<xsd:element name="BusNontxLiquifiedPetroleumGas" type="BusNontaxableTypeOfUse" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Liquified petroleum gas - Business</Description>
+						<LineNumber>11a(a)</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Liquified Petroleum Gas - Credit -->
+			<xsd:element name="NontxLiquefiedPtrlmGasCrAmt" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Liquified petroleum gas - Credit</Description>
+						<LineNumber>11a(d)</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+				<xsd:complexType>
+					<xsd:simpleContent>
+						<xsd:extension base="USAmountNNType">
+							<xsd:attribute name="creditReferenceNum" type="StringType" fixed="419" use="required"/>
+						</xsd:extension>
+					</xsd:simpleContent>
+				</xsd:complexType>
+			</xsd:element>
+
+			<!-- P Series Fuels -->
+			<xsd:element name="NontxPSeriesFuels" type="AlternativeFuelsType" minOccurs="0" maxOccurs="9">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>P series fuels</Description>
+						<LineNumber>11b(a)</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- P Series Fuels - Business -->
+			<xsd:element name="BusNontxPSeriesFuels" type="BusNontaxableTypeOfUse" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>P series fuels - Business</Description>
+						<LineNumber>11b(a)</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- P Series Fuels - Credit -->
+			<xsd:element name="NontxPSeriesFuelsCreditAmt" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>P series fuels - Credit</Description>
+						<LineNumber>11b(d)</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+				<xsd:complexType>
+					<xsd:simpleContent>
+						<xsd:extension base="USAmountNNType">
+							<xsd:attribute name="creditReferenceNum" type="StringType" fixed="420" use="required"/>
+						</xsd:extension>
+					</xsd:simpleContent>
+				</xsd:complexType>
+			</xsd:element>
+
+			<!-- Compressed Natural Gas -->
+			<xsd:element name="NontxCompressedNaturalGas" type="AlternativeFuelsType" minOccurs="0" maxOccurs="9">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Compressed natural gas</Description>
+						<LineNumber>11c(a)</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Compressed Natural Gas - Business -->
+			<xsd:element name="BusNontxCompressedNaturalGas" type="BusNontaxableTypeOfUse" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Compressed natural gas - Business</Description>
+						<LineNumber>11c(a)</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Compressed Natural Gas - Credit -->
+			<xsd:element name="NontxCompressedNaturalGasCrAmt" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Compressed natural gas - Credit</Description>
+						<LineNumber>11c(d)</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+				<xsd:complexType>
+					<xsd:simpleContent>
+						<xsd:extension base="USAmountNNType">
+							<xsd:attribute name="creditReferenceNum" type="StringType" fixed="421" use="required"/>
+						</xsd:extension>
+					</xsd:simpleContent>
+				</xsd:complexType>
+			</xsd:element>
+
+			<!-- Liquified Hydrogen -->
+			<xsd:element name="NontxLiquifiedHydrogen" type="AlternativeFuelsType" minOccurs="0" maxOccurs="9">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Liquified hydrogen</Description>
+						<LineNumber>11d(a)</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Liquified Hydrogen - Business -->
+			<xsd:element name="BusNontxLiquifiedHydrogen" type="BusNontaxableTypeOfUse" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Liquified hydrogen - Business</Description>
+						<LineNumber>11d(a)</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Liquified Hydrogen - Credit -->
+			<xsd:element name="NontxLiquefiedHydrogenCrAmt" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Liquified hydrogen - Credit</Description>
+						<LineNumber>11d(d)</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+				<xsd:complexType>
+					<xsd:simpleContent>
+						<xsd:extension base="USAmountNNType">
+							<xsd:attribute name="creditReferenceNum" type="StringType" fixed="422" use="required"/>
+						</xsd:extension>
+					</xsd:simpleContent>
+				</xsd:complexType>
+			</xsd:element>
+
+			<!-- Liquified Fuel Derived From Coal -->
+			<xsd:element name="NontxLiqfdFuelDerivedFromCoal" type="AlternativeFuelsType" minOccurs="0" maxOccurs="9">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Liquified fuel derived from coal</Description>
+						<LineNumber>11e(a)</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Liquified Fuel Derived From Coal - Business -->
+			<xsd:element name="BusNontxLiqfdFuelDerFromCoal" type="BusNontaxableTypeOfUse" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Liquified fuel derived from coal - Business</Description>
+						<LineNumber>11e(a)</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Liquified Fuel Derived From Coal - Credit -->
+			<xsd:element name="NontxLiqfdFuelDerFromCoalCrAmt" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Liquified fuel derived from coal - Credit</Description>
+						<LineNumber>11e(d)</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+				<xsd:complexType>
+					<xsd:simpleContent>
+						<xsd:extension base="USAmountNNType">
+							<xsd:attribute name="creditReferenceNum" type="StringType" fixed="423" use="required"/>
+						</xsd:extension>
+					</xsd:simpleContent>
+				</xsd:complexType>
+			</xsd:element>
+
+			<!-- Liquid Hydrocarbons Derived From Biomass-->
+			<xsd:element name="NontaxLiqFuelDerFromBiomass" type="AlternativeFuelsType" minOccurs="0" maxOccurs="9">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Liquid hydrocarbons derived from biomass</Description>
+						<LineNumber>11f(a)</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Liquid Hydrocarbons Derived From Biomass - Business-->
+			<xsd:element name="BusNontxLiqFuelDerFromBiomass" type="BusNontaxableTypeOfUse" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Liquid hydrocarbons derived from biomass - Business</Description>
+						<LineNumber>11f(a)</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Liquid Hydrocarbons Derived From Biomass - Credit -->
+			<xsd:element name="NontxLiqFuelDerBiomassCrAmt" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Liquid hydrocarbons derived from biomass - Credit</Description>
+						<LineNumber>11f(d)</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+				<xsd:complexType>
+					<xsd:simpleContent>
+						<xsd:extension base="USAmountNNType">
+							<xsd:attribute name="creditReferenceNum" type="StringType" fixed="424" use="required"/>
+						</xsd:extension>
+					</xsd:simpleContent>
+				</xsd:complexType>
+			</xsd:element>
+
+			<!-- Liquified Natural Gas -->
+			<xsd:element name="NontxLiquefiedNaturalGas" type="AlternativeFuelsType" minOccurs="0" maxOccurs="9">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Liquified natural gas</Description>
+						<LineNumber>11g(a)</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Liquified Natural Gas - Business -->
+			<xsd:element name="BusNontxLiquefiedNaturalGas" type="BusNontaxableTypeOfUse" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Liquified natural gas - Business</Description>
+						<LineNumber>11g(a)</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Liquified Natural Gas - Credit -->
+			<xsd:element name="NontxLiquefiedNaturalGasCrAmt" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Liquified natural gas - Credit</Description>
+						<LineNumber>11g(d)</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+				<xsd:complexType>
+					<xsd:simpleContent>
+						<xsd:extension base="USAmountNNType">
+							<xsd:attribute name="creditReferenceNum" type="StringType" fixed="425" use="required"/>
+						</xsd:extension>
+					</xsd:simpleContent>
+				</xsd:complexType>
+			</xsd:element>
+
+			<!-- Liquefied Gas Derived from Biomass -->
+			<xsd:element name="NontxLiquefiedGasBiomass" type="AlternativeFuelsType" minOccurs="0" maxOccurs="9">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Liquefied gas derived from biomass</Description>
+						<LineNumber>11h(a)</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Liquefied Gas Derived from Biomass - Business -->
+			<xsd:element name="BusNontxLiquefiedGasDerBiomass" type="BusNontaxableTypeOfUse" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Liquefied gas derived from biomass - Business</Description>
+						<LineNumber>11h(a)</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Liquefied Gas Derived from Biomass - Credit -->
+			<xsd:element name="NontxLiquefiedGasBiomassCrAmt" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Liquefied gas derived from biomass - Credit</Description>
+						<LineNumber>11h(d)</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+				<xsd:complexType>
+					<xsd:simpleContent>
+						<xsd:extension base="USAmountNNType">
+							<xsd:attribute name="creditReferenceNum" type="StringType" fixed="435" use="required"/>
+						</xsd:extension>
+					</xsd:simpleContent>
+				</xsd:complexType>
+			</xsd:element>
+
+			<!-- Registration No.for Alternative Fuel Credit and Alternative Fuel Mixture Credit -->
+			<xsd:element name="AlternativeFuelRegistrationNum" type="RegistrationNumType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Registration no. for alternative fuel credit and alternative fuel mixture credit</Description>
+						<LineNumber>12</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Liquified Petroleum Gas - Gallons -->
+			<xsd:element name="LiquefiedPetroleumGasGalsQty" type="FuelGallonsType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Liquified petroleum gas - Gallons</Description>
+						<LineNumber>12a(c)</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Liquified Petroleum Gas - Credit -->
+			<xsd:element name="LiquefiedPetroleumGasCrAmt" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Liquified petroleum gas - Credit</Description>
+						<LineNumber>12a(d)</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+				<xsd:complexType>
+					<xsd:simpleContent>
+						<xsd:extension base="USAmountNNType">
+							<xsd:attribute name="creditReferenceNum" type="StringType" fixed="426" use="required"/>
+						</xsd:extension>
+					</xsd:simpleContent>
+				</xsd:complexType>
+			</xsd:element>
+
+			<!-- P Series Fuels - Gallons -->
+			<xsd:element name="PSeriesFuelsGallonsQty" type="FuelGallonsType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>P series fuels - Gallons</Description>
+						<LineNumber>12b(c)</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- P Series Fuels - Credit -->
+			<xsd:element name="PSeriesFuelsCreditAmt" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>P series fuels - Credit</Description>
+						<LineNumber>12b(d)</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+				<xsd:complexType>
+					<xsd:simpleContent>
+						<xsd:extension base="USAmountNNType">
+							<xsd:attribute name="creditReferenceNum" type="StringType" fixed="427" use="required"/>
+						</xsd:extension>
+					</xsd:simpleContent>
+				</xsd:complexType>
+			</xsd:element>
+
+			<!-- Compressed Natural Gas - Gallons -->
+			<xsd:element name="CompressedNaturalGasGalsQty" type="FuelGallonsType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Compressed natural gas - Gallons</Description>
+						<LineNumber>12c(c)</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Compressed Natural Gas - Credit -->
+			<xsd:element name="CompressedNaturalGasCreditAmt" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Compressed natural gas - Credit</Description>
+						<LineNumber>12c(d)</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+				<xsd:complexType>
+					<xsd:simpleContent>
+						<xsd:extension base="USAmountNNType">
+							<xsd:attribute name="creditReferenceNum" type="StringType" fixed="428" use="required"/>
+						</xsd:extension>
+					</xsd:simpleContent>
+				</xsd:complexType>
+			</xsd:element>
+
+			<!-- Liquified Hydrogen - Gallons -->
+			<xsd:element name="LiquefiedHydrogenGallonsQty" type="FuelGallonsType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Liquified hydrogen - Gallons</Description>
+						<LineNumber>12d(c)</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Liquified Hydrogen - Credit -->
+			<xsd:element name="LiquefiedHydrogenCreditAmt" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Liquified hydrogen - Credit</Description>
+						<LineNumber>12d(d)</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+				<xsd:complexType>
+					<xsd:simpleContent>
+						<xsd:extension base="USAmountNNType">
+							<xsd:attribute name="creditReferenceNum" type="StringType" fixed="429" use="required"/>
+						</xsd:extension>
+					</xsd:simpleContent>
+				</xsd:complexType>
+			</xsd:element>
+
+			<!-- Liquified Fuel Derived From Coal - Gallons -->
+			<xsd:element name="LiquidFuelDerFromCoalGalsQty" type="FuelGallonsType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Liquified fuel derived from coal - Gallons</Description>
+						<LineNumber>12e(c)</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Liquified Fuel Derived From Coal - Credit -->
+			<xsd:element name="LiquidFuelDerFromCoalCreditAmt" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Liquified fuel derived from coal - Credit</Description>
+						<LineNumber>12e(d)</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+				<xsd:complexType>
+					<xsd:simpleContent>
+						<xsd:extension base="USAmountNNType">
+							<xsd:attribute name="creditReferenceNum" type="StringType" fixed="430" use="required"/>
+						</xsd:extension>
+					</xsd:simpleContent>
+				</xsd:complexType>
+			</xsd:element>
+
+			<!-- Liquid Hydrocarbons Derived From Biomass - Gallons -->
+			<xsd:element name="LiquidFuelDerBiomassGalsQty" type="FuelGallonsType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Liquid hydrocarbons derived from biomass - Gallons</Description>
+						<LineNumber>12f(c)</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Liquid Hydrocarbons Derived From Biomass - Credit -->
+			<xsd:element name="LiquidFuelDerBiomassCrAmt" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Liquid hydrocarbons derived from biomass - Credit</Description>
+						<LineNumber>12f(d)</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+				<xsd:complexType>
+					<xsd:simpleContent>
+						<xsd:extension base="USAmountNNType">
+							<xsd:attribute name="creditReferenceNum" type="StringType" fixed="431" use="required"/>
+						</xsd:extension>
+					</xsd:simpleContent>
+				</xsd:complexType>
+			</xsd:element>
+
+			<!-- Liquified Natural Gas - Gallons -->
+			<xsd:element name="LiquefiedNaturalGasGallonsQty" type="FuelGallonsType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Liquified natural gas - Gallons</Description>
+						<LineNumber>12g(c)</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Liquified Natural Gas - Credit -->
+			<xsd:element name="LiquefiedNaturalGasCreditAmt" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Liquified natural gas - Credit</Description>
+						<LineNumber>12g(d)</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+				<xsd:complexType>
+					<xsd:simpleContent>
+						<xsd:extension base="USAmountNNType">
+							<xsd:attribute name="creditReferenceNum" type="StringType" fixed="432" use="required"/>
+						</xsd:extension>
+					</xsd:simpleContent>
+				</xsd:complexType>
+			</xsd:element>
+
+			<!-- Liquefied Gas Derived from Biomass -->
+			<xsd:element name="LiquefiedGasDerBiomassGalsQty" type="FuelGallonsType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Liquefied gas derived from biomass</Description>
+						<LineNumber>12h(c)</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Liquefied Gas Derived from Biomass - Credit -->
+			<xsd:element name="LiquefiedGasDerBiomassCrAmt" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Liquefied gas derived from biomass - Credit</Description>
+						<LineNumber>12h(d)</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+				<xsd:complexType>
+					<xsd:simpleContent>
+						<xsd:extension base="USAmountNNType">
+							<xsd:attribute name="creditReferenceNum" type="StringType" fixed="436" use="required"/>
+						</xsd:extension>
+					</xsd:simpleContent>
+				</xsd:complexType>
+			</xsd:element>
+
+			<!-- Compressed Gas Derived from Biomass (GGE= 121 cu.ft.) -->
+			<xsd:element name="CompressedGasBiomassGGEQty" type="FuelGallonsType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Compressed gas derived from biomass (GGE= 121 cu.ft.)</Description>
+						<LineNumber>12i(c)</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Compressed Gas Derived from Biomass (GGE= 121 cu.ft.) - Credit -->
+			<xsd:element name="CompressedGasBiomassCreditAmt" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Compressed Gas Derived from Biomass (GGE= 121 cu.ft.) - Credit</Description>
+						<LineNumber>12i(d)</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+				<xsd:complexType>
+					<xsd:simpleContent>
+						<xsd:extension base="USAmountNNType">
+							<xsd:attribute name="creditReferenceNum" type="StringType" fixed="437" use="required"/>
+						</xsd:extension>
+					</xsd:simpleContent>
+				</xsd:complexType>
+			</xsd:element>
+
+			<!-- Registration No. for Registered Credit Card Issuers -->
+			<xsd:element name="CreditCardIssrRegistrationNum" type="RegistrationNumType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Registration No. for Registered Credit Card issuers</Description>
+						<LineNumber>13</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Diesel Fuel Sold State or Local Gov - Gallons -->
+			<xsd:element name="DslFuelSoldStLocalGovtGalsQty" type="FuelGallonsType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Diesel fuel sold state or local gov - Gallons</Description>
+						<LineNumber>13a(c)</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Diesel Fuel Sold State or Local Gov - Credit -->
+			<xsd:element name="DslFuelSoldStLocalGovtCrAmt" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Diesel fuel sold state or local gov - Credit</Description>
+						<LineNumber>13a(d)</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+				<xsd:complexType>
+					<xsd:simpleContent>
+						<xsd:extension base="USAmountNNType">
+							<xsd:attribute name="creditReferenceNum" type="StringType" fixed="360" use="required"/>
+						</xsd:extension>
+					</xsd:simpleContent>
+				</xsd:complexType>
+			</xsd:element>
+
+			<!-- Kerosene Sold State or Local Gov - Gallons -->
+			<xsd:element name="KrsnFuelSoldStLocalGovtGalsQty" type="FuelGallonsType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Kerosene sold state or local gov - Gallons</Description>
+						<LineNumber>13b(c)</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Kerosene Sold State or Local Gov - Credit -->
+			<xsd:element name="KrsnFuelSoldStLocalGovtCrAmt" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Kerosene sold state or local gov - Credit</Description>
+						<LineNumber>13b(d)</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+				<xsd:complexType>
+					<xsd:simpleContent>
+						<xsd:extension base="USAmountNNType">
+							<xsd:attribute name="creditReferenceNum" type="StringType" fixed="346" use="required"/>
+						</xsd:extension>
+					</xsd:simpleContent>
+				</xsd:complexType>
+			</xsd:element>
+
+			<!-- Aviation Kerosene For Use State or Local Gov - Gallons -->
+			<xsd:element name="KrsnAvnSoldStLocalGovtGalsQty" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Aviation kerosene for use state or local gov - Gallons</Description>
+						<LineNumber>13c(c)</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+				<xsd:complexType>
+					<xsd:simpleContent>
+						<xsd:extension base="FuelGallonsType">
+							<xsd:attribute name="keroseneTaxRateCd">
+								<xsd:simpleType>
+									<xsd:restriction base="StringType">
+										<xsd:enumeration value="TAXEDAT244"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:attribute>
+						</xsd:extension>
+					</xsd:simpleContent>
+				</xsd:complexType>
+			</xsd:element>
+
+			<!-- Aviation Kerosene For Use State or Local Gov - Credit -->
+			<xsd:element name="KrsnAvnSoldStLocalGovtCrAmt" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Aviation kerosene for use state or local gov - Credit</Description>
+						<LineNumber>13c(d)</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+				<xsd:complexType>
+					<xsd:simpleContent>
+						<xsd:extension base="USAmountNNType">
+							<xsd:attribute name="referenceDocumentId" type="IdListType"/>
+				                       	<xsd:attribute name="referenceDocumentName" type="StringType" fixed="NontaxableUseFuelsCreditCardUsersStatement"/>
+							<xsd:attribute name="creditReferenceNum" type="StringType" fixed="369" use="required"/>
+						</xsd:extension>
+					</xsd:simpleContent>
+				</xsd:complexType>
+			</xsd:element>
+
+			<!-- Nontaxable Use of Diesel Water Fuel Emulsion -->
+			<xsd:element name="NontxUseDieselWaterEmulsion" type="DieselWaterFuelEmulsionType" minOccurs="0" maxOccurs="9">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Nontaxable use of diesel water fuel emulsion</Description>
+						<LineNumber>14a(a)</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Nontaxable Use of Diesel Water Fuel Emulsion - Business -->
+			<xsd:element name="BusNontxUseDieselWtrEmulsion" type="BusNontaxableTypeOfUse" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Nontaxable use of diesel water fuel emulsion - Business</Description>
+						<LineNumber>14a(a)</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Nontaxable Use of Diesel Water Fuel Emulsion - Credit -->
+			<xsd:element name="NontxUseDieselWtrEmulsionCrAmt" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Nontaxable use of diesel water fuel emulsion</Description>
+						<LineNumber>14a(d)</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+				<xsd:complexType>
+					<xsd:simpleContent>
+						<xsd:extension base="USAmountNNType">
+							<xsd:attribute name="referenceDocumentId" type="IdListType"/>
+				                       	<xsd:attribute name="referenceDocumentName" type="StringType" fixed="NontaxableUseFuelsCreditCardUsersStatement"/>
+							<xsd:attribute name="creditReferenceNum" type="StringType" fixed="309" use="required"/>
+						</xsd:extension>
+					</xsd:simpleContent>
+				</xsd:complexType>
+			</xsd:element>
+
+			<!-- Exported Nontaxable Use of Diesel Water Fuel Emulsion - Gallons -->
+			<xsd:element name="ExpNontxUseDslWtrEmulsionQty" type="FuelGallonsType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Exported nontaxable use of diesel water fuel emulsion - Gallons</Description>
+						<LineNumber>14b(c)</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Exported Nontaxable Use of Diesel Water Fuel Emulsion - Credit -->
+			<xsd:element name="ExpNontxUseDslWtrEmulsionCrAmt" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Exported nontaxable use of diesel water fuel emulsion - Credit</Description>
+						<LineNumber>14b(d)</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+				<xsd:complexType>
+					<xsd:simpleContent>
+						<xsd:extension base="USAmountNNType">
+							<xsd:attribute name="creditReferenceNum" type="StringType" fixed="306" use="required"/>
+						</xsd:extension>
+					</xsd:simpleContent>
+				</xsd:complexType>
+			</xsd:element>
+
+			<!-- Registration No. for Diesel-Water Fuel Emulsion Blending -->
+			<xsd:element name="DieselWtrBlndgRegistrationNum" type="RegistrationNumType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Registration No. for Diesel-Water Fuel Emulsion Blending</Description>
+						<LineNumber>15</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Blender Credit Use of Diesel Water Fuel Emulsion - Gallons -->
+			<xsd:element name="BlndrCrUseDslWtrEmulsionQty" type="FuelGallonsType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Blender credit use of diesel water fuel emulsion - Gallons</Description>
+						<LineNumber>15(c)</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Blender Credit Use of Diesel Water Fuel Emulsion - Credit -->
+			<xsd:element name="BlndrCrUseDslWtrEmulsionCrAmt" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Blender credit use of diesel water fuel emulsion - Credit</Description>
+						<LineNumber>15(d)</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+				<xsd:complexType>
+					<xsd:simpleContent>
+						<xsd:extension base="USAmountNNType">
+							<xsd:attribute name="referenceDocumentId" type="IdListType"/>
+				                       	<xsd:attribute name="referenceDocumentName" type="StringType" fixed="DieselWaterFuelEmulsionBlendingStatement"/>
+							<xsd:attribute name="creditReferenceNum" type="StringType" fixed="310" use="required"/>
+						</xsd:extension>
+					</xsd:simpleContent>
+				</xsd:complexType>
+			</xsd:element>
+
+			<!-- Exported Dyed Diesel Fuel - Gallons -->
+			<xsd:element name="ExportedDyedDieselFuelGalsQty" type="FuelGallonsType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Exported dyed diesel fuel - Gallons</Description>
+						<LineNumber>16a(c)</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Exported Dyed Diesel Fuel - Credit -->
+			<xsd:element name="ExportedDyedDieselFuelCrAmt" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Exported dyed diesel fuel - Credit</Description>
+						<LineNumber>16a(d)</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+				<xsd:complexType>
+					<xsd:simpleContent>
+						<xsd:extension base="USAmountNNType">
+							<xsd:attribute name="creditReferenceNum" type="StringType" fixed="415" use="required"/>
+						</xsd:extension>
+					</xsd:simpleContent>
+				</xsd:complexType>
+			</xsd:element>
+
+			<!-- Exported Dyed Kerosene - Gallons -->
+			<xsd:element name="ExportedDyedKeroseneGallonsQty" type="FuelGallonsType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Exported dyed kerosene - Gallons</Description>
+						<LineNumber>16b(c)</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Exported Dyed Kerosene - Credit -->
+			<xsd:element name="ExportedDyedKeroseneCreditAmt" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Exported dyed kerosene - Credit</Description>
+						<LineNumber>16b(d)</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+				<xsd:complexType>
+					<xsd:simpleContent>
+						<xsd:extension base="USAmountNNType">
+							<xsd:attribute name="creditReferenceNum" type="StringType" fixed="416" use="required"/>
+						</xsd:extension>
+					</xsd:simpleContent>
+				</xsd:complexType>
+			</xsd:element>
+
+			<!-- Total Income Tax Credit -->
+			<xsd:element name="TotalFuelTaxCreditAmt" type="USAmountNNType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Total income tax credit</Description>
+						<LineNumber>17</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+		</xsd:sequence>
+
+	</xsd:complexType>
+
+
+	<!-- ===== Type for Gasohol ===== -->
+
+
+	<xsd:complexType name="GasoholType">
+		<xsd:sequence>
+			<xsd:element name="NontaxableUseOfFuelTypeCd">
+				<xsd:annotation>
+					<xsd:documentation>(a)</xsd:documentation>
+				</xsd:annotation>
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:enumeration value="04"/>
+						<xsd:enumeration value="05"/>
+						<xsd:enumeration value="07"/>
+						<xsd:enumeration value="11"/>
+						<xsd:enumeration value="13"/>
+						<xsd:enumeration value="14"/>
+						<xsd:enumeration value="15"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element name="GallonsQty" type="FuelGallonsType">
+				<xsd:annotation>
+					<xsd:documentation>(c)</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+
+
+	<!-- ===== Type for Undyed Diesel and Kerosene ===== -->
+
+
+	<xsd:complexType name="UndyedDieselKeroseneType">
+		<xsd:sequence>
+			<xsd:element name="NontaxableUseOfFuelTypeCd">
+				<xsd:annotation>
+					<xsd:documentation>(a)</xsd:documentation>
+				</xsd:annotation>
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:enumeration value="02"/>
+						<xsd:enumeration value="06"/>
+						<xsd:enumeration value="07"/>
+						<xsd:enumeration value="08"/>
+						<xsd:enumeration value="11"/>
+						<xsd:enumeration value="13"/>
+						<xsd:enumeration value="14"/>
+						<xsd:enumeration value="15"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element name="GallonsQty" type="FuelGallonsType">
+				<xsd:annotation>
+					<xsd:documentation>(c)</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+
+
+	<!-- ===== Types for Aviation Fuel ===== -->
+
+	<xsd:complexType name="AviationFuelGasolineType">
+		<xsd:sequence>
+			<xsd:element name="NontaxableUseOfFuelTypeCd">
+				<xsd:annotation>
+					<xsd:documentation>(a)</xsd:documentation>
+				</xsd:annotation>
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:enumeration value="01"/>
+						<xsd:enumeration value="02"/>
+						<xsd:enumeration value="09"/>
+						<xsd:enumeration value="10"/>
+						<xsd:enumeration value="11"/>
+						<xsd:enumeration value="13"/>
+						<xsd:enumeration value="14"/>
+						<xsd:enumeration value="15"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element name="GallonsQty" type="FuelGallonsType">
+				<xsd:annotation>
+					<xsd:documentation>(c)</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+
+
+	<!-- ===== Type for Aviation Grade Kerosene ===== -->
+
+	<xsd:complexType name="AviationGradeKeroseneType">
+		<xsd:sequence>
+			<xsd:element name="NontaxableUseOfFuelTypeCd">
+				<xsd:annotation>
+					<xsd:documentation>(a)</xsd:documentation>
+				</xsd:annotation>
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:enumeration value="01"/>
+						<xsd:enumeration value="09"/>
+						<xsd:enumeration value="10"/>
+						<xsd:enumeration value="11"/>
+						<xsd:enumeration value="13"/>
+						<xsd:enumeration value="14"/>
+						<xsd:enumeration value="15"/>
+						<xsd:enumeration value="16"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element name="GallonsQty" type="FuelGallonsType">
+				<xsd:annotation>
+					<xsd:documentation>(c)</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+
+
+	<!-- ===== Type for Alternative Fuels ===== -->
+
+	<xsd:complexType name="AlternativeFuelsType">
+		<xsd:sequence>		
+			<xsd:element name="NontaxableUseOfFuelTypeCd">
+				<xsd:annotation>
+					<xsd:documentation>(a)</xsd:documentation>
+				</xsd:annotation>
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:enumeration value="01"/>
+						<xsd:enumeration value="02"/>
+						<xsd:enumeration value="04"/>
+						<xsd:enumeration value="06"/>
+						<xsd:enumeration value="07"/>
+						<xsd:enumeration value="11"/>
+						<xsd:enumeration value="13"/>
+						<xsd:enumeration value="14"/>
+						<xsd:enumeration value="15"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element name="GallonsQty" type="FuelGallonsType">
+				<xsd:annotation>
+					<xsd:documentation>(c)</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+
+
+	<!-- ===== Type for Nontaxable Use of Diesel Water Fuel Emulsion ===== -->
+
+	<xsd:complexType name="DieselWaterFuelEmulsionType">
+		<xsd:sequence>		
+			<xsd:element name="NontaxableUseOfFuelTypeCd">
+				<xsd:annotation>
+					<xsd:documentation>(a)</xsd:documentation>
+				</xsd:annotation>
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:enumeration value="01"/>
+						<xsd:enumeration value="02"/>
+						<xsd:enumeration value="06"/>
+						<xsd:enumeration value="07"/>
+						<xsd:enumeration value="08"/>
+						<xsd:enumeration value="11"/>
+						<xsd:enumeration value="13"/>
+						<xsd:enumeration value="14"/>
+						<xsd:enumeration value="15"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element name="GallonsQty" type="FuelGallonsType">
+				<xsd:annotation>
+					<xsd:documentation>(c)</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+
+
+	<!-- ===== Type for Business Nontaxable ===== -->
+
+	<xsd:complexType name="BusNontaxableTypeOfUse">
+		<xsd:sequence>
+			<xsd:element name="FuelTaxLocalBusCd">
+				<xsd:annotation>
+					<xsd:documentation>(a)</xsd:documentation>
+				</xsd:annotation>
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:enumeration value="BUS"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element name="NontaxableUseOfFuelTypeCd">
+				<xsd:annotation>
+					<xsd:documentation>(a)</xsd:documentation>
+				</xsd:annotation>
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:enumeration value="05"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element name="CreditRt">
+				<xsd:annotation>
+					<xsd:documentation>(b)</xsd:documentation>
+				</xsd:annotation>
+				<xsd:simpleType>
+					<xsd:restriction base="RatioType">
+						<xsd:totalDigits value="3"/>
+						<xsd:fractionDigits value="3"/>
+						<xsd:minInclusive value=".000"/>
+						<xsd:maxInclusive value=".999"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>			
+			<xsd:element name="GallonsQty" type="FuelGallonsType">
+				<xsd:annotation>
+					<xsd:documentation>(c)</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+
+
+	<!-- ===== Type for Noncommercial Aviation Kerosene Type ===== -->
+
+	<xsd:complexType name="NoncommercialAviationKeroseneType">
+		<xsd:sequence>
+			<xsd:element name="NontaxableUseOfFuelTypeCd">
+				<xsd:annotation>
+					<xsd:documentation>(a)</xsd:documentation>
+				</xsd:annotation>
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:enumeration value="01"/>
+						<xsd:enumeration value="09"/>
+						<xsd:enumeration value="10"/>
+						<xsd:enumeration value="11"/>
+						<xsd:enumeration value="13"/>
+						<xsd:enumeration value="15"/>
+						<xsd:enumeration value="16"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element name="GallonsQty" type="FuelGallonsType">
+				<xsd:annotation>
+					<xsd:documentation>(c)</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+
+
+	<!-- ===== Nontaxable Use of Undyed Kerosene Taxed at $.044 ===== -->
+
+	<xsd:complexType name="NontaxableUseTaxedAt044Type">
+		<xsd:sequence>
+			<xsd:element name="NontaxableUseOfFuelTypeCd">
+				<xsd:annotation>
+					<xsd:documentation>(a)</xsd:documentation>
+				</xsd:annotation>
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:enumeration value="02"/>
+						<xsd:enumeration value="06"/>
+						<xsd:enumeration value="07"/>
+						<xsd:enumeration value="08"/>
+						<xsd:enumeration value="11"/>
+						<xsd:enumeration value="13"/>
+						<xsd:enumeration value="14"/>
+						<xsd:enumeration value="15"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element name="GallonsQty" type="FuelGallonsType">
+				<xsd:annotation>
+					<xsd:documentation>(c)</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+
+
+	<!-- ===== Nontaxable Use of Undyed Kerosene Taxed at $.219 ===== -->
+
+	<xsd:complexType name="NontaxableUseTaxed219Type">
+		<xsd:sequence>
+			<xsd:element name="NontaxableUseOfFuelTypeCd">
+				<xsd:annotation>
+					<xsd:documentation>(a)</xsd:documentation>
+				</xsd:annotation>
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:enumeration value="02"/>
+						<xsd:enumeration value="06"/>
+						<xsd:enumeration value="07"/>
+						<xsd:enumeration value="08"/>
+						<xsd:enumeration value="11"/>
+						<xsd:enumeration value="13"/>
+						<xsd:enumeration value="14"/>
+						<xsd:enumeration value="15"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element name="GallonsQty" type="FuelGallonsType">
+				<xsd:annotation>
+					<xsd:documentation>(c)</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+
+
+</xsd:schema>

@@ -1,0 +1,224 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema targetNamespace="http://www.irs.gov/efile" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.irs.gov/efile" elementFormDefault="qualified" attributeFormDefault="unqualified">
+
+	<xsd:annotation>
+		<xsd:documentation>
+			<Description>IRS e-file Individual Income Tax Schema - IRS Form 8958 Allocation of Tax Amounts Between Certain Individuals in Community Property States</Description>
+			<TaxYear>2018</TaxYear>
+			<MaturityLevel>Final Release</MaturityLevel>
+			<ReleaseDate>February 13, 2019</ReleaseDate>
+		</xsd:documentation>
+	</xsd:annotation>
+	
+	<xsd:include schemaLocation="../../../Common/efileTypes.xsd"/>
+
+	<!-- ====================================================================== -->
+	<!-- ============================ IRS Form 8958 =========================== -->
+	<!-- ====================================================================== -->
+
+	<xsd:element name="IRS8958">
+		<xsd:annotation>
+			<xsd:documentation>IRS Form 8958</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:complexContent>
+				<xsd:extension base="IRS8958Type">
+					<xsd:attributeGroup ref="DocumentAttributes">
+						<xsd:annotation>
+							<xsd:documentation>Common return document attributes</xsd:documentation>
+						</xsd:annotation>
+					</xsd:attributeGroup>
+					<xsd:attribute name="documentName" type="xsd:string" fixed="IRS8958">
+						<xsd:annotation>
+							<xsd:documentation>IRS internal use only. To avoid error in the return, do not include the attribute name or value.</xsd:documentation>
+						</xsd:annotation>
+					</xsd:attribute>
+				<xsd:attribute name="referenceDocumentId" type="IdListType" />
+				<xsd:attribute name="referenceDocumentName" type="StringType" fixed="BinaryAttachment"/>					
+				</xsd:extension>
+			</xsd:complexContent>
+		</xsd:complexType>
+	</xsd:element>
+
+	<xsd:complexType name="IRS8958Type">
+		<xsd:annotation>
+			<xsd:documentation>Content model for IRS Form 8958</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+
+			<!-- Spouse Or Partner First Name -->
+			<xsd:element name="SpouseOrPartnerFirstNm" type="PersonFirstNameType">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Spouse Or Partner First Name</Description>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Spouse Or Partner Last Name -->
+			<xsd:element name="SpouseOrPartnerLastNm" type="PersonLastNameType">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Spouse Or Partner Last Name</Description>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Spouse Or Partner Social Security Number -->
+			<xsd:element name="SpouseOrPartnerSSN" type="SSNType">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Spouse Or Partner Social Security Number</Description>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Wages Amount -->
+			<xsd:element name="WagesAllocnGrp" type="AllocationInfoDetailType" minOccurs="0" maxOccurs="40">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Wages Amount</Description>
+						<LineNumber>1</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Taxable Interest Amount -->
+			<xsd:element name="TaxableInterestAllocnGrp" type="AllocationInfoDetailType" minOccurs="0" maxOccurs="40">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Taxable Interest Amount</Description>
+						<LineNumber>2</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Ordinary Dividends Amount -->
+			<xsd:element name="OrdinaryDividendsAllocnGrp" type="AllocationInfoDetailType" minOccurs="0" maxOccurs="40">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Ordinary Dividends Amount</Description>
+						<LineNumber>3</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- State Local Income Tax Refund Amount -->
+			<xsd:element name="StLocalIncomeTxRefundAllocnGrp" type="AllocationInfoDetailType" minOccurs="0" maxOccurs="40">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>State Local Income Tax Refund Amount</Description>
+						<LineNumber>4</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Self Employment Income Amount -->
+			<xsd:element name="SelfEmploymentIncomeAllocnGrp" type="AllocationInfoDetailType" minOccurs="0" maxOccurs="40">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Self Employment Income Amount</Description>
+						<LineNumber>5</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Capital Gain Loss Amount -->
+			<xsd:element name="CapitalGainLossAllocnGrp" type="AllocationInfoDetailType" minOccurs="0" maxOccurs="40">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Capital Gain Loss Amount</Description>
+						<LineNumber>6</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Taxable Pensions Amount -->
+			<xsd:element name="TaxablePensionsAllocnGrp" type="AllocationInfoDetailType" minOccurs="0" maxOccurs="40">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Taxable Pensions Amount</Description>
+						<LineNumber>7</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Rental Real Estate Amount -->
+			<xsd:element name="RentalRealEstateAllocnGrp" type="AllocationInfoDetailType" minOccurs="0" maxOccurs="40">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Rental Real Estate Amount</Description>
+						<LineNumber>8</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Deductible Self Employment Tax Amount -->
+			<xsd:element name="DedSelfEmploymentTaxAllocnGrp" type="AllocationInfoDetailType" minOccurs="0" maxOccurs="40">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Deductible Self Employment Tax Amount</Description>
+						<LineNumber>9</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Self Employment Tax Amount -->
+			<xsd:element name="SelfEmploymentTaxAllocnGrp" type="AllocationInfoDetailType" minOccurs="0" maxOccurs="40">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Self Employment Tax Amount</Description>
+						<LineNumber>10</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Withholding Tax Amount -->
+			<xsd:element name="WithholdingTaxAllocnGrp" type="AllocationInfoDetailType" minOccurs="0" maxOccurs="40">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Withholding Tax Amount</Description>
+						<LineNumber>11</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Other Amount -->
+			<xsd:element name="OtherItemAllocnGrp" type="AllocationInfoDetailType" minOccurs="0" maxOccurs="40">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Other Amount</Description>
+						<LineNumber>12</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<!-- Type use in this file -->
+	<xsd:complexType name="AllocationInfoDetailType">
+		<xsd:sequence>
+	
+			<xsd:element name="Desc" minOccurs="0">
+				<xsd:simpleType>
+					<xsd:restriction base="TextType">
+						<xsd:maxLength value="40"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+
+			<!-- Total Allocation Amount -->
+			<xsd:element name="TotalAllocationAmt" type="USAmountType" minOccurs="0"/>
+
+			<!-- Primary Taxpayer Allocation Amount -->
+			<xsd:element name="PrimaryTaxpayerAllocationAmt" type="USAmountType" minOccurs="0"/>
+
+			<!-- Spouse Or Partner Social Security Number Amount -->
+			<xsd:element name="SpouseOrPartnerAllocationAmt" type="USAmountType" minOccurs="0"/>
+
+		</xsd:sequence>
+	</xsd:complexType>
+
+</xsd:schema>
+

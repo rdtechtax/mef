@@ -1,0 +1,317 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns="http://www.irs.gov/efile" xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.irs.gov/efile" elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.0">
+
+	<xsd:annotation>
+		<xsd:documentation>
+			<Description>IRS e-file Schema - IRS Form 8814</Description>
+			<TaxYear>2018</TaxYear>
+			<MaturityLevel>Final Release</MaturityLevel>
+			<ReleaseDate>February 13, 2019</ReleaseDate>
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:include schemaLocation="../../../Common/efileTypes.xsd"/>
+
+	<!-- ================================================================== -->
+	<!-- ======================  IRS FORM 8814 =============================== -->
+	<!-- ================================================================== -->
+
+	<xsd:element name="IRS8814">
+		<xsd:annotation>
+			<xsd:documentation>IRS FORM 8814</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:complexContent>
+				<xsd:extension base="IRS8814Type">
+					<xsd:attributeGroup ref="DocumentAttributes">
+						<xsd:annotation>
+							<xsd:documentation>Common return document attributes</xsd:documentation>
+						</xsd:annotation>
+					</xsd:attributeGroup>
+					<xsd:attribute name="documentName" type="xsd:string" fixed="IRS8814">
+						<xsd:annotation>
+							<xsd:documentation>IRS internal use only. To avoid error in the return, do not include the attribute name or value.</xsd:documentation>
+						</xsd:annotation>
+					</xsd:attribute>
+				</xsd:extension>
+			</xsd:complexContent>
+		</xsd:complexType>
+	</xsd:element>
+	
+	<xsd:complexType name="IRS8814Type">
+		<xsd:annotation>
+			<xsd:documentation>Content model for FORM 8814</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+		
+			<!-- Child's name -->
+			<xsd:element name="ChildNm" type="PersonNameType">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Child's name</Description>
+						<LineNumber>A</LineNumber>
+						<ELFFieldNumber>0010</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Child's name control -->
+			<xsd:element name="ChildNameControlTxt" type="PersonNameControlType">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Child's name control</Description>
+						<LineNumber>A</LineNumber>
+						<ELFFieldNumber>0015</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Child's SSN -->
+			<xsd:element name="ChildSSN" type="SSNType">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Child's SSN</Description>
+						<LineNumber>B</LineNumber>
+						<ELFFieldNumber>0020</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Multiple Form 8814 indicator -->
+			<xsd:element name="MultipleForm8814Ind" type="CheckboxType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Multiple Form 8814 indicator</Description>
+						<LineNumber>C</LineNumber>
+						<ELFFieldNumber>0030</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			
+			<!-- =============== Part I - Child's Interest and Dividends to Report on Your Return =============== -->
+			<!-- Child's Taxable Interest Amount -->
+			<xsd:element name="ChildTaxableInterestAmt" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Child's taxable interest amount</Description>
+						<LineNumber>1a</LineNumber>
+						<ELFFieldNumber>0100</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+				<xsd:complexType>
+					<xsd:simpleContent>
+						<xsd:extension base="USAmountType">
+							<xsd:attribute name="referenceDocumentId" type="IdListType"/>
+							<xsd:attribute name="referenceDocumentName" type="StringType" fixed="ChildTaxableInterestStatement"/>
+						</xsd:extension>
+					</xsd:simpleContent>
+				</xsd:complexType>
+			</xsd:element>
+			
+		<!-- Child's Taxable Exempt Interest Amount -->
+		<xsd:element name="ChildTaxExemptInterestAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Child's taxable exempt interest amount</Description>
+						<LineNumber>1b</LineNumber>
+						<ELFFieldNumber>0110</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			
+		<!-- Child's Ordinary Dividend Amount -->
+		<xsd:element name="ChildOrdinaryDividendAmt" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Child's ordinary dividend amount</Description>
+						<LineNumber>2a</LineNumber>
+						<ELFFieldNumber>0135</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+				<xsd:complexType>
+					<xsd:simpleContent>
+						<xsd:extension base="USAmountType">
+							<xsd:attribute name="nomineeDistributionCd" type="StringType" fixed="ND">
+								<xsd:annotation>
+									<xsd:documentation>
+										<ELFFieldNumber>0120</ELFFieldNumber>
+									</xsd:documentation>
+								</xsd:annotation>
+							</xsd:attribute>
+							<xsd:attribute name="nomineeDistributionAmt" type="USAmountType">
+								<xsd:annotation>
+									<xsd:documentation>
+										<ELFFieldNumber>0130</ELFFieldNumber>
+									</xsd:documentation>
+								</xsd:annotation>
+							</xsd:attribute>
+						</xsd:extension>
+					</xsd:simpleContent>
+				</xsd:complexType>
+			</xsd:element>
+			
+			<!-- Child's Qualified Dividend Amount -->
+			<xsd:element name="ChildQualifiedDividendAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Child's qualified dividend amount</Description>
+						<LineNumber>2b</LineNumber>
+						<ELFFieldNumber>0138</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			
+			<!-- Child's Capital Gain Distribution Amount -->
+			<xsd:element name="ChildCapitalGainDistriAmt" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Child's capital gain distribution amount</Description>
+						<LineNumber>3</LineNumber>
+						<ELFFieldNumber>0151</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+				<xsd:complexType>
+					<xsd:simpleContent>
+						<xsd:extension base="USAmountType">
+							<xsd:attribute name="nomineeDistributionCd" type="StringType" fixed="ND">
+								<xsd:annotation>
+									<xsd:documentation>
+										<ELFFieldNumber>0141</ELFFieldNumber>
+									</xsd:documentation>
+								</xsd:annotation>
+							</xsd:attribute>
+							<xsd:attribute name="nomineeDistributionAmt" type="USAmountNNType">
+								<xsd:annotation>
+									<xsd:documentation>
+										<ELFFieldNumber>0146</ELFFieldNumber>
+									</xsd:documentation>
+								</xsd:annotation>
+							</xsd:attribute>
+						</xsd:extension>
+					</xsd:simpleContent>
+				</xsd:complexType>
+			</xsd:element>
+			
+			<!-- Child's Investment Income Amount -->
+			<xsd:element name="ChildInvestmentIncomeAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Child's investment income amount</Description>
+						<LineNumber>4</LineNumber>
+						<ELFFieldNumber>0170</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			
+			<!-- Child's Net Investment Income Amount -->
+			<xsd:element name="ChildNetInvestmentIncomeAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Child's net investment income amount</Description>
+						<LineNumber>6</LineNumber>
+						<ELFFieldNumber>0200</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			
+			<!-- Child's Qualified Dividend Percentage -->
+			<xsd:element name="ChildQualifiedDividendPct" type="RatioType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Child's qualified dividend percentage</Description>
+						<LineNumber>7</LineNumber>
+						<ELFFieldNumber>0215</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			
+			<!-- Child's Captial Gains Distribution Percentage -->
+			<xsd:element name="ChildCapitalGainDistriPct" type="RatioType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Child's captial gains distribution percentage</Description>
+						<LineNumber>8</LineNumber>
+						<ELFFieldNumber>0225</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			
+			<!-- Child's Qualified Dividend Adjusted Amount -->
+			<xsd:element name="ChildQualifiedDividendAdjAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Child's qualified dividend adjusted amount</Description>
+						<LineNumber>9</LineNumber>
+						<ELFFieldNumber>0235</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			
+			<!-- Child's Capital Gains Distribution Adjusted Amount -->
+			<xsd:element name="ChildCapitalGainDistriAdjAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Child's capital gains distribution adjusted amount</Description>
+						<LineNumber>10</LineNumber>
+						<ELFFieldNumber>0245</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			
+			<!-- Child's Tax Basis Adjustment Sum Amount -->
+			<xsd:element name="ChildTaxBasisAdjustmentSumAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Child's tax basis adjustment sum amount</Description>
+						<LineNumber>11</LineNumber>
+						<ELFFieldNumber>0255</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			
+			<!-- Child's Net Adjusted Income Amount -->
+			<xsd:element name="ChildNetAdjustedIncomeAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Child's net adjusted income amount</Description>
+						<LineNumber>12</LineNumber>
+						<ELFFieldNumber>0265</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			
+			<!-- =============== Part II  =============== -->
+			
+			<!-- Child's Interest and Dividend Tax Basis Amount -->
+			<xsd:element name="ChildInterestAndDivTaxBasisAmt" type="USAmountNNType">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Child's interest and dividend tax basis amount</Description>
+						<LineNumber>14</LineNumber>
+						<ELFFieldNumber>0275</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			
+			<!-- Child's Tax Basis Under Specified Amount Indicator -->
+			<xsd:element name="ChildTaxBasisUnderSpcfdAmtInd" type="BooleanType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Child's tax basis under specified amount indicator</Description>
+						<LineNumber>15</LineNumber>
+						<ELFFieldNumber>0280 0285</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			
+			<!-- Child's Interest and Dividend Tax  Amount -->
+			<xsd:element name="ChildInterestAndDividendTaxAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Child's interest and dividend tax amount</Description>
+						<LineNumber>15</LineNumber>
+						<ELFFieldNumber>0295</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:schema>

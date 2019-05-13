@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema targetNamespace="http://www.irs.gov/efile" xmlns="http://www.irs.gov/efile" xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.0">
+
+	<xsd:annotation>
+		<xsd:documentation>
+			<Description>IRS e-file Individual Income Tax Schema - Other Adjustments Statement</Description>
+			<Purpose>Attach a statement showing specific literals and the amount you received</Purpose> 
+			<TaxYear>2018</TaxYear>
+			<MaturityLevel>Final Release</MaturityLevel>
+			<ReleaseDate>February 13, 2019</ReleaseDate>
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:include schemaLocation="../../../Common/efileTypes.xsd" />
+
+	<!-- =========================================================== -->
+	<!-- =============== Other Adjustments Statement =============== -->
+	<!-- =========================================================== -->
+
+	<xsd:element name="OtherAdjustmentsStatement">
+		<xsd:annotation>
+			<xsd:documentation>Other Adjustments Statement</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:complexContent>
+				<xsd:extension base="OtherAdjustmentsStatementType">
+					<xsd:attributeGroup ref="DocumentAttributes">
+						<xsd:annotation>
+							<xsd:documentation>Common return document attributes</xsd:documentation>
+						</xsd:annotation>
+					</xsd:attributeGroup>
+					<xsd:attribute name="documentName" type="StringType" fixed="OtherAdjustmentsStatement">
+						<xsd:annotation>
+							<xsd:documentation>IRS internal use only. To avoid error in the return, do not include the attribute name or value.</xsd:documentation>
+						</xsd:annotation>
+					</xsd:attribute>
+				</xsd:extension>
+			</xsd:complexContent>
+		</xsd:complexType>
+	</xsd:element>
+
+	<xsd:complexType name="OtherAdjustmentsStatementType">
+		<xsd:annotation>
+			<xsd:documentation>Content model for Other Adjustments Statement</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+
+			<xsd:element name="OtherAdjustmentsStmt" type="OtherAdjustmentsStmtType" minOccurs="0" maxOccurs="100"/>
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="OtherAdjustmentsStmtType">
+		<xsd:sequence>
+		   <xsd:choice minOccurs="0">
+			
+			<!-- Other Adjustments Literal -->
+			<xsd:element name="OtherAdjustmentsLitCd">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Other adjustments literal</Description>
+					</xsd:documentation>
+				</xsd:annotation>
+				<xsd:simpleType>
+					<xsd:restriction base="StringType">
+						<xsd:enumeration value="RFST" />
+						<xsd:enumeration value="SUB-PAY TRA" />
+						<xsd:enumeration value="UDC" />
+						<xsd:enumeration value="403(B)" />
+						<xsd:enumeration value="501(C)(18)(D)" />
+						<xsd:enumeration value="PPR" />
+						<xsd:enumeration value="FORM 2555" />
+						<xsd:enumeration value="WBF" />
+						<xsd:enumeration value="MSA" />
+						<xsd:enumeration value="JURY PAY" />
+						<xsd:enumeration value="USOC" />
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			
+			<!-- Other Adjustments Code Text -->
+			<xsd:element name="OtherAdjustmentsCodeTxt">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Other adjustments code text</Description>
+					</xsd:documentation>
+				</xsd:annotation>
+				<xsd:simpleType>
+					<xsd:restriction base="TextType">
+						<xsd:maxLength value="50"/>
+					</xsd:restriction>
+			    </xsd:simpleType>
+			</xsd:element>
+		  </xsd:choice>
+		  
+			<!-- Other Adjustments Amount -->
+			<xsd:element name="OtherAdjustmentsAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Other adjustments amount</Description>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+		</xsd:sequence>
+	</xsd:complexType>
+
+</xsd:schema>

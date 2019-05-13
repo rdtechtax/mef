@@ -1,0 +1,525 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.irs.gov/efile" targetNamespace="http://www.irs.gov/efile" elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.0">
+
+	<xsd:annotation>
+		<xsd:documentation>
+			<Description>IRS e-file Schema - IRS Form 8853</Description>
+			<TaxYear>2018</TaxYear>
+			<MaturityLevel>Final Release</MaturityLevel>
+			<ReleaseDate>February 13, 2019</ReleaseDate>
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:include schemaLocation="../../../Common/efileTypes.xsd"/>
+
+	<!--==================================================================-->
+	<!--============================ IRS8853 ============================-->
+	<!--==================================================================-->
+
+	<xsd:element name="IRS8853">
+		<xsd:annotation>
+			<xsd:documentation>IRS Form 8853</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:complexContent>
+				<xsd:extension base="IRS8853Type">
+					<xsd:attributeGroup ref="DocumentAttributes">
+						<xsd:annotation>
+							<xsd:documentation>Common return document attributes</xsd:documentation>
+						</xsd:annotation>
+					</xsd:attributeGroup>
+					<xsd:attribute name="documentName" type="xsd:string" fixed="IRS8853"/>
+				</xsd:extension>
+			</xsd:complexContent>
+		</xsd:complexType>
+	</xsd:element>
+
+	<xsd:complexType name="IRS8853Type">
+		<xsd:annotation>
+			<xsd:documentation>Content model for IRS 8853</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+
+			<!-- Archer MSA And Medcare Advantage MSA Group -->
+			<xsd:element name="ArcherMSAAndMedcrAdvntgMSAGrp" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Archer MSA And Medcare Advantage MSA Group</Description>
+						<ELFFieldNumber>NL</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+				<xsd:complexType>
+					<xsd:sequence>
+
+						<!--MSA Holder -->
+						<xsd:element name="MSAHolderSSN" type="SSNType">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>MSA Holder</Description>						
+									<ELFFieldNumber>0009</ELFFieldNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						
+						<!--MSA Holder Death Indicator -->
+						<xsd:element name="MSAHolderDeathInd" type="CheckboxType" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>MSA Holder Death Indicator</Description>						
+									<ELFFieldNumber>0015</ELFFieldNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						
+						<!--MSA Calculations Explanation Statement Code -->
+						<xsd:element name="MSACalculationsExplnStmtCd" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>MSA Calculations Explanation Statement Code</Description>						
+									<ELFFieldNumber>0017</ELFFieldNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+							<xsd:simpleType>
+								<xsd:restriction base="StringType">
+									<xsd:enumeration value="STATEMENT"/>
+								</xsd:restriction>
+							</xsd:simpleType>
+						</xsd:element>
+						
+						<!-- ===== Section A.  Archer MSAs ===== -->
+						<!-- ===== Part I - Archer MSA Contributions and Deductions ===== -->
+						
+						<!--Archer MSA Employer Contribution Amount -->
+						<xsd:element name="ArcherMSAEmployerContriAmt" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Archer MSA Employer Contribution Amount</Description>
+									<LineNumber>1</LineNumber>
+									<ELFFieldNumber>0160</ELFFieldNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+							<xsd:complexType>
+								<xsd:simpleContent>
+									<xsd:extension base="USAmountNNType">
+										<xsd:attribute name="referenceDocumentId" type="IdListType"/>
+										<xsd:attribute name="referenceDocumentName" type="StringType" fixed="PrimaryTaxpayerHDHPStatement SpouseTaxpayerHDHPStatement"/>
+									</xsd:extension>
+								</xsd:simpleContent>
+							</xsd:complexType>
+						</xsd:element>
+						
+						<!--Archer MSA Contribution Amount -->
+						<xsd:element name="ArcherMSAContributionAmt" type="USAmountNNType" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Archer MSA Contribution Amount</Description>
+									<LineNumber>2</LineNumber>
+									<ELFFieldNumber>0170</ELFFieldNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						
+						<!--Archer MSA Contribution Limitation Amount -->
+						<xsd:element name="ArcherMSAContriLimitationAmt" type="USAmountNNType" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Archer MSA Contribution Limitation Amount</Description>
+									<LineNumber>3</LineNumber>
+									<ELFFieldNumber>0180</ELFFieldNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						
+						<!--HDHP Employer Compensation Amount -->
+						<xsd:element name="HDHPEmployerCompensationAmt" type="USAmountNNType" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>HDHP Employer Compensation Amount</Description>
+									<LineNumber>4</LineNumber>
+									<ELFFieldNumber>0190</ELFFieldNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						
+						<!--Archer MSA Deduction Amount -->
+						<xsd:element name="ArcherMSADeductionAmt" type="USAmountType" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Archer MSA Deduction Amount</Description>
+									<LineNumber>5</LineNumber>
+									<ELFFieldNumber>0200</ELFFieldNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						
+						<!-- ===== Part II - Archer MSA Distributions ===== -->
+						
+						<!--Total Archer MSA Distribution Amount -->
+						<xsd:element name="TotalArcherMSADistributionAmt" type="USAmountType" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Total Archer MSA Distribution Amount</Description>
+									<LineNumber>6a</LineNumber>
+									<ELFFieldNumber>0210</ELFFieldNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						
+						<!--Archer MSA Distribution Roll Over Amount -->
+						<xsd:element name="ArcherMSADistriRollOverAmt" type="USAmountNNType" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Archer MSA Distribution Roll Over Amount</Description>
+									<LineNumber>6b</LineNumber>
+									<ELFFieldNumber>0220</ELFFieldNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						
+						<!--Archer MSA Net Distribution Amount -->
+						<xsd:element name="ArcherMSANetDistributionAmt" type="USAmountType" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Archer MSA Net Distribution Amount</Description>
+									<LineNumber>6c</LineNumber>
+									<ELFFieldNumber>0230</ELFFieldNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						
+						<!--Archer MSA Unreimb Qual Medical Expenses Amount -->
+						<xsd:element name="ArcherMSAUnreimbQualMedExpAmt" type="USAmountType" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Archer MSA Unreimbursed Qualified Medical Expenses Amount</Description>
+									<LineNumber>7</LineNumber>
+									<ELFFieldNumber>0240</ELFFieldNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						
+						<!--Taxable Archer MSA Distribution Amount -->
+						<xsd:element name="TaxableArcherMSADistriAmt" type="USAmountType" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Taxable Archer MSA Distribution Amount</Description>
+									<LineNumber>8</LineNumber>
+									<ELFFieldNumber>0250</ELFFieldNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						
+						<!--Archer MSA Distribution Meet Tax Exception Indicator -->
+						<xsd:element name="ArcherMSADistriMeetTaxExcInd" type="CheckboxType" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Archer MSA Distribution Meet Tax Exception Indicator</Description>
+									<LineNumber>9a</LineNumber>
+									<ELFFieldNumber>0260</ELFFieldNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						
+						<!--Archer MSA Additional Distribution Tax Amount -->
+						<xsd:element name="ArcherMSAAddnlDistriTaxAmt" type="USAmountType" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Archer MSA Additional Distribution Tax Amount</Description>
+									<LineNumber>9b</LineNumber>
+									<ELFFieldNumber>0270</ELFFieldNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						
+						<!-- ===== Section B.  Medicare Advantage MSA Distributions ==== -->
+
+						<!--Total Medicare MSA Distribution Amount -->
+						<xsd:element name="TotalMedicareMSADistriAmt" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Total Medicare MSA Distribution Amount</Description>
+									<LineNumber>10</LineNumber>
+									<ELFFieldNumber>0272</ELFFieldNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+							<xsd:complexType>
+								<xsd:simpleContent>
+									<xsd:extension base="USAmountType">
+										<xsd:attribute name="referenceDocumentId" type="IdListType"/>
+										<xsd:attribute name="referenceDocumentName" type="StringType" fixed="PrimaryTaxpayerMedicareMSAStatement SpouseTaxpayerMedicareMSAStatement"/>
+									</xsd:extension>
+								</xsd:simpleContent>
+							</xsd:complexType>
+						</xsd:element>
+						
+						<!--Medicare MSA Unrmb Qual Medical Expenses Amount -->
+						<xsd:element name="MedicareMSAUnrmbQualMedExpAmt" type="USAmountType" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Medicare MSA Unreimbursed Qualified Medical Expenses Amount</Description>
+									<LineNumber>11</LineNumber>
+									<ELFFieldNumber>0274</ELFFieldNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						
+						<!--Taxable Medicare MSA Distribution Amount -->
+						<xsd:element name="TaxableMedicareMSADistriAmt" type="USAmountType" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Taxable Medicare MSA Distribution Amount</Description>
+									<LineNumber>12</LineNumber>
+									<ELFFieldNumber>0276</ELFFieldNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						
+						<!--Medicare MSA Distribution Meet Tax Exception Indicator -->
+						<xsd:element name="MedicareMSADistriMeetTaxExcInd" type="CheckboxType" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Medicare MSA Distribution Meet Tax Exception Indicator</Description>
+									<LineNumber>13a</LineNumber>
+									<ELFFieldNumber>0278</ELFFieldNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						
+						<!--Medicare MSA Additional Distribution Tax Amount -->
+						<xsd:element name="MedicareMSAAddnlDistriTaxAmt" type="USAmountType" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Medicare MSA Additional Distribution Tax Amount</Description>
+									<LineNumber>13b</LineNumber>
+									<ELFFieldNumber>0279</ELFFieldNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			
+			<!-- Section C LTC Insurance Contract Group -->
+			<xsd:element name="SectCLTCInsuranceCntrctGrp" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Section C LTC Insurance Contract Group</Description>
+						<ELFFieldNumber>NL</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+				<xsd:complexType>
+					<xsd:sequence>
+
+						<!--LTC Insurance Policy Holder Name -->
+						<xsd:element name="LTCInsurancePolicyHolderNm" type="PersonNameType" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>LTC Insurance Policy Holder Name</Description>						
+									<ELFFieldNumber>0288</ELFFieldNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						
+						<!--  LTC Insurance Policy Holder Social Security Number -->
+						<xsd:element name="LTCInsurancePolicyHolderSSN" type="SSNType">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>LTC Insurance Policy Holder Social Security Number</Description>
+									<ELFFieldNumber>0289</ELFFieldNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						
+						<!-- ===== Section C.  Long-Term Care (LTC) Insurance Contracts ===== -->
+
+						<!--Form LTC Multiple Copies Indicator -->
+						<xsd:element name="Form8853LTCMultipleCopiesInd" type="CheckboxType" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Form LTC Multiple Copies Indicator</Description>
+									<ELFFieldNumber>0290</ELFFieldNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						
+						<!--LTC Insured Name Control -->
+						<xsd:element name="LTCInsuredNameControlTxt" type="PersonNameControlType">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>LTC Insured Name Control</Description>
+									<ELFFieldNumber>0295</ELFFieldNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						
+						<!--LTC Insured Name -->
+						<xsd:element name="LTCInsuredNm" type="PersonNameType" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>LTC Insured Name</Description>
+									<LineNumber>14a</LineNumber>
+									<ELFFieldNumber>0300</ELFFieldNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						
+						<!--LTC Insured -->
+						<xsd:element name="LTCInsuredSSN" type="SSNType">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>LTC Insured</Description>
+									<LineNumber>14b</LineNumber>
+									<ELFFieldNumber>0310</ELFFieldNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						
+						<!--LTC Insurance Other Payment Indicator -->
+						<xsd:element name="LTCInsuranceOtherPaymentInd">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>LTC Insurance Other Payment Indicator</Description>
+									<LineNumber>15</LineNumber>
+									<ELFFieldNumber>0320 0330</ELFFieldNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+							<xsd:complexType>
+								<xsd:simpleContent>
+									<xsd:extension base="BooleanType">
+										<xsd:attribute name="referenceDocumentId" type="IdListType"/>
+										<xsd:attribute name="referenceDocumentName" type="StringType" fixed="MultiplePayeesStatement"/>
+									</xsd:extension>
+								</xsd:simpleContent>
+							</xsd:complexType>
+						</xsd:element>
+						
+						<!--LTC Insured Terminally Ill Indicator -->
+						<xsd:element name="LTCInsuredTerminallyIllInd" type="BooleanType">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>LTC Insured Terminally Ill Indicator</Description>
+									<LineNumber>16</LineNumber>
+									<ELFFieldNumber>0340 0350</ELFFieldNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						
+						<!--LTC Gross Payments Received Amount -->
+						<xsd:element name="LTCGrossPaymentsReceivedAmt" type="USAmountType" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>LTC Gross Payments Received Amount</Description>
+									<LineNumber>17</LineNumber>
+									<ELFFieldNumber>0360</ELFFieldNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						
+						<!--LTC Insurance Qualified Amount -->
+						<xsd:element name="LTCInsuranceQualifiedAmt" type="USAmountType" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>LTC Insurance Qualified Amount</Description>
+									<LineNumber>18</LineNumber>
+									<ELFFieldNumber>0370</ELFFieldNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						
+						<!--Accelerated Death Benefit Received Amount -->
+						<xsd:element name="AcceleratedDeathBenefitRcvdAmt" type="USAmountType" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Accelerated Death Benefit Received Amount</Description>
+									<LineNumber>19</LineNumber>
+									<ELFFieldNumber>0380</ELFFieldNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						
+						<!--Total LTC And Death Benefit Received Amount -->
+						<xsd:element name="TotalLTCAndDeathBenefitRcvdAmt" type="USAmountType" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Total LTC And Death Benefit Received Amount</Description>
+									<LineNumber>20</LineNumber>
+									<ELFFieldNumber>0390</ELFFieldNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						
+						<!--LTC Days Multiply By Per Diem Amount -->
+						<xsd:element name="LTCDaysMultiplyByPerDiemAmt" type="USAmountType" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>LTC Days Multiply By Per Diem Amount</Description>
+									<LineNumber>21</LineNumber>
+									<ELFFieldNumber>0400</ELFFieldNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						
+						<!--LTC Cost Incurred Amount -->
+						<xsd:element name="LTCCostIncurredAmt" type="USAmountType" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>LTC Cost Incurred Amount</Description>
+									<LineNumber>22</LineNumber>
+									<ELFFieldNumber>0410</ELFFieldNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						
+						<!--Larger Calculation Or Actual LTC Costs Amount -->
+						<xsd:element name="LargerCalcOrActualLTCCostsAmt" type="USAmountType" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Larger Calculation Or Actual LTC Costs Amount</Description>
+									<LineNumber>23</LineNumber>
+									<ELFFieldNumber>0420</ELFFieldNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						
+						<!--LTC Reimbursement Amount -->
+						<xsd:element name="LTCReimbursementAmt" type="USAmountType" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>LTC Reimbursement Amount</Description>
+									<LineNumber>24</LineNumber>
+									<ELFFieldNumber>0430</ELFFieldNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						
+						<!--LTC Per Diem Limitation Amount -->
+						<xsd:element name="LTCPerDiemLimitationAmt" type="USAmountType" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>LTC Per Diem Limitation Amount</Description>
+									<LineNumber>25</LineNumber>
+									<ELFFieldNumber>0440</ELFFieldNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						
+						<!--LTC Taxable Payments Amount -->
+						<xsd:element name="LTCTaxablePaymentsAmt" type="USAmountType" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>LTC Taxable Payments Amount</Description>
+									<LineNumber>26</LineNumber>
+									<ELFFieldNumber>0450</ELFFieldNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			
+		</xsd:sequence>
+	</xsd:complexType>
+	
+</xsd:schema>

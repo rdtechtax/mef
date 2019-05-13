@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.irs.gov/efile" targetNamespace="http://www.irs.gov/efile" elementFormDefault="qualified" attributeFormDefault="unqualified">
+ <xsd:annotation>
+    <xsd:documentation>
+       <Description>IRS e-file Individual Income Tax Schema - Self Employment Income Work Sheet</Description>
+       <Purpose>Use this worksheet to figure net self employment income for Clergy - Publication 517</Purpose>
+       <TaxYear>2018</TaxYear>
+       <MaturityLevel>Final Release</MaturityLevel>
+       <ReleaseDate>February 13, 2019</ReleaseDate>
+    </xsd:documentation>
+ </xsd:annotation>
+ <xsd:include schemaLocation="../../../Common/efileTypes.xsd"/>
+
+
+ <!-- =============================================================== -->
+ <!-- ======================  Self EmploymentIncome Worksheet============================ -->
+ <!-- =============================================================== -->
+
+
+ <xsd:element name="ClergySelfEmplmnIncomeWrksht">
+    <xsd:annotation>
+       <xsd:documentation>Clergy Self Employment Income Worksheet</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+       <xsd:complexContent>
+          <xsd:extension base="ClergySelfEmplmnIncomeWrkshtType">
+             <xsd:attributeGroup ref="DocumentAttributes">
+                <xsd:annotation>
+                   <xsd:documentation>Common return document attributes</xsd:documentation>
+                </xsd:annotation>
+             </xsd:attributeGroup>
+             <xsd:attribute name="documentName" type="xsd:string" fixed="ClergySelfEmploymentIncomeWorksheet">
+                <xsd:annotation>
+                   <xsd:documentation>IRS internal use only. To avoid error in the return, do not include the attribute name or value.</xsd:documentation>
+                </xsd:annotation>
+             </xsd:attribute>
+          </xsd:extension>
+       </xsd:complexContent>
+    </xsd:complexType>
+ </xsd:element>
+
+ <xsd:complexType name="ClergySelfEmplmnIncomeWrkshtType">
+    <xsd:annotation>
+       <xsd:documentation>Content model for Clergy Self Employment Income Worksheet</xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence>
+
+       <!-- SSN of Minister -->
+       <xsd:element name="MinisterSSN" type="SSNType">
+          <xsd:annotation>
+             <xsd:documentation>
+                <Description>SSN of Taxpayer With Employee Business Expense</Description>
+                <ELFFieldNumber>0010</ELFFieldNumber>
+             </xsd:documentation>
+          </xsd:annotation>
+       </xsd:element>
+
+       <!-- Wages Amount -->
+       <xsd:element name="WagesAmt" type="USAmountType" minOccurs="0">
+          <xsd:annotation>
+             <xsd:documentation>
+                <Description>Wages Amount</Description>
+                <LineNumber>1</LineNumber>
+                <ELFFieldNumber>0020</ELFFieldNumber>
+             </xsd:documentation>
+                          </xsd:annotation>
+       </xsd:element>
+
+       <!-- Net Profit Or Loss Amount -->
+       <xsd:element name="NetProfitOrLossAmt" type="USAmountType" minOccurs="0">
+          <xsd:annotation>
+             <xsd:documentation>
+                <Description>Net Profit Or Loss Amount</Description>
+                <LineNumber>2</LineNumber>
+                <ELFFieldNumber>0030</ELFFieldNumber>
+             </xsd:documentation>
+          </xsd:annotation>
+       </xsd:element>
+
+       <!-- Minister SE Income Prsng Allowance Amount -->
+       <xsd:element name="MinisterSEIncmPrsngAllwncAmt" type="USAmountType" minOccurs="0">
+          <xsd:annotation>
+             <xsd:documentation>
+                <Description>Minister SE Income Prsng Allowance Amount</Description>
+                <LineNumber>3(a)</LineNumber>
+                <ELFFieldNumber>0040</ELFFieldNumber>
+             </xsd:documentation>
+          </xsd:annotation>
+       </xsd:element>
+
+			<!-- Minister SE Income Utility Allowance Amount -->
+			<xsd:element name="MinisterSEIncmUtilityAllwncAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Minister SE Income Utility Allowance Amount</Description>
+						<LineNumber>3(b)</LineNumber>
+						<ELFFieldNumber>0050</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Minister SE Income Total Allowance Amount -->
+			<xsd:element name="MinisterSEIncmTotAllwncAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Minister SE Income Total Allowance Amount</Description>
+						<LineNumber>3(c)</LineNumber>
+						<ELFFieldNumber>0060</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Minister SE Income Total Income Allowance Amount -->
+			<xsd:element name="MinisterSEIncmTotIncmAllwncAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Minister SE Income Total Income Allowance Amount</Description>
+						<LineNumber>4</LineNumber>
+						<ELFFieldNumber>0070</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Figure ScheduleC Deduction Nondeduction Expense Amount -->
+			<xsd:element name="FgrSchCDedNondedExpenseAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Figure ScheduleC Deduction Nondeduction Expense Amount</Description>
+						<LineNumber>5</LineNumber>
+						<ELFFieldNumber>0080</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Figure Form2106 Deduction Total Unreimbursed Expense Amount -->
+			<xsd:element name="FgrFrm2106DedTotUnreimExpnsAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Figure Form2106 Deduction Total Unreimbursed Expense Amount</Description>
+						<LineNumber>6</LineNumber>
+						<ELFFieldNumber>0090</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Minister SE Income Total Business Not Deducted Amount -->
+			<xsd:element name="MinisterSEIncmTotBusNotDedAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Minister SE Income Total Business Not Deducted Amount</Description>
+						<LineNumber>7</LineNumber>
+						<ELFFieldNumber>0100</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Net NonFarm Profit Loss Amount -->
+			<xsd:element name="NetNonFarmProfitLossAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Net NonFarm Profit Loss Amount</Description>
+						<LineNumber>8</LineNumber>
+						<ELFFieldNumber>0110</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+		</xsd:sequence>
+	</xsd:complexType>
+
+</xsd:schema>

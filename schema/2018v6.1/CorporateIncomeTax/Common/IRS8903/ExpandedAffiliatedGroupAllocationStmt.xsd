@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns="http://www.irs.gov/efile" xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.irs.gov/efile" elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.0">
+
+	<xsd:annotation>
+		<xsd:documentation>
+			<Description>IRS e-file Schema - Expanded Affiliated Group Allocation Calculation Statement</Description>
+			<TaxYear>2018</TaxYear>
+			<MaturityLevel>Final Release</MaturityLevel>
+			<ReleaseDate>February 13, 2019</ReleaseDate>
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:include schemaLocation="../../../Common/efileTypes.xsd"/>
+
+
+	<!-- ===================================================================================== -->
+	<!-- ============ Expanded Affiliated Group Allocation Calculation Statement ============= -->
+	<!-- ===================================================================================== -->
+
+
+	<xsd:element name="ExpndAffltGroupAllocnCalcStmt">
+		<xsd:annotation>
+			<xsd:documentation>Expanded Affiliated Group Allocation Calculation Statement</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:complexContent>
+				<xsd:extension base="ExpndAffltGroupAllocnCalcStmtType">
+					<xsd:attributeGroup ref="DocumentAttributes">
+						<xsd:annotation>
+							<xsd:documentation>Common return document attributes</xsd:documentation>
+						</xsd:annotation>
+					</xsd:attributeGroup>
+					<xsd:attribute name="documentName" type="xsd:string" fixed="ExpandedAffiliatedGroupAllocationStmt">
+						<xsd:annotation>
+							<xsd:documentation>IRS internal use only. To avoid error in the return, do not include the attribute name or value.</xsd:documentation>
+						</xsd:annotation>
+					</xsd:attribute>
+				</xsd:extension>
+			</xsd:complexContent>
+		</xsd:complexType>
+	</xsd:element>
+
+	<xsd:complexType name="ExpndAffltGroupAllocnCalcStmtType">
+		<xsd:annotation>
+			<xsd:documentation>Content model for Expanded Affiliated Group Allocation Calculation Statement</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+
+			<xsd:element name="ExpndAffltGroupAllocnCalc" minOccurs="0" maxOccurs="unbounded">
+				<xsd:complexType>
+					<xsd:sequence>
+
+						<!-- Name of Each Taxpayer in the EAG -->
+						<xsd:element name="EAGTaxpayerName" type="BusinessNameType" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Name of each taxpayer in the EAG</Description>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>			
+
+						<!-- TIN of Each of These Taxpayers or Missing EIN Reason -->
+						<xsd:choice minOccurs="0">
+						
+							<!-- TIN of Each of These Taxpayers -->
+							<xsd:element name="TaxpayerEIN" type="EINType">
+								<xsd:annotation>
+									<xsd:documentation>
+										<Description>TIN of each of these taxpayers</Description>
+									</xsd:documentation>
+								</xsd:annotation>
+							</xsd:element>
+						
+							<!-- Missing EIN Reason -->
+							<xsd:element name="MissingEINReasonCd">
+								<xsd:annotation>
+									<xsd:documentation>
+										<Description>Missing EIN reason</Description>			
+									</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="StringType">
+										<xsd:enumeration value="APPLD FOR"/>
+										<xsd:enumeration value="FOREIGNUS"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>				
+						</xsd:choice>			
+
+						<!-- Amount of the total Section 199 deduction -->
+						<xsd:element name="TotalSection199DeductionAmt" type="USAmountType">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Amount of the total Section 199 deduction</Description>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+
+						<!-- Allocated Amount for Each Taxpayer in the EAG -->
+						<xsd:element name="EAGTaxpayerAmt" type="USAmountType">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Allocated amount for each taxpayer in the EAG</Description>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						
+						<!-- How Allocated Amount Was Calculated  -->
+						<xsd:element name="CalculationDesc" type="ShortExplanationType">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>How allocated amount was calculated</Description>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>		
+
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+
+		</xsd:sequence>
+	</xsd:complexType>
+
+</xsd:schema>

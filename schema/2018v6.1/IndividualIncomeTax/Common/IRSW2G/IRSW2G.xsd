@@ -1,0 +1,428 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.irs.gov/efile" targetNamespace="http://www.irs.gov/efile" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xsd:annotation>
+		<xsd:documentation>
+			<Description>IRS e-file Individual Income Tax Schema - IRS Form W-2G Certain Gambling Winnings</Description>
+			<TaxYear>2018</TaxYear>
+			<MaturityLevel>Final Release</MaturityLevel>
+			<ReleaseDate>February 13, 2019</ReleaseDate>
+		</xsd:documentation>
+	</xsd:annotation>
+	<xsd:include schemaLocation="../../../Common/efileTypes.xsd"/>
+
+	<!-- ============================================================ -->
+	<!-- ====================== IRS Form W-2G ======================= -->
+	<!-- ============================================================ -->
+
+	<xsd:element name="IRSW2G">
+		<xsd:annotation>
+			<xsd:documentation>IRS Form W-2G</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:complexContent>
+				<xsd:extension base="IRSW2GType">
+					<xsd:attributeGroup ref="DocumentAttributes">
+						<xsd:annotation>
+							<xsd:documentation>Common return document attributes</xsd:documentation>
+						</xsd:annotation>
+					</xsd:attributeGroup>
+					<xsd:attribute name="documentName" type="xsd:string" fixed="IRSW2G">
+						<xsd:annotation>
+							<xsd:documentation>IRS internal use only. To avoid error in the return, do not include the attribute name or value.</xsd:documentation>
+						</xsd:annotation>
+					</xsd:attribute>
+				</xsd:extension>
+			</xsd:complexContent>
+		</xsd:complexType>
+	</xsd:element>
+
+	<xsd:complexType name="IRSW2GType">
+		<xsd:annotation>
+			<xsd:documentation>Content model for Form W-2G</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+
+			<!-- Corrected Checkbox -->
+			<xsd:element name="CorrectedW2GInd" type="CheckboxType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Corrected Checkbox</Description>
+						<ELFFieldNumber>0010</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Payer Name Control -->
+			<xsd:element name="PayerNameControlTxt" type="BusinessNameControlType">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Payer Name Control</Description>
+						<ELFFieldNumber>0015</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Payer's Name -->
+			<xsd:element name="PayerName" type="BusinessNameType">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Payer's Name</Description>
+						<ELFFieldNumber>0020 0021</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Choice between US Address or Foreign Address-->
+			<xsd:choice>
+				<!-- Business US Address -->
+				<xsd:element name="PayerUSAddress" type="USAddressType">
+					<xsd:annotation>
+						<xsd:documentation>
+							<Description>Payers US address</Description>
+							<ELFFieldNumber>0022 0023  0024 0025</ELFFieldNumber>
+						</xsd:documentation>
+					</xsd:annotation>
+				</xsd:element>
+				<!-- Business Foreign Address -->
+				<xsd:element name="PayerForeignAddress" type="OtherForeignAddressType">
+					<xsd:annotation>
+						<xsd:documentation>
+							<Description>Payers foreign address</Description>
+							<ELFFieldNumber>0022 0023  0024 0025</ELFFieldNumber>
+						</xsd:documentation>
+					</xsd:annotation>
+				</xsd:element>
+			</xsd:choice>
+			<!-- Choice between SSN or EIN -->
+			<xsd:choice>
+				<xsd:element name="PayerSSN" type="SSNType">
+					<xsd:annotation>
+						<xsd:documentation>
+							<Description>SSN of payer</Description>
+							<ELFFieldNumber>0026</ELFFieldNumber>
+						</xsd:documentation>
+					</xsd:annotation>
+				</xsd:element>
+				<xsd:element name="PayerEIN" type="EINType">
+					<xsd:annotation>
+						<xsd:documentation>
+							<Description>EIN of payer</Description>
+							<ELFFieldNumber>0026</ELFFieldNumber>
+						</xsd:documentation>
+					</xsd:annotation>
+				</xsd:element>
+			</xsd:choice>
+			<!-- Payers Telephone Number -->
+			<xsd:element name="PayerTelephoneNum" type="PhoneNumberType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Telephone Number of payer</Description>
+						<ELFFieldNumber>0030</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Gambling Reportable Winning Amount -->
+			<xsd:element name="GamblingReportableWinningAmt" type="USAmountNNType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Gambling Reportable Winning Amount</Description>
+						<LineNumber>1</LineNumber>
+						<ELFFieldNumber>0040</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Gambling Winning Date -->
+			<xsd:element name="GamblingWinningDt" type="DateType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Gambling Winning Date</Description>
+						<LineNumber>2</LineNumber>
+						<ELFFieldNumber>0090</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Gambling Win Wager Type Code -->
+			<xsd:element name="GamblingWinWagerTypeCd" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Gambling Win Wager Type Code</Description>
+						<LineNumber>3</LineNumber>
+						<ELFFieldNumber>0080</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+				<xsd:simpleType>
+					<xsd:restriction base="TextType">
+						<xsd:maxLength value="13"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<!-- Federal Income Tax Withheld Amount -->
+			<xsd:element name="FederalIncomeTaxWithheldAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Federal Income Tax Withheld Amount</Description>
+						<LineNumber>4</LineNumber>
+						<ELFFieldNumber>0050</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Gambling Winning Transaction Desc -->
+			<xsd:element name="GamblingWinningTransactionDesc" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Gambling Winning Transaction Desc</Description>
+						<LineNumber>5</LineNumber>
+						<ELFFieldNumber>0100</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+				<xsd:simpleType>
+					<xsd:restriction base="TextType">
+						<xsd:maxLength value="13"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<!-- Gambling Winning Event Desc -->
+			<xsd:element name="GamblingWinningEventDesc" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Gambling Winning Event Desc</Description>
+						<LineNumber>6</LineNumber>
+						<ELFFieldNumber>0105</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+				<xsd:simpleType>
+					<xsd:restriction base="TextType">
+						<xsd:maxLength value="13"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<!-- Gambling Win From Ident Wagers Amount -->
+			<xsd:element name="GamblingWinFromIdntclWagersAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Gambling Win From Ident Wagers Amount</Description>
+						<LineNumber>7</LineNumber>
+						<ELFFieldNumber>0120</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Gambling Win Cashier Identification -->
+			<xsd:element name="GamblingWinCashierId" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Gambling Win Cashier Identification</Description>
+						<LineNumber>8</LineNumber>
+						<ELFFieldNumber>0130</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+				<xsd:simpleType>
+					<xsd:restriction base="TextType">
+						<xsd:maxLength value="13"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<!-- Recipients Name -->
+			<xsd:element name="RecipientNm" type="PersonNameType">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Recipients Name</Description>
+						<ELFFieldNumber>0140</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Choice between US Address or Foreign Address for Recipients -->
+			<xsd:choice>
+				<!-- Business US Address -->
+				<xsd:element name="RecipientUSAddress" type="USAddressType">
+					<xsd:annotation>
+						<xsd:documentation>
+							<Description>Recipients US address</Description>
+							<ELFFieldNumber>0142 0143 0145 0146 0147 0148</ELFFieldNumber>
+						</xsd:documentation>
+					</xsd:annotation>
+				</xsd:element>
+				<!-- Business Foreign Address -->
+				<xsd:element name="RecipientForeignAddress" type="OtherForeignAddressType">
+					<xsd:annotation>
+						<xsd:documentation>
+							<Description>Recipients foreign address</Description>
+							<ELFFieldNumber>0142 0143 0145 0146 0147 0148</ELFFieldNumber>
+						</xsd:documentation>
+					</xsd:annotation>
+				</xsd:element>
+			</xsd:choice>
+			<xsd:choice>
+				<!-- Recepient's SSN -->
+				<xsd:element name="RecipientSSN" type="SSNType">
+					<xsd:annotation>
+						<xsd:documentation>
+							<Description>Recepient's ID Number</Description>
+							<LineNumber>9</LineNumber>
+							<ELFFieldNumber>0150</ELFFieldNumber>
+						</xsd:documentation>
+					</xsd:annotation>
+				</xsd:element>
+				<!-- Recepient's EIN -->
+				<xsd:element name="RecipientEIN" type="EINType">
+					<xsd:annotation>
+						<xsd:documentation>
+							<Description>Recepient's ID Number</Description>
+							<LineNumber>9</LineNumber>
+						</xsd:documentation>
+					</xsd:annotation>
+				</xsd:element>
+			</xsd:choice>
+			<!-- Gambling Win Window Number -->
+			<xsd:element name="GamblingWinWindowNum" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Gambling Win Window Number</Description>
+						<LineNumber>10</LineNumber>
+						<ELFFieldNumber>0160</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+				<xsd:simpleType>
+					<xsd:restriction base="TextType">
+						<xsd:maxLength value="13"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<!-- Recipient First Addtional ID Number -->
+			<xsd:element name="RecipientFirstAdditionalIdNum" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Recipient First Addtional ID Number</Description>
+						<LineNumber>11</LineNumber>
+						<ELFFieldNumber>0180</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+				<xsd:simpleType>
+					<xsd:restriction base="TextType">
+						<xsd:maxLength value="13"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<!-- Recipient Second Addtional ID Number -->
+			<xsd:element name="RecipientSecondAdditionalIdNum" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Recipient Second Addtional ID Number</Description>
+						<LineNumber>12</LineNumber>
+						<ELFFieldNumber>0190</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+				<xsd:simpleType>
+					<xsd:restriction base="TextType">
+						<xsd:maxLength value="13"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+
+			<!-- W-2G State and Local Tax Group, Lines 13 - 18 -->
+			<xsd:element name="W2GStateLocalTaxGrp" type="W2GStateLocalTaxGrpType" minOccurs="0" maxOccurs="unbounded"/>
+
+			<!-- Standard Or Non Standard Code -->
+			<xsd:element name="StandardOrNonStandardCd">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Standard Or Non Standard Code</Description>
+						<ELFFieldNumber>0220</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+				<xsd:simpleType>
+					<xsd:restriction base="TextType">
+						<xsd:enumeration value="N"/>
+						<xsd:enumeration value="S"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<!-- Definition of any Type local to this file -->
+	<xsd:complexType name="W2GStateLocalTaxGrpType">
+		<xsd:sequence>
+			<!-- State Abbreviation Code -->
+			<xsd:element name="StateAbbreviationCd" type="StateType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>State Abbreviation Code</Description>
+						<LineNumber>13</LineNumber>
+						<ELFFieldNumber>0200</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Payer's State Id Number -->
+			<xsd:element name="PayerStateIdNum" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Payer's State Id Number</Description>
+						<LineNumber>13</LineNumber>
+						<ELFFieldNumber>0201</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+				<xsd:simpleType>
+					<xsd:restriction base="TextType">
+						<xsd:maxLength value="16"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<!-- Gambling Winning Amount -->
+			<xsd:element name="GamblingWinningAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Gambling Winning Amount</Description>
+						<LineNumber>14</LineNumber>
+						<ELFFieldNumber>NL</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- State Tax Withheld Amount -->
+			<xsd:element name="StateTaxWithheldAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>State Tax Withheld Amount</Description>
+						<LineNumber>15</LineNumber>
+						<ELFFieldNumber>0210</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- W-2G Local Tax Group, Lines 16 - 18 -->
+			<xsd:element name="W2GLocalTaxGrp" minOccurs="0" maxOccurs="unbounded">
+				<xsd:complexType>
+					<xsd:sequence>
+						<!-- Gambling Winning Amount -->
+						<xsd:element name="GamblingWinningAmt" type="USAmountType" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Gambling Winning Amount</Description>
+									<LineNumber>16</LineNumber>
+									<ELFFieldNumber>NL</ELFFieldNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						<!-- Local Income Tax Amount -->
+						<xsd:element name="LocalIncomeTaxAmt" type="USAmountType" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Local Income Tax Amount</Description>
+									<LineNumber>17</LineNumber>
+									<ELFFieldNumber>NL</ELFFieldNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						<!-- Name of Locality -->
+						<xsd:element name="LocalityNm" type="LineExplanationType" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Name of Locality</Description>
+									<LineNumber>18</LineNumber>
+									<ELFFieldNumber>NL</ELFFieldNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+
+</xsd:schema>

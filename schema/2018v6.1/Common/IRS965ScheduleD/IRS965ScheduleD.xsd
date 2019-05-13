@@ -1,0 +1,227 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns="http://www.irs.gov/efile" xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.irs.gov/efile" elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.0">
+	<xsd:annotation>
+		<xsd:documentation>
+			<Description>IRS e-file Schema - Form 965 Schedule D</Description>
+			<TaxYear>2018</TaxYear>
+			<MaturityLevel>Final Release</MaturityLevel>
+			<ReleaseDate>February 13, 2019</ReleaseDate>
+		</xsd:documentation>
+	</xsd:annotation>
+	<xsd:include schemaLocation="../efileTypes.xsd"/>
+	<!-- =============================================================== -->
+	<!-- ==================  IRS Form 965 Schedule D  ================== -->
+	<!-- =============================================================== -->
+	<xsd:element name="IRS965ScheduleD">
+		<xsd:annotation>
+			<xsd:documentation>IRS Form 965 Schedule D</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:complexContent>
+				<xsd:extension base="IRS965ScheduleDType">
+					<xsd:attributeGroup ref="DocumentAttributes">
+						<xsd:annotation>
+							<xsd:documentation>Common return document attributes</xsd:documentation>
+						</xsd:annotation>
+					</xsd:attributeGroup>
+					<xsd:attribute name="documentName" type="StringType" fixed="IRS965ScheduleD">
+						<xsd:annotation>
+							<xsd:documentation>IRS internal use only. To avoid error in the return, do not include the attribute name or value.</xsd:documentation>
+						</xsd:annotation>
+					</xsd:attribute>
+					<xsd:attribute name="referenceDocumentId" type="IdListType">
+						<xsd:annotation>
+							<xsd:documentation>List of document ID's of forms, schedules, supporting info. etc. attached to this form</xsd:documentation>
+						</xsd:annotation>
+					</xsd:attribute>
+					<xsd:attribute name="referenceDocumentName" type="StringType" fixed="IRS965ScheduleE BinaryAttachment GeneralDependencyMedium"/>
+				</xsd:extension>
+			</xsd:complexContent>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:complexType name="IRS965ScheduleDType">
+		<xsd:annotation>
+			<xsd:documentation>Content model for IRS Form 965 Schedule D</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+
+			<!-- US Shareholder's Aggregate Foreign Cash Position Group -->
+			<xsd:element name="USShrAggrgtFrgnCashPositionGrp" minOccurs="0" maxOccurs="unbounded">
+				<xsd:complexType>
+					<xsd:sequence>
+
+						<!-- Foreign Corporation Name -->
+						<xsd:element name="ForeignCorporationName" type="BusinessNameType" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Foreign Corporation Name</Description>
+									<LineNumber>Lines 1 - 15, Column "Name of Specified Foreign Corporation"</LineNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+
+						<!-- EIN or Foreign Entity Reference ID Number -->
+						<xsd:choice>
+							<xsd:element name="EIN" type="EINType">
+								<xsd:annotation>
+									<xsd:documentation>
+										<Description>EIN</Description>
+										<LineNumber>Lines 1 - 15, Column (a)</LineNumber>
+									</xsd:documentation>
+								</xsd:annotation>
+							</xsd:element>
+							<xsd:element name="ForeignEntityReferenceIdNum">
+								<xsd:annotation>
+									<xsd:documentation>
+										<Description>Foreign Entity Reference ID Number</Description>
+										<LineNumber>Lines 1 - 15, Column (a)</LineNumber>
+									</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="AlphaNumericType">
+										<xsd:minLength value="1" />
+										<xsd:maxLength value="50" />
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+						</xsd:choice>
+
+						<!-- Cash Position At Close Prior Taxable Year Amount -->
+						<xsd:element name="CashPositionAtClosePYAmt" type="USAmountNNType" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Cash Position At Close Prior Taxable Year Amount</Description>
+									<LineNumber>Lines 1 - 15, Column (b)</LineNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+
+						<!-- Pro Rata Share Cash Position Prior Taxable Year Amount -->
+						<xsd:element name="ProRataShrCashPosPYAmt" type="USAmountNNType" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Pro Rata Share Cash Position Prior Taxable Year Amount</Description>
+									<LineNumber>Lines 1 - 15, Column (c)</LineNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+
+						<!-- Cash Position At Close Before November Amount -->
+						<xsd:element name="CashPositionAtCloseBfrNovAmt" type="USAmountNNType" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Cash Position At Close Before November Amount</Description>
+									<LineNumber>Lines 1 - 15, Column (d)</LineNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+
+						<!-- Pro Rata Share Cash Position Before November Amount -->
+						<xsd:element name="ProRataShrCashPosBfrNovAmt" type="USAmountNNType" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Pro Rata Share Cash Position Before November Amount</Description>
+									<LineNumber>Lines 1 - 15, Column (e)</LineNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+
+						<!-- Cash Position At Close Before January Amount -->
+						<xsd:element name="CashPositionAtCloseBfrJanAmt" type="USAmountNNType" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Cash Position At Close Before January Amount</Description>
+									<LineNumber>Lines 1 - 15, Column (f)</LineNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+
+						<!-- Pro Rata Share Cash Position Before January Amount -->
+						<xsd:element name="ProRataShrCashPosBfrJanAmt" type="USAmountNNType" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Pro Rata Share Cash Position Before January Amount</Description>
+									<LineNumber>Lines 1 - 15, Column (g)</LineNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+
+			<!-- Total Pro Rata Share Cash Position Prior Taxable Year Amount -->
+			<xsd:element name="TotProRataShrCashPosPYAmt" type="USAmountNNType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Total Pro Rata Share Cash Position Before November Amount</Description>
+						<LineNumber>Line 16, Column (c)</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Total Pro Rata Share Cash Position Before November Amount -->
+			<xsd:element name="TotProRataShrCashPosBfrNovAmt" type="USAmountNNType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Total Pro Rata Share Cash Position Before November Amount</Description>
+						<LineNumber>Line 16, Column (e)</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Total Pro Rata Share Cash Position Before January Amount -->
+			<xsd:element name="TotProRataShrCashPosBfrJanAmt" type="USAmountNNType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Total Pro Rata Share Cash Position Before January Amount</Description>
+						<LineNumber>Line 16, Column (g)</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Line 17: Use Value of Line 16, Column (g) -->
+
+			<!-- Total Calculated Pro Rata Share Amount -->
+			<xsd:element name="TotalCalculatedProRataShareAmt" type="USAmountNNType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Total Calculated Pro Rata Share Amount</Description>
+						<LineNumber>18</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Aggregate Foreign Cash Position Amount -->
+			<xsd:element name="AggrgtForeignCashPositionAmt" type="USAmountNNType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Aggregate Foreign Cash Position Amount</Description>
+						<LineNumber>19</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Prior Tax Year Aggregate Foreign Cash Position Amount -->
+			<xsd:element name="PYAggrgtForeignCashPositionAmt" type="USAmountNNType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Prior Tax Year Aggregate Foreign Cash Position Amount</Description>
+						<LineNumber>20</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Current Tax Year Aggregate Foreign Cash Position Amount -->
+			<xsd:element name="CYAggrgtForeignCashPositionAmt" type="USAmountNNType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Current Tax Year Aggregate Foreign Cash Position Amount</Description>
+						<LineNumber>21</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:schema>

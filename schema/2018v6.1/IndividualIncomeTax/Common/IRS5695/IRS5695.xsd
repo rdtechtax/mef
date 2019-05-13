@@ -1,0 +1,531 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.irs.gov/efile" targetNamespace="http://www.irs.gov/efile" elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.0">
+	<xsd:annotation>
+		<xsd:documentation>
+			<Description>IRS e-file Schema - IRS Form 5695 Residential Energy Credit</Description>
+			<TaxYear>2018</TaxYear>
+			<MaturityLevel>Final Release</MaturityLevel>
+			<ReleaseDate>February 13, 2019</ReleaseDate>
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:include schemaLocation="../../../Common/efileTypes.xsd"/>
+
+	<!--  ================================================================== -->
+	<!--  ======================== IRS Form 5695 =========================== -->
+	<!--  ================================================================== -->
+
+	<xsd:element name="IRS5695">
+		<xsd:annotation>
+			<xsd:documentation>IRS Form 5695</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:complexContent>
+				<xsd:extension base="IRS5695Type">
+					<xsd:attributeGroup ref="DocumentAttributes">
+						<xsd:annotation>
+							<xsd:documentation>Common return document attributes</xsd:documentation>
+						</xsd:annotation>
+					</xsd:attributeGroup>
+					<xsd:attribute name="documentName" type="xsd:string" fixed="IRS5695"/>
+				</xsd:extension>
+			</xsd:complexContent>
+		</xsd:complexType>
+	</xsd:element>
+
+	<xsd:complexType name="IRS5695Type">
+		<xsd:annotation>
+			<xsd:documentation>Content model for Form 5695</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+
+			<xsd:element name="NameLine1Txt" type="NameLine1Type">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Name</Description>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			
+			<xsd:element name="SSN" type="SSNType">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>SSN</Description>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Part I - Residential Energy Efficient Property Credit -->
+			<xsd:element name="RsdntlEnergyEffcntPropCrGrp" minOccurs="0">
+				<xsd:complexType>
+					<xsd:sequence>
+						<!-- Solar Electric Property Cost Amount -->
+						<xsd:element name="SolarElecPropCostAmt" type="USAmountType" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Solar Electric Property Cost Amount</Description>
+									<LineNumber>1</LineNumber>
+									<ELFFieldNumber>0255</ELFFieldNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						<!-- Solar Water Heating Property Cost Amount -->
+						<xsd:element name="SolarWaterHtPropCostAmt" type="USAmountType" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Solar Water Heating Property Cost Amount</Description>
+									<LineNumber>2</LineNumber>
+									<ELFFieldNumber>0260</ELFFieldNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						<!-- Small Wind Property Cost Amount -->
+						<xsd:element name="SmallWindPropCostAmt" type="USAmountType" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Small Wind Property Cost Amount</Description>
+									<LineNumber>3</LineNumber>
+									<ELFFieldNumber>0265</ELFFieldNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						<!-- Geothermal Heat Pump Property Cost Amount -->
+						<xsd:element name="GeothrmlHtPumpPropCostAmt" type="USAmountType" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Geothermal Heat Pump Property Cost Amount</Description>
+									<LineNumber>4</LineNumber>
+									<ELFFieldNumber>0270</ELFFieldNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						<!-- Total Energy Credits Amount -->
+						<xsd:element name="TotalEnergyCreditsAmt" type="USAmountType" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Total Energy Credits Amount</Description>
+									<LineNumber>5</LineNumber>
+									<ELFFieldNumber>0275</ELFFieldNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						<!-- Geothermal Heat Pump Property Standard Percentage Credit Amount -->
+						<xsd:element name="GeothrmlHtPumpPropStdPctCrAmt" type="USAmountType" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Geothermal Heat Pump Property Standard Percentage Credit Amount</Description>
+									<LineNumber>6</LineNumber>
+									<ELFFieldNumber>0280</ELFFieldNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						<!-- Qualified Fuel Cell Property in US Indicator -->
+						<xsd:element name="QlfyFuelCellPropertyInUSInd" type="BooleanType" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Qualified Fuel Cell Property in US Indicator</Description>
+									<LineNumber>7a</LineNumber>
+									<ELFFieldNumber>NL</ELFFieldNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						<!-- Qualified Fuel Cell Property Home Address -->
+						<xsd:element name="QlfyFuelCellPropertyHmAddress" type="USAddressType" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Qualified Fuel Cell Property Home Address</Description>
+									<LineNumber>7b</LineNumber>
+									<ELFFieldNumber>NL</ELFFieldNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						<!-- Fuel Cell Property Cost Amount -->
+						<xsd:element name="FuelCellPropCostAmt" type="USAmountType" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Fuel Cell Property Cost Amount</Description>
+									<LineNumber>8</LineNumber>
+									<ELFFieldNumber>0285</ELFFieldNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						<!-- Fuel Cell Property Standard Percentage Credit Amount -->
+						<xsd:element name="FuelCellPropStdPctCrAmt" type="USAmountType" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Fuel Cell Property Standard Percentage Credit Amount</Description>
+									<LineNumber>9</LineNumber>
+									<ELFFieldNumber>0290</ELFFieldNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						<!-- Fuel Cell Property Kilowatt Capitalized Numeric -->
+						<xsd:element name="FuelCellPropKWCapNum" type="LargeRatioType" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Fuel Cell Property Kilowatt Capitalized Numeric</Description>
+									<LineNumber>10</LineNumber>
+									<ELFFieldNumber>0295</ELFFieldNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						<!-- Fuel Cell Property Kilowatt Capacity Amount -->
+						<xsd:element name="FuelCellPropKWCapAmt" type="USAmountType" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Fuel Cell Property Kilowatt Capacity Amount</Description>
+									<LineNumber>10</LineNumber>
+									<ELFFieldNumber>0300</ELFFieldNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						<!-- Fuel Cell Property Allowable Cost Amount -->
+						<xsd:element name="FuelCellPropAllwblCostAmt" type="USAmountType" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Fuel Cell Property Allowable Cost Amount</Description>
+									<LineNumber>11</LineNumber>
+									<ELFFieldNumber>0305</ELFFieldNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						<!-- Prior Year Carryforward Energy Efficient Property Credit Amount -->
+						<xsd:element name="PYCarryfwdEnergyEffPropertyAmt" type="USAmountType" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Prior Year Carryforward Energy Efficient Property Credit Amount</Description>
+									<LineNumber>12</LineNumber>
+									<ELFFieldNumber>0310</ELFFieldNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						<!-- Total of Energy Credits Amount -->
+						<xsd:element name="TotalOfEnergyCreditsAmt" type="USAmountType" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Total of Energy Credits Amount</Description>
+									<LineNumber>13</LineNumber>
+									<ELFFieldNumber>0315</ELFFieldNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						<!-- Tax less Credits Amount -->
+						<xsd:element name="TaxLessCreditsAmt" type="USAmountType" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Tax less Credits Amount</Description>
+									<LineNumber>14</LineNumber>
+									<ELFFieldNumber>0330</ELFFieldNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						<!-- Residential Energy Efficient Property Credit Amount -->
+						<xsd:element name="ResidentialEgyEffPropCrAmt" type="USAmountType" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Residential Energy Efficient Property Credit Amount</Description>
+									<LineNumber>15</LineNumber>
+									<ELFFieldNumber>0230</ELFFieldNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						<!-- Carryforward Energy Efficient Property Credit Amount -->
+						<xsd:element name="CarryfwdEnergyEffPropertyCrAmt" type="USAmountType" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Carryforward Energy Efficient Property Credit Amount</Description>
+									<LineNumber>16</LineNumber>
+									<ELFFieldNumber>0335</ELFFieldNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+
+			<!-- Part II - Non-Business Energy Property Credit -->
+			<xsd:element name="NonBusinessEgyEffcntPropCrGrp" minOccurs="0">
+				<xsd:complexType>
+					<xsd:sequence>
+						<!-- Home Located in USA Indicator -->
+						<xsd:element name="HomeLocatedInUSAInd" type="BooleanType" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Home Located in USA Indicator</Description>
+									<LineNumber>17a</LineNumber>
+									<ELFFieldNumber>NL</ELFFieldNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						<!-- Energy Property Credit Main Home US Address -->
+						<xsd:element name="EgyPropCrMainHomeUSAddress" type="USAddressType" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Energy Property Credit Main Home US Address</Description>
+									<LineNumber>17b</LineNumber>
+									<ELFFieldNumber>NL</ELFFieldNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						<!-- Improvement Related To Construction of Main Home Indicator -->
+						<xsd:element name="ImprvRltdToConstMainHomeInd" type="BooleanType" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Improvement Related To Construction of Main Home Indicator</Description>
+									<LineNumber>17c</LineNumber>
+									<ELFFieldNumber>NL</ELFFieldNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						<!-- Total Non-Business Residential Energy Credit Amount -->
+						<xsd:element name="TotNonBusinessEgyPropCrPYAmt" type="USAmountType" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Total Non-Business Residential Energy Credit Amount</Description>
+									<LineNumber>18</LineNumber>
+									<ELFFieldNumber>NL</ELFFieldNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						<!-- Insulation or System Heat Gain Loss Cost Amount -->
+						<xsd:element name="InsulationOrSysHtGnLossCostAmt" type="USAmountType" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Insulation or System Heat Gain Loss Cost Amount</Description>
+									<LineNumber>19a</LineNumber>
+									<ELFFieldNumber>NL</ELFFieldNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						<!-- Exterior Doors Cost Amount -->
+						<xsd:element name="ExteriorDoorsCostAmt" type="USAmountType" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Exterior Doors Cost Amount</Description>
+									<LineNumber>19b</LineNumber>
+									<ELFFieldNumber>NL</ELFFieldNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						<!-- Metal or Asphalt Roof Cost Amount -->
+						<xsd:element name="MetalOrAsphaltRoofCostAmt" type="USAmountType" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Metal or Asphalt Roof Cost Amount</Description>
+									<LineNumber>19c</LineNumber>
+									<ELFFieldNumber>NL</ELFFieldNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						<!-- Exterior Window or Skylight Cost Amount -->
+						<xsd:element name="ExteriorWndwOrSkylightCostAmt" type="USAmountType" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Exterior Window or Skylight Cost Amount</Description>
+									<LineNumber>19d</LineNumber>
+									<ELFFieldNumber>NL</ELFFieldNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						<!-- Exterior Window or Skylight Cost Limit Amount -->
+						<xsd:element name="ExtWndwOrSkylightCostLimitAmt" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Exterior Window or Skylight Cost Limit Amount</Description>
+									<LineNumber>19e</LineNumber>
+									<ELFFieldNumber>NL</ELFFieldNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+							<xsd:simpleType>
+								<xsd:restriction base="USAmountType">
+									<xsd:enumeration value="2000"/>
+								</xsd:restriction>
+							</xsd:simpleType>
+						</xsd:element>
+						<!-- Prior Year Window Expenses Amount -->
+						<xsd:element name="PriorYearWindowExpnsAmt" type="USAmountType" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Prior Year Window Expenses Amount</Description>
+									<LineNumber>19f</LineNumber>
+									<ELFFieldNumber>NL</ELFFieldNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						<!-- Maximum Energy Credit less Prior Year Window Expenses Amount -->
+						<xsd:element name="MaxEgyCrLessPYWindowExpnsAmt" type="USAmountType" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Maximum Energy Credit less Prior Year Window Expenses Amount</Description>
+									<LineNumber>19g</LineNumber>
+									<ELFFieldNumber>NL</ELFFieldNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						<!-- Credit After Applying Window Expenses Limit Amount -->
+						<xsd:element name="CrAfterAppWndwExpnsLimitAmt" type="USAmountType" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Credit After Applying Window Expenses Limit Amount</Description>
+									<LineNumber>19h</LineNumber>
+									<ELFFieldNumber>NL</ELFFieldNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						<!-- Partial Energy Improvement Cost Amount -->
+						<xsd:element name="PartialEnergyImprvCostAmt" type="USAmountType" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Partial Energy Improvement Cost Amount</Description>
+									<LineNumber>20</LineNumber>
+									<ELFFieldNumber>NL</ELFFieldNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						<!-- Energy Efficient Improvement Standard Percentage Credit Amount -->
+						<xsd:element name="EnergyEffcntImprvStdPctCrAmt" type="USAmountType" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Energy Efficient Improvement Standard Percentage Credit Amount</Description>
+									<LineNumber>21</LineNumber>
+									<ELFFieldNumber>NL</ELFFieldNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						<!-- Energy Efficient Building Property Cost Amount -->
+						<xsd:element name="EnergyEffcntBldgPropCostAmt" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Energy Efficient Building Property Cost Amount</Description>
+									<LineNumber>22a</LineNumber>
+									<ELFFieldNumber>NL</ELFFieldNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+							<xsd:simpleType>
+								<xsd:restriction base="USAmountType">
+									<xsd:maxInclusive value="300"/>
+								</xsd:restriction>
+							</xsd:simpleType>
+						</xsd:element>
+						<!-- Qualified Natural Gas Cost Amount -->
+						<xsd:element name="QualifiedNaturalGasCostAmt" type="USAmountType" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Qualified Natural Gas Cost Amount</Description>
+									<LineNumber>22b</LineNumber>
+									<ELFFieldNumber>NL</ELFFieldNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						<!-- Advanced Main Air Circulating Fan Cost Amount -->
+						<xsd:element name="AdvncMainAirCirctngFanCostAmt" type="USAmountType" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Advanced Main Air Circulating Fan Cost Amount</Description>
+									<LineNumber>22c</LineNumber>
+									<ELFFieldNumber>NL</ELFFieldNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						<!-- Internal Energy Improvement Cost Amount -->
+						<xsd:element name="InternalEnergyImprvCostAmt" type="USAmountType" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Internal Energy Improvement Cost Amount</Description>
+									<LineNumber>23</LineNumber>
+									<ELFFieldNumber>NL</ELFFieldNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						<!-- Total Energy Improvements Cost Amount -->
+						<xsd:element name="TotalEnergyImprovementsCostAmt" type="USAmountType" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Total Energy Improvements Cost Amount</Description>
+									<LineNumber>24</LineNumber>
+									<ELFFieldNumber>NL</ELFFieldNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						<!-- Maximum Residential Energy Credit Amount -->
+						<xsd:element name="MaximumResidentialEnergyCrAmt" type="USAmountType" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Maximum Residential Energy Credit Amount</Description>
+									<LineNumber>25</LineNumber>
+									<ELFFieldNumber>NL</ELFFieldNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						<!-- Married Taxpayer More Than One Home Code -->
+						<xsd:element name="MarriedTPWMoreThanOneHomeCd" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Married Taxpayer More Than One Home Code</Description>
+									<LineNumber>25</LineNumber>
+									<ELFFieldNumber>NL</ELFFieldNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+							<xsd:simpleType>
+								<xsd:restriction base="StringType">
+									<xsd:enumeration value="MORE THAN ONE HOME"/>
+								</xsd:restriction>
+							</xsd:simpleType>
+						</xsd:element>
+						<!-- Energy Efficient Improvements Allowable Cost Amount -->
+						<xsd:element name="EnergyEffcntImprvAllwblCostAmt" type="USAmountType" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Energy Efficient Improvements Allowable Cost Amount</Description>
+									<LineNumber>26</LineNumber>
+									<ELFFieldNumber>NL</ELFFieldNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						<!--  Adjusted Credit Limit Amount -->
+						<xsd:element name="AdjustedCreditLimitAmt" type="USAmountType" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Adjusted Credit Limit Amount</Description>
+									<LineNumber>27</LineNumber>
+									<ELFFieldNumber>NL</ELFFieldNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						<!--  Lesser of Actual Credit or Adjusted Credit Limit Amount -->
+						<xsd:element name="LesserOfActCrOrAdjCrLimitAmt" type="USAmountType" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Lesser of Actual Credit or Adjusted Credit Limit Amount</Description>
+									<LineNumber>28</LineNumber>
+									<ELFFieldNumber>NL</ELFFieldNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						<!--  Taxes less Credits Amount -->
+						<xsd:element name="TaxesLessCreditsAmt" type="USAmountType" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Taxes less Credits Amount</Description>
+									<LineNumber>29</LineNumber>
+									<ELFFieldNumber>NL</ELFFieldNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						<!--  Non-Business Energy Credit Amount -->
+						<xsd:element name="NonBusinessEnergyCrAmt" type="USAmountType" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Non-Business Energy Credit Amount</Description>
+									<LineNumber>30</LineNumber>
+									<ELFFieldNumber>NL</ELFFieldNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:schema>

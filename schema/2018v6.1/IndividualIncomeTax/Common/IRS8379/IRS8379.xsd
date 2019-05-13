@@ -1,0 +1,551 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.irs.gov/efile" targetNamespace="http://www.irs.gov/efile" elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.0">
+	<xsd:annotation>
+		<xsd:documentation>
+			<Description>IRS e-file Schema - IRS Form 8379 Injured Spouse Allocation</Description>
+			<TaxYear>2018</TaxYear>
+			<MaturityLevel>Final Release</MaturityLevel>
+			<ReleaseDate>February 13, 2019</ReleaseDate>
+		</xsd:documentation>
+	</xsd:annotation>
+	<xsd:include schemaLocation="../../../Common/efileTypes.xsd"/>
+	<!--==================================================================-->
+	<!--=========================== IRS 8379 =============================-->
+	<!--==================================================================-->
+	<xsd:element name="IRS8379">
+		<xsd:annotation>
+			<xsd:documentation>IRS Form 8379</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:complexContent>
+				<xsd:extension base="IRS8379Type">
+					<xsd:attributeGroup ref="DocumentAttributes">
+						<xsd:annotation>
+							<xsd:documentation>Common return document attributes</xsd:documentation>
+						</xsd:annotation>
+					</xsd:attributeGroup>
+					<xsd:attribute name="documentName" type="xsd:string" fixed="IRS8379"/>
+				</xsd:extension>
+			</xsd:complexContent>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:complexType name="IRS8379Type">
+		<xsd:annotation>
+			<xsd:documentation>Content model for Form 8379</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<!--Injured Spouse Claim Tax Year -->
+			<xsd:element name="InjuredSpouseClaimTaxYr" type="YearType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Injured Spouse Claim Tax Year</Description>
+						<LineNumber>1</LineNumber>
+						<ELFFieldNumber>0015</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!--Joint Return Indicator -->
+			<xsd:element name="JointReturnInd" type="BooleanType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Joint Return Indicator</Description>
+						<LineNumber>2</LineNumber>
+						<ELFFieldNumber>0025 0035</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!--Joint Pay Past Due Debts Indicator -->
+			<xsd:element name="JointPayPastDueDebtsInd" type="BooleanType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Joint Pay Past Due Debts Indicator</Description>
+						<LineNumber>3</LineNumber>
+						<ELFFieldNumber>0045 0055</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!--Obligated To Pay Past Due Debts Indicator -->
+			<xsd:element name="ObligatedToPayPastDueDebtsInd" type="BooleanType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Obligated To Pay Past Due Debts Indicator</Description>
+						<LineNumber>4</LineNumber>
+						<ELFFieldNumber>0065 0075</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!--Community Property State Indicator -->
+			<xsd:element name="CommunityPropertyStateInd" type="BooleanType">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Community Property State Indicator</Description>
+						<LineNumber>5a</LineNumber>
+						<ELFFieldNumber>0085 0095</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!--Community Property State Code -->
+			<xsd:element name="CommunityPropertyStateCd" minOccurs="0" maxOccurs="9">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Community Property State Code</Description>
+						<LineNumber>5a</LineNumber>
+						<ELFFieldNumber>0096 0097 0098 0099 0100 0102 0103 0104 0105</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+				<xsd:simpleType>
+					<xsd:restriction base="StringType">
+						<xsd:enumeration value="AZ"/>
+						<xsd:enumeration value="CA"/>
+						<xsd:enumeration value="ID"/>
+						<xsd:enumeration value="LA"/>
+						<xsd:enumeration value="NV"/>
+						<xsd:enumeration value="NM"/>
+						<xsd:enumeration value="TX"/>
+						<xsd:enumeration value="WA"/>
+						<xsd:enumeration value="WI"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<!--Marriage Recognized Community Property State Indicator-->
+			<xsd:element name="MarriageRcgnzComPropStInd" type="BooleanType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Marriage Recognized Community Property State Indicator</Description>
+						<LineNumber>5b</LineNumber>
+						<ELFFieldNumber/>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!--Payments Made And Reported Indicator -->
+			<xsd:element name="PaymentsMadeAndReportedInd" type="BooleanType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Payments Made And Reported Indicator</Description>
+						<LineNumber>6</LineNumber>
+						<ELFFieldNumber>0106 0115</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!--Earned Income Indicator -->
+			<xsd:element name="EarnedIncomeInd" type="BooleanType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Earned Income Indicator</Description>
+						<LineNumber>7</LineNumber>
+						<ELFFieldNumber>0125 0135</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!--Earned Income Credit Or Additional Child Tax Credit Indicator -->
+			<xsd:element name="EICOrAdditionalChildTaxCrInd" type="BooleanType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Earned Income Credit Or Additional Child Tax Credit Indicator</Description>
+						<LineNumber>8</LineNumber>
+						<ELFFieldNumber>0145 0152</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!--Refundable Tax Credit Claim Indicator -->
+			<xsd:element name="RefundableTaxCreditClaimInd" type="BooleanType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Refundable Tax Credit Claim Indicator</Description>
+						<LineNumber>9</LineNumber>
+						<ELFFieldNumber>0153 0154</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="InjuredSpouseInformationGrp" minOccurs="2" maxOccurs="2">
+				<xsd:complexType>
+					<xsd:sequence>
+						<!--Name -->
+						<xsd:element name="PersonNm" type="PersonNameType">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Name</Description>
+									<LineNumber>10</LineNumber>
+									<ELFFieldNumber>0155 0170</ELFFieldNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						<!-- Social Security Number -->
+						<xsd:element name="SSN" type="SSNType">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Social Security Number</Description>
+									<LineNumber>10</LineNumber>
+									<ELFFieldNumber>0157 0171</ELFFieldNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						<!--Injured Spouse Indicator -->
+						<xsd:element name="InjuredSpouseInd" type="CheckboxType" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Injured Spouse Indicator</Description>
+									<LineNumber>10</LineNumber>
+									<ELFFieldNumber>0159 0172</ELFFieldNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<!--Joint Refund Indicator -->
+			<xsd:element name="JointRefundInd" type="CheckboxType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Joint Refund Indicator</Description>
+						<LineNumber>11</LineNumber>
+						<ELFFieldNumber>0173</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!--Alternate Address Indicator -->
+			<xsd:element name="AlternateAddressInd" type="BooleanType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Alternate Address Indicator</Description>
+						<LineNumber>12</LineNumber>
+						<ELFFieldNumber>0174 0175</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:choice minOccurs="0">
+				<!--United States Address -->
+				<xsd:element name="USAddress" type="USAddressType" minOccurs="0">
+					<xsd:annotation>
+						<xsd:documentation>
+							<Description>United States Address</Description>
+							<LineNumber>12</LineNumber>
+							<ELFFieldNumber>0176 0177 0178 0179</ELFFieldNumber>
+						</xsd:documentation>
+					</xsd:annotation>
+				</xsd:element>
+				<!--Foreign Address -->
+				<xsd:element name="ForeignAddress" type="ForeignAddressType" minOccurs="0">
+					<xsd:annotation>
+						<xsd:documentation>
+							<Description>Foreign Address</Description>
+							<LineNumber>12</LineNumber>
+							<ELFFieldNumber>0176 0177 0178 0179</ELFFieldNumber>
+						</xsd:documentation>
+					</xsd:annotation>
+				</xsd:element>
+			</xsd:choice>
+			<xsd:element name="JointReturnAmtGrp" minOccurs="0">
+				<xsd:complexType>
+					<xsd:sequence>
+						<!--Wages Amount -->
+						<xsd:element name="WagesAmt" type="USAmountNNType" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Wages Amount</Description>
+									<LineNumber>13aa</LineNumber>
+									<ELFFieldNumber>0188</ELFFieldNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						<!--Total Other Income Amount -->
+						<xsd:element name="TotalOtherIncomeAmt" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Total Other Income Amount</Description>
+									<LineNumber>13ba</LineNumber>
+									<ELFFieldNumber>0210</ELFFieldNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+							<xsd:complexType>
+								<xsd:simpleContent>
+									<xsd:extension base="USAmountType">
+										<xsd:attribute name="referenceDocumentId" type="IdListType"/>
+										<xsd:attribute name="referenceDocumentName" type="StringType" fixed="InjuredSpouseOtherIncomeStatement"/>
+									</xsd:extension>
+								</xsd:simpleContent>
+							</xsd:complexType>
+						</xsd:element>
+						<!--Income Adjustment Amount -->
+						<xsd:element name="IncomeAdjustmentAmt" type="USAmountType" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Income Adjustment Amount</Description>
+									<LineNumber>14a</LineNumber>
+									<ELFFieldNumber>0480</ELFFieldNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						<!--Standard Or Itemized Deduction Amount -->
+						<xsd:element name="StandardOrItemizedDeductionAmt" type="USAmountType" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Standard Or Itemized Deduction Amount</Description>
+									<LineNumber>15a</LineNumber>
+									<ELFFieldNumber>0540</ELFFieldNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						<!--Allocated Exemption Count -->
+						<xsd:element name="AllocatedExemptionCnt" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Allocated Exemption Count</Description>
+									<LineNumber>16a</LineNumber>
+									<ELFFieldNumber>0570</ELFFieldNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+							<xsd:simpleType>
+								<xsd:restriction base="IntegerNNType">
+									<xsd:totalDigits value="2"/>
+								</xsd:restriction>
+							</xsd:simpleType>
+						</xsd:element>
+						<!--Credit Amount -->
+						<xsd:element name="CreditAmt" type="USAmountType" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Credit Amount</Description>
+									<LineNumber>17a</LineNumber>
+									<ELFFieldNumber>0600</ELFFieldNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						<!--Other Taxes Amount -->
+						<xsd:element name="OtherTaxesAmt" type="USAmountType" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Other Taxes Amount</Description>
+									<LineNumber>18a</LineNumber>
+									<ELFFieldNumber>0630</ELFFieldNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						<!--Federal Income Tax Withheld Amount -->
+						<xsd:element name="FederalIncomeTaxWithheldAmt" type="USAmountType" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Federal Income Tax Withheld Amount</Description>
+									<LineNumber>19a</LineNumber>
+									<ELFFieldNumber>0660</ELFFieldNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						<!--Estimated Tax Payment Amount -->
+						<xsd:element name="EstimatedTaxPaymentAmt" type="USAmountType" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Estimated Tax Payment Amount</Description>
+									<LineNumber>20a</LineNumber>
+									<ELFFieldNumber>0690</ELFFieldNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="InjuredSpouseAllocatedAmtGrp" minOccurs="0">
+				<xsd:complexType>
+					<xsd:sequence>
+						<!--Wages Amount -->
+						<xsd:element name="WagesAmt" type="USAmountNNType" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Wages Amount</Description>
+									<LineNumber>13ab</LineNumber>
+									<ELFFieldNumber>0190</ELFFieldNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						<!--Total Other Income Amount -->
+						<xsd:element name="TotalOtherIncomeAmt" type="USAmountType" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Total Other Income Amount</Description>
+									<LineNumber>13bb</LineNumber>
+									<ELFFieldNumber>0220</ELFFieldNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						<!--Income Adjustment Amount -->
+						<xsd:element name="IncomeAdjustmentAmt" type="USAmountType" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Income Adjustment Amount</Description>
+									<LineNumber>14b</LineNumber>
+									<ELFFieldNumber>0490</ELFFieldNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						<!--Standard Or Itemized Deduction Amount -->
+						<xsd:element name="StandardOrItemizedDeductionAmt" type="USAmountType" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Standard Or Itemized Deduction Amount</Description>
+									<LineNumber>15b</LineNumber>
+									<ELFFieldNumber>0550</ELFFieldNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						<!--Allocated Exemption Count -->
+						<xsd:element name="AllocatedExemptionCnt" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Allocated Exemption Count</Description>
+									<LineNumber>16b</LineNumber>
+									<ELFFieldNumber>0580</ELFFieldNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+							<xsd:simpleType>
+								<xsd:restriction base="IntegerNNType">
+									<xsd:totalDigits value="2"/>
+								</xsd:restriction>
+							</xsd:simpleType>
+						</xsd:element>
+						<!--Credit Amount -->
+						<xsd:element name="CreditAmt" type="USAmountType" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Credit Amount</Description>
+									<LineNumber>17b</LineNumber>
+									<ELFFieldNumber>0610</ELFFieldNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						<!--Other Taxes Amount -->
+						<xsd:element name="OtherTaxesAmt" type="USAmountType" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Other Taxes Amount</Description>
+									<LineNumber>18b</LineNumber>
+									<ELFFieldNumber>0640</ELFFieldNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						<!--Federal Income Tax Withheld Amount -->
+						<xsd:element name="FederalIncomeTaxWithheldAmt" type="USAmountType" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Federal Income Tax Withheld Amount</Description>
+									<LineNumber>19b</LineNumber>
+									<ELFFieldNumber>0670</ELFFieldNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						<!--Estimated Tax Payment Amount -->
+						<xsd:element name="EstimatedTaxPaymentAmt" type="USAmountType" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Estimated Tax Payment Amount</Description>
+									<LineNumber>20b</LineNumber>
+									<ELFFieldNumber>0700</ELFFieldNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="OtherSpouseAllocatedAmtGrp" minOccurs="0">
+				<xsd:complexType>
+					<xsd:sequence>
+						<!--Wages Amount -->
+						<xsd:element name="WagesAmt" type="USAmountNNType" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Wages Amount</Description>
+									<LineNumber>13ac</LineNumber>
+									<ELFFieldNumber>0200</ELFFieldNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						<!--Total Other Income Amount -->
+						<xsd:element name="TotalOtherIncomeAmt" type="USAmountType" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Total Other Income Amount</Description>
+									<LineNumber>13bc</LineNumber>
+									<ELFFieldNumber>0230</ELFFieldNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						<!--Income Adjustment Amount -->
+						<xsd:element name="IncomeAdjustmentAmt" type="USAmountType" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Income Adjustment Amount</Description>
+									<LineNumber>14c</LineNumber>
+									<ELFFieldNumber>0500</ELFFieldNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						<!--Standard Or Itemized Deduction Amount -->
+						<xsd:element name="StandardOrItemizedDeductionAmt" type="USAmountType" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Standard Or Itemized Deduction Amount</Description>
+									<LineNumber>15c</LineNumber>
+									<ELFFieldNumber>0560</ELFFieldNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						<!--Allocated Exemption Count -->
+						<xsd:element name="AllocatedExemptionCnt" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Allocated Exemption Count</Description>
+									<LineNumber>16c</LineNumber>
+									<ELFFieldNumber>0590</ELFFieldNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+							<xsd:simpleType>
+								<xsd:restriction base="IntegerNNType">
+									<xsd:totalDigits value="2"/>
+								</xsd:restriction>
+							</xsd:simpleType>
+						</xsd:element>
+						<!--Credit Amount -->
+						<xsd:element name="CreditAmt" type="USAmountType" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Credit Amount</Description>
+									<LineNumber>17c</LineNumber>
+									<ELFFieldNumber>0620</ELFFieldNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						<!--Other Taxes Amount -->
+						<xsd:element name="OtherTaxesAmt" type="USAmountType" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Other Taxes Amount</Description>
+									<LineNumber>18c</LineNumber>
+									<ELFFieldNumber>0650</ELFFieldNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						<!--Federal Income Tax Withheld Amount -->
+						<xsd:element name="FederalIncomeTaxWithheldAmt" type="USAmountType" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Federal Income Tax Withheld Amount</Description>
+									<LineNumber>19c</LineNumber>
+									<ELFFieldNumber>0680</ELFFieldNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						<!--Estimated Tax Payment Amount -->
+						<xsd:element name="EstimatedTaxPaymentAmt" type="USAmountType" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Estimated Tax Payment Amount</Description>
+									<LineNumber>20c</LineNumber>
+									<ELFFieldNumber>0710</ELFFieldNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:schema>

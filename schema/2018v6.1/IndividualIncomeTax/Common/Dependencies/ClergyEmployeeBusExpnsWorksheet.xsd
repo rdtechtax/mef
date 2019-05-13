@@ -1,0 +1,264 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.irs.gov/efile" targetNamespace="http://www.irs.gov/efile" elementFormDefault="qualified" attributeFormDefault="unqualified">
+ <xsd:annotation>
+    <xsd:documentation>
+       <Description>IRS e-file Individual Income Tax Schema - Employee Business Expenses Worksheet</Description>
+	<Purpose>Use this worksheet to figure allowable Form 2106 employee expenses for clergy - Publication 517</Purpose>
+       <TaxYear>2018</TaxYear>
+       <MaturityLevel>Final Release</MaturityLevel>
+       <ReleaseDate>February 13, 2019</ReleaseDate>
+    </xsd:documentation>
+ </xsd:annotation>
+ <xsd:include schemaLocation="../../../Common/efileTypes.xsd"/>
+
+
+ <!-- =============================================================== -->
+ <!-- ======================  Clergy Employee Business Expenses Worksheet============================ -->
+ <!-- =============================================================== -->
+
+
+ <xsd:element name="ClergyEmplBusExpenseWrksht">
+    <xsd:annotation>
+       <xsd:documentation>Clergy Employee Business Expenses Worksheet</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+       <xsd:complexContent>
+          <xsd:extension base="ClergyEmplBusExpenseWrkshtType">
+             <xsd:attributeGroup ref="DocumentAttributes">
+                <xsd:annotation>
+                   <xsd:documentation>Common return document attributes</xsd:documentation>
+                </xsd:annotation>
+             </xsd:attributeGroup>
+             <xsd:attribute name="documentName" type="xsd:string" fixed="ClergyEmployeeBusExpnsWorksheet">
+                <xsd:annotation>
+                   <xsd:documentation>IRS internal use only. To avoid error in the return, do not include the attribute name or value.</xsd:documentation>
+                </xsd:annotation>
+             </xsd:attribute>
+          </xsd:extension>
+       </xsd:complexContent>
+    </xsd:complexType>
+ </xsd:element>
+
+ <xsd:complexType name="ClergyEmplBusExpenseWrkshtType">
+    <xsd:annotation>
+       <xsd:documentation>Content model for Employee Business Expenses Worksheet</xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence>
+
+       <!-- SSN of Minister -->
+       <xsd:element name="MinisterSSN" type="SSNType" minOccurs="1" maxOccurs="1">
+          <xsd:annotation>
+             <xsd:documentation>
+                <Description>SSN of Taxpayer With Employee Business Expense</Description>
+                <ELFFieldNumber>0010</ELFFieldNumber>
+             </xsd:documentation>
+          </xsd:annotation>
+       </xsd:element>
+
+       <!-- Ministerial Tax Free Income Percent -->
+       <xsd:element name="MinisterialTaxFreeIncmPct" type="RatioType" minOccurs="0">
+          <xsd:annotation>
+             <xsd:documentation>
+                <Description>Ministerial Tax Free Income Percent</Description>
+                <LineNumber>1</LineNumber>
+                <ELFFieldNumber>0020</ELFFieldNumber>
+             </xsd:documentation>
+                          </xsd:annotation>
+       </xsd:element>
+
+       <!-- Business Miles Count -->
+       <xsd:element name="BusinessMilesCnt" type="IntegerType" minOccurs="0" maxOccurs="1">
+          <xsd:annotation>
+             <xsd:documentation>
+                <Description>Business Miles Count</Description>
+                <LineNumber>2</LineNumber>
+                <ELFFieldNumber>0030</ELFFieldNumber>
+             </xsd:documentation>
+          </xsd:annotation>
+       </xsd:element>
+
+	<!-- Deductible Clergy Mileage Amount -->
+	<xsd:element name="DeductibleClergyMileageAmt" type="USAmountType" minOccurs="0">
+		<xsd:annotation>
+			<xsd:documentation>
+				<Description>Deductible Clergy Mileage Amount</Description>
+				<LineNumber>2A</LineNumber>
+				<ELFFieldNumber>0040</ELFFieldNumber>
+			</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>	
+
+
+       <!-- Figure Form2106 Deduction Meals And Entertainment Amount -->
+       <xsd:element name="FgrFrm2106DedMealsAndEntrmtAmt" type="USAmountType" minOccurs="0">
+	  <xsd:annotation>
+	     <xsd:documentation>
+		<Description>Figure Form2106 Deduction Meals and Entertainment Amount</Description>
+		<LineNumber>3B</LineNumber>
+		<ELFFieldNumber>0050</ELFFieldNumber>
+	     </xsd:documentation>
+	  </xsd:annotation>
+       </xsd:element>
+
+	   <!-- Other Expenses Group -->
+	   <xsd:element name="OtherExpenseDetail" minOccurs="0" maxOccurs="unbounded">
+	    <xsd:complexType>
+	     <xsd:sequence>
+
+	     <!-- Description -->
+	     <xsd:element name="Desc" type="LineExplanationType" minOccurs="0">
+	      <xsd:annotation>
+	       <xsd:documentation>
+		<Description>Description</Description>
+		<LineNumber>4(a)-4(e)</LineNumber>
+		<ELFFieldNumber>0070 0090 0110 0130 0150</ELFFieldNumber>
+	       </xsd:documentation>
+	      </xsd:annotation>
+	     </xsd:element>
+
+	     <!-- Amount -->
+		<xsd:element name="Amt" type="USAmountType" minOccurs="0">
+		 <xsd:annotation>
+		  <xsd:documentation>
+		   <Description>Amount</Description>
+		   <LineNumber>4A(a)-4A(e)</LineNumber>
+		   <ELFFieldNumber>0080 0100 0120 0140 0160</ELFFieldNumber>
+		  </xsd:documentation>
+		 </xsd:annotation>
+		</xsd:element>
+
+		</xsd:sequence>
+	    </xsd:complexType>
+	   </xsd:element>
+   
+		<!-- Figure Form2106 Deduction Total Other Expense Amount -->
+		<xsd:element name="FgrFrm2106DedTotOthExpnsAmt" type="USAmountType" minOccurs="0">
+			<xsd:annotation>
+				<xsd:documentation>
+					<Description>Figure Form2106 Deduction Total Other Expense Amount</Description>
+					<LineNumber>5A</LineNumber>
+					<ELFFieldNumber>0170</ELFFieldNumber>
+				</xsd:documentation>
+			</xsd:annotation>
+		</xsd:element>
+
+		<!-- Line 5B - Figure Form 2106 Deduction Meals And Entertainment Amount   Copy of line 3B -->
+		<!-- ELFFieldNumber 0175 ELFFieldNumber -->
+		<!-- Figure Form2106 Deduction Meals And Entertainment Amount 
+	       <xsd:element name="FgrFrm2106DedMealsAndEntrmtAmt" type="USAmountType" minOccurs="0" maxOccurs="1">
+		  <xsd:annotation>
+		     <xsd:documentation>
+			<Description>Figure Form 2106 Deduction Meals and Entertainment Amount</Description>
+			<LineNumber>5B</LineNumber>
+			<ELFFieldNumber>0175</ELFFieldNumber>
+		     </xsd:documentation>
+		  </xsd:annotation>
+	       </xsd:element>
+	       -->
+
+       		<!-- Clergy Other Reimbursed Not on W2 Amount -->
+       		<xsd:element name="ClergyOtherReimbNotOnW2Amt" type="USAmountType" minOccurs="0">
+          		<xsd:annotation>
+             			<xsd:documentation>
+                			<Description>Clergy Other Reimbursed Not on W2 Amount</Description>
+                			<LineNumber>6A</LineNumber>
+             			    	<ELFFieldNumber>0190</ELFFieldNumber>
+             			</xsd:documentation>
+          		</xsd:annotation>
+       		</xsd:element>
+
+       		<!-- Clergy Meals and Entertainment Not On W2 Amount -->
+       		<xsd:element name="ClergyMealsAndEntrmtNotOnW2Amt" type="USAmountType" minOccurs="0">
+          		<xsd:annotation>
+             			<xsd:documentation>
+                			<Description>Clergy Meals and Entertainment Not On W2 Amount</Description>
+                			<LineNumber>6B</LineNumber>
+             			    	<ELFFieldNumber>0195</ELFFieldNumber>
+             			</xsd:documentation>
+          		</xsd:annotation>
+       		</xsd:element>
+
+       		<!-- Total Clergy Other Unreimbursed Expense Amount -->
+       		<xsd:element name="TotClergyOtherUnreimExpnsAmt" type="USAmountType" minOccurs="0">
+          		<xsd:annotation>
+             			<xsd:documentation>
+                			<Description>Total Clergy Other Unreimbursed Expense Amount</Description>
+                			<LineNumber>7A</LineNumber>
+             			    	<ELFFieldNumber>0200</ELFFieldNumber>
+             			</xsd:documentation>
+          		</xsd:annotation>
+       		</xsd:element>
+
+       		<!-- Total Clergy Meals Unreimbursed Expense Amount -->
+       		<xsd:element name="TotClergyMealsUnreimExpnsAmt" type="USAmountType" minOccurs="0">
+          		<xsd:annotation>
+             			<xsd:documentation>
+                			<Description>Total clergy Meals Unreimbursed Expense Amount</Description>
+                			<LineNumber>7B</LineNumber>
+             			    	<ELFFieldNumber>0205</ELFFieldNumber>
+             			</xsd:documentation>
+          		</xsd:annotation>
+       		</xsd:element>
+
+       		<!-- Line 8A - Total Clergy Other Unreimbursed Expense Amount   Copy of line 7A -->
+		<!-- ELFFieldNumber 0206 ELFFieldNumber -->
+       		<!-- Total Clergy Other Unreimbursed Expense Amount 
+       		<xsd:element name="TotClergyOtherUnreimExpnsAmt" type="USAmountType" minOccurs="0">
+          		<xsd:annotation>
+             			<xsd:documentation>
+                			<Description>Total Clergy Other Unreimbursed Expense Amount</Description>
+                			<LineNumber>8A</LineNumber>
+             			    	<ELFFieldNumber>0206</ELFFieldNumber>
+             			</xsd:documentation>
+          		</xsd:annotation>
+       		</xsd:element>
+		-->
+       		
+       		<!-- Total Clergy Meals Times Percent Amount -->
+       		<xsd:element name="TotalClergyMealsTimesPctAmt" type="USAmountType" minOccurs="0">
+          		<xsd:annotation>
+             			<xsd:documentation>
+                			<Description>Total Clergy Meals Times Percent Amount</Description>
+                			<LineNumber>8B</LineNumber>
+             			    	<ELFFieldNumber>0207</ELFFieldNumber>
+             			</xsd:documentation>
+          		</xsd:annotation>
+       		</xsd:element>
+
+       		<!-- Sum Total Clergy Expenses Amount -->
+       		<xsd:element name="SumTotalClergyExpensesAmt" type="USAmountType" minOccurs="0">
+          		<xsd:annotation>
+             			<xsd:documentation>
+                			<Description>Sum Total Clergy Expenses Amount</Description>
+                			<LineNumber>9A</LineNumber>
+             			    	<ELFFieldNumber>0208</ELFFieldNumber>
+             			</xsd:documentation>
+          		</xsd:annotation>
+       		</xsd:element>
+
+		<!-- Figure Form2106 Deduction Nondeduction Expense Amount -->
+		<xsd:element name="FgrFrm2106DedNondedExpnsAmt" type="USAmountType" minOccurs="0">
+			<xsd:annotation>
+				<xsd:documentation>
+					<Description>Figure Form2106 Deduction Nondeduction Expense Amount</Description>
+					<LineNumber>10A</LineNumber>
+					<ELFFieldNumber>0210</ELFFieldNumber>
+				</xsd:documentation>
+			</xsd:annotation>
+		</xsd:element>
+
+		<!-- Unreimbursed Employee Business Expense Amount -->
+		<xsd:element name="UnreimEmployeeBusExpnsAmt" type="USAmountType" minOccurs="0">
+			<xsd:annotation>
+				<xsd:documentation>
+					<Description>Unreimbursed Employee Business Expense Amount</Description>
+					<LineNumber>11B</LineNumber>
+					<ELFFieldNumber>0220</ELFFieldNumber>
+				</xsd:documentation>
+			</xsd:annotation>
+		</xsd:element>
+
+		</xsd:sequence>
+	</xsd:complexType>
+
+</xsd:schema>

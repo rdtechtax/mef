@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema targetNamespace="http://www.irs.gov/efile" xmlns="http://www.irs.gov/efile" xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.0">
+
+	<xsd:annotation>
+		<xsd:documentation>
+			<Description>IRS e-file U.S. Nonresident Alien Income Tax Schema - Estate Or Trust Not Engaged in Trade or Business Statement</Description>
+			<Purpose>Optional Statement - For Estates and Trust not engaged in a trade or business, attach a statement to Form 1040NR with the names and addresses of any U.S. grantors and beneficiaries.</Purpose>
+			<TaxYear>2018</TaxYear>
+			<MaturityLevel>Final Release</MaturityLevel>
+			<ReleaseDate>February 13, 2019</ReleaseDate>
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:include schemaLocation="../../../Common/efileTypes.xsd" />
+
+	<!-- ======================================================================== -->
+	<!-- ====== Estate Or Trust Not Engaged in Trade or Business Statement ====== -->
+	<!-- ======================================================================== -->
+
+	<xsd:element name="EstOrTrNotEngagedTrdOrBusStmt">
+		<xsd:annotation>
+			<xsd:documentation>Estate Or Trust Not Engaged in Trade or Business Statement</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:complexContent>
+				<xsd:extension base="EstOrTrNotEngagedTrdOrBusStmtType">
+					<xsd:attributeGroup ref="DocumentAttributes">
+						<xsd:annotation>
+							<xsd:documentation>Common return document attributes</xsd:documentation>
+						</xsd:annotation>
+					</xsd:attributeGroup>
+					<xsd:attribute name="documentName" type="TextType" fixed="EstateOrTrustNotEngagedInTradeOrBusinessStatement">
+						<xsd:annotation>
+							<xsd:documentation>IRS internal use only. To avoid error in the return, do not include the attribute name or value.</xsd:documentation>
+						</xsd:annotation>
+					</xsd:attribute>
+				</xsd:extension>
+			</xsd:complexContent>
+		</xsd:complexType>
+	</xsd:element>
+
+	<xsd:complexType name="EstOrTrNotEngagedTrdOrBusStmtType">
+		<xsd:annotation>
+			<xsd:documentation>Content model for Estate Or Trust Not Engaged in Trade or Business Statement</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<!-- Name and Address of U.S. Grantor -->
+			<xsd:element name="GrantorNameAndAddress" type="NameAndAddressType" minOccurs="0" maxOccurs="unbounded"/>
+			<!-- Name and Address of U.S. Beneficiary -->
+			<xsd:element name="BeneficiaryNameAndAddress" type="NameAndAddressType" minOccurs="0" maxOccurs="unbounded"/>
+		</xsd:sequence>
+	</xsd:complexType>
+
+</xsd:schema>

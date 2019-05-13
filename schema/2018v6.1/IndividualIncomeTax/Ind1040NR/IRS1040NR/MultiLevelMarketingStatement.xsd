@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema targetNamespace="http://www.irs.gov/efile" xmlns="http://www.irs.gov/efile" xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.0">
+
+	<xsd:annotation>
+		<xsd:documentation>
+			<Description>IRS e-file U.S. Nonresident Alien Income Tax Schema - Multi-Level Marketing Statement</Description>
+			<Purpose>Optional Statement - If the taxpayer is a distributor for a multilevel marketing company who had taxes withheld in error, attach to the U.S. income tax return supporting information. Publication 519.</Purpose>
+			<TaxYear>2018</TaxYear>
+			<MaturityLevel>Final Release</MaturityLevel>
+			<ReleaseDate>February 13, 2019</ReleaseDate>
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:include schemaLocation="../../../Common/efileTypes.xsd" />
+
+	<!-- ============================================= -->
+	<!-- ====== Multi-Level Marketing Statement ====== -->
+	<!-- ============================================= -->
+
+	<xsd:element name="MultiLevelMarketingStatement">
+		<xsd:annotation>
+			<xsd:documentation>Multi-Level Marketing Statement</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:complexContent>
+				<xsd:extension base="MultiLevelMarketingStatementType">
+					<xsd:attributeGroup ref="DocumentAttributes">
+						<xsd:annotation>
+							<xsd:documentation>Common return document attributes</xsd:documentation>
+						</xsd:annotation>
+					</xsd:attributeGroup>
+					<xsd:attribute name="documentName" type="TextType" fixed="MultiLevelMarketingStatement">
+						<xsd:annotation>
+							<xsd:documentation>IRS internal use only. To avoid error in the return, do not include the attribute name or value.</xsd:documentation>
+						</xsd:annotation>
+					</xsd:attribute>
+				</xsd:extension>
+			</xsd:complexContent>
+		</xsd:complexType>
+	</xsd:element>
+
+	<xsd:complexType name="MultiLevelMarketingStatementType">
+		<xsd:annotation>
+			<xsd:documentation>Content model for Multi-Level Marketing Statement</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<!-- Income Not Subjected To U.S. Tax Statement -->
+			<xsd:element name="IncomeNotSubjectToUSTaxTxt" type="MediumExplanationType" minOccurs="0"/>
+			<!-- U.S Arrivals and Departures Dates -->
+			<xsd:element name="USArrivalDepartureDateTxt" minOccurs="0">
+				<xsd:complexType>
+					<xsd:simpleContent>
+						<xsd:extension base="ShortExplanationType">
+							<xsd:attribute name="referenceDocumentId" type="IdListType"/>
+							<xsd:attribute name="referenceDocumentName" type="TextType" fixed="BinaryAttachment"/>
+						</xsd:extension>
+					</xsd:simpleContent>
+				</xsd:complexType>
+			</xsd:element>
+			<!-- Low Tier Distributors of Personal Services Statement -->
+			<xsd:element name="LowerTierDistrPrsnlServiceTxt" type="ShortExplanationType" minOccurs="0"/>
+			<!-- Additional explanation if needed by filer -->
+			<xsd:element name="AdditionalExplanationTxt" type="ShortExplanationType" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+
+</xsd:schema>

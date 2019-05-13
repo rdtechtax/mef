@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns="http://www.irs.gov/efile" xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.irs.gov/efile" elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.0">
+
+	<xsd:annotation>
+		<xsd:documentation>
+			<Description>IRS e-file Individual Income Tax Schema - Other Miscellaneous Deductions Statement Statement</Description>
+			<Purpose>Attach a statement showing the type and amount of each of the following expenses: Gambling Losses, but only to the extent of gambling winnings reported on Form 1040.  Casualty and theft losses or income-producing property from Form 4684 or Form 4797.  Loss from other activities from schedule K-1.  Federal estate tax on income in respect of a decedent.  Amortizable bond premium on bonds acquired before October 23, 1986.  Deductions for repayment of amounts under a claim of right if over 3,000.  Certain uncovered investments in a pension.  Impairment-related work expenses of a disabled person.  Enter only one total on line 28</Purpose>
+			<TaxYear>2018</TaxYear>
+			<MaturityLevel>Final Release</MaturityLevel>
+			<ReleaseDate>February 13, 2019</ReleaseDate>
+		</xsd:documentation>
+	</xsd:annotation>
+	
+	<xsd:include schemaLocation="../../../Common/efileTypes.xsd"/>
+	
+	<!-- ============================================================== -->
+	<!-- =========  Other Miscellaneous Deductions Statement ========== -->
+	<!-- ============================================================== -->
+	
+	<xsd:element name="OtherMiscDeductionsStmt">
+		<xsd:annotation>
+			<xsd:documentation>Other Miscellaneous Deductions statement</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:complexContent>
+				<xsd:extension base="OtherMiscDeductionsStmtType">
+					<xsd:attributeGroup ref="DocumentAttributes">
+						<xsd:annotation>
+							<xsd:documentation>Common return document attributes</xsd:documentation>
+						</xsd:annotation>
+					</xsd:attributeGroup>
+					<xsd:attribute name="documentName" type="xsd:string" fixed="OtherMiscellaneousDeductionsStatement">
+						<xsd:annotation>
+							<xsd:documentation>IRS internal use only. To avoid error in the return, do not include the attribute name or value.</xsd:documentation>
+						</xsd:annotation>
+					</xsd:attribute>
+				</xsd:extension>
+			</xsd:complexContent>
+		</xsd:complexType>
+	</xsd:element>
+	
+	<xsd:complexType name="OtherMiscDeductionsStmtType">
+		<xsd:annotation>
+			<xsd:documentation>Content model for miscellaneous deductions statement</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+		
+			<xsd:element name="MiscellaneousDeductionDetail" type="MiscellaneousDeductionDetailType" minOccurs="0" maxOccurs="unbounded"/>
+			
+		</xsd:sequence>
+	</xsd:complexType>
+	
+	<xsd:complexType name="MiscellaneousDeductionDetailType">
+		
+		<xsd:sequence>
+		
+			<!-- Type of Other Miscellaneous Deductions -->
+			<xsd:element name="MiscellaneousDeductionTypeDesc">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Type of miscellaneous deduction</Description>
+					</xsd:documentation>
+				</xsd:annotation>
+				<xsd:simpleType>
+					<xsd:restriction base="LineExplanationType">
+						<xsd:enumeration value="AMORTIZABLE BOND PREMIUMS"/>
+						<xsd:enumeration value="CASUALTY AND THEFT LOSS"/>
+						<xsd:enumeration value="FEDERAL ESTATE TAX"/>	
+						<xsd:enumeration value="GAMBLING LOSSES"/>	
+						<xsd:enumeration value="IMPAIRMENT-RELATED WORK EXPENSES"/>
+						<xsd:enumeration value="CLAIM REPAYMENTS"/>
+						<xsd:enumeration value="UNRECOVERED PENSION INVESTMENTS"/>
+						<xsd:enumeration value="SCHEDULE K-1"/>
+						<xsd:enumeration value="ORDINARY LOSS DEBT INSTRUMENT"/>
+						<xsd:enumeration value="NET QUALIFIED DISASTER LOSS"/>
+						<xsd:enumeration value="STANDARD DEDUCTION CLAIMED WITH QUALIFIED DISASTER LOSS"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+
+			<!-- Other Miscellaneous Deductions Amount -->
+			<xsd:element name="MiscellaneousDeductionAmt" type="USAmountType">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Miscellaneous deduction amount</Description>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			
+		</xsd:sequence>
+	</xsd:complexType>
+	
+</xsd:schema>

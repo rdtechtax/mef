@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.irs.gov/efile" targetNamespace="http://www.irs.gov/efile" elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.0">
+
+	<xsd:annotation>
+
+		<xsd:documentation>
+
+			<Description>IRS e-file Schema - Transactions in Lieu of the FSC Provisions Schedule</Description>
+
+			<TaxYear>2018</TaxYear>
+
+			<MaturityLevel>Final Release</MaturityLevel>
+
+			<ReleaseDate>February 13, 2019</ReleaseDate>
+
+		</xsd:documentation>
+
+	</xsd:annotation>
+
+
+
+	<xsd:include schemaLocation="../../../Common/efileTypes.xsd"/>
+
+
+
+	<!-- ============================================================================== -->
+
+	<!-- ==============  Transactions in Lieu of the FSC Provisions Schedule===================== -->
+
+	<!-- ============================================================================== -->
+
+
+
+	<xsd:element name="TransInLieuOfFSCProvisionsSch">
+
+		<xsd:annotation>
+
+			<xsd:documentation>Transactions in Lieu of the FSC Provisions Schedule</xsd:documentation>
+
+		</xsd:annotation>
+
+		<xsd:complexType>
+
+			<xsd:complexContent>
+
+				<xsd:extension base="TransInLieuOfFSCProvisionsSchType">
+
+					<xsd:attributeGroup ref="DocumentAttributes">
+
+						<xsd:annotation>
+
+							<xsd:documentation>Common return document attributes</xsd:documentation>
+
+						</xsd:annotation>
+
+					</xsd:attributeGroup>
+
+					<xsd:attribute name="documentName" type="xsd:string" fixed="TransactionsInLieuOfTheFSCProvisionsSchedule">
+
+						<xsd:annotation>
+
+							<xsd:documentation>IRS internal use only. To avoid error in the return, do not include the attribute name or value.</xsd:documentation>
+
+						</xsd:annotation>
+
+					</xsd:attribute>
+
+				</xsd:extension>
+
+			</xsd:complexContent>
+
+		</xsd:complexType>
+
+	</xsd:element>
+
+
+
+	<xsd:complexType name="TransInLieuOfFSCProvisionsSchType">
+
+		<xsd:annotation>
+
+			<xsd:documentation>Content model for Transactions in Lieu of the FSC Provisions Schedule</xsd:documentation>
+
+		</xsd:annotation>
+
+		<xsd:sequence>
+
+			
+
+			<xsd:element name="TransInLieuOfFSCProvisionsInfo" minOccurs="0" maxOccurs="unbounded">
+
+				<xsd:complexType>
+
+					<xsd:sequence>
+
+					
+
+						<!-- Type Of Transactions Subject To The ETI Exclusion Treatment -->
+
+						<xsd:element name="TrSubjToETIExclusionTypeDesc" type="LineExplanationType" minOccurs="0">
+
+							<xsd:annotation>
+
+								<xsd:documentation>
+
+									<Description>Type of transactions subject to the eti exclusion treatment</Description>
+
+								</xsd:documentation>
+
+							</xsd:annotation>
+
+						</xsd:element>
+
+			
+
+						<!-- Amount Of Transactions Subject To The ETI Exclusion Treatment -->
+
+						<xsd:element name="ExtraterritorialExclIncomeAmt" type="USAmountType" minOccurs="0">
+
+							<xsd:annotation>
+
+								<xsd:documentation>
+
+									<Description>Amount of transactions subject to the eti exclusion treatment</Description>
+
+								</xsd:documentation>
+
+							</xsd:annotation>
+
+						</xsd:element>
+
+						
+
+					</xsd:sequence>
+
+				</xsd:complexType>
+
+			</xsd:element>
+
+			
+
+			<!-- Total Amount Transactions Subject To The ETI Exclusion Treatment From Item 2 Above -->
+
+			<xsd:element name="TotalTransactionAmt" type="USAmountType" minOccurs="0">
+
+				<xsd:annotation>
+
+					<xsd:documentation>
+
+						<Description>Total amount transactions subject to the eti exclusion treatment</Description>
+
+					</xsd:documentation>
+
+				</xsd:annotation>
+
+			</xsd:element>
+
+						
+
+		</xsd:sequence>
+
+	</xsd:complexType>
+
+</xsd:schema>

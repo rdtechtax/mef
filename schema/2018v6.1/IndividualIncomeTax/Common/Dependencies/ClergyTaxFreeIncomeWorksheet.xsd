@@ -1,0 +1,290 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.irs.gov/efile" targetNamespace="http://www.irs.gov/efile" elementFormDefault="qualified" attributeFormDefault="unqualified">
+ <xsd:annotation>
+    <xsd:documentation>
+       <Description>IRS e-file Individual Income Tax Schema - Tax Free Income Work Sheet</Description>
+       <Purpose>Use this worksheet to figure tax free income for Clergy - Publication 517</Purpose>
+       <TaxYear>2018</TaxYear>
+       <MaturityLevel>Final Release</MaturityLevel>
+       <ReleaseDate>February 13, 2019</ReleaseDate>
+    </xsd:documentation>
+ </xsd:annotation>
+ <xsd:include schemaLocation="../../../Common/efileTypes.xsd"/>
+
+
+ <!-- =============================================================== -->
+ <!-- ======================  Tax Free Income Worksheet============================ -->
+ <!-- =============================================================== -->
+
+
+ <xsd:element name="ClergyTaxFreeIncomeWorksheet">
+    <xsd:annotation>
+       <xsd:documentation>Clergy Tax Free Income Worksheet</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+       <xsd:complexContent>
+          <xsd:extension base="ClergyTaxFreeIncomeWorksheetType">
+             <xsd:attributeGroup ref="DocumentAttributes">
+                <xsd:annotation>
+                   <xsd:documentation>Common return document attributes</xsd:documentation>
+                </xsd:annotation>
+             </xsd:attributeGroup>
+             <xsd:attribute name="documentName" type="xsd:string" fixed="ClergyTaxFreeIncomeWorksheet">
+                <xsd:annotation>
+                   <xsd:documentation>IRS internal use only. To avoid error in the return, do not include the attribute name or value.</xsd:documentation>
+                </xsd:annotation>
+             </xsd:attribute>
+          </xsd:extension>
+       </xsd:complexContent>
+    </xsd:complexType>
+ </xsd:element>
+
+ <xsd:complexType name="ClergyTaxFreeIncomeWorksheetType">
+    <xsd:annotation>
+       <xsd:documentation>Content model for Clergy Tax Free Income Worksheet</xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence>
+
+       <!-- SSN of Minister -->
+       <xsd:element name="MinisterSSN" type="SSNType">
+          <xsd:annotation>
+             <xsd:documentation>
+                <Description>SSN of Taxpayer With Employee Business Expense</Description>
+                <ELFFieldNumber>0010</ELFFieldNumber>
+             </xsd:documentation>
+          </xsd:annotation>
+       </xsd:element>
+
+       <!-- Wages Amount -->
+       <xsd:element name="WagesAmt" type="USAmountType" minOccurs="0">
+          <xsd:annotation>
+             <xsd:documentation>
+                <Description>Wages Amount</Description>
+                <LineNumber>1(a) and 1(c)</LineNumber>
+                <ELFFieldNumber>0020 0030</ELFFieldNumber>
+             </xsd:documentation>
+                          </xsd:annotation>
+       </xsd:element>
+
+       <!-- Gross Receipts Or Sales Amount -->
+       <xsd:element name="GrossReceiptsOrSalesAmt" type="USAmountType" minOccurs="0">
+          <xsd:annotation>
+             <xsd:documentation>
+                <Description>Gross Income from weddings, baptisms, ect. (Sch C/EZ Line 1)</Description>
+                <LineNumber>2(a) and 2(c)</LineNumber>
+                <ELFFieldNumber>0040 0050</ELFFieldNumber>
+             </xsd:documentation>
+          </xsd:annotation>
+       </xsd:element>
+
+			<!-- Parsonage Provided By Church Group -->
+			<xsd:element name="ParsonageProvidedByChurchGrp" minOccurs="0">
+				<xsd:complexType>
+					<xsd:sequence>
+
+    		<!-- Parsonage Provided By Church FRV Amount -->
+    		<xsd:element name="PrsngProvByChurchFRVAmt" type="USAmountType" minOccurs="0">
+    		 <xsd:annotation>
+    		  <xsd:documentation>
+    		   <Description>Parsonage Provided By Church FRV Amount</Description>
+    		   <LineNumber>3a(b) and 3a(c)</LineNumber>
+    		   <ELFFieldNumber>0060 0070</ELFFieldNumber>
+    		  </xsd:documentation>
+    		 </xsd:annotation>
+    		</xsd:element>
+
+    		<!-- Parsonage Provided Utility Allowance Amount -->
+    		<xsd:element name="PrsngProvUtilityAllowanceAmt" type="USAmountType" minOccurs="0">
+    		 <xsd:annotation>
+    		  <xsd:documentation>
+    		   <Description>Parsonage Provided Utility Allowance Amount</Description>
+    		   <LineNumber>3b</LineNumber>
+    		   <ELFFieldNumber>0080</ELFFieldNumber>
+    		  </xsd:documentation>
+    		 </xsd:annotation>
+    		</xsd:element>
+
+    		<!-- Parsonage Provided Actual Utility Expense Amount -->
+    		<xsd:element name="PrsngProvActlUtilityExpenseAmt" type="USAmountType" minOccurs="0">
+    		 <xsd:annotation>
+    		  <xsd:documentation>
+    		   <Description>Parsonage Provided Actual Utility Expense Amount</Description>
+    		   <LineNumber>3c</LineNumber>
+    		   <ELFFieldNumber>0090</ELFFieldNumber>
+    		  </xsd:documentation>
+    		 </xsd:annotation>
+    		</xsd:element>
+
+    		<!-- Smaller Utility Expense Or Allowance Amount -->
+    		<xsd:element name="SmallerUtilityExpnsOrAllwncAmt" type="USAmountType" minOccurs="0">
+    		 <xsd:annotation>
+    		  <xsd:documentation>
+    		   <Description>Smaller Utility Expense Or Allowance Amount</Description>
+    		   <LineNumber>3d(b) and 3d(c)</LineNumber>
+    		   <ELFFieldNumber>0100 0110</ELFFieldNumber>
+    		  </xsd:documentation>
+    		 </xsd:annotation>
+    		</xsd:element>
+
+    		<!-- Excess Utility Allowance Amount -->
+    		<xsd:element name="ExcessUtilityAllowanceAmt" type="USAmountType" minOccurs="0">
+    		 <xsd:annotation>
+    		  <xsd:documentation>
+    		   <Description>Excess Utility Allowance Amount</Description>
+    		   <LineNumber>3e(a) and 3e(c)</LineNumber>
+    		   <ELFFieldNumber>0120 and 0130</ELFFieldNumber>
+    		  </xsd:documentation>
+    		 </xsd:annotation>
+    		</xsd:element>
+
+    		<!-- Parsonage Or Rental Allowance Amount -->
+    		<xsd:element name="ParsonageOrRentalAllwanceAmt" type="USAmountType" minOccurs="0">
+    		 <xsd:annotation>
+    		  <xsd:documentation>
+    		   <Description>Parsonage Or Rental Allowance Amount</Description>
+    		   <LineNumber>4a</LineNumber>
+    		   <ELFFieldNumber>0140</ELFFieldNumber>
+    		 </xsd:documentation>
+    		 </xsd:annotation>
+    		</xsd:element>
+
+    		<!-- No Parsonage Utility Allowance Amount -->
+    		<xsd:element name="NoPrsngUtilityAllowanceAmt" type="USAmountType" minOccurs="0">
+    		 <xsd:annotation>
+    		  <xsd:documentation>
+    		   <Description>No Parsonage Utility Allowance Amount</Description>
+    		   <LineNumber>4b</LineNumber>
+    		   <ELFFieldNumber>0150</ELFFieldNumber>
+    		  </xsd:documentation>
+    		 </xsd:annotation>
+    		</xsd:element>
+
+    		<!-- No Parsonage Total Rental Utilities Allowance Amount -->
+    		<xsd:element name="NoPrsngTotRntlUtltsAllwncAmt" type="USAmountType" minOccurs="0">
+    		 <xsd:annotation>
+    		  <xsd:documentation>
+    		   <Description>No Parsonage Total Rental Utilities Allowance Amount</Description>
+    		   <LineNumber>4c</LineNumber>
+    		   <ELFFieldNumber>0160</ELFFieldNumber>
+    		 </xsd:documentation>
+    		 </xsd:annotation>
+    		</xsd:element>
+
+    		<!-- No Parsonage Actual Parsonage Expense Amount -->
+    		<xsd:element name="NoPrsngActlParsonageExpenseAmt" type="USAmountType" minOccurs="0">
+    		 <xsd:annotation>
+    		  <xsd:documentation>
+    		   <Description>No Parsonage Actual Parsonage Expense Amount</Description>
+    		   <LineNumber>4d</LineNumber>
+    		   <ELFFieldNumber>0170</ELFFieldNumber>
+    		  </xsd:documentation>
+    		 </xsd:annotation>
+    		</xsd:element>
+
+    		<!-- No Parsonage Actual Utility Expense Amount -->
+    		<xsd:element name="NoPrsngActualUtilityExpenseAmt" type="USAmountType" minOccurs="0">
+    		 <xsd:annotation>
+    		  <xsd:documentation>
+    		   <Description>No Parsonage Actual Utility Expense Amount</Description>
+    		   <LineNumber>4e</LineNumber>
+    		   <ELFFieldNumber>0180</ELFFieldNumber>
+    		 </xsd:documentation>
+    		 </xsd:annotation>
+    		</xsd:element>
+
+    		<!-- Total Parsonage Utility Expenses Amount -->
+    		<xsd:element name="TotalParsonageUtilityExpnssAmt" type="USAmountType" minOccurs="0">
+    		 <xsd:annotation>
+    		  <xsd:documentation>
+    		   <Description>Total Parsonage Utility Expenses Amount</Description>
+    		   <LineNumber>4f</LineNumber>
+    		   <ELFFieldNumber>0190</ELFFieldNumber>
+    		  </xsd:documentation>
+    		 </xsd:annotation>
+    		</xsd:element>
+
+    		<!-- No Parsonage FRV Of Home Plus Utilities Amount -->
+    		<xsd:element name="NoPrsngFRVOfHomePlusUtltsAmt" type="USAmountType" minOccurs="0">
+    		 <xsd:annotation>
+    		  <xsd:documentation>
+    		   <Description>N oParsonage FRV Of Home Plus Utilities Amount</Description>
+    		   <LineNumber>4g</LineNumber>
+    		   <ELFFieldNumber>0200</ELFFieldNumber>
+    		 </xsd:documentation>
+    		 </xsd:annotation>
+    		</xsd:element>
+
+    		<!-- Smaller Of Allowance Actual Or FRV Amount -->
+    		<xsd:element name="SmallerOfAllwncActualOrFRVAmt" type="USAmountType" minOccurs="0">
+    		 <xsd:annotation>
+    		  <xsd:documentation>
+    		   <Description>Smaller Of Allowance Actual Or FRV Amount</Description>
+    		   <LineNumber>4h(b) and 4h(c)</LineNumber>
+    		   <ELFFieldNumber>0210 and 0220</ELFFieldNumber>
+    		  </xsd:documentation>
+    		 </xsd:annotation>
+    		</xsd:element>
+
+    		<!-- Excess Church Allowance Amount -->
+    		<xsd:element name="ExcessChurchAllowanceAmt" type="USAmountType" minOccurs="0">
+    		 <xsd:annotation>
+    		  <xsd:documentation>
+    		   <Description>Excess Church Allowance Amount</Description>
+    		   <LineNumber>4i(a) and 4i(c)</LineNumber>
+    		   <ELFFieldNumber>0230 and 0240</ELFFieldNumber>
+    		 </xsd:documentation>
+    		 </xsd:annotation>
+    		</xsd:element>
+    		
+    		</xsd:sequence>
+    </xsd:complexType>
+   </xsd:element>
+
+   <!-- Total Taxable Ministerial Income Amount -->
+    		<xsd:element name="TotalTaxableMinisterialIncmAmt" type="USAmountType" minOccurs="0">
+    <xsd:annotation>
+    	<xsd:documentation>
+    		<Description>Total Taxable Ministerial Income Amount</Description>
+    		<LineNumber>5(a)</LineNumber>
+    		<ELFFieldNumber>0250</ELFFieldNumber>
+    	</xsd:documentation>
+    </xsd:annotation>
+   </xsd:element>
+
+   <!-- Total Tax Free Ministerial Income Amount -->
+    		<xsd:element name="TotalTxFreeMinisterialIncmAmt" type="USAmountType" minOccurs="0">
+    <xsd:annotation>
+    	<xsd:documentation>
+    		<Description>Total Tax Free Ministerial Income Amount</Description>
+    		<LineNumber>5(b) and 6</LineNumber>
+    		<ELFFieldNumber>02600280</ELFFieldNumber>
+    	</xsd:documentation>
+    </xsd:annotation>
+   </xsd:element>
+
+   <!-- Total Ministerial Income Amount -->
+    		<xsd:element name="TotalMinisterialIncomeAmt" type="USAmountType" minOccurs="0">
+    <xsd:annotation>
+    	<xsd:documentation>
+    		<Description>Total Ministerial Income Amount</Description>
+    		<LineNumber>5(c) and 6</LineNumber>
+    		<ELFFieldNumber>0270 0290</ELFFieldNumber>
+    	</xsd:documentation>
+    </xsd:annotation>
+   </xsd:element>
+
+   <!-- Ministerial Tax Free Income Percent -->
+    		<xsd:element name="MinisterialTaxFreeIncmPct" type="RatioType" minOccurs="0">
+    <xsd:annotation>
+    	<xsd:documentation>
+    		<Description>Ministerial Tax Free Income Percent</Description>
+    		<LineNumber>6</LineNumber>
+    		<ELFFieldNumber>0300</ELFFieldNumber>
+    	</xsd:documentation>
+    </xsd:annotation>
+   </xsd:element>
+
+		</xsd:sequence>
+	</xsd:complexType>
+
+</xsd:schema>

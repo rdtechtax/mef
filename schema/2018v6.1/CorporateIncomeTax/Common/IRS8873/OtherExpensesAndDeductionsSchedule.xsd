@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.irs.gov/efile" targetNamespace="http://www.irs.gov/efile" elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.0">
+
+	<xsd:annotation>
+
+		<xsd:documentation>
+
+			<Description>IRS e-file Schema - Other Expenses and Deductions Schedule</Description>
+
+			<TaxYear>2018</TaxYear>
+
+			<MaturityLevel>Final Release</MaturityLevel>
+
+			<ReleaseDate>February 13, 2019</ReleaseDate>
+
+		</xsd:documentation>
+
+	</xsd:annotation>
+
+
+
+	<xsd:include schemaLocation="../../../Common/efileTypes.xsd"/>
+
+
+
+	<!-- ================================================================== -->
+
+	<!-- ===========  Other Expenses and Deductions Schedule =================== -->
+
+	<!-- ================================================================== -->
+
+
+
+	<xsd:element name="OtherExpensesandDeductionsSch">
+
+		<xsd:annotation>
+
+			<xsd:documentation>Other Expenses and Deductions Schedule</xsd:documentation>
+
+		</xsd:annotation>
+
+		<xsd:complexType>
+
+			<xsd:complexContent>
+
+				<xsd:extension base="OtherExpensesandDeductionsSchType">
+
+					<xsd:attributeGroup ref="DocumentAttributes">
+
+						<xsd:annotation>
+
+							<xsd:documentation>Common return document attributes</xsd:documentation>
+
+						</xsd:annotation>
+
+					</xsd:attributeGroup>
+
+					<xsd:attribute name="documentName" type="xsd:string" fixed="OtherExpensesAndDeductionsSchedule">
+
+						<xsd:annotation>
+
+							<xsd:documentation>IRS internal use only. To avoid error in the return, do not include the attribute name or value.</xsd:documentation>
+
+						</xsd:annotation>
+
+					</xsd:attribute>
+
+				</xsd:extension>
+
+			</xsd:complexContent>
+
+		</xsd:complexType>
+
+	</xsd:element>
+
+
+
+	<xsd:complexType name="OtherExpensesandDeductionsSchType">
+
+		<xsd:annotation>
+
+			<xsd:documentation>Content model for Other Expenses and Deductions Schedule</xsd:documentation>
+
+		</xsd:annotation>
+
+		<xsd:sequence>
+
+		
+
+			<xsd:element name="OtherExpensesandDeductionsGrp" minOccurs="0" maxOccurs="unbounded">
+
+				<xsd:complexType>
+
+					<xsd:sequence>
+
+
+
+						<!-- Type of Other Expenses and Deductions, Other Than Those Included in Your Cost of Goods Sold -->
+
+						<xsd:element name="TypeOfOtherExpensesAndDedTxt" type="LineExplanationType" minOccurs="0">
+
+							<xsd:annotation>
+
+								<xsd:documentation>
+
+									<Description>Type of Other Expenses and Deductions, other than those included in you cost of goods sold</Description>
+
+								</xsd:documentation>
+
+							</xsd:annotation>
+
+						</xsd:element>
+
+			
+
+						<!-- Amount Of Foreign Trade Income Deductions Reported On Line 15 -->
+
+						<xsd:element name="ForeignTradeIncomeAmt" type="USAmountType" minOccurs="0">
+
+							<xsd:annotation>
+
+								<xsd:documentation>
+
+									<Description>Amount of foreign trade income deductions reported on line 15</Description>
+
+								</xsd:documentation>
+
+							</xsd:annotation>
+
+						</xsd:element>
+
+			
+
+						<!-- Amount Of Foreign Sales And Leasing Deductions Reported On Line 16 -->
+
+						<xsd:element name="ForeignSalesAndLeasingIncmAmt" type="USAmountType" minOccurs="0">
+
+							<xsd:annotation>
+
+								<xsd:documentation>
+
+									<Description>Amount of foreign sales and leasing deductions reported on line 16</Description>
+
+								</xsd:documentation>
+
+							</xsd:annotation>
+
+						</xsd:element>
+
+						
+
+					</xsd:sequence>
+
+				</xsd:complexType>
+
+			</xsd:element>
+
+			
+
+			<!-- Total Of Amount Of Foreign Trade Income Deductions, Line 15 -->
+
+			<xsd:element name="TotFrgnTrdIncmOthExpnssDedAmt" type="USAmountType" minOccurs="0">
+
+				<xsd:annotation>
+
+					<xsd:documentation>
+
+						<Description>Total of amount of foreign trade income deductions, line 15</Description>
+
+					</xsd:documentation>
+
+				</xsd:annotation>
+
+			</xsd:element>
+
+
+
+			<!-- Total Of Amount Of Foreign Sales And Leasing Deductions, Line 16 -->
+
+			<xsd:element name="TotFrgnSlsLeasingExpnssDedAmt" type="USAmountType" minOccurs="0">
+
+				<xsd:annotation>
+
+					<xsd:documentation>
+
+						<Description>Total of amount of foreign sales and leasing deductions, line 16</Description>
+
+					</xsd:documentation>
+
+				</xsd:annotation>
+
+			</xsd:element>
+
+			
+
+		</xsd:sequence>
+
+	</xsd:complexType>
+
+</xsd:schema>

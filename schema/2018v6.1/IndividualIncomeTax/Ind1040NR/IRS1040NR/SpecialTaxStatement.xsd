@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema targetNamespace="http://www.irs.gov/efile" xmlns="http://www.irs.gov/efile" xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.0">
+
+	<xsd:annotation>
+		<xsd:documentation>
+			<Description>IRS e-file Nonresident Alien Income Tax Schema - Special Tax Statement</Description>
+			<Purpose>Optional Statement - Taxpayer is subject to tax under a special rule if taxpayer interrupts the period of U.S. residence with a period of nonresidence. A statement must be attached to the return that identifies the source of all U.S. and foreign gross income and the items of income subject to this special rule. Publication 519.</Purpose>
+			<TaxYear>2018</TaxYear>
+			<MaturityLevel>Final Release</MaturityLevel>
+			<ReleaseDate>February 13, 2019</ReleaseDate>
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:include schemaLocation="../../../Common/efileTypes.xsd" />
+
+	<!-- ========================================================= -->
+	<!-- ====== Special Tax Statement ======= -->
+	<!-- ========================================================= -->
+
+	<xsd:element name="SpecialTaxStatement">
+		<xsd:annotation>
+			<xsd:documentation>Special Tax Statement</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:complexContent>
+				<xsd:extension base="SpecialTaxStatementType">
+					<xsd:attributeGroup ref="DocumentAttributes">
+						<xsd:annotation>
+							<xsd:documentation>Common return document attributes</xsd:documentation>
+						</xsd:annotation>
+					</xsd:attributeGroup>
+					<xsd:attribute name="documentName" type="TextType" fixed="SpecialTaxStatement">
+						<xsd:annotation>
+							<xsd:documentation>IRS internal use only. To avoid error in the return, do not include the attribute name or value.</xsd:documentation>
+						</xsd:annotation>
+					</xsd:attribute>
+				</xsd:extension>
+			</xsd:complexContent>
+		</xsd:complexType>
+	</xsd:element>
+
+	<xsd:complexType name="SpecialTaxStatementType">
+		<xsd:annotation>
+			<xsd:documentation>Content model for Special Tax Statement</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<!-- Source of all U.S. and Foreign Gross Income -->
+			<xsd:element name="USFrgnGroIncmSourceExplnTxt" type="ExplanationType" minOccurs="0"/>
+			<!-- U.S. and Foreign Items Subject to Special Rule -->
+			<xsd:element name="USFrgnGroIncmItemSpclRuleTxt" type="MediumExplanationType" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+
+</xsd:schema>

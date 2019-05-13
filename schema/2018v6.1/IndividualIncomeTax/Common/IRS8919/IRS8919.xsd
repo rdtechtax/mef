@@ -1,0 +1,235 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.irs.gov/efile" targetNamespace="http://www.irs.gov/efile" elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.0">
+	<xsd:annotation>
+		<xsd:documentation>
+			<Description>IRS e-file Schema - IRS Form 8919 Uncollected Social Security and Medicare Tax on Wages</Description>
+			<TaxYear>2018</TaxYear>
+			<MaturityLevel>Final Release</MaturityLevel>
+			<ReleaseDate>February 13, 2019</ReleaseDate>
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:include schemaLocation="../../../Common/efileTypes.xsd"/>
+
+	<!--==================================================================-->
+	<!--======================= IRS Form 8919 ============================-->
+	<!--==================================================================-->
+
+	<xsd:element name="IRS8919">
+		<xsd:annotation>
+			<xsd:documentation>IRS Form 8919</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:complexContent>
+				<xsd:extension base="IRS8919Type">
+					<xsd:attributeGroup ref="DocumentAttributes">
+						<xsd:annotation>
+							<xsd:documentation>Common return document attributes</xsd:documentation>
+						</xsd:annotation>
+					</xsd:attributeGroup>
+					<xsd:attribute name="documentName" type="xsd:string" fixed="IRS8919">
+						<xsd:annotation>
+							<xsd:documentation>IRS internal use only. To avoid error in the return, do not include the attribute name or value.</xsd:documentation>
+						</xsd:annotation>
+					</xsd:attribute>
+				</xsd:extension>
+			</xsd:complexContent>
+		</xsd:complexType>
+	</xsd:element>
+
+	<xsd:complexType name="IRS8919Type">
+		<xsd:annotation>
+			<xsd:documentation>Content model for IRS Form 8919</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+		
+			<!-- Name-->
+			<xsd:element name="PersonNm" type="PersonNameType">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Name</Description>
+						<ELFFieldNumber>0010</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>	
+
+			<!-- SSN-->
+			<xsd:element name="SSN" type="SSNType">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>SSN</Description>
+						<ELFFieldNumber>0020</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>	
+		
+			<xsd:element name="UncollectedSocSecMedTaxPerFirm" minOccurs="0" maxOccurs="unbounded">
+				<xsd:complexType>
+					<xsd:sequence>
+						<!--Employer Name -->
+						<xsd:element name="EmployerName" type="BusinessNameType">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Employer Name</Description>
+									<LineNumber>1a 2a 3a 4a 5a</LineNumber>
+									<ELFFieldNumber>0030 0090 0150 0210 0270</ELFFieldNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						<xsd:choice>
+							<!--Employer Identification Number -->
+							<xsd:element name="EmployerEIN" type="EINType">
+								<xsd:annotation>
+									<xsd:documentation>
+										<Description>Employer Identification Number</Description>
+										<LineNumber>1b 2b 3b 4b 5b</LineNumber>
+										<ELFFieldNumber>0040 0100 0160 0220 0280</ELFFieldNumber>
+									</xsd:documentation>
+								</xsd:annotation>
+							</xsd:element>
+							<!--Employer SSN-->
+							<xsd:element name="SSN" type="SSNType">
+								<xsd:annotation>
+									<xsd:documentation>
+										<Description>Employer SSN</Description>
+										<LineNumber>1b 2b 3b 4b 5b</LineNumber>
+										<ELFFieldNumber>0040 0100 0160 0220 0280</ELFFieldNumber>
+									</xsd:documentation>
+								</xsd:annotation>
+							</xsd:element>
+							<!--Employer TIN Unknown-->
+							<xsd:element name="UnknownTINCd" type="TextType" fixed="UNKNOWN">
+								<xsd:annotation>
+									<xsd:documentation>
+										<Description>Employer TIN Unknown</Description>
+										<LineNumber>1b 2b 3b 4b 5b</LineNumber>
+										<ELFFieldNumber>0040 0100 0160 0220 0280</ELFFieldNumber>
+									</xsd:documentation>
+								</xsd:annotation>
+							</xsd:element>
+						</xsd:choice>
+						<!--Uncollected Social Security Medicare Reason Code -->
+						<xsd:element name="UncollectedSocSecMedReasonCd">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Uncollected Social Security Medicare Reason Code</Description>
+									<LineNumber>1c 2c 3c 4c 5c</LineNumber>
+									<ELFFieldNumber>0050 0110 0170 0230 0290</ELFFieldNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+							<xsd:simpleType>
+								<xsd:restriction base="StringType">
+									<xsd:enumeration value="A"/>
+									<xsd:enumeration value="C"/>
+									<xsd:enumeration value="G"/>
+									<xsd:enumeration value="H"/>
+								</xsd:restriction>
+							</xsd:simpleType>
+						</xsd:element>
+						<!--Correspondence Received Date -->
+						<xsd:element name="CorrespondenceReceivedDt" type="DateType" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Correspondence Received Date</Description>
+									<LineNumber>1d 2d 3d 4d 5d</LineNumber>
+									<ELFFieldNumber>0060 0120 0180 0240 0300</ELFFieldNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						<!--Form 1099 Received Indicator -->
+						<xsd:element name="Form1099ReceivedInd" type="CheckboxType" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Form 1099 Received Indicator</Description>
+									<LineNumber>1e 2e 3e 4e 5e</LineNumber>
+									<ELFFieldNumber>0070 0130 0190 0250 0310</ELFFieldNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						<!--Wages With No Witholding Amount -->
+						<xsd:element name="WagesWithNoWitholdingAmt" type="USAmountType">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Wages With No Witholding Amount</Description>
+									<LineNumber>1f 2f 3f 4f 5f</LineNumber>
+									<ELFFieldNumber>0080 0140 0200 0260 0320</ELFFieldNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<!--Total Wages With No Withholding Amount -->
+			<xsd:element name="TotalWagesWithNoWithholdingAmt" type="USAmountType">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Total Wages With No Withholding Amount</Description>
+						<LineNumber>6</LineNumber>
+						<ELFFieldNumber>0330</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!--Total Wages And Unreported Tips Amount -->
+			<xsd:element name="TotalWagesAndUnreportedTipsAmt" type="USAmountType">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Total Wages And Unreported Tips Amount</Description>
+						<LineNumber>8</LineNumber>
+						<ELFFieldNumber>0340</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!--Net Wages Subject To Social Security Tax Amount -->
+			<xsd:element name="NetWagesSubjectToSocSecTaxAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Net Wages Subject To Social Security Tax Amount</Description>
+						<LineNumber>9</LineNumber>
+						<ELFFieldNumber>0350</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!--Wages Subject To Social Security Tax Amount -->
+			<xsd:element name="WagesSubjectToSSTAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Wages Subject To Social Security Tax Amount</Description>
+						<LineNumber>10</LineNumber>
+						<ELFFieldNumber>0360</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!--Uncollected Social Security Tax Amount -->
+			<xsd:element name="UncollectedSocSecTaxAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Uncollected Social Security Tax Amount</Description>
+						<LineNumber>11</LineNumber>
+						<ELFFieldNumber>0370</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!--Uncollected Medicare Tax Amount -->
+			<xsd:element name="UncollectedMedicareTaxAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Uncollected Medicare Tax Amount</Description>
+						<LineNumber>12</LineNumber>
+						<ELFFieldNumber>0380</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!--Uncollected Social Security and Medicare Tax Amount -->
+			<xsd:element name="UncollectedSocSecMedTaxAmt" type="USAmountType">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Uncollected Social Security and Medicare Tax Amount</Description>
+						<LineNumber>13</LineNumber>
+						<ELFFieldNumber>0390</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:schema>

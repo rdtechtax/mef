@@ -1,0 +1,298 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns="http://www.irs.gov/efile" xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.irs.gov/efile" elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.0">
+	<xsd:annotation>
+		<xsd:documentation>
+			<Description>IRS e-file Schema - Form 965 Schedule F</Description>
+			<TaxYear>2018</TaxYear>
+			<MaturityLevel>Final Release</MaturityLevel>
+			<ReleaseDate>February 13, 2019</ReleaseDate>
+		</xsd:documentation>
+	</xsd:annotation>
+	<xsd:include schemaLocation="../efileTypes.xsd"/>
+	<!-- =============================================================== -->
+	<!-- ==================  IRS Form 965 Schedule F  ================== -->
+	<!-- =============================================================== -->
+	<xsd:element name="IRS965ScheduleF">
+		<xsd:annotation>
+			<xsd:documentation>IRS Form 965 Schedule F</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:complexContent>
+				<xsd:extension base="IRS965ScheduleFType">
+					<xsd:attributeGroup ref="DocumentAttributes">
+						<xsd:annotation>
+							<xsd:documentation>Common return document attributes</xsd:documentation>
+						</xsd:annotation>
+					</xsd:attributeGroup>
+					<xsd:attribute name="documentName" type="StringType" fixed="IRS965ScheduleF">
+						<xsd:annotation>
+							<xsd:documentation>IRS internal use only. To avoid error in the return, do not include the attribute name or value.</xsd:documentation>
+						</xsd:annotation>
+					</xsd:attribute>
+					<xsd:attribute name="referenceDocumentId" type="IdListType">
+						<xsd:annotation>
+							<xsd:documentation>List of document ID's of forms, schedules, supporting info. etc. attached to this form</xsd:documentation>
+						</xsd:annotation>
+					</xsd:attribute>
+					<xsd:attribute name="referenceDocumentName" type="StringType" fixed="BinaryAttachment GeneralDependencySmall"/>
+				</xsd:extension>
+			</xsd:complexContent>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:complexType name="IRS965ScheduleFType">
+		<xsd:annotation>
+			<xsd:documentation>Content model for IRS Form 965 Schedule F</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+
+			<!-- Separate Category Code -->
+			<xsd:element name="SeparateCategoryCd">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Separate Category Code</Description>
+						<LineNumber>a</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+				<xsd:simpleType>
+					<xsd:restriction base="TextType">
+						<xsd:enumeration value="PAS"/>
+						<xsd:enumeration value="GEN"/>
+						<xsd:enumeration value="901j"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+
+			<!-- Sanctioned Country Code -->
+			<xsd:element name="SanctionedCountryCd" type="CountryType" minOccurs="0" maxOccurs="14">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Sanctioned Country Code</Description>
+						<LineNumber>b</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Deferred Foreign Income Corporation Group -->
+			<xsd:element name="DeferredForeignIncomeCorpGrp" minOccurs="0" maxOccurs="unbounded">
+				<xsd:complexType>
+					<xsd:sequence>
+
+						<!-- Foreign Corporation Name -->
+						<xsd:element name="ForeignCorporationName" type="BusinessNameType" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Foreign Corporation Name</Description>
+									<LineNumber>Lines 1 - 15, Column "Name of Deferred Foreign Income Corporation"</LineNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+
+						<!-- EIN or Foreign Entity Reference ID Number -->
+						<xsd:choice>
+							<xsd:element name="EIN" type="EINType">
+								<xsd:annotation>
+									<xsd:documentation>
+										<Description>EIN</Description>
+										<LineNumber>Lines 1 - 15, Column (a)</LineNumber>
+									</xsd:documentation>
+								</xsd:annotation>
+							</xsd:element>
+							<xsd:element name="ForeignEntityReferenceIdNum">
+								<xsd:annotation>
+									<xsd:documentation>
+										<Description>Foreign Entity Reference ID Number</Description>
+										<LineNumber>Lines 1 - 15, Column (a)</LineNumber>
+									</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="AlphaNumericType">
+										<xsd:minLength value="1" />
+										<xsd:maxLength value="50" />
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+						</xsd:choice>
+
+						<!-- Issuer EIN or Foreign Entity Reference ID Number -->
+						<xsd:choice minOccurs="0">
+							<xsd:element name="IssuerEIN" type="EINType">
+								<xsd:annotation>
+									<xsd:documentation>
+										<Description>EIN</Description>
+										<LineNumber>Lines 1 - 15, Column (b)</LineNumber>
+									</xsd:documentation>
+								</xsd:annotation>
+							</xsd:element>
+							<xsd:element name="IssuerFrgnEntityReferenceIdNum">
+								<xsd:annotation>
+									<xsd:documentation>
+										<Description>Foreign Entity Reference ID Number</Description>
+										<LineNumber>Lines 1 - 15, Column (b)</LineNumber>
+									</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="AlphaNumericType">
+										<xsd:minLength value="1" />
+										<xsd:maxLength value="50" />
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+						</xsd:choice>
+
+						<!-- US Tax Year End -->
+						<xsd:element name="TaxYearEndMonthYr" type="YearMonthType" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>US Tax Year End</Description>
+									<LineNumber>Lines 1 - 15, Column (c)</LineNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+
+      			<!-- Country Code -->
+      			<xsd:element name="CountryCd" type="CountryType" minOccurs="0">
+      				<xsd:annotation>
+      					<xsd:documentation>
+      						<Description>Country Code</Description>
+									<LineNumber>Lines 1 - 15, Column (d)</LineNumber>
+      					</xsd:documentation>
+      				</xsd:annotation>
+      			</xsd:element>
+
+						<!-- Section 965(a) Inclusion Amount -->
+						<xsd:element name="Section965aInclusionAmt" type="USAmountNNType" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Section 965(a) Inclusion Amount</Description>
+									<LineNumber>Lines 1 - 15, Column (e)(1)</LineNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+
+						<!-- Section 965(a) Inclusion Functional Currency Amount -->
+						<xsd:element name="Section965aInclusionFuncCurAmt" type="ForeignAmountNNType" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Section 965(a) Inclusion Functional Currency Amount</Description>
+									<LineNumber>Lines 1 - 15, Column (e)(2)</LineNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+
+						<!-- Post-1986 Undistributed Earnings Amount -->
+						<xsd:element name="CYEPPost1986UndistrEarnAmt" type="ForeignAmountNNType" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Post-1986 Previously Taxed Earnings And Profits November Amount</Description>
+									<LineNumber>Lines 1 - 15, Column (f)</LineNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+
+						<!-- Section 965(a) Inclusion Post-1986 Percentage -->
+						<xsd:element name="Sect965aInclsnPost1986Pct" type="RatioType" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Section 965(a) Inclusion Post-1986 Percentage</Description>
+									<LineNumber>Lines 1 - 15, Column (g)</LineNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+
+						<!-- Balance Beginning Of Year Post-1986 Undistributed Earnings Amount -->
+						<xsd:element name="BalBOYPost1986UndistrEarnAmt" type="USAmountNNType" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Balance Beginning Of Year Post-1986 Undistributed Earnings Amount</Description>
+									<LineNumber>Lines 1 - 15, Column (h)</LineNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+
+						<!-- Foreign Taxes Paid Amount -->
+						<xsd:element name="ForeignTaxesPaidAmt" type="USAmountNNType" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Foreign Taxes Paid Amount</Description>
+									<LineNumber>Lines 1 - 15, Column (i)</LineNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+
+						<!-- Foreign Taxes Deemed Paid Amount -->
+						<xsd:element name="ForeignTaxesDeemedPaidAmt" type="USAmountNNType" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Foreign Taxes Deemed Paid Amount</Description>
+									<LineNumber>Lines 1 - 15, Column (j)</LineNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+
+						<!-- Post-1986 Foreign Income Taxes Amount -->
+						<xsd:element name="Post1986ForeignIncomeTaxesAmt" type="USAmountNNType" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Post-1986 Foreign Income Taxes Amount</Description>
+									<LineNumber>Lines 1 - 15, Column (k)</LineNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+
+						<!-- Taxes Deemed Paid Amount -->
+						<xsd:element name="TaxesDeemedPaidAmt" type="USAmountNNType" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Taxes Deemed Paid Amount</Description>
+									<LineNumber>Lines 1 - 15, Column (l)</LineNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+
+			<!-- Total Not From Pass-Through Entities Section 965(a) Inclusion Amount -->
+			<xsd:element name="TotNotPTESect965aInclusionAmt" type="USAmountNNType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Total Not From Pass-Through Entities Section 965(a) Inclusion Amount</Description>
+						<LineNumber>Line 16, Column (e)(1)</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Total Pass-Through Entities Section 965(a) Inclusion Amount -->
+			<xsd:element name="TotPTESect965aInclusionAmt" type="USAmountNNType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Total Pass-Through Entities Section 965(a) Inclusion Amount</Description>
+						<LineNumber>Line 17, Column (e)(1)</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Total Not From Pass-Through Entities Taxes Deemed Paid Amount -->
+			<xsd:element name="TotNotPTETaxesDeemedPaidAmt" type="USAmountNNType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Total Not From Pass-Through Entities Taxes Deemed Paid Amount</Description>
+						<LineNumber>Line 16, Column (l)</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Total Pass-Through Entities Taxes Deemed Paid Amount -->
+			<xsd:element name="TotPTETaxesDeemedPaidAmt" type="USAmountNNType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Total Pass-Through Entities Taxes Deemed Paid Amount</Description>
+						<LineNumber>Line 17, Column (l)</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:schema>

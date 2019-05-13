@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.irs.gov/efile" targetNamespace="http://www.irs.gov/efile" elementFormDefault="qualified" attributeFormDefault="unqualified">
+
+	<xsd:annotation>
+		<xsd:documentation>
+			<Description>IRS e-file Individual Income Tax Schema - IRS Form 8888 - Allocation of Refund (Including Savings Bond Purchases)</Description>
+			<TaxYear>2018</TaxYear>
+			<MaturityLevel>Final Release</MaturityLevel>
+			<ReleaseDate>February 13, 2019</ReleaseDate>
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:include schemaLocation="../../../Common/efileTypes.xsd"/>
+
+	<!-- ================================================================== -->
+	<!-- ======================== IRS Form 8888 =========================== -->
+	<!-- ================================================================== -->
+
+	<xsd:element name="IRS8888">
+		<xsd:annotation>
+			<xsd:documentation>IRS Form 8888</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:complexContent>
+				<xsd:extension base="IRS8888Type">
+					<xsd:attributeGroup ref="DocumentAttributes">
+						<xsd:annotation>
+							<xsd:documentation>Common return document attributes</xsd:documentation>
+						</xsd:annotation>
+					</xsd:attributeGroup>
+					<xsd:attribute name="documentName" type="xsd:string" fixed="IRS8888">
+						<xsd:annotation>
+							<xsd:documentation>IRS internal use only. To avoid error in the return, do not include the attribute name or value.</xsd:documentation>
+						</xsd:annotation>
+					</xsd:attribute>
+				</xsd:extension>
+			</xsd:complexContent>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:complexType name="IRS8888Type">
+		<xsd:annotation>
+			<xsd:documentation>Content model for IRS Form 8888</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+		
+			<!-- ========= PART I - Direct Deposit ========= -->		
+			
+			<xsd:element name="DirectDepositInfoGroup" minOccurs="0" maxOccurs="3">
+				<xsd:complexType>
+					<xsd:sequence>
+					
+						<!-- Direct Deposit Refund Amount -->
+						<xsd:element name="DirectDepositRefundAmt" type="USAmountPosType">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Direct Deposit Refund Amount</Description>
+									<LineNumber>1a 2a 3a</LineNumber>
+									<ELFFieldNumber>0010 0070 0130</ELFFieldNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						
+						<!-- Routing Transit Number -->
+						<xsd:element name="RoutingTransitNum" type="RoutingTransitNumberType">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Routing Transit Number</Description>
+									<LineNumber>1b 2b 3b</LineNumber>
+									<ELFFieldNumber>0020 0080 0140</ELFFieldNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						
+						<!-- Account Indicator -->
+						<xsd:element name="BankAccountTypeCd">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Account Type Code</Description>
+									<LineNumber>1c 2c 3c</LineNumber>
+									<ELFFieldNumber>0030 0040 0090 0100 0150 1060</ELFFieldNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+							<xsd:simpleType>
+								<xsd:restriction base="BankAccountType">
+									<xsd:enumeration value="1"/>
+									<xsd:enumeration value="2"/>
+								</xsd:restriction>
+							</xsd:simpleType>
+						</xsd:element>
+						
+						<!-- Depositor Account Number -->
+						<xsd:element name="DepositorAccountNum" type="BankAccountNumberType">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Depositor Account Number</Description>
+									<LineNumber>1d 2d 3d</LineNumber>
+									<ELFFieldNumber>0060 0120 0180</ELFFieldNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+
+			<!-- ========= PART II - U.S. Series I Savings Bond Purchases ========= -->		
+
+			<!-- Amount to be used for Bond Purchases for Yourself and Your Spouse, If Married Filing Jointly -->
+			<xsd:element name="RefundUsedForBondPurchasesAmt" type="USAmountPosType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Amount to be used for Bond Purchases for Yourself and Your Spouse, If Married Filing Jointly</Description>
+						<LineNumber>4</LineNumber>
+						<ELFFieldNumber>0305</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<xsd:element name="SavingsBondPurchaseInfoGrp" minOccurs="0" maxOccurs="2">
+				<xsd:complexType>
+					<xsd:sequence>
+						<!-- Amount to be used for Yourself, Your Spouse, Or Someone else -->
+						<xsd:element name="BondPurchaseAmt" type="USAmountPosType">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Amount to be used for Yourself, Your Spouse, Or Someone else</Description>
+									<LineNumber>5a 6a</LineNumber>
+									<ELFFieldNumber>0310</ELFFieldNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						
+						<!-- Owner's Name for the Bond Registration -->
+						<xsd:element name="BondOwnerNm" type="PersonNameType">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Owner's Name for the Bond Registration</Description>
+									<LineNumber>5b 6b</LineNumber>
+									<ELFFieldNumber>0320</ELFFieldNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						
+						<!-- CoOwner or Beneficiary Name -->
+						<xsd:element name="BondCoOwnerOrBeneficiaryNm" type="PersonNameType" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>CoOwner or Beneficiary Name</Description>
+									<LineNumber>5c 6c</LineNumber>
+									<ELFFieldNumber>0330</ELFFieldNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+
+						<!-- Beneficiary Designation Indicator -->
+						<xsd:element name="BeneficiaryInd" type="CheckboxType" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Beneficiary Designation Indicator</Description>
+									<LineNumber>5c 6c</LineNumber>
+									<ELFFieldNumber>0340</ELFFieldNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+						
+			<!-- ========= Part III - Paper Check ========= -->		
+
+			<!-- Amount to be Refunded by Check -->
+			<xsd:element name="RefundByCheckAmt" type="USAmountPosType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Amount to be Refunded by Check</Description>
+						<LineNumber>7</LineNumber>
+						<ELFFieldNumber>0390</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- ========= Part IV - Total Allocation Of Refund ========= -->		
+
+			<!-- Total Allocation of Refund -->
+			<xsd:element name="TotalAllocationOfRefundAmt" type="USAmountPosType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Total Allocation of Refund</Description>
+						<LineNumber>8</LineNumber>
+						<ELFFieldNumber>0400</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:schema>

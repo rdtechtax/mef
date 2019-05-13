@@ -1,0 +1,608 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.irs.gov/efile" targetNamespace="http://www.irs.gov/efile" elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.0">
+
+	<xsd:annotation>
+		<xsd:documentation>
+			<Description>IRS e-file Individual Income Tax Schema - IRS 1040 Schedule H Household Employment Taxes</Description>
+			<TaxYear>2018</TaxYear>
+			<MaturityLevel>Final Release</MaturityLevel>
+			<ReleaseDate>February 13, 2019</ReleaseDate>
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:include schemaLocation="../../../Common/efileTypes.xsd"/>
+	
+	<!-- =================================================================== -->
+	<!-- ======================= IRS 1040 Schedule H ======================= -->
+	<!-- =================================================================== -->
+	
+	<xsd:element name="IRS1040ScheduleH">
+		<xsd:annotation>
+			<xsd:documentation>IRS 1040 Schedule H</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:complexContent>
+				<xsd:extension base="IRS1040SchHType">
+					<xsd:attributeGroup ref="DocumentAttributes">
+						<xsd:annotation>
+							<xsd:documentation>Common return document attributes</xsd:documentation>
+						</xsd:annotation>
+					</xsd:attributeGroup>
+					<xsd:attribute name="documentName" type="xsd:string" fixed="IRS1040ScheduleH">
+						<xsd:annotation>
+							<xsd:documentation>IRS internal use only. To avoid error in the return do not include the attribute name or value.</xsd:documentation>
+						</xsd:annotation>
+					</xsd:attribute>
+					<xsd:attribute name="referenceDocumentId" type="IdListType">
+						<xsd:annotation>
+							<xsd:documentation>List of document ID's of forms, schedules, supporting info. etc. attached to this form</xsd:documentation>
+						</xsd:annotation>
+					</xsd:attribute>
+					<xsd:attribute name="referenceDocumentName" type="StringType" fixed="BinaryAttachment"/>
+				</xsd:extension>
+			</xsd:complexContent>
+		</xsd:complexType>
+	</xsd:element>
+	
+	<xsd:complexType name="IRS1040SchHType">
+		<xsd:annotation>
+			<xsd:documentation>Content model for Schedule H</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			
+			<!-- Household Employer Name -->
+			<xsd:element name="HouseholdEmployerNm" type="PersonNameType">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Household Employer Name</Description>
+						<ELFFieldNumber>0010</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			
+			<!-- Employer Name Control -->
+			<xsd:element name="EmployerNameControlTxt" type="PersonNameControlType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Employer Name Control</Description>
+						<ELFFieldNumber>0015</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- SSN -->
+			<xsd:element name="SSN" type="SSNType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>SSN</Description>
+						<ELFFieldNumber>0020</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<xsd:choice>
+				<xsd:element name="EmployerEIN" type="EINType">
+					<xsd:annotation>
+						<xsd:documentation>
+							<xsd:Description>Employer ID Number</xsd:Description>
+							<ELFFieldNumber>0030</ELFFieldNumber>
+						</xsd:documentation>
+					</xsd:annotation>
+				</xsd:element>
+				<xsd:element name="AppliedForEINReasonCd">
+					<xsd:annotation>
+						<xsd:documentation>
+							<xsd:Description>Missing EIN Reason Cd</xsd:Description>
+							<ELFFieldNumber>NL</ELFFieldNumber>
+						</xsd:documentation>
+					</xsd:annotation>
+					<xsd:simpleType>
+						<xsd:restriction base="StringType">
+							<xsd:enumeration value="APPLD FOR"/>
+						</xsd:restriction>
+					</xsd:simpleType>
+				</xsd:element>
+			</xsd:choice>
+
+			<!-- Household Employee Cash Wages Over Limit Credit Year Indicator -->
+			<xsd:element name="HsldEmplPdCashWageOverLmtCYInd" type="BooleanType">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Household Employee Cash Wages Over Limit Credit Year Indicator</Description>
+						<LineNumber>A</LineNumber>
+						<ELFFieldNumber>0040 0045</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			
+			<!-- Household Employee Federal Income Tax Withheld Indicator -->
+			<xsd:element name="HsldEmplFedIncmTaxWithheldInd" type="BooleanType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Household Employee Federal Income Tax Withheld Indicator</Description>
+						<LineNumber>B</LineNumber>
+						<ELFFieldNumber>0050 0055</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			
+			<!-- Household Employee Paid Cash Wages Over Limit Quarter Indicator -->
+			<xsd:element name="HsldEmplPdCashWageOvrLmtQtrInd" type="BooleanType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Household Employee Paid Cash Wages Over Limit Quarter Indicator</Description>
+						<LineNumber>C</LineNumber>
+						<ELFFieldNumber>0060 0065</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			
+			<!-- Part I - Social Security, Medicare, and Federal Income Taxes -->
+			
+			<!-- Social Security Tax Cash Wages Amount -->
+			<xsd:element name="SocialSecurityTaxCashWagesAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Social Security Tax Cash Wages Amount</Description>
+						<LineNumber>1</LineNumber>
+						<ELFFieldNumber>0070</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			
+			<!-- Social Security Tax Amount -->
+			<xsd:element name="SocialSecurityTaxAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Social Security Tax Amount</Description>
+						<LineNumber>2</LineNumber>
+						<ELFFieldNumber>0080</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			
+			<!-- Total cash wages subject to Medicare Taxes -->
+			<xsd:element name="MedicareTaxCashWagesAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Total cash wages subject to Medicare Taxes</Description>
+						<LineNumber>3</LineNumber>
+						<ELFFieldNumber>0090</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			
+			<!-- Medicare Tax Withheld Amount -->
+			<xsd:element name="MedicareTaxWithheldAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Medicare Taxes</Description>
+						<LineNumber>4</LineNumber>
+						<ELFFieldNumber>0100</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			
+			<!-- Total Medicare Tax Cash Wages Additional Withholding Amount -->
+			<xsd:element name="TotMedcrTaxCashWagesAddnlWhAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Total cash wages subject to Additional Medicare Tax withholding</Description>
+						<LineNumber>5</LineNumber>
+						<ELFFieldNumber>NL</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			
+			<!-- Additional Medicare Tax Withholding Amount -->
+			<xsd:element name="AddnlMedicareTaxWithholdingAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Additional Medicare Tax withholding</Description>
+						<LineNumber>6</LineNumber>
+						<ELFFieldNumber>NL</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			
+			<!-- Federal Income Tax Withheld Amount -->
+			<xsd:element name="FederalIncomeTaxWithheldAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Federal Income Tax Withheld Amount</Description>
+						<LineNumber>7</LineNumber>
+						<ELFFieldNumber>0110</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			
+			<!-- Total Social Security Medicare And Fedral Income Tax Amount -->
+			<xsd:element name="TotSocSecMedcrAndFedIncmTaxAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Total Social Security Medicare And Fedral Income Tax Amount</Description>
+						<LineNumber>8</LineNumber>
+						<ELFFieldNumber>0120</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			
+			<xsd:element name="HsldEmplStateDisabilityPymtGrp" minOccurs="0">
+				<xsd:complexType>
+					<xsd:sequence>
+						<!-- Household Employee State Disability Payment Amount -->
+						<xsd:element name="HsldEmplStateDisabilityPymtAmt" type="USAmountType">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Household Employee State Disability Payment Amount</Description>
+									<LineNumber>8</LineNumber>
+									<ELFFieldNumber>0125</ELFFieldNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						<xsd:element name="HsldEmplStateDisabilityPymtCd">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Household Employee State Disability Payment Code</Description>
+									<LineNumber>8</LineNumber>
+									<ELFFieldNumber>0127</ELFFieldNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+							<xsd:simpleType>
+								<xsd:restriction base="StringType">
+									<xsd:enumeration value="DISABILITY"/>
+								</xsd:restriction>
+							</xsd:simpleType>
+						</xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			
+			<!-- Household Employee Paid Total Cash Wages Any Quarter Indicator -->
+			<xsd:element name="HsldEmplPdTotCashWageAnyQtrInd" type="BooleanType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Household Employee Paid Total Cash Wages Any Quarter Indicator</Description>
+						<LineNumber>9</LineNumber>
+						<ELFFieldNumber>0150 0155</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			
+			<!-- Part II - Federal Unemployment Tax -->
+			
+			<!-- Unemployed Paid Only One State Indicator -->
+			<xsd:element name="UnemplPaidOnlyOneStateInd" type="BooleanType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Unemployed Paid Only One State Indicator</Description>
+						<LineNumber>10</LineNumber>
+						<ELFFieldNumber>0170 0175</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			
+			<!-- Pay All State Unemployment Contributions Indicator -->
+			<xsd:element name="PayAllStateUnemplContriInd" type="BooleanType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Pay All State Unemployment Contributions Indicator</Description>
+						<LineNumber>11</LineNumber>
+						<ELFFieldNumber>0180 0185</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			
+			<!-- Taxable FUTA Wages Also Taxable Unemployment Indicator -->
+			<xsd:element name="TxblFUTAWagesAlsoTxblUnemplInd" type="BooleanType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Taxable FUTA Wages Also Taxable Unemployment Indicator</Description>
+						<LineNumber>12</LineNumber>
+						<ELFFieldNumber>0190 0195</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			
+			<!-- Choice Between Unemployment Fund Single State Group and Unemployment Fund Multi StateGroup -->
+			<xsd:choice minOccurs="0">
+			<!-- ======= Section A ======= -->
+				<!-- Unemployement Fund Single State Group -->
+				<xsd:element name="UnemplFundSingleStateGroup" minOccurs="0">
+					<xsd:complexType>
+						<xsd:sequence>
+							<!-- State Code -->
+							<xsd:element name="StateCd" type="StateType">
+								<xsd:annotation>
+									<xsd:documentation>
+										<Description>State Code</Description>
+										<LineNumber>13</LineNumber>
+										<ELFFieldNumber>0200</ELFFieldNumber>
+									</xsd:documentation>
+								</xsd:annotation>
+							</xsd:element>
+							<xsd:choice minOccurs="0">
+								<!-- Contributions Paid To State Unemployment Fund Amount -->
+								<xsd:element name="ContriPaidToStateUnemplFundAmt" type="USAmountType">
+									<xsd:annotation>
+										<xsd:documentation>
+											<Description>Contributions Paid To State Unemployment Fund Amount</Description>
+											<LineNumber>14</LineNumber>
+											<ELFFieldNumber>0220</ELFFieldNumber>
+										</xsd:documentation>
+									</xsd:annotation>
+								</xsd:element>
+								<xsd:element name="UnemploymentFundZeroRateCd">
+									<xsd:annotation>
+										<xsd:documentation>
+											<Description>Unemployement Fund Zero Rate Code</Description>
+											<LineNumber>14</LineNumber>
+											<ELFFieldNumber>0220</ELFFieldNumber>
+										</xsd:documentation>
+									</xsd:annotation>
+									<xsd:simpleType>
+										<xsd:restriction base="StringType">
+											<xsd:enumeration value="0% RATE"/>
+										</xsd:restriction>
+									</xsd:simpleType>
+								</xsd:element>
+							</xsd:choice>
+							<!-- Total Cash Wages Subject FUTA Tax Amount -->
+							<xsd:element name="TotalCashWagesSubjFUTATaxAmt" type="USAmountType">
+								<xsd:annotation>
+									<xsd:documentation>
+										<Description>Total Cash Wages Subject FUTA Tax Amount</Description>
+										<LineNumber>15</LineNumber>
+										<ELFFieldNumber>0230</ELFFieldNumber>
+									</xsd:documentation>
+								</xsd:annotation>
+							</xsd:element>
+							<!-- FUTA Tax Amount -->
+							<xsd:element name="FUTATaxAmt" type="USAmountType" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>
+										<Description>FUTA Tax Amount</Description>
+										<LineNumber>16</LineNumber>
+										<ELFFieldNumber>0240</ELFFieldNumber>
+									</xsd:documentation>
+								</xsd:annotation>
+							</xsd:element>
+						</xsd:sequence>
+					</xsd:complexType>
+				</xsd:element>
+				<!-- ======= Section B ======= -->
+				<!-- Unemployment Fund Multi State Group -->
+				<xsd:element name="UnemplFundMultiStateGroup" minOccurs="0">
+					<xsd:complexType>
+						<xsd:sequence>
+							<!-- Unemployment State Tax Group -->
+							<xsd:element name="UnemploymentStateTaxGroup" minOccurs="0" maxOccurs="62">
+								<xsd:complexType>
+									<xsd:sequence>
+										<!-- State Code -->
+										<xsd:element name="StateCd" type="StateType">
+											<xsd:annotation>
+												<xsd:documentation>
+													<Description>State Code</Description>
+													<LineNumber>17(a)</LineNumber>
+													<ELFFieldNumber>0250 0340</ELFFieldNumber>
+												</xsd:documentation>
+											</xsd:annotation>
+										</xsd:element>
+										<!-- Taxable Wages Paid State Unemployment Fund Amount -->
+										<xsd:element name="TxblWagesPaidStUnemplFundAmt" type="USAmountType" minOccurs="0">
+											<xsd:annotation>
+												<xsd:documentation>
+													<Description>Taxable Wages Paid State Unemployment Fund Amount</Description>
+													<LineNumber>17(b)</LineNumber>
+													<ELFFieldNumber>0270 0360</ELFFieldNumber>
+												</xsd:documentation>
+											</xsd:annotation>
+										</xsd:element>
+										<!-- Unemployment State Experience Rate From Date -->
+										<xsd:element name="UnemplStateExprncRateFromDt" type="DateType" minOccurs="0">
+											<xsd:annotation>
+												<xsd:documentation>
+													<Description>Unemployment State Experience Rate From Date</Description>
+													<LineNumber>17(c)</LineNumber>
+													<ELFFieldNumber>0280 0370</ELFFieldNumber>
+												</xsd:documentation>
+											</xsd:annotation>
+										</xsd:element>
+										<!-- Unemployment State Experience Rate To Date -->
+										<xsd:element name="UnemplStateExprncRateToDt" type="DateType" minOccurs="0">
+											<xsd:annotation>
+												<xsd:documentation>
+													<Description>Unemployment State Experience Rate To Date</Description>
+													<LineNumber>17(c)</LineNumber>
+													<ELFFieldNumber>0285 0375</ELFFieldNumber>
+												</xsd:documentation>
+											</xsd:annotation>
+										</xsd:element>
+										<!-- Unemployment State Experience Rate -->
+										<xsd:element name="UnemploymentStateExperienceRt" type="RatioType" minOccurs="0">
+											<xsd:annotation>
+												<xsd:documentation>
+													<Description>Unemployment State Experience Rate</Description>
+													<LineNumber>17(d)</LineNumber>
+													<ELFFieldNumber>0290 0380</ELFFieldNumber>
+												</xsd:documentation>
+											</xsd:annotation>
+										</xsd:element>
+										<!-- Unemployment Tax Credit At 54 Rate Amount -->
+										<xsd:element name="UnemploymentTaxCrAt54RateAmt" type="USAmountType" minOccurs="0">
+											<xsd:annotation>
+												<xsd:documentation>
+													<Description>Unemployment Tax Credit At 54 Rate Amount</Description>
+													<LineNumber>17(e)</LineNumber>
+													<ELFFieldNumber>0300 0390</ELFFieldNumber>
+												</xsd:documentation>
+											</xsd:annotation>
+										</xsd:element>
+										<!-- Unemployment Tax Credit At State Rate Amount -->
+										<xsd:element name="UnemploymentTaxCrAtStateRtAmt" type="USAmountType" minOccurs="0">
+											<xsd:annotation>
+												<xsd:documentation>
+													<Description>Unemployment Tax Credit At State Rate Amount</Description>
+													<LineNumber>17(f)</LineNumber>
+													<ELFFieldNumber>0310 0400</ELFFieldNumber>
+												</xsd:documentation>
+											</xsd:annotation>
+										</xsd:element>
+										<!-- Unemployment Additional Tax Credit Amount -->
+										<xsd:element name="UnemploymentAdditionalTaxCrAmt" type="USAmountNNType" minOccurs="0">
+											<xsd:annotation>
+												<xsd:documentation>
+													<Description>Unemployment Additional Tax Credit Amount</Description>
+													<LineNumber>17(g)</LineNumber>
+													<ELFFieldNumber>0320 0410</ELFFieldNumber>
+												</xsd:documentation>
+											</xsd:annotation>
+										</xsd:element>
+										<!-- Contribution Paid To State Unemployment Fund Amount -->
+										<xsd:element name="ContriPaidToStateUnemplFundAmt" type="USAmountType" minOccurs="0">
+											<xsd:annotation>
+												<xsd:documentation>
+													<Description>Contribution Paid To State Unemployment Fund Amount</Description>
+													<LineNumber>17(h)</LineNumber>
+													<ELFFieldNumber>0330 0420</ELFFieldNumber>
+												</xsd:documentation>
+											</xsd:annotation>
+										</xsd:element>
+									</xsd:sequence>
+								</xsd:complexType>
+							</xsd:element>
+							<!-- Total Unemployment Additional Tax Credit Amount -->
+							<xsd:element name="TotalUnemplAdditionalTaxCrAmt" type="USAmountType" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>
+										<Description>Total Unemployment Additional Tax Credit Amount</Description>
+										<LineNumber>18(g)</LineNumber>
+										<ELFFieldNumber>0440</ELFFieldNumber>
+									</xsd:documentation>
+								</xsd:annotation>
+							</xsd:element>
+							<!-- Total Contribution State Unemployment Fund Amount -->
+							<xsd:element name="TotalContriStateUnemplFundAmt" type="USAmountType" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>
+										<Description>Total Contribution State Unemployment Fund Amount</Description>
+										<LineNumber>18(h)</LineNumber>
+										<ELFFieldNumber>0450</ELFFieldNumber>
+									</xsd:documentation>
+								</xsd:annotation>
+							</xsd:element>
+							<!-- Tentative FUTA Credit Amount -->
+							<xsd:element name="TentativeFUTACreditAmt" type="USAmountType" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>
+										<Description>Tentative FUTA Credit Amount</Description>
+										<LineNumber>19</LineNumber>
+										<ELFFieldNumber>0460</ELFFieldNumber>
+									</xsd:documentation>
+								</xsd:annotation>
+							</xsd:element>
+							<!-- Total Cash Wages Subject To FUTA Tax Amount -->
+							<xsd:element name="TotalCashWagesSubjFUTATaxAmt" type="USAmountType">
+								<xsd:annotation>
+									<xsd:documentation>
+										<Description>Total Cash Wages Subject To FUTA Tax Amount</Description>
+										<LineNumber>20</LineNumber>
+										<ELFFieldNumber>0470</ELFFieldNumber>
+									</xsd:documentation>
+								</xsd:annotation>
+							</xsd:element>
+							<!-- Gross FUTA Tax Credit Amount -->
+							<xsd:element name="GrossFUTATaxCreditAmt" type="USAmountType" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>
+										<Description>Gross FUTA Tax Credit Amount</Description>
+										<LineNumber>21</LineNumber>
+										<ELFFieldNumber>0480</ELFFieldNumber>
+									</xsd:documentation>
+								</xsd:annotation>
+							</xsd:element>
+							<!-- FUTA Tax Credit Max Allowed Amount -->
+							<xsd:element name="FUTATaxCreditMaxAllowedAmt" type="USAmountType" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>
+										<Description>FUTA Tax Credit Max Allowed Amount</Description>
+										<LineNumber>22</LineNumber>
+										<ELFFieldNumber>0490</ELFFieldNumber>
+									</xsd:documentation>
+								</xsd:annotation>
+							</xsd:element>
+							<!-- Unemployment Smaller Tax Adjustment Amount -->
+							<xsd:element name="UnemplSmallerTaxAdjustmentAmt" type="USAmountType" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>
+										<Description>Unemployment Smaller Tax Adjustment Amount</Description>
+										<LineNumber>23</LineNumber>
+										<ELFFieldNumber>0500</ELFFieldNumber>
+									</xsd:documentation>
+								</xsd:annotation>
+							</xsd:element>
+							<!-- Credit Reduction State Worksheet Indicator -->
+							<xsd:element name="CreditReductionStateWrkshtInd" type="CheckboxType" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>
+										<Description>Credit Reduction State Worksheet Indicator</Description>
+										<LineNumber>23</LineNumber>
+										<ELFFieldNumber>0503</ELFFieldNumber>
+									</xsd:documentation>
+								</xsd:annotation>
+							</xsd:element>
+							<!-- FUTA Tax Amount -->
+							<xsd:element name="FUTATaxAmt" type="USAmountType" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>
+										<Description>FUTA Tax Amount</Description>
+										<LineNumber>24</LineNumber>
+										<ELFFieldNumber>0510</ELFFieldNumber>
+									</xsd:documentation>
+								</xsd:annotation>
+							</xsd:element>
+						</xsd:sequence>
+					</xsd:complexType>
+				</xsd:element>
+			</xsd:choice>
+
+			<!-- Part III - Total Household Employment Taxes -->
+			
+			<!-- Total Tax Household Employment Calculated Amount -->
+			<xsd:element name="TotalTaxHouseholdEmplCalcAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Total Tax Household Employment Calculated Amount</Description>
+						<LineNumber>25</LineNumber>
+						<ELFFieldNumber>0520</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Combined FUTA Tax Plus Net Taxes Amount -->
+			<xsd:element name="CombinedFUTATaxPlusNetTaxesAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Combined FUTA Tax Plus Net Taxes Amount</Description>
+						<LineNumber>26</LineNumber>
+						<ELFFieldNumber>0530</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Required To File Form 1040 Code -->
+			<xsd:element name="RequiredToFileForm1040Ind" type="BooleanType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Required To File Form 1040 Code</Description>
+						<LineNumber>27</LineNumber>
+						<ELFFieldNumber>0540 0550</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			
+		</xsd:sequence>
+	</xsd:complexType>
+	
+</xsd:schema>

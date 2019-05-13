@@ -1,0 +1,506 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns="http://www.irs.gov/efile" xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.irs.gov/efile" elementFormDefault="qualified" attributeFormDefault="unqualified">
+
+	<xsd:annotation>
+		<xsd:documentation>
+			<Description>IRS e-file Schema - IRS Form 8839 Qualified Adoption Expenses</Description>
+			<TaxYear>2018</TaxYear>
+			<MaturityLevel>Final Release</MaturityLevel>
+			<ReleaseDate>February 13, 2019</ReleaseDate>
+		</xsd:documentation>
+	</xsd:annotation>
+	
+	<xsd:include schemaLocation="../../../Common/efileTypes.xsd"/>
+	
+	<!--=====================================================================-->
+	<!--=========================== IRS Form 8839 ===========================-->
+	<!--=====================================================================-->
+
+	<xsd:element name="IRS8839">
+		<xsd:annotation>
+			<xsd:documentation>IRS Form 8839</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:complexContent>
+				<xsd:extension base="IRS8839Type">
+					<xsd:attributeGroup ref="DocumentAttributes">
+						<xsd:annotation>
+							<xsd:documentation>Common return document attributes</xsd:documentation>
+						</xsd:annotation>
+					</xsd:attributeGroup>
+					<xsd:attribute name="documentName" type="xsd:string" fixed="IRS8839">
+						<xsd:annotation>
+							<xsd:documentation>IRS internal use only. To avoid error in the return, do not include the attribute name or value.</xsd:documentation>
+						</xsd:annotation>
+					</xsd:attribute>
+				</xsd:extension>
+			</xsd:complexContent>
+		</xsd:complexType>
+	</xsd:element>
+	
+	<xsd:complexType name="IRS8839Type">
+		<xsd:annotation>
+			<xsd:documentation>Content model for Form 8839</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+
+			<xsd:element name="AdoptedChild" maxOccurs="12">
+				<xsd:complexType>
+					<xsd:sequence>
+
+						<!-- Part I - Information About Your Eligible Child or Children -->
+
+						<!-- Child's First Name -->
+						<xsd:element name="PersonFirstNm" type="PersonFirstNameType" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Child's First Name</Description>
+									<LineNumber>1a</LineNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+
+						<!-- Child's Last Name -->
+						<xsd:element name="PersonLastNm" type="PersonLastNameType" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Child's Last Name</Description>
+									<LineNumber>1a</LineNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+
+						<!-- Person Name Control Text -->
+						<xsd:element name="PersonNameControlTxt" type="PersonNameControlType" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Child's Name Control</Description>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+
+						<!-- Child's Birth Year -->
+						<xsd:element name="ChildBirthYr" type="YearType" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Child's Year of Birth</Description>
+									<LineNumber>1b</LineNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+
+						<!-- Disabled Child Over 18 Indicator -->
+						<xsd:element name="DisabledChildOver18Ind" type="CheckboxType" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Disabled Child Over 18 Indicator</Description>
+									<LineNumber>1c</LineNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+
+						<!-- Child With Special Needs Indicator -->
+						<xsd:element name="ChildWithSpecialNeedsInd" type="CheckboxType" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Child With Special Needs Indicator</Description>
+									<LineNumber>1d</LineNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+
+						<!-- Foreign Child Indicator -->
+						<xsd:element name="ForeignChildInd" type="CheckboxType" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Foreign Child Indicator</Description>
+									<LineNumber>1e</LineNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+
+						<!-- Child's SSN -->
+						<xsd:element name="ChildSSN" type="SSNType" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Child's Social Security Number</Description>
+									<LineNumber>1f</LineNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+
+						<!-- Adoption Final Indicator -->
+						<xsd:element name="AdoptionFinalInd" type="CheckboxType" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Adoption Final Indicator</Description>
+									<LineNumber>1g</LineNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+			
+						<!-- Part II - Adoption Credit -->
+
+						<!-- Adoption Credit Max Per Child Amount -->
+						<xsd:element name="AdoptionCreditMaxPerChildAmt" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Adoption Credit Max Per Child Amount</Description>
+									<LineNumber>2</LineNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+							<xsd:simpleType>
+								<xsd:restriction base="USAmountType">
+									<xsd:maxInclusive value="13810" />
+								</xsd:restriction>
+							</xsd:simpleType>
+						</xsd:element>
+
+						<!-- Adoption Credit Same Child Prior Year Indicator -->
+						<xsd:element name="AdoptionCreditSameChildPYInd" type="BooleanType" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Adoption Credit Same Child Prior Year Indicator</Description>
+									<LineNumber>3</LineNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+
+						<!-- Adoption Credit Prior Year Amount -->
+						<xsd:element name="AdoptionCreditPriorYearAmt" type="USAmountType" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Adoption Credit Prior Year Amount</Description>
+									<LineNumber>3</LineNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+
+						<!-- Adoption Net Allowed Tax Credit Amount -->
+						<xsd:element name="AdoptionNetAllowedTaxCreditAmt" type="USAmountType" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Adoption Net Allowed Tax Credit Amount</Description>
+									<LineNumber>4</LineNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+
+						<!-- Qualified Adoption Expense Amount -->
+						<xsd:element name="QualifiedAdoptionExpenseAmt" type="USAmountType" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Qualified Adoption Expense Amount</Description>
+									<LineNumber>5</LineNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+
+						<!-- Adoption Smaller Credit Or Expenses Amount -->
+						<xsd:element name="AdoptionSmllrCreditOrExpnsAmt" type="USAmountType" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Adoption Smaller Credit Or Expenses Amount</Description>
+									<LineNumber>6</LineNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>					
+
+						<!-- Calculated Adoption Credit Amount -->
+						<xsd:element name="CalculatedAdoptionCreditAmt" type="USAmountType" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Calculated Adoption Credit Amount</Description>
+									<LineNumber>10</LineNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+
+						<!-- Net Calculated Adoption Credit Amount -->
+						<xsd:element name="NetCalculatedAdoptionCreditAmt" type="USAmountType" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Net Calculated Adoption Credit Amount</Description>
+									<LineNumber>11</LineNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+
+						<!-- Part III - Employer-Provided Adoption Benefits -->
+
+						<!-- Employer Adoption Exclusion Maximum Per Child Amount -->
+						<xsd:element name="EmployerAdoptionExclMaxChldAmt" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Employer Adoption Exclusion Maximum Per Child Amount</Description>
+									<LineNumber>17</LineNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+							<xsd:simpleType>
+								<xsd:restriction base="USAmountType">
+									<xsd:maxInclusive value="13810" />
+								</xsd:restriction>
+							</xsd:simpleType>
+						</xsd:element>
+
+						<!-- Employer Adoption Benefit Same Child Prior Year Indicator -->
+						<xsd:element name="EmployerAdptnBnftSameChldPYInd" type="BooleanType" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Employer Adoption Benefit Same Child Prior Year Indicator</Description>
+									<LineNumber>18</LineNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+
+						<!-- Employer Adoption Benefits Prior Year Amount -->
+						<xsd:element name="EmployerAdoptionBenefitsPYAmt" type="USAmountType" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Employer Adoption Benefits Prior Year Amount</Description>
+									<LineNumber>18</LineNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+
+						<!-- Employer Adoption Benefit Less Allowed Amount -->
+						<xsd:element name="EmployerAdptnBnftLessAllwdAmt" type="USAmountType" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Employer Adoption Benefit Less Allowed Amount</Description>
+									<LineNumber>19</LineNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+
+						<!-- Employer Adoption Benefit Per Child Amount -->
+						<xsd:element name="EmployerAdoptionBnftPerChldAmt" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Employer Adoption Benefit Per Child Amount</Description>
+									<LineNumber>20</LineNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+							<xsd:complexType>
+								<xsd:simpleContent>
+									<xsd:extension base="USAmountType">
+										<!-- Employer Adoption Benefit Exclusion Prior Year Code -->
+										<xsd:attribute name="employerAdoptionBnftExclPYCd" type="TextType" fixed="PYAB" />
+										<!-- Employer Adoption Benefit Exclusion Prior Year Amount -->
+										<xsd:attribute name="employerAdoptionBnftExclPYAmt" type="USAmountType" />
+									</xsd:extension>
+								</xsd:simpleContent>
+							</xsd:complexType>
+						</xsd:element>
+
+						<!-- Allowed Tax Credit or Employer Adoption Benefit Amount -->
+						<xsd:element name="AllwdTaxCrOrEmplrAdptnBnftAmt" type="USAmountType" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Allowed Tax Credit or Employer Adoption Benefit Amount</Description>
+									<LineNumber>22</LineNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+
+						<!-- Adoption Benefit Adjusted Gross Income Percentage Expense Amount -->
+						<xsd:element name="AdoptionBnftAGIPctExpnsAmt" type="USAmountType" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Adoption Benefit Adjusted Gross Income Percentage Expense Amount</Description>
+									<LineNumber>26</LineNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+
+						<!-- Excluded Benefits Amount -->
+						<xsd:element name="ExcludedBenefitsAmt" type="USAmountType" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Excluded Benefits Amount</Description>
+									<LineNumber>27</LineNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			
+			<!-- Part II - Adoption Credit -->
+
+			<!-- Adoption Credit Modified Adjusted Gross Income Amount -->
+			<xsd:element name="AdoptionCreditModifiedAGIAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Adoption Credit Modified Adjusted Gross Income Amount</Description>
+						<LineNumber>7</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Adoption Credit Modified Adjusted Gross Income Limit Amount -->
+			<xsd:element name="AdoptionCreditModifAGILimitAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Adoption Credit Modified Adjusted Gross Income Limit Amount</Description>
+						<LineNumber>8</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Adoption Credit Modified Adjusted Gross Income Greater Amount Indicator -->
+			<xsd:element name="AdoptionCrModifAGIGrtrAmtInd" type="BooleanType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Adoption Credit Modified Adjusted Gross Income Greater Amount Indicator</Description>
+						<LineNumber>8</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Adoption Credit Adjusted Modified Adjusted Gross Income Percentage -->
+			<xsd:element name="AdoptionCreditAdjModifAGIPct" type="RatioType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Adoption Credit Adjusted Modified Adjusted Gross Income Percentage</Description>
+						<LineNumber>9</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Net Adoption Credit Excluding Carry Forward Amount -->
+			<xsd:element name="NetAdoptionCreditExclCfwdAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Net Adoption Credit Excluding Carry Forward Amount</Description>
+						<LineNumber>12</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Adoption Credit Carry Forward Amount -->
+			<xsd:element name="AdoptionCreditCfwdAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Adoption Credit Carry Forward Amount</Description>
+						<LineNumber>13</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Net Adoption Credit Carry Forward Amount -->
+			<xsd:element name="NetAdoptionCreditCfwdAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Net Adoption Credit Carry Forward Amount</Description>
+						<LineNumber>14</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Credit Limit Worksheet Amount -->
+			<xsd:element name="CreditLimitWorksheetAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Credit Limit Worksheet Amount</Description>
+						<LineNumber>15</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Adoption Credit Amount -->
+			<xsd:element name="AdoptionCreditAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Adoption Credit Amount</Description>
+						<LineNumber>16</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Part III - Employer-Provided Adoption Benefits -->
+
+			<!-- Employer Adoption Benefits Amount -->
+			<xsd:element name="EmployerAdoptionBenefitsAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Employer Adoption Benefits Amount</Description>
+						<LineNumber>21</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Adoption Benefits Modified Adjusted Gross Income Amount -->
+			<xsd:element name="AdoptionBenefitsModifiedAGIAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Adoption Benefits Modified Adjusted Gross Income Amount</Description>
+						<LineNumber>23</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Adoption Benefit Modified Adjusted Gross Income Greater Amount Indicator -->
+			<xsd:element name="AdoptionBnftModifAGIGrtrAmtInd" type="BooleanType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Adoption Benefit Modified Adjusted Gross Income Greater Amount Indicator</Description>
+						<LineNumber>24</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Adoption Benefit Modified Adjusted Gross Income Less Limit Amount -->
+			<xsd:element name="AdoptionBnftModifAGILessLmtAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Adoption Benefit Modified Adjusted Gross Income Less Limit Amount</Description>
+						<LineNumber>24</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Adoption Benefit Adjusted Modified Adjusted Gross Income Percentage -->
+			<xsd:element name="AdoptionBenefitAdjModifAGIPct" type="RatioType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Adoption Benefit Adjusted Modified Adjusted Gross Income Percentage</Description>
+						<LineNumber>25</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Total Excluded Benefits Amount -->
+			<xsd:element name="TotalExcludedBenefitsAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Total Excluded Benefits</Description>
+						<LineNumber>28</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Excluded More Than Employer Adoption Benefits Indicator -->
+			<xsd:element name="ExcldMoreThanEmplrAdptnBnftInd" type="BooleanType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Excluded More Than Employer Adoption Benefits Indicator</Description>
+						<LineNumber>29</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			
+			<!-- Taxable Benefits Amount -->
+			<xsd:element name="TaxableBenefitsAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Taxable Benefits Amount</Description>
+						<LineNumber>29</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:schema>

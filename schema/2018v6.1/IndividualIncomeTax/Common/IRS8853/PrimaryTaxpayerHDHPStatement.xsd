@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns="http://www.irs.gov/efile" xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.irs.gov/efile" elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.0">
+	
+	<xsd:annotation>
+		<xsd:documentation>
+			<Description>IRS e-file Individual Income Tax Schema - Primary Taxpayer HDHP Statement</Description>
+			<Purpose>If both spouses have HDHPs with self-only coverage, complete a separate Form 8853, Section A, Part I, for each spouse. Enter "statement" across the top of each Form 8853, fill in the name and SSN, and complete Part I. Next, add lines 1, 2, and 5 from the two statement Forms 8853 and enter those totals on the respective lines of the controlling Form 8853 (the combined Form 8853 for both spouses). Do not complete lines 3 and 4 of the controlling Form 8853. Attach the two statement Forms 8853 to your tax return after the controlling Form 8853.</Purpose>
+			<TaxYear>2018</TaxYear>
+			<MaturityLevel>Final Release</MaturityLevel>
+			<ReleaseDate>February 13, 2019</ReleaseDate>
+		</xsd:documentation>
+	</xsd:annotation>
+	
+	<xsd:include schemaLocation="../../../Common/efileTypes.xsd"/>
+	
+	<!-- =========================================================== -->
+	<!-- ============  Primary Taxpayer HDHP Statement  ============ -->
+	<!-- =========================================================== -->
+	
+	<xsd:element name="PrimaryTaxpayerHDHPStatement">
+		<xsd:annotation>
+			<xsd:documentation>Primary Taxpayer HDHP Statement</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:complexContent>
+				<xsd:extension base="PrimaryTaxpayerHDHPStmtType">
+					<xsd:attributeGroup ref="DocumentAttributes">
+						<xsd:annotation>
+							<xsd:documentation>Common return document attributes</xsd:documentation>
+						</xsd:annotation>
+					</xsd:attributeGroup>
+					<xsd:attribute name="documentName" type="StringType" fixed="PrimaryTaxpayerHDHPStatement">
+						<xsd:annotation>
+							<xsd:documentation>IRS internal use only. To avoid error in the return, do not include the attribute name or value.</xsd:documentation>
+						</xsd:annotation>
+					</xsd:attribute>
+				</xsd:extension>
+			</xsd:complexContent>
+		</xsd:complexType>
+	</xsd:element>
+
+	<xsd:complexType name="PrimaryTaxpayerHDHPStmtType">
+		<xsd:annotation>
+			<xsd:documentation>Content model for Primary Taxpayer HDHP Statement</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+
+			<!--Archer MSA Employer Contribution Amount -->
+			<xsd:element name="ArcherMSAEmployerContriAmt" type="USAmountNNType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Archer MSA Employer Contribution Amount</Description>
+						<LineNumber>1</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!--Archer MSA Contribution Amount -->
+			<xsd:element name="ArcherMSAContributionAmt" type="USAmountNNType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Archer MSA Contribution Amount</Description>
+						<LineNumber>2</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!--Archer MSA Contribution Limitation Amount -->
+			<xsd:element name="ArcherMSAContriLimitationAmt" type="USAmountNNType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Archer MSA Contribution Limitation Amount</Description>
+						<LineNumber>3</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!--HDHP Employer Compensation Amount -->
+			<xsd:element name="HDHPEmployerCompensationAmt" type="USAmountNNType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>HDHP Employer Compensation Amount</Description>
+						<LineNumber>4</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!--Archer MSA Deduction Amount -->
+			<xsd:element name="ArcherMSADeductionAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Archer MSA Deduction Amount</Description>
+						<LineNumber>5</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+		</xsd:sequence>
+	</xsd:complexType>
+
+</xsd:schema>

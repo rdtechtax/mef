@@ -1,0 +1,275 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns="http://www.irs.gov/efile" xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.irs.gov/efile" elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.0">
+	<xsd:annotation>
+		<xsd:documentation>
+			<Description>IRS e-file Schema - Form 965 Schedule E</Description>
+			<TaxYear>2018</TaxYear>
+			<MaturityLevel>Final Release</MaturityLevel>
+			<ReleaseDate>February 13, 2019</ReleaseDate>
+		</xsd:documentation>
+	</xsd:annotation>
+	<xsd:include schemaLocation="../efileTypes.xsd"/>
+	<!-- =============================================================== -->
+	<!-- ==================  IRS Form 965 Schedule E  ================== -->
+	<!-- =============================================================== -->
+	<xsd:element name="IRS965ScheduleE">
+		<xsd:annotation>
+			<xsd:documentation>IRS Form 965 Schedule E</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:complexContent>
+				<xsd:extension base="IRS965ScheduleEType">
+					<xsd:attributeGroup ref="DocumentAttributes">
+						<xsd:annotation>
+							<xsd:documentation>Common return document attributes</xsd:documentation>
+						</xsd:annotation>
+					</xsd:attributeGroup>
+					<xsd:attribute name="documentName" type="StringType" fixed="IRS965ScheduleE">
+						<xsd:annotation>
+							<xsd:documentation>IRS internal use only. To avoid error in the return, do not include the attribute name or value.</xsd:documentation>
+						</xsd:annotation>
+					</xsd:attribute>
+					<xsd:attribute name="referenceDocumentId" type="IdListType">
+						<xsd:annotation>
+							<xsd:documentation>List of document ID's of forms, schedules, supporting info. etc. attached to this form</xsd:documentation>
+						</xsd:annotation>
+					</xsd:attribute>
+					<xsd:attribute name="referenceDocumentName" type="StringType" fixed="BinaryAttachment GeneralDependencyMedium"/>
+				</xsd:extension>
+			</xsd:complexContent>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:complexType name="IRS965ScheduleEType">
+		<xsd:annotation>
+			<xsd:documentation>Content model for IRS Form 965 Schedule E</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+
+			<!-- US Shareholder's Aggregate Foreign Cash Position Detail Group -->
+			<xsd:element name="USShrAggrgtFrgnCashPositionDtl" minOccurs="0" maxOccurs="unbounded">
+				<xsd:complexType>
+					<xsd:sequence>
+
+						<!-- Foreign Corporation Name -->
+						<xsd:element name="ForeignCorporationName" type="BusinessNameType" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Foreign Corporation Name</Description>
+									<LineNumber>Lines 1 - 15, Column "Name of Specified Foreign Corporation"</LineNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+
+						<!-- EIN or Foreign Entity Reference ID Number -->
+						<xsd:choice>
+							<xsd:element name="EIN" type="EINType">
+								<xsd:annotation>
+									<xsd:documentation>
+										<Description>EIN</Description>
+										<LineNumber>Lines 1 - 15, Column (a)</LineNumber>
+									</xsd:documentation>
+								</xsd:annotation>
+							</xsd:element>
+							<xsd:element name="ForeignEntityReferenceIdNum">
+								<xsd:annotation>
+									<xsd:documentation>
+										<Description>Foreign Entity Reference ID Number</Description>
+										<LineNumber>Lines 1 - 15, Column (a)</LineNumber>
+									</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="AlphaNumericType">
+										<xsd:minLength value="1" />
+										<xsd:maxLength value="50" />
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+						</xsd:choice>
+
+						<!-- Cash Position Not Hedge Transactions Prior Taxable Year Amount -->
+						<xsd:element name="CashPosNotHedgeTransPYAmt" type="USAmountNNType" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Cash Position Not Hedge Transactions Prior Taxable Year Amount</Description>
+									<LineNumber>Lines 1 - 15, Column (b)(1)</LineNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+
+						<!-- Cash Position Hedge Transactions Prior Taxable Year Amount -->
+						<xsd:element name="CashPosHedgeTransPYAmt" type="USAmountNNType" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Cash Position Hedge Transactions Prior Taxable Year Amount</Description>
+									<LineNumber>Lines 1 - 15, Column (b)(2)</LineNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+
+						<!-- Cash Position At Close Prior Taxable Year Amount -->
+						<xsd:element name="CashPositionAtClosePYAmt" type="USAmountNNType" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Cash Position At Close Prior Taxable Year Amount</Description>
+									<LineNumber>Lines 1 - 15, Column (b)(3)</LineNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+
+						<!-- Cash Position Not Hedge Transactions Before November Amount -->
+						<xsd:element name="CashPosNotHedgeTransBfrNovAmt" type="USAmountNNType" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Cash Position Not Hedge Transactions Before November Amount</Description>
+									<LineNumber>Lines 1 - 15, Column (c)(1)</LineNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+
+						<!-- Cash Position Hedge Transactions Before November Amount -->
+						<xsd:element name="CashPosHedgeTransBfrNovAmt" type="USAmountNNType" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Cash Position Hedge Transactions Before November Amount</Description>
+									<LineNumber>Lines 1 - 15, Column (c)(2)</LineNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+
+						<!-- Cash Position At Close Before November Amount -->
+						<xsd:element name="CashPositionAtCloseBfrNovAmt" type="USAmountNNType" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Cash Position At Close Before November Amount</Description>
+									<LineNumber>Lines 1 - 15, Column (c)(3)</LineNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+
+						<!-- Cash Position Not Hedge Transactions Before January Amount -->
+						<xsd:element name="CashPosNotHedgeTransBfrJanAmt" type="USAmountNNType" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Cash Position Not Hedge Transactions Before January Amount</Description>
+									<LineNumber>Lines 1 - 15, Column (d)(1)</LineNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+
+						<!-- Cash Position Hedge Transactions Before January Amount -->
+						<xsd:element name="CashPosHedgeTransBfrJanAmt" type="USAmountNNType" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Cash Position Hedge Transactions Before January Amount</Description>
+									<LineNumber>Lines 1 - 15, Column (d)(2)</LineNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+
+						<!-- Cash Position At Close Before January Amount -->
+						<xsd:element name="CashPositionAtCloseBfrJanAmt" type="USAmountNNType" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Cash Position At Close Before January Amount</Description>
+									<LineNumber>Lines 1 - 15, Column (d)(3)</LineNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+
+			<!-- Total Cash Position Not Hedge Transactions Prior Taxable Year Amount -->
+			<xsd:element name="TotCashPosNotHedgeTransPYAmt" type="USAmountNNType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Total Cash Position Not Hedge Transactions Prior Taxable Year Amount</Description>
+						<LineNumber>Line 16, Column (b)(1)</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Total Cash Position Hedge Transactions Prior Taxable Year Amount -->
+			<xsd:element name="TotCashPosHedgeTransPYAmt" type="USAmountNNType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Total Cash Position Hedge Transactions Prior Taxable Year Amount</Description>
+						<LineNumber>Line 16, Column (b)(2)</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Total Cash Position At Close Prior Taxable Year Amount -->
+			<xsd:element name="TotCashPositionAtClosePYAmt" type="USAmountNNType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Total Cash Position At Close Prior Taxable Year Amount</Description>
+						<LineNumber>Line 16, Column (b)(3)</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Total Cash Position Not Hedge Transactions Before November Amount -->
+			<xsd:element name="TotCashPosNotHedgeTransNovAmt" type="USAmountNNType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Total Cash Position Not Hedge Transactions Before November Amount</Description>
+						<LineNumber>Line 16, Column (c)(1)</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Total Cash Position Hedge Transactions Before November Amount -->
+			<xsd:element name="TotCashPosHedgeTransNovAmt" type="USAmountNNType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Total Cash Position Hedge Transactions Before November Amount</Description>
+						<LineNumber>Line 16, Column (c)(2)</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Total Cash Position At Close Before November Amount -->
+			<xsd:element name="TotCashPositionAtCloseNovAmt" type="USAmountNNType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Total Cash Position At Close Before November Amount</Description>
+						<LineNumber>Line 16, Column (c)(3)</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Total Cash Position Not Hedge Transactions Before January Amount -->
+			<xsd:element name="TotCashPosNotHedgeTransJanAmt" type="USAmountNNType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Total Cash Position Not Hedge Transactions Before January Amount</Description>
+						<LineNumber>Line 16, Column (d)(1)</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Total Cash Position Hedge Transactions Before January Amount -->
+			<xsd:element name="TotCashPosHedgeTransJanAmt" type="USAmountNNType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Total Cash Position Hedge Transactions Before January Amount</Description>
+						<LineNumber>Line 16, Column (d)(2)</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Total Cash Position At Close Before January Amount -->
+			<xsd:element name="TotCashPositionAtCloseJanAmt" type="USAmountNNType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Total Cash Position At Close Before January Amount</Description>
+						<LineNumber>Line 16, Column (d)(3)</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:schema>

@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema targetNamespace="http://www.irs.gov/efile" xmlns="http://www.irs.gov/efile" xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.0">
+
+	<xsd:annotation>
+		<xsd:documentation>
+			<Description>IRS e-file Individual Income Tax Schema - Other Income Type Statement</Description>
+			<Purpose>This statement should be attached to Form 1040, line 21 if you have income that needs to be specified as other income.  Attach a statement showing specific literals and the amount you received</Purpose> 
+			<TaxYear>2018</TaxYear>
+			<MaturityLevel>Final Release</MaturityLevel>
+			<ReleaseDate>February 13, 2019</ReleaseDate>
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:include schemaLocation="../../../Common/efileTypes.xsd" />
+
+	<!-- =========================================================== -->
+	<!-- =============== Other Income Type Statement =============== -->
+	<!-- =========================================================== -->
+
+	<xsd:element name="OtherIncomeTypeStatement">
+		<xsd:annotation>
+			<xsd:documentation>Other Income Type Statement</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:complexContent>
+				<xsd:extension base="OtherIncomeTypeStatementType">
+					<xsd:attributeGroup ref="DocumentAttributes">
+						<xsd:annotation>
+							<xsd:documentation>Common return document attributes</xsd:documentation>
+						</xsd:annotation>
+					</xsd:attributeGroup>
+					<xsd:attribute name="documentName" type="StringType" fixed="OtherIncomeTypeStatement">
+						<xsd:annotation>
+							<xsd:documentation>IRS internal use only. To avoid error in the return, do not include the attribute name or value.</xsd:documentation>
+						</xsd:annotation>
+					</xsd:attribute>
+				</xsd:extension>
+			</xsd:complexContent>
+		</xsd:complexType>
+	</xsd:element>
+
+	<xsd:complexType name="OtherIncomeTypeStatementType">
+		<xsd:annotation>
+			<xsd:documentation>Content model for Other Income Type Statement</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="OtherIncomeTypeStmt" minOccurs="0" maxOccurs="100">
+				<xsd:complexType>
+					<xsd:complexContent>
+						<xsd:extension base="OtherIncomeTypeStmtType">
+							<xsd:attribute name="referenceDocumentId" type="IdListType"/>
+							<xsd:attribute name="referenceDocumentName" type="StringType" fixed="NetOperatingLossCarryforwardDeductionStatement">
+								<xsd:annotation>
+								<xsd:documentation>
+									<ELFFieldNumber>NL</ELFFieldNumber>
+								</xsd:documentation>
+								</xsd:annotation>
+							</xsd:attribute>
+						</xsd:extension>
+					</xsd:complexContent>
+				</xsd:complexType>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="OtherIncomeTypeStmtType">
+		<xsd:sequence>
+
+			<xsd:choice minOccurs="0">        
+
+				<!-- Other Income Literal Code-->
+				<xsd:element name="OtherIncomeLitCd" minOccurs="0">
+					<xsd:annotation>
+						<xsd:documentation>
+							<Description>Other income literal code</Description>
+						</xsd:documentation>
+					</xsd:annotation>
+					<xsd:simpleType>
+						<xsd:restriction base="StringType">
+							<xsd:enumeration value="MSA" />
+							<xsd:enumeration value="LTC" />
+							<xsd:enumeration value="MED MSA" />
+							<xsd:enumeration value="HSA" />
+							<xsd:enumeration value="FORM 8814" />
+							<xsd:enumeration value="GAMBLING WINNINGS" />
+							<xsd:enumeration value="FORM 2555" />
+							<xsd:enumeration value="FORM 2555-EZ" />
+							<xsd:enumeration value="LOSS ON EXCESS DEFER DIST" />
+							<xsd:enumeration value="INDIAN GAMING PROCEEDS" />
+							<xsd:enumeration value="INDIAN TRIBAL DISTRIB" />
+							<xsd:enumeration value="NATIVE AMERICAN DISTRIB" />
+							<xsd:enumeration value="NOL" />
+							<xsd:enumeration value="NOTICE 2014-7" />
+							<xsd:enumeration value="AIRLINE PAYMENT" />
+							<xsd:enumeration value="ABLE" />
+							<xsd:enumeration value="SECT 933" />
+						</xsd:restriction>
+					</xsd:simpleType>
+				</xsd:element>
+			       
+				<!-- Other Income Literal -->
+				<xsd:element name="OtherIncomeCodeTxt" minOccurs="0">
+					<xsd:annotation>
+						<xsd:documentation>
+							<Description>Other income code text</Description>
+						</xsd:documentation>
+					</xsd:annotation>
+					<xsd:simpleType>
+						<xsd:restriction base="TextType">
+							<xsd:maxLength value="50"/>
+						</xsd:restriction>
+					</xsd:simpleType>
+				</xsd:element>
+			       
+			</xsd:choice>
+
+			<!-- Other Income Amount -->
+			<xsd:element name="OtherIncomeAmt" type="USAmountType">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Other income amount</Description>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+		</xsd:sequence>
+	</xsd:complexType>
+
+</xsd:schema>

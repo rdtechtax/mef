@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.irs.gov/efile" targetNamespace="http://www.irs.gov/efile" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xsd:annotation>
+		<xsd:documentation>
+			<Description>IRS e-file Corporate Income Tax Schema - IRS Form 8933</Description>
+			<TaxYear>2018</TaxYear>
+			<MaturityLevel>Final Release</MaturityLevel>
+			<ReleaseDate>February 13, 2019</ReleaseDate>
+		</xsd:documentation>
+	</xsd:annotation>
+	<xsd:include schemaLocation="../../../Common/efileTypes.xsd"/>
+	<!-- ================================================================== -->
+	<!-- ======================  IRS Form 8933 =============================== -->
+	<!-- ================================================================== -->
+	<xsd:element name="IRS8933">
+		<xsd:annotation>
+			<xsd:documentation>IRS Form 8933</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:complexContent>
+				<xsd:extension base="IRS8933Type">
+					<xsd:attributeGroup ref="DocumentAttributes">
+						<xsd:annotation>
+							<xsd:documentation>Common return document attributes</xsd:documentation>
+						</xsd:annotation>
+					</xsd:attributeGroup>
+					<xsd:attribute name="documentName" type="xsd:string" fixed="IRS8933">
+						<xsd:annotation>
+							<xsd:documentation>IRS internal use only. To avoid error in the return, do not include the attribute name or value.</xsd:documentation>
+						</xsd:annotation>
+					</xsd:attribute>
+				</xsd:extension>
+			</xsd:complexContent>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:complexType name="IRS8933Type">
+		<xsd:annotation>
+			<xsd:documentation>Content model for Form 8933</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+
+			<!-- Captured Not Used Before Specified Date Group -->
+			<xsd:element name="CapturedNotUsedBfrSpcfdDtGrp" type="CapturedMetricTonCreditGrpType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Captured using equipment placed in service before February 9, 2018, not used as a tertiary injectant in a   
+											qualified enhanced oil or natural gas recovery project, and not used in away described in section 45Q(f)(5).
+						</Description>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Captured Used Before Specified Date Group -->
+			<xsd:element name="CapturedUsedBfrSpcfdDtGrp" type="CapturedMetricTonCreditGrpType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Captured using equipment placed in service before February 9, 2018, used as a tertiary injectant in a 
+											qualified enhanced oil or natural gas recovery project, or used in away described in section 45Q(f)(5).
+						</Description>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Captured Not Used After Specified Date Group -->
+			<xsd:element name="CapturedNotUsedAftrSpcfdDtGrp" type="CapturedMetricTonCreditGrpType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Captured using equipment placed in service on or after February 9, 2018, not used as a tertiary injectant 
+											in a qualified enhanced oil or natural gas recovery project, nor used as described in section 45Q(f)(5)
+						</Description>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Captured Used After Specified Date Group -->
+			<xsd:element name="CapturedUsedAftrSpcfdDtGrp" type="CapturedMetricTonCreditGrpType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Captured using equipment placed on or after February 9, 2018 used as a tertiary injectant in a  
+											qualified enhanced oil or natural gas recovery project or used as described in section 45Q(f)(5)
+						</Description>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Section 45Qb3 Election Ind -->
+					<xsd:element name="Section45Qb3ElectionInd" type="CheckboxType" minOccurs="0">
+						<xsd:annotation>
+							<xsd:documentation>
+								<Description>Section 45Qb3 Election Ind</Description>
+								<LineNumber>Line 5</LineNumber>
+							</xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+			<!-- Section 45Qb6 Election Ind -->
+					<xsd:element name="Section45Qb6ElectionInd" type="CheckboxType" minOccurs="0">
+						<xsd:annotation>
+							<xsd:documentation>
+								<Description>Section 45Qb6 Election Ind</Description>
+								<LineNumber>Line 6</LineNumber>
+							</xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+			<!-- Line 7 Reserved -->		
+			<!-- Credit from Partnerships & S Corporations -->
+			<xsd:element name="CreditAmt" type="USAmountNNType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Credit from Partnerships and S Corporations</Description>
+						<LineNumber>Line 8</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Total Amount -->
+			<xsd:element name="TotalAmt" type="USAmountPosType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Total of lines 1c, 2c, 3c and 4c</Description>
+						<LineNumber>Line 9</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="CapturedMetricTonCreditGrpType">
+		<xsd:sequence>
+		<!-- Metric Tons Captured Qty -->
+			<xsd:element name="MetricTonsCapturedQty" type="LargeRatioType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Metric Tons Captured Qty Lines - 1a, 2a, 3a, and 4a</Description>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		<!-- Metric Tons Captured Credit Amount -->	
+			<xsd:element name="MetricTonsCapturedCreditAmt" type="USDecimalAmountNNType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Metric Tons Captured Credit Amount Lines -  1c, 2c, 3c, and 4c</Description>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:schema>

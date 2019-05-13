@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema targetNamespace="http://www.irs.gov/efile" xmlns="http://www.irs.gov/efile" xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.0">
+
+	<xsd:annotation>
+		<xsd:documentation>
+			<Description>IRS e-file U.S. Nonresident Alien Income Tax Schema - Form 8854 Computation Statement</Description>
+			<Purpose>Optional Statement - Column (e). Before you complete column (e), you must allocate the exclusion amount to the gain properties on a separate schedule. Attach a copy of the separate schedule to this form.</Purpose>
+			<TaxYear>2018</TaxYear>
+			<MaturityLevel>Final Release</MaturityLevel>
+			<ReleaseDate>February 13, 2019</ReleaseDate>
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:include schemaLocation="../../../Common/efileTypes.xsd" />
+
+	<!-- ============================================= -->
+	<!-- ====== Form 8854 Computation Statement ====== -->
+	<!-- ============================================= -->
+
+	<xsd:element name="Form8854ComputationStatement">
+		<xsd:annotation>
+			<xsd:documentation>Form 8854 Computation Statement</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:complexContent>
+				<xsd:extension base="Form8854ComputationStatementType">
+					<xsd:attributeGroup ref="DocumentAttributes">
+						<xsd:annotation>
+							<xsd:documentation>Common return document attributes</xsd:documentation>
+						</xsd:annotation>
+					</xsd:attributeGroup>
+					<xsd:attribute name="documentName" type="TextType" fixed="Form8854ComputationStatement">
+						<xsd:annotation>
+							<xsd:documentation>IRS internal use only. To avoid error in the return, do not include the attribute name or value.</xsd:documentation>
+						</xsd:annotation>
+					</xsd:attribute>
+				</xsd:extension>
+			</xsd:complexContent>
+		</xsd:complexType>
+	</xsd:element>
+
+	<xsd:complexType name="Form8854ComputationStatementType">
+		<xsd:annotation>
+			<xsd:documentation>Form 8854 Computation Statement</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<!-- Gain After Allocation Exclusion -->
+			<xsd:element name="GainAfterAllocationExclGrp" minOccurs="0" maxOccurs="20">
+				<xsd:complexType>
+					<xsd:sequence>
+						<!-- Property Description -->
+						<xsd:element name="PropertyDesc" type="LineExplanationType"/>
+						<!-- Cost Or Other Basis Amount -->
+						<xsd:element name="CostOrOtherBasisAmt" type="USAmountType"/>
+						<!-- Fair Market Value On Day Before Expatriation Amount -->
+						<xsd:element name="FairMarketValueDayBfrExptrtAmt" type="USAmountType"/>
+						<!-- Gain Or Loss Amount -->
+						<xsd:element name="GainOrLossAmt" type="USAmountType"/>
+						<!-- Exclusion Calculation Amount -->
+						<xsd:element name="ExclusionCalculationAmt" type="USAmountType"/>
+						<!-- Gain After Allocation Exclusion Amount -->
+						<xsd:element name="GainAfterAllocationExclAmt" type="USAmountType"/>
+						<!-- Total Built-In Gain Amount -->
+						<xsd:element name="TotalBuiltInGainAmt" type="USAmountType"/>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+
+</xsd:schema>

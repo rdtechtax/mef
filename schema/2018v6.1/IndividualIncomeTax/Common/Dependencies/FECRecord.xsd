@@ -1,0 +1,216 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns="http://www.irs.gov/efile" xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.irs.gov/efile" elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.0">
+
+	<xsd:annotation>
+		<xsd:documentation>
+			<Description>IIRS e-file Individual Income Tax Schema - FEC Record</Description>
+			<TaxYear>2018</TaxYear>
+			<MaturityLevel>Final Release</MaturityLevel>
+			<ReleaseDate>February 13, 2019</ReleaseDate>
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:include schemaLocation="../../../Common/efileTypes.xsd"/>
+
+
+	<!-- ========================================================== -->
+	<!-- =======================  FEC Record ====================== -->
+	<!-- ========================================================== -->
+
+
+	<xsd:element name="FECRecord">
+		<xsd:annotation>
+			<xsd:documentation>FEC Record</xsd:documentation>
+		</xsd:annotation>
+
+		<xsd:complexType>
+			<xsd:complexContent>
+				<xsd:extension base="FECRecordType">
+					<xsd:attributeGroup ref="DocumentAttributes">
+						<xsd:annotation>
+							<xsd:documentation>Common return document attributes</xsd:documentation>
+						</xsd:annotation>
+					</xsd:attributeGroup>
+					<xsd:attribute name="documentName" type="StringType" fixed="FECRecord">
+						<xsd:annotation>
+							<xsd:documentation>IRS internal use only. To avoid error in the return, do not include the attribute name or value.</xsd:documentation>
+						</xsd:annotation>
+					</xsd:attribute>
+				</xsd:extension>
+			</xsd:complexContent>
+		</xsd:complexType>
+	</xsd:element>
+
+	<xsd:complexType name="FECRecordType">
+		<xsd:annotation>
+			<xsd:documentation>Content model for FEC Record</xsd:documentation>
+		</xsd:annotation>
+
+		<xsd:sequence>
+
+			<!-- Employee TIN -->
+			<xsd:element name="EmployeeTIN" type="SSNType">
+				<xsd:annotation>
+					<xsd:documentation>
+					        <Description>Employee TIN</Description>
+					        <ELFFieldNumber>0010</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Employee Name Control -->
+			<xsd:element name="EmployeeNameControlTxt" type="PersonNameControlType">
+				<xsd:annotation>
+					<xsd:documentation>
+					        <Description>Employee name control</Description>
+					        <ELFFieldNumber>0020</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Employee Name -->
+			<xsd:element name="EmployeeNm" type="NameLine1Type">
+				<xsd:annotation>
+					<xsd:documentation>
+					         <Description>Employee name</Description>
+					         <ELFFieldNumber>0030</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			
+			<!-- Employee In Care Of Name -->
+			<xsd:element name="EmployeeInCareOfNm" type="InCareOfNameType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+					          <Description>Employee in care of name</Description>
+					          <ELFFieldNumber>0040</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			
+			<!-- Choice between Employee US Address or Foreign Address -->
+			<xsd:choice>
+			       <!-- US Address -->
+			       <xsd:element name="USAddress" type="USAddressType" minOccurs="0">
+					<xsd:annotation>
+						 <xsd:documentation>
+						     	<Description>Employee US address</Description>
+						     	<ELFFieldNumber>0050 0060 0070 0080 0090 0100 0110</ELFFieldNumber>
+						 </xsd:documentation>
+				        </xsd:annotation>
+			       </xsd:element>
+				
+			       <!-- Foreign Address -->
+			       <xsd:element name="ForeignAddress" type="ForeignAddressType" minOccurs="0">
+				        <xsd:annotation>
+						 <xsd:documentation>
+						        <Description>Employee foreign address</Description>
+						     	<ELFFieldNumber>0050 0060 0070 0080 0090 0100 0110</ELFFieldNumber>
+						 </xsd:documentation>
+				        </xsd:annotation>
+		     	       </xsd:element>
+			</xsd:choice>
+
+			<!-- Work Performed Residing In US Indicator -->
+			<xsd:element name="WorkPerformedResidingInUSInd" type="CheckboxType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+					       <Description>Work performed residing in US indicator</Description>
+					       <ELFFieldNumber>0120</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			
+			<!-- Choice between Foreign Employer Person Name or ForeignEmployerBusinessName -->
+			<xsd:choice>
+				<!-- Foreign Employer Person Name -->
+				<xsd:element name="ForeignEmployerPersonNm" type="PersonNameType" minOccurs="0">
+					<xsd:annotation>
+						<xsd:documentation>
+							<Description>Foreign employer person name</Description>
+							<ELFFieldNumber>0140</ELFFieldNumber>
+					        </xsd:documentation>
+					</xsd:annotation>
+				</xsd:element>
+							
+				<!-- Foreign Employer Business Name -->
+				<xsd:element name="ForeignEmployerBusinessName" type="BusinessNameType" minOccurs="0">
+					<xsd:annotation>
+						<xsd:documentation>
+							<Description>Foreign employer business name</Description>
+						        <ELFFieldNumber>00140</ELFFieldNumber>
+						</xsd:documentation>
+				        </xsd:annotation>
+			        </xsd:element>
+			</xsd:choice>
+
+			<!-- Employer In Care Of Name -->
+			<xsd:element name="EmployerInCareOfNm" type="InCareOfNameType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+					       <Description>Employer in care of name</Description>
+					       <ELFFieldNumber>0150</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Foreign Employer Address -->
+			<xsd:element name="ForeignEmployerAddress" type="ForeignAddressType">
+				<xsd:annotation>
+					<xsd:documentation>
+					       <Description>Foreign employer address</Description>
+					       <ELFFieldNumber>0160 0170 0180 0190 0200</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			
+			<!-- Foreign EIN -->
+			<xsd:element name="ForeignEIN" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+					       <Description>Foreign employer address</Description>
+					       <ELFFieldNumber>0210</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+				<xsd:simpleType>
+					<xsd:restriction base="TextType">
+						<xsd:maxLength value="16"/>
+					</xsd:restriction>
+		                </xsd:simpleType>
+			</xsd:element>
+
+			<!-- Foreign Employer Compensation Amount -->
+		        <xsd:element name="ForeignEmployerCompensationAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+					       <Description>Foreign employer compensation amount</Description>
+					       <ELFFieldNumber>0220</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Foreign Pension Received Amount -->
+		        <xsd:element name="ForeignPensionReceivedAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+					       <Description>Foreign Pension Received amount</Description>
+					       <ELFFieldNumber>0230</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Foreign Pension Taxable Amount -->
+		        <xsd:element name="ForeignPensionTaxableAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+					       <Description>Foreign Pension Taxable amount</Description>
+					       <ELFFieldNumber>0240</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+		</xsd:sequence>
+
+	</xsd:complexType>
+
+</xsd:schema>

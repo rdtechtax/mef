@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns="http://www.irs.gov/efile" xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.irs.gov/efile" elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.0">
+
+	<xsd:annotation>
+		<xsd:documentation>
+			<Description>IRS e-file Individual Income Tax Schema - Injured Spouse Other Income Statement</Description>
+			<TaxYear>2018</TaxYear>
+			<MaturityLevel>Final Release</MaturityLevel>
+			<ReleaseDate>February 13, 2019</ReleaseDate>
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:include schemaLocation="../../../Common/efileTypes.xsd"/>
+
+	<!-- =========================================================== -->
+	<!-- ========== Injured Spouse Other Income Statement ========== -->
+	<!-- =========================================================== -->
+
+	<xsd:element name="InjuredSpouseOtherIncomeStmt">
+		<xsd:annotation>
+			<xsd:documentation>Injured Spouse Other Income Statement</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:complexContent>
+				<xsd:extension base="InjuredSpouseOtherIncmStmtType">
+					<xsd:attributeGroup ref="DocumentAttributes">
+						<xsd:annotation>
+							<xsd:documentation>Common return document attributes</xsd:documentation>
+						</xsd:annotation>
+					</xsd:attributeGroup>
+					<xsd:attribute name="documentName" type="StringType" fixed="InjuredSpouseOtherIncomeStatement">
+						<xsd:annotation>
+							<xsd:documentation>IRS internal use only. To avoid error in the return, do not include the attribute name or value.</xsd:documentation>
+						</xsd:annotation>
+					</xsd:attribute>
+				</xsd:extension>
+			</xsd:complexContent>
+		</xsd:complexType>
+	</xsd:element>
+
+	<xsd:complexType name="InjuredSpouseOtherIncmStmtType">
+		<xsd:annotation>
+			<xsd:documentation>Content model for Injured Spouse Other Income Statement</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="InjrdSpsAllocationOthIncmGrp" type="InjSpouseAllocationOthIncmType" maxOccurs="unbounded"/>
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="InjSpouseAllocationOthIncmType">
+		<xsd:sequence>
+			       
+			<!-- Type of Other Income -->
+			<xsd:element name="OtherIncomeDesc" type="LineExplanationType">
+			 	<xsd:annotation>
+					<xsd:documentation>
+						<Description>Type of Other Income</Description>
+						<ELFFieldNumber>0100</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+	 		</xsd:element>
+			       
+			<!-- Total Other Income -->
+			<xsd:element name="TotalOtherIncomeAmt" type="USAmountType">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Total Other Income</Description>
+						<ELFFieldNumber>0200</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Injured Spouse Allocation Amount -->
+			<xsd:element name="InjuredSpouseAllocationAmt" type="USAmountType">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Injured Spouse Allocation Amount</Description>
+						<ELFFieldNumber>0300</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Other Spouse Allocation Amount -->
+			<xsd:element name="OtherSpouseAllocationAmt" type="USAmountType">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Other Spouse Allocation Amount</Description>
+						<ELFFieldNumber>0400</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:schema>

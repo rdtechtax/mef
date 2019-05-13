@@ -1,0 +1,971 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns="http://www.irs.gov/efile" xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.irs.gov/efile" elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.0">
+
+	<xsd:annotation> 
+		<xsd:documentation>
+			<Description>IRS e-file U.S. Nonresident Alien Income Tax Schema - ReturnHeader for 1040NR</Description>
+			<MaturityLevel>Final Release</MaturityLevel>
+			<ReleaseDate>February 13, 2019</ReleaseDate>
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:include schemaLocation="../../Common/efileTypes.xsd"/>
+
+	<xsd:element name="ReturnHeader" type="ReturnHeaderType"/>
+
+	<xsd:complexType name="ReturnHeaderType">
+		<xsd:annotation>
+			<xsd:documentation>Content model for the 1040NR ReturnHeader</xsd:documentation>
+		</xsd:annotation>
+		
+		<xsd:sequence>
+		
+			<!-- Date And Time When Return Was Created -->
+			<xsd:element name="ReturnTs" type="TimestampType">
+				<xsd:annotation>
+					<xsd:documentation>
+						<xsd:Description>Date and time when return was created</xsd:Description>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			
+			<!-- Tax Year -->
+			<xsd:element name="TaxYr" type="YearType">
+				<xsd:annotation>
+					<xsd:documentation>
+						<xsd:Description>Tax year</xsd:Description>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			
+			<!-- Tax Period Begin Date -->
+			<xsd:element name="TaxPeriodBeginDt" type="DateType">
+				<xsd:annotation>
+					<xsd:documentation>
+						<xsd:Description>Tax period begin date</xsd:Description>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			
+			<!-- Tax Period End Date -->
+			<xsd:element name="TaxPeriodEndDt" type="DateType">
+				<xsd:annotation>
+					<xsd:documentation>
+						<xsd:Description>Tax period end date</xsd:Description>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			
+			<!-- Imperfect Return Indicator -->
+			<xsd:element name="ImperfectReturnInd" type="CheckboxType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<xsd:Description>Imperfect return indicator</xsd:Description>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- ITIN Return Indicator -->
+			<xsd:element name="InactiveITINReturnInd" type="CheckboxType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<xsd:Description>ITIN Return Indicator</xsd:Description>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Consortium Return Code -->
+			<xsd:element name="ConsortiumReturnCd" type="ConsortiumType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<xsd:Description>Consortium return code</xsd:Description>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			
+			<!-- Affordable Filing Code -->
+			<xsd:element name="AffordableFilingCd" type="PartnersPageFilingType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<xsd:Description>Affordable filing code</xsd:Description>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			
+			<!-- Intermediate Service Provider Number -->
+			<xsd:element name="ISPNum" type="ISPType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<xsd:Description>Intermediate service provider number</xsd:Description>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			
+			<!-- Software Identification -->
+			<xsd:element name="SoftwareId" type="SoftwareIdType">
+				<xsd:annotation>
+					<xsd:documentation>
+						<xsd:Description>Software identification</xsd:Description>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			
+			<!-- Software Version Number -->
+			<xsd:element name="SoftwareVersionNum" type="SoftwareVersionType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<xsd:Description>Software version number</xsd:Description>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			
+			<!-- Originator -->
+			<xsd:element name="OriginatorGrp">
+				<xsd:complexType>
+					<xsd:sequence>
+						<!-- Electronic Filing Identification Number -->
+						<xsd:element name="EFIN" type="EFINType"/>
+						<!-- Originator Type Code-->
+						<xsd:element name="OriginatorTypeCd" type="OriginatorType"/>						
+						<!-- Practitioner PIN -->
+						<xsd:element name="PractitionerPINGrp" minOccurs="0">
+							<xsd:complexType>
+								<xsd:sequence>
+									<!-- Electronic Filing Identification Number -->
+									<xsd:element name="EFIN" type="EFINType"/>
+									<!-- Personal Identification Number -->
+									<xsd:element name="PIN" type="PINType"/>
+								</xsd:sequence>
+							</xsd:complexType>
+					        </xsd:element>
+				        </xsd:sequence>
+			        </xsd:complexType>
+			</xsd:element>
+						
+			<!-- Self-Select PIN -->
+			<xsd:element name="SelfSelectPINGrp" minOccurs="0">
+				<xsd:complexType>
+					<xsd:sequence>
+						<!-- Primary Date Of Birth -->
+						<xsd:element name="PrimaryBirthDt" type="DateType" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<xsd:Description>Primary date of birth</xsd:Description>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						<!-- Primary Prior Year AGI Amount -->
+						<xsd:element name="PrimaryPriorYearAGIAmt" type="USAmountType" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<xsd:Description>Primary prior year AGI amount</xsd:Description>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						<!-- Primary Prior Year PIN -->
+						<xsd:element name="PrimaryPriorYearPIN" type="PINType" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<xsd:Description>Primary prior year PIN</xsd:Description>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			
+       		<!-- PIN Provided By IRS To Taxpayers Who Are Victims Of Identify Theft -->
+       		<xsd:element name="IdentityProtectionPIN" minOccurs="0">
+          		<xsd:annotation>
+					<xsd:documentation>
+						<Description>PIN provided by IRS to taxpayers who are victims of identify theft</Description>
+					</xsd:documentation>
+          		</xsd:annotation>
+				<xsd:simpleType>
+			        <xsd:restriction base="TextType">
+			            <xsd:maxLength value="6"/>
+			        </xsd:restriction>
+        		</xsd:simpleType>
+       		</xsd:element>
+
+       		<!-- PIN Provided By IRS To Taxpayers Who Are Victims Of Identify Theft -->
+       		<xsd:element name="SpouseIdentityProtectionPIN" minOccurs="0">
+          		<xsd:annotation>
+					<xsd:documentation>
+						<Description>PIN provided by IRS to taxpayers who are victims of identify theft</Description>
+					</xsd:documentation>
+          		</xsd:annotation>
+				<xsd:simpleType>
+			        <xsd:restriction base="TextType">
+			            <xsd:maxLength value="6"/>
+			        </xsd:restriction>
+        		</xsd:simpleType>
+       		</xsd:element>
+
+			<!-- PIN Type Code -->
+			<xsd:element name="PINTypeCd" type="PINCodeType">
+				<xsd:annotation>
+					<xsd:documentation>
+						<xsd:Description>PIN type code</xsd:Description>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			
+			<!-- Jurat Disclosure Code -->
+			<xsd:element name="JuratDisclosureCd">
+				<xsd:annotation>
+					<xsd:documentation>
+						<xsd:Description>Jurat disclosure code</xsd:Description>
+					</xsd:documentation>
+				</xsd:annotation>
+				<xsd:simpleType>
+					<xsd:restriction base="TextType">
+						<xsd:enumeration value="Online Self Select PIN"/>
+						<xsd:enumeration value="Self Select PIN By ERO"/>
+						<xsd:enumeration value="Practitioner PIN"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			
+			<xsd:choice>
+				<!-- Primary PIN Entered By Code -->
+				<xsd:element name="PrimaryPINEnteredByCd" type="PINEnteredByType" minOccurs="0">
+					<xsd:annotation>
+						<xsd:documentation>
+							<xsd:Description>Primary PIN entered by code</xsd:Description>
+						</xsd:documentation>
+					</xsd:annotation>
+				</xsd:element>
+				<!-- Parent Guardian Legally Responsible -->
+				<xsd:element name="ParentGrdnLegalResponsibleGrp" minOccurs="0">
+					<xsd:complexType>
+						<xsd:sequence>
+							<!-- Minor Child Signed By Code-->
+							<xsd:element name="MinorChildSignedByCd">
+								<xsd:annotation>
+									<xsd:documentation>
+										<xsd:Description>Minor child signed by code</xsd:Description>
+									</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="TextType">
+										<xsd:enumeration value="PARENT FOR MINOR CHILD"/>
+										<xsd:enumeration value="GUARDIAN FOR MINOR CHILD"/>
+										<xsd:enumeration value="LEGALLY RESPONSIBLE PERSON FOR MINOR CHILD"/>
+										<xsd:enumeration value="POWER OF ATTORNEY FOR MINOR CHILD"/>
+										<xsd:enumeration value="ERO FOR MINOR CHILD"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<!-- Person Name-->
+							<xsd:element name="PersonNm" type="PersonNameType"/>
+						</xsd:sequence>
+					</xsd:complexType>
+				</xsd:element>
+			</xsd:choice>
+			
+			<!-- Primary Signature PIN -->
+			<xsd:element name="PrimarySignaturePIN" type="PINType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<xsd:Description>Primary signature PIN</xsd:Description>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			
+			<!-- Primary Signature Date -->
+			<xsd:element name="PrimarySignatureDt" type="DateType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<xsd:Description>Primary signature date</xsd:Description>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			
+			<!-- Return Type Code -->
+			<xsd:element name="ReturnTypeCd">
+				<xsd:annotation>
+					<xsd:documentation>
+						<xsd:Description>Return type code</xsd:Description>
+					</xsd:documentation>
+				</xsd:annotation>
+				<xsd:simpleType>
+					<xsd:restriction base="TextType">
+						<xsd:enumeration value="1040NR"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			
+			<!-- Filer -->
+			<xsd:element name="Filer">
+				<xsd:complexType>
+					<xsd:sequence>
+						<!-- Primary SSN -->
+						<xsd:element name="PrimarySSN" type="SSNType">
+							<xsd:annotation>
+								<xsd:documentation>
+									<xsd:Description>Primary SSN</xsd:Description>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						<!-- Name Line 1 -->
+						<xsd:element name="NameLine1Txt" type="NameLine1Type">
+							<xsd:annotation>
+								<xsd:documentation>
+									<xsd:Description>Name line 1</xsd:Description>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						<!-- In Care Of Name -->
+						<xsd:element name="InCareOfNm" type="InCareOfNameType" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<xsd:Description>In care of name</xsd:Description>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						<!-- Primary Name Control -->
+						<xsd:element name="PrimaryNameControlTxt" type="PersonNameControlType">
+							<xsd:annotation>
+								<xsd:documentation>
+									<xsd:Description>Primary name control</xsd:Description>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						<xsd:choice>
+							<!-- U.S. Address -->
+							<xsd:element name="USAddress" type="USAddressType">
+								<xsd:annotation>
+									<xsd:documentation>
+										<xsd:Description>U.S. address</xsd:Description>
+									</xsd:documentation>
+								</xsd:annotation>
+							</xsd:element>
+							<!-- Foreign Address -->
+							<xsd:element name="ForeignAddress" type="ForeignAddressType">
+								<xsd:annotation>
+									<xsd:documentation>
+										<xsd:Description>Foreign address</xsd:Description>
+									</xsd:documentation>
+								</xsd:annotation>
+							</xsd:element>
+						</xsd:choice>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			
+			<!-- Paid Preparer Information -->
+			<xsd:element name="PaidPreparerInformationGrp" minOccurs="0">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="SignatureDt" type="DateType" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<xsd:Description>Date Signed</xsd:Description>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						<xsd:element name="SelfEmployedInd" type="CheckboxType" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<xsd:Description>Self Employed</xsd:Description>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						<xsd:choice minOccurs="0">
+							<xsd:element name="PTIN" type="PTINType">
+								<xsd:annotation>
+									<xsd:documentation>
+										<xsd:Description>Preparer PTIN</xsd:Description>
+									</xsd:documentation>
+								</xsd:annotation>
+							</xsd:element>
+							<xsd:element name="STIN" type="STINType">
+								<xsd:annotation>
+									<xsd:documentation>
+										<xsd:Description>Preparer STIN</xsd:Description>
+									</xsd:documentation>
+								</xsd:annotation>
+							</xsd:element>
+							<xsd:element name="PreparerSSN" type="SSNType">
+								<xsd:annotation>
+									<xsd:documentation>
+										<xsd:Description>Preparer SSN</xsd:Description>
+									</xsd:documentation>
+								</xsd:annotation>
+							</xsd:element>
+						</xsd:choice>
+						<xsd:element name="PreparerFirmEIN" type="EINType" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<xsd:Description>Preparer Firm ID Number</xsd:Description>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						<!-- Preparer Person Name -->
+						<xsd:element name="PreparerPersonNm" type="PersonNameType" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<xsd:Description>Preparer Person Name</xsd:Description>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						<!-- Preparer Firm Name -->
+						<xsd:element name="PreparerFirmName" type="BusinessNameType" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<xsd:Description>Preparer Firm Name</xsd:Description>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						<xsd:choice minOccurs="0">
+							<xsd:element name="PreparerUSAddress" type="USAddressType">
+								<xsd:annotation>
+									<xsd:documentation>
+										<xsd:Description>US Address</xsd:Description>
+									</xsd:documentation>
+								</xsd:annotation>
+							</xsd:element>
+							<xsd:element name="PreparerForeignAddress" type="ForeignAddressType">
+								<xsd:annotation>
+									<xsd:documentation>
+										<xsd:Description>Preparer Foreign Address</xsd:Description>
+									</xsd:documentation>
+								</xsd:annotation>
+							</xsd:element>
+						</xsd:choice>
+						
+						<xsd:choice minOccurs="0">
+							<xsd:element name="PhoneNum" type="PhoneNumberType">
+								<xsd:annotation>
+									<xsd:documentation>
+										<xsd:Description>Phone</xsd:Description>
+									</xsd:documentation>
+								</xsd:annotation>
+							</xsd:element>
+							<xsd:element name="ForeignPhoneNum" type="ForeignPhoneNumberType">
+								<xsd:annotation>
+									<xsd:documentation>
+										<xsd:Description>Foreign Phone</xsd:Description>
+									</xsd:documentation>
+								</xsd:annotation>
+							</xsd:element>
+						</xsd:choice>
+						<xsd:element name="EmailAddressTxt" type="EmailAddressType" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<xsd:Description>Email Address</xsd:Description>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+
+			<!-- Online Filer Information -->
+			<xsd:element name="OnlineFilerInformation" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<xsd:Description>Online Filer Information</xsd:Description>
+					</xsd:documentation>
+				</xsd:annotation>
+				<xsd:complexType>
+					<xsd:sequence>
+						<!-- Choice between Routing Transit Number or Check -->
+						<xsd:choice minOccurs="0">
+							<!-- Routing Transit Number -->
+							<xsd:element name="RoutingTransitNum" type="RoutingTransitNumberType">
+								<xsd:annotation>
+									<xsd:documentation>
+										<xsd:Description>Routing Transit Number</xsd:Description>
+									</xsd:documentation>
+								</xsd:annotation>
+							</xsd:element>
+							<!-- Check -->
+							<xsd:element name="CheckCd" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>
+										<xsd:Description>Check</xsd:Description>
+									</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="TextType">
+										<xsd:enumeration value="Check"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+						</xsd:choice>
+			
+						<!-- Depositor Account Number -->
+						<xsd:element name="DepositorAccountNum" type="BankAccountNumberType" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<xsd:Description>Depositor Account Number</xsd:Description>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+
+			<!-- Additional Filer Information -->
+			<xsd:element name="AdditionalFilerInformation" minOccurs="0">
+				<xsd:complexType>
+					<xsd:sequence>
+						<!-- Data captured at the time of submission or account creation -->
+						<xsd:element name="AtSubmissionCreationGrp" minOccurs="0">
+							<xsd:complexType>
+								<xsd:sequence>
+									<!-- Routing Transit Number -->
+									<xsd:element name="RoutingTransitNum" type="RoutingTransitNumberType" minOccurs="0"/>
+									<!-- Depositor Account Number -->
+									<xsd:element name="DepositorAccountNum" type="BankAccountNumberType" minOccurs="0"/>
+									<!-- Timestamp When Bank Account Data Is Captured -->
+									<xsd:element name="BankAccountDataCapturedTs" type="TimestampType" minOccurs="0"/>
+									<!-- Cell Phone Number -->
+									<xsd:choice minOccurs="0">
+										<xsd:element name="CellPhoneNum" type="PhoneNumberType" minOccurs="0"/>
+										<xsd:element name="ForeignCellPhoneNum" type="ForeignPhoneNumberType" minOccurs="0"/>
+									</xsd:choice>
+									<!-- Email Address -->
+									<xsd:element name="EmailAddressTxt" type="EmailAddressType" minOccurs="0"/>
+								</xsd:sequence>
+							</xsd:complexType>
+						</xsd:element>
+						<!-- Primary Taxpayer Driver's License or State Identification -->
+						<xsd:element name="PrimDrvrLcnsOrStateIssdIdGrp" type="DrvrLcnsOrStateIssdIdGrpType" minOccurs="0"/>
+						<!-- Data captured at the time of submission filing -->
+						<xsd:element name="AtSubmissionFilingGrp" minOccurs="0">
+							<xsd:complexType>
+								<xsd:sequence>
+									<!-- Refund Disbursement Code -->
+									<xsd:element name="RefundDisbursementCd" minOccurs="0">
+										<xsd:simpleType>
+											<xsd:restriction base="TextType">
+												<xsd:enumeration value="0"/>
+												<xsd:enumeration value="1"/>
+												<xsd:enumeration value="2"/>
+												<xsd:enumeration value="3"/>
+												<xsd:enumeration value="4"/>
+											</xsd:restriction>
+										</xsd:simpleType>
+									</xsd:element>
+									<!-- Routing Transit Number -->
+									<xsd:element name="RoutingTransitNum" type="RoutingTransitNumberType" minOccurs="0"/>
+									<!-- Depositor Account Number -->
+									<xsd:element name="DepositorAccountNum" type="BankAccountNumberType" minOccurs="0"/>
+									<!-- Refund Product Election Indicator -->
+									<xsd:element name="RefundProductElectionInd" type="BooleanType" minOccurs="0"/>
+									<!-- Refund Product CIP Code -->
+									<xsd:element name="RefundProductCIPCd" minOccurs="0">
+										<xsd:simpleType>
+											<xsd:restriction base="TextType">
+												<xsd:enumeration value="0"/>
+												<xsd:enumeration value="1"/>
+												<xsd:enumeration value="2"/>
+												<xsd:enumeration value="3"/>
+												<xsd:enumeration value="4"/>
+												<xsd:enumeration value="5"/>
+											</xsd:restriction>
+										</xsd:simpleType>
+									</xsd:element>
+									<!-- Cell Phone Number -->
+									<xsd:choice minOccurs="0">
+										<xsd:element name="CellPhoneNum" type="PhoneNumberType" minOccurs="0"/>
+										<xsd:element name="ForeignCellPhoneNum" type="ForeignPhoneNumberType" minOccurs="0"/>
+									</xsd:choice>
+									<!-- Email Address -->
+									<xsd:element name="EmailAddressTxt" type="EmailAddressType" minOccurs="0"/>
+								</xsd:sequence>
+							</xsd:complexType>
+						</xsd:element>
+						<!-- Trusted Customer Group -->
+						<xsd:element name="TrustedCustomerGrp" minOccurs="0">
+							<xsd:complexType>
+								<xsd:sequence>
+									<!-- Trusted Customer Code -->
+									<xsd:element name="TrustedCustomerCd" minOccurs="0">
+										<xsd:simpleType>
+											<xsd:restriction base="TextType">
+												<xsd:enumeration value="0"/>
+												<xsd:enumeration value="1"/>
+												<xsd:enumeration value="2"/>
+												<xsd:enumeration value="3"/>
+											</xsd:restriction>
+										</xsd:simpleType>
+									</xsd:element>
+									<!-- Out Of Bounds Security Verification Code -->
+									<xsd:element name="OOBSecurityVerificationCd" minOccurs="0">
+										<xsd:simpleType>
+											<xsd:restriction base="TextType">
+												<xsd:enumeration value="00"/>
+												<xsd:enumeration value="01"/>
+												<xsd:enumeration value="02"/>
+												<xsd:enumeration value="03"/>
+												<xsd:enumeration value="04"/>
+												<xsd:enumeration value="05"/>
+												<xsd:enumeration value="06"/>
+												<xsd:enumeration value="07"/>
+												<xsd:enumeration value="08"/>
+												<xsd:enumeration value="09"/>
+												<xsd:enumeration value="10"/>
+												<xsd:enumeration value="11"/>
+												<xsd:enumeration value="12"/>
+											</xsd:restriction>
+										</xsd:simpleType>
+									</xsd:element>
+									<!-- Last Submission Required Out Of Bounds Code -->
+									<xsd:element name="LastSubmissionRqrOOBCd" minOccurs="0">
+										<xsd:simpleType>
+											<xsd:restriction base="TextType">
+												<xsd:enumeration value="0"/>
+												<xsd:enumeration value="1"/>
+											</xsd:restriction>
+										</xsd:simpleType>
+									</xsd:element>
+									<!-- Authentication Summary Code -->
+									<xsd:element name="AuthenticationSummaryCd" minOccurs="0" maxOccurs="2">
+										<xsd:simpleType>
+											<xsd:restriction base="TextType">
+												<xsd:enumeration value="IPL0"/>
+												<xsd:enumeration value="IPL1"/>
+												<xsd:enumeration value="IPL2P"/>
+												<xsd:enumeration value="IPL2R"/>
+												<xsd:enumeration value="IPL3P"/>
+												<xsd:enumeration value="IPL3R"/>
+												<xsd:enumeration value="IPL4"/>
+												<xsd:enumeration value="TAL0"/>
+												<xsd:enumeration value="TAL1"/>
+												<xsd:enumeration value="TAL2"/>
+												<xsd:enumeration value="TAL3"/>
+												<xsd:enumeration value="TAL4"/>
+											</xsd:restriction>
+										</xsd:simpleType>
+									</xsd:element>
+									<!-- Payment Declined Reason Code -->
+									<xsd:element name="PaymentDeclinedReasonCd" minOccurs="0">
+										<xsd:simpleType>
+											<xsd:restriction base="TextType">
+												<xsd:enumeration value="0"/>
+												<xsd:enumeration value="1"/>
+												<xsd:enumeration value="2"/>
+											</xsd:restriction>
+										</xsd:simpleType>
+									</xsd:element>
+									<!-- Change indictor for the user name in the returning customer profile -->
+									<xsd:element name="ProfileUserNameChangeInd" type="CheckboxType" minOccurs="0"/>
+									<!-- Change indictor for the password in the returning customer profile -->
+									<xsd:element name="ProfilePasswordChangeInd" type="CheckboxType" minOccurs="0"/>
+									<!-- Change indictor for the email address in the returning customer profile -->
+									<xsd:element name="ProfileEmailAddressChangeInd" type="CheckboxType" minOccurs="0"/>
+									<!-- Change indictor for the cell phone number in the returning customer profile -->
+									<xsd:element name="ProfileCellPhoneNumChangeInd" type="CheckboxType" minOccurs="0"/>
+								</xsd:sequence>
+							</xsd:complexType>
+						</xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+
+			<!-- Filing Security Information -->
+			<xsd:element name="FilingSecurityInformation" minOccurs="0">
+				<xsd:complexType>
+					<xsd:sequence>
+						<!-- Data captured at the time of submission or account creation -->
+						<xsd:element name="AtSubmissionCreationGrp" minOccurs="0">
+							<xsd:complexType>
+								<xsd:sequence>
+									<!-- IP Address -->
+									<xsd:element name="IPAddress" type="IPAddressType" minOccurs="0"/>
+									<!-- IP Port Number -->
+									<xsd:element name="IPPortNum" minOccurs="0">
+										<xsd:simpleType>
+											<xsd:restriction base="NumericType">
+												<xsd:maxLength value="5"/>
+											</xsd:restriction>
+										</xsd:simpleType>
+									</xsd:element>
+									<!-- Common Elements for Device Information -->
+									<xsd:group ref="DeviceInfoCommonElements"/>
+								</xsd:sequence>
+							</xsd:complexType>
+						</xsd:element>
+						<!-- Data captured at the time of submission filing -->
+						<xsd:element name="AtSubmissionFilingGrp" minOccurs="0">
+							<xsd:complexType>
+								<xsd:sequence>
+									<!-- IP Address -->
+									<xsd:element name="IPAddress" type="IPAddressType" minOccurs="0"/>
+									<!-- Final IP Port Number -->
+									<xsd:element name="FinalIPPortNum" minOccurs="0">
+										<xsd:simpleType>
+											<xsd:restriction base="NumericType">
+												<xsd:maxLength value="5"/>
+											</xsd:restriction>
+										</xsd:simpleType>
+									</xsd:element>
+									<!-- Common Elements for Device Information -->
+									<xsd:group ref="DeviceInfoCommonElements"/>
+								</xsd:sequence>
+							</xsd:complexType>
+						</xsd:element>
+						<!-- Federal Original Submission Identification -->
+						<xsd:element name="FederalOriginalSubmissionId" type="SubmissionIdType" minOccurs="0"/>
+						<!-- Federal Original Submission Identification Date -->
+						<xsd:element name="FederalOriginalSubmissionIdDt" type="DateType" minOccurs="0"/>
+						<!-- Filing License Type Code -->
+						<xsd:element name="FilingLicenseTypeCd" minOccurs="0">
+							<xsd:simpleType>
+								<xsd:restriction base="TextType">
+									<xsd:enumeration value="I"/>
+									<xsd:enumeration value="P"/>
+									<xsd:enumeration value="O"/>
+								</xsd:restriction>
+							</xsd:simpleType>
+						</xsd:element>
+						<!-- Total Preparation Submission Time Span -->
+						<xsd:element name="TotalPreparationSubmissionTs" minOccurs="0">
+							<xsd:simpleType>
+								<xsd:restriction base="TextType">
+									<xsd:pattern value="[0-9]{1,6}"/>
+								</xsd:restriction>
+							</xsd:simpleType>
+						</xsd:element>
+						<!-- Total Active Time Preparation Submission Time Span -->
+						<xsd:element name="TotActiveTimePrepSubmissionTs" minOccurs="0">
+							<xsd:simpleType>
+								<xsd:restriction base="TextType">
+									<xsd:pattern value="[0-9]{1,6}"/>
+								</xsd:restriction>
+							</xsd:simpleType>
+						</xsd:element>
+						<!-- Authentication Review Code -->
+						<xsd:element name="AuthenticationReviewCd" minOccurs="0" maxOccurs="8">
+							<xsd:simpleType>
+								<xsd:restriction base="TextType">
+									<xsd:enumeration value="0"/>
+									<xsd:enumeration value="1"/>
+									<xsd:enumeration value="2"/>
+									<xsd:enumeration value="3"/>
+									<xsd:enumeration value="4"/>
+									<xsd:enumeration value="5"/>
+									<xsd:enumeration value="6"/>
+									<xsd:enumeration value="7"/>
+								</xsd:restriction>
+							</xsd:simpleType>
+						</xsd:element>
+						<!-- Vendor Control Number -->
+						<xsd:element name="VendorControlNum" minOccurs="0">
+							<xsd:simpleType>
+								<xsd:restriction base="AlphaNumericType">
+									<xsd:maxLength value="16"/>
+								</xsd:restriction>
+							</xsd:simpleType>
+						</xsd:element>
+						<!-- Authentication Review Text -->
+						<xsd:element name="AuthenticationReviewTxt" type="LineExplanationType" minOccurs="0" maxOccurs="8"/>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+
+			<!-- Paper Document Indicator - Form 8283 -->
+			<xsd:element name="Form8283PaperDocumentInd" type="CheckboxType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<xsd:Description>Form 8283 Paper Document Ind</xsd:Description>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			
+			<!-- Paper Document Indicator  - Form 8332  -->
+			<xsd:element name="Form8332PaperDocumentInd" type="CheckboxType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<xsd:Description>Form 8332 Paper Document Ind</xsd:Description>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			
+			<!-- Paper Document Indicator  - Form 3468  -->
+			<xsd:element name="Form3468PaperDocumentInd" type="CheckboxType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<xsd:Description>Form 3468 Paper Document Ind</xsd:Description>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			
+			<!-- Paper Document Indicator  - Form 3115  -->
+			<xsd:element name="Form3115PaperDocumentInd" type="CheckboxType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<xsd:Description>Form 3115 Paper Document Ind</xsd:Description>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			
+			<!-- Paper Document Indicator  - Form 1098C  -->
+			<xsd:element name="Form1098CPaperDocumentInd" type="CheckboxType" minOccurs="0">					
+				<xsd:annotation>
+					<xsd:documentation>
+						<xsd:Description>Form 1098C Paper Document Ind</xsd:Description>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Paper Document Indicator  - Form 8885  -->
+			<xsd:element name="Form8885PaperDocumentInd" type="CheckboxType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<xsd:Description>Form 8885 Paper Document Ind</xsd:Description>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			
+			<!-- Paper Document Indicator  - Form 8864  -->
+			<xsd:element name="Form8864PaperDocumentInd" type="CheckboxType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<xsd:Description>Form 8864 Paper Document Ind</xsd:Description>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			
+			<!-- Paper Document Indicator  - Form 4136  -->
+			<xsd:element name="Form4136PaperDocumentInd" type="CheckboxType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<xsd:Description>Form 4136 Paper Document Ind</xsd:Description>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			
+			<!-- Paper Document Indicator - Power of Attorney -->
+			<xsd:element name="POAPaperDocumentInd" type="CheckboxType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<xsd:Description>Power of Attorney Paper Document Ind</xsd:Description>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Paper Document Indicator  - Form 8949  -->
+			<xsd:element name="Form8949PaperDocumentInd" type="CheckboxType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<xsd:Description>Form 8949 Paper Document Indicator</xsd:Description>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			
+		</xsd:sequence>
+		
+		<!-- Binary Attachment Count -->
+		<xsd:attribute name="binaryAttachmentCnt" type="IntegerNNType" use="required">
+			<xsd:annotation>
+				<xsd:documentation>
+				<xsd:Description>The number of binary attachments in the return</xsd:Description>
+				</xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+		
+	</xsd:complexType>
+
+	<!-- Driver's License or State Identification Group Type -->
+	<xsd:complexType name="DrvrLcnsOrStateIssdIdGrpType">
+		<xsd:sequence>
+
+			<!-- Driver's License or State Identification Number -->
+			<xsd:element name="DrvrLcnsOrStateIssdIdNum" minOccurs="0">
+				<xsd:simpleType>
+					<xsd:restriction base="TextType">
+						<xsd:maxLength value="40"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+
+			<!-- Driver's License or State Identification State Code -->
+			<xsd:element name="DrvrLcnsOrStateIssdIdStCd" type="StateType" minOccurs="0"/>
+
+			<!-- Driver's License or State Identification Expiration Date -->
+			<xsd:element name="DrvrLcnsOrStateIssdIdExprDt" type="DateType" minOccurs="0"/>
+
+			<!-- Driver's License or State Identification Issue Date -->
+			<xsd:element name="DrvrLcnsOrStateIssdIdIssDt" type="DateType" minOccurs="0"/>
+
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<!-- Common Elements for Device Information -->
+	<xsd:group name="DeviceInfoCommonElements">
+		<xsd:sequence>
+
+			<!-- Device Identification -->
+			<xsd:element name="DeviceId" type="DeviceIdType" minOccurs="0"/>
+
+			<!-- Device Type Code -->
+			<xsd:element name="DeviceTypeCd" minOccurs="0">
+				<xsd:simpleType>
+					<xsd:restriction base="TextType">
+						<xsd:enumeration value="0"/>
+						<xsd:enumeration value="1"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+
+			<!-- The following five elements are used for online products only -->
+			<!-- User Agent Text -->
+			<xsd:element name="UserAgentTxt" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>User Agent Text - used for online products only</xsd:documentation>
+				</xsd:annotation>
+				<xsd:simpleType>
+					<xsd:restriction base="TextType">
+						<xsd:maxLength value="150"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<!-- Browser Language Text -->
+			<xsd:element name="BrowserLanguageTxt" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>Browser Language Text - used for online products only</xsd:documentation>
+				</xsd:annotation>
+				<xsd:simpleType>
+					<xsd:restriction base="TextType">
+						<xsd:maxLength value="5"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<!-- Platform Text -->
+			<xsd:element name="PlatformTxt" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>Platform Text - used for online products only</xsd:documentation>
+				</xsd:annotation>
+				<xsd:simpleType>
+					<xsd:restriction base="TextType">
+						<xsd:maxLength value="10"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<!-- Time Zone Offset Number -->
+			<xsd:element name="TimeZoneOffsetNum" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>Time Zone Offset Number - used for online products only</xsd:documentation>
+				</xsd:annotation>
+				<xsd:simpleType>
+					<xsd:restriction base="TextType">
+						<xsd:pattern value="([-|+][0-9]{3})"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<!-- System Timestamp -->
+			<xsd:element name="SystemTs" type="TimestampType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>System Timestamp - used for online products only</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+		</xsd:sequence>
+	</xsd:group>
+
+</xsd:schema>

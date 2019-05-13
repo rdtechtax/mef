@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.irs.gov/efile" targetNamespace="http://www.irs.gov/efile" elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.0">
+
+	<xsd:annotation>
+
+		<xsd:documentation>
+
+			<Description>IRS e-file Schema - Section 942(a)(3) Schedule</Description>
+
+			<TaxYear>2018</TaxYear>
+
+			<MaturityLevel>Final Release</MaturityLevel>
+
+			<ReleaseDate>February 13, 2019</ReleaseDate>
+
+		</xsd:documentation>
+
+	</xsd:annotation>
+
+
+
+	<xsd:include schemaLocation="../../../Common/efileTypes.xsd"/>
+
+
+
+	<!-- =================================================================== -->
+
+	<!-- ================ Section 942(a)(3) Schedule ============================ -->
+
+	<!-- =================================================================== -->
+
+
+
+	<xsd:element name="Section942a3Schedule">
+
+		<xsd:annotation>
+
+			<xsd:documentation>Section 942(a)(3) Schedule</xsd:documentation>
+
+		</xsd:annotation>
+
+		<xsd:complexType>
+
+			<xsd:complexContent>
+
+				<xsd:extension base="Section942a3ScheduleType">
+
+					<xsd:attributeGroup ref="DocumentAttributes">
+
+						<xsd:annotation>
+
+							<xsd:documentation>Common return document attributes</xsd:documentation>
+
+						</xsd:annotation>
+
+					</xsd:attributeGroup>
+
+					<xsd:attribute name="documentName" type="xsd:string" fixed="Section942a3Schedule">
+
+						<xsd:annotation>
+
+							<xsd:documentation>IRS internal use only. To avoid error in the return, do not include the attribute name or value.</xsd:documentation>
+
+						</xsd:annotation>
+
+					</xsd:attribute>
+
+				</xsd:extension>
+
+			</xsd:complexContent>
+
+		</xsd:complexType>
+
+	</xsd:element>
+
+
+
+	<xsd:complexType name="Section942a3ScheduleType">
+
+		<xsd:annotation>
+
+			<xsd:documentation>Content model for Section 942(a)(3) Schedule</xsd:documentation>
+
+		</xsd:annotation>
+
+		<xsd:sequence>
+
+			
+
+			<xsd:element name="TransactionsBeingOmtInfoGrp" minOccurs="0" maxOccurs="unbounded">
+
+				<xsd:complexType>
+
+					<xsd:sequence>
+
+					
+
+						<!-- Type Of Gross Receipt Excluded From Foreign Trading Gross Receipts -->
+
+						<xsd:element name="TypeOfGrossReceiptExcludedTxt" type="LineExplanationType" minOccurs="0">
+
+							<xsd:annotation>
+
+								<xsd:documentation>
+
+									<Description>Type of gross receipt excluded from foreign trading income</Description>
+
+								</xsd:documentation>
+
+							</xsd:annotation>
+
+						</xsd:element>
+
+			
+
+						<!-- Amount Of Gross Receipt Excluded From Foreign Trading Gross Receipts -->
+
+						<xsd:element name="GrossReceiptExcludedAmt" type="USAmountType" minOccurs="0">
+
+							<xsd:annotation>
+
+								<xsd:documentation>
+
+									<Description>Amount of gross receipt excluded from foreign trading income</Description>
+
+								</xsd:documentation>
+
+							</xsd:annotation>
+
+						</xsd:element>
+
+												
+
+					</xsd:sequence>
+
+				</xsd:complexType>
+
+			</xsd:element>
+
+			
+
+			<!-- Total Of Gross Receipts -->
+
+			<xsd:element name="TotalOfGrossReceiptsExcldAmt" type="USAmountType" minOccurs="0">
+
+				<xsd:annotation>
+
+					<xsd:documentation>
+
+						<Description>Total amount of gross receipts excluded from foreign trading income</Description>
+
+					</xsd:documentation>
+
+				</xsd:annotation>
+
+			</xsd:element>
+
+			
+
+		</xsd:sequence>
+
+	</xsd:complexType>
+
+</xsd:schema>

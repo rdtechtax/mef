@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns="http://www.irs.gov/efile" xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.irs.gov/efile" elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.0">
+	<xsd:annotation>
+		<xsd:documentation>
+			<Description>IRS e-file Individual Income Tax Schema - Change By Divorce In IRA Basis Statement</Description>
+			<Purpose>TY 2012 Form/Per instructions, Page 7 and 8 - Increase or decrease the amount on line 7 (line 22 and Line 24 by any basis transferred or received incident to divorce.</Purpose>
+			<TaxYear>2018</TaxYear>
+			<MaturityLevel>Final Release</MaturityLevel>
+			<ReleaseDate>February 13, 2019</ReleaseDate>
+		</xsd:documentation>
+	</xsd:annotation>
+	<xsd:include schemaLocation="../../../Common/efileTypes.xsd"/>
+
+	<!-- ================================================================== -->
+	<!-- ============ Change By Divorce In IRA Basis Statement ============ -->
+	<!-- ================================================================== -->
+
+	<xsd:element name="ChangeByDivorceInIRABasisStmt">
+		<xsd:annotation>
+			<xsd:documentation>Change By Divorce In Roth IRA Basis Statement</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:complexContent>
+				<xsd:extension base="ChgByDivorceInIRABasisStmtType">
+					<xsd:attributeGroup ref="DocumentAttributes">
+						<xsd:annotation>
+							<xsd:documentation>Common return document attributes</xsd:documentation>
+						</xsd:annotation>
+					</xsd:attributeGroup>
+					<xsd:attribute name="documentName" type="StringType" fixed="ChangeByDivorceInIRABasisStatement">
+						<xsd:annotation>
+							<xsd:documentation>IRS internal use only. To avoid error in the return, do not include the attribute name or value.</xsd:documentation>
+						</xsd:annotation>
+					</xsd:attribute>
+				</xsd:extension>
+			</xsd:complexContent>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:complexType name="ChgByDivorceInIRABasisStmtType">
+		<xsd:annotation>
+			<xsd:documentation>Content model for Change By Divorce In IRA Basis Statement</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="SpouseSSN" type="SSNType" minOccurs="0"/>
+			<xsd:element name="SpouseNm" type="NameLine1Type" minOccurs="0"/>
+			<xsd:element name="ExplanationTxt" type="ExplanationType" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:schema>

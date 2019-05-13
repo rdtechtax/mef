@@ -1,0 +1,448 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.irs.gov/efile" targetNamespace="http://www.irs.gov/efile" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xsd:annotation>
+		<xsd:documentation>
+			<Description>IRS e-file Individual Income Tax Schema - Information To Claim Certain Credits After Disallowance</Description>
+			<TaxYear>2018</TaxYear>
+			<MaturityLevel>Final Release</MaturityLevel>
+			<ReleaseDate>February 13, 2019</ReleaseDate>
+		</xsd:documentation>
+	</xsd:annotation>
+	<xsd:include schemaLocation="../../../Common/efileTypes.xsd"/>
+	<!-- =============================================================== -->
+	<!-- ======================  IRS FORM 8862 ============================ -->
+	<!-- =============================================================== -->
+	<xsd:element name="IRS8862">
+		<xsd:annotation>
+			<xsd:documentation>IRS FORM 8862</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:complexContent>
+				<xsd:extension base="IRS8862Type">
+					<xsd:attributeGroup ref="DocumentAttributes">
+						<xsd:annotation>
+							<xsd:documentation>Common return document attributes</xsd:documentation>
+						</xsd:annotation>
+					</xsd:attributeGroup>
+					<xsd:attribute name="documentName" type="xsd:string" fixed="IRS8862">
+						<xsd:annotation>
+							<xsd:documentation>IRS internal use only. To avoid error in the return, do not include the attribute name or value.</xsd:documentation>
+						</xsd:annotation>
+					</xsd:attribute>
+				</xsd:extension>
+			</xsd:complexContent>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:complexType name="IRS8862Type">
+		<xsd:annotation>
+			<xsd:documentation>Content model for FORM 8862</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<!-- ======================== Part I - All Filers ======================-->
+			<!--  Part 1 question 1 -->
+			<xsd:element name="TaxYr" type="YearType">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Year filing form</Description>
+						<LineNumber>Part I 1</LineNumber>
+						<ELFFieldNumber>0010</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!--  Indicator for EIC Claimed -->
+			<xsd:element name="EICClaimedInd" type="CheckboxType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Indicator for EIC Claimed</Description>
+						<LineNumber>Part I 2</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!--  Indicator for Child Tax Credit, Additional Child Tax Credit and Other Dependent Credit Claimed -->
+			<xsd:element name="CTCACTCODCClaimedInd" type="CheckboxType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Indicator for Child Tax Credit, Additional Child Tax Credit and Other Dependent Credit Claimed</Description>
+						<LineNumber>Part I 2</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!--  Indicator for American Opportunity Tax Credit Claimed -->
+			<xsd:element name="AOTCClaimedInd" type="CheckboxType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Indicator for American Opportunity Tax Credit Claimed</Description>
+						<LineNumber>Part I 2</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- ======================== Part II - Earned Income Credit ======================-->
+			<!--  EIC Elig Clm Incm Incorrect Rpt Ind -->
+			<xsd:element name="EICEligClmIncmIncorrectRptInd" type="BooleanType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>EIC Elig Clm Incm Incorrect Rpt Ind</Description>
+						<LineNumber>Part II 3</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!--  EIC Elig Clm Qlfy Chld Of Other Ind -->
+			<xsd:element name="EICEligClmQlfyChldOfOtherInd" type="BooleanType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>EIC Elig Clm Qlfy Chld Of Other Ind</Description>
+						<LineNumber>Part II 4</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- ======================== Section A: Filers With a Qualifying Child or Children ======================-->
+			<!--  Qualifying Child Indicator -->
+			<xsd:element name="QualifyingChildInd" type="BooleanType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Qualifying Child Indicator</Description>
+						<LineNumber>Part II Section A 6</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>	
+			<!--  Filer With Qualifying Child Group -->
+			<xsd:element name="FilerWithQualifyingChildGrp" minOccurs="0" maxOccurs="3">
+				<xsd:complexType>
+					<xsd:sequence>
+						<!-- Child First And Last Name -->
+						<xsd:element name="ChildFirstAndLastName" type="PersonFullNameType">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Child First And Last Name</Description>
+									<LineNumber>Part II Section A 5a, 5b, 5c</LineNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						<!-- Live In US Day Count -->
+						<xsd:element name="LiveInUSDayCnt" type="NumberOfDaysType" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Live In US Day Count</Description>
+									<LineNumber>Part II Section A 7(child 1), 7(child 2), 7(child 3)</LineNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						<!-- Birth Month Day Date -->
+						<xsd:element name="BirthMonthDayDt" type="MonthDayType" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Birth Month Day Date</Description>
+									<LineNumber>Part II Section A 8(child 1), 8(child 2), 8(child 3)</LineNumber>
+									<ELFFieldNumber>0082 0092</ELFFieldNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						<!-- Death Month Day Date -->
+						<xsd:element name="DeathMonthDayDt" type="MonthDayType" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Death Month Day Date</Description>
+									<LineNumber>Part II Section A 8(child 1), 8(child 2), 8(child 3)</LineNumber>
+									<ELFFieldNumber>0084 0094</ELFFieldNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<!-- ======================== Section B: Filers Without a Qualifying Child or Children ======================-->
+			<!-- Primary No Qualifying Child Group -->
+			<xsd:element name="PrimaryNoQualifyingChildGrp" type="NoQualifyingChildGrpType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Primary No Qualifying Child Group</Description>
+						<LineNumber>Part II Section B</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Spouse No Qualifying Child Group -->
+			<xsd:element name="SpouseNoQualifyingChildGrp" type="NoQualifyingChildGrpType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Spouse No Qualifying Child Group</Description>
+						<LineNumber>Part II Section B</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- ======================== Part III: Child Tax Credit/Additional Child Tax Credit/Credit for Other Dependent  ======================-->
+			<!-- Child Tax Credit and Additional Child Tax Credit Information Group -->
+			<xsd:element name="CTCACTCChildInformationGrp" minOccurs="0" maxOccurs="15">
+				<xsd:complexType>
+					<xsd:sequence>
+						<!-- Child First And Last Name -->
+						<xsd:element name="ChildFirstAndLastName" type="PersonFullNameType">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Child First And Last Name</Description>
+									<LineNumber>Part III 12a, 12b, 12c, 12d</LineNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						<!-- Live With Child Over Half Year Indicator -->
+						<xsd:element name="LiveWithChildOverHalfYearInd" type="BooleanType">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Live With Child Over Half Year Indicator</Description>
+									<LineNumber>Part III 14</LineNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>						
+						<!-- Qualifying Child Indicator -->
+						<xsd:element name="QualifyingChildInd" type="BooleanType">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Qualifying Child Indicator</Description>
+									<LineNumber>Part III 15</LineNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						<!-- Dependent Indicator -->
+						<xsd:element name="DependentInd" type="BooleanType">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Dependent Indicator</Description>
+									<LineNumber>Part III 16 (Child1) (Child 2) (Child 3) (Child 4)</LineNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						<!-- US Citizen or National Indicator -->
+						<xsd:element name="USCitizenOrNationalInd" type="BooleanType">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>US Citizen or National Indicator</Description>
+									<LineNumber>Part III 17  (Other Dependent 1) (Other Dependent 2) (Other Dependent 3) (Other Dependent 4)</LineNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>	
+			<xsd:element name="ODCPersonInformationGrp" minOccurs="0" maxOccurs="15">
+				<xsd:complexType>
+					<xsd:sequence>
+						<!-- Person Full Name -->
+						<xsd:element name="PersonFullName" type="PersonFullNameType">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Person Full Name</Description>
+									<LineNumber>Part III 13a, 13b, 13c, 13d</LineNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						<!-- Dependent Indicator -->
+						<xsd:element name="DependentInd" type="BooleanType">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Dependent Indicator</Description>
+									<LineNumber>Part III 16 (Child1) (Child 2) (Child 3) (Child 4)</LineNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						<!-- US Citizen or National Indicator -->
+						<xsd:element name="USCitizenOrNationalInd" type="BooleanType">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>US Citizen or National Indicator</Description>
+									<LineNumber>Part III 17  (Other Dependent 1) (Other Dependent 2) (Other Dependent 3) (Other Dependent 4)</LineNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>	
+			<!-- ======================== Part IV: American Opportunity Tax Credit ======================-->
+			<!-- American Opportunity Tax Credit Student Information Group -->
+			<xsd:element name="AOTCStudentInformationGrp" minOccurs="0" maxOccurs="25">
+				<xsd:complexType>
+					<xsd:sequence>
+						<!-- Student Name -->
+						<xsd:element name="StudentName" type="PersonFullNameType">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Student Name</Description>
+									<LineNumber>Part IV 18a, 18b, 18c</LineNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						<!-- Eligible Student Indicator -->
+						<xsd:element name="EligibleStudentInd" type="BooleanType">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Eligible Student Indicator</Description>
+									<LineNumber>Part IV 19a</LineNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						<!-- Prior Year Credit Claimed Indicator -->
+						<xsd:element name="PriorYearCreditClaimedInd" type="BooleanType" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Prior Year Credit Claimed Indicator</Description>
+									<LineNumber>Part IV 19b</LineNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>	
+			<!-- ======================== Part V: Qualifying Child of More Than One Person ======================-->
+			<!-- Live With Other Person Indicator -->
+			<xsd:element name="LiveWithOtherPersonInd" type="BooleanType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Live With Other Person Indicator</Description>
+						<LineNumber>Part V 22</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Qualifying Child of More Than One Person Group -->
+			<xsd:element name="QlfyChildMoreThan1PersonGrp" minOccurs="0" maxOccurs="15">
+				<xsd:complexType>
+					<xsd:sequence>
+						<!-- Child First And Last Name -->
+						<xsd:element name="ChildFirstAndLastName" type="PersonFullNameType">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Child First And Last Name</Description>
+									<LineNumber>Part V 20a, 20b, 20c, 20d</LineNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						<!-- Choice between Live with Child Address Group or Same Information Child 1 Indicator or Same Information Child 2 Indicator-->
+						<xsd:choice>
+							<!-- Live With Chld Address Group -->
+							<xsd:element name="LiveWithChildAddrGrp" maxOccurs="10">
+								<xsd:complexType>
+									<xsd:sequence>
+										<!-- Choice between US Address or Foreign Address-->
+										<xsd:choice>
+											<!-- US Address -->
+											<xsd:element name="USAddress" type="USAddressType">
+												<xsd:annotation>
+													<xsd:documentation>
+														<Description>US address</Description>
+														<LineNumber>Part V 21</LineNumber>
+													</xsd:documentation>
+												</xsd:annotation>
+											</xsd:element>
+											<!-- Foreign Address -->
+											<xsd:element name="ForeignAddress" type="ForeignAddressType">
+												<xsd:annotation>
+													<xsd:documentation>
+														<Description>Foreign address</Description>
+														<LineNumber>Part V 21</LineNumber>
+													</xsd:documentation>
+												</xsd:annotation>
+											</xsd:element>
+										</xsd:choice>
+									</xsd:sequence>
+								</xsd:complexType>
+							</xsd:element>
+							<!-- Same Information Child 1 Indicator -->
+							<xsd:element name="SameInformationChild1Ind" type="CheckboxType">
+								<xsd:annotation>
+									<xsd:documentation>
+										<Description>Same Information Child 1 Indicator</Description>
+										<LineNumber>Part V 21</LineNumber>
+									</xsd:documentation>
+								</xsd:annotation>
+							</xsd:element>
+						</xsd:choice>
+					
+						<!-- Other Person Live With Child Group -->
+						<xsd:element name="OtherPersonLiveWithChildGrp" minOccurs="0" maxOccurs="1">
+							<xsd:complexType>
+								<xsd:sequence>
+									<!-- Choice between Other Person Information Group or Same Information Child 1 Indicator or Same Information Child 2 Indicator-->
+									<xsd:choice>
+										<!-- Other Person Information Group -->
+										<xsd:element name="OtherPersonInformationGrp" maxOccurs="15">
+											<xsd:complexType>
+												<xsd:sequence>
+													<!-- Person Name -->
+													<xsd:element name="PersonNm" type="PersonNameType">
+														<xsd:annotation>
+															<xsd:documentation>
+																<Description>Person Name</Description>
+																<LineNumber>Part V 22</LineNumber>
+															</xsd:documentation>
+														</xsd:annotation>
+													</xsd:element>
+													<!-- Other Person Relation Description -->
+													<xsd:element name="RelationshipDescriptionTxt">
+														<xsd:annotation>
+															<xsd:documentation>
+																<Description>Other Person Relation Description</Description>
+																<LineNumber>Part V 22</LineNumber>
+															</xsd:documentation>
+														</xsd:annotation>
+														<xsd:simpleType>
+															<xsd:restriction base="TextType">
+																<xsd:maxLength value="11"/>
+															</xsd:restriction>
+														</xsd:simpleType>
+													</xsd:element>
+												</xsd:sequence>
+											</xsd:complexType>
+										</xsd:element>
+
+										<!-- Same Information Child 1 Ind -->
+										<xsd:element name="SameInformationChild1Ind" type="CheckboxType">
+											<xsd:annotation>
+												<xsd:documentation>
+													<Description>Same Information Child 1 Ind</Description>
+													<LineNumber>Part V 22</LineNumber>
+												</xsd:documentation>
+											</xsd:annotation>
+										</xsd:element>
+									</xsd:choice>
+								</xsd:sequence>
+							</xsd:complexType>
+						</xsd:element>	
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>					
+		</xsd:sequence>
+	</xsd:complexType>			
+	<!-- Local Type(s) -->	
+	<!-- No Qualifying Child Group Type -->
+	<xsd:complexType name="NoQualifyingChildGrpType">
+		<xsd:sequence>
+			<xsd:element name="MainHomeUSDayCnt" type="NumberOfDaysType">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Main Home US Day Count</Description>
+						<LineNumber>Part II Section B 9a 9b</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="AgeNum">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Age Number</Description>
+						<LineNumber>Part II Section B 10a 10b</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+				<xsd:simpleType>
+					<xsd:restriction base="IntegerNNType">
+						<xsd:totalDigits value="3"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element name="OtherPersonClaimDependentInd" type="BooleanType">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Other Person Claim Dependent Indicator</Description>
+						<LineNumber>Part II Section B 11a 11b</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>	
+	
+</xsd:schema>

@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.irs.gov/efile" targetNamespace="http://www.irs.gov/efile" elementFormDefault="qualified" attributeFormDefault="unqualified">
+
+	<xsd:annotation>
+		<xsd:documentation>
+			<Description>IRS e-file Individual Income Tax Schema - IRS 1310 Statement of Person Claiming Refund Due a Deceased Taxpayer</Description>
+			<TaxYear>2018</TaxYear>
+			<MaturityLevel>Final Release</MaturityLevel>
+			<ReleaseDate>February 13, 2019</ReleaseDate>
+		</xsd:documentation>
+	</xsd:annotation>
+	
+	<xsd:include schemaLocation="../../../Common/efileTypes.xsd"/>
+	
+	<!-- =============================================================== -->
+	<!-- ======================== IRS Form 1310 ======================== -->
+	<!-- =============================================================== -->
+
+	<xsd:element name="IRS1310">
+		<xsd:annotation>
+			<xsd:documentation>IRS Form 1310</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:complexContent>
+				<xsd:extension base="IRS1310Type">
+					<xsd:attributeGroup ref="DocumentAttributes">
+						<xsd:annotation>
+							<xsd:documentation>Common return document attributes</xsd:documentation>
+						</xsd:annotation>
+					</xsd:attributeGroup>
+					<xsd:attribute name="documentName" type="xsd:string" fixed="IRS1310">
+						<xsd:annotation>
+							<xsd:documentation>IRS internal use only. To avoid error in the return, do not include the attribute name or value.</xsd:documentation>
+						</xsd:annotation>
+					</xsd:attribute>
+				</xsd:extension>
+			</xsd:complexContent>
+		</xsd:complexType>
+	</xsd:element>
+
+	<xsd:complexType name="IRS1310Type">
+		<xsd:annotation>
+			<xsd:documentation>Content model for Form 1310</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+		
+			<!-- Tax Year for Refund -->
+			<xsd:element name="RefundDueTaxYr" type="YearType">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Tax year decedent was due a refund</Description>
+						<ELFFieldNumber>0010</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Decedent Name -->
+			<xsd:element name="DecedentNm" type="NameLine1Type" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Name of decedent</Description>
+						<ELFFieldNumber>0020</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Death Date -->
+			<xsd:element name="DeathDt" type="DateType">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Date of Death</Description>
+						<ELFFieldNumber>0030</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Decedent SSN -->
+			<xsd:element name="DecedentSSN" type="SSNType">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Decedent's social security number</Description>
+						<ELFFieldNumber>0040</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Person name control text -->
+			<xsd:element name="PersonNameControlTxt" type="PersonNameControlType">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Name Control of Person Claiming Refund</Description>
+						<ELFFieldNumber>0050</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Refund Claimant Name - Use "InCareOfNm" from the Return Header -->
+
+			<!-- Refund Claimant SSN -->
+			<xsd:element name="RefundClaimantSSN" type="SSNType">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Your Social Security Number</Description>
+						<ELFFieldNumber>0070</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:choice>
+				<!-- Refund Claimant Address -->
+				<xsd:element name="RefundClaimantUSAddress" type="USAddressType">
+					<xsd:annotation>
+						<xsd:documentation>
+							<Description>Home Address</Description>
+							<ELFFieldNumber>0110 0120 0130 0140 0150 0160</ELFFieldNumber>
+						</xsd:documentation>
+					</xsd:annotation>
+				</xsd:element>
+				<xsd:element name="RefundClaimantForeignAddress" type="ForeignAddressType">
+					<xsd:annotation>
+						<xsd:documentation>
+							<Description>Home Address</Description>
+						</xsd:documentation>
+					</xsd:annotation>
+				</xsd:element>
+			</xsd:choice>
+
+			<!-- Part I Check the Box that applies to you -->
+
+			<!-- Surviving Spouse -->
+			<!-- Line A Surviving Spouse Indicator is not used for e-file at this time
+			<xsd:element name="SurvivingSpouseInd" type="CheckboxType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Surviving Spouse Indicator</Description>
+						<LineNumber>A</LineNumber>
+						<ELFFieldNumber>0170</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			-->
+			<!-- Court appointed personal representative -->
+			<!-- Line B Court or Personal Representative Indicator is only used for 1040X and 843
+			<xsd:element name="CourtOrPersonalRepInd" type="CheckboxType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Court or Personal Representative Indicator</Description>
+						<LineNumber>B</LineNumber>
+						<ELFFieldNumber>0180</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			-->
+			<!-- Other Person Claiming Refund Indicator -->
+			<xsd:element name="OtherPersonClaimingRefundInd" type="CheckboxType">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Person other than A or B claiming refund</Description>
+						<LineNumber>C</LineNumber>
+						<ELFFieldNumber>0190</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Valid Proof Of Death Indicator -->
+			<xsd:element name="ValidProofOfDeathInd" type="CheckboxType">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Valid Proof Of Death Indicator</Description>
+						<LineNumber>C</LineNumber>
+						<ELFFieldNumber>0200</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Part II Complete this part only if you checked the box on line C above -->
+
+			<!-- Has Will? -->
+			<xsd:element name="DecedentHasWillInd" type="BooleanType">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Did the decedent leave a will</Description>
+						<LineNumber>1</LineNumber>
+						<ELFFieldNumber>0210 0220</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Court Appointed Personal Rep? -->
+			<xsd:element name="CourtAppointedRepInd" type="BooleanType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Has a court appointed a personal representative for the estate</Description>
+						<LineNumber>2a</LineNumber>
+						<ELFFieldNumber>0230 0240</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Will one be appointed? -->
+			<xsd:element name="RepresentativeToBeAppointedInd" type="BooleanType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Has a court appointed a personal representative for the estate</Description>
+						<LineNumber>2b</LineNumber>
+						<ELFFieldNumber>0250 0260</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- According to state laws? -->
+			<xsd:element name="PaymentAccordingToStateLawInd" type="BooleanType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>will you pay out the refund according to the laws of the state?</Description>
+						<LineNumber>3</LineNumber>
+						<ELFFieldNumber>0270 0280</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Part III Signature and Verification. All filers must complete this part -->
+
+			<!-- Signature -->
+			<xsd:element name="RefundClaimantSignatureDt" type="DateType">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Request Refund Signature</Description>
+						<ELFFieldNumber>0300</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			
+		</xsd:sequence>
+	</xsd:complexType>
+
+</xsd:schema>

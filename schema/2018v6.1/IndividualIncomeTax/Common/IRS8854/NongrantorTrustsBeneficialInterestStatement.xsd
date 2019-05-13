@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema targetNamespace="http://www.irs.gov/efile" xmlns="http://www.irs.gov/efile" xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.0">
+
+	<xsd:annotation>
+		<xsd:documentation>
+			<Description>IRS e-file U.S. Nonresident Alien Income Tax Schema - Nongrantor Trusts Beneficial Interest Statement</Description>
+			<Purpose>Optional Statement - List the total value of all assets held by nongrantor trusts in which you are considered to have a beneficial interest. You must attach a statement to Form 8854 that lists each trust separately. Include the EIN (if any) for each trust. Describe the assets and liabilities (using the categories on this balance sheet) from your interest in each trust.</Purpose>
+			<TaxYear>2018</TaxYear>
+			<MaturityLevel>Final Release</MaturityLevel>
+			<ReleaseDate>February 13, 2019</ReleaseDate>
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:include schemaLocation="../../../Common/efileTypes.xsd" />
+
+	<!-- ============================================================= -->
+	<!-- ====== Nongrantor Trusts Beneficial Interest Statement ====== -->
+	<!-- ============================================================= -->
+
+	<xsd:element name="NongrantorTrBeneficialIntStmt">
+		<xsd:annotation>
+			<xsd:documentation>Nongrantor Trusts Beneficial Interest Statement</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:complexContent>
+				<xsd:extension base="NongrantorTrBeneficialIntStmtType">
+					<xsd:attributeGroup ref="DocumentAttributes">
+						<xsd:annotation>
+							<xsd:documentation>Common return document attributes</xsd:documentation>
+						</xsd:annotation>
+					</xsd:attributeGroup>
+					<xsd:attribute name="documentName" type="TextType" fixed="NongrantorTrustsBeneficialInterestStatement">
+						<xsd:annotation>
+							<xsd:documentation>IRS internal use only. To avoid error in the return, do not include the attribute name or value.</xsd:documentation>
+						</xsd:annotation>
+					</xsd:attribute>
+				</xsd:extension>
+			</xsd:complexContent>
+		</xsd:complexType>
+	</xsd:element>
+
+	<xsd:complexType name="NongrantorTrBeneficialIntStmtType">
+		<xsd:annotation>
+			<xsd:documentation>Nongrantor Trusts Beneficial Interest Statement</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<!-- Nongrantor Trusts Beneficial Interest -->
+			<xsd:element name="NongrantorTrBeneficialIntGrp" minOccurs="0" maxOccurs="1000">
+				<xsd:complexType>
+					<xsd:sequence>
+						<!-- Trust EIN -->
+						<xsd:element name="TrustEIN" type="EINType" minOccurs="0"/>
+						<!-- Trust Name -->
+						<xsd:element name="TrustName" type="BusinessNameType"/>
+						<!-- Fair Market Value Amount -->
+						<xsd:element name="FairMarketValueAmt" type="USAmountType"/>
+						<!-- U.S. Adjusted Basis Amount -->
+						<xsd:element name="USAdjustedBasisAmt" type="USAmountType"/>
+						<!-- Gain Or Loss Amount -->
+						<xsd:element name="GainOrLossAmt" type="USAmountType"/>
+						<!-- Fair Market Value on Beginning Date Of U.S. Residency Amount -->
+						<xsd:element name="FMVBegngDtUSResAmt" type="USAmountType" minOccurs="0"/>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+
+</xsd:schema>

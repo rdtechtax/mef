@@ -1,0 +1,323 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.irs.gov/efile" targetNamespace="http://www.irs.gov/efile" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xsd:annotation>
+		<xsd:documentation>
+			<Description>IRS e-file Partnership Schema - IRS Form 8941</Description>
+			<TaxYear>2018</TaxYear>
+			<MaturityLevel>Final Release</MaturityLevel>
+			<ReleaseDate>February 13, 2019</ReleaseDate>
+		</xsd:documentation>
+	</xsd:annotation>
+	<xsd:include schemaLocation="../../../Common/efileTypes.xsd"/>
+	<!-- ================================================================== -->
+	<!-- ======================  IRS Form 8941 =============================== -->
+	<!-- ================================================================== -->
+	<xsd:element name="IRS8941">
+		<xsd:annotation>
+			<xsd:documentation>IRS Form 8941</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:complexContent>
+				<xsd:extension base="IRS8941Type">
+					<xsd:attributeGroup ref="DocumentAttributes">
+						<xsd:annotation>
+							<xsd:documentation>Common return document attributes</xsd:documentation>
+						</xsd:annotation>
+					</xsd:attributeGroup>
+					<xsd:attribute name="documentName" type="xsd:string" fixed="IRS8941">
+						<xsd:annotation>
+							<xsd:documentation>IRS internal use only. To avoid error in the return, do not include the attribute name or value.</xsd:documentation>
+						</xsd:annotation>
+					</xsd:attribute>
+				</xsd:extension>
+			</xsd:complexContent>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:complexType name="IRS8941Type">
+		<xsd:annotation>
+			<xsd:documentation>Content model for Form 8941</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:choice minOccurs="1" maxOccurs="1">
+				<!-- Person Name -->
+				<xsd:element name="PersonNm" type="PersonNameType" minOccurs="0" maxOccurs="1">
+					<xsd:annotation>
+						<xsd:documentation>
+							<Description>Person Name</Description>
+						</xsd:documentation>
+					</xsd:annotation>
+				</xsd:element>
+				<!-- Business Name -->
+				<xsd:element name="BusinessName" type="BusinessNameType" minOccurs="0" maxOccurs="1">
+					<xsd:annotation>
+						<xsd:documentation>
+							<Description>Business Name</Description>
+						</xsd:documentation>
+					</xsd:annotation>
+				</xsd:element>
+			</xsd:choice>
+			<xsd:choice minOccurs="1" maxOccurs="1">
+				<!-- SSN -->
+				<xsd:element name="SSN" type="SSNType" minOccurs="0" maxOccurs="1">
+					<xsd:annotation>
+						<xsd:documentation>
+							<Description>SSN</Description>
+						</xsd:documentation>
+					</xsd:annotation>
+				</xsd:element>
+				<!-- EIN -->
+				<xsd:element name="EIN" type="EINType" minOccurs="0" maxOccurs="1">
+					<xsd:annotation>
+						<xsd:documentation>
+							<Description>EIN</Description>
+						</xsd:documentation>
+					</xsd:annotation>
+				</xsd:element>
+			</xsd:choice>
+			<!-- Premiums paid for employee health coverage through SHOP  -->
+			<xsd:element name="SHOPInd" type="BooleanType" minOccurs="0" maxOccurs="1">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Did employer participate with SHOP exchange?</Description>
+						<lineNumber>Line A</lineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Name of Marketplace Identifier -->
+			<xsd:element name="SHOPIdentificationNum" type="ShortDescriptionType" minOccurs="0" maxOccurs="1">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Marketplace Identifier</Description>
+						<lineNumber>Line A</lineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Employment Taxes Report Employer EIN -->
+			<xsd:element name="EmplmnTaxesReportEmployerEIN" type="EINType" minOccurs="0" maxOccurs="1">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Employment Taxes Report Employer EIN</Description>
+						<lineNumber>Line B</lineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Prior Years of Shop Identification  -->
+			<xsd:element name="PriorYearSHOPInd" type="BooleanType" minOccurs="0" maxOccurs="1">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Did you file a Form 8941 two years ago and consecutively?</Description>
+						<lineNumber>Line C</lineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Small Employer HIP Individual Employed For Current Count -->
+			<xsd:element name="SmllEmplrHIPIndivEmpldForCrCnt" minOccurs="0" maxOccurs="1">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Small Employer HIP Individual Employed For Current Count</Description>
+						<lineNumber>Line 1</lineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+				<xsd:simpleType>
+					<xsd:restriction base="IntegerNNType">
+						<xsd:totalDigits value="4"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<!-- Small Employer HIP FTE Employed For Tax Year Count -->
+			<xsd:element name="SmllEmplrHIPFTEEmplForTaxYrCnt" minOccurs="0" maxOccurs="1">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Small Employer HIP FTE Employed For Tax Year Count</Description>
+						<lineNumber>Line 2</lineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+				<xsd:simpleType>
+					<xsd:restriction base="IntegerNNType">
+						<xsd:totalDigits value="4"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<!-- Average Annual Wages Paid For Tax Year Amount -->
+			<xsd:element name="AvgAnnualWagesPdForTxYrAmt" type="USAmountType" minOccurs="0" maxOccurs="1">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Average Annual Wages Paid For Tax Year Amount</Description>
+						<lineNumber>Line 3</lineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- HIP Paid For Employees Employed For Credit Amount -->
+			<xsd:element name="HIPPaidForEmplEmployedForCrAmt" type="USAmountType" minOccurs="0" maxOccurs="1">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>HIP Paid For Employees Employed For Credit Amount</Description>
+						<lineNumber>Line 4</lineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Small Employer HIP Potentially Paid Amount -->
+			<xsd:element name="SmllEmplrHIPPotentiallyPaidAmt" type="USAmountType" minOccurs="0" maxOccurs="1">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Small Employer HIP Potentially Paid Amount</Description>
+						<lineNumber>Line 5</lineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Small Employer Eligible HIP Paid Amount -->
+			<xsd:element name="SmllEmplrEligibleHIPPaidAmt" type="USAmountType" minOccurs="0" maxOccurs="1">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Small Employer Eligible HIP Paid Amount</Description>
+						<lineNumber>Line 6</lineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Small Employer Eligible HIP Times Percent Amount -->
+			<xsd:element name="SmllEmplrEligHIPTimesPctAmt" type="USAmountType" minOccurs="0" maxOccurs="1">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Small Employer Eligible HIP Times Percent Amount</Description>
+						<lineNumber>Line 7</lineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Small Employer HIP FTE Credit Amount -->
+			<xsd:element name="SmllEmplrHIPFTECreditAmt" type="USAmountType" minOccurs="0" maxOccurs="1">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Small Employer HIP FTE Credit Amount</Description>
+						<lineNumber>Line 8</lineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Annual Wage Paid Less Than Specified Amount -->
+			<xsd:element name="AnnualWgPdLessThanSpecifiedAmt" type="USAmountType" minOccurs="0" maxOccurs="1">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Annual Wage Paid Less Than Specified Amount</Description>
+						<lineNumber>Line 9</lineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Total State Premium Subsidy Paid Or Credit For HIP Amount -->
+			<xsd:element name="TotStPremSbsdyPdOrCrForHIPAmt" type="USAmountType" minOccurs="0" maxOccurs="1">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Total State Premium Subsidy Paid Or Credit For HIP Amount</Description>
+						<lineNumber>Line 10</lineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- HIP Paid Less Total State Premium Or Credit Amount -->
+			<xsd:element name="HIPPdLessTotStPremOrCrAmt" type="USAmountNNType" minOccurs="0" maxOccurs="1">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>HIP Paid Less Total State Premium Or Credit Amount</Description>
+						<lineNumber>Line 11</lineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Smaller Annual Wage Paid Or HIP Paid Amount -->
+			<xsd:element name="SmallerAnnualWgPdOrHIPPdAmt" type="USAmountType" minOccurs="0" maxOccurs="1">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Smaller Annual Wage Paid Or HIP Paid Amount</Description>
+						<lineNumber>Line 12</lineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Paid HIP For Employees For Purpose Of Credit Count -->
+			<xsd:element name="PaidHIPForEmplForPrpsOfCrCnt" minOccurs="0" maxOccurs="1">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Paid HIP For Employees For Purpose Of Credit Count</Description>
+						<lineNumber>Line 13</lineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+				<xsd:simpleType>
+					<xsd:restriction base="IntegerNNType">
+						<xsd:totalDigits value="4"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<!-- FTE Employees Paid HIP For Purpose Of Credit Count -->
+			<xsd:element name="FTEEmplPdHIPForPrpsOfCrCnt" minOccurs="0" maxOccurs="1">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>FTE Employees Paid HIP For Purpose Of Credit Count</Description>
+						<lineNumber>Line 14</lineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+				<xsd:simpleType>
+					<xsd:restriction base="IntegerNNType">
+						<xsd:totalDigits value="4"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<!-- Small Employer Credit For HIP Amount -->
+			<xsd:element name="SmllEmplrCreditForHIPAmt" type="USAmountType" minOccurs="0" maxOccurs="1">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Small Employer Credit For HIP Amount</Description>
+						<lineNumber>Line 15</lineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Sum Smaller Amount And Credit For HIP Amount -->
+			<xsd:element name="SumSmllrAmtAndCreditForHIPAmt" type="USAmountType" minOccurs="0" maxOccurs="1">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Sum Smaller Amount And Credit For HIP Amount</Description>
+						<lineNumber>Line 16</lineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Small Employer HIP Allocated To Patrons Amount -->
+			<xsd:element name="SmllEmplrHIPAllocToPatronsAmt" minOccurs="0" maxOccurs="1">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Small Employer HIP Allocated To Patrons Amount</Description>
+						<lineNumber>Line 17</lineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+				<xsd:complexType>
+					<xsd:simpleContent>
+						<xsd:extension base="USAmountType">
+							<xsd:attribute name="referenceDocumentId" type="IdListType"/>
+							<xsd:attribute name="referenceDocumentName" type="StringType" fixed="PassiveCreditAmountExplanationStatement"/>
+						</xsd:extension>
+					</xsd:simpleContent>
+				</xsd:complexType>
+			</xsd:element>
+			<!-- Small Employer HIP Sum Less Allocated Amount -->
+			<xsd:element name="SmllEmplrHIPSumLessAllocAmt" type="USAmountType" minOccurs="0" maxOccurs="1">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Small Employer HIP Sum Less Allocated Amount</Description>
+						<lineNumber>Line 18</lineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Small Employer HIP Payroll Taxes Paid Credit Amount -->
+			<xsd:element name="SmllEmplrHIPPayrollTxsPdCrAmt" type="USAmountType" minOccurs="0" maxOccurs="1">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Small Employer HIP Payroll Taxes Paid Credit Amount</Description>
+						<lineNumber>Line 19</lineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Small Employer HIP Tax Exempt Credit Amount -->
+			<xsd:element name="SmllEmplrHIPTaxExemptCreditAmt" type="USAmountType" minOccurs="0" maxOccurs="1">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Small Employer HIP Tax Exempt Credit Amount</Description>
+						<lineNumber>Line 20</lineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:schema>

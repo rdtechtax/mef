@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema targetNamespace="http://www.irs.gov/efile" xmlns="http://www.irs.gov/efile" xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.0">
+
+	<xsd:annotation>
+		<xsd:documentation>
+			<Description>IRS e-file Individual Income Tax Schema - Other Withholding Statement</Description>
+			<Purpose>This statement should be attached to Form 1040, line 62 if you have other withholdings that need to be specified separately.  Attach a statement showing specific literals and the amount</Purpose>
+			<TaxYear>2018</TaxYear>
+			<MaturityLevel>Final Release</MaturityLevel>
+			<ReleaseDate>February 13, 2019</ReleaseDate>
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:include schemaLocation="../../../Common/efileTypes.xsd" />
+
+	<!-- ============================================================== -->
+	<!-- ================ Other Withholding Statement ================= -->
+	<!-- ============================================================== -->
+
+	<xsd:element name="OtherWithholdingStatement">
+		<xsd:annotation>
+			<xsd:documentation>Other Withholding Statement</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:complexContent>
+				<xsd:extension base="OtherWithholdingStatementType">
+					<xsd:attributeGroup ref="DocumentAttributes">
+						<xsd:annotation>
+							<xsd:documentation>Common return document attributes</xsd:documentation>
+						</xsd:annotation>
+					</xsd:attributeGroup>
+					<xsd:attribute name="documentName" type="StringType" fixed="OtherWithholdingStatement">
+						<xsd:annotation>
+							<xsd:documentation>IRS internal use only. To avoid error in the return, do not include the attribute name or value.</xsd:documentation>
+						</xsd:annotation>
+					</xsd:attribute>
+				</xsd:extension>
+			</xsd:complexContent>
+		</xsd:complexType>
+	</xsd:element>
+
+	<xsd:complexType name="OtherWithholdingStatementType">
+		<xsd:annotation>
+			<xsd:documentation>Content model for Other Withholding Statment</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+
+			<xsd:element name="OtherWithholdingStmt" type="OtherWithholdingStmtType" minOccurs="0" maxOccurs="25"/>
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="OtherWithholdingStmtType">
+		<xsd:sequence>
+
+			<!-- Withholding Code -->
+			<xsd:element name="WithholdingCd">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Withholding Code</Description>
+					</xsd:documentation>
+				</xsd:annotation>
+				<xsd:simpleType>
+					<xsd:restriction base="StringType">
+						<xsd:enumeration value="FORM 1099" />
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+
+			<!-- Withholding Amount -->
+			<xsd:element name="WithholdingAmt" type="USAmountType">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Withholding amount</Description>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+		</xsd:sequence>
+	</xsd:complexType>
+
+</xsd:schema>

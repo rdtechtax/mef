@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns="http://www.irs.gov/efile" xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.irs.gov/efile" elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.0">
+
+	<xsd:annotation>
+		<xsd:documentation>
+			<Description>IRS e-file Partnership Income Tax Schema - Gain Eligible For Section 1045 Rollover Stock Replaced Schedule</Description>
+			<TaxYear>2018</TaxYear>
+			<MaturityLevel>Final Release</MaturityLevel>
+			<ReleaseDate>February 13, 2019</ReleaseDate>
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:include schemaLocation="../../../Common/efileTypes.xsd"/>
+
+
+	<!-- ======================================================================== -->
+	<!-- ==== Gain Eligible For Section 1045 Rollover Stock Replaced Schedule === -->
+	<!-- ======================================================================== -->
+
+
+	<xsd:element name="Gain1045StkRplcdSchd">
+		<xsd:annotation>
+			<xsd:documentation>Gain Eligible For Section 1045 Rollover Stock Replaced Schedule</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:complexContent>
+				<xsd:extension base="Gain1045StkRplcdSchdType">
+					<xsd:attributeGroup ref="DocumentAttributes">
+						<xsd:annotation>
+							<xsd:documentation>Common return document attributes</xsd:documentation>
+						</xsd:annotation>
+					</xsd:attributeGroup>
+					<xsd:attribute name="documentName" type="xsd:string" fixed="GainEligForSection1045RolloverStockReplacedSchedule">
+						<xsd:annotation>
+							<xsd:documentation>IRS internal use only. To avoid error in the return, do not include the attribute name or value.</xsd:documentation>
+						</xsd:annotation>
+					</xsd:attribute>
+				</xsd:extension>
+			</xsd:complexContent>
+		</xsd:complexType>
+	</xsd:element>	
+
+	<xsd:complexType name="Gain1045StkRplcdSchdType">
+		<xsd:annotation>
+			<xsd:documentation>Content model for the Gain Eligible For Section 1045 Rollover Stock Replaced Schedule</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+    			<!-- Gain Eligible For Section 1045 Rollover Stock Replaced -->
+			<xsd:element name="Gain1045StkRplcdGrp" type="Gain1045StkRplcdGrpType" minOccurs="0" maxOccurs="unbounded">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Gain Eligible For Section 1045 Rollover Stock Replaced</Description>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<!-- Type for Repeating Group - Gain Eligible For Section 1045 Rollover Stock Replaced -->
+	<xsd:complexType name="Gain1045StkRplcdGrpType">
+		<xsd:sequence>
+			<!-- Name of Corporation That Issued Stock -->
+			<xsd:element name="CorporationThatIssuedStockName" type="BusinessNameType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Name of Corporation That Issued Stock</Description>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Partner’s Share of Partnership’s Adjusted Basis -->
+			<xsd:element name="PartnersSharePrtshpsAdjBssAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Partner’s Share of Partnership’s Adjusted Basis</Description>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Sales Price of Stock-->
+			<xsd:element name="SalesPriceOfStockAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Sales Price of Stock</Description>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Date Stock Purchased -->
+			<xsd:element name="StockPurchaseDt" type="DateType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Date Stock Purchased</Description>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Date Stock Sold -->
+			<xsd:element name="StockSoldDt" type="DateType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Date Stock Sold</Description>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Name of corporation that issue the replacement QSB Stock-->
+			<xsd:element name="CorpThatIssueQSBStockName" type="BusinessNameType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Name of corporation that issue the replacement QSB Stock</Description>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Partner’s Distributive Share of Gain from Sales -->
+			<xsd:element name="PartnerDistriShrOfGainSaleAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Partner’s Distributive Share of Gain from Sales</Description>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Partner’s Distributive Share of Gain Deferred -->
+			<xsd:element name="PartnerDistriShrOfGainDefrdAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Partner’s Distributive Share of Gain Deferred</Description>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Date Replacement Stock Distributed -->
+			<xsd:element name="ReplacementStockDistributedDt" type="DateType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Date Replacement Stock Distributed</Description>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Partner’s Share of Partnership’s FMV of Replacement Stock -->
+			<xsd:element name="PrtnrShrOfPrtshpFMVRplcStkAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Partner’s Share of Partnership’s FMV of Replacement Stock</Description>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Partner’s Share of Partnership’s Adjusted Basis of Replacement Stock -->
+			<xsd:element name="PrtnrShrPrtshpAdjBssRplcStkAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Partner’s Share of Partnership’s Adjusted Basis of Replacement Stock</Description>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+
+</xsd:schema>

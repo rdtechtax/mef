@@ -1,0 +1,442 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns="http://www.irs.gov/efile" xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.irs.gov/efile" elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.0">
+	<xsd:annotation>
+		<xsd:documentation>
+			<Description>IRS e-file Schema - Form 965 Schedule H</Description>
+			<TaxYear>2018</TaxYear>
+			<MaturityLevel>Final Release</MaturityLevel>
+			<ReleaseDate>February 13, 2019</ReleaseDate>
+		</xsd:documentation>
+	</xsd:annotation>
+	<xsd:include schemaLocation="../efileTypes.xsd"/>
+	<!-- =============================================================== -->
+	<!-- ==================  IRS Form 965 Schedule H  ================== -->
+	<!-- =============================================================== -->
+	<xsd:element name="IRS965ScheduleH">
+		<xsd:annotation>
+			<xsd:documentation>IRS Form 965 Schedule H</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:complexContent>
+				<xsd:extension base="IRS965ScheduleHType">
+					<xsd:attributeGroup ref="DocumentAttributes">
+						<xsd:annotation>
+							<xsd:documentation>Common return document attributes</xsd:documentation>
+						</xsd:annotation>
+					</xsd:attributeGroup>
+					<xsd:attribute name="documentName" type="StringType" fixed="IRS965ScheduleH">
+						<xsd:annotation>
+							<xsd:documentation>IRS internal use only. To avoid error in the return, do not include the attribute name or value.</xsd:documentation>
+						</xsd:annotation>
+					</xsd:attribute>
+					<xsd:attribute name="referenceDocumentId" type="IdListType">
+						<xsd:annotation>
+							<xsd:documentation>List of document ID's of forms, schedules, supporting info. etc. attached to this form</xsd:documentation>
+						</xsd:annotation>
+					</xsd:attribute>
+					<xsd:attribute name="referenceDocumentName" type="StringType" fixed="BinaryAttachment"/>
+				</xsd:extension>
+			</xsd:complexContent>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:complexType name="IRS965ScheduleHType">
+		<xsd:annotation>
+			<xsd:documentation>Content model for IRS Form 965 Schedule H</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+
+			<!-- SECTION 1 - Amounts Reported on Forms 1116 and 1118 and Disallowed Foreign Taxes -->
+
+			<!-- Separate Category Code -->
+			<xsd:element name="SeparateCategoryCd">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Separate Category Code</Description>
+						<LineNumber>a</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+				<xsd:simpleType>
+					<xsd:restriction base="TextType">
+						<xsd:enumeration value="PAS"/>
+						<xsd:enumeration value="GEN"/>
+						<xsd:enumeration value="901j"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+
+			<!-- Sanctioned Country Code -->
+			<xsd:element name="SanctionedCountryCd" type="CountryType" minOccurs="0" maxOccurs="14">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Sanctioned Country Code</Description>
+						<LineNumber>b</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Current Tax Year Disallowed Foreign Tax Group -->
+			<xsd:element name="CYDisallowedForeignTaxGrp" type="DisallowedForeignTaxGrpType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Current Tax Year Disallowed Foreign Tax Group</Description>
+						<LineNumber>1 - 14</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Prior Tax Year Disallowed Foreign Tax Group -->
+			<xsd:element name="PYDisallowedForeignTaxGrp" type="DisallowedForeignTaxGrpType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Prior Tax Year Disallowed Foreign Tax Group</Description>
+						<LineNumber>15 - 28</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- SECTION 2 - Applicable Percentage for Disallowance of Foreign Tax Credit Not From Pass-Throughs -->
+
+			<!-- Current Tax Year Applicable Percentage -->
+
+			<!-- Net Smaller Of Current Tax Year Section 965(a) Or Foreign Cash Position Amount -->
+			<xsd:element name="NetSmllrCY965aOrFrgnCashPosAmt" type="USAmountNNType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Smaller Of Current Tax Year Section 965(a) Or Foreign Cash Position Amount</Description>
+						<LineNumber>29</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Current Tax Year Total Section 965(a) Inclusion Amount -->
+			<xsd:element name="CYTotalSection965aInclusionAmt" type="USAmountNNType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Current Tax Year Total Section 965(a) Inclusion Amount</Description>
+						<LineNumber>30</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Current Tax Year Total Section 965(a) Net Smaller Percentage -->
+			<xsd:element name="CYTot965aNetSmllrPct" type="F965SchHRatioType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Current Tax Year Total Section 965(a) Net Smaller Percentage</Description>
+						<LineNumber>31</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Current Tax Year Applicable Total Section 965(a) Net Smaller Percentage -->
+			<xsd:element name="CYApplcblTot965aNetSmllrPct" type="F965SchHRatioType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Current Tax Year Applicable Total Section 965(a) Net Smaller Percentage</Description>
+						<LineNumber>32</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Smaller Of Current Tax Year Section 965(a) Or Foreign Cash Position Amount -->
+			<xsd:element name="SmllrCY965aOrFrgnCashPosAmt" type="USAmountNNType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Smaller Of Current Tax Year Section 965(a) Or Foreign Cash Position Amount</Description>
+						<LineNumber>33</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Line 34: Use Value of Line 30 -->
+
+			<!-- Current Tax Year Total Section 965(a) Smaller Percentage -->
+			<xsd:element name="CYTot965aSmllrPct" type="F965SchHRatioType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Current Tax Year Total Section 965(a) Smaller Percentage</Description>
+						<LineNumber>35</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Current Tax Year Applicable Total Section 965(a) Smaller Percentage -->
+			<xsd:element name="CYApplcblTot965aSmllrPct" type="F965SchHRatioType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Current Tax Year Applicable Total Section 965(a) Smaller Percentage</Description>
+						<LineNumber>36</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Current Tax Year Applicable Not From Pass-Through Entities Percentage -->
+			<xsd:element name="CYApplicableNotPTEPct" type="F965SchHRatioType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Current Tax Year Applicable Not From Pass-Through Entities Percentage</Description>
+						<LineNumber>37</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Prior Tax Year Applicable Percentage -->
+
+			<!-- Net Smaller Of Prior Tax Year Section 965(a) Or Foreign Cash Position Amount -->
+			<xsd:element name="NetSmllrPY965aOrFrgnCashPosAmt" type="USAmountNNType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Smaller Of Prior Tax Year Section 965(a) Or Foreign Cash Position Amount</Description>
+						<LineNumber>38</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Prior Tax Year Total Section 965(a) Inclusion Amount -->
+			<xsd:element name="PYTotalSection965aInclusionAmt" type="USAmountNNType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Prior Tax Year Total Section 965(a) Inclusion Amount</Description>
+						<LineNumber>39</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Prior Tax Year Total Section 965(a) Net Smaller Percentage -->
+			<xsd:element name="PYTot965aNetSmllrPct" type="F965SchHRatioType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Prior Tax Year Total Section 965(a) Net Smaller Percentage</Description>
+						<LineNumber>40</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Prior Tax Year Applicable Total Section 965(a) Net Smaller Percentage -->
+			<xsd:element name="PYApplcblTot965aNetSmllrPct" type="F965SchHRatioType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Prior Tax Year Applicable Total Section 965(a) Net Smaller Percentage</Description>
+						<LineNumber>41</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Smaller Of Prior Tax Year Section 965(a) Or Foreign Cash Position Amount -->
+			<xsd:element name="SmllrPY965aOrFrgnCashPosAmt" type="USAmountNNType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Smaller Of Prior Tax Year Section 965(a) Or Foreign Cash Position Amount</Description>
+						<LineNumber>42</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Line 43: Use Value of Line 39 -->
+
+			<!-- Prior Tax Year Total Section 965(a) Smaller Percentage -->
+			<xsd:element name="PYTot965aSmllrPct" type="F965SchHRatioType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Prior Tax Year Total Section 965(a) Smaller Percentage</Description>
+						<LineNumber>44</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Prior Tax Year Applicable Total Section 965(a) Smaller Percentage -->
+			<xsd:element name="PYApplcblTot965aSmllrPct" type="F965SchHRatioType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Prior Tax Year Applicable Total Section 965(a) Smaller Percentage</Description>
+						<LineNumber>45</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Prior Tax Year Applicable Not From Pass-Through Entities Percentage -->
+			<xsd:element name="PYApplicableNotPTEPct" type="F965SchHRatioType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Prior Tax Year Applicable Not From Pass-Through Entities Percentage</Description>
+						<LineNumber>46</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<!-- Type used for Lines 1 - 14 and Lines 15 - 28 -->
+	<xsd:complexType name="DisallowedForeignTaxGrpType">
+		<xsd:sequence>
+
+			<!-- Total Not From Pass-Through Entities Section 965(a) Inclusion Amount -->
+			<xsd:element name="TotNotPTESect965aInclusionAmt" type="USAmountNNType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Total Not From Pass-Through Entities Section 965(a) Inclusion Amount</Description>
+						<LineNumber>1, 15</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Total Pass-Through Entities Section 965(a) Inclusion Amount -->
+			<xsd:element name="TotPTESect965aInclusionAmt" type="USAmountNNType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Total Pass-Through Entities Section 965(a) Inclusion Amount</Description>
+						<LineNumber>2, 16</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Total Section 965(a) Inclusion Amount -->
+			<xsd:element name="TotalSection965aInclusionAmt" type="USAmountNNType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Total Section 965(a) Inclusion Amount</Description>
+						<LineNumber>3, 17</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Total Not From Pass-Through Entities Section 965(c) Deduction Amount -->
+			<xsd:element name="TotNotPTESect965cDeductionAmt" type="USAmountNNType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Total Not From Pass-Through Entities Section 965(c) Deduction Amount</Description>
+						<LineNumber>4, 18</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Total Pass-Through Entities Section 965(c) Deduction Amount -->
+			<xsd:element name="TotPTESect965cDeductionAmt" type="USAmountNNType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Total Pass-Through Entities Section 965(c) Deduction Amount</Description>
+						<LineNumber>5, 19</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Total Section 965(c) Deduction Amount -->
+			<xsd:element name="TotalSection965cDeductionAmt" type="USAmountNNType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Total Section 965(c) Deduction Amount</Description>
+						<LineNumber>6, 20</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Total Not From Pass-Through Entities Taxes Deemed Paid Amount -->
+			<xsd:element name="TotNotPTETaxesDeemedPaidAmt" type="USAmountNNType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Total Not From Pass-Through Entities Taxes Deemed Paid Amount</Description>
+						<LineNumber>7, 21</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Total Pass-Through Entities Taxes Deemed Paid Amount -->
+			<xsd:element name="TotPTETaxesDeemedPaidAmt" type="USAmountNNType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Total Pass-Through Entities Taxes Deemed Paid Amount</Description>
+						<LineNumber>8, 22</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Total Taxes Deemed Paid Amount -->
+			<xsd:element name="TotalTaxesDeemedPaidAmt" type="USAmountNNType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Total Taxes Deemed Paid Amount</Description>
+						<LineNumber>9, 23</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Applicable Not From Pass-Through Entities Percentage -->
+			<xsd:element name="ApplicableNotPTEPct" type="F965SchHRatioType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Applicable Not From Pass-Through Entities Percentage</Description>
+						<LineNumber>10, 24</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Applicable Pass-Through Entities Percentage -->
+			<xsd:element name="ApplicablePTEPct" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Applicable Pass-Through Entities Percentage</Description>
+						<LineNumber>11, 25</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+				<xsd:complexType>
+					<xsd:simpleContent>
+						<xsd:extension base="F965SchHRatioType">
+							<xsd:attribute name="referenceDocumentId" type="IdListType"/>
+							<xsd:attribute name="referenceDocumentName" type="StringType" fixed="BinaryAttachment"/>
+						</xsd:extension>
+					</xsd:simpleContent>
+				</xsd:complexType>
+			</xsd:element>
+
+			<!-- Disallowed Foreign Tax Not From Pass-Through Entities Amount -->
+			<xsd:element name="DisallowedForeignTaxNotPTEAmt" type="USAmountNNType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Disallowed Foreign Tax Not From Pass-Through Entities Amount</Description>
+						<LineNumber>12, 26</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Disallowed Foreign Tax Pass-Through Entities Amount -->
+			<xsd:element name="DisallowedForeignTaxPTEAmt" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Disallowed Foreign Tax Pass-Through Entities Amount</Description>
+						<LineNumber>13, 27</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+				<xsd:complexType>
+					<xsd:simpleContent>
+						<xsd:extension base="USAmountNNType">
+							<xsd:attribute name="referenceDocumentId" type="IdListType"/>
+							<xsd:attribute name="referenceDocumentName" type="StringType" fixed="BinaryAttachment"/>
+						</xsd:extension>
+					</xsd:simpleContent>
+				</xsd:complexType>
+			</xsd:element>
+
+			<!-- Total Disallowed Foreign Tax Amount -->
+			<xsd:element name="TotalDisallowedForeignTaxAmt" type="USAmountNNType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Total Disallowed Foreign Tax Amount</Description>
+						<LineNumber>14, 28</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<!-- Type with more restrictions than LargeRatioType, used in this file -->
+	<xsd:simpleType name="F965SchHRatioType">
+		<xsd:restriction base="LargeRatioType">
+			<xsd:totalDigits value="10" />
+			<xsd:fractionDigits value="9" />
+			<xsd:minInclusive value="0.0000" />
+			<xsd:maxInclusive value="1.000000000" />
+		</xsd:restriction>
+	</xsd:simpleType>
+
+</xsd:schema>

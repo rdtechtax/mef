@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema targetNamespace="http://www.irs.gov/efile" xmlns="http://www.irs.gov/efile" xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.0">
+
+	<xsd:annotation>
+		<xsd:documentation>
+			<Description>IRS e-file U.S. Nonresident Alien Income Tax Schema - Other Liabilities Statement</Description>
+			<Purpose>Optional Statement - Attach a statement describing and listing the total value of any other liabilities you have that are not included on lines 21 and 22.</Purpose>
+			<TaxYear>2018</TaxYear>
+			<MaturityLevel>Final Release</MaturityLevel>
+			<ReleaseDate>February 13, 2019</ReleaseDate>
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:include schemaLocation="../../../Common/efileTypes.xsd" />
+
+	<!-- ========================================= -->
+	<!-- ====== Other Liabilities Statement ====== -->
+	<!-- ========================================= -->
+
+	<xsd:element name="OtherLiabilitiesStatement">
+		<xsd:annotation>
+			<xsd:documentation>Other Liabilities Statement</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:complexContent>
+				<xsd:extension base="OtherLiabilitiesStatementType">
+					<xsd:attributeGroup ref="DocumentAttributes">
+						<xsd:annotation>
+							<xsd:documentation>Common return document attributes</xsd:documentation>
+						</xsd:annotation>
+					</xsd:attributeGroup>
+					<xsd:attribute name="documentName" type="TextType" fixed="OtherLiabilitiesStatement">
+						<xsd:annotation>
+							<xsd:documentation>IRS internal use only. To avoid error in the return, do not include the attribute name or value.</xsd:documentation>
+						</xsd:annotation>
+					</xsd:attribute>
+				</xsd:extension>
+			</xsd:complexContent>
+		</xsd:complexType>
+	</xsd:element>
+
+	<xsd:complexType name="OtherLiabilitiesStatementType">
+		<xsd:annotation>
+			<xsd:documentation>Other Liabilities Statement</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<!-- Other Liability -->
+			<xsd:element name="OtherLiabilityGrp" minOccurs="0" maxOccurs="1000">
+				<xsd:complexType>
+					<xsd:sequence>
+						<!-- Description -->
+						<xsd:element name="Desc" type="LineExplanationType"/>
+						<!-- Amount -->
+						<xsd:element name="Amt" type="USAmountType" minOccurs="0"/>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+
+</xsd:schema>

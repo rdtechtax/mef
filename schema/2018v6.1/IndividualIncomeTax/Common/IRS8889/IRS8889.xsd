@@ -1,0 +1,353 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.irs.gov/efile" targetNamespace="http://www.irs.gov/efile" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xsd:annotation>
+		<xsd:documentation>
+			<Description>IRS e-file Individual Income Tax Schema - IRS Form 8889 Health Savings Accounts (HSAs)</Description>
+			<TaxYear>2018</TaxYear>
+			<MaturityLevel>Final Release</MaturityLevel>
+			<ReleaseDate>February 13, 2019</ReleaseDate>
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:include schemaLocation="../../../Common/efileTypes.xsd"/>
+
+	<!-- =============================================================== -->
+	<!-- ======================= IRS Form 8889 ========================= -->
+	<!-- =============================================================== -->
+
+	<xsd:element name="IRS8889">
+		<xsd:annotation>
+			<xsd:documentation>IRS Form 8889</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:complexContent>
+				<xsd:extension base="IRS8889Type">
+					<xsd:attributeGroup ref="DocumentAttributes">
+						<xsd:annotation>
+							<xsd:documentation>Common return document attributes</xsd:documentation>
+						</xsd:annotation>
+					</xsd:attributeGroup>
+					<xsd:attribute name="documentName" type="xsd:string" fixed="IRS8889">
+						<xsd:annotation>
+							<xsd:documentation>IRS internal use only. To avoid error in the return, do not include the attribute name or value.</xsd:documentation>
+						</xsd:annotation>
+					</xsd:attribute>
+				</xsd:extension>
+			</xsd:complexContent>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:complexType name="IRS8889Type">
+		<xsd:annotation>
+			<xsd:documentation>Content model for IRS Form 8889</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+
+			<!-- Name -->
+			<xsd:element name="PersonNm" type="PersonNameType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Name</Description>
+						<ELFFieldNumber>NL</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		
+			<!-- Recipient Social Security Number -->
+			<xsd:element name="RecipientSSN" type="SSNType">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Recipient Social Security Number</Description>
+						<ELFFieldNumber>0010</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			
+			<!-- Part I - HSA Contributions and Deduction -->
+			
+			<!-- HDHP Self Only Coverage or Family choice -->
+			<xsd:choice minOccurs="0">
+			
+				<!-- HDHP Self Only Coverage Indicator -->
+				<xsd:element name="HDHPSelfOnlyCoverageInd" type="CheckboxType">
+					<xsd:annotation>
+						<xsd:documentation>
+							<Description>HDHP Self Only Coverage Indicator</Description>
+							<LineNumber>1</LineNumber>
+							<ELFFieldNumber>0015</ELFFieldNumber>
+						</xsd:documentation>
+					</xsd:annotation>
+				</xsd:element>
+				
+				<!-- HDHP Family Coverage Indicator -->
+				<xsd:element name="HDHPFamilyCoverageInd" type="CheckboxType">
+					<xsd:annotation>
+						<xsd:documentation>
+							<Description>HDHP Family Coverage Indicator</Description>
+							<LineNumber>1</LineNumber>
+							<ELFFieldNumber>0025</ELFFieldNumber>
+						</xsd:documentation>
+					</xsd:annotation>
+				</xsd:element>
+				
+			</xsd:choice>
+			
+			<!-- HSA Contribution Amount -->
+			<xsd:element name="HSAContributionAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>HSA Contribution Amount</Description>
+						<LineNumber>2</LineNumber>
+						<ELFFieldNumber>0035</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			
+			<!-- HSA Limited Annual Deductible Amount -->
+			<xsd:element name="HSALimitedAnnualDeductibleAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>HSA Limited Annual Deductible Amount</Description>
+						<LineNumber>3</LineNumber>
+						<ELFFieldNumber>0045</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			
+			<!-- Total Archer MSA Contribution Amount -->
+			<xsd:element name="TotalArcherMSAContributionAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Total Archer MSA Contribution Amount</Description>
+						<LineNumber>4</LineNumber>
+						<ELFFieldNumber>0055</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			
+			<!-- HSA Limited Deductible Allowed Amount -->
+			<xsd:element name="HSALimitedDeductibleAllwdAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>HSA Limited Deductible Allowed Amount</Description>
+						<LineNumber>5</LineNumber>
+						<ELFFieldNumber>0065</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			
+			<!-- HSA Family Deductible Amount -->
+			<xsd:element name="HSAFamilyDeductibleAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>HSA Family Deductible Amount</Description>
+						<LineNumber>6</LineNumber>
+						<ELFFieldNumber>0075</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			
+			<!-- HSA Additional Contribution Amount -->
+			<xsd:element name="HSAAddnlContributionAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>HSA Additional Contribution Amount</Description>
+						<LineNumber>7</LineNumber>
+						<ELFFieldNumber>0085</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			
+			<!-- HSA Limited Gross Contribution Amount -->
+			<xsd:element name="HSALimitedGrossContributionAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>HSA Limited Gross Contribution Amount</Description>
+						<LineNumber>8</LineNumber>
+						<ELFFieldNumber>0095</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			
+			<!-- HSA Employer Contribution Amount -->
+			<xsd:element name="HSAEmployerContributionAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>HSA Employer Contribution Amount</Description>
+						<LineNumber>9</LineNumber>
+						<ELFFieldNumber>0105</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			
+			<!-- HSA Qualified Funding Distribution Amount -->
+			<xsd:element name="HSAQualifiedFundingDistriAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>HSA Qualified Funding Distribution Amount</Description>
+						<LineNumber>10</LineNumber>
+						<ELFFieldNumber>0115</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			
+			<!-- Total HSA Contribution Amount -->
+			<xsd:element name="TotalHSAContributionAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Total HSA Contribution Amount</Description>
+						<LineNumber>11</LineNumber>
+						<ELFFieldNumber>0125</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			
+			<!-- HSA Limited Contribution Amount -->
+			<xsd:element name="HSALimitedContributionAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>HSA Limited Contribution Amount</Description>
+						<LineNumber>12</LineNumber>
+						<ELFFieldNumber>0130</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			
+			<!-- Total HSA Deduction Amount -->
+			<xsd:element name="TotalHSADeductionAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Total HSA Deduction Amount</Description>
+						<LineNumber>13</LineNumber>
+						<ELFFieldNumber>0135</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			
+			<!-- Part II - HSA Distributions -->
+			
+			<!-- Total HSA Distribution Amount -->
+			<xsd:element name="TotalHSADistributionAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Total HSA Distribution Amount</Description>
+						<LineNumber>14a</LineNumber>
+						<ELFFieldNumber>0145</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			
+			<!-- HSA Distribution Rollover Amount -->
+			<xsd:element name="HSADistributionRolloverAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>HSA Distribution Rollover Amount</Description>
+						<LineNumber>14b</LineNumber>
+						<ELFFieldNumber>0155</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			
+			<!-- HSA Net Distribution Amount -->
+			<xsd:element name="HSANetDistributionAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>HSA Net Distribution Amount</Description>
+						<LineNumber>14c</LineNumber>
+						<ELFFieldNumber>0165</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			
+			<!-- Unreimbursed Qualified Medical and Dental Expense Amount -->
+			<xsd:element name="UnreimbQualMedAndDentalExpAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Unreimbursed Qualified Medical and Dental Expense Amount</Description>
+						<LineNumber>15</LineNumber>
+						<ELFFieldNumber>0170</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			
+			<!-- Taxable HSA Distribution Amount -->
+			<xsd:element name="TaxableHSADistributionAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Taxable HSA Distribution Amount</Description>
+						<LineNumber>16</LineNumber>
+						<ELFFieldNumber>0175</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			
+			<!-- HSA Distribution Additional Percent Tax Exceptions Indicator -->
+			<xsd:element name="HSADistriAddnlPercentTaxExcInd" type="CheckboxType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>HSA Distribution Additional Percent Tax Exceptions Indicator</Description>
+						<LineNumber>17a</LineNumber>
+						<ELFFieldNumber>0185</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			
+			<!-- HSA Distribution Additional Percent Tax Amount -->
+			<xsd:element name="HSADistriAddnlPercentTaxAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>HSA Distribution Additional Percent Tax Amount</Description>
+						<LineNumber>17b</LineNumber>
+						<ELFFieldNumber>0195</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			
+			<!-- Part III Income and Additional Tax for Failure to Maintain HDHP Coverage -->
+			
+			<!-- HDHP Coverage Fail Partial Year Amount -->
+			<xsd:element name="HDHPCoverageFailPartialYrAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>HDHP Coverage Fail Partial Year Amount</Description>
+						<LineNumber>18</LineNumber>
+						<ELFFieldNumber>0230</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			
+			<!-- HDHP Coverage Fail Fund Distribution Amount -->
+			<xsd:element name="HDHPCoverageFailFundDistriAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>HDHP Coverage Fail Fund Distribution Amount</Description>
+						<LineNumber>19</LineNumber>
+						<ELFFieldNumber>0240</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			
+			<!-- HDHP Coverage Income Amount -->
+			<xsd:element name="HDHPCoverageIncomeAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>HDHP Coverage Income Amount</Description>
+						<LineNumber>20</LineNumber>
+						<ELFFieldNumber>0250</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			
+			<!-- HDHP Coverage Additional Tax Amount -->
+			<xsd:element name="HDHPCoverageAddnlTaxAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>HDHP Coverage Additional Tax Amount</Description>
+						<LineNumber>21</LineNumber>
+						<ELFFieldNumber>0260</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:schema>

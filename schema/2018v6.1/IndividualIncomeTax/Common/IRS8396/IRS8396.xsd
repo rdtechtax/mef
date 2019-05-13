@@ -1,0 +1,276 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.irs.gov/efile" targetNamespace="http://www.irs.gov/efile" elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.0">
+	<xsd:annotation>
+		<xsd:documentation>
+			<Description>IRS e-file Schema - IRS Form 8396</Description>
+			<TaxYear>2018</TaxYear>
+			<MaturityLevel>Final Release</MaturityLevel>
+			<ReleaseDate>February 13, 2019</ReleaseDate>
+		</xsd:documentation>
+	</xsd:annotation>
+	<xsd:include schemaLocation="../../../Common/efileTypes.xsd"/>
+	<!--==================================================================-->
+	<!--============================= IRS8396 ==============================-->
+	<!--==================================================================-->
+	<xsd:element name="IRS8396">
+		<xsd:annotation>
+			<xsd:documentation>IRS Form 8396</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:complexContent>
+				<xsd:extension base="IRS8396Type">
+					<xsd:attributeGroup ref="DocumentAttributes">
+						<xsd:annotation>
+							<xsd:documentation>Common return document attributes</xsd:documentation>
+						</xsd:annotation>
+					</xsd:attributeGroup>
+					<xsd:attribute name="documentName" type="xsd:string" fixed="IRS8396">
+						<xsd:annotation>
+							<xsd:documentation>IRS internal use only. To avoid error in the return, do not include the attribute name or value.</xsd:documentation>
+						</xsd:annotation>
+					</xsd:attribute>
+				</xsd:extension>
+			</xsd:complexContent>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:complexType name="IRS8396Type">
+		<xsd:annotation>
+			<xsd:documentation>Content model for IRS8396</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+
+			<!-- US Address Of Qualified Mortgage Certificate Home -->
+			<xsd:element name="QlfyMortgageCertUSAddress" type="USAddressType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>US Address Of Qualified Mortgage Certificate Home</Description>
+						<ELFFieldNumber>0030 0040 0050 0060</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!--Mortgage Subsidy Certified Issuer Agency Name -->
+			<xsd:element name="MortgSbsdyCertIssuerAgencyNm" type="LineExplanationType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Mortgage Subsidy Certified Issuer Agency Name</Description>
+						<ELFFieldNumber>0062</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!--Mortgage Credit Certificate Number -->
+			<xsd:element name="MortgageCreditCertificateNum" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Mortgage Credit Certificate Number</Description>
+						<ELFFieldNumber>0064</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+				<xsd:simpleType>
+					<xsd:restriction base="TextType">
+						<xsd:maxLength value="22"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			
+			<!--Mortgage Credit Certificate Issue Date -->
+			<xsd:element name="MortgCrCertificateIssueDt" type="DateType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Mortgage Credit Certificate Issue Date</Description>
+						<ELFFieldNumber>0066</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			
+			<!--Part I Current Year Mortgage Interest Credit-->
+			<!--Certified Mortgage Interest Credit Paid Amount -->
+			<xsd:element name="CertifiedMortgageIntCrPdAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Certified Mortgage Interest Credit Paid Amount</Description>
+						<LineNumber>1</LineNumber>
+						<ELFFieldNumber>0070</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			
+			<!--Mortgage Credit Certificate Rate -->
+			<xsd:element name="MortgageCreditCertificateRt" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Mortgage Credit Certificate Rate</Description>
+						<LineNumber>2</LineNumber>
+						<ELFFieldNumber>0080</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+				<xsd:complexType>
+					<xsd:simpleContent>
+						<xsd:extension base="RatioType">
+							<xsd:attribute name="referenceDocumentId" type="IdListType"/>
+							<xsd:attribute name="referenceDocumentName" type="StringType" fixed="MortgageCreditCertificateInterestCalculationStatement"/>
+						</xsd:extension>
+					</xsd:simpleContent>
+				</xsd:complexType>
+			</xsd:element>
+			
+			<!--Mortgage Interest Reduction Amount -->
+			<xsd:element name="MortgageInterestReductionAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Mortgage Interest Reduction Amount</Description>
+						<LineNumber>3</LineNumber>
+						<ELFFieldNumber>0090</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			
+			<!--Mortgage Interest Previous 3 Year Carryforward Credit Amount -->
+			<xsd:element name="MortgIntPrevious3YrCfwdCrAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Mortgage Interest Previous 3 Year Carryforward Credit Amount</Description>
+						<LineNumber>4</LineNumber>
+						<ELFFieldNumber>0100</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			
+			<!--Mortgage Interest Previous 2 Year Carryforward Credit Amount -->
+			<xsd:element name="MortgIntPrevious2YrCfwdCrAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Mortgage Interest Previous 2 Year Carryforward Credit Amount</Description>
+						<LineNumber>5</LineNumber>
+						<ELFFieldNumber>0110</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			
+			<!--Mortgage Interest Prior Year Carryforward Credit Amount -->
+			<xsd:element name="MortgIntPYCarryforwardCrAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Mortgage Interest Prior Year Carryforward Credit Amount</Description>
+						<LineNumber>6</LineNumber>
+						<ELFFieldNumber>0120</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			
+			<!--Mortgage Interest Total Previous Carryforward Credit Amount -->
+			<xsd:element name="MortgIntTotPreviousCfwdCrAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Mortgage Interest Total Previous Carryforward Credit Amount</Description>
+						<LineNumber>7</LineNumber>
+						<ELFFieldNumber>0130</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			
+			<!--Tax Liability Limit from Credit Limit Worksheet Amount -->
+			<xsd:element name="TaxLiabLmtFromCrLmtWrkshtAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Tax Liability Limit from Credit Limit Worksheet Amount</Description>
+						<LineNumber>8</LineNumber>
+						<ELFFieldNumber>0140</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			
+			<!--Mortgage Interest Credit Amount -->
+			<xsd:element name="MortgageInterestCreditAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Mortgage Interest Credit Amount</Description>
+						<LineNumber>9</LineNumber>
+						<ELFFieldNumber>0170</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			
+			<!--Part II Mortgage Interest Credit Carryforward-->
+			<!--Mortgage Interest Reductions Plus Oldest Carryforward Credit Amount -->
+			<xsd:element name="MortgIntRedPlusOldestCfwdCrAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Mortgage Interest Reductions Plus Oldest Carryforward Credit Amount</Description>
+						<LineNumber>10</LineNumber>
+						<ELFFieldNumber>0180</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			
+			<!--Mortgage Interest Total Previous Carryforward Credit Amount -->
+			<!-- For Line #11: Enter the amount from line 7 -->
+			<!--Larger Of Mortgage Interest Credit Or Carryforward Amount -->
+			<xsd:element name="LargerOfMortgIntCrOrCfwdAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Larger Of Mortgage Interest Credit Or Carryforward Amount</Description>
+						<LineNumber>12</LineNumber>
+						<ELFFieldNumber>0200</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			
+			<!--Mortgage Interest Tentative Two Year Carryforward Credit Amount -->
+			<xsd:element name="MortgIntTentTwoYearCfwdCrAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Mortgage Interest Tentative Two Year Carryforward Credit Amount</Description>
+						<LineNumber>13</LineNumber>
+						<ELFFieldNumber>0210</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			
+			<!--Mortgage Interest Next Years 2 Year Carryforward Credit Amount -->
+			<xsd:element name="MortgIntNextYears2YrCfwdCrAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Mortgage Interest Next Years 2 Year Carryforward Credit Amount</Description>
+						<LineNumber>14</LineNumber>
+						<ELFFieldNumber>0220</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			
+			<!--Mortgage Interest Tentative 3 Year Carryforward Credit Amount -->
+			<xsd:element name="MortgIntTent3YearCfwdCrAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Mortgage Interest Tentative 3 Year Carryforward Credit Amount</Description>
+						<LineNumber>15</LineNumber>
+						<ELFFieldNumber>0230</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			
+			<!--Mortgage Interest Next Years 3 Year Carryforward Credit Amount -->
+			<xsd:element name="MortgIntNextYears3YrCfwdCrAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Mortgage Interest Next Years 3 Year Carryforward Credit Amount</Description>
+						<LineNumber>16</LineNumber>
+						<ELFFieldNumber>0240</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			
+			<!--Mortgage Interest Next Years Prior Year Carryforward Credit Amount -->
+			<xsd:element name="MortgIntNextYearsPYCfwdCrAmt" type="USAmountNNType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Mortgage Interest Next Years Prior Year Carryforward Credit Amount</Description>
+						<LineNumber>17</LineNumber>
+						<ELFFieldNumber>0250</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:schema>

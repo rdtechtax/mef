@@ -1,0 +1,567 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.irs.gov/efile" targetNamespace="http://www.irs.gov/efile" elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.0">
+	<xsd:annotation>
+		<xsd:documentation>
+			<Description>IRS e-file Schema - IRS Form 4563 Exclusion of Income for Bona Fide Residents of American Samoa</Description>
+			<TaxYear>2018</TaxYear>
+			<MaturityLevel>Final Release</MaturityLevel>
+			<ReleaseDate>February 13, 2019</ReleaseDate>
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:include schemaLocation="../../../Common/efileTypes.xsd"/>
+
+	<!-- ================================================================== -->
+	<!-- ========================== IRS Form 4563 ========================= -->
+	<!-- ================================================================== -->
+
+	<xsd:element name="IRS4563">
+		<xsd:annotation>
+			<xsd:documentation>IRS Form 4563</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:complexContent>
+				<xsd:extension base="IRS4563Type">
+					<xsd:attributeGroup ref="DocumentAttributes">
+						<xsd:annotation>
+							<xsd:documentation>Common return document attributes</xsd:documentation>
+						</xsd:annotation>
+					</xsd:attributeGroup>
+					<xsd:attribute name="documentName" type="xsd:string" fixed="IRS4563"/>
+				</xsd:extension>
+			</xsd:complexContent>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:complexType name="IRS4563Type">
+		<xsd:annotation>
+			<xsd:documentation>Content model for Form 4563</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+
+			<!--Name -->
+			<xsd:element name="NameLine1Txt" type="NameLine1Type" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Name</Description>
+						<ELFFieldNumber>0010</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!--Social Security Number -->
+			<xsd:element name="SSN" type="SSNType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Social Security Number</Description>
+						<ELFFieldNumber>0020</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!--Bona Fide Residence Begin Date -->
+			<xsd:element name="BonaFideResidenceBeginDt" type="DateType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Bona Fide Residence Begin Date</Description>
+						<LineNumber>1</LineNumber>
+						<ELFFieldNumber>0030</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<xsd:choice minOccurs="0">
+				<!--Bona Fide Residence Ending Date -->
+				<xsd:element name="BonaFideResidenceEndDt" type="DateType">
+					<xsd:annotation>
+						<xsd:documentation>
+							<Description>Bona Fide Residence Ending Date</Description>
+							<LineNumber>1</LineNumber>
+							<ELFFieldNumber>0040</ELFFieldNumber>
+						</xsd:documentation>
+					</xsd:annotation>
+				</xsd:element>
+				<xsd:element name="ContinueLiteralCd" type="TextType" fixed="CONTINUE">
+					<xsd:annotation>
+						<xsd:documentation>
+							<Description>Continue Literal Code</Description>
+							<LineNumber>1</LineNumber>
+							<ELFFieldNumber>0040</ELFFieldNumber>
+						</xsd:documentation>
+					</xsd:annotation>
+				</xsd:element>
+			</xsd:choice>
+
+			<xsd:choice minOccurs="0">
+
+				<!--Rented Room Indicator -->
+				<xsd:element name="RentedRoomInd" type="CheckboxType">
+					<xsd:annotation>
+						<xsd:documentation>
+							<Description>Rented Room Indicator</Description>
+							<LineNumber>2</LineNumber>
+							<ELFFieldNumber>0050</ELFFieldNumber>
+						</xsd:documentation>
+					</xsd:annotation>
+				</xsd:element>
+
+				<!--Rented House Indicator -->
+				<xsd:element name="RentedHouseInd" type="CheckboxType">
+					<xsd:annotation>
+						<xsd:documentation>
+							<Description>Rented House Indicator</Description>
+							<LineNumber>2</LineNumber>
+							<ELFFieldNumber>0060</ELFFieldNumber>
+						</xsd:documentation>
+					</xsd:annotation>
+				</xsd:element>
+
+				<!--Employer Furnished Quarters Indicator -->
+				<xsd:element name="EmployerFurnishedQuartersInd" type="CheckboxType">
+					<xsd:annotation>
+						<xsd:documentation>
+							<Description>Employer Furnished Quarters Indicator</Description>
+							<LineNumber>2</LineNumber>
+							<ELFFieldNumber>0070</ELFFieldNumber>
+						</xsd:documentation>
+					</xsd:annotation>
+				</xsd:element>
+
+				<!--Purchased House Indicator -->
+				<xsd:element name="PurchasedHouseInd" type="CheckboxType">
+					<xsd:annotation>
+						<xsd:documentation>
+							<Description>Purchased House Indicator</Description>
+							<LineNumber>2</LineNumber>
+							<ELFFieldNumber>0080</ELFFieldNumber>
+						</xsd:documentation>
+					</xsd:annotation>
+				</xsd:element>
+
+			</xsd:choice>
+
+			<!--Family Living With You Indicator -->
+			<xsd:element name="FamilyLivingWithYouInd" type="BooleanType">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Family Living With You Indicator</Description>
+						<LineNumber>3a</LineNumber>
+						<ELFFieldNumber>0090 0100</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<xsd:element name="FamilyInAmericanSamoaGrp" minOccurs="0" maxOccurs="unbounded">
+				<xsd:complexType>
+					<xsd:sequence>
+
+						<xsd:element name="FamilyRelationshipCd">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Family Relationship Code</Description>
+									<LineNumber>3b</LineNumber>
+									<ELFFieldNumber>0110</ELFFieldNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+							<xsd:simpleType>
+								<xsd:restriction base="TextType">
+									<xsd:enumeration value="CHILD"/>
+									<xsd:enumeration value="FOSTERCHILD"/>
+									<xsd:enumeration value="GRANDCHILD"/>
+									<xsd:enumeration value="GRANDPARENT"/>
+									<xsd:enumeration value="PARENT"/>
+									<xsd:enumeration value="BROTHER"/>
+									<xsd:enumeration value="SISTER"/>
+									<xsd:enumeration value="AUNT"/>
+									<xsd:enumeration value="UNCLE"/>
+									<xsd:enumeration value="NEPHEW"/>
+									<xsd:enumeration value="NIECE"/>
+									<xsd:enumeration value="NONE"/>
+									<xsd:enumeration value="SON"/>
+									<xsd:enumeration value="DAUGHTER"/>
+									<xsd:enumeration value="SPOUSE"/>
+									<xsd:enumeration value="OTHER"/>
+								</xsd:restriction>
+							</xsd:simpleType>
+						</xsd:element>
+
+						<!--Family Living With You Time Period -->
+						<xsd:element name="FamilyLivingWithYouTimePeriod">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Family Living With You Time Period</Description>
+									<LineNumber>3b</LineNumber>
+									<ELFFieldNumber>0120</ELFFieldNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+							<xsd:simpleType>
+								<xsd:restriction base="TextType">
+									<xsd:maxLength value="25"/>
+								</xsd:restriction>
+							</xsd:simpleType>
+						</xsd:element>
+
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+
+			<!--Home Maintained Outside American Samoa Indicator -->
+			<xsd:element name="HmMaintOutsdAmericanSamoaInd" type="BooleanType">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Home Maintained Outside American Samoa Indicator</Description>
+						<LineNumber>4a</LineNumber>
+						<ELFFieldNumber>0130 0140</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<xsd:element name="HmMaintOutsdAmericanSamoaGrp" minOccurs="0" maxOccurs="unbounded">
+				<xsd:complexType>
+					<xsd:sequence>
+
+						<xsd:choice>
+							<!--Home US Address -->
+							<xsd:element name="HomeAddress" type="USAddressType">
+								<xsd:annotation>
+									<xsd:documentation>
+										<Description>Home Address</Description>
+										<LineNumber>4b</LineNumber>
+										<ELFFieldNumber>0150</ELFFieldNumber>
+									</xsd:documentation>
+								</xsd:annotation>
+							</xsd:element>
+							<!--Home Foreign Address -->
+							<xsd:element name="HomeForeignAddress" type="ForeignAddressType">
+								<xsd:annotation>
+									<xsd:documentation>
+										<Description>Home Foreign Address</Description>
+										<LineNumber>4b</LineNumber>
+										<ELFFieldNumber>0150</ELFFieldNumber>
+									</xsd:documentation>
+								</xsd:annotation>
+							</xsd:element>
+						</xsd:choice>
+						
+						<xsd:element name="HomeRentedStatusCd" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Home Rented Status Code</Description>
+									<LineNumber>4b</LineNumber>
+									<ELFFieldNumber>0160</ELFFieldNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+							<xsd:simpleType>
+								<xsd:restriction base="TextType">
+									<xsd:enumeration value="RENTED"/>
+								</xsd:restriction>
+							</xsd:simpleType>
+						</xsd:element>
+
+						<!--Occupant Name -->
+						<xsd:element name="OccupantNm" minOccurs="0" maxOccurs="unbounded">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Occupant Name</Description>
+									<LineNumber>4b</LineNumber>
+									<ELFFieldNumber>0170</ELFFieldNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+							<xsd:complexType>
+								<xsd:simpleContent>
+									<xsd:extension base="PersonNameType">
+										<xsd:attribute name="occupantRelationshipCd">
+											<xsd:annotation>
+												<xsd:documentation>
+													<ELFFieldNumber>0180</ELFFieldNumber>
+												</xsd:documentation>
+											</xsd:annotation>
+											<xsd:simpleType>
+												<xsd:restriction base="TextType">
+													<xsd:enumeration value="CHILD"/>
+													<xsd:enumeration value="FOSTERCHILD"/>
+													<xsd:enumeration value="GRANDCHILD"/>
+													<xsd:enumeration value="GRANDPARENT"/>
+													<xsd:enumeration value="PARENT"/>
+													<xsd:enumeration value="BROTHER"/>
+													<xsd:enumeration value="SISTER"/>
+													<xsd:enumeration value="AUNT"/>
+													<xsd:enumeration value="UNCLE"/>
+													<xsd:enumeration value="NEPHEW"/>
+													<xsd:enumeration value="NIECE"/>
+													<xsd:enumeration value="NONE"/>
+													<xsd:enumeration value="SON"/>
+													<xsd:enumeration value="DAUGHTER"/>
+													<xsd:enumeration value="SPOUSE"/>
+													<xsd:enumeration value="OTHER"/>
+												</xsd:restriction>
+											</xsd:simpleType>
+										</xsd:attribute>
+									</xsd:extension>
+								</xsd:simpleContent>
+							</xsd:complexType>
+						</xsd:element>
+
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+
+			<!--Employer Name -->
+			<xsd:element name="EmployerName" type="BusinessNameType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Employer Name</Description>
+						<LineNumber>5</LineNumber>
+						<ELFFieldNumber>0190</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<xsd:choice minOccurs="0">
+				<!--Employer Foreign Address -->
+				<xsd:element name="EmployerForeignAddress" type="ForeignAddressType">
+					<xsd:annotation>
+						<xsd:documentation>
+							<Description>Employer Foreign Address</Description>
+							<LineNumber>5</LineNumber>
+							<ELFFieldNumber>0200</ELFFieldNumber>
+						</xsd:documentation>
+					</xsd:annotation>
+				</xsd:element>
+				<!--Employer Other Foreign Address -->
+				<xsd:element name="EmployerOtherForeignAddress" type="OtherForeignAddressType">
+					<xsd:annotation>
+						<xsd:documentation>
+							<Description>Employer Other Foreign Address</Description>
+							<LineNumber>5</LineNumber>
+							<ELFFieldNumber>0200</ELFFieldNumber>
+						</xsd:documentation>
+					</xsd:annotation>
+				</xsd:element>
+			</xsd:choice>
+
+			<!--Self Employed -->
+			<xsd:element name="SelfEmployedCd" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Self Employed</Description>
+						<LineNumber>5</LineNumber>
+						<ELFFieldNumber>0200</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+				<xsd:simpleType>
+					<xsd:restriction base="TextType">
+						<xsd:enumeration value="SELF EMPLOYED"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+
+			<xsd:element name="AmericanSamoaAbsenceGrp" minOccurs="0" maxOccurs="unbounded">
+				<xsd:complexType>
+					<xsd:sequence>
+
+						<!--American Samoa Departure Date -->
+						<xsd:element name="AmericanSamoaDepartureDt" type="DateType" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>American Samoa Departure Date</Description>
+									<LineNumber>6a-1 6a-2 6a-3 6a-4</LineNumber>
+									<ELFFieldNumber>0210 0250 0290 0300</ELFFieldNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+
+						<!--American Samoa Return Date -->
+						<xsd:element name="AmericanSamoaReturnDt" type="DateType" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>American Samoa Return Date</Description>
+									<LineNumber>6b-1 6b-2 6b-3 6b-4</LineNumber>
+									<ELFFieldNumber>0220 0260 0300 0340</ELFFieldNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+
+						<!--Days Absent From Samoa Count -->
+						<xsd:element name="DaysAbsentFromSamoaCnt" type="NumberOfDaysType" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Days Absent From Samoa Count</Description>
+									<LineNumber>6c-1 6c-2 6c-3 6c-4</LineNumber>
+									<ELFFieldNumber>0230 0270 0310 0350</ELFFieldNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+
+						<!--Absence Reason Descriptive -->
+						<xsd:element name="AbsenceReasonDesc" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Absence Reason Descriptive</Description>
+									<LineNumber>6d-1 6d-2 6d-3 6d-4</LineNumber>
+									<ELFFieldNumber>0240 0280 0320 0360</ELFFieldNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+							<xsd:simpleType>
+								<xsd:restriction base="TextType">
+									<xsd:maxLength value="35"/>
+								</xsd:restriction>
+							</xsd:simpleType>
+						</xsd:element>
+
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+
+			<!--Wages Exclusion Amount -->
+			<xsd:element name="WagesExclusionAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Wages Exclusion Amount</Description>
+						<LineNumber>7</LineNumber>
+						<ELFFieldNumber>0370</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!--Taxable Interest Exclusion Amount -->
+			<xsd:element name="TaxableInterestExclusionAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Taxable Interest Exclusion Amount</Description>
+						<LineNumber>8</LineNumber>
+						<ELFFieldNumber>0380</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!--Ordinary Dividends Exclusion Amount -->
+			<xsd:element name="OrdinaryDividendsExclusionAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Ordinary Dividends Exclusion Amount</Description>
+						<LineNumber>9</LineNumber>
+						<ELFFieldNumber>0390</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!--Business Income Exclusion Amount -->
+			<xsd:element name="BusinessIncomeExclusionAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Business Income Exclusion Amount</Description>
+						<LineNumber>10</LineNumber>
+						<ELFFieldNumber>0400</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!--Capital Gaining Exclusion Amount -->
+			<xsd:element name="CapitalGainExclusionAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Capital Gaining Exclusion Amount</Description>
+						<LineNumber>11</LineNumber>
+						<ELFFieldNumber>0410</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!--Rental Real Estate Income Exclusion Amount -->
+			<xsd:element name="RentalRealEstateIncomeExclAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Rental Real Estate Income Exclusion Amount</Description>
+						<LineNumber>12</LineNumber>
+						<ELFFieldNumber>0420</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!--Farmland Income Exclusion Amount -->
+			<xsd:element name="FarmIncomeExclusionAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Farmland Income Exclusion Amount</Description>
+						<LineNumber>13</LineNumber>
+						<ELFFieldNumber>0430</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<xsd:element name="OtherIncomeExclusionGrp" minOccurs="0" maxOccurs="100">
+				<xsd:complexType>
+					<xsd:sequence>
+
+						<xsd:choice>
+
+							<!-- Other Income Exclusion Code -->
+							<xsd:element name="OtherIncomeExclusionCd">
+								<xsd:annotation>
+									<xsd:documentation>
+										<Description>Other Income Exclusion Code</Description>
+										<LineNumber>14</LineNumber>
+										<ELFFieldNumber>0440</ELFFieldNumber>
+									</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="TextType">
+										<xsd:enumeration value="MSA"/>
+										<xsd:enumeration value="LTC"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+
+							<!-- Other Income List Type -->
+							<xsd:element name="OtherIncomeExclusionDesc" type="LineExplanationType">
+								<xsd:annotation>
+									<xsd:documentation>
+										<Description>Other Income List Type</Description>
+										<LineNumber>14</LineNumber>
+										<ELFFieldNumber>0440</ELFFieldNumber>
+									</xsd:documentation>
+								</xsd:annotation>
+							</xsd:element>
+
+						</xsd:choice>
+
+						<!-- Other Income Exclusion Amount -->
+						<xsd:element name="OtherIncomeExclusionAmt" type="USAmountType">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Other Income Exclusion Amount</Description>
+									<LineNumber>14</LineNumber>
+									<ELFFieldNumber>0445</ELFFieldNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+
+					</xsd:sequence>
+				</xsd:complexType> 		
+			</xsd:element>	
+
+			<!--Total Other Income Exclusion Amount -->
+			<xsd:element name="TotalOtherIncomeExclusionAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Total Other Income Exclusion Amount</Description>
+						<LineNumber>14</LineNumber>
+						<ELFFieldNumber>0450</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!--Gross Income Exclusion Amount -->
+			<xsd:element name="GrossIncomeExclusionAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Gross Income Exclusion Amount</Description>
+						<LineNumber>15</LineNumber>
+						<ELFFieldNumber>0460</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:schema>

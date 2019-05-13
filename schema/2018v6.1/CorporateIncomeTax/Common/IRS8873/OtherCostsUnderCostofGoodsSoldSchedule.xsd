@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.irs.gov/efile" targetNamespace="http://www.irs.gov/efile" elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.0">
+
+	<xsd:annotation>
+
+		<xsd:documentation>
+
+			<Description>IRS e-file Schema - Other Costs under Cost of Goods Sold Schedule</Description>
+
+			<TaxYear>2018</TaxYear>
+
+			<MaturityLevel>Final Release</MaturityLevel>
+
+			<ReleaseDate>February 13, 2019</ReleaseDate>
+
+		</xsd:documentation>
+
+	</xsd:annotation>
+
+
+
+	<xsd:include schemaLocation="../../../Common/efileTypes.xsd"/>
+
+
+
+	<!-- ================================================================================ -->
+
+	<!-- ===========  Other Costs under Cost of Goods Sold Schedule  ============================ -->
+
+	<!-- ================================================================================ -->
+
+
+
+	<xsd:element name="OtherCostsUnderGoodsSoldSch">
+
+		<xsd:annotation>
+
+			<xsd:documentation>Other Costs under Cost of Goods Sold Schedule</xsd:documentation>
+
+		</xsd:annotation>
+
+		<xsd:complexType>
+
+			<xsd:complexContent>
+
+				<xsd:extension base="OtherCostsUnderGoodsSoldSchType">
+
+					<xsd:attributeGroup ref="DocumentAttributes">
+
+						<xsd:annotation>
+
+							<xsd:documentation>Common return document attributes</xsd:documentation>
+
+						</xsd:annotation>
+
+					</xsd:attributeGroup>
+
+					<xsd:attribute name="documentName" type="xsd:string" fixed="OtherCostsUnderCostofGoodsSoldSchedule">
+
+						<xsd:annotation>
+
+							<xsd:documentation>IRS internal use only. To avoid error in the return, do not include the attribute name or value.</xsd:documentation>
+
+						</xsd:annotation>
+
+					</xsd:attribute>
+
+				</xsd:extension>
+
+			</xsd:complexContent>
+
+		</xsd:complexType>
+
+	</xsd:element>
+
+
+
+	<xsd:complexType name="OtherCostsUnderGoodsSoldSchType">
+
+		<xsd:annotation>
+
+			<xsd:documentation>Content model for Other Costs under Cost of Goods Sold Schedule </xsd:documentation>
+
+		</xsd:annotation>
+
+		<xsd:sequence>
+
+			
+
+			<xsd:element name="OtherCostsInfoGrp" minOccurs="0" maxOccurs="unbounded">
+
+				<xsd:complexType>
+
+					<xsd:sequence>
+
+
+
+						<!-- Type Of Additional Section 263A Costs -->
+
+						<xsd:element name="TypeOfAddnlSectionCostsTxt" type="LineExplanationType" minOccurs="0">
+
+							<xsd:annotation>
+
+								<xsd:documentation>
+
+									<Description>Type of additional section 263a costs</Description>
+
+								</xsd:documentation>
+
+							</xsd:annotation>
+
+						</xsd:element>
+
+			
+
+						<!-- Amount Of Foreign Trade Income Additional Section 263A Costs, Line 17e (a) -->
+
+						<xsd:element name="ForeignTradeIncomeAmt" type="USAmountType" minOccurs="0">
+
+							<xsd:annotation>
+
+								<xsd:documentation>
+
+									<Description>Amount of foreign trade income additional section 263a costs, line 17e (a)</Description>
+
+								</xsd:documentation>
+
+							</xsd:annotation>
+
+						</xsd:element>
+
+			
+
+						<!-- Amount Of Foreign Sales and Leasing Income Additional Section 263A costs, Line 17e (b) -->
+
+						<xsd:element name="ForeignSalesAndLeasingIncmAmt" type="USAmountType" minOccurs="0">
+
+							<xsd:annotation>
+
+								<xsd:documentation>
+
+									<Description>Amount of foreign sales and leasing income additional section 263a costs, line 17e (b)</Description>
+
+								</xsd:documentation>
+
+							</xsd:annotation>
+
+						</xsd:element>
+
+						
+
+					</xsd:sequence>
+
+				</xsd:complexType>
+
+			</xsd:element>
+
+			
+
+			<!-- Total Amount Of Foreign Trade Income, Line 17e(a) -->
+
+			<xsd:element name="TotalAmountOfForeignTrdIncmAmt" type="USAmountType" minOccurs="0">
+
+				<xsd:annotation>
+
+					<xsd:documentation>
+
+						<Description>Total amount of foreign trade income, line 17e(a)</Description>
+
+					</xsd:documentation>
+
+				</xsd:annotation>
+
+			</xsd:element>
+
+
+
+			<!-- Total Of Foreign Sales and Leasing Income, Line 17e(b) -->
+
+			<xsd:element name="TotFrgnSalesAndLeasingIncmAmt" type="USAmountType" minOccurs="0">
+
+				<xsd:annotation>
+
+					<xsd:documentation>
+
+						<Description>Total of foreign sales and leasing income, line 17e(b)</Description>
+
+					</xsd:documentation>
+
+				</xsd:annotation>
+
+			</xsd:element>
+
+						
+
+		</xsd:sequence>
+
+	</xsd:complexType>
+
+</xsd:schema>

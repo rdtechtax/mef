@@ -1,0 +1,628 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.irs.gov/efile" targetNamespace="http://www.irs.gov/efile" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xsd:annotation>
+		<xsd:documentation>
+			<Description>IRS e-file Individual Income Tax Schema - IRS Form 9465 Installment Agreement Request</Description>
+			<TaxYear>2018</TaxYear>
+			<MaturityLevel>Final Release</MaturityLevel>
+			<ReleaseDate>February 13, 2019</ReleaseDate>
+		</xsd:documentation>
+	</xsd:annotation>
+	<xsd:include schemaLocation="../../../Common/efileTypes.xsd"/>
+	<!-- ======================================================================== -->
+	<!-- ============================ IRS Form 9465 ============================= -->
+	<!-- ======================================================================== -->
+	<xsd:element name="IRS9465">
+		<xsd:annotation>
+			<xsd:documentation>IRS Form 9465</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:complexContent>
+				<xsd:extension base="IRS9465Type">
+					<xsd:attributeGroup ref="DocumentAttributes">
+						<xsd:annotation>
+							<xsd:documentation>Common return document attributes</xsd:documentation>
+						</xsd:annotation>
+					</xsd:attributeGroup>
+					<xsd:attribute name="documentName" type="xsd:string" fixed="IRS9465">
+						<xsd:annotation>
+							<xsd:documentation>IRS internal use only. To avoid error in the return, do not include the attribute name or value.</xsd:documentation>
+						</xsd:annotation>
+					</xsd:attribute>
+				</xsd:extension>
+			</xsd:complexContent>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:complexType name="IRS9465Type">
+		<xsd:annotation>
+			<xsd:documentation>Content model for Form 9465</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<!-- Form 9465 Tax Return Type Code -->
+			<xsd:element name="F9465TaxReturnTypeCd" minOccurs="1" maxOccurs="17">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Form 9465 Tax Return Type Code</Description>
+					</xsd:documentation>
+				</xsd:annotation>
+				<xsd:simpleType>
+					<xsd:restriction base="StringType">
+						<xsd:enumeration value="FORM 1040"/>
+						<xsd:enumeration value="FORM 1040A"/>
+						<xsd:enumeration value="FORM 1040EZ"/>
+						<xsd:enumeration value="FORM 1040NR"/>
+						<xsd:enumeration value="FORM 1040PR"/>
+						<xsd:enumeration value="FORM 1040SS"/>
+						<xsd:enumeration value="FORM 940"/>
+						<xsd:enumeration value="FORM 940PR"/>
+						<xsd:enumeration value="FORM 941"/>
+						<xsd:enumeration value="FORM 941PR"/>
+						<xsd:enumeration value="FORM 941SS"/>
+						<xsd:enumeration value="FORM 943"/>
+						<xsd:enumeration value="FORM 943PR"/>
+						<xsd:enumeration value="FORM 944"/>
+						<xsd:enumeration value="FORM 945"/>
+						<xsd:enumeration value="FORM 720"/>
+						<xsd:enumeration value="FORM 2290"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<!-- Installment Agreement Request Tax Year -->
+			<xsd:element name="IATaxYrDt" type="YearType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Installment Agreement Request Tax Year</Description>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Installment Agreement Request Tax Year and Month -->
+			<xsd:element name="BusIATaxYrDt" type="YearMonthType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Installment Agreement Request Tax Year and Month</Description>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Tax Period Detail Grp -->
+			<xsd:element name="TaxPeriodDetailGrp" minOccurs="0">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="TaxPeriodBeginDt" type="DateType">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Tax Period Begin Date</Description>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						<xsd:element name="TaxPeriodEndDt" type="DateType">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Tax Period End Date</Description>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<!-- Person full name -->
+			<xsd:element name="PersonFullName" type="PersonFullNameType">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Person full name</Description>
+						<LineNumber>1a</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Primary name control -->
+			<xsd:element name="PrimaryNameControlTxt" type="PersonNameControlType">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Primary name control</Description>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Primary SSN -->
+			<xsd:element name="PrimarySSN" type="SSNType">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Primary SSN</Description>
+						<LineNumber>1a</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Spouse name -->
+			<xsd:element name="SpouseName" type="PersonFullNameType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Spouse name</Description>
+						<LineNumber>1a</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Spouse name control -->
+			<xsd:element name="SpouseNameControlTxt" type="PersonNameControlType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Spouse name control</Description>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Spouse SSN -->
+			<xsd:element name="SpouseSSN" type="SSNType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Spouse SSN</Description>
+						<LineNumber>1a</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- New Address Indicator -->
+			<xsd:element name="NewAddressInd" type="CheckboxType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>New Address Indicator</Description>
+						<LineNumber>1b</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="HomePhoneGrp" minOccurs="0">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:choice minOccurs="0">
+							<!-- Home Phone Number -->
+							<xsd:element name="PhoneNum" type="PhoneNumberType">
+								<xsd:annotation>
+									<xsd:documentation>
+										<Description>Home Phone Number</Description>
+										<LineNumber>3</LineNumber>
+									</xsd:documentation>
+								</xsd:annotation>
+							</xsd:element>
+							<!-- Foreign Home Phone Number -->
+							<xsd:element name="ForeignPhoneNum" type="ForeignPhoneNumberType">
+								<xsd:annotation>
+									<xsd:documentation>
+										<Description>Foreign Home Phone Number</Description>
+										<LineNumber>3</LineNumber>
+									</xsd:documentation>
+								</xsd:annotation>
+							</xsd:element>
+						</xsd:choice>
+						<!-- Best Time To Call At Home -->
+						<xsd:element name="BestTimeToCallAtHomeTxt" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Best Time To Call At Home</Description>
+									<LineNumber>3</LineNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+							<xsd:simpleType>
+								<xsd:restriction base="TextType">
+									<xsd:maxLength value="10"/>
+								</xsd:restriction>
+							</xsd:simpleType>
+						</xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="WorkPhoneGrp" minOccurs="0">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:choice minOccurs="0">
+							<!-- Home Phone Number -->
+							<xsd:element name="PhoneNum" type="PhoneNumberType">
+								<xsd:annotation>
+									<xsd:documentation>
+										<Description>Work Phone Number</Description>
+										<LineNumber>4</LineNumber>
+									</xsd:documentation>
+								</xsd:annotation>
+							</xsd:element>
+							<!-- Foreign Home Phone Number -->
+							<xsd:element name="ForeignPhoneNum" type="ForeignPhoneNumberType">
+								<xsd:annotation>
+									<xsd:documentation>
+										<Description>Foreign Work Phone Number</Description>
+										<LineNumber>4</LineNumber>
+									</xsd:documentation>
+								</xsd:annotation>
+							</xsd:element>
+						</xsd:choice>
+						<!-- Telephone Number Extension Number -->
+						<xsd:element name="TelephoneNumberExtensionNum" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Telephone Number Extension Number</Description>
+									<LineNumber>4</LineNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+							<xsd:simpleType>
+								<xsd:restriction base="TextType">
+									<xsd:maxLength value="4"/>
+								</xsd:restriction>
+							</xsd:simpleType>
+						</xsd:element>
+						<!-- Best Time To Call At Home -->
+						<xsd:element name="BestTimeToCallAtWorkTxt" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Best Time To Call At Work</Description>
+									<LineNumber>4</LineNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+							<xsd:simpleType>
+								<xsd:restriction base="TextType">
+									<xsd:maxLength value="10"/>
+								</xsd:restriction>
+							</xsd:simpleType>
+						</xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<!-- Tax Due Amount -->
+			<xsd:element name="TaxDueAmt" type="USAmountType">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Total amount you owe as shown on your tax return(s) (or notice(s))</Description>
+						<LineNumber>5</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Additional Balance Due Amount -->
+			<xsd:element name="AdditionalBalanceDueAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>If you have any additional balances due that aren't reported on line 5, enter the amount here</Description>
+						<LineNumber>6</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Total Balance Due Amount -->
+			<xsd:element name="TotalBalanceDueAmt" type="USAmountType">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Add lines 5 and 6 and enter the result</Description>
+						<LineNumber>7</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Payment Amount -->
+			<xsd:element name="PaymentAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Amount of any payment you're making with this request</Description>
+						<LineNumber>8</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Amount owed less payment amount -->
+			<xsd:element name="TotalTaxDueAmt" type="USAmountType" minOccurs="0" maxOccurs="1">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Amount owed</Description>
+						<LineNumber>9</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Calculated Monthly Payment Amount -->
+			<xsd:element name="CalculatedMonthlyPymtAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Divide the amount on line 9 by 72 and enter the result</Description>
+						<LineNumber>10</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Payment Due Amount -->
+			<xsd:element name="PaymentDueAmt" type="USAmountType" minOccurs="0" maxOccurs="1">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Amount you can pay each month</Description>
+						<LineNumber>11a</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Revised Monthly Payment Amt -->
+			<xsd:element name="RevisedMonthlyPaymentAmt" type="USAmountType" minOccurs="0" maxOccurs="1">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Enter Revised Monthly Payment</Description>
+						<LineNumber>11b</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Can Not Increase Payment Indicator -->
+			<xsd:element name="CanNotIncreasePaymentInd" type="CheckboxType" minOccurs="0" maxOccurs="1">
+				<xsd:annotation>
+					<xsd:documentation>
+						<LineNumber>11b</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Payment Due Day Number -->
+			<xsd:element name="PaymentDueDayNum">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Enter the day you want to make your payment each month</Description>
+						<LineNumber>12</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+				<xsd:simpleType>
+					<xsd:restriction base="IntegerType">
+						<xsd:minInclusive value="1"/>
+						<xsd:maxInclusive value="28"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<!-- Routing Transit Number -->
+			<xsd:element name="RoutingTransitNum" type="RoutingTransitNumberType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<xsd:Description>Routing Transit Number</xsd:Description>
+						<LineNumber>13a</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Bank Account Number -->
+			<xsd:element name="BankAccountNum" type="BankAccountNumberType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<xsd:Description>Bank Account Number</xsd:Description>
+						<LineNumber>13b</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- No Electronic Payment Indicator  -->
+			<xsd:element name="NoElectronicPaymentInd" type="CheckboxType" minOccurs="0" maxOccurs="1">
+				<xsd:annotation>
+					<xsd:documentation>
+						<xsd:Description>Low-income taxpayers only. If you're unable to make electronic payments through a direct installment agreement</xsd:Description>
+						<LineNumber>13c</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Payroll Deduction Agreement Indicator  -->
+			<xsd:element name="PayrollDeductionAgreementInd" type="CheckboxType" minOccurs="0" maxOccurs="1">
+				<xsd:annotation>
+					<xsd:documentation>
+						<xsd:Description>If you want to make payments by payroll deduction, check this box and attach completed Form 2159, Payroll Deduction Agreement</xsd:Description>
+						<LineNumber>14</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- County of primary residence  -->
+			<xsd:element name="PrimaryResidenceCountyNm" type="TextType" minOccurs="0" maxOccurs="1">
+				<xsd:annotation>
+					<xsd:documentation>
+						<xsd:Description>County of primary residence</xsd:Description>
+						<LineNumber>15</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:choice minOccurs="0" maxOccurs="1">
+				<!-- Marital Status Single indicator  -->
+				<xsd:element name="MaritalStatusSingleInd" type="CheckboxType" maxOccurs="1">
+					<xsd:annotation>
+						<xsd:documentation>
+							<Description>Marital Status Single</Description>
+							<LineNumber>16a</LineNumber>
+						</xsd:documentation>
+					</xsd:annotation>
+				</xsd:element>
+				<!-- Marital Status Married  -->
+				<xsd:element name="MaritalStatusMarriedInd" type="CheckboxType" maxOccurs="1">
+					<xsd:annotation>
+						<xsd:documentation>
+							<Description>Marital Status Married</Description>
+							<LineNumber>16a</LineNumber>
+						</xsd:documentation>
+					</xsd:annotation>
+				</xsd:element>
+			</xsd:choice>
+			<!-- Do you share household expenses with your spouse -->
+			<xsd:element name="ShareHouseholdExpnsWithSpsInd" type="BooleanType" minOccurs="0" maxOccurs="1">
+				<xsd:annotation>
+					<xsd:documentation>
+						<xsd:Description>Do you share household expenses with your spouse</xsd:Description>
+						<LineNumber>16b</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- How many dependents will you be able to claim on this year tax return -->
+			<xsd:element name="DependentsClaimedCnt" type="IntegerNNType" minOccurs="0" maxOccurs="1">
+				<xsd:annotation>
+					<xsd:documentation>
+						<xsd:Description>How many dependents will you be able to claim on this year tax return</xsd:Description>
+						<LineNumber>17</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- How many people in your household are 65 or older -->
+			<xsd:element name="Age65OrOlderHouseholdCnt" type="IntegerNNType" minOccurs="0" maxOccurs="1">
+				<xsd:annotation>
+					<xsd:documentation>
+						<xsd:Description>How many people in your household are 65 or older</xsd:Description>
+						<LineNumber>18</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- How often are you paid -->
+			<xsd:choice minOccurs="0" maxOccurs="1">
+				<!-- Primary Paid Once A Week Indicator  -->
+				<xsd:element name="PrimaryPdOnceAWeekInd" type="CheckboxType" maxOccurs="1">
+					<xsd:annotation>
+						<xsd:documentation>
+							<Description>Primary Paid Once A Week</Description>
+							<LineNumber>19</LineNumber>
+						</xsd:documentation>
+					</xsd:annotation>
+				</xsd:element>
+				<!-- Primary Paid Once Every Two Weeks Indicator  -->
+				<xsd:element name="PrimaryPdOnceEveryTwoWeeksInd" type="CheckboxType" maxOccurs="1">
+					<xsd:annotation>
+						<xsd:documentation>
+							<Description>Primary Paid Once Every Two Weeks</Description>
+							<LineNumber>19</LineNumber>
+						</xsd:documentation>
+					</xsd:annotation>
+				</xsd:element>
+				<!-- Primary Paid Once A Month Indicator  -->
+				<xsd:element name="PrimaryPdOnceAMonthInd" type="CheckboxType" maxOccurs="1">
+					<xsd:annotation>
+						<xsd:documentation>
+							<Description>Primary Paid Once A Month</Description>
+							<LineNumber>19</LineNumber>
+						</xsd:documentation>
+					</xsd:annotation>
+				</xsd:element>
+				<!-- Primary Paid Twice a Month Indicator  -->
+				<xsd:element name="PrimaryPdTwiceAMonthInd" type="CheckboxType" maxOccurs="1">
+					<xsd:annotation>
+						<xsd:documentation>
+							<Description>Primary Paid Twice a Month</Description>
+							<LineNumber>19</LineNumber>
+						</xsd:documentation>
+					</xsd:annotation>
+				</xsd:element>
+			</xsd:choice>
+			<!-- What is your net income per pay period (take home pay)  -->
+			<xsd:element name="PrimaryNetIncomePerPayPrdAmt" type="USAmountType" minOccurs="0" maxOccurs="1">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>What is your net income per pay period (take home pay)</Description>
+						<LineNumber>20</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- How often is your spouse paid -->
+			<xsd:choice minOccurs="0" maxOccurs="1">
+				<!-- Spouse Paid Once A Week Indicator  -->
+				<xsd:element name="SpousePdOnceAWeekInd" type="CheckboxType" maxOccurs="1">
+					<xsd:annotation>
+						<xsd:documentation>
+							<Description>Spouse Paid Once A Week</Description>
+							<LineNumber>21</LineNumber>
+						</xsd:documentation>
+					</xsd:annotation>
+				</xsd:element>
+				<!-- Spouse Paid Once Every Two Weeks Indicator  -->
+				<xsd:element name="SpousePdOnceEveryTwoWeeksInd" type="CheckboxType" maxOccurs="1">
+					<xsd:annotation>
+						<xsd:documentation>
+							<Description>Spouse Paid Once Every Two Weeks</Description>
+							<LineNumber>21</LineNumber>
+						</xsd:documentation>
+					</xsd:annotation>
+				</xsd:element>
+				<!-- Spouse Paid Once A Month Indicator  -->
+				<xsd:element name="SpousePdOnceAMonthInd" type="CheckboxType" maxOccurs="1">
+					<xsd:annotation>
+						<xsd:documentation>
+							<Description>Spouse Paid Once A Month</Description>
+							<LineNumber>21</LineNumber>
+						</xsd:documentation>
+					</xsd:annotation>
+				</xsd:element>
+				<!-- Spouse Paid Twice a Month Indicator  -->
+				<xsd:element name="SpousePdTwiceAMonthInd" type="CheckboxType" maxOccurs="1">
+					<xsd:annotation>
+						<xsd:documentation>
+							<Description>Spouse Paid Twice a Month</Description>
+							<LineNumber>21</LineNumber>
+						</xsd:documentation>
+					</xsd:annotation>
+				</xsd:element>
+			</xsd:choice>
+			<!-- Spouse Net Income Per Pay Period Amount -->
+			<xsd:element name="SpouseNetIncomePerPayPrdAmt" type="USAmountType" minOccurs="0" maxOccurs="1">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>What is your spouse net income per pay period (take home pay)</Description>
+						<LineNumber>22</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- How many vehicles do you own? -->
+			<xsd:element name="VehicleCnt" type="IntegerNNType" minOccurs="0" maxOccurs="1">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>How Many Vehicles Do You Own</Description>
+						<LineNumber>23</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- How many car payments do you have each month -->
+			<xsd:element name="CarPaymentCnt" type="IntegerNNType" minOccurs="0" maxOccurs="1">
+				<xsd:annotation>
+					<xsd:documentation>
+						<xsd:Description>How many car payments do you have each month?</xsd:Description>
+						<LineNumber>24</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Do you have health insurance -->
+			<xsd:element name="HealthInsuranceInd" type="BooleanType" minOccurs="0" maxOccurs="1">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Do you have health insurance</Description>
+						<LineNumber>25a</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Are your premiums deducted from your paycheck -->
+			<xsd:element name="HealthInsurancePremiumDedInd" type="BooleanType" minOccurs="0" maxOccurs="1">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Are your premiums deducted from your paycheck</Description>
+						<LineNumber>25b</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- How much are your monthly premiums -->
+			<xsd:element name="MthlyHealthInsurancePremiumAmt" type="USAmountType" minOccurs="0" maxOccurs="1">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>How much are your monthly premiums</Description>
+						<LineNumber>25c</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Do you make court-ordered payments -->
+			<xsd:element name="CourtOrderedPaymentInd" type="BooleanType" minOccurs="0" maxOccurs="1">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Do you make court-ordered payments</Description>
+						<LineNumber>26a</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Are your court-ordered payments deducted from your paycheck -->
+			<xsd:element name="CourtOrderedPaymentDedInd" type="BooleanType" minOccurs="0" maxOccurs="1">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Are your court-ordered payments deducted from your paycheck</Description>
+						<LineNumber>26b</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- How much are your court-ordered payments each month -->
+			<xsd:element name="MthlyCourtOrderedPaymentAmt" type="USAmountType" minOccurs="0" maxOccurs="1">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>How much are your court-ordered payments each month</Description>
+						<LineNumber>26c</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Not including any court-ordered payments for child and dependent support, how much do you pay for child or dependent care each month -->
+			<xsd:element name="ChildOrDependentCareExpenseAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Not including any court-ordered payments for child and dependent support, how much do you pay for child or dependent care each month</Description>
+						<LineNumber>27</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:schema>

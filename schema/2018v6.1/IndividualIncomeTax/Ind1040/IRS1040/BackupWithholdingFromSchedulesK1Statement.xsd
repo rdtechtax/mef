@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns="http://www.irs.gov/efile" xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.irs.gov/efile" elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.0">
+
+	<xsd:annotation>
+		<xsd:documentation>
+			<Description>IRS e-file Individual Income Tax Schema - Backup Withholding from Schedules K-1 Statement</Description>
+			<Purpose>To report Back-up withholding from Forms 1065, 1041, and 1120S</Purpose>
+			<TaxYear>2018</TaxYear>
+			<MaturityLevel>Final Release</MaturityLevel>
+			<ReleaseDate>February 13, 2019</ReleaseDate>
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:include schemaLocation="../../../Common/efileTypes.xsd"/>
+
+	<!-- =============================================================== -->
+	<!-- ======= Backup Withholding from Schedules K-1 Statement ======= -->
+	<!-- =============================================================== -->
+
+	<xsd:element name="BackupWhSchedulesK1Statement">
+		<xsd:annotation>
+			<xsd:documentation>Backup Withholding from Schedules K-1 Statement</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:complexContent>
+				<xsd:extension base="BackupWhSchedulesK1StatementType">
+					<xsd:attributeGroup ref="DocumentAttributes">
+						<xsd:annotation>
+							<xsd:documentation>Common return document attributes</xsd:documentation>
+						</xsd:annotation>
+					</xsd:attributeGroup>
+					<xsd:attribute name="documentName" type="StringType" fixed="BackupWithholdingFromSchedulesK1Statement">
+						<xsd:annotation>
+							<xsd:documentation>IRS internal use only. To avoid error in the return, do not include the attribute name or value.</xsd:documentation>
+						</xsd:annotation>
+					</xsd:attribute>
+				</xsd:extension>
+			</xsd:complexContent>
+		</xsd:complexType>
+	</xsd:element>
+
+	<xsd:complexType name="BackupWhSchedulesK1StatementType">
+		<xsd:annotation>
+			<xsd:documentation>Content model for Backup Withholding from Schedules K-1 Statement</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+
+			<xsd:element name="BackupWhSchedulesK1StmtGrp" maxOccurs="unbounded">
+				<xsd:complexType>
+					<xsd:sequence>
+
+						<!-- Information About the Partnership, Estate or Trust or S-Corp -->
+
+						<xsd:choice minOccurs="0">
+
+							<!-- EIN -->
+							<xsd:element name="EIN" type="EINType">
+								<xsd:annotation>
+									<xsd:documentation>
+										<Description>EIN</Description>
+									</xsd:documentation>
+								</xsd:annotation>
+							</xsd:element>
+
+							<!-- Missing EIN Reason -->
+							<xsd:element name="MissingEINReasonCd">
+								<xsd:annotation>
+									<xsd:documentation>
+										<Description>Missing EIN reason</Description>
+									</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="TextType">
+										<xsd:enumeration value="APPLD FOR"/>
+										<xsd:enumeration value="FOREIGNUS"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+
+						</xsd:choice>
+
+						<!-- Business Name -->
+						<xsd:element name="BusinessName" type="BusinessNameType" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Business Name</Description>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+
+						<!-- In Care Of Name -->
+						<xsd:element name="InCareOfNm" type="InCareOfNameType" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>In Care Of Name</Description>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+
+						<xsd:choice minOccurs="0">
+
+							<!-- US Address -->
+							<xsd:element name="USAddress" type="USAddressType" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>
+										<Description>Employee US address</Description>
+									</xsd:documentation>
+								</xsd:annotation>
+							</xsd:element>
+				
+							<!-- Foreign Address -->
+							<xsd:element name="ForeignAddress" type="ForeignAddressType" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>
+										<Description>Employee foreign address</Description>
+									</xsd:documentation>
+								</xsd:annotation>
+							</xsd:element>
+
+						</xsd:choice>
+
+						<!-- Credits -->
+
+						<!-- Schedule K-1 Credits Code for backup withholding reporting -->
+						<xsd:element name="SchK1CreditsCd" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Schedule K-1 Credits Code for backup withholding reporting</Description>
+								</xsd:documentation>
+							</xsd:annotation>
+							<xsd:simpleType>
+								<xsd:restriction base="TextType">
+									<xsd:maxLength value="1"/>
+								</xsd:restriction>
+							</xsd:simpleType>
+						</xsd:element>
+	
+						<!-- Amount -->
+						<xsd:element name="Amt" type="USAmountType" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Amount</Description>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+
+						<!-- Description -->
+						<xsd:element name="Desc" type="LineExplanationType" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Description</Description>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+			
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+
+			<!-- Total Amount -->
+			<xsd:element name="TotalAmt" type="USAmountType">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Total Amount</Description>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+		</xsd:sequence>
+	</xsd:complexType>
+
+</xsd:schema>

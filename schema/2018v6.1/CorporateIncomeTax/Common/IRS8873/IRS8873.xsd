@@ -1,0 +1,981 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.irs.gov/efile" targetNamespace="http://www.irs.gov/efile" elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.0">
+	<xsd:annotation>
+		<xsd:documentation>
+			<Description>IRS e-file Schema - Form 8873</Description>
+			<TaxYear>2018</TaxYear>
+			<MaturityLevel>Final Release</MaturityLevel>
+			<ReleaseDate>February 13, 2019</ReleaseDate>
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:include schemaLocation="../../../Common/efileTypes.xsd"/>
+
+	<!-- =================================================================== -->
+	<!-- =======================  IRS Form 8873 ============================ -->
+	<!-- =================================================================== -->
+
+	<xsd:element name="IRS8873">
+		<xsd:annotation>
+			<xsd:documentation>IRS Form 8873</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:complexContent>
+				<xsd:extension base="IRS8873Type">
+					<xsd:attributeGroup ref="DocumentAttributes">
+						<xsd:annotation>
+							<xsd:documentation>Common return document attributes</xsd:documentation>
+						</xsd:annotation>
+					</xsd:attributeGroup>
+					<xsd:attribute name="documentName" type="xsd:string" fixed="IRS8873">
+						<xsd:annotation>
+							<xsd:documentation>IRS internal use only. To avoid error in the return, do not include the attribute name or value.</xsd:documentation>
+						</xsd:annotation>
+					</xsd:attribute>
+					<xsd:attribute name="referenceDocumentId" type="IdListType"/>
+					<xsd:attribute name="referenceDocumentName" type="StringType" fixed="TabularScheduleOfTransactions"/>
+				</xsd:extension>
+			</xsd:complexContent>
+		</xsd:complexType>
+	</xsd:element>
+
+	<xsd:complexType name="IRS8873Type">
+		<xsd:annotation>
+			<xsd:documentation>Content model for IRS Form 8873</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+
+			<!-- =======================  Part I : Elections and Other Information ======================= -->
+
+			<!-- Electing Under Section 942(a)(3) Box -->
+			<xsd:element name="UnderSection942a3BoxInd" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Check the box if you are electing under section 942(a)(3) to exclude a portion of your gross receipts from foreign trading gross receipts on line 15</Description>
+							<LineNumber>Part I Line 1</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+				<xsd:complexType>
+					<xsd:simpleContent>
+						<xsd:extension base="CheckboxType">
+							<xsd:attribute name="referenceDocumentId" type="IdListType"/>
+							<xsd:attribute name="referenceDocumentName" type="StringType" fixed="Section942a3Schedule"/>
+						</xsd:extension>
+					</xsd:simpleContent>
+				</xsd:complexType>
+			</xsd:element>
+
+			<!-- Electing Transactions In Lieu Of FSC Provisions Box -->
+			<xsd:element name="TransInLieuOfFSCPrvsnBoxInd" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Check the box if you are electing to have the extraterritorial income exclusion provisions apply to certain transactions in lieu of the FSC provisions</Description>
+							<LineNumber>Part I Line 2</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+				<xsd:complexType>
+					<xsd:simpleContent>
+						<xsd:extension base="CheckboxType">
+							<xsd:attribute name="referenceDocumentId" type="IdListType"/>
+							<xsd:attribute name="referenceDocumentName" type="StringType" fixed="TransactionsInLieuOfTheFSCProvisionsSchedule"/>
+						</xsd:extension>
+					</xsd:simpleContent>
+				</xsd:complexType>
+			</xsd:element>
+
+			<!-- Electing To Be Treated As A Domestic Corp Box -->
+			<xsd:element name="FrgnCorpTreatedAsDomCorpInd" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Check the box if the taxpayer is a foreign corporation electing to be treated as a domestic corporation (see instructions)</Description>
+							<LineNumber>Part I Line 3</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+				<xsd:complexType>
+					<xsd:simpleContent>
+						<xsd:extension base="CheckboxType">
+							<xsd:attribute name="referenceDocumentId" type="IdListType"/>
+							<xsd:attribute name="referenceDocumentName" type="StringType" fixed="BasisForEntitlementStatement"/>
+						</xsd:extension>
+					</xsd:simpleContent>
+				</xsd:complexType>
+			</xsd:element>
+
+			<!-- Excepted From Foreign Requirements Yes Or No Boxes -->
+			<xsd:element name="FrgnEconProcessExcReqrmntsInd" type="BooleanType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Are you excepted from the foreign economic process requirements because your foreign trading gross receipts are $5 million or less?</Description>
+							<LineNumber>Part I Line 4a</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<xsd:choice minOccurs="0">
+				<!-- Met The 50% Foreign Direct Cost Test -->
+				<xsd:element name="Met50PercentFrgnDrtCostTestInd" type="CheckboxType">
+					<xsd:annotation>
+						<xsd:documentation>
+							<Description>You met the 50% foreign direct cost test</Description>
+								<LineNumber>Part I Line 4b(1)</LineNumber>
+						</xsd:documentation>
+					</xsd:annotation>
+				</xsd:element>
+
+				<!-- Met Alternative 85% Foreign Direct Cost Test -->
+				<xsd:element name="MetAlt85PCTFrgnDrtCostTestInd" type="CheckboxType">
+					<xsd:annotation>
+						<xsd:documentation>
+							<Description>You met alternative 85% foreign direct cost test</Description>
+								<LineNumber>Part I Line 4b(2)</LineNumber>
+						</xsd:documentation>
+					</xsd:annotation>
+				</xsd:element>
+			</xsd:choice>
+
+			<!-- Business Activity Code or Inactive -->
+			<xsd:choice minOccurs="0">
+
+				<!-- Business Activity Code -->
+				<xsd:element name="PrincipalBusinessActivityCd" type="BusinessActivityCodeType">
+					<xsd:annotation>
+						<xsd:documentation>
+							<Description>Business activity code</Description>
+								<LineNumber>Part I Line 5a</LineNumber>
+						</xsd:documentation>
+					</xsd:annotation>
+				</xsd:element>
+
+				<!-- Inactive Business Activity Code -->
+				<xsd:element name="InactivePrincipalBusActyCd">
+					<xsd:annotation>
+						<xsd:documentation>
+							<Description>Inactive business activity code</Description>
+							<LineNumber>Part I Line 5a</LineNumber>
+						</xsd:documentation>
+					</xsd:annotation>
+					<xsd:simpleType>
+						<xsd:restriction base="StringType">
+							<xsd:enumeration value="Inactive"/>
+						</xsd:restriction>
+					</xsd:simpleType>
+				</xsd:element>
+
+			</xsd:choice>
+
+			<!-- Product Or Product Line -->
+			<xsd:element name="PrincipalBusinessActivityDesc" type="LineExplanationType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Product or product line</Description>
+							<LineNumber>Part I Line 5b</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<xsd:choice minOccurs="0">
+				<!-- Aggregate On Form 8873 Box -->
+				<xsd:element name="AggregateOnForm8873BoxInd" type="CheckboxType">
+					<xsd:annotation>
+						<xsd:documentation>
+							<Description>Aggregate on form 8873 box</Description>
+								<LineNumber>Part I Line 5c(1)(a)</LineNumber>
+						</xsd:documentation>
+					</xsd:annotation>
+				</xsd:element>
+
+				<!-- Aggregate On Tabular Schedule Box -->
+				<xsd:element name="AggregateOnTabularSchBoxInd" type="CheckboxType">
+					<xsd:annotation>
+						<xsd:documentation>
+							<Description>Aggregate on tabular schedule box</Description>
+								<LineNumber>Part I Line 5c(1)(b)</LineNumber>
+						</xsd:documentation>
+					</xsd:annotation>
+				</xsd:element>
+
+				<!-- Tabular Schedule Of Transactions Box -->
+				<xsd:element name="TabularSchOfTransactionsBoxInd" type="CheckboxType">
+					<xsd:annotation>
+						<xsd:documentation>
+							<Description>Tabular schedule of transactions box</Description>
+								<LineNumber>Part I Line 5c(1)(c)</LineNumber>
+						</xsd:documentation>
+					</xsd:annotation>
+				</xsd:element>
+
+				<!-- Group Of Transactions Box -->
+				<xsd:element name="GroupOfTransactionsBoxInd" type="CheckboxType">
+					<xsd:annotation>
+						<xsd:documentation>
+							<Description>Group of transactions box</Description>
+								<LineNumber>Part I Line 5c(2)</LineNumber>
+						</xsd:documentation>
+					</xsd:annotation>
+				</xsd:element>
+			</xsd:choice>
+
+
+			<!-- =======================  Part II : Foreign Trade Income and Foreign Sale and Leasing Income ======================= -->
+
+			<!-- Sale, Exchange, Or Disposition Foreign Trade Income -->
+			<xsd:element name="FrgnTrdSaleOrExchIncmAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Sale, exchange, or disposition of qualifying foreign trade property</Description>
+							<LineNumber>Part II Line 6(a)</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Amount From Line 6(a) Attributable To Sale Of Property's Foreign Sale And Leasing Income -->
+			<xsd:element name="SaleAttrblFrgnSaleLsngIncm1Amt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Enter the amount from line 6, column (a), attributable to the sale of property</Description>
+							<LineNumber>Part II Line 7(b)</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Lease Or Rental Of Property - Foreign Trade Income -->
+			<xsd:element name="FrgnTrdLeaseOrRntalIncmAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Lease or rental of qualifying foreign trade property for use by the lessee outside the United States.</Description>
+							<LineNumber>Part II Line 8(a)</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Lease Or Rental Of Property - Foreign Sale And Leasing Income -->
+			<xsd:element name="ForeignSalesAndLeasingIncmAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Lease or rental of property - foreign sale and leasing income</Description>
+							<LineNumber>Part II Line 8(b)</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Services Related To Sale, Exchange Of Property Foreign Trade Income -->
+			<xsd:element name="ServicesRltdFrgnTrdIncm1Amt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Services related and subsidiary to the sale, exchange, or other disposition of qualifying - foreign trade property</Description>
+							<LineNumber>Part II Line 9(a)</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Amount From Line 9(a) Attributable To Sale Of Property - Foreign Sale And Leasing Income -->
+			<xsd:element name="SaleAttrblFrgnSaleLsngIncm2Amt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Amount from line 9(a) attributable to sale of property - foreign sale and leasing income</Description>
+							<LineNumber>Part II Line 10(b)</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Services Related To Lease Of Property Foreign Trade Income -->
+			<xsd:element name="ServicesRelatedFrgnTrdIncm2Amt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Services related to lease of property - foreign trade income</Description>
+							<LineNumber>Part II Line 11(a)</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Services Related To Lease Of Property Foreign Sale And Leasing Income -->
+			<xsd:element name="SrvcRltdFrgnSaleLsngIncmAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Services related to lease of property - foreign sale and leasing income</Description>
+							<LineNumber>Part II Line 11(b)</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Engineering Or Architectural Services - Foreign Trade Income -->
+			<xsd:element name="ConstructionSrvcFrgnTrdIncmAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Engineering or architectural services - foreign trade income</Description>
+							<LineNumber>12(a)</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Managerial Services Provided To Unrelated Persons - Foreign Trade Income -->
+			<xsd:element name="ManagerialSrvcFrgnTrdIncmAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Managerial services provided to unrelated persons - foreign trade income</Description>
+							<LineNumber>Part II Line 13(a)</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Sum Of Amounts From 6(a),9(a),12(a),and 13(a) - Foreign Sale And Leasing Income -->
+			<xsd:element name="SumOfFrgnEconomicProcAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Sum of amounts from 6(a),9(a),12(a),and 13(a) - foreign sale and leasing income</Description>
+							<LineNumber>Part II Line 14(b)</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Foreign Trading Gross Receipts -->
+			<xsd:element name="ForeignTradingGrossRcpts1Amt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Foreign trading gross receipts. Add lines 6 through 13 in column (a)</Description>
+							<LineNumber>Part II Line 15(a)</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Add Lines 7(b) Through 14(b) - Foreign Sales And Leasing Income -->
+			<xsd:element name="SumOfForeignSaleLsngIncmAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Add lines 7(b) through 14(b) - foreign sales and leasing income</Description>
+							<LineNumber>Part II Line 16(b)</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!--  Inventory At BOY - Foreign Trade Income -->
+			<xsd:element name="InventoryBOYForeignTrdIncmAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Cost of goods sold - inventory at beginning of year - foreign trade income</Description>
+							<LineNumber>Part II Line 17a(a)</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!--  Inventory At BOY - Foreign Sales And Leasing Income -->
+			<xsd:element name="InvntryBOYFrgnSaleLsngIncmAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Cost of goods sold - inventory at beginning of year - foreign sales and leasing income</Description>
+							<LineNumber>Part II Line 17a(b)</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!--  Purchases - Foreign Trade Income -->
+			<xsd:element name="PurchasesForeignTradeIncmAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Cost of goods sold - purchases - foreign trade income</Description>
+							<LineNumber>Part II Line 17b(a)</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Purchases - Foreign Sale And Leasing Income -->
+			<xsd:element name="FrgnPurchasesSaleLsngIncmAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Cost of goods sold - purchases - foreign sale and leasing income</Description>
+							<LineNumber>Part II Line 17b(b)</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Cost Of Labor - Foreign Trade Income -->
+			<xsd:element name="CostOfLaborForeignTradeIncmAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Cost of goods sold - cost of labor - foreign trade income</Description>
+							<LineNumber>Part II Line 17c(a)</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Cost Of Labor - Foreign Sales And Leasing Income -->
+			<xsd:element name="CostOfLbrFrgnSaleLsngIncmAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Cost of goods sold - cost of labor - foreign sales and leasing income</Description>
+							<LineNumber>Part II Line 17c(b)</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Additional Section 263A Costs - Foreign Trade Income -->
+			<xsd:element name="Section263AForeignTradeIncmAmt" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Cost of goods sold - additional section 263a costs - foreign trade income</Description>
+						<LineNumber>Part II Line 17d(a)</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+				<xsd:complexType>
+					<xsd:simpleContent>
+						<xsd:extension base="USAmountType">
+							<xsd:attribute name="referenceDocumentId" type="IdListType"/>
+							<xsd:attribute name="referenceDocumentName" type="StringType" fixed="AdditionalSection263ACostsUnderCostofGoodsSoldSchedule"/>
+						</xsd:extension>
+					</xsd:simpleContent>
+				</xsd:complexType>
+			</xsd:element>
+
+			<!-- Cost Of Goods Sold - Additional Section 263A Costs - Foreign Sales And Leasing Income -->
+			<xsd:element name="Sect263AFrgnSaleLeasingIncmAmt" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Cost of goods sold - additional section 263a costs - foreign sales and leasing income</Description>
+						<LineNumber>Part II Line 17d(b)</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+				<xsd:complexType>
+					<xsd:simpleContent>
+						<xsd:extension base="USAmountType">
+							<xsd:attribute name="referenceDocumentId" type="IdListType"/>
+							<xsd:attribute name="referenceDocumentName" type="StringType" fixed="AdditionalSection263ACostsUnderCostofGoodsSoldSchedule"/>
+						</xsd:extension>
+					</xsd:simpleContent>
+				</xsd:complexType>
+			</xsd:element>
+
+			<!-- Other Costs - Foreign Trade Income -->
+			<xsd:element name="OtherCostsForeignTradeIncmAmt" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Cost of goods sold - Other Costs - Foreign Trade Income</Description>
+						<LineNumber>Part II Line 17e(a)</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+				<xsd:complexType>
+				<xsd:simpleContent>
+						<xsd:extension base="USAmountType">
+							<xsd:attribute name="referenceDocumentId" type="IdListType"/>
+							<xsd:attribute name="referenceDocumentName" type="StringType" fixed="OtherCostsUnderCostofGoodsSoldSchedule"/>
+						</xsd:extension>
+					</xsd:simpleContent>
+				</xsd:complexType>
+			</xsd:element>
+
+			<!-- Other Costs - Foreign Trade Income -->
+			<xsd:element name="OthCostsFrgnSaleLeasingIncmAmt" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Cost of goods sold - Other Costs - Foreign Trade Income</Description>
+						<LineNumber>Part II Line 17e(b)</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+				<xsd:complexType>
+					<xsd:simpleContent>
+						<xsd:extension base="USAmountType">
+							<xsd:attribute name="referenceDocumentId" type="IdListType"/>
+							<xsd:attribute name="referenceDocumentName" type="StringType" fixed="OtherCostsUnderCostofGoodsSoldSchedule"/>
+						</xsd:extension>
+					</xsd:simpleContent>
+				</xsd:complexType>
+			</xsd:element>
+
+			<!-- Total - Foreign Trade Income -->
+			<xsd:element name="TotalOfCostForeignTradeIncmAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Cost of goods sold - Total. Add lines 17a through 17e- foreign trade income</Description>
+						<LineNumber>Part II Line 17f(a)</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Total -  Foreign Sales And Leasing -->
+			<xsd:element name="TotOfCostFrgnSaleLsngIncmAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Cost of goods sold - Total. Add lines 17a through 17e - foreign sales and leasing</Description>
+							<LineNumber>Part II Line 17f(b)</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!--  Inventory At EOY - Foreign Trade Income -->
+			<xsd:element name="InventoryEOYFrgnTradeIncmAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Cost of goods sold - inventory at end of year - foreign trade income</Description>
+							<LineNumber>Part II Line 17g(a)</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!--  Inventory At EOY - Foreign Sales And Leasing Income -->
+			<xsd:element name="InvntryEOYFrgnSaleLsngIncmAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Cost of goods sold - inventory at end of year - foreign sales and leasing income</Description>
+							<LineNumber>Part II Line 17g(b)</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Subtract 17g From 17f - Foreign Trade Income -->
+			<xsd:element name="NetGoodsCostForeignTrdIncmAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Cost of goods sold - subtract 17g from 17f - foreign trade income</Description>
+							<LineNumber>Part II Line 17h(a)</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Subtract 17g From 17f - Foreign Sale And Leasing Income -->
+			<xsd:element name="NetGdsCostFrgnSaleLsngIncmAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Cost of goods sold  - subtract 17g from 17f - foreign sale and leasing income</Description>
+							<LineNumber>Part II Line 17h(b)</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- In Column A, Subtract Line 17h From Line 15 - Foreign Trade Income -->
+			<xsd:element name="SubtractForeignTradeIncomeAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>In column a, subtract line 17h from line 15 - foreign trade income</Description>
+							<LineNumber>Part II Line 18a</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- In Column B, Subtract Line 17h From Line 16 - Foreign Sales And Leasing Income -->
+			<xsd:element name="SubtractFrgnSaleLeasingIncmAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>In column b, subtract line 17h from line 16 - foreign sales and leasing income</Description>
+							<LineNumber>Part II Line 18b</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Other Expenses and Deductions allocable to line 15 - Foreign Trade Income -->
+			<xsd:element name="DeductionsForeignTradeIncmAmt" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Other expenses and deductions allocable to line 15 - foreign trade income</Description>
+							<LineNumber>Part II Line 19a</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+				<xsd:complexType>
+					<xsd:simpleContent>
+						<xsd:extension base="USAmountType">
+							<xsd:attribute name="referenceDocumentId" type="IdListType"/>
+							<xsd:attribute name="referenceDocumentName" type="StringType" fixed="OtherExpensesAndDeductionsSchedule"/>
+						</xsd:extension>
+					</xsd:simpleContent>
+				</xsd:complexType>
+			</xsd:element>
+
+			<!-- Other Expenses and Deductions allocable to line 16 - Foreign Sales And Leasing Income -->
+			<xsd:element name="DedFrgnSaleLeasingIncmAmt" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Other expenses and deductions allocable to line 16 - foreign sales and leasing income</Description>
+							<LineNumber>Part II Line 19b</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+				<xsd:complexType>
+					<xsd:simpleContent>
+						<xsd:extension base="USAmountType">
+							<xsd:attribute name="referenceDocumentId" type="IdListType"/>
+							<xsd:attribute name="referenceDocumentName" type="StringType" fixed="OtherExpensesAndDeductionsSchedule"/>
+						</xsd:extension>
+					</xsd:simpleContent>
+				</xsd:complexType>
+			</xsd:element>
+
+			<!-- Foreign Trade Income In Column (a) Subtract Line 19 from Line 18 -->
+			<xsd:element name="ForeignTradeIncome1Amt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Foreign trade income In column (a) subtract line 19 from line 18</Description>
+							<LineNumber>Part II Line 20a</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Foreign Sale And Leasing Income -->
+			<xsd:element name="FrgnSaleAndLsngIncm1Amt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Foreign sale and leasing income. In column (b), subtract line 19 from line 18</Description>
+							<LineNumber>Part II Line 21b</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- =======================  Part III : Marginal Costing ============================= -->
+
+			<!-- ========  Section A:  Foreign Trade Income Using Marginal Costing Method ============ -->
+
+			<!-- Foreign Trading Gross Receipts -->
+			<xsd:element name="ForeignTradingGrossRcpts2Amt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Foreign trading gross receipts</Description>
+							<LineNumber>Part III Line 22</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Costs And Expenses Allocable To Line 22 - Direct Material Costs -->
+			<xsd:element name="CostsAndExpnssDrtMtrlCostsAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Costs and expenses allocable to line 22 - direct material costs</Description>
+							<LineNumber>Part III Line 23a</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Costs And Expenses Allocable To Line 22 - Direct Labor Costs -->
+			<xsd:element name="CostsAndExpensesDrtLbrCostsAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Costs and expenses allocable to line 22 - direct labor costs</Description>
+							<LineNumber>Part III Line 23b</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Costs And Expenses Allocable - Add Lines 23a And 23b -->
+			<xsd:element name="SumOfCostsAndExpensesAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Costs and expenses allocable - add lines 23a and 23b</Description>
+							<LineNumber>Part III Line 23c</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Subtract Line 23c From Line 22 -->
+			<xsd:element name="FrgnGroRcptsMnsCostExpnssAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Subtract line 23c from line 22</Description>
+							<LineNumber>Part III Line 24</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Worldwide Gross Receipts From Sales -->
+			<xsd:element name="WorldwideGrossRcptsFromSlsAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Worldwide gross receipts from sales</Description>
+							<LineNumber>Part III Line 25</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Costs And Expenses Allocable To Line 25 - Property Sold -->
+			<xsd:element name="CostsAndExpensesForPropSoldAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Costs and expenses allocable to line 25 - property sold</Description>
+							<LineNumber>Part III Line 26a</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Costs and Expenses Allocable to line 25 - Expenses and Deductions Attributable to Gross Income -->
+			<xsd:element name="OtherExpnssDedAttrblGroIncmAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Costs and expenses allocable to line 25 - expenses and deductions attributable to gross income</Description>
+							<LineNumber>Part III Line 26b</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Costs And Expenses Allocable To Line 25 - Add Lines 26a And 26b -->
+			<xsd:element name="TotalCostsAndExpensesAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Costs and expenses allocable to line 25 - add lines 26a and 26b</Description>
+							<LineNumber>Part III Line 26c</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Subtract Line 26c From Line 25 -->
+			<xsd:element name="WorldWideRcptsMnsCostExpnssAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Subtract line 26c from line 25.(Note: If -0- or less, stop here. You may not use Part III to determine your qualifying foreign trade income. Go to line 37.)</Description>
+							<LineNumber>Part III Line 27</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Overall Profit percentage -->
+			<xsd:element name="OverallProfitPercentageRt" type="RatioType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Overall profit percentage. Divide line 27 by line 25. Carry the result to at least three decimal places</Description>
+							<LineNumber>Part III Line 28</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Overall Profit Percentage Limitation -->
+			<xsd:element name="OverallProfitPercentageLmtAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Overall profit percentage limitation. Multiply line 22 by line 28</Description>
+							<LineNumber>Part III Line 29</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Foreign Trade Income Using Marginal Costing -->
+			<xsd:element name="FrgnTrdeIncmByMrgnalCostingAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Foreign trade income using marginal costing. Enter the smaller of line 24 or line 29</Description>
+							<LineNumber>Part III Line 30</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- ========  Section B:  15% of Foreign Trade Income Method ============ -->
+
+			<!-- Multiply Line 30 By 15% -->
+			<xsd:element name="FrgnTrdIncmMrgnalCostingPctAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Multiply line 30 by 15%</Description>
+							<LineNumber>Part III Line 31</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Foreign Trade Income Using Full Costing -->
+			<xsd:element name="ForeignTrdIncmByFullCostingAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Foreign trade income using full costing. Enter the amount from line 20</Description>
+							<LineNumber>Part III Line 32</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Smaller Of Line 31 Or Line 32 -->
+			<xsd:element name="ForeignTradeIncomeSmallerAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Smaller of line 31 or line 32</Description>
+							<LineNumber>Part III Line 33</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- ========  Section C:  1.2% of Foreign Trading Gross Receipts Method ============ -->
+
+			<!-- Multiply Line 22 By 1.2% -->
+			<xsd:element name="FrgnTrdGroRcptsBy1Pnt2PctAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Multiply line 22 by 1.2%</Description>
+							<LineNumber>Part III Line 34</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Multiply Line 30 By 30% -->
+			<xsd:element name="ForeignTradeIncomeBy30PctAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Multiply line 30 by 30%</Description>
+							<LineNumber>Part III Line 35</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Enter The Smallest Of Lines 32, 34, Or 35 -->
+			<xsd:element name="SmlestOfFrgnTrdIncmGroRcptAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Enter the smallest of lines 32, 34, or 35</Description>
+							<LineNumber>Part III Line 36</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- ========  Part IV:  Extraterritorial Income Exclusion (Net of Disallowed Deductions) ============ -->
+
+			<!-- Enter Foreign Trade Income From Line 20 -->
+			<xsd:element name="ForeignTradeIncome2Amt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Enter foreign trade income from line 20</Description>
+							<LineNumber>Part IV Line 37</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Multiply Line 37 By 15% -->
+			<xsd:element name="ForeignTradeIncomeBy15PctAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Multiply line 37 by 15%</Description>
+							<LineNumber>Part IV Line 38</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Enter Foreign Trading Gross Receipts From Line 15 -->
+			<xsd:element name="ForeignTradingGrossRcpts3Amt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Enter foreign trading gross receipts from line 15</Description>
+							<LineNumber>Part IV Line 39</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Multiply Line 39 By 1.2% -->
+			<xsd:element name="ForeignTradeRcptsBy1Pnt2PctAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Multiply line 39 by 1.2%</Description>
+							<LineNumber>Part IV Line 40</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Multiply Line 38 By 2.0 -->
+			<xsd:element name="ForeignTradeIncomeBy2PctAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Multiply line 38 by 2.0</Description>
+							<LineNumber>Part IV Line 41</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Enter The Smaller Of Line 40 Or Line 41 -->
+			<xsd:element name="SmallerOfForeignTrdGroRcptsAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Enter the smaller of line 40 or line 41</Description>
+							<LineNumber>Part IV Line 42</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Enter Foreign Sale And Leasing Income From Line 21 -->
+			<xsd:element name="FrgnSaleAndLsngIncm2Amt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Enter foreign sale and leasing income from line 21</Description>
+							<LineNumber>Part IV Line 43</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Multiply Line 43 By 30% -->
+			<xsd:element name="FrgnSaleAndLsngBy30PctAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Multiply line 43 by 30%</Description>
+							<LineNumber>Part IV Line 44</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Enter Greatest Of Lines 33,36, 38, 42 Or 44 -->
+			<xsd:element name="GreatestOfQlfyFrgnTrdIncmAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Enter greatest of lines 33,36, 38, 42 or 44. If you are using the alternative computation, see instructions for the amount to enter</Description>
+							<LineNumber>Part IV Line 45</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- If line 44 equals line 45, divide the amount on line 45 by the amount on line 43; otherwise, divide line 45 by line 37. -->
+			<xsd:element name="QlfyTrdMthdsDivByFrgnTrdIncmRt" type="RatioType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>If line 44 equals line 45, divide the amount on line 45 by the amount on line 43; otherwise, divide line 45 by line 37.</Description>
+							<LineNumber>Part IV Line 46</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- If Line 44 Equals Line 45, Enter Amount From Line 19(b). Otherwise, Enter Line 19(a) -->
+			<xsd:element name="OthFrgnTrdExpnsAndDednsAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>If line 44 equals line 45, enter amount from line 19(b).  otherwise, enter line 19(a)</Description>
+							<LineNumber>Part IV Line 47</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Multiply Line 46 By Line 47 -->
+			<xsd:element name="MultiplyExpensesDedByRtAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Multiply line 46 by line 47</Description>
+							<LineNumber>Part IV Line 48</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Add Lines 45 And 48 -->
+			<xsd:element name="SumOfQualifiedFrgnTrdIncmAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Add lines 45 and 48</Description>
+							<LineNumber>Part IV Line 49</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Reduction For Inter- National Boycott Operations, Etc. -->
+			<xsd:element name="ReductionForIntntByctAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Reduction for international boycott operations, etc.</Description>
+							<LineNumber>Part IV Line 50</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Qualifying Foreign Trade Income -->
+			<xsd:element name="QualifyingForeignTradeIncmAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Qualifying foreign trade income. Subtract line 50 from line 49. If -0- or less, stop here.</Description>
+							<LineNumber>Part IV Line 51</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Subtract Line 48 from Qualifying Foreign Trade Income -->
+			<xsd:element name="DifBtwnExpnDedNdFrgnTrdIncmAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Subtract line 48 from qualifying foreign trade income</Description>
+							<LineNumber>Part IV Line 52</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:schema>

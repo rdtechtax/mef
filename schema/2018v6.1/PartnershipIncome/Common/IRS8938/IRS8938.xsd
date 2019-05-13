@@ -1,0 +1,1018 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2014 rel. 2 (x64) (http://www.altova.com) by ﻿Internal Revenue Service (IRS Software Management) -->
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.irs.gov/efile" targetNamespace="http://www.irs.gov/efile" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xsd:annotation>
+		<xsd:documentation>
+			<Description>IRS e-file Partnership Schema - IRS Form 8938</Description>
+			<TaxYear>2018</TaxYear>
+			<MaturityLevel>Final Release</MaturityLevel>
+			<ReleaseDate>February 13, 2019</ReleaseDate>
+		</xsd:documentation>
+	</xsd:annotation>
+	<xsd:include schemaLocation="../../../Common/efileTypes.xsd"/>
+	<!-- ================================================================== -->
+	<!-- ======================  IRS Form 8938 =============================== -->
+	<!-- ================================================================== -->
+	<xsd:element name="IRS8938">
+		<xsd:annotation>
+			<xsd:documentation>IRS Form 8938</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:complexContent>
+				<xsd:extension base="IRS8938Type">
+					<xsd:attributeGroup ref="DocumentAttributes">
+						<xsd:annotation>
+							<xsd:documentation>Common return document attributes</xsd:documentation>
+						</xsd:annotation>
+					</xsd:attributeGroup>
+					<xsd:attribute name="documentName" type="xsd:string" fixed="IRS8938">
+						<xsd:annotation>
+							<xsd:documentation>IRS internal use only. To avoid error in the return, do not include the attribute name or value.</xsd:documentation>
+						</xsd:annotation>
+					</xsd:attribute>
+					<xsd:attribute name="referenceDocumentId" type="IdListType">
+						<xsd:annotation>
+							<xsd:documentation>List of document ID's of forms, schedules, supporting info. etc. attached to this form</xsd:documentation>
+						</xsd:annotation>
+					</xsd:attribute>
+					<xsd:attribute name="referenceDocumentName" type="StringType" fixed="GeneralDependencySmall"/>
+				</xsd:extension>
+			</xsd:complexContent>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:complexType name="IRS8938Type">
+		<xsd:annotation>
+			<xsd:documentation>Content model for Form 8938</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<!-- Calendar Year -->
+			<xsd:element name="CalendarYr" type="YearType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Calendar Year</Description>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Tax Year Begin Date -->
+			<xsd:element name="TaxYearBeginDt" type="DateType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Tax Year Begin Date</Description>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Tax Year End Date -->
+			<xsd:element name="TaxYearEndDt" type="DateType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Tax Year End Date</Description>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!--Line 3 Type of Filer Indicators -->
+			<xsd:choice minOccurs="0">
+				<!-- Specified Individual Indicator-->
+				<xsd:element name="SpcfdIndividualInd" type="CheckboxType" minOccurs="0">
+					<xsd:annotation>
+						<xsd:documentation>
+							<Description>Specified Individual Indicator</Description>
+							<LineNumber>3a</LineNumber>
+						</xsd:documentation>
+					</xsd:annotation>
+				</xsd:element>
+				<!-- Partnership Indicator-->
+				<xsd:element name="PartnershipInd" type="CheckboxType" minOccurs="0">
+					<xsd:annotation>
+						<xsd:documentation>
+							<Description>Partnership Indicator</Description>
+							<LineNumber>3b</LineNumber>
+						</xsd:documentation>
+					</xsd:annotation>
+				</xsd:element>
+				<!-- Corporation Indicator-->
+				<xsd:element name="CorporationInd" type="CheckboxType" minOccurs="0">
+					<xsd:annotation>
+						<xsd:documentation>
+							<Description>Corporation Indicator</Description>
+							<LineNumber>3c</LineNumber>
+						</xsd:documentation>
+					</xsd:annotation>
+				</xsd:element>
+				<!-- Trust Indicator-->
+				<xsd:element name="TrustInd" type="CheckboxType" minOccurs="0">
+					<xsd:annotation>
+						<xsd:documentation>
+							<Description>Trust Indicator</Description>
+							<LineNumber>3d</LineNumber>
+						</xsd:documentation>
+					</xsd:annotation>
+				</xsd:element>
+			</xsd:choice>
+			<!-- Line 4 Specified Individual or Specified Person Group -->
+			<xsd:element name="SpecifiedIndivOrPersonInfo" type="SpecifiedIndivOrPersonInfoType" minOccurs="0" maxOccurs="unbounded">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Line 4 Specified Individual or Specified Person Group</Description>
+						<LineNumber>Line 4</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Part I Foreign Deposit and Custodial Accounts Summary -->
+			<!-- Foreign Deposit Account Count  -->
+			<xsd:element name="ForeignDepositAcctCnt" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Number of Deposit Accounts (reported on Form 8938)</Description>
+						<LineNumber>Part I Line 1</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+				<xsd:simpleType>
+					<xsd:restriction base="IntegerType">
+						<xsd:totalDigits value="10"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<!-- Maximum of All Foreign Deposit Account Value Amount -->
+			<xsd:element name="MaxAllFrgnDepositAcctValueAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Maximum Value of All Deposit Accounts</Description>
+						<LineNumber>Part I Line 2</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Foreign Custodial Account Count  -->
+			<xsd:element name="ForeignCustodialAcctCnt" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Number of Custodial Accounts (reported on Form 8938)</Description>
+						<LineNumber>Part I Line 3</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+				<xsd:simpleType>
+					<xsd:restriction base="IntegerType">
+						<xsd:totalDigits value="10"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<!-- Maximum of All Foreign Custodial Account Value Amount -->
+			<xsd:element name="MaxAllFrgnCstdAcctValueAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Maximum Value of All Custodial Accounts</Description>
+						<LineNumber>Part I Line 4</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Any Deposit Or Custodial Account Closed During TY Indicator -->
+			<xsd:element name="AnyDepOrCstdAcctClosedDurTYInd" type="BooleanType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Were any foreign deposit or custodial accounts closed during the tax year?</Description>
+						<LineNumber>Part I Line 5</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Part II Other Foreign Assets Summary -->
+			<!-- Foreign Assets Count  -->
+			<xsd:element name="ForeignAssetCnt" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Number of Foreign Assets (reported on Form 8938)</Description>
+						<LineNumber>Part II Line 1</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+				<xsd:simpleType>
+					<xsd:restriction base="IntegerType">
+						<xsd:totalDigits value="10"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<!-- Maximum of All Foreign Assets Value Amount -->
+			<xsd:element name="MaxAllFrgnAssetValueAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Maximum Value of All Assets</Description>
+						<LineNumber>Part II Line 2</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Any Foreign Assets Acquired Or Sold During TY Indicator -->
+			<xsd:element name="AnyFrgnAssetAcqOrSoldDurTYInd" type="BooleanType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Were any foreign assets acquired or sold during the tax year?</Description>
+						<LineNumber>Part II Line 3</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Repeating group For Part III  Summary of Tax Items Attributable to Specified Foreign Financial Assets -->
+			<xsd:element name="ForeignFinclAccountSumGrp" type="AssetCategorySumGrpType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Foreign Financial Account Summary Group</Description>
+						<LineNumber>Part III Line 1(b)</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="OtherForeignAssetSumGrp" type="AssetCategorySumGrpType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Other Foreign Assets Summary Group</Description>
+						<LineNumber>Part III Line 2(b)</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Part IV - Excepted Specified Foreign Financial Assets Counts-->
+			<!-- Form 3520 Count -->
+			<xsd:element name="Form3520Cnt" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Number of Forms 3520</Description>
+						<LineNumber>Part IV Line 1</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+				<xsd:simpleType>
+					<xsd:restriction base="IntegerType">
+						<xsd:totalDigits value="6"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<!-- Form 3520A Count -->
+			<xsd:element name="Form3520ACnt" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Number of Forms 3520-A</Description>
+						<LineNumber>Part IV Line 2</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+				<xsd:simpleType>
+					<xsd:restriction base="IntegerType">
+						<xsd:totalDigits value="6"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<!-- Form 5471 Count -->
+			<xsd:element name="Form5471Cnt" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Number of Forms 5471</Description>
+						<LineNumber>Part IV Line 3</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+				<xsd:simpleType>
+					<xsd:restriction base="IntegerType">
+						<xsd:totalDigits value="6"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<!-- Form 8621 Count -->
+			<xsd:element name="Form8621Cnt" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Number of Forms 8621</Description>
+						<LineNumber>Part IV Line 4</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+				<xsd:simpleType>
+					<xsd:restriction base="IntegerType">
+						<xsd:totalDigits value="6"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<!-- Form 8865 Count -->
+			<xsd:element name="Form8865Cnt" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Number of Forms 8865</Description>
+						<LineNumber>Part IV Line 5</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+				<xsd:simpleType>
+					<xsd:restriction base="IntegerType">
+						<xsd:totalDigits value="6"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<!-- Part V Foreign Deposit and Custodial Accounts Group  -->
+			<xsd:element name="ForeignFinclAccountGrp" type="ForeignFinclAccountGrpType" minOccurs="0" maxOccurs="unbounded"/>
+			<!-- Part VI Other Foreign Assets Detail Group  -->
+			<xsd:element name="OtherForeignAssetGrp" type="OtherForeignAssetGrpType" minOccurs="0" maxOccurs="unbounded"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<!-- Groups for Part III - Summary of Tax Items Attributable to Specified Foreign Financial Assets Group-->
+	<xsd:complexType name="AssetCategorySumGrpType">
+		<xsd:sequence>
+			<xsd:element name="InterestSumGrp" type="TaxItemSumGrpType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>(a) Interest - Reported On Form Or Schedule Amount</Description>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="DividendSumGrp" type="TaxItemSumGrpType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>(b) Dividend - Reported On Form Or Schedule Amount</Description>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="RoyaltySumGrp" type="TaxItemSumGrpType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>(c)Royalty - Reported On Form Or Schedule Amount</Description>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="OtherIncomeSumGrp" type="TaxItemSumGrpType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>(d) Other Income - Reported On Form Or Schedule Amount</Description>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="GainLossSumGrp" type="TaxItemSumGrpType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>(e) Gain Loss - Reported On Form Or Schedule Amount</Description>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="DeductionSumGrp" type="TaxItemSumGrpType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>(f) Deduction - Reported On Form Or Schedule Amount</Description>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="CreditSumGrp" type="TaxItemSumGrpType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>(g) Credit - Reported On Form Or Schedule Amount</Description>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	<!-- Elements for Part III - Tax Item Summary Group -->
+	<xsd:complexType name="TaxItemSumGrpType">
+		<xsd:sequence>
+			<xsd:element name="ReportedOnFormOrScheduleAmt" type="USAmountType">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Reported On Form Or Schedule Amount</Description>
+						<LineNumber>(c)</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="WhereReportedFormAndLineTxt" type="ShortDescriptionType" minOccurs="0" maxOccurs="unbounded">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Where Reported Form And Line</Description>
+						<LineNumber>(d)</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="WhereReportedSchAndLineTxt" type="ShortDescriptionType" minOccurs="0" maxOccurs="unbounded">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Where Reported Schedule And Line</Description>
+						<LineNumber>(e)</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	<!-- Part V Foreign Deposit and Custodial Accounts Group Elements -->
+	<xsd:complexType name="ForeignFinclAccountGrpType">
+		<xsd:sequence>
+			<xsd:choice minOccurs="0">
+				<!-- Deposit Account Type Indicator -->
+				<xsd:element name="DepositAccountTypeInd" type="CheckboxType" minOccurs="0">
+					<xsd:annotation>
+						<xsd:documentation>
+							<Description>Deposit Account Type Indicator</Description>
+							<LineNumber>Part V Line 1</LineNumber>
+						</xsd:documentation>
+					</xsd:annotation>
+				</xsd:element>
+				<!-- Custodial Account Type Indicator -->
+				<xsd:element name="CustodialAccountTypeInd" type="CheckboxType" minOccurs="0">
+					<xsd:annotation>
+						<xsd:documentation>
+							<Description>Custodial Account Type Indicator</Description>
+							<LineNumber>Part V Line 1</LineNumber>
+						</xsd:documentation>
+					</xsd:annotation>
+				</xsd:element>
+			</xsd:choice>
+			<xsd:choice minOccurs="0">
+				<!-- Identifying Designation Number -->
+				<xsd:element name="IdentifyingDesignationNum" type="LineExplanationType" minOccurs="0">
+					<xsd:annotation>
+						<xsd:documentation>
+							<Description>Identifying Designation Number</Description>
+							<LineNumber>Part V Line 2</LineNumber>
+						</xsd:documentation>
+					</xsd:annotation>
+				</xsd:element>
+				<!-- Bank Account Number -->
+				<xsd:element name="BankAccountNum" type="BankAccountNumberType" minOccurs="0">
+					<xsd:annotation>
+						<xsd:documentation>
+							<Description>Bank Account Number</Description>
+							<LineNumber>Part V Line 2</LineNumber>
+						</xsd:documentation>
+					</xsd:annotation>
+				</xsd:element>
+			</xsd:choice>
+			<!-- =============== Check All That Apply =============== -->
+			<!-- Account Opened During Tax Year Indicator -->
+			<xsd:element name="AccountOpenedDuringTaxYearInd" type="CheckboxType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Account Opened During Tax Year Indicator</Description>
+						<LineNumber>Part V Line 3a</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Account Closed During Tax Year Indicator -->
+			<xsd:element name="AccountClosedDuringTaxYearInd" type="CheckboxType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Account Closed During Tax Year Indicator</Description>
+						<LineNumber>Part V Line 3b</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Jointly Owned With Spouse Indicator -->
+			<xsd:element name="JointlyOwnedWithSpouseInd" type="CheckboxType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Jointly Owned With Spouse Indicator</Description>
+						<LineNumber>Part V Line 3c</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- No Tax Item Reported Indicator -->
+			<xsd:element name="NoTaxItemReportedInd" type="CheckboxType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>No Tax Item Reported Indicator</Description>
+						<LineNumber>Part V Line 3d</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Max Account Value During Tax Year Amount -->
+			<xsd:element name="MaxAccountValueDurTYAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Max Account Value During Tax Year Amount</Description>
+						<LineNumber>Part V Line 4</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Exchange Rate Used Indictor -->
+			<xsd:element name="ExchangeRateUsedInd" type="BooleanType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Exchange Rate Used Indictor</Description>
+						<LineNumber>Part V Line 5</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Foreign Currency Description -->
+			<xsd:element name="ForeignCurrencyDesc" type="LineExplanationType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Foreign Currency Description</Description>
+						<LineNumber>Part V Line 6(a)</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Exchange Rate Used -->
+			<xsd:element name="ExchangeRt" type="LargeRatioType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Exchange Rate</Description>
+						<LineNumber>Part V Line 6(b)</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Source Of Exchange Rate Used Text -->
+			<xsd:element name="SourceOfExchangeRateUsedTxt" type="LineExplanationType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Source Of Exchange Rate Used Text</Description>
+						<LineNumber>Part V Line 6(c)</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Business Name -->
+			<xsd:element name="BusinessName" type="BusinessNameType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Business Name</Description>
+						<LineNumber>Part V Line 7(a)</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!--GIIN -->
+			<xsd:element name="GIIN" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>GIIN</Description>
+						<LineNumber>Part V Line 7(b)</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+				<xsd:simpleType>
+					<xsd:restriction base="TextType">
+						<xsd:maxLength value="19"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:choice minOccurs="0">
+				<!-- US Address -->
+				<xsd:element name="USAddress" type="USAddressType" minOccurs="0">
+					<xsd:annotation>
+						<xsd:documentation>
+							<Description>US Address</Description>
+							<LineNumber>Part V Lines 8,9</LineNumber>
+						</xsd:documentation>
+					</xsd:annotation>
+				</xsd:element>
+				<!-- Foreign Address -->
+				<xsd:element name="ForeignAddress" type="ForeignAddressType" minOccurs="0">
+					<xsd:annotation>
+						<xsd:documentation>
+							<Description>Foreign Address</Description>
+							<LineNumber>Part V Lines 8,9</LineNumber>
+						</xsd:documentation>
+					</xsd:annotation>
+				</xsd:element>
+			</xsd:choice>
+		</xsd:sequence>
+	</xsd:complexType>
+	<!-- Part VI Other Foreign Assets Detail Group -->
+	<xsd:complexType name="OtherForeignAssetGrpType">
+		<xsd:sequence>
+			<!-- Asset Description -->
+			<xsd:element name="AssetDesc" type="LineExplanationType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>AssetDescription</Description>
+						<LineNumber>Part VI Line 1</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:choice minOccurs="0">
+				<!-- Identifying Designation Number -->
+				<xsd:element name="IdentifyingDesignationNum" type="LineExplanationType" minOccurs="1" maxOccurs="1">
+					<xsd:annotation>
+						<xsd:documentation>
+							<Description>Identifying Designation Number</Description>
+							<LineNumber>Part VI Line 2</LineNumber>
+						</xsd:documentation>
+					</xsd:annotation>
+				</xsd:element>
+				<!-- Bank Account Number -->
+				<xsd:element name="BankAccountNum" type="BankAccountNumberType" minOccurs="1" maxOccurs="1">
+					<xsd:annotation>
+						<xsd:documentation>
+							<Description>Bank Account Number</Description>
+							<LineNumber>Part VI Line 2</LineNumber>
+						</xsd:documentation>
+					</xsd:annotation>
+				</xsd:element>
+			</xsd:choice>
+			<xsd:choice minOccurs="0">
+				<!-- Date Acquired -->
+				<xsd:element name="AcquiredDt" type="DateType" minOccurs="1" maxOccurs="1">
+					<xsd:annotation>
+						<xsd:documentation>
+							<Description>Date Acquired</Description>
+							<LineNumber>Part VI Line 3a</LineNumber>
+						</xsd:documentation>
+					</xsd:annotation>
+				</xsd:element>
+				<!-- Acquired Date Various Code -->
+				<xsd:element name="AcquiredDateVariousCd" minOccurs="1" maxOccurs="1">
+					<xsd:annotation>
+						<xsd:documentation>
+							<Description>Acquired Date Various Code</Description>
+							<LineNumber>Part VI Line 3a</LineNumber>
+						</xsd:documentation>
+					</xsd:annotation>
+					<xsd:simpleType>
+						<xsd:restriction base="TextType">
+							<xsd:enumeration value="VARIOUS"/>
+						</xsd:restriction>
+					</xsd:simpleType>
+				</xsd:element>
+			</xsd:choice>
+			<xsd:choice minOccurs="0">
+				<!-- Disposed Of Date -->
+				<xsd:element name="DisposedOfDt" type="DateType" minOccurs="1" maxOccurs="1">
+					<xsd:annotation>
+						<xsd:documentation>
+							<Description>Disposed Of Date</Description>
+							<LineNumber>Part VI Line 3b</LineNumber>
+						</xsd:documentation>
+					</xsd:annotation>
+				</xsd:element>
+				<!-- Disposed Of Date Various Code -->
+				<xsd:element name="DisposedOfDateVariousCd" minOccurs="1" maxOccurs="1">
+					<xsd:annotation>
+						<xsd:documentation>
+							<Description>Disposed Of Date Various Code</Description>
+							<LineNumber>Part VI Line 3b</LineNumber>
+						</xsd:documentation>
+					</xsd:annotation>
+					<xsd:simpleType>
+						<xsd:restriction base="TextType">
+							<xsd:enumeration value="VARIOUS"/>
+						</xsd:restriction>
+					</xsd:simpleType>
+				</xsd:element>
+			</xsd:choice>
+			<!-- Jointly Owned With Spouse Indicator -->
+			<xsd:element name="JointlyOwnedWithSpouseInd" type="CheckboxType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Jointly Owned With Spouse Indicator</Description>
+						<LineNumber>Part VI Line 3c</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- No Tax Item Reported Indicator -->
+			<xsd:element name="NoTaxItemReportedInd" type="CheckboxType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>No Tax Item Reported Indicator</Description>
+						<LineNumber>Part VI Line 3d</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:choice minOccurs="0">
+				<!-- Maximum Value During Tax Year 0 To 50000 Indicator -->
+				<xsd:element name="MaxValueDuringTY0To50000Ind" type="CheckboxType" minOccurs="0">
+					<xsd:annotation>
+						<xsd:documentation>
+							<Description>Maximum Value During Tax Year 0 To 50000 Indicator</Description>
+							<LineNumber>Part VI Line 4a</LineNumber>
+						</xsd:documentation>
+					</xsd:annotation>
+				</xsd:element>
+				<!-- Maximum Value During Tax Year 50001 To 100000 Indicator -->
+				<xsd:element name="MaxValueDurTY50001To100000Ind" type="CheckboxType" minOccurs="0">
+					<xsd:annotation>
+						<xsd:documentation>
+							<Description>Maximum Value During Tax Year 50001 To 100000 Indicator</Description>
+							<LineNumber>Part VI Line 4b</LineNumber>
+						</xsd:documentation>
+					</xsd:annotation>
+				</xsd:element>
+				<!-- Maximum Value During Tax Year 100001 To 150000 Indicator -->
+				<xsd:element name="MaxValueDurTY100001To150000Ind" type="CheckboxType" minOccurs="0">
+					<xsd:annotation>
+						<xsd:documentation>
+							<Description>Maximum Value During Tax Year 100001 To 150000 Indicator</Description>
+							<LineNumber>Part VI Line 4c</LineNumber>
+						</xsd:documentation>
+					</xsd:annotation>
+				</xsd:element>
+				<!-- Maximum Value During Tax Year 150001 To 200000 Indicator -->
+				<xsd:element name="MaxValueDurTY150001To200000Ind" type="CheckboxType" minOccurs="0">
+					<xsd:annotation>
+						<xsd:documentation>
+							<Description>Maximum Value During Tax Year 150001 To 200000 Indicator</Description>
+							<LineNumber>Part VI Line 4d</LineNumber>
+						</xsd:documentation>
+					</xsd:annotation>
+				</xsd:element>
+				<!-- Maximum Value During Tax Year More Than Maximum Amount -->
+				<xsd:element name="MaxValueDurTYMoreMaxAmt" type="USAmountType" minOccurs="0">
+					<xsd:annotation>
+						<xsd:documentation>
+							<Description>Maximum Value During Tax Year More Than Maximum Amount</Description>
+							<LineNumber>Part VI Line 4e</LineNumber>
+						</xsd:documentation>
+					</xsd:annotation>
+				</xsd:element>
+			</xsd:choice>
+			<!-- Exchange Rate Used Indicator -->
+			<xsd:element name="ExchangeRateUsedInd" type="BooleanType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Exchange Rate Used Indicator</Description>
+						<LineNumber>Part VI Line 5</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Foreign Currency Description Text -->
+			<xsd:element name="ForeignCurrencyDesc" type="LineExplanationType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Foreign Currency Description Text</Description>
+						<LineNumber>Part VI Line 6(a)</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Foreign Currency Exchange Rate Used -->
+			<xsd:element name="ExchangeRt" type="LargeRatioType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Foreign Currency Exchange Rate Used</Description>
+						<LineNumber>Part VI Line 6(b)</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Source Of Exchange Rate Used Text  -->
+			<xsd:element name="SourceOfExchangeRateUsedTxt" type="LineExplanationType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Source Of Exchange Rate Used Text</Description>
+						<LineNumber>Part VI Line 6(c)</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Name Of Foreign Entity -->
+			<xsd:element name="EntityName" type="BusinessNameType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Name Of Foreign Entity</Description>
+						<LineNumber>Part VI Line 7a</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!--GIIN -->
+			<xsd:element name="GIIN" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>GIIN</Description>
+						<LineNumber>Part VI Line 7(b)</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+				<xsd:simpleType>
+					<xsd:restriction base="TextType">
+						<xsd:maxLength value="19"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<!-- =============== Part VI (b)Type Of Foreign Entity =============== -->
+			<xsd:choice minOccurs="0">
+				<!-- Foreign Partnership Indicator -->
+				<xsd:element name="PartnershipInd" type="CheckboxType" minOccurs="0">
+					<xsd:annotation>
+						<xsd:documentation>
+							<Description>Foreign Partnership Indicator</Description>
+							<LineNumber>Part VI Line 7c(1)</LineNumber>
+						</xsd:documentation>
+					</xsd:annotation>
+				</xsd:element>
+				<!-- Foreign Corporation Indicator -->
+				<xsd:element name="CorporationInd" type="CheckboxType" minOccurs="0">
+					<xsd:annotation>
+						<xsd:documentation>
+							<Description>Foreign Corporation Indicator</Description>
+							<LineNumber>Part VI Line 7c(2)</LineNumber>
+						</xsd:documentation>
+					</xsd:annotation>
+				</xsd:element>
+				<!-- Foreign Trust Indicator -->
+				<xsd:element name="TrustInd" type="CheckboxType" minOccurs="0">
+					<xsd:annotation>
+						<xsd:documentation>
+							<Description>Foreign Trust Indicator</Description>
+							<LineNumber>Part VI Line 7c(3)</LineNumber>
+						</xsd:documentation>
+					</xsd:annotation>
+				</xsd:element>
+				<!-- Foreign Estate Indicator -->
+				<xsd:element name="EstateInd" type="CheckboxType" minOccurs="0">
+					<xsd:annotation>
+						<xsd:documentation>
+							<Description>Foreign Estate Indicator</Description>
+							<LineNumber>Part VI Line 7c(4)</LineNumber>
+						</xsd:documentation>
+					</xsd:annotation>
+				</xsd:element>
+			</xsd:choice>
+			<xsd:choice minOccurs="0">
+				<!-- US Address -->
+				<xsd:element name="USAddress" type="USAddressType" minOccurs="0">
+					<xsd:annotation>
+						<xsd:documentation>
+							<Description>US Address</Description>
+							<LineNumber>Part VI Lines 7d,7e</LineNumber>
+						</xsd:documentation>
+					</xsd:annotation>
+				</xsd:element>
+				<!-- Foreign Address -->
+				<xsd:element name="ForeignAddress" type="ForeignAddressType" minOccurs="0">
+					<xsd:annotation>
+						<xsd:documentation>
+							<Description>Foreign Address</Description>
+							<LineNumber>Part VI Lines 7d,7e</LineNumber>
+						</xsd:documentation>
+					</xsd:annotation>
+				</xsd:element>
+			</xsd:choice>
+			<xsd:element name="AssetNotStockOfForeignEntGrp" type="AssetNotStockOfForeignEntGrpType" minOccurs="0" maxOccurs="unbounded"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<!-- Asset Not Stock Of Foreign Entity Group Elements-->
+	<xsd:complexType name="AssetNotStockOfForeignEntGrpType">
+		<xsd:sequence>
+			<!-- =============== Part II (a) Name of Issuer or Counterparty =============== -->
+			<xsd:choice minOccurs="0">
+				<!-- Business Name -->
+				<xsd:element name="BusinessName" type="BusinessNameType" minOccurs="0">
+					<xsd:annotation>
+						<xsd:documentation>
+							<Description>Business Name</Description>
+							<LineNumber>Part VI Line 8a</LineNumber>
+						</xsd:documentation>
+					</xsd:annotation>
+				</xsd:element>
+				<!-- Person Name -->
+				<xsd:element name="PersonNm" type="PersonNameType" minOccurs="0">
+					<xsd:annotation>
+						<xsd:documentation>
+							<Description>Person Name</Description>
+							<LineNumber>Part VI Line 8a</LineNumber>
+						</xsd:documentation>
+					</xsd:annotation>
+				</xsd:element>
+			</xsd:choice>
+			<xsd:choice minOccurs="0">
+				<!-- Issuer Indicator -->
+				<xsd:element name="IssuerInd" type="CheckboxType" minOccurs="0">
+					<xsd:annotation>
+						<xsd:documentation>
+							<Description>Issuer Indicator</Description>
+							<LineNumber>Part VI Line 8a</LineNumber>
+						</xsd:documentation>
+					</xsd:annotation>
+				</xsd:element>
+				<!--Counterparty  Indicator -->
+				<xsd:element name="CounterpartyInd" type="CheckboxType" minOccurs="0">
+					<xsd:annotation>
+						<xsd:documentation>
+							<Description>Counterparty Indicator</Description>
+							<LineNumber>Part VI Line 8a</LineNumber>
+						</xsd:documentation>
+					</xsd:annotation>
+				</xsd:element>
+			</xsd:choice>
+			<!-- =============== Part II (b) Type of Issuer or Counterparty=============== -->
+			<xsd:choice minOccurs="0">
+				<!-- Individual Indicator -->
+				<xsd:element name="IndividualInd" type="CheckboxType" minOccurs="0">
+					<xsd:annotation>
+						<xsd:documentation>
+							<Description>Individual Indicator</Description>
+							<LineNumber>Part VI Line 8b(1)</LineNumber>
+						</xsd:documentation>
+					</xsd:annotation>
+				</xsd:element>
+				<!-- Partnership Indicator -->
+				<xsd:element name="PartnershipInd" type="CheckboxType" minOccurs="0">
+					<xsd:annotation>
+						<xsd:documentation>
+							<Description>Partnership Indicator</Description>
+							<LineNumber>Part VI Line 8b(2)</LineNumber>
+						</xsd:documentation>
+					</xsd:annotation>
+				</xsd:element>
+				<!-- Corporation Indicator -->
+				<xsd:element name="CorporationInd" type="CheckboxType" minOccurs="0">
+					<xsd:annotation>
+						<xsd:documentation>
+							<Description>Corporation Indicator</Description>
+							<LineNumber>Part VI Line 8b(3)</LineNumber>
+						</xsd:documentation>
+					</xsd:annotation>
+				</xsd:element>
+				<!-- Trust Indicator -->
+				<xsd:element name="TrustInd" type="CheckboxType" minOccurs="0">
+					<xsd:annotation>
+						<xsd:documentation>
+							<Description>Trust Indicator</Description>
+							<LineNumber>Part VI Line 8b(4)</LineNumber>
+						</xsd:documentation>
+					</xsd:annotation>
+				</xsd:element>
+				<!-- Estate Indicator -->
+				<xsd:element name="EstateInd" type="CheckboxType" minOccurs="0">
+					<xsd:annotation>
+						<xsd:documentation>
+							<Description>Estate Indicator</Description>
+							<LineNumber>Part VI Line 8b(5)</LineNumber>
+						</xsd:documentation>
+					</xsd:annotation>
+				</xsd:element>
+			</xsd:choice>
+			<xsd:choice minOccurs="0">
+				<!-- US Person Indicator -->
+				<xsd:element name="USPersonInd" type="CheckboxType" minOccurs="0">
+					<xsd:annotation>
+						<xsd:documentation>
+							<Description>US Person Indicator</Description>
+							<LineNumber>Part VI Line 8c</LineNumber>
+						</xsd:documentation>
+					</xsd:annotation>
+				</xsd:element>
+				<!-- Foreign Person Indicator -->
+				<xsd:element name="ForeignPersonInd" type="CheckboxType" minOccurs="0">
+					<xsd:annotation>
+						<xsd:documentation>
+							<Description>Foreign Person Indicator</Description>
+							<LineNumber>Part VI Line 8c</LineNumber>
+						</xsd:documentation>
+					</xsd:annotation>
+				</xsd:element>
+			</xsd:choice>
+			<xsd:choice minOccurs="0">
+				<!-- US Address -->
+				<xsd:element name="USAddress" type="USAddressType" minOccurs="0">
+					<xsd:annotation>
+						<xsd:documentation>
+							<Description>US Address</Description>
+							<LineNumber>Part VI Lines 8d,8e</LineNumber>
+						</xsd:documentation>
+					</xsd:annotation>
+				</xsd:element>
+				<!-- Foreign Address -->
+				<xsd:element name="ForeignAddress" type="ForeignAddressType" minOccurs="0">
+					<xsd:annotation>
+						<xsd:documentation>
+							<Description>Foreign Address</Description>
+							<LineNumber>Part VI Lines 8d,8e</LineNumber>
+						</xsd:documentation>
+					</xsd:annotation>
+				</xsd:element>
+			</xsd:choice>
+		</xsd:sequence>
+	</xsd:complexType>
+	<!-- Specified Individual or Specified Person Group Type-->
+	<xsd:complexType name="SpecifiedIndivOrPersonInfoType">
+		<xsd:sequence>
+			<xsd:choice minOccurs="0">
+				<!-- Person Name -->
+				<xsd:element name="PersonNm" type="PersonNameType" minOccurs="0">
+					<xsd:annotation>
+						<xsd:documentation>
+							<Description>Person Name</Description>
+							<LineNumber>Line 4a</LineNumber>
+						</xsd:documentation>
+					</xsd:annotation>
+				</xsd:element>
+				<!-- Business Name -->
+				<xsd:element name="BusinessNm" type="BusinessNameType" minOccurs="0">
+					<xsd:annotation>
+						<xsd:documentation>
+							<Description>Business Name</Description>
+							<LineNumber>Line 4a</LineNumber>
+						</xsd:documentation>
+					</xsd:annotation>
+				</xsd:element>
+			</xsd:choice>
+			<xsd:choice minOccurs="0">
+				<!-- SSN -->
+				<xsd:element name="SSN" type="SSNType" minOccurs="1">
+					<xsd:annotation>
+						<xsd:documentation>
+							<Description>SSN</Description>
+							<LineNumber>Line 4b</LineNumber>
+						</xsd:documentation>
+					</xsd:annotation>
+				</xsd:element>
+				<!-- EIN -->
+				<xsd:element name="EIN" type="EINType" minOccurs="1">
+					<xsd:annotation>
+						<xsd:documentation>
+							<Description>EIN</Description>
+							<LineNumber>Line 4b</LineNumber>
+						</xsd:documentation>
+					</xsd:annotation>
+				</xsd:element>
+				<!-- Missing EIN reason -->
+				<xsd:element name="MissingEINReasonCd" minOccurs="1">
+					<xsd:annotation>
+						<xsd:documentation>
+							<Description>Missing EIN reason</Description>
+							<LineNumber>Line 4b</LineNumber>
+						</xsd:documentation>
+					</xsd:annotation>
+					<xsd:simpleType>
+						<xsd:restriction base="StringType">
+							<xsd:enumeration value="APPLD FOR"/>
+							<xsd:enumeration value="FOREIGNUS"/>
+						</xsd:restriction>
+					</xsd:simpleType>
+				</xsd:element>
+			</xsd:choice>
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:schema>

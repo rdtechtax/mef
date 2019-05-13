@@ -1,0 +1,347 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.irs.gov/efile" targetNamespace="http://www.irs.gov/efile" elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.0">
+	<xsd:annotation>
+		<xsd:documentation>
+			<Description>IRS e-file Schema - IRS Form 8828</Description>
+			<TaxYear>2018</TaxYear>
+			<MaturityLevel>Final Release</MaturityLevel>
+			<ReleaseDate>February 13, 2019</ReleaseDate>
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:include schemaLocation="../../../Common/efileTypes.xsd"/>
+
+	<!--==================================================================-->
+	<!--============================== IRS8828 =============================-->
+	<!--==================================================================-->
+
+	<xsd:element name="IRS8828">
+		<xsd:annotation>
+			<xsd:documentation>IRS Form 8828</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:complexContent>
+				<xsd:extension base="IRS8828Type">
+					<xsd:attributeGroup ref="DocumentAttributes">
+						<xsd:annotation>
+							<xsd:documentation>Common return document attributes</xsd:documentation>
+						</xsd:annotation>
+					</xsd:attributeGroup>
+					<xsd:attribute name="documentName" type="xsd:string" fixed="IRS8828">
+						<xsd:annotation>
+							<xsd:documentation>IRS internal use only. To avoid error in the return, do not include the attribute name or value.</xsd:documentation>
+						</xsd:annotation>
+					</xsd:attribute>
+				</xsd:extension>
+			</xsd:complexContent>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:complexType name="IRS8828Type">
+		<xsd:annotation>
+			<xsd:documentation>Content model for IRS8828</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<!--Part I - Description of Home Subject to Federally Subsidized Debt-->
+			<!--Mortgage Subsidy Property Address -->
+			<xsd:element name="MortgSbsdyPropertyAddress" type="USAddressType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Mortgage Subsidy Property Address</Description>
+						<LineNumber>1</LineNumber>
+						<ELFFieldNumber>0010 0020</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!--Mortgage Subsidy Tax Exemption Bond Indicator -->
+			<xsd:element name="MortgSbsdyTaxExemptBondInd" type="CheckboxType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Mortgage Subsidy Tax Exemption Bond Indicator</Description>
+						<LineNumber>2a</LineNumber>
+						<ELFFieldNumber>0030</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!--Mortgage Subsidy Mortgage Credit Certificate Indicator -->
+			<xsd:element name="MortgSbsdyMortgageCrCertInd" type="CheckboxType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Mortgage Subsidy Mortgage Credit Certificate Indicator</Description>
+						<LineNumber>2b</LineNumber>
+						<ELFFieldNumber>0040</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!--Mortgage Subsidy Certificate Issuer State Code -->
+			<xsd:element name="MortgSbsdyCertIssuerStateCd" type="StateType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Mortgage Subsidy Certificate Issuer State Code</Description>
+						<LineNumber>3</LineNumber>
+						<ELFFieldNumber>0050</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!--Mortgage Subsidy Certificate Issuer Subdiv Name -->
+			<xsd:element name="MortgSbsdyCertIssuerSubdivNm" type="LineExplanationType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Mortgage Subsidy Certificate Issuer Subdiv Name</Description>
+						<LineNumber>3</LineNumber>
+						<ELFFieldNumber>0060</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!--Mortgage Subsidy Certificate Issuer Agency Name -->
+			<xsd:element name="MortgSbsdyCertIssuerAgencyNm" type="LineExplanationType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Mortgage Subsidy Certificate Issuer Agency Name</Description>
+						<LineNumber>3</LineNumber>
+						<ELFFieldNumber>0070</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!--Mortgage Subsidy Originator Lending Institution Name -->
+			<xsd:element name="MortgSbsdyOrigLendingInstnNm" type="BusinessNameLine1Type" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Mortgage Subsidy Originator Lending Institution Name</Description>
+						<LineNumber>4</LineNumber>
+						<ELFFieldNumber>0080</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!--Mortgage Subsidy Originator Lending Institution Address -->
+			<xsd:element name="MortgSbsdyOrigLendingInstnAddr" type="USAddressType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Mortgage Subsidy Originator Lending Institution Address</Description>
+						<LineNumber>4</LineNumber>
+						<ELFFieldNumber>0090</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!--Mortgage Subsidy Original Loan Closing Date -->
+			<xsd:element name="MortgSbsdyOriginalLoanClsDt" type="DateType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Mortgage Subsidy Original Loan Closing Date</Description>
+						<LineNumber>5</LineNumber>
+						<ELFFieldNumber>0100</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!--Mortgage Subsidy Sale Or Disposition Closing Date -->
+			<xsd:element name="MortgSbsdySaleOrDisposClsDt" type="DateType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Mortgage Subsidy Sale Or Disposition Closing Date</Description>
+						<LineNumber>6</LineNumber>
+						<ELFFieldNumber>0110</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!--Mortgage Subsidy Originator Closing Elaps Year Count -->
+			<xsd:element name="MortgSbsdyOrigClsElapsYearCnt" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Mortgage Subsidy Originator Closing Elaps Year Count</Description>
+						<LineNumber>7</LineNumber>
+						<ELFFieldNumber>0120</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+				<xsd:simpleType>
+					<xsd:restriction base="NumericType">
+						<xsd:maxLength value="2"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<!--Mortgage Subsidy Originator Closing Elaps Month Count -->
+			<xsd:element name="MortgSbsdyOrigClsElapsMnthCnt" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Mortgage Subsidy Originator Closing Elaps Month Count</Description>
+						<LineNumber>7</LineNumber>
+						<ELFFieldNumber>0130</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+				<xsd:simpleType>
+					<xsd:restriction base="NumericType">
+						<xsd:maxLength value="2"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<!--Mortgage Subsidy Originator Loan Payment Date -->
+			<xsd:element name="MortgSbsdyOrigLoanPaymentDt" type="DateType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Mortgage Subsidy Originator Loan Payment Date</Description>
+						<LineNumber>8</LineNumber>
+						<ELFFieldNumber>0135</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!--Part II - Computation of Recapture Tax-->
+			<!--Mortgage Subsidy Sales Price Interests Home Amount -->
+			<xsd:element name="MortgSbsdySalesPriceIntHomeAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Mortgage Subsidy Sales Price Interests Home Amount</Description>
+						<LineNumber>9</LineNumber>
+						<ELFFieldNumber>0140</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!--Mortgage Subsidy Expenses From Home Sale Amount -->
+			<xsd:element name="MortgSbsdyExpnssFromHmSaleAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Mortgage Subsidy Expenses From Home Sale Amount</Description>
+						<LineNumber>10</LineNumber>
+						<ELFFieldNumber>0150</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!--Mortgage Subsidy Sale Of Home Realized Amount -->
+			<xsd:element name="MortgSbsdySaleOfHmRealizedAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Mortgage Subsidy Sale Of Home Realized Amount</Description>
+						<LineNumber>11</LineNumber>
+						<ELFFieldNumber>0160</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!--Mortgage Subsidy Adjusted Basis In Home Amount -->
+			<xsd:element name="MortgSbsdyAdjustedBasisInHmAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Mortgage Subsidy Adjusted Basis In Home Amount</Description>
+						<LineNumber>12</LineNumber>
+						<ELFFieldNumber>0170</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!--Mortgage Subsidy Gaining Or Loss Home Sale Amount -->
+			<xsd:element name="MortgSbsdyGainOrLossHmSaleAmt" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Mortgage Subsidy Gaining Or Loss Home Sale Amount</Description>
+						<LineNumber>13</LineNumber>
+						<ELFFieldNumber>0180</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+				<xsd:complexType>
+					<xsd:simpleContent>
+						<xsd:extension base="USAmountType">
+							<xsd:attribute name="qlfySubordMortgageLoanCd" type="StringType" fixed="QSML"/>
+							<xsd:attribute name="referenceDocumentId" type="IdListType"/>
+							<xsd:attribute name="referenceDocumentName" type="StringType" fixed="MortgSbsdyCalculationShareOfGain"/>
+						</xsd:extension>
+					</xsd:simpleContent>
+				</xsd:complexType>
+			</xsd:element>
+			<!--Mortgage Subsidy Gain Loss Adjustment Home Sale Amount -->
+			<xsd:element name="MortgSbsdyGainLossAdjHmSaleAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Mortgage Subsidy Gain Loss Adjustment Home Sale Amount</Description>
+						<LineNumber>14</LineNumber>
+						<ELFFieldNumber>0190</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!--Mortgage Subsidy Modified Adjusted Gross Income Amount -->
+			<xsd:element name="MortgSbsdyModifiedAGIAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Mortgage Subsidy Modified Adjusted Gross Income Amount</Description>
+						<LineNumber>15</LineNumber>
+						<ELFFieldNumber>0200</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!--Mortgage Subsidy Adjusted Qualifying Income Amount -->
+			<xsd:element name="MortgSbsdyAdjustedQlfyIncmAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Mortgage Subsidy Adjusted Qualifying Income Amount</Description>
+						<LineNumber>16</LineNumber>
+						<ELFFieldNumber>0210</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!--Mortgage Subsidy Income Basis Amount -->
+			<xsd:element name="MortgSbsdyIncomeBasisAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Mortgage Subsidy Income Basis Amount</Description>
+						<LineNumber>17</LineNumber>
+						<ELFFieldNumber>0220</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!--Mortgage Subsidy Income Percentage Rate -->
+			<xsd:element name="MortgSbsdyIncomePercentageRt" type="RatioType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Mortgage Subsidy Income Percentage Rate</Description>
+						<LineNumber>18</LineNumber>
+						<ELFFieldNumber>0230</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!--Mortgage Subsidy Federally Subsidized Amount -->
+			<xsd:element name="MortgSbsdyFederallySbsdzdAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Mortgage Subsidy Federally Subsidized Amount</Description>
+						<LineNumber>19</LineNumber>
+						<ELFFieldNumber>0240</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!--Mortgage Subsidy Holding Period Rate -->
+			<xsd:element name="MortgSbsdyHoldingPeriodRt" type="RatioType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Mortgage Subsidy Holding Period Rate</Description>
+						<LineNumber>20</LineNumber>
+						<ELFFieldNumber>0250</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!--Mortgage Subsidy Federally Subsidized Adjustment Amount -->
+			<xsd:element name="MortgSbsdyFedSbsdzdAdjAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Mortgage Subsidy Federally Subsidized Adjustment Amount</Description>
+						<LineNumber>21</LineNumber>
+						<ELFFieldNumber>0260</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!--Mortgage Subsidy Recapture Amount -->
+			<xsd:element name="MortgSbsdyRecaptureAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Mortgage Subsidy Recapture Amount</Description>
+						<LineNumber>22</LineNumber>
+						<ELFFieldNumber>0270</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!--Mortgage Subsidy Recapture Tax Amount -->
+			<xsd:element name="MortgSbsdyRecaptureTaxAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Mortgage Subsidy Recapture Tax Amount</Description>
+						<LineNumber>23</LineNumber>
+						<ELFFieldNumber>0280</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:schema>

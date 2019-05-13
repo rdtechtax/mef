@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema targetNamespace="http://www.irs.gov/efile" xmlns="http://www.irs.gov/efile" xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.0">
+
+	<xsd:annotation>
+		<xsd:documentation>
+			<Description>IRS e-file U.S. Nonresident Alien Income Tax Schema - Nongrantor Trust Statement</Description>
+			<Purpose>Optional Statement - If you have an interest in more than one nongrantor trust, you must attach a statement to the form that separately identifies each nongrantor trust and includes one of the following statements for each interest. "I waive any right to claim any reduction in withholding on any distribution from such trust under any treaty with the United States.", or "I elect under section 877A(f)(4)(B) to be treated as having received the value of my entire interest in the trust (as determined for purposes of section 877A) as of the day before my expatriation date. I attach a copy of my valuation letter ruling issued by the IRS."</Purpose>
+			<TaxYear>2018</TaxYear>
+			<MaturityLevel>Final Release</MaturityLevel>
+			<ReleaseDate>February 13, 2019</ReleaseDate>
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:include schemaLocation="../../../Common/efileTypes.xsd" />
+
+	<!-- ======================================== -->
+	<!-- ====== Nongrantor Trust Statement ====== -->
+	<!-- ======================================== -->
+
+	<xsd:element name="NongrantorTrustStatement">
+		<xsd:annotation>
+			<xsd:documentation>Nongrantor Trust Statement</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:complexContent>
+				<xsd:extension base="NongrantorTrustStatementType">
+					<xsd:attributeGroup ref="DocumentAttributes">
+						<xsd:annotation>
+							<xsd:documentation>Common return document attributes</xsd:documentation>
+						</xsd:annotation>
+					</xsd:attributeGroup>
+					<xsd:attribute name="documentName" type="TextType" fixed="NongrantorTrustStatement">
+						<xsd:annotation>
+							<xsd:documentation>IRS internal use only. To avoid error in the return, do not include the attribute name or value.</xsd:documentation>
+						</xsd:annotation>
+					</xsd:attribute>
+				</xsd:extension>
+			</xsd:complexContent>
+		</xsd:complexType>
+	</xsd:element>
+
+	<xsd:complexType name="NongrantorTrustStatementType">
+		<xsd:annotation>
+			<xsd:documentation>Nongrantor Trust Statement</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<!-- Nongrantor Trust Interest -->
+			<xsd:element name="NongrantorTrustInterestGrp" minOccurs="0" maxOccurs="1000">
+				<xsd:complexType>
+					<xsd:sequence>
+						<!-- Description -->
+						<xsd:element name="Desc" type="LineExplanationType"/>
+						<!-- Nongrantor Trust Interest Code -->
+						<xsd:element name="NongrantorTrustInterestCd">
+							<xsd:simpleType>
+								<xsd:restriction base="TextType">
+									<xsd:enumeration value="I WAIVE ANY RIGHT TO CLAIM ANY REDUCTION IN WITHOLDING ON ANY DISTRIBUTION FROM SUCH TRUST UNDER ANY TREATY WITH THE UNITED STATES"/>
+									<xsd:enumeration value="I ELECT UNDER SECTION 877A(f)(4)(B) TO BE TREATED AS HAVING RECEIVED THE VALUE OF MY ENTIRE INTEREST IN THE TRUST (AS DETERMINED FOR PURPOSES OF SECTION 877A) AS OF THE DAY BEFORE MY EXPATRIATION DATE. I ATTACH A COPY OF MY VALUATION LETTER RULING ISSUED BY THE IRS."/>
+								</xsd:restriction>
+							</xsd:simpleType>
+						</xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+
+</xsd:schema>

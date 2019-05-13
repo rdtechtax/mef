@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.irs.gov/efile" targetNamespace="http://www.irs.gov/efile" elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.0">
+
+	<xsd:annotation>
+		<xsd:documentation>
+			<Description>IRS e-file Schema - IRS Form 2120</Description>
+			<TaxYear>2018</TaxYear>
+			<MaturityLevel>Final Release</MaturityLevel>
+			<ReleaseDate>February 13, 2019</ReleaseDate>
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:include schemaLocation="../../../Common/efileTypes.xsd"/>
+	
+	<!--==================================================================-->
+	<!--============================ IRS2120 ===============================-->
+	<!--==================================================================-->
+	
+	<xsd:element name="IRS2120">
+		<xsd:annotation>
+			<xsd:documentation>IRS Form 2120</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:complexContent>
+				<xsd:extension base="IRS2120Type">
+					<xsd:attributeGroup ref="DocumentAttributes">
+						<xsd:annotation>
+							<xsd:documentation>Common return document attributes</xsd:documentation>
+						</xsd:annotation>
+					</xsd:attributeGroup>
+					<xsd:attribute name="documentName" type="xsd:string" fixed="IRS2120"/>
+				</xsd:extension>
+			</xsd:complexContent>
+		</xsd:complexType>
+	</xsd:element>
+	
+	<xsd:complexType name="IRS2120Type">
+		<xsd:annotation>
+			<xsd:documentation>Content model for IRS 2120</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+		
+			<!--Calendar Year -->
+			<xsd:element name="CalendarYr" type="YearType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Calendar Year</Description>
+						<ELFFieldNumber>0010</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			
+			<!--Qualifying Person Name -->
+			<xsd:element name="QualifyingPersonName" type="PersonFullNameType">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Qualifying Person Name</Description>
+						<ELFFieldNumber>0020 0030</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			
+			<xsd:element name="EligiblePersonWaivingDepdRight" maxOccurs="100">
+				<xsd:complexType>
+					<xsd:sequence>
+						<!--Person Full Name -->
+						<xsd:element name="PersonFullName" type="PersonFullNameType">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Person Full Name</Description>
+									<ELFFieldNumber>0040 0045 0100 0105 0160 0165 0220 0225</ELFFieldNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						<!--SSN -->
+						<xsd:element name="SSN" type="SSNType">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>SSN</Description>
+									<ELFFieldNumber>0050 0110 0170 0230</ELFFieldNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						<xsd:choice>
+							<!--United States Address -->
+							<xsd:element name="USAddress" type="USAddressType">
+								<xsd:annotation>
+									<xsd:documentation>
+										<Description>United States Address</Description>
+										<ELFFieldNumber>0060 0070 0080 0090 0091 0092 0093 0120 0130 0140 0150 0151 0152 0153 0180 0190 0200 0210 0211 0212 0213 0240 0250 0260 0270 0271 0272 0273</ELFFieldNumber>
+									</xsd:documentation>
+								</xsd:annotation>
+							</xsd:element>
+							<!--Foreign Address -->
+							<xsd:element name="ForeignAddress" type="ForeignAddressType">
+								<xsd:annotation>
+									<xsd:documentation>
+										<Description>Foreign Address</Description>
+										<ELFFieldNumber>0060 0070 0080 0090 0091 0092 0093 0120 0130 0140 0150 0151 0152 0153 0180 0190 0200 0210 0211 0212 0213 0240 0250 0260 0270 0271 0272 0273</ELFFieldNumber>
+									</xsd:documentation>
+								</xsd:annotation>
+							</xsd:element>
+						</xsd:choice>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			
+		</xsd:sequence>
+	</xsd:complexType>
+	
+</xsd:schema>

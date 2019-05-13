@@ -1,0 +1,298 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.irs.gov/efile" targetNamespace="http://www.irs.gov/efile" elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.0">
+	<xsd:annotation>
+		<xsd:documentation>
+			<Description>IRS e-file Schema - IRS Form 1040 Schedule J Income Averaging for Farmers and Fishermen</Description>
+			<TaxYear>2018</TaxYear>
+			<MaturityLevel>Final Release</MaturityLevel>
+			<ReleaseDate>February 13, 2019</ReleaseDate>
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:include schemaLocation="../../../Common/efileTypes.xsd"/>
+
+	<!-- ================================================================== -->
+	<!-- =================== IRS Form 1040 Schedule J ===================== -->
+	<!-- ================================================================== -->
+
+	<xsd:element name="IRS1040ScheduleJ">
+		<xsd:annotation>
+			<xsd:documentation>IRS Form 1040 Schedule J</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:complexContent>
+				<xsd:extension base="IRS1040ScheduleJType">
+					<xsd:attributeGroup ref="DocumentAttributes">
+						<xsd:annotation>
+							<xsd:documentation>Common return document attributes</xsd:documentation>
+						</xsd:annotation>
+					</xsd:attributeGroup>
+					<xsd:attribute name="documentName" type="xsd:string" fixed="IRS1040ScheduleJ"/>
+				</xsd:extension>
+			</xsd:complexContent>
+		</xsd:complexType>
+	</xsd:element>
+
+	<xsd:complexType name="IRS1040ScheduleJType">
+		<xsd:annotation>
+			<xsd:documentation>Content model for Schedule J</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+
+			<!--Taxable Income Amount -->
+			<xsd:element name="TaxableIncomeAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Taxable Income Amount</Description>
+						<LineNumber>1</LineNumber>
+						<ELFFieldNumber>0010</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!--Elected Farm Income Amount -->
+			<xsd:element name="ElectedFarmIncomeAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Elected Farm Income Amount</Description>
+						<LineNumber>2a</LineNumber>
+						<ELFFieldNumber>0020</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			
+			<!--Excess Net Long Termination Capitalized Gain Amount -->
+			<xsd:element name="ExcessNetLongTermCapGainAmt" type="USAmountNNType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Excess Net Long Termination Capitalized Gain Amount</Description>
+						<LineNumber>2b</LineNumber>
+						<ELFFieldNumber>0023</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!--Unrecaptured Property Gain Amount -->
+			<xsd:element name="UnrecapturedPropertyGainAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Unrecaptured Property Gain Amount</Description>
+						<LineNumber>2c</LineNumber>
+						<ELFFieldNumber>0026</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!--Net Income Amount -->
+			<xsd:element name="NetIncomeAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Net Income Amount</Description>
+						<LineNumber>3</LineNumber>
+						<ELFFieldNumber>0030</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!--Current Tax Amount -->
+			<xsd:element name="CurrentTaxAmt" type="USAmountNNType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Current Tax Amount</Description>
+						<LineNumber>4</LineNumber>
+						<ELFFieldNumber>0040</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="ThirdPYTxblFarmIncmDetail" minOccurs="0">
+				<xsd:complexType>
+					<xsd:sequence>
+						<!--Taxable Income Amount -->
+						<xsd:element name="TaxableIncomeAmt" type="USAmountType" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Taxable Income Amount</Description>
+									<LineNumber>5</LineNumber>
+									<ELFFieldNumber>0050</ELFFieldNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						<!--Average Income Amount -->
+						<xsd:element name="AverageIncomeAmt" type="USAmountNNType" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Average Income Amount</Description>
+									<LineNumber>6</LineNumber>
+									<ELFFieldNumber>0060</ELFFieldNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						<!--Net Income Amount -->
+						<xsd:element name="NetIncomeAmt" type="USAmountType" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Net Income Amount</Description>
+									<LineNumber>7</LineNumber>
+									<ELFFieldNumber>0070</ELFFieldNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						<!--Tax Table Amount -->
+						<xsd:element name="TaxTableAmt" type="USAmountNNType" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Tax Table Amount</Description>
+									<LineNumber>8</LineNumber>
+									<ELFFieldNumber>0080</ELFFieldNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="SecondPYTxblFarmIncmDetail" minOccurs="0">
+				<xsd:complexType>
+					<xsd:sequence>
+						<!--Taxable Income Amount -->
+						<xsd:element name="TaxableIncomeAmt" type="USAmountType" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Taxable Income Amount</Description>
+									<LineNumber>9</LineNumber>
+									<ELFFieldNumber>0090</ELFFieldNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						<!--NOTE: -->
+						<!--
+							line 10 has the same value as line 6; therefore, line 10 has been removed from the schema
+						-->
+						<!--Net Income Amount -->
+						<xsd:element name="NetIncomeAmt" type="USAmountType" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Net Income Amount</Description>
+									<LineNumber>11</LineNumber>
+									<ELFFieldNumber>0110</ELFFieldNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						<!--Tax Table Amount -->
+						<xsd:element name="TaxTableAmt" type="USAmountNNType" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Tax Table Amount</Description>
+									<LineNumber>12</LineNumber>
+									<ELFFieldNumber>0120</ELFFieldNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+
+			<xsd:element name="FirstPYTxblFarmIncmDetail" minOccurs="0">
+				<xsd:complexType>
+					<xsd:sequence>
+						<!--Taxable Income Amount -->
+						<xsd:element name="TaxableIncomeAmt" type="USAmountType" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Taxable Income Amount</Description>
+									<LineNumber>13</LineNumber>
+									<ELFFieldNumber>0130</ELFFieldNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						<!--NOTE: -->
+						<!--
+							line 14 has the same value as line 6; therefore, line 14 has been removed from the schema
+						-->
+						<!--Net Income Amount -->
+						<xsd:element name="NetIncomeAmt" type="USAmountType" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Net Income Amount</Description>
+									<LineNumber>15</LineNumber>
+									<ELFFieldNumber>0150</ELFFieldNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						<!--Tax Table Amount -->
+						<xsd:element name="TaxTableAmt" type="USAmountNNType" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Tax Table Amount</Description>
+									<LineNumber>16</LineNumber>
+									<ELFFieldNumber>0160</ELFFieldNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<!--Total Tax Table Amount -->
+			<xsd:element name="TotalTaxTableAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Total Tax Table Amount</Description>
+						<LineNumber>17</LineNumber>
+						<ELFFieldNumber>0170</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!--NOTE: -->
+			<!--
+				line 18 has the same value as line 17; therefore, line 18 has been removed from the schema
+			-->
+			<!--Tentative Tax 3rd Prior Year Retained Amount -->
+			<xsd:element name="TentativeTax3rdPYRtnAmt" type="USAmountNNType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Tentative Tax 3rd Prior Year Retained Amount</Description>
+						<LineNumber>19</LineNumber>
+						<ELFFieldNumber>0180</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!--Tentative Tax 2nd Prior Year Retained Amount -->
+			<xsd:element name="TentativeTax2ndPYRtnAmt" type="USAmountNNType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Tentative Tax 2nd Prior Year Retained Amount</Description>
+						<LineNumber>20</LineNumber>
+						<ELFFieldNumber>0190</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!--Tentative Tax 1st Prior Year Retained Amount -->
+			<xsd:element name="TentativeTax1stPYRtnAmt" type="USAmountNNType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Tentative Tax 1st Prior Year Retained Amount</Description>
+						<LineNumber>21</LineNumber>
+						<ELFFieldNumber>0200</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!--Gross Farm Income Tax Amount -->
+			<xsd:element name="GrossFarmIncomeTaxAmt" type="USAmountNNType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Gross Farm Income Tax Amount</Description>
+						<LineNumber>22</LineNumber>
+						<ELFFieldNumber>0210</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!--Average Farm Income Tax Amount -->
+			<xsd:element name="AverageFarmIncomeTaxAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Average Farm Income Tax Amount</Description>
+						<LineNumber>23</LineNumber>
+						<ELFFieldNumber>0220</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:schema>

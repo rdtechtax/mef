@@ -1,0 +1,513 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.irs.gov/efile" targetNamespace="http://www.irs.gov/efile" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xsd:annotation>
+		<xsd:documentation>
+			<Description>IRS e-file Individual Income Tax Schema - IRS FORM 4970 Tax on Accumulation Distribution of Trusts</Description>
+			<TaxYear>2018</TaxYear>
+			<MaturityLevel>Final Release</MaturityLevel>
+			<ReleaseDate>February 13, 2019</ReleaseDate>
+		</xsd:documentation>
+	</xsd:annotation>
+	<xsd:include schemaLocation="../../../Common/efileTypes.xsd"/>
+	<!-- =============================================================== -->
+	<!-- ======================  IRS FORM 4970 ============================ -->
+	<!-- =============================================================== -->
+	<xsd:element name="IRS4970">
+		<xsd:annotation>
+			<xsd:documentation>IRS FORM 4970</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:complexContent>
+				<xsd:extension base="IRS4970Type">
+					<xsd:attributeGroup ref="DocumentAttributes">
+						<xsd:annotation>
+							<xsd:documentation>Common return document attributes</xsd:documentation>
+						</xsd:annotation>
+					</xsd:attributeGroup>
+					<xsd:attribute name="documentName" type="xsd:string" fixed="IRS4970">
+						<xsd:annotation>
+							<xsd:documentation>IRS internal use only. To avoid error in the return, do not include the attribute name or value.</xsd:documentation>
+						</xsd:annotation>
+					</xsd:attribute>
+				</xsd:extension>
+			</xsd:complexContent>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:complexType name="IRS4970Type">
+		<xsd:annotation>
+			<xsd:documentation>Content model for FORM 4970</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<!-- Person Subject To Trust Tax Name -->
+			<xsd:element name="PersonSubjectToTrustTaxNm" type="PersonNameType">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Person Subject To Trust Tax Name</Description>
+						<LineNumber>A</LineNumber>
+						<ELFFieldNumber>0010</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Person Subject To Trust Tax SSN -->
+			<xsd:element name="PersonSubjectToTrustTaxSSN" type="SSNType">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Person Subject To Trust Tax SSN</Description>
+						<LineNumber>B</LineNumber>
+						<ELFFieldNumber>0020</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Trust Nm -->
+			<xsd:element name="TrustName" type="BusinessNameType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Trust Nm</Description>
+						<LineNumber>C</LineNumber>
+						<ELFFieldNumber>0030</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Choice between US Address or Foreign Address-->
+			<xsd:choice minOccurs="0">
+				<!--US Address -->
+				<xsd:element name="USAddress" type="USAddressType">
+					<xsd:annotation>
+						<xsd:documentation>
+							<Description>US address</Description>
+							<LineNumber>C</LineNumber>
+							<ELFFieldNumber>0040 0050</ELFFieldNumber>
+						</xsd:documentation>
+					</xsd:annotation>
+				</xsd:element>
+				<!-- Foreign Address -->
+				<xsd:element name="ForeignAddress" type="ForeignAddressType">
+					<xsd:annotation>
+						<xsd:documentation>
+							<Description>Foreign Address</Description>
+							<LineNumber>C</LineNumber>
+							<ELFFieldNumber>0040 0050</ELFFieldNumber>
+						</xsd:documentation>
+					</xsd:annotation>
+				</xsd:element>
+			</xsd:choice>
+			<!-- Trust EIN -->
+			<xsd:element name="TrustEIN" type="EINType">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Trust EIN</Description>
+						<LineNumber>D</LineNumber>
+						<ELFFieldNumber>0060</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Choice between Domestic or Foreign Trust -->
+			<xsd:choice minOccurs="0">
+				<!-- Domestic Trust Ind Checkbox -->
+				<xsd:element name="DomesticTrustInd" type="CheckboxType">
+					<xsd:annotation>
+						<xsd:documentation>
+							<Description>DomesticTrustInd Checkbox</Description>
+							<LineNumber>E</LineNumber>
+							<ELFFieldNumber>0070</ELFFieldNumber>
+						</xsd:documentation>
+					</xsd:annotation>
+				</xsd:element>
+				<!-- Foreign Trust Ind Ind Checkbox -->
+				<xsd:element name="ForeignTrustInd" type="CheckboxType">
+					<xsd:annotation>
+						<xsd:documentation>
+							<Description>ForeignTrustInd Checkbox</Description>
+							<LineNumber>E</LineNumber>
+							<ELFFieldNumber>0080</ELFFieldNumber>
+						</xsd:documentation>
+					</xsd:annotation>
+				</xsd:element>
+			</xsd:choice>
+			<!-- Beneficiary Birth Dt -->
+			<xsd:element name="BeneficiaryBirthDt" type="DateType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>BeneficiaryBirthDt</Description>
+						<LineNumber>F</LineNumber>
+						<ELFFieldNumber>0090</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Trust Cnt -->
+			<xsd:element name="TrustCnt" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Number of Trusts from which accumulated distributions received</Description>
+						<LineNumber>G</LineNumber>
+						<ELFFieldNumber>0100</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+				<xsd:simpleType>
+					<xsd:restriction base="IntegerType">
+						<xsd:totalDigits value="2"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<!-- Part I Average Income and Determination of Computation Years -->
+			<!-- Current Distribution Amt -->
+			<xsd:element name="CurrentDistributionAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Current Distribution Amt</Description>
+						<LineNumber>1</LineNumber>
+						<ELFFieldNumber>0110</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Before Age Distribution Amt -->
+			<xsd:element name="BeforeAgeDistributionAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Accumulated Income Distribution before age 21</Description>
+						<LineNumber>2</LineNumber>
+						<ELFFieldNumber>0120</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Undistributed Net Income Amt -->
+			<xsd:element name="UndistributedNetIncomeAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Undistributed Net Income Amt</Description>
+						<LineNumber>3</LineNumber>
+						<ELFFieldNumber>0130</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Trust Taxes Amt -->
+			<xsd:element name="TrustTaxesAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Trust Taxes Amt</Description>
+						<LineNumber>4</LineNumber>
+						<ELFFieldNumber>0140</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Total Distribution Amt -->
+			<xsd:element name="TotalDistributionAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Total Distribution Amt</Description>
+						<LineNumber>5</LineNumber>
+						<ELFFieldNumber>0150</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Exempt Interest Amt -->
+			<xsd:element name="ExemptInterestAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Exempt Interest Amt</Description>
+						<LineNumber>6</LineNumber>
+						<ELFFieldNumber>0160</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Total Distribution Taxable Amt -->
+			<xsd:element name="TotalDistributionTaxableAmt" type="USAmountNNType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Total Distribution Taxable Amt</Description>
+						<LineNumber>7</LineNumber>
+						<ELFFieldNumber>0170</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Trust Earlier Tax Years Cnt -->
+			<xsd:element name="TrustEarlierTaxYearsCnt" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Number of earlier tax years</Description>
+						<LineNumber>8</LineNumber>
+						<ELFFieldNumber>0180</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+				<xsd:simpleType>
+					<xsd:restriction base="IntegerType">
+						<xsd:totalDigits value="2"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<!-- Average Annual Distributed Amt -->
+			<xsd:element name="AverageAnnualDistributedAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Average Annual Distributed Amt</Description>
+						<LineNumber>9</LineNumber>
+						<ELFFieldNumber>0190</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Percentage Distribution Amt -->
+			<xsd:element name="PercentageDistributionAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Percentage Distribution Amt</Description>
+						<LineNumber>10</LineNumber>
+						<ELFFieldNumber>0200</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Early Tax Years Avg Cnt -->
+			<xsd:element name="EarlyTaxYearsAvgCnt" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Early Tax Years Avg Cnt</Description>
+						<LineNumber>11</LineNumber>
+						<ELFFieldNumber>0210</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+				<xsd:simpleType>
+					<xsd:restriction base="IntegerType">
+						<xsd:totalDigits value="2"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<!-- Average For Recomputing Tax Amt -->
+			<xsd:element name="AverageForRecomputingTaxAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Average For Recomputing Tax Amt</Description>
+						<LineNumber>12</LineNumber>
+						<ELFFieldNumber>0220</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- PYOne Taxable Income Amt -->
+			<xsd:element name="PYOneTaxableIncomeAmt" type="USAmountNNType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>First prior year taxable income</Description>
+						<LineNumber>13a</LineNumber>
+						<ELFFieldNumber>0230</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- PYTwo Taxable Income Amt -->
+			<xsd:element name="PYTwoTaxableIncomeAmt" type="USAmountNNType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Second prior year taxable incomet</Description>
+						<LineNumber>13b</LineNumber>
+						<ELFFieldNumber>0240</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- PYThree Taxable Income Amt -->
+			<xsd:element name="PYThreeTaxableIncomeAmt" type="USAmountNNType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Third prior year taxable income</Description>
+						<LineNumber>13c</LineNumber>
+						<ELFFieldNumber>0250</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- PYFour Taxable Income Amt -->
+			<xsd:element name="PYFourTaxableIncomeAmt" type="USAmountNNType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Fourth prior year taxable income</Description>
+						<LineNumber>13d</LineNumber>
+						<ELFFieldNumber>0260</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- PYFive Taxable Income Amt -->
+			<xsd:element name="PYFiveTaxableIncomeAmt" type="USAmountNNType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Fifth prior year taxable income</Description>
+						<LineNumber>13e</LineNumber>
+						<ELFFieldNumber>0270</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Part II Tax Attributable to the Accumulation Distribution -->
+			<xsd:element name="AccumulationDistriTaxPYGrp" minOccurs="0" maxOccurs="3">
+				<xsd:complexType>
+					<xsd:sequence>
+						<!-- Tax Year -->
+						<xsd:element name="TaxYr" type="YearType" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Tax Year</Description>
+									<LineNumber>14</LineNumber>
+									<ELFFieldNumber>0280 0390 0500</ELFFieldNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						<!-- PY Taxable Inc Bfr Accum Distri Amt -->
+						<xsd:element name="PYTaxableIncBfrAccumDistriAmt" type="USAmountNNType" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>PY Taxable Inc Bfr Accum Distri Amt</Description>
+									<LineNumber>14</LineNumber>
+									<ELFFieldNumber>0290 0400 0510</ELFFieldNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						
+						<!-- Line 15: Display the data from line 12 -->
+						
+						<!-- Recomputed Taxable Income Amt -->
+						<xsd:element name="RecomputedTaxableIncomeAmt" type="USAmountType" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Recomputed Taxable Income Amt</Description>
+									<LineNumber>16</LineNumber>
+									<ELFFieldNumber>0310 0420 0530</ELFFieldNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						<!-- Income Tax Amt -->
+						<xsd:element name="IncomeTaxAmt" type="USAmountType" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Income Tax Amt</Description>
+									<LineNumber>17</LineNumber>
+									<ELFFieldNumber>0320 0430 0540</ELFFieldNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						<!-- Income Tax Before Credits Amt -->
+						<xsd:element name="IncomeTaxBeforeCreditsAmt" type="USAmountType" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Income Tax Before Credits Amt</Description>
+									<LineNumber>18</LineNumber>
+									<ELFFieldNumber>0330 0440 0550</ELFFieldNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						<!-- Additional Tax Before Credits Amt -->
+						<xsd:element name="AdditionalTaxBeforeCreditsAmt" type="USAmountType" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Additional Tax Before Credits Amt</Description>
+									<LineNumber>19</LineNumber>
+									<ELFFieldNumber>0340 0450 0560</ELFFieldNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						
+						<!-- Tax Credit Adjustment Amt -->
+						<xsd:element name="TaxCreditAdjustmentAmt" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Tax Credit Adjustment Amt</Description>
+									<LineNumber>20</LineNumber>
+									<ELFFieldNumber>0350 0460 0570</ELFFieldNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+							<xsd:complexType>
+								<xsd:simpleContent>
+									<xsd:extension base="USAmountType">
+										<xsd:attribute name="referenceDocumentId" type="IdListType"/>
+										<xsd:attribute name="referenceDocumentName" type="StringType" fixed="BinaryAttachment"/>
+									</xsd:extension>
+								</xsd:simpleContent>
+							</xsd:complexType>
+						</xsd:element>
+									
+						<!-- Tax Less Credit Amt -->
+						<xsd:element name="TaxLessCreditAmt" type="USAmountType" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Tax Less Credit Amt</Description>
+									<LineNumber>21</LineNumber>
+									<ELFFieldNumber>0360 0470 0580</ELFFieldNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						
+						<!-- AMT Adjustment Amt -->
+						<xsd:element name="AMTAdjustmentAmt" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>AMT Adjustment Amt</Description>
+									<LineNumber>22</LineNumber>
+									<ELFFieldNumber>0370 0480 0590</ELFFieldNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+							<xsd:complexType>
+								<xsd:simpleContent>
+									<xsd:extension base="USAmountType">
+										<xsd:attribute name="referenceDocumentId" type="IdListType"/>
+										<xsd:attribute name="referenceDocumentName" type="StringType" fixed="BinaryAttachment  IRS6251"/>
+									</xsd:extension>
+								</xsd:simpleContent>
+							</xsd:complexType>
+						</xsd:element>
+						
+						<!-- Adj Accumulation Dist Tax Amt -->
+						<xsd:element name="AdjAccumulationDistriTaxAmt" type="USAmountType" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Adj Accumulation Dist Tax Amt</Description>
+									<LineNumber>23</LineNumber>
+									<ELFFieldNumber>0380 0490 0600</ELFFieldNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+					
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+					
+			<!-- Three Year Adjusted Tax Amt -->
+			<xsd:element name="ThreeYearAdjustedTaxAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Three Year Adjusted Tax Amt</Description>
+						<LineNumber>24</LineNumber>
+						<ELFFieldNumber>0610</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			
+			<!-- Average Adjusted Tax Amt -->
+			<xsd:element name="AverageAdjustedTaxAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Average Adjusted Tax Amt</Description>
+						<LineNumber>25</LineNumber>
+						<ELFFieldNumber>0620</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			
+			<!-- Total Adjusted Tax Amt -->
+			<xsd:element name="TotalAdjustedTaxAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Total Adjusted Tax Amt</Description>
+						<LineNumber>26</LineNumber>
+						<ELFFieldNumber>0630</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Line 27: Enter value from line 4 -->
+			
+			<!-- Partial Tax On Accumulation Dist Amt -->
+			<xsd:element name="PartialTaxOnAccumDistriAmt" type="USAmountNNType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Partial Tax On Accumulation Dist Amt</Description>
+						<LineNumber>28</LineNumber>
+						<ELFFieldNumber>0670</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:schema>

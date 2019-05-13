@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns="http://www.irs.gov/efile" xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.irs.gov/efile" elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.0">
+
+	<xsd:annotation>
+		<xsd:documentation>
+			<Description>IRS e-file Schema - Multiple Transferee Statement</Description>
+			<Purpose>In a case of multiple transferees, report the total deferred S corporation-related net 965 tax liability transferred as a negative number in column (g) and in column (h) report the tax identification number of a transferee and attach a schedule to Form 965-A providing a break-down of the total deferred S corporation-related net 965 tax liability transferred and the associated tax identification numbers of each transferee.</Purpose>
+			<TaxYear>2018</TaxYear>
+			<MaturityLevel>Final Release</MaturityLevel>
+			<ReleaseDate>February 13, 2019</ReleaseDate>
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:include schemaLocation="../efileTypes.xsd"/>
+
+	<!-- =============================================================== -->
+	<!-- ===============  Multiple Transferee Statement  =============== -->
+	<!-- =============================================================== -->
+
+	<xsd:element name="MultipleTransfereeStmt">
+		<xsd:annotation>
+			<xsd:documentation>Multiple Transferee Statement</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:complexContent>
+				<xsd:extension base="MultipleTransfereeStmtType">
+					<xsd:attributeGroup ref="DocumentAttributes">
+						<xsd:annotation>
+							<xsd:documentation>Common return document attributes</xsd:documentation>
+						</xsd:annotation>
+					</xsd:attributeGroup>
+					<xsd:attribute name="documentName" type="StringType" fixed="MultipleTransfereeStatement">
+						<xsd:annotation>
+							<xsd:documentation>IRS internal use only. To avoid error in the return, do not include the attribute name or value.</xsd:documentation>
+						</xsd:annotation>
+					</xsd:attribute>
+				</xsd:extension>
+			</xsd:complexContent>
+		</xsd:complexType>
+	</xsd:element>
+
+	<xsd:complexType name="MultipleTransfereeStmtType">
+		<xsd:annotation>
+			<xsd:documentation>Content model for Multiple Transferee Statement</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+
+			<!-- Details about Net 965 Tax Liability Transfer Group-->
+			<xsd:element name="Net965TaxLiabTransferGrp" minOccurs="0" maxOccurs="unbounded">
+				<xsd:complexType>
+					<xsd:sequence>
+
+						<!-- Election or Transfer Year -->
+						<xsd:element name="ElectionTransferYr" type="YearType">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Election or Transfer Year</Description>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+
+
+						<!-- S Corporation EIN -->
+						<xsd:element name="SCorporationEIN" type="EINType">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>S Corporation EIN</Description>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+
+						<!-- Deferred Net Tax Liability Transferred Amount -->
+						<xsd:element name="DeferredNetTaxLiabTrnsfrAmt" type="USAmountType" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Deferred Net Tax Liability Transferred Amount</Description>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+
+						<!-- Details of Transfer Information for Transferee Group-->
+						<xsd:element name="TaxLiabilityTransfereeGrp" minOccurs="0" maxOccurs="unbounded">
+							<xsd:complexType>
+								<xsd:sequence>
+
+									<!-- SSN or EIN -->
+									<xsd:choice minOccurs="0">
+										<xsd:element name="SSN" type="SSNType">
+											<xsd:annotation>
+												<xsd:documentation>
+													<Description>SSN</Description>
+												</xsd:documentation>
+											</xsd:annotation>
+										</xsd:element>
+										<xsd:element name="EIN" type="EINType">
+											<xsd:annotation>
+												<xsd:documentation>
+													<Description>EIN</Description>
+												</xsd:documentation>
+											</xsd:annotation>
+										</xsd:element>
+									</xsd:choice>
+
+									<!-- Transferred Amount -->
+									<xsd:element name="TransferredAmt" type="USAmountType" minOccurs="0">
+										<xsd:annotation>
+											<xsd:documentation>
+												<Description>Transferred Amount</Description>
+											</xsd:documentation>
+										</xsd:annotation>
+									</xsd:element>
+
+								</xsd:sequence>
+							</xsd:complexType>
+						</xsd:element>
+
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+
+		</xsd:sequence>
+	</xsd:complexType>
+
+</xsd:schema>

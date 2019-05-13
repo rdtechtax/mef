@@ -1,0 +1,482 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns="http://www.irs.gov/efile" xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.irs.gov/efile" elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.0">
+	<xsd:annotation>
+		<xsd:documentation>
+			<Description>IRS e-file Schema - Form 8903</Description>
+			<TaxYear>2018</TaxYear>
+			<MaturityLevel>Final Release</MaturityLevel>
+			<ReleaseDate>February 13, 2019</ReleaseDate>
+		</xsd:documentation>
+	</xsd:annotation>
+	<xsd:include schemaLocation="../../../Common/efileTypes.xsd"/>
+
+	<!-- ===================================================================== -->
+	<!-- =======================	IRS Form 8903 ============================ -->
+	<!-- ===================================================================== -->
+
+	<xsd:element name="IRS8903">
+		<xsd:annotation>
+			<xsd:documentation>IRS Form 8903</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:complexContent>
+				<xsd:extension base="IRS8903Type">
+					<xsd:attributeGroup ref="DocumentAttributes">
+						<xsd:annotation>
+							<xsd:documentation>Common return document attributes</xsd:documentation>
+						</xsd:annotation>
+					</xsd:attributeGroup>
+					<xsd:attribute name="documentName" type="xsd:string" fixed="IRS8903">
+						<xsd:annotation>
+							<xsd:documentation>IRS internal use only. To avoid error in the return, do not include the attribute name or value.</xsd:documentation>
+						</xsd:annotation>
+					</xsd:attribute>
+
+					<xsd:attribute name="filedPursuantToSect30191002Cd">
+						<xsd:simpleType>
+							<xsd:restriction base="StringType">
+								<xsd:enumeration value="Section 301.9100-2 Indicator"/>
+							</xsd:restriction>
+						</xsd:simpleType>
+					</xsd:attribute>
+
+				</xsd:extension>
+			</xsd:complexContent>
+		</xsd:complexType>
+	</xsd:element>
+
+	<!-- ========================================= -->
+	<!-- Domestic Production Activities Deduction -->
+	<!-- ========================================= -->
+
+	<xsd:complexType name="IRS8903Type">
+		<xsd:annotation>
+			<xsd:documentation>Content model for IRS Form 8903</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+
+			<!-- All Production Activities -->
+			<xsd:element name="AllProductionGrp" type="AllProductionGrpType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>All production activities</Description>
+						<LineNumber>1(a) - 10(a)</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- All Activities -->
+			<xsd:element name="AllActivitiesGrp" type="AllActivitiesGrpType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>All activities</Description>
+						<LineNumber>1(b) - 10(b)</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Income Limitation -->
+			<xsd:element name="IncomeLimitationAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Income limitation</Description>
+						<LineNumber>11</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Enter Smaller of Line 10 or Line 11 -->
+			<xsd:element name="QualifiedIncomeOrIncomeLmtAmt" type="USAmountNNType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Enter smaller of line 10 or line 11</Description>
+						<LineNumber>12</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Enter 6% of Line 12 -->
+			<xsd:element name="PercentOfIncomeAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Enter 6% of line 12</Description>
+						<LineNumber>13</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Qualified Income Or Oil Related Or Income Limits -->
+			<xsd:element name="QlfyIncOrOilRelOrIncLimitsAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Qualified income or oil related or income limits</Description>
+						<LineNumber>14a</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Qualified Income Or Oil Related Or Income Percent Amount -->
+			<xsd:element name="QlfyIncOrOilRelOrIncPercentAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Qualified income or oil related or income percent amount</Description>
+						<LineNumber>14b</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Domestic Production Activity Reduction Amount -->
+			<xsd:element name="DomesticProdActivityRedAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Domestic production activity reduction amount</Description>
+						<LineNumber>15</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Form W-2 Wages -->
+			<xsd:element name="W2WagesAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Form W-2 wages</Description>
+						<LineNumber>16</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Form W-2 Wages from Partnerships, S Corps, Estates and Trust -->
+			<xsd:element name="PassThroughW2WagesAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Form W-2 wages from partnerships, S corps, estates and trusts</Description>
+						<LineNumber>17</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Add Lines 14 & 15 -->
+			<xsd:element name="TotalW2WagesAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Add lines 14 and 15</Description>
+						<LineNumber>18</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Amount Allocated To Beneficiaries Of Estates Or Trust -->
+			<xsd:element name="EstateOrTrustAllocatedBenefAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Amount allocated to beneficiaries of estates or trust</Description>
+						<LineNumber>19</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Estates And Trusts -->
+			<xsd:element name="EstatesAndTrustsAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Estates and trusts</Description>
+						<LineNumber>20</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Form W-2 Wage Limitation.  Enter 50% of Line 18 -->
+			<xsd:element name="W2WageLimitationAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Form W-2 wage limitation.  Enter 50% of line 18</Description>
+						<LineNumber>21</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Enter Smaller of Line 13 or Line 19 -->
+			<xsd:element name="IncomePctOrW2WageLimitationAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Enter smaller of line 13 or line 19</Description>
+						<LineNumber>22</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Domestic Production Activities Deduction from Cooperatives -->
+			<xsd:element name="CoopeartivesDomesticProdDedAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Domestic production activities deduction from cooperatives</Description>
+						<LineNumber>23</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Expanded Affiliated Group Allocation -->
+			<xsd:element name="ExpandedGroupAllocationAmt" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Expanded affiliated group allocation</Description>
+						<LineNumber>24</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+				<xsd:complexType>
+					<xsd:simpleContent>
+						<xsd:extension base="USAmountType">
+							<xsd:attribute name="referenceDocumentId" type="IdListType"/>
+							<xsd:attribute name="referenceDocumentName" type="StringType" fixed="ExpandedAffiliatedGroupAllocationStmt ExpandedAffiliatedGroupQPAIStmt"/>
+						</xsd:extension>
+					</xsd:simpleContent>
+				</xsd:complexType>
+			</xsd:element>
+
+			<!-- Domestic Production Activities Deduction -->
+			<xsd:element name="DomesticProductionActDedAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Domestic production activities deduction</Description>
+						<LineNumber>25</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<!-- ================================================================= -->
+	<!-- ============= Type for Table Rows Line 1(a) - 10(a) ============= -->
+	<!-- ================================================================= -->
+
+
+	<xsd:complexType name="AllProductionGrpType">
+		<xsd:annotation>
+			<xsd:documentation>Type for table rows Line 1(a) - 10(a)</xsd:documentation>
+		</xsd:annotation>
+
+		<xsd:sequence>
+
+
+			<!-- Domestic Production Gross Receipts -->
+			<xsd:element name="DomesticProductionGroRcptsAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Domestic production gross receipts</Description>
+						<LineNumber>1(a)</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Allocable Cost of Goods Sold -->
+			<xsd:element name="AllocatedCostOfGoodsSoldAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Allocable cost of goods sold</Description>
+						<LineNumber>2(a)</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Directly Allocable Deductions, Expenses, or Losses -->
+			<xsd:element name="DirectDedExpensesLossesAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Directly allocable deductions, expenses, or losses</Description>
+						<LineNumber>3(a)</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Indirectly Allocable Deductions, Expenses, or Losses -->
+			<xsd:element name="IndirectDedExpnssLossesAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Indirectly allocable deductions, expenses, or losses</Description>
+						<LineNumber>4(a)</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Add Lines 2 through 4 -->
+			<xsd:element name="TotCostGdsSoldDedExpnssLossAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Add lines 2 through 4</Description>
+						<LineNumber>5(a)</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Subtract Line 5 from Line 1 -->
+			<xsd:element name="NetDomesticProdGrossRcptsAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Subtract line 5 from line 1</Description>
+						<LineNumber>6(a)</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Qualified Production Activities Income from Partnerships, S Corps, Estates and Trusts -->
+			<xsd:element name="QlfyProductionActivitiesAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Qualified production activities income from partnerships, S corps, estates and trusts</Description>
+						<LineNumber>7(a)</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Production Activities Income -->
+			<xsd:element name="ProductionActivitiesIncomeAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Production activities income</Description>
+						<LineNumber>8(a)</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Amount Allocated To Beneficiaries Or Trust -->
+			<xsd:element name="EstateOrTrustAllocatedBenefAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Amount allocated to beneficiaries or trust</Description>
+						<LineNumber>9(a)</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Oil Related Qualified Production Activities Income -->
+			<xsd:element name="OilRelQlfyProdActivitiesIncAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Oil related qualified production activities income</Description>
+						<LineNumber>10a(a)</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+		</xsd:sequence>
+	</xsd:complexType>
+
+
+	<!-- ================================================================= -->
+	<!-- ============= Type for Table Rows Line 1(b) - 10(b) ============= -->
+	<!-- ================================================================= -->
+
+
+	<xsd:complexType name="AllActivitiesGrpType">
+		<xsd:annotation>
+			<xsd:documentation>Type for table rows Line 1(b) - 10(b)</xsd:documentation>
+		</xsd:annotation>
+
+		<xsd:sequence>
+
+
+			<!-- Domestic Production Gross Receipts -->
+			<xsd:element name="DomesticProductionGroRcptsAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Domestic production gross receipts</Description>
+						<LineNumber>1(b)</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Allocable Cost of Goods Sold -->
+			<xsd:element name="AllocatedCostOfGoodsSoldAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Allocable cost of goods sold</Description>
+						<LineNumber>2(b)</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Directly Allocable Deductions, Expenses, or Losses -->
+			<xsd:element name="DirectDedExpensesLossesAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Directly allocable deductions, expenses, or losses</Description>
+						<LineNumber>3(b)</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Indirectly Allocable Deductions, Expenses, or Losses -->
+			<xsd:element name="IndirectDedExpnssLossesAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Indirectly allocable deductions, expenses, or losses</Description>
+						<LineNumber>4(b)</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Add Lines 2 through 4 -->
+			<xsd:element name="TotCostGdsSoldDedExpnssLossAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Add lines 2 through 4</Description>
+						<LineNumber>5(b)</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Subtract Line 5 from Line 1 -->
+			<xsd:element name="NetDomesticProdGrossRcptsAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Subtract line 5 from line 1</Description>
+						<LineNumber>6(b)</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Qualified Production Activities Income from Partnerships, S Corps, Estates and Trusts -->
+			<xsd:element name="QlfyProductionActivitiesAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Qualified production activities income from partnerships, S corps, estates and trusts</Description>
+						<LineNumber>7(b)</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Production Activities Income -->
+			<xsd:element name="ProductionActivitiesIncomeAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Production activities income</Description>
+						<LineNumber>8(b)</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Amount Allocated To Beneficiaries Or Trust -->
+			<xsd:element name="EstateOrTrustAllocatedBenefAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Amount allocated to beneficiaries or trust</Description>
+						<LineNumber>9(b)</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Qualified Production Activities Income -->
+			<xsd:element name="QlfyProductionActyIncomeAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Qualified production activities income</Description>
+						<LineNumber>10b(b)</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+		</xsd:sequence>
+	</xsd:complexType>
+
+</xsd:schema>

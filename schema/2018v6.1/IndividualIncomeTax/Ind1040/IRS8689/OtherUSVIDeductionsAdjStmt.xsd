@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.irs.gov/efile" targetNamespace="http://www.irs.gov/efile" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xsd:annotation>
+		<xsd:documentation>
+			<Description>IRS Individual Income Tax Schema - Other US Virgin Islands Deductions Adjustment Statement</Description>
+			<Purpose>Include in the total on line 28 the amount of any other deductions included on Form 1040, line 36, that are attributable to your USVI income. On the dotted line next to line 28, enter the amount of each deduction attributable to your USVI income and identify it as you did on Form 1040, line 36.</Purpose>
+			<TaxYear>2018</TaxYear>
+			<MaturityLevel>Final Release</MaturityLevel>
+			<ReleaseDate>February 13, 2019</ReleaseDate>
+		</xsd:documentation>
+	</xsd:annotation>
+	<xsd:include schemaLocation="../../../Common/efileTypes.xsd"/>
+	<!-- ===================================================================================== -->
+	<!-- =================== Other US Virgin Islands Deductions Adjustment Statement ======================= -->
+	<!-- ===================================================================================== -->
+	<xsd:element name="OtherUSVIDeductionsAdjStmt">
+		<xsd:annotation>
+			<xsd:documentation>Other US Virgin Islands Deductions Adjustment Statement</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:complexContent>
+				<xsd:extension base="OtherUSVIDeductionsAdjStmtType">
+					<xsd:attributeGroup ref="DocumentAttributes">
+						<xsd:annotation>
+							<xsd:documentation>Common return document attributes</xsd:documentation>
+						</xsd:annotation>
+					</xsd:attributeGroup>
+					<xsd:attribute name="documentName" type="xsd:string" fixed="OtherUSVIDeductionsAdjStmt">
+						<xsd:annotation>
+							<xsd:documentation>IRS internal use only. To avoid error in the return, do not include the attribute name or value.</xsd:documentation>
+						</xsd:annotation>
+					</xsd:attribute>
+				</xsd:extension>
+			</xsd:complexContent>
+		</xsd:complexType>
+	</xsd:element>
+
+	<xsd:complexType name="OtherUSVIDeductionsAdjStmtType">
+		<xsd:annotation>
+			<xsd:documentation>Content model for Other US Virgin Islands Deductions Adjustment Statement</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="OtherUSVIDeductionsAdjGrp" minOccurs="0" maxOccurs="unbounded">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="OtherUSVIDeductionsAdjDesc" type="ShortDescriptionType" minOccurs="0"/>
+						<xsd:element name="OtherUSVIDeductionsAdjAmt" type="USAmountType" minOccurs="0"/>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:schema>

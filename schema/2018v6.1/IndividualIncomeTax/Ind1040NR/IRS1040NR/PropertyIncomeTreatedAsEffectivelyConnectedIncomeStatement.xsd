@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema targetNamespace="http://www.irs.gov/efile" xmlns="http://www.irs.gov/efile" xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.0">
+
+	<xsd:annotation>
+		<xsd:documentation>
+			<Description>IRS e-file Nonresident Alien Income Tax Schema - Property Income Treated As Effectively Connected Income Statement</Description>
+			<Purpose>Optional Statement - Attach this statement if taxpayer has income from real property located in the United States that they own or have an interest in and hold for the production of income, and they choose to treat all income from that property as income effectively connected with a trade or business in the United States. Publication 519.</Purpose>
+			<TaxYear>2018</TaxYear>
+			<MaturityLevel>Final Release</MaturityLevel>
+			<ReleaseDate>February 13, 2019</ReleaseDate>
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:include schemaLocation="../../../Common/efileTypes.xsd" />
+
+	<!-- ========================================================= -->
+	<!-- ====== Property Income Treated As Effectively Connected Income Statement ======= -->
+	<!-- ========================================================= -->
+
+	<xsd:element name="PropertyIncmTreatECIStmt">
+		<xsd:annotation>
+			<xsd:documentation>Property Income Treated As Effectively Connected Income Statement</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:complexContent>
+				<xsd:extension base="PropertyIncmTreatECIStmtType">
+					<xsd:attributeGroup ref="DocumentAttributes">
+						<xsd:annotation>
+							<xsd:documentation>Common return document attributes</xsd:documentation>
+						</xsd:annotation>
+					</xsd:attributeGroup>
+					<xsd:attribute name="documentName" type="TextType" fixed="PropertyIncomeTreatedAsEffectivelyConnectedIncomeStatement">
+						<xsd:annotation>
+							<xsd:documentation>IRS internal use only. To avoid error in the return, do not include the attribute name or value.</xsd:documentation>
+						</xsd:annotation>
+					</xsd:attribute>
+				</xsd:extension>
+			</xsd:complexContent>
+		</xsd:complexType>
+	</xsd:element>
+
+	<xsd:complexType name="PropertyIncmTreatECIStmtType">
+		<xsd:annotation>
+			<xsd:documentation>Content model for Property Income Treated As Effectively Connected Income Statement</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="MakeChoiceCd" minOccurs="0">
+				<xsd:simpleType>
+					<!-- Making the Choice -->
+					<xsd:restriction base="TextType">
+						<xsd:enumeration value="I CHOOSE TO TREAT ALL INCOME FROM THE FOLLOWING PROPERTIES AS INCOME EFFECTIVELY CONNECTED WITH A BUSINESS OR TRADE IN THE UNITED STATES"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<!-- Property Income Treated As Effectively Connected Income-->
+			<xsd:element name="PropertyIncmTreatECIGrp" minOccurs="0" maxOccurs="100">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:choice>
+							<!-- Internal Revenue Code 871(d) -->
+							<xsd:element name="IRCSection871dCd">
+								<xsd:simpleType>
+									<xsd:restriction base="TextType">
+										<xsd:enumeration value="IRC SECTION 871(d)"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<!-- Tax Treaty -->
+							<xsd:element name="TaxTreatyTxt" type="ShortDescriptionType"/>
+						</xsd:choice>
+						<!-- Real Property or Interest in the United States -->
+						<xsd:element name="PropertyDesc" type="LineExplanationType" minOccurs="0"/>
+						<!-- Extent Of Ownership Of Property -->
+						<xsd:element name="ExtentOwnershipPropDesc" type="LineExplanationType" minOccurs="0"/>
+						<!-- Location Of Property -->
+						<xsd:element name="PropertyLocationTxt" type="LineExplanationType" minOccurs="0"/>
+						<!-- Improvements to Property Description -->
+						<xsd:element name="PropertyImprovementDesc" type="ShortExplanationType" minOccurs="0"/>
+						<!-- Property Ownership Dates -->
+						<xsd:element name="PropertyOwnershipDateDesc" type="LineExplanationType" minOccurs="0"/>
+						<!-- Income from Property -->
+						<xsd:element name="IncomeAmt" type="USAmountType" minOccurs="0"/>
+						<!-- Previous Choices and Revocations -->
+						<xsd:element name="TxblYrRevocationOrElectionDesc" type="LineExplanationType" minOccurs="0"/>
+						<!-- Additional explanation if needed by filer -->
+						<xsd:element name="AdditionalExplanationTxt" type="ShortExplanationType" minOccurs="0"/>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<!-- Income From Property Total -->
+			<xsd:element name="TotalIncomeAmt" type="USAmountType" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+
+</xsd:schema>

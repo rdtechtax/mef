@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema targetNamespace="http://www.irs.gov/efile" xmlns="http://www.irs.gov/efile" xmlns:efile="http://www.irs.gov/efile" xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.0">
+
+	<xsd:annotation>
+		<xsd:documentation>
+			<Description>IRS e-file U.S. Nonresident Alien Income Tax Schema - Return for 1040NR</Description>
+			<TaxYear>2018</TaxYear>
+			<MaturityLevel>Final Release</MaturityLevel>
+			<ReleaseDate>February 13, 2019</ReleaseDate>
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:include schemaLocation="ReturnHeader1040NR.xsd" />
+	<xsd:include schemaLocation="ReturnData1040NR.xsd" />
+
+	<!-- U.S. Nonresident Alien Income Tax Return - 1040NR -->
+	<xsd:element name="Return">
+		<xsd:annotation>
+			<xsd:documentation>U.S. Nonresident Alien Income Tax Return - Form 1040NR - wraps around ReturnHeader and ReturnData</xsd:documentation>
+		</xsd:annotation>
+
+		<xsd:complexType>
+			<xsd:sequence>
+
+				<xsd:element ref="ReturnHeader" />
+				<xsd:element ref="ReturnData" />
+
+			</xsd:sequence>
+
+			<!-- Return Version -->
+			<xsd:attribute name="returnVersion" type="StringType" use="required" fixed="2018v6.1" >
+				<xsd:annotation>
+					<xsd:documentation>Return Version</xsd:documentation>
+				</xsd:annotation>
+			</xsd:attribute>
+
+		</xsd:complexType>
+
+		<!-- Uniqueness constraint for 'documentId' attribute of return documents -->
+		<xsd:unique name="documentId">
+			<xsd:selector xpath="efile:ReturnData/efile:*" />
+			<xsd:field xpath="@documentId" />
+		</xsd:unique>
+
+		<!-- Uniqueness constraint for Binary Attachment -->
+		<xsd:unique name="BinaryAttachment">
+			<xsd:selector xpath="efile:ReturnData/efile:BinaryAttachment" />
+			<xsd:field xpath="efile:AttachmentLocationTxt" />
+		</xsd:unique>
+
+	</xsd:element>
+
+</xsd:schema>

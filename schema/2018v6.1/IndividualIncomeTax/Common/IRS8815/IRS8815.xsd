@@ -1,0 +1,234 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.irs.gov/efile" targetNamespace="http://www.irs.gov/efile" elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.0">
+	<xsd:annotation>
+		<xsd:documentation>
+			<Description>IRS e-file Schema - IRS Form 8815 Exclusion of Interest From Series EE and I U.S. Savings Bonds Issued After 1989</Description>
+			<TaxYear>2018</TaxYear>
+			<MaturityLevel>Final Release</MaturityLevel>
+			<ReleaseDate>February 13, 2019</ReleaseDate>
+		</xsd:documentation>
+	</xsd:annotation>
+	<xsd:include schemaLocation="../../../Common/efileTypes.xsd"/>
+	<!--==================================================================-->
+	<!--========================= IRS Form 8815 ==========================-->
+	<!--==================================================================-->
+	<xsd:element name="IRS8815">
+		<xsd:annotation>
+			<xsd:documentation>IRS Form 8815</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:complexContent>
+				<xsd:extension base="IRS8815Type">
+					<xsd:attributeGroup ref="DocumentAttributes">
+						<xsd:annotation>
+							<xsd:documentation>Common return document attributes</xsd:documentation>
+						</xsd:annotation>
+					</xsd:attributeGroup>
+					<xsd:attribute name="documentName" type="xsd:string" fixed="IRS8815">
+						<xsd:annotation>
+							<xsd:documentation>IRS internal use only. To avoid error in the return, do not include the attribute name or value.</xsd:documentation>
+						</xsd:annotation>
+					</xsd:attribute>
+					<xsd:attribute name="referenceDocumentId" type="IdListType">
+						<xsd:annotation>
+							<xsd:documentation>List of document ID's of forms, schedules, supporting info. etc. attached to this form</xsd:documentation>
+						</xsd:annotation>
+					</xsd:attribute>
+					<xsd:attribute name="referenceDocumentName" type="StringType" fixed="GeneralDependencyMedium"/>
+				</xsd:extension>
+			</xsd:complexContent>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:complexType name="IRS8815Type">
+		<xsd:annotation>
+			<xsd:documentation>Content model for Form 8815</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="EligibleEducationInstnGrp" minOccurs="0" maxOccurs="unbounded">
+				<xsd:complexType>
+					<xsd:sequence>
+						<!--Eligibile Person Name -->
+						<xsd:element name="EligiblePersonNm" type="PersonNameType">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Eligibile Person Name</Description>
+									<LineNumber>1(a)1 1(a)2 1(a)3</LineNumber>
+									<ELFFieldNumber>0010 0050 0090</ELFFieldNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						<!--Eligibile Institution Name -->
+						<xsd:element name="EligibleInstitutionNm" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Eligibile Institution Name</Description>
+									<LineNumber>1(b)1 1(b)2 1(b)3</LineNumber>
+									<ELFFieldNumber>0020 0060 0100</ELFFieldNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+							<xsd:complexType>
+								<xsd:simpleContent>
+									<xsd:extension base="BusinessNameLine1Type">
+										<xsd:attribute name="qualifiedTuitionProgramCd" type="StringType" fixed="QSTP"/>
+										<xsd:attribute name="coverdellEducationalSavAcctCd" type="StringType" fixed="COVERDELL ESA"/>
+									</xsd:extension>
+								</xsd:simpleContent>
+							</xsd:complexType>
+						</xsd:element>
+						<xsd:choice minOccurs="0">
+							<!--Eligible Institution United States Address -->
+							<xsd:element name="EligibleInstitutionUSAddress" type="USAddressType" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>
+										<Description>Eligible Institution United States Address</Description>
+										<LineNumber>1(b)1 1(b)2 1(b)3</LineNumber>
+										<ELFFieldNumber>0030 0040 0070 0080 0100 0110</ELFFieldNumber>
+									</xsd:documentation>
+								</xsd:annotation>
+							</xsd:element>
+							<!--Eligible Institution Foreign Address -->
+							<xsd:element name="EligibleInstitutionFrgnAddress" type="ForeignAddressType" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>
+										<Description>Eligible Institution Foreign Address</Description>
+										<LineNumber>1(b)1 1(b)2 1(b)3</LineNumber>
+									</xsd:documentation>
+								</xsd:annotation>
+							</xsd:element>
+						</xsd:choice>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<!--Exclusion Bond Interests Total Qualifying Education Expense Amount -->
+			<xsd:element name="ExclBondIntTotQlfyEducExpnsAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Exclusion Bond Interests Total Qualifying Education Expense Amount</Description>
+						<LineNumber>2</LineNumber>
+						<ELFFieldNumber>0170</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!--Exclusion Bond Interests Total Non Tax Education Benefiting Amount -->
+			<xsd:element name="ExclBondIntTotNonTxEducBnftAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Exclusion Bond Interests Total Non Tax Education Benefiting Amount</Description>
+						<LineNumber>3</LineNumber>
+						<ELFFieldNumber>0180</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!--Exclusion Bond Interests Taxable Education Benefit Amount -->
+			<xsd:element name="ExclBondIntTxblEducBenefitAmt" type="USAmountNNType">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Exclusion Bond Interests Taxable Education Benefit Amount</Description>
+						<LineNumber>4</LineNumber>
+						<ELFFieldNumber>0190</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!--Exclusion Bond Total Processing Year Bond Processible Amount -->
+			<xsd:element name="ExclBondTotPYBondProcAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Exclusion Bond Total Processing Year Bond Processible Amount</Description>
+						<LineNumber>5</LineNumber>
+						<ELFFieldNumber>0200</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!--Exclusion Bond Interests Total Processing Year Bond Interests Amount -->
+			<xsd:element name="ExclBondIntTotPYBondIntAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Exclusion Bond Interests Total Processing Year Bond Interests Amount</Description>
+						<LineNumber>6</LineNumber>
+						<ELFFieldNumber>0210</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!--Exclusion Bond Interests Taxable Expense Bond Processible Real Time -->
+			<xsd:element name="ExclBondIntTxblExpnsBondProcRt" type="RatioType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Exclusion Bond Interests Taxable Expense Bond Processible Real Time</Description>
+						<LineNumber>7</LineNumber>
+						<ELFFieldNumber>0220</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!--Exclusion Bond Interests Tentative Bond Interests Amount -->
+			<xsd:element name="ExclBondIntTentativeBondIntAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Exclusion Bond Interests Tentative Bond Interests Amount</Description>
+						<LineNumber>8</LineNumber>
+						<ELFFieldNumber>0230</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!--Exclusion Bond Interests Modified Adjusted Gross Income Amount -->
+			<xsd:element name="ExclBondIntModifiedAGIAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Exclusion Bond Interests Modified Adjusted Gross Income Amount</Description>
+						<LineNumber>9</LineNumber>
+						<ELFFieldNumber>0240</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!--Exclusion Bond Interests Filing Status Limitations Amount -->
+			<xsd:element name="ExclBondIntFilingStatusLmtAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Exclusion Bond Interests Filing Status Limitations Amount</Description>
+						<LineNumber>10</LineNumber>
+						<ELFFieldNumber>0250</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!--Exclusion Bond Interests Excess Adjusted Gross Income Amount -->
+			<xsd:element name="ExclBondIntExcessAGIAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Exclusion Bond Interests Excess Adjusted Gross Income Amount</Description>
+						<LineNumber>11</LineNumber>
+						<ELFFieldNumber>0260</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!--Exclusion Bond Interests Excess Adjusted Gross Income Real Time -->
+			<xsd:element name="ExclBondIntExcessAGIRt" type="RatioType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Exclusion Bond Interests Excess Adjusted Gross Income Real Time</Description>
+						<LineNumber>12</LineNumber>
+						<ELFFieldNumber>0270</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!--Exclusion Bond Interests Offset Amount -->
+			<xsd:element name="ExclBondIntOffsetAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Exclusion Bond Interests Offset Amount</Description>
+						<LineNumber>13</LineNumber>
+						<ELFFieldNumber>0280</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Excludable Savings Bond Interests Amount -->
+			<xsd:element name="ExcludableSavingsBondIntAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Excludable Savings Bond Interests Amount</Description>
+						<LineNumber>14</LineNumber>
+						<ELFFieldNumber>0290</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:schema>

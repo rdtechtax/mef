@@ -1,0 +1,226 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns="http://www.irs.gov/efile" xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.irs.gov/efile" elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.0">
+
+	<xsd:annotation>
+		<xsd:documentation>
+			<Description>IRS e-file Partnership Income Tax Schema - Foreign Tax Credit Information Schedule</Description>
+			<TaxYear>2018</TaxYear>
+			<MaturityLevel>Final Release</MaturityLevel>
+			<ReleaseDate>February 13, 2019</ReleaseDate>
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:include schemaLocation="../../../Common/efileTypes.xsd"/>
+
+
+	<!-- ============================================================= -->
+	<!-- ======== Foreign Tax Credit Information Schedule ============ -->
+	<!-- ============================================================= -->
+
+
+	<xsd:element name="ForeignTaxCrInformationSchd">
+		<xsd:annotation>
+			<xsd:documentation>Foreign Tax Credit Information Schedule</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:complexContent>
+				<xsd:extension base="ForeignTaxCrInformationSchdTyp">
+					<xsd:attributeGroup ref="DocumentAttributes">
+						<xsd:annotation>
+							<xsd:documentation>Common return document attributes</xsd:documentation>
+						</xsd:annotation>
+					</xsd:attributeGroup>
+					<xsd:attribute name="documentName" type="xsd:string" fixed="ForeignTaxCrInformationSchd">
+						<xsd:annotation>
+							<xsd:documentation>IRS internal use only. To avoid error in the return, do not include the attribute name or value.</xsd:documentation>
+						</xsd:annotation>
+					</xsd:attribute>
+				</xsd:extension>
+			</xsd:complexContent>
+		</xsd:complexType>
+	</xsd:element>	
+
+	<xsd:complexType name="ForeignTaxCrInformationSchdTyp">
+		<xsd:annotation>
+			<xsd:documentation>Content model for the Foreign Tax Credit Information Schedule</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+    			<!-- Foreign Tax Credit Information -->
+			<xsd:element name="ForeignTaxCrInformation" type="ForeignTaxCrInformationType" minOccurs="0" maxOccurs="unbounded">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Foreign Tax Credit Information</Description>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<!-- Type for Repeating Group - Foreign Tax Credit Information -->
+	<xsd:complexType name="ForeignTaxCrInformationType">
+		<xsd:sequence>
+			<!-- Name of Country or U.S. possession-->
+			<xsd:element name="ForeignCountryOrUSPossessionCd" type="CountryType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Name of Country or U.S. possession</Description>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Gross Income From All Sources -->
+			<xsd:element name="GrossIncomeFromAllSourcesAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Gross Income From All Sources</Description>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Gross Income Sourced at Partner Level -->
+			<xsd:element name="GrossIncomeSourcedPrtnrLvlAmt" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Gross Income Sourced at Partner Level</Description>
+					</xsd:documentation>
+				</xsd:annotation>
+				<xsd:complexType>
+					<xsd:simpleContent>
+						<xsd:extension base="USAmountType">
+							<xsd:attribute name="referenceDocumentId" type="IdListType"/>
+							<xsd:attribute name="referenceDocumentName" type="StringType" fixed="ForeignGrossIncomeSourcedAtPartnershipLevelSchedule"/>
+						</xsd:extension>
+					</xsd:simpleContent>
+				</xsd:complexType>				
+			</xsd:element>
+			<!-- Passive Amount-->
+			<xsd:element name="PassiveAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Passive Amount</Description>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Listed Categories Amount-->
+			<xsd:element name="ListedCategoriesAmt" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Listed Categories Amount</Description>
+					</xsd:documentation>
+				</xsd:annotation>
+				<xsd:complexType>
+					<xsd:simpleContent>
+						<xsd:extension base="USAmountType">
+							<xsd:attribute name="referenceDocumentId" type="IdListType"/>
+							<xsd:attribute name="referenceDocumentName" type="StringType" fixed="OtherPartnershipLevelForeignGrossIncomeStatement"/>
+						</xsd:extension>
+					</xsd:simpleContent>
+				</xsd:complexType>				
+			</xsd:element>
+			<!-- General Limitation Amount-->
+			<xsd:element name="GeneralLimitationAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>General Limitation Amount</Description>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Interest Expense Amount-->
+			<xsd:element name="InvestmentInterestExpenseAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Interest Expense Amount</Description>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		   <!-- Other Amount-->
+			<xsd:element name="OtherAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Other Amount</Description>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Passive Amount 2-->
+			<xsd:element name="Passive2Amt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Passive Amount</Description>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Listed Categories Amount-->
+			<xsd:element name="ListedCategories2Amt" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Listed Categories Amount</Description>
+					</xsd:documentation>
+				</xsd:annotation>
+				<xsd:complexType>
+					<xsd:simpleContent>
+						<xsd:extension base="USAmountType">
+							<xsd:attribute name="referenceDocumentId" type="IdListType"/>
+							<xsd:attribute name="referenceDocumentName" type="StringType" fixed="OtherPartnershipLevelDeductionsStatement"/>
+						</xsd:extension>
+					</xsd:simpleContent>
+				</xsd:complexType>						
+			</xsd:element>
+			<!-- General Limitation Amount-->
+			<xsd:element name="GeneralLimitation2Amt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>General Limitation Amount</Description>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		  	<!-- Total Foreign Taxes Paid Amount -->
+			<xsd:element name="TotalForeignTaxesPaidAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Total Foreign Taxes Paid Amount</Description>
+					</xsd:documentation>
+				</xsd:annotation>					
+			</xsd:element>
+		  	<!-- Total Foreign Taxes Accrued Amount -->
+			<xsd:element name="TotalForeignTaxesAccruedAmt" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Total Foreign Taxes Accrued Amount</Description>
+					</xsd:documentation>
+				</xsd:annotation>
+				<xsd:complexType>
+					<xsd:simpleContent>
+						<xsd:extension base="USAmountType">
+							<xsd:attribute name="referenceDocumentId" type="IdListType"/>
+							<xsd:attribute name="referenceDocumentName" type="StringType" fixed="TotalForeignTaxesAccruedStatement"/>
+						</xsd:extension>
+					</xsd:simpleContent>
+				</xsd:complexType>					
+			</xsd:element>
+ 	  		<!-- Total Foreign Taxes Paid/Accrued Amount -->
+			<xsd:element name="TotalForeignTaxPaidAccruedAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Total Foreign Taxes Paid/Accrued Amount</Description>
+					</xsd:documentation>
+				</xsd:annotation>					
+			</xsd:element>
+
+		  	<!-- Reduction in Taxes Available for Credit Amount -->
+			<xsd:element name="ReductionInTaxesAvlblForCrAmt" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Reduction in Taxes Available for Credit Amount</Description>
+					</xsd:documentation>
+				</xsd:annotation>
+				<xsd:complexType>
+					<xsd:simpleContent>
+						<xsd:extension base="USAmountType">
+							<xsd:attribute name="referenceDocumentId" type="IdListType"/>
+							<xsd:attribute name="referenceDocumentName" type="StringType" fixed="ReductionInTaxesAvailableForCreditStatement"/>
+						</xsd:extension>
+					</xsd:simpleContent>
+				</xsd:complexType>				
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+
+</xsd:schema>

@@ -1,0 +1,412 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.irs.gov/efile" targetNamespace="http://www.irs.gov/efile" elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.0">
+	<xsd:annotation>
+		<xsd:documentation>
+			<Description>IRS e-file Schema - Form 6198</Description>
+			<TaxYear>2018</TaxYear>
+			<MaturityLevel>Final Release</MaturityLevel>
+			<ReleaseDate>February 13, 2019</ReleaseDate>
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:include schemaLocation="../../../Common/efileTypes.xsd"/>
+
+	<!-- ================================================================ -->
+	<!-- =======================  IRS Form 6198 ============================ -->
+	<!-- ================================================================ -->
+
+	<xsd:element name="IRS6198">
+		<xsd:annotation>
+			<xsd:documentation>IRS Form 6198</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:complexContent>
+				<xsd:extension base="IRS6198Type">
+					<xsd:attributeGroup ref="DocumentAttributes">
+						<xsd:annotation>
+							<xsd:documentation>Common return document attributes</xsd:documentation>
+						</xsd:annotation>
+					</xsd:attributeGroup>
+					<xsd:attribute name="documentName" type="xsd:string" fixed="IRS6198">
+						<xsd:annotation>
+							<xsd:documentation>IRS internal use only. To avoid error in the return, do not include the attribute name or value.</xsd:documentation>
+						</xsd:annotation>
+					</xsd:attribute>
+				</xsd:extension>
+			</xsd:complexContent>
+		</xsd:complexType>
+	</xsd:element>
+
+	<xsd:complexType name="IRS6198Type">
+		<xsd:annotation>
+			<xsd:documentation>Content model for IRS Form 6198</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+
+			<!--  Description of Activity  -->
+			<xsd:element name="ActivityDescriptionTxt" type="LineExplanationType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Description of activity (See page 2 of the instructions)</Description>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- ======== Part I: Current Year Profit (Loss) From the Activity, Including Prior Year Nondeductible Amounts ======= -->
+
+			<!-- Ordinary Income (Loss) from the Activity -->
+			<xsd:element name="OrdinaryIncomeLossAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Ordinary income (loss) from the activity</Description>
+						<LineNumber>1</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Schedule D Gain or Loss -->
+			<xsd:element name="ScheduleDGainOrLossAmt" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Schedule D gain or loss</Description>
+						<LineNumber>2a</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+				<xsd:complexType>
+					<xsd:simpleContent>
+						<xsd:extension base="USAmountType">
+							<xsd:attribute name="referenceDocumentId" type="IdListType"/>
+							<xsd:attribute name="referenceDocumentName" type="StringType" fixed="SchDGainsOrLossesForAtRiskLmtStatement"/>
+						</xsd:extension>
+					</xsd:simpleContent>
+				</xsd:complexType>
+			</xsd:element>
+
+			<!--  Form 4797 Gain or Loss-->
+			<xsd:element name="Form4797GainOrLossAmt" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Form 4797 gain or loss</Description>
+						<LineNumber>2b</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+				<xsd:complexType>
+					<xsd:simpleContent>
+						<xsd:extension base="USAmountType">
+							<xsd:attribute name="referenceDocumentId" type="IdListType"/>
+							<xsd:attribute name="referenceDocumentName" type="StringType" fixed="Form4797GainsOrLossesForAtRiskLmtStatement"/>
+						</xsd:extension>
+					</xsd:simpleContent>
+				</xsd:complexType>
+			</xsd:element>
+				
+			<!--  Other Form or Schedule  -->
+			<xsd:element name="OtherFormOrScheduleAmt" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Other form or schedule</Description>
+						<LineNumber>2c</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+				<xsd:complexType>
+					<xsd:simpleContent>
+						<xsd:extension base="USAmountType">
+							<xsd:attribute name="referenceDocumentId" type="IdListType"/>
+							<xsd:attribute name="referenceDocumentName" type="StringType" fixed="OtherFormOrSchGainsOrLossesForAtRiskLmtStatement"/>
+						</xsd:extension>
+					</xsd:simpleContent>
+				</xsd:complexType>
+			</xsd:element>
+			
+			<!-- Form or Schedule Number -->
+			<xsd:element name="ScheduleOrFormNum" type="LineExplanationType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Form or schedule number</Description>
+						<LineNumber>Line 2c</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!--  Schedule K-1 Income or Gain  -->
+			<xsd:element name="ScheduleK1IncomeOrGainAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Schedule K-1 income or gain</Description>
+						<LineNumber>3</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!--  Other Deductions or Loss from the Activity -->
+			<xsd:element name="OtherDeductionsAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Other deductions or loss from the activity</Description>
+						<LineNumber>4</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!--  Current Year Overall Profit or Loss from the Activity. Combine lines 1 through 4-->
+			<xsd:element name="CurrentYearProfitOrLossAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Current year overall profit or loss from the activity. Combine lines 1 through 4</Description>
+						<LineNumber>5</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- =============== Part II: Simplified Computation of Amount At Risk. ===================== -->
+
+			<!-- Adjusted Basis (as Defined in Section 1011) in the Activity -->
+			<xsd:element name="AdjustedBasisAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Adjusted basis (as defined in section 1011) in the activity</Description>
+						<LineNumber>6</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!--  Increases for the Tax Year -->
+			<xsd:element name="CurrentYearIncreaseRiskAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Increases for the tax year. See page 4 of the instructions</Description>
+						<LineNumber>7</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!--  Line 6 Plus Line 7 -->
+			<xsd:element name="SumAdjBasisAndIncreaseRiskAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Line 6 plus line 7</Description>
+						<LineNumber>8</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Tax Year Decreases -->
+			<xsd:element name="CurrentYearDecreaseRiskAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Tax year decreases</Description>
+						<LineNumber>9</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Line 8 Minus Line 9 -->
+			<xsd:element name="SumAdjBasisIncrLessDecrRiskAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Subtract line 9 from line 8</Description>
+						<LineNumber>10a</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Amount at Risk  -->
+			<xsd:element name="SimplifiedComputationRiskAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Amount at risk. If line 10a is more than zero, enter that amount here</Description>
+						<LineNumber>10b</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- ================= Part III: Detailed Computation of Amount At Risk ================ -->
+
+			<!-- Investment In the Activity -->
+			<xsd:element name="ActivityInvestmentAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Investment in the activity</Description>
+						<LineNumber>11</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Increases at Effective Date -->
+			<xsd:element name="EffectiveDateIncreaseAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Increases at effective date</Description>
+						<LineNumber>12</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Line 11 Plus Line 12  -->
+			<xsd:element name="SumActyInvestmentAndDtIncrAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Line 11 plus line 12 </Description>
+						<LineNumber>13</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Decreases at Effective Date -->
+			<xsd:element name="EffectiveDateDecreaseAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Decreases at effective date</Description>
+						<LineNumber>14</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<xsd:choice minOccurs="0">
+				<!-- At Risk Effective Date Box -->
+				<xsd:element name="EffectiveDateRiskAmountInd" type="CheckboxType">
+					<xsd:annotation>
+						<xsd:documentation>
+							<Description>At risk effective date box</Description>
+							<LineNumber>15a</LineNumber>
+						</xsd:documentation>
+					</xsd:annotation>
+				</xsd:element>	
+				<!-- Prior Year Form 6198 -->
+				<xsd:element name="Form6198PriorYearInd" type="CheckboxType">
+					<xsd:annotation>
+						<xsd:documentation>
+							<Description> Prior year (Form) 6198</Description>
+							<LineNumber>15b</LineNumber>
+						</xsd:documentation>
+					</xsd:annotation>
+				</xsd:element>
+			</xsd:choice>
+
+			<!-- Amount at Risk  -->
+			<xsd:element name="DetailedComputationRisk1Amt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Amount at risk (check box that applies)</Description>
+						<LineNumber>15</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<xsd:choice minOccurs="0">
+				<!-- Increases Effective Date Box -->
+				<xsd:element name="IncreaseSinceEffectiveDateInd" type="CheckboxType">
+					<xsd:annotation>
+						<xsd:documentation>
+							<Description> Increases effective date box</Description>
+							<LineNumber>16a</LineNumber>
+						</xsd:documentation>
+					</xsd:annotation>
+				</xsd:element>	
+				<!-- Increases End of Prior Year Box -->
+				<xsd:element name="IncreaseSincePriorYearInd" type="CheckboxType">
+					<xsd:annotation>
+						<xsd:documentation>
+							<Description>Increases end of prior year box</Description>
+							<LineNumber>16b</LineNumber>
+						</xsd:documentation>
+					</xsd:annotation>
+				</xsd:element>
+			</xsd:choice>
+
+			<!-- Amount of Increases -->
+			<xsd:element name="IncreasesAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Amount of increases</Description>
+						<LineNumber>16</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Line 15 Plus Line 16  -->
+			<xsd:element name="SumAmountAtRiskAndIncreaseAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Line 15 Plus Line 16 </Description>
+						<LineNumber>17</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<xsd:choice minOccurs="0">
+				<!-- Decreases Effective Date Box -->
+				<xsd:element name="DecreaseSinceEffectiveDateInd" type="CheckboxType">
+					<xsd:annotation>
+						<xsd:documentation>
+							<Description>Decreases effective date box</Description>
+							<LineNumber>18a</LineNumber>
+						</xsd:documentation>
+					</xsd:annotation>
+				</xsd:element>	
+				<!-- Decreases End of Prior Year Box -->
+				<xsd:element name="DecreaseSincePriorYearInd" type="CheckboxType">
+					<xsd:annotation>
+						<xsd:documentation>
+							<Description>Decreases end of prior year box</Description>
+							<LineNumber>18b</LineNumber>
+						</xsd:documentation>
+					</xsd:annotation>
+				</xsd:element>
+			</xsd:choice>
+
+			<!-- Amount of Decreases -->
+			<xsd:element name="DecreasesAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Amount of decreases </Description>
+						<LineNumber>18</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Line 17 Minus Line 18 -->
+			<xsd:element name="NetAtRiskAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Line 17 Minus Line 18</Description>
+						<LineNumber>19a</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Amount at Risk  -->
+			<xsd:element name="DetailedComputationRiskAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Amount at risk. If line 19a is more than zero, enter that amount here</Description>
+						<LineNumber>19b</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- ================== Part IV: Deductible Loss ========================== -->
+
+			<!-- Larger of Line 10b or Line 19b -->
+			<xsd:element name="AmountAtRiskAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Larger of Line 10b or Line 19b</Description>
+						<LineNumber>20</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Deductible Loss -->
+			<xsd:element name="DeductibleLossAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Deductible loss. Smaller of line 5 loss or line 20</Description>
+						<LineNumber>21</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:schema>

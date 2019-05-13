@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns="http://www.irs.gov/efile" xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.irs.gov/efile" elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.0">
+
+	<xsd:annotation>
+		<xsd:documentation>
+			<Description>IRS e-file Individual Income Tax Schema - IRS Form 1040 Schedule EIC Earned Income Credit Qualifying Child Information</Description>
+			<TaxYear>2018</TaxYear>
+			<MaturityLevel>Final Release</MaturityLevel>
+			<ReleaseDate>February 13, 2019</ReleaseDate>
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:include schemaLocation="../../../Common/efileTypes.xsd"/>
+
+	<!-- =================================================================== -->
+	<!-- ================= IRS Form 1040 Schedule EIC ====================== -->
+	<!-- =================================================================== -->
+
+	<xsd:element name="IRS1040ScheduleEIC">
+		<xsd:annotation>
+			<xsd:documentation>IRS Form 1040 Schedule EIC</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:complexContent>
+				<xsd:extension base="IRS1040ScheduleEICType">
+					<xsd:attributeGroup ref="DocumentAttributes">
+						<xsd:annotation>
+							<xsd:documentation>Common return document attributes</xsd:documentation>
+						</xsd:annotation>
+					</xsd:attributeGroup>
+					<xsd:attribute name="documentName" type="xsd:string" fixed="IRS1040ScheduleEIC">
+						<xsd:annotation>
+							<xsd:documentation>IRS internal use only. To avoid error in the return, do not include the attribute name or value.</xsd:documentation>
+						</xsd:annotation>
+					</xsd:attribute>
+				</xsd:extension>
+			</xsd:complexContent>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:complexType name="IRS1040ScheduleEICType">
+		<xsd:annotation>
+			<xsd:documentation>Content model for IRS Form 1040 Schedule EIC</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<!-- Qualifying Child Information Repeating Group -->
+			<xsd:element name="QualifyingChildInformation" maxOccurs="3">
+				<xsd:complexType>
+					<xsd:sequence>
+						<!-- Qualifying Child Name Control -->
+						<xsd:element name="QualifyingChildNameControlTxt" type="PersonNameControlType">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Qualifying child name control</Description>
+									<LineNumber>1</LineNumber>
+									<ELFFieldNumber>0007 0077 0147</ELFFieldNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						<!-- Qualifying Child First and Last Name -->
+						<xsd:element name="ChildFirstAndLastName" type="PersonFullNameType">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Qualifying child first and last name</Description>
+									<LineNumber>1</LineNumber>
+									<ELFFieldNumber>0010 0080 0011 0081 0150 0151</ELFFieldNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						<!-- Dependent/Qualifying Child Identity Protection PIN -->
+						<xsd:element name="IdentityProtectionPIN" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Dependent/Qualifying Child Identity Protection PIN</Description>
+									<LineNumber>2</LineNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+							<xsd:simpleType>
+								<xsd:restriction base="TextType">
+									<xsd:length value="6"/>
+								</xsd:restriction>
+							</xsd:simpleType>
+						</xsd:element>
+						<xsd:choice>
+							<!-- Qualifying SSN -->
+							<xsd:element name="QualifyingChildSSN" type="SSNType">
+								<xsd:annotation>
+									<xsd:documentation>
+										<Description>Choice Between Qualifying SSN or Child Died</Description>
+										<LineNumber>2</LineNumber>
+										<ELFFieldNumber>0015 0085 0155</ELFFieldNumber>
+									</xsd:documentation>
+								</xsd:annotation>
+							</xsd:element>
+							<!-- Child Died -->
+							<xsd:element name="DiedLiteralCd">
+								<xsd:annotation>
+									<xsd:documentation>
+										<Description>Child Died</Description>
+										<LineNumber>2</LineNumber>
+										<ELFFieldNumber>0015 0085 0155</ELFFieldNumber>
+									</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="StringType">
+										<xsd:enumeration value="DIED"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+						</xsd:choice>
+						<!-- Child Year Of Birth -->
+						<xsd:element name="ChildBirthYr" type="YearType">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Year of birth</Description>
+									<LineNumber>3</LineNumber>
+									<ELFFieldNumber>0020 0090 0160</ELFFieldNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						<!-- Child Is A Student Under 24 Ind -->
+						<xsd:element name="ChildIsAStudentUnder24Ind" type="BooleanType" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Child is A student under 24 ind</Description>
+									<LineNumber>4(a)</LineNumber>
+									<ELFFieldNumber>0030 0035 0100 0105 0170 0175</ELFFieldNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						<!-- Child Permanently Disabled Ind -->
+						<xsd:element name="ChildPermanentlyDisabledInd" type="BooleanType" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Child permanently disabled ind</Description>
+									<LineNumber>4(b)</LineNumber>
+									<ELFFieldNumber>0040 0045 0110 0115 0180 0185</ELFFieldNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						<!-- Child Relationship -->
+						<xsd:element name="ChildRelationshipCd">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Relationship</Description>
+									<LineNumber>5</LineNumber>
+									<ELFFieldNumber>0060 0130 0200</ELFFieldNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+							<xsd:simpleType>
+								<xsd:restriction base="StringType">
+									<xsd:enumeration value="SON"/>
+									<xsd:enumeration value="DAUGHTER"/>
+									<xsd:enumeration value="STEPCHILD"/>
+									<xsd:enumeration value="FOSTER CHILD"/>
+									<xsd:enumeration value="BROTHER"/>
+									<xsd:enumeration value="SISTER"/>
+									<xsd:enumeration value="STEPBROTHER"/>
+									<xsd:enumeration value="STEPSISTER"/>
+									<xsd:enumeration value="HALF BROTHER"/>
+									<xsd:enumeration value="HALF SISTER"/>
+									<xsd:enumeration value="GRANDCHILD"/>
+									<xsd:enumeration value="NIECE"/>
+									<xsd:enumeration value="NEPHEW"/>
+								</xsd:restriction>
+							</xsd:simpleType>
+						</xsd:element>
+						<!-- Choice between Months Child Lived With You Cnt or Kidnapped Child Indicator -->
+						<xsd:choice>
+							<!-- Months Child Lived With You Cnt -->
+							<xsd:element name="MonthsChildLivedWithYouCnt">
+								<xsd:annotation>
+									<xsd:documentation>
+										<Description>Choice Between Months Child Lived with You or Kidnapped Child</Description>
+										<LineNumber>6</LineNumber>
+										<ELFFieldNumber>0070 0140 0210</ELFFieldNumber>
+									</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="StringType">
+										<xsd:enumeration value="07"/>
+										<xsd:enumeration value="08"/>
+										<xsd:enumeration value="09"/>
+										<xsd:enumeration value="10"/>
+										<xsd:enumeration value="11"/>
+										<xsd:enumeration value="12"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<!-- Kidnapped Child Code -->
+							<xsd:element name="KidnappedChildCd">
+								<xsd:annotation>
+									<xsd:documentation>
+										<Description>Kidnapped Child Code</Description>
+										<LineNumber>6</LineNumber>
+										<ELFFieldNumber>0072 0142 0212</ELFFieldNumber>
+									</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="StringType">
+										<xsd:enumeration value="KC"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+						</xsd:choice>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:schema>

@@ -1,0 +1,3020 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.irs.gov/efile" targetNamespace="http://www.irs.gov/efile" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xsd:annotation>
+		<xsd:documentation>
+			<Description>IRS e-file Schema - Form 3800</Description>
+			<TaxYear>2018</TaxYear>
+			<MaturityLevel>Final Release</MaturityLevel>
+			<ReleaseDate>February 13, 2019</ReleaseDate>
+		</xsd:documentation>
+	</xsd:annotation>
+	<xsd:include schemaLocation="../../../Common/efileTypes.xsd"/>
+
+
+	<!-- =============================================================== -->
+	<!-- ======================  IRS Form 3800 ============================ -->
+	<!-- =============================================================== -->
+
+
+	<xsd:element name="IRS3800">
+		<xsd:annotation>
+			<xsd:documentation>IRS Form 3800</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:complexContent>
+				<xsd:extension base="IRS3800Type">
+					<xsd:attributeGroup ref="DocumentAttributes">
+						<xsd:annotation>
+							<xsd:documentation>Common return document attributes</xsd:documentation>
+						</xsd:annotation>
+					</xsd:attributeGroup>
+					<xsd:attribute name="documentName" type="xsd:string" fixed="IRS3800">
+						<xsd:annotation>
+							<xsd:documentation>IRS internal use only. To avoid error in the return, do not include the attribute name or value.</xsd:documentation>
+						</xsd:annotation>
+					</xsd:attribute>
+					<xsd:attribute name="referenceDocumentId" type="IdListType">
+						<xsd:annotation>
+							<xsd:documentation>List of document ID's of forms, schedules, supporting info. etc. attached to this form</xsd:documentation>
+						</xsd:annotation>
+					</xsd:attribute>
+					<xsd:attribute name="referenceDocumentName" type="StringType" fixed="GeneralDependencySmall"/>
+
+
+				</xsd:extension>
+			</xsd:complexContent>
+		</xsd:complexType>
+	</xsd:element>
+
+	<xsd:complexType name="IRS3800Type">
+		<xsd:annotation>
+			<xsd:documentation>Content model for Form 3800</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+
+			<!-- Part I: Part I Current Year Credit for Credits Not Allowed Against Tentative Minimum Tax (TMT) -->
+
+			<!-- General Business Credit From Non Passive Activity -->
+			<xsd:element name="GeneralBusCrFromNnPssvActyAmt" type="USAmountNNType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>General business credit from non passive activity</Description>
+						<LineNumber>Part I, line 1</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Passive Activity Credits Included from Line 2 -->
+			<xsd:element name="CurrYearPassiveActyCreditsAmt" type="USAmountNNType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Passive activity credits included from line 2</Description>
+						<LineNumber>Part I, line 2</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Passive Activity Credits Allowed for the Current Year -->
+			<xsd:element name="PssvActyForGenBusCrAllowedAmt" type="USAmountNNType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Passive activity credits allowed for the current year</Description>
+						<LineNumber>Part I, line 3</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Carryforward of General Business Credit from the Current Year -->
+			<xsd:element name="CYGeneralBusCrCarryforwardAmt" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Carryforward of general business credit from the current year</Description>
+						<LineNumber>Part I, line 4</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+				<xsd:complexType>
+					<xsd:simpleContent>
+						<xsd:extension base="USAmountNNType">
+							<xsd:attribute name="referenceDocumentId" type="IdListType"/>
+							<xsd:attribute name="referenceDocumentName" type="StringType" fixed="CarryforwardGeneralBusinessCr"/>
+						</xsd:extension>
+					</xsd:simpleContent>
+				</xsd:complexType>
+			</xsd:element>
+
+			<!-- Carryback of General Business Credit -->
+			<xsd:element name="CarryBackGeneralBusinessCrAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Carryback of general business credit</Description>
+						<LineNumber>Part I, line 5</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Current Year Credits Not Allowed Against TMT Amount -->
+			<xsd:element name="CYCreditsNotAllwAgainstTMTAmt" type="USAmountNNType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Current year credits not allowed against TMT amount</Description>
+						<LineNumber>Part I, line 6</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Part II: Allowable Credit -->
+
+			<!-- Regular Tax Before Credits -->
+			<xsd:element name="RegularTaxBeforeCreditsAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Regular tax before credits</Description>
+						<LineNumber>Part II, line 7</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Alternative Minimum Tax -->
+			<xsd:element name="AlternativeMinimumTaxAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Alternative minimum tax</Description>
+						<LineNumber>Part II, line 8</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Sum of Regular Tax Before Credits and AMT -->
+			<xsd:element name="AdjustedRegTaxBeforeCreditAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Sum of regular tax before credits and AMT</Description>
+						<LineNumber>Part II, line 9</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Foreign Tax Credit -->
+			<xsd:element name="ForeignTaxCreditAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Foreign tax credit</Description>
+						<LineNumber>Part II, line 10a</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Certain Allowable Credits -->
+			<xsd:element name="CertainAllowableCreditsAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Certain allowable credits</Description>
+						<LineNumber>Part II, line 10b</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			
+			<!-- Sum of Foreign and Personal Tax Credits -->
+			<xsd:element name="TotalTaxCreditsAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Sum of foreign and personal tax credits</Description>
+						<LineNumber>Part II, line 10c</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Net Income Tax -->
+			<xsd:element name="NetIncomeTaxAmt" type="USAmountNNType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Net income tax</Description>
+						<LineNumber>Part II, line 11</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Net Regular Tax; if zero or less, enter -0- -->
+			<xsd:element name="NetRegularTaxAmt" type="USAmountNNType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Net regular tax; if zero or less, enter -0-</Description>
+						<LineNumber>Part II, line 12</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Percent Excess of Net Regular Tax, if any -->
+			<xsd:element name="ExcessNetRegularTaxAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Percent Excess of Net Regular Tax, if any</Description>
+						<LineNumber>Part II, line 13</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Tentative Minimum Tax -->
+			<xsd:element name="TentativeMinimumTaxAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Tentative minimum tax</Description>
+						<LineNumber>Part II, line 14</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Greater of Percent Excess or TMT -->
+			<xsd:element name="AdjustedExcessNetRegularTaxAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Greater of percent excess or TMT</Description>
+						<LineNumber>Part II, line 15</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Subtract Greater of Excess From Net Income Tax.  If Zero or Less, Enter -0- -->
+			<xsd:element name="AdjustedNetIncomeTaxAmt" type="USAmountNNType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Subtract greater of excess from net income tax.  If zero or less, enter -0-</Description>
+						<LineNumber>Part II, line 16</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Smaller of CY Credits Not Allowed TMT Or Total Adjusted Amount -->
+			<xsd:element name="SmllrCYNotAllwTMTOrTotAdjAmt" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Smaller of CY credits not allowed TMT or total adjusted amount</Description>
+						<LineNumber>Part II, line 17</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+				<xsd:complexType>
+					<xsd:simpleContent>
+						<xsd:extension base="USAmountType">
+							<xsd:attribute name="section383Or384IndicatorCd">
+								<xsd:simpleType>
+									<xsd:restriction base="StringType">
+										<xsd:enumeration value="SEC 383"/>
+										<xsd:enumeration value="SEC 384"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:attribute>
+						</xsd:extension>
+					</xsd:simpleContent>
+				</xsd:complexType>
+			</xsd:element>
+
+			<!-- Tentative Minimun Tax Times Percent Amount -->
+			<xsd:element name="TentativeMinimunTaxTimesPctAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Tentative minimun tax times percent amount</Description>
+						<LineNumber>Part II, line 18</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Greater Excess Or Times Percent Amount -->
+			<xsd:element name="GreaterExcessOrTimesPctAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Greater excess or times percent amount</Description>
+						<LineNumber>Part II, line 19</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Net Income Tax less Greater Excess Amount; If Zero Or Less, Enter -0- -->
+			<xsd:element name="NetIncmTaxLessGreaterExcessAmt" type="USAmountNNType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Net income tax less greater excess amount; if zero or less, enter -0-</Description>
+						<LineNumber>Part II, line 20</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Subtract Smaller From Net Less Greater Amount; If Zero or Less, Enter -0- -->
+			<xsd:element name="SubSmllrFromNetLessGreaterAmt" type="USAmountNNType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Subtract smaller from net less greater amount; if zero or less, enter -0-</Description>
+						<LineNumber>Part II, line 21</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Total Empowerment Zone General Business Credits Amount -->
+			<xsd:element name="TotEmpwrZoneGenBusCreditsAmt" type="USAmountNNType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Total empowerment zone general business credits amount</Description>
+						<LineNumber>Part II, line 22</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- GBC From Passive Activity - All Parts -->
+			<xsd:element name="GBCFromPssvActyAllPartsAmt" type="USAmountNNType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>GBC from passive activity - all parts</Description>
+						<LineNumber>Part II, line 23</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Passive Activity Credit Allowed for Tax Year -->
+			<xsd:element name="PassiveActyAllowedForTYAmt" type="USAmountNNType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Passive activity credit allowed for tax year</Description>
+						<LineNumber>Part II, line 24</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Total Passive Activity Credit for Tax Year -->
+			<xsd:element name="TotalPassiveActivityCreditAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Total passive activity credit for tax year</Description>
+						<LineNumber>Part II, line 25</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Empowerment Zone and Community Employment Credit -->
+			<xsd:element name="EmpwrZoneAndComEmploymentCrAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Empowerment zone and community employment credit</Description>
+						<LineNumber>Part II, line 26</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Net Income Tax Less Percent Excess Amount -->
+			<xsd:element name="NetIncomeTaxLessPctExcessAmt" type="USAmountNNType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Net income tax less percent excess amount</Description>
+						<LineNumber>Part II, line 27</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Sum Smaller And Empowerment Zone Employment Credit Amount -->
+			<xsd:element name="SumSmllrEmpwrZnEmplmnCrAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Sum smaller and empowerment zone employment credit amount</Description>
+						<LineNumber>Part II, line 28</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Net Smaller And Empowerment Zone Employment Credit Amount; If Zero Or Less, Enter -0- -->
+			<xsd:element name="NetSmllrAndEmpwrZnEmplmnCrAmt" type="USAmountNNType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Net smaller and empowerment zone employment credit amount; if zero or less, enter -0-</Description>
+						<LineNumber>Part II, line 29</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Allowed General Business Credit From Non Passive Activity Amount -->
+			<xsd:element name="AllwGenBusCrFromNonPssvActyAmt" type="USAmountNNType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Allowed general business credit from non passive activity amount</Description>
+						<LineNumber>Part II, line 30</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Line 31 Reserved -->
+
+			<!-- General Business Passive Activity Credit Amount -->
+			<xsd:element name="GenBusEligSmllBusPssvActyCrAmt" type="USAmountNNType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>General business passive activity credit amount</Description>
+						<LineNumber>Part II, line 32</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Other Specified Allowable General Business Credit -->
+			<xsd:element name="OtherSpecifiedAllwGenBusCrAmt" type="USAmountNNType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Other specified allowable general business credit</Description>
+						<LineNumber>Part II, line 33</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Allowed General And Eligible Smaller Business Carryforward Credit Amount -->
+			<xsd:element name="AllwGenAndEligSmllBusCfwdCrAmt" type="USAmountNNType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Allowed general and eligible smaller business carryforward credit amount</Description>
+						<LineNumber>Part II, line 34</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Allowed General Business Carryback Credit Amount -->
+			<xsd:element name="AllwGenAndEligSmllBusCybkCrAmt" type="USAmountNNType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Allowed general business carryback credit amount</Description>
+						<LineNumber>Part II, line 35</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Total Allowed General And Eligible Small Business Credit Amount -->
+			<xsd:element name="TotAllwGenAndEligSmllBusCrAmt" type="USAmountNNType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Total allowed general and eligible small business credit amount</Description>
+						<LineNumber>Part II, line 36</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Smaller General Business Credit Or Total General Eligible Credit Amount -->
+			<xsd:element name="SmllrGenBusCrOrTotGenEligCrAmt" type="USAmountNNType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Smaller general business credit or total general eligible credit amount</Description>
+						<LineNumber>Part II, line 37</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Current Year Credit Allowed -->
+			<xsd:element name="CurrentYearCreditAllowedAmt" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Current year credit allowed</Description>
+						<LineNumber>Part II, line 38</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+				<xsd:complexType>
+					<xsd:simpleContent>
+						<xsd:extension base="USAmountType">
+							<xsd:attribute name="referenceDocumentId" type="IdListType"/>
+							<xsd:attribute name="referenceDocumentName" type="StringType" fixed="GenBusinessCreditComputation"/>
+						</xsd:extension>
+					</xsd:simpleContent>
+				</xsd:complexType>
+			</xsd:element>
+
+			<!-- Part III: General Business Credits or Eligible Small Business Credits -->
+
+			<!-- General Business Credit Or Eligible Small Business Credit Group -->
+			<xsd:element name="GenBusCrOrEligSmllBusCrGrp" type="GenBusCrOrEligSmllBusCrGrpType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>General business credit or eligible small business credit group</Description>
+						<LineNumber>Part III</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+		</xsd:sequence>
+
+	</xsd:complexType>
+
+
+	<!-- ===== Type for Repeating Element "GenBusCrOrEligSmllBusCrGrp" in Part III ===== -->
+
+	<xsd:complexType name="GenBusCrOrEligSmllBusCrGrpType">
+		<xsd:sequence>
+
+			<!-- Consolidated Business Credits Group -->
+			<xsd:element name="ConsolidatedBusinessCreditsGrp" type="ConsolidatedBusinessCreditsGrpType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Consolidated Business Credits Group</Description>
+						<LineNumber>Part III Lines I</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- General Business Credit From Non-Passive Activity Group -->
+			<xsd:element name="GeneralBusCrFromNnpssvActyGrp" type="GeneralBusCrFromNnpssvActyGrpType" minOccurs="0" maxOccurs="unbounded">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>General business credit from non-passive activity group</Description>
+						<LineNumber>Part III, line A</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- General Business Credit From Passive Activity Group -->
+			<xsd:element name="GeneralBusCrFromPassiveActyGrp" type="GeneralBusCrFromPassiveActyGrpType" minOccurs="0" maxOccurs="unbounded">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>General business credit from passive activity group</Description>
+						<LineNumber>Part III, line B</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- General Business Credit From Passive Carryforwards Group -->
+			<xsd:element name="GeneralBusCrCarryforwardsGrp" type="GeneralBusCrCarryforwardsGrpType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>General business credit carryforwards group</Description>
+						<LineNumber>Part III, line C</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- General Business Credit Carrybacks Group -->
+			<xsd:element name="GeneralBusCrCarrybacksGrp" type="GeneralBusCrCarrybacksGrpType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>General business credit carrybacks group</Description>
+						<LineNumber>Part III, line D</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Checkbox E, Reserved -->
+
+			<!-- Checkbox F, Reserved -->
+			
+			<!-- Eligible Small Business Credit Carryforwards Group -->
+			<xsd:element name="EligibleSmallBusinessCrCfwdGrp" type="EligSmllBusCrCarryforwardsGrpType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Eligible small business credit carryforwards group</Description>
+						<LineNumber>Part III, line G</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Checkbox H, Reserved -->
+
+		</xsd:sequence>
+
+	</xsd:complexType>
+
+
+	<!-- ===== Type for Repeating Element "ConsolidatedBusinessCreditsGrp" in Part III Line I ===== -->
+
+	<xsd:complexType name="ConsolidatedBusinessCreditsGrpType">
+		<xsd:sequence>
+
+			<!-- Consolidated Section Indicator -->
+			<xsd:element name="ConsolidatedSectionInd" type="CheckboxType">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Consolidated section indicator</Description>
+						<LineNumber>Part III, line I</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Business Credits Group -->
+			<xsd:element name="BusinessCreditsGrp" type="BusinessCreditsGrpType">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Business Credits Group</Description>
+						<LineNumber>Part III Lines 1 - 6</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<!-- ===== Type for Repeating Element "GeneralBusCrFromNnpssvActyGrp" in Part III Line A ===== -->
+
+	<xsd:complexType name="GeneralBusCrFromNnpssvActyGrpType">
+		<xsd:sequence>
+
+			<!-- General Business Credit From Non-Passive Activity -->
+			<xsd:element name="GeneralBusCrFromNnpssvActyInd" type="CheckboxType">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>General business credit from non-passive activity</Description>
+						<LineNumber>Part III, line A</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Business Credits Group -->
+			<xsd:element name="BusinessCreditsGrp" type="BusinessCreditsGrpType">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Business Credits Group</Description>
+						<LineNumber>Part III Lines 1 - 6</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<!-- ===== Type for Repeating Element "GeneralBusCrFromPassiveActyGrp" in Part III Line B ===== -->
+
+	<xsd:complexType name="GeneralBusCrFromPassiveActyGrpType">
+		<xsd:sequence>
+
+			<!-- General Business Credit From Passive Activity -->
+			<xsd:element name="GeneralBusCrFromPassiveActyInd" type="CheckboxType">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>General business credit from passive activity</Description>
+						<LineNumber>Part III, line B</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Business Credits Group -->
+			<xsd:element name="BusinessCreditsGrp" type="BusinessCreditsGrpType">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Business Credits Group</Description>
+						<LineNumber>Part III Lines 1 - 6</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<!-- ===== Type for Repeating Element "GeneralBusCrCarryforwardsGrp" in Part III Line C ===== -->
+
+	<xsd:complexType name="GeneralBusCrCarryforwardsGrpType">
+		<xsd:sequence>
+
+			<!-- General Business Credit From Passive Carryforwards -->
+			<xsd:element name="GeneralBusCrCarryforwardsInd" type="CheckboxType">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>General business credit carryforwards</Description>
+						<LineNumber>Part III, line C</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Business Credits Group -->
+			<xsd:element name="BusinessCreditsGrp" type="BusinessCreditsGrpType">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Business Credits Group</Description>
+						<LineNumber>Part III Lines 1 - 6</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<!-- ===== Type for Repeating Element "GeneralBusCrCarrybacksGrp" in Part III Line D ===== -->
+
+	<xsd:complexType name="GeneralBusCrCarrybacksGrpType">
+		<xsd:sequence>
+
+			<!-- General Business Credit Carrybacks -->
+			<xsd:element name="GeneralBusCrCarrybacksInd" type="CheckboxType">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>General business credit carrybacks</Description>
+						<LineNumber>Part III, line D</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Business Credits Group -->
+			<xsd:element name="BusinessCreditsGrp" type="BusinessCreditsGrpType">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Business Credits Group</Description>
+						<LineNumber>Part III Lines 1 - 6</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<!-- ===== Type for Repeating Element "EligSmllBusCrCarryforwardsGrp" in Part III Line G ===== -->
+
+	<xsd:complexType name="EligSmllBusCrCarryforwardsGrpType">
+		<xsd:sequence>
+
+			<!-- Eligible Small Business Credit Carryforwards -->
+			<xsd:element name="EligSmllBusCrCarryforwardsInd" type="CheckboxType">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Eligible small business credit carryforwards</Description>
+						<LineNumber>Part III, line G</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Business Credits Group -->
+			<xsd:element name="BusinessCreditsGrp" type="BusinessCreditsGrpType">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Business Credits Group</Description>
+						<LineNumber>Part III Lines 1 - 6</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+		</xsd:sequence>
+	</xsd:complexType>
+
+		<!-- ===== Type for Repeating Element "BusinessCreditsGrp" in Part III Lines 1 - 6 ===== -->
+
+		<xsd:complexType name="BusinessCreditsGrpType">
+			<xsd:sequence>
+
+				<!-- Current Year Investment Credit Group -->
+				<xsd:element name="CurrentYearInvestmentCreditGrp" minOccurs="0">
+					<xsd:complexType>
+						<xsd:sequence>
+							<!-- Current Year Investment Credit (Form 3468, Part II) -->
+							<xsd:element name="CurrentYearInvestmentCreditAmt">
+								<xsd:annotation>
+									<xsd:documentation>
+										<Description>Current year investment credit (Form 3468, Part II)</Description>
+										<LineNumber>Part III, line 1a(c)</LineNumber>
+									</xsd:documentation>
+								</xsd:annotation>
+								<xsd:complexType>
+									<xsd:simpleContent>
+										<xsd:extension base="USAmountNNType">
+											<xsd:attribute name="referenceDocumentId" type="IdListType"/>
+											<xsd:attribute name="referenceDocumentName" type="StringType" fixed="IRS3468"/>
+										</xsd:extension>
+									</xsd:simpleContent>
+								</xsd:complexType>
+							</xsd:element>
+
+							<xsd:choice minOccurs="0">
+
+								<!-- EIN Of Pass Through Entity -->
+								<xsd:element name="PassThroughEntityEIN" type="EINType">
+									<xsd:annotation>
+										<xsd:documentation>
+											<Description>EIN Of pass through entity</Description>
+											<LineNumber>Part III, line 1a(b)</LineNumber>
+										</xsd:documentation>
+									</xsd:annotation>
+								</xsd:element>
+
+								<!-- Missing EIN Reason -->
+								<xsd:element name="MissingEINReasonCd">
+									<xsd:annotation>
+										<xsd:documentation>
+											<Description>Missing EIN reason</Description>
+											<LineNumber>Part III, line 1a(b)</LineNumber>
+										</xsd:documentation>
+									</xsd:annotation>
+									<xsd:simpleType>
+										<xsd:restriction base="StringType">
+											<xsd:enumeration value="APPLD FOR"/>
+											<xsd:enumeration value="FOREIGNUS"/>
+										</xsd:restriction>
+									</xsd:simpleType>
+								</xsd:element>
+
+							</xsd:choice>
+
+						</xsd:sequence>
+					</xsd:complexType>
+				</xsd:element>
+
+				<!-- Part III, line 1b Reserved -->
+
+				<!-- Current Year Credit for Increasing Research Activities Group -->
+				<xsd:element name="CYIncreasingResearchCrGrp" minOccurs="0">
+					<xsd:complexType>
+						<xsd:sequence>
+							<!-- Current Year Credit for Increasing Research Activities -->
+							<xsd:element name="CYIncreasingResearchCrAmt">
+								<xsd:annotation>
+									<xsd:documentation>
+										<Description>Current year credit for increasing research activities</Description>
+										<LineNumber>Part III, line 1c(c)</LineNumber>
+									</xsd:documentation>
+								</xsd:annotation>
+								<xsd:complexType>
+									<xsd:simpleContent>
+										<xsd:extension base="USAmountNNType">
+											<xsd:attribute name="referenceDocumentId" type="IdListType"/>
+											<xsd:attribute name="referenceDocumentName" type="StringType" fixed="IRS6765"/>
+										</xsd:extension>
+									</xsd:simpleContent>
+								</xsd:complexType>
+							</xsd:element>
+
+							<xsd:choice minOccurs="0">
+
+								<!-- EIN Of Pass Through Entity -->
+								<xsd:element name="PassThroughEntityEIN" type="EINType">
+									<xsd:annotation>
+										<xsd:documentation>
+											<Description>EIN Of pass through entity</Description>
+											<LineNumber>Part III, line 1c(b)</LineNumber>
+										</xsd:documentation>
+									</xsd:annotation>
+								</xsd:element>
+
+								<!-- Missing EIN Reason -->
+								<xsd:element name="MissingEINReasonCd">
+									<xsd:annotation>
+										<xsd:documentation>
+											<Description>Missing EIN reason</Description>
+											<LineNumber>Part III, line 1c(b)</LineNumber>
+										</xsd:documentation>
+									</xsd:annotation>
+									<xsd:simpleType>
+										<xsd:restriction base="StringType">
+											<xsd:enumeration value="APPLD FOR"/>
+											<xsd:enumeration value="FOREIGNUS"/>
+										</xsd:restriction>
+									</xsd:simpleType>
+								</xsd:element>
+
+							</xsd:choice>
+
+						</xsd:sequence>
+					</xsd:complexType>
+				</xsd:element>
+
+				<!-- Current Year Low-Income Housing Credit Group -->
+				<xsd:element name="CYLowIncomeHousingCrGrp" minOccurs="0">
+					<xsd:complexType>
+						<xsd:sequence>
+
+							<!-- Current Year Low-Income Housing Credit (Form 8586, Part I) -->
+							<xsd:element name="CurrentYearLowIncomeHsngCrAmt">
+								<xsd:annotation>
+									<xsd:documentation>
+										<Description>Current year low-income housing credit (Form 8586, Part I)</Description>
+										<LineNumber>Part III, line 1d(c)</LineNumber>
+									</xsd:documentation>
+								</xsd:annotation>
+								<xsd:complexType>
+									<xsd:simpleContent>
+										<xsd:extension base="USAmountNNType">
+											<xsd:attribute name="referenceDocumentId" type="IdListType"/>
+											<xsd:attribute name="referenceDocumentName" type="StringType" fixed="IRS8586"/>
+										</xsd:extension>
+									</xsd:simpleContent>
+								</xsd:complexType>
+							</xsd:element>
+
+							<xsd:choice minOccurs="0">
+
+								<!-- EIN Of Pass Through Entity -->
+								<xsd:element name="PassThroughEntityEIN" type="EINType">
+									<xsd:annotation>
+										<xsd:documentation>
+											<Description>EIN Of pass through entity</Description>
+											<LineNumber>Part III, line 1d(b)</LineNumber>
+										</xsd:documentation>
+									</xsd:annotation>
+								</xsd:element>
+
+								<!-- Missing EIN Reason -->
+								<xsd:element name="MissingEINReasonCd">
+									<xsd:annotation>
+										<xsd:documentation>
+											<Description>Missing EIN reason</Description>
+											<LineNumber>Part III, line 1d(b)</LineNumber>
+										</xsd:documentation>
+									</xsd:annotation>
+									<xsd:simpleType>
+										<xsd:restriction base="StringType">
+											<xsd:enumeration value="APPLD FOR"/>
+											<xsd:enumeration value="FOREIGNUS"/>
+										</xsd:restriction>
+									</xsd:simpleType>
+								</xsd:element>
+
+							</xsd:choice>
+
+						</xsd:sequence>
+					</xsd:complexType>
+				</xsd:element>
+
+				<!-- Current Year Disabled Access Credit Group -->
+				<xsd:element name="CurrentYearDisabledAccessCrGrp" minOccurs="0">
+					<xsd:complexType>
+						<xsd:sequence>
+
+							<!-- Current Year Disabled Access Credit (Form 8826) -->
+							<xsd:element name="CurrentYearDisabledAccessCrAmt">
+								<xsd:annotation>
+									<xsd:documentation>
+										<Description>Current year disabled access credit (Form 8826)</Description>
+										<LineNumber>Part III, line 1e(c)</LineNumber>
+									</xsd:documentation>
+								</xsd:annotation>
+								<xsd:complexType>
+									<xsd:simpleContent>
+										<xsd:extension base="USAmountNNType">
+											<xsd:attribute name="referenceDocumentId" type="IdListType"/>
+											<xsd:attribute name="referenceDocumentName" type="StringType" fixed="IRS8826"/>
+										</xsd:extension>
+									</xsd:simpleContent>
+								</xsd:complexType>
+							</xsd:element>
+
+							<xsd:choice minOccurs="0">
+
+								<!-- EIN Of Pass Through Entity -->
+								<xsd:element name="PassThroughEntityEIN" type="EINType">
+									<xsd:annotation>
+										<xsd:documentation>
+											<Description>EIN Of pass through entity</Description>
+											<LineNumber>Part III, line 1e(b)</LineNumber>
+										</xsd:documentation>
+									</xsd:annotation>
+								</xsd:element>
+
+								<!-- Missing EIN Reason -->
+								<xsd:element name="MissingEINReasonCd">
+									<xsd:annotation>
+										<xsd:documentation>
+											<Description>Missing EIN reason</Description>
+											<LineNumber>Part III, line 1e(b)</LineNumber>
+										</xsd:documentation>
+									</xsd:annotation>
+									<xsd:simpleType>
+										<xsd:restriction base="StringType">
+											<xsd:enumeration value="APPLD FOR"/>
+											<xsd:enumeration value="FOREIGNUS"/>
+										</xsd:restriction>
+									</xsd:simpleType>
+								</xsd:element>
+
+							</xsd:choice>
+
+						</xsd:sequence>
+					</xsd:complexType>
+				</xsd:element>
+
+				<!-- Current Year Renewable Electricity Production Credit Group -->
+				<xsd:element name="CYRenewableElectricityCrGrp" minOccurs="0">
+					<xsd:complexType>
+						<xsd:sequence>
+
+							<!-- Current Year Renewable Electricity Production Credit (Form 8835, Part I) -->
+							<xsd:element name="CurrentYearRenewableElecCrAmt">
+								<xsd:annotation>
+									<xsd:documentation>
+										<Description>Current year renewable electricity production credit (Form 8835, Part I)</Description>
+										<LineNumber>Part III, line 1f(c)</LineNumber>
+									</xsd:documentation>
+								</xsd:annotation>
+								<xsd:complexType>
+									<xsd:simpleContent>
+										<xsd:extension base="USAmountNNType">
+											<xsd:attribute name="referenceDocumentId" type="IdListType"/>
+											<xsd:attribute name="referenceDocumentName" type="StringType" fixed="IRS8835"/>
+										</xsd:extension>
+									</xsd:simpleContent>
+								</xsd:complexType>
+							</xsd:element>
+
+							<xsd:choice minOccurs="0">
+
+								<!-- EIN Of Pass Through Entity -->
+								<xsd:element name="PassThroughEntityEIN" type="EINType">
+									<xsd:annotation>
+										<xsd:documentation>
+											<Description>EIN Of pass through entity</Description>
+											<LineNumber>Part III, line 1f(b)</LineNumber>
+										</xsd:documentation>
+									</xsd:annotation>
+								</xsd:element>
+
+								<!-- Missing EIN Reason -->
+								<xsd:element name="MissingEINReasonCd">
+									<xsd:annotation>
+										<xsd:documentation>
+											<Description>Missing EIN reason</Description>
+											<LineNumber>Part III, line 1f(b)</LineNumber>
+										</xsd:documentation>
+									</xsd:annotation>
+									<xsd:simpleType>
+										<xsd:restriction base="StringType">
+											<xsd:enumeration value="APPLD FOR"/>
+											<xsd:enumeration value="FOREIGNUS"/>
+										</xsd:restriction>
+									</xsd:simpleType>
+								</xsd:element>
+
+							</xsd:choice>
+
+						</xsd:sequence>
+					</xsd:complexType>
+				</xsd:element>
+
+				<!-- Current Year Indian Employment Credit Group -->
+				<xsd:element name="CurrentYearIndianEmplmnCrGrp" minOccurs="0">
+					<xsd:complexType>
+						<xsd:sequence>
+
+							<!-- Current Year Indian Employment Credit -->
+							<xsd:element name="CYIndianEmploymentCreditAmt">
+								<xsd:annotation>
+									<xsd:documentation>
+										<Description>Current year indian employment credit</Description>
+										<LineNumber>Part III, line 1g(c)</LineNumber>
+									</xsd:documentation>
+								</xsd:annotation>
+								<xsd:complexType>
+									<xsd:simpleContent>
+										<xsd:extension base="USAmountNNType">
+											<xsd:attribute name="referenceDocumentId" type="IdListType"/>
+											<xsd:attribute name="referenceDocumentName" type="StringType" fixed="IRS8845"/>
+										</xsd:extension>
+									</xsd:simpleContent>
+								</xsd:complexType>
+							</xsd:element>
+
+							<xsd:choice minOccurs="0">
+
+								<!-- EIN Of Pass Through Entity -->
+								<xsd:element name="PassThroughEntityEIN" type="EINType">
+									<xsd:annotation>
+										<xsd:documentation>
+											<Description>EIN Of pass through entity</Description>
+											<LineNumber>Part III, line 1g(b)</LineNumber>
+										</xsd:documentation>
+									</xsd:annotation>
+								</xsd:element>
+
+								<!-- Missing EIN Reason -->
+								<xsd:element name="MissingEINReasonCd">
+									<xsd:annotation>
+										<xsd:documentation>
+											<Description>Missing EIN reason</Description>
+											<LineNumber>Part III, line 1g(b)</LineNumber>
+										</xsd:documentation>
+									</xsd:annotation>
+									<xsd:simpleType>
+										<xsd:restriction base="StringType">
+											<xsd:enumeration value="APPLD FOR"/>
+											<xsd:enumeration value="FOREIGNUS"/>
+										</xsd:restriction>
+									</xsd:simpleType>
+								</xsd:element>
+
+							</xsd:choice>
+
+						</xsd:sequence>
+					</xsd:complexType>
+				</xsd:element>
+
+				<!-- Current Year Orphan Drug Credit Group -->
+				<xsd:element name="CurrentYearOrphanDrugCreditGrp" minOccurs="0">
+					<xsd:complexType>
+						<xsd:sequence>
+
+							<!-- Current Year Orphan Drug Credit (Form 8820) -->
+							<xsd:element name="CurrentYearOrphanDrugCreditAmt">
+								<xsd:annotation>
+									<xsd:documentation>
+										<Description>Current year orphan drug credit (Form 8820)</Description>
+										<LineNumber>Part III, line 1h(c)</LineNumber>
+									</xsd:documentation>
+								</xsd:annotation>
+								<xsd:complexType>
+									<xsd:simpleContent>
+										<xsd:extension base="USAmountNNType">
+											<xsd:attribute name="referenceDocumentId" type="IdListType"/>
+											<xsd:attribute name="referenceDocumentName" type="StringType" fixed="IRS8820"/>
+										</xsd:extension>
+									</xsd:simpleContent>
+								</xsd:complexType>
+							</xsd:element>
+
+							<xsd:choice minOccurs="0">
+
+								<!-- EIN Of Pass Through Entity -->
+								<xsd:element name="PassThroughEntityEIN" type="EINType">
+									<xsd:annotation>
+										<xsd:documentation>
+											<Description>EIN Of pass through entity</Description>
+											<LineNumber>Part III, line 1h(b)</LineNumber>
+										</xsd:documentation>
+									</xsd:annotation>
+								</xsd:element>
+
+								<!-- Missing EIN Reason -->
+								<xsd:element name="MissingEINReasonCd">
+									<xsd:annotation>
+										<xsd:documentation>
+											<Description>Missing EIN reason</Description>
+											<LineNumber>Part III, line 1h(b)</LineNumber>
+										</xsd:documentation>
+									</xsd:annotation>
+									<xsd:simpleType>
+										<xsd:restriction base="StringType">
+											<xsd:enumeration value="APPLD FOR"/>
+											<xsd:enumeration value="FOREIGNUS"/>
+										</xsd:restriction>
+									</xsd:simpleType>
+								</xsd:element>
+
+							</xsd:choice>
+
+						</xsd:sequence>
+					</xsd:complexType>
+				</xsd:element>
+
+				<!-- Current Year New Markets Credit Group -->
+				<xsd:element name="CurrentYearNewMarketsCreditGrp" minOccurs="0">
+					<xsd:complexType>
+						<xsd:sequence>
+
+							<!-- Current Year New Markets Credit (Form 8874) -->
+							<xsd:element name="CurrentYearNewMarketsCreditAmt">
+								<xsd:annotation>
+									<xsd:documentation>
+										<Description>Current year new markets credit (Form 8874)</Description>
+										<LineNumber>Part III, line 1i(c)</LineNumber>
+									</xsd:documentation>
+								</xsd:annotation>
+								<xsd:complexType>
+									<xsd:simpleContent>
+										<xsd:extension base="USAmountNNType">
+											<xsd:attribute name="referenceDocumentId" type="IdListType"/>
+											<xsd:attribute name="referenceDocumentName" type="StringType" fixed="IRS8874"/>
+										</xsd:extension>
+									</xsd:simpleContent>
+								</xsd:complexType>
+							</xsd:element>
+
+							<xsd:choice minOccurs="0">
+
+								<!-- EIN Of Pass Through Entity -->
+								<xsd:element name="PassThroughEntityEIN" type="EINType">
+									<xsd:annotation>
+										<xsd:documentation>
+											<Description>EIN Of pass through entity</Description>
+											<LineNumber>Part III, line 1i(b)</LineNumber>
+										</xsd:documentation>
+									</xsd:annotation>
+								</xsd:element>
+
+								<!-- Missing EIN Reason -->
+								<xsd:element name="MissingEINReasonCd">
+									<xsd:annotation>
+										<xsd:documentation>
+											<Description>Missing EIN reason</Description>
+											<LineNumber>Part III, line 1i(b)</LineNumber>
+										</xsd:documentation>
+									</xsd:annotation>
+									<xsd:simpleType>
+										<xsd:restriction base="StringType">
+											<xsd:enumeration value="APPLD FOR"/>
+											<xsd:enumeration value="FOREIGNUS"/>
+										</xsd:restriction>
+									</xsd:simpleType>
+								</xsd:element>
+
+							</xsd:choice>
+
+						</xsd:sequence>
+					</xsd:complexType>
+				</xsd:element>
+
+				<!-- Current Year Credit For Small Employer Pension Plan Group -->
+				<xsd:element name="CYSmallEmployerPensionPlanGrp" minOccurs="0">
+					<xsd:complexType>
+						<xsd:sequence>
+
+							<!-- Current Year Credit For Small Employer Pension Plan -->
+							<xsd:element name="CurrentYrSmllEmplrPnsnPlanAmt">
+								<xsd:annotation>
+									<xsd:documentation>
+										<Description>Current Year credit for small employer pension plan</Description>
+										<LineNumber>Part III, line 1j(c)</LineNumber>
+									</xsd:documentation>
+								</xsd:annotation>
+								<xsd:complexType>
+									<xsd:simpleContent>
+										<xsd:extension base="USAmountNNType">
+											<xsd:attribute name="referenceDocumentId" type="IdListType"/>
+											<xsd:attribute name="referenceDocumentName" type="StringType" fixed="IRS8881"/>
+										</xsd:extension>
+									</xsd:simpleContent>
+								</xsd:complexType>
+							</xsd:element>
+
+							<xsd:choice minOccurs="0">
+
+								<!-- EIN Of Pass Through Entity -->
+								<xsd:element name="PassThroughEntityEIN" type="EINType">
+									<xsd:annotation>
+										<xsd:documentation>
+											<Description>EIN Of pass through entity</Description>
+											<LineNumber>Part III, line 1j(b)</LineNumber>
+										</xsd:documentation>
+									</xsd:annotation>
+								</xsd:element>
+
+								<!-- Missing EIN Reason -->
+								<xsd:element name="MissingEINReasonCd">
+									<xsd:annotation>
+										<xsd:documentation>
+											<Description>Missing EIN reason</Description>
+											<LineNumber>Part III, line 1j(b)</LineNumber>
+										</xsd:documentation>
+									</xsd:annotation>
+									<xsd:simpleType>
+										<xsd:restriction base="StringType">
+											<xsd:enumeration value="APPLD FOR"/>
+											<xsd:enumeration value="FOREIGNUS"/>
+										</xsd:restriction>
+									</xsd:simpleType>
+								</xsd:element>
+
+							</xsd:choice>
+
+						</xsd:sequence>
+					</xsd:complexType>
+				</xsd:element>
+
+				<!-- Current Year Credit For Employer-Provided Child Care Facilities Group -->
+				<xsd:element name="CYEmplrProvChildCareFcltsCrGrp" minOccurs="0">
+					<xsd:complexType>
+						<xsd:sequence>
+
+							<!-- Current Year Credit For Employer-Provided Child Care Facilities -->
+							<xsd:element name="CYEmplrProvChldCareFcltsCrAmt">
+								<xsd:annotation>
+									<xsd:documentation>
+										<Description>Current Year Credit for employer-provided child care facilities</Description>
+										<LineNumber>Part III, line 1k(c)</LineNumber>
+									</xsd:documentation>
+								</xsd:annotation>
+								<xsd:complexType>
+									<xsd:simpleContent>
+										<xsd:extension base="USAmountNNType">
+											<xsd:attribute name="referenceDocumentId" type="IdListType"/>
+											<xsd:attribute name="referenceDocumentName" type="StringType" fixed="IRS8882"/>
+										</xsd:extension>
+									</xsd:simpleContent>
+								</xsd:complexType>
+							</xsd:element>
+
+							<xsd:choice minOccurs="0">
+
+								<!-- EIN Of Pass Through Entity -->
+								<xsd:element name="PassThroughEntityEIN" type="EINType">
+									<xsd:annotation>
+										<xsd:documentation>
+											<Description>EIN Of pass through entity</Description>
+											<LineNumber>Part III, line 1k(b)</LineNumber>
+										</xsd:documentation>
+									</xsd:annotation>
+								</xsd:element>
+
+								<!-- Missing EIN Reason -->
+								<xsd:element name="MissingEINReasonCd">
+									<xsd:annotation>
+										<xsd:documentation>
+											<Description>Missing EIN reason</Description>
+											<LineNumber>Part III, line 1k(b)</LineNumber>
+										</xsd:documentation>
+									</xsd:annotation>
+									<xsd:simpleType>
+										<xsd:restriction base="StringType">
+											<xsd:enumeration value="APPLD FOR"/>
+											<xsd:enumeration value="FOREIGNUS"/>
+										</xsd:restriction>
+									</xsd:simpleType>
+								</xsd:element>
+
+							</xsd:choice>
+
+						</xsd:sequence>
+					</xsd:complexType>
+				</xsd:element>
+
+				<!-- Current Year Biodiesel Fuels Credit Group -->
+				<xsd:element name="CurrentYearBiodieselFuelCrGrp" minOccurs="0">
+					<xsd:complexType>
+						<xsd:sequence>
+
+							<!-- Current Year Biodiesel Fuels Credit -->
+							<xsd:element name="CurrentYearBiodieselFuelCrAmt">
+								<xsd:annotation>
+									<xsd:documentation>
+										<Description>Current year biodiesel fuels credit</Description>
+										<LineNumber>Part III, line 1l(c)</LineNumber>
+									</xsd:documentation>
+								</xsd:annotation>
+								<xsd:complexType>
+									<xsd:simpleContent>
+										<xsd:extension base="USAmountNNType">
+											<xsd:attribute name="referenceDocumentId" type="IdListType"/>
+											<xsd:attribute name="referenceDocumentName" type="StringType" fixed="IRS8864"/>
+										</xsd:extension>
+									</xsd:simpleContent>
+								</xsd:complexType>
+							</xsd:element>
+
+							<xsd:choice minOccurs="0">
+
+								<!-- EIN Of Pass Through Entity -->
+								<xsd:element name="PassThroughEntityEIN" type="EINType">
+									<xsd:annotation>
+										<xsd:documentation>
+											<Description>EIN Of pass through entity</Description>
+											<LineNumber>Part III, line 1l(b)</LineNumber>
+										</xsd:documentation>
+									</xsd:annotation>
+								</xsd:element>
+
+								<!-- Missing EIN Reason -->
+								<xsd:element name="MissingEINReasonCd">
+									<xsd:annotation>
+										<xsd:documentation>
+											<Description>Missing EIN reason</Description>
+											<LineNumber>Part III, line 1l(b)</LineNumber>
+										</xsd:documentation>
+									</xsd:annotation>
+									<xsd:simpleType>
+										<xsd:restriction base="StringType">
+											<xsd:enumeration value="APPLD FOR"/>
+											<xsd:enumeration value="FOREIGNUS"/>
+										</xsd:restriction>
+									</xsd:simpleType>
+								</xsd:element>
+
+							</xsd:choice>
+
+						</xsd:sequence>
+					</xsd:complexType>
+				</xsd:element>
+
+				<!-- Current Year Low Sulfur Diesel Fuel Production Credit Group -->
+				<xsd:element name="CYLowSulfurDieselCreditGrp" minOccurs="0">
+					<xsd:complexType>
+						<xsd:sequence>
+
+							<!-- Current Year Low Sulfur Diesel Fuel Production Credit -->
+							<xsd:element name="CurrentYearLowSulfurDslCrAmt">
+								<xsd:annotation>
+									<xsd:documentation>
+										<Description>Current year low sulfur diesel fuel production credit</Description>
+										<LineNumber>Part III, line 1m(c)</LineNumber>
+									</xsd:documentation>
+								</xsd:annotation>
+								<xsd:complexType>
+									<xsd:simpleContent>
+										<xsd:extension base="USAmountNNType">
+											<xsd:attribute name="referenceDocumentId" type="IdListType"/>
+											<xsd:attribute name="referenceDocumentName" type="StringType" fixed="IRS8896"/>
+										</xsd:extension>
+									</xsd:simpleContent>
+								</xsd:complexType>
+							</xsd:element>
+
+							<xsd:choice minOccurs="0">
+
+								<!-- EIN Of Pass Through Entity -->
+								<xsd:element name="PassThroughEntityEIN" type="EINType">
+									<xsd:annotation>
+										<xsd:documentation>
+											<Description>EIN Of pass through entity</Description>
+											<LineNumber>Part III, line 1m(b)</LineNumber>
+										</xsd:documentation>
+									</xsd:annotation>
+								</xsd:element>
+
+								<!-- Missing EIN Reason -->
+								<xsd:element name="MissingEINReasonCd">
+									<xsd:annotation>
+										<xsd:documentation>
+											<Description>Missing EIN reason</Description>
+											<LineNumber>Part III, line 1m(b)</LineNumber>
+										</xsd:documentation>
+									</xsd:annotation>
+									<xsd:simpleType>
+										<xsd:restriction base="StringType">
+											<xsd:enumeration value="APPLD FOR"/>
+											<xsd:enumeration value="FOREIGNUS"/>
+										</xsd:restriction>
+									</xsd:simpleType>
+								</xsd:element>
+
+							</xsd:choice>
+
+						</xsd:sequence>
+					</xsd:complexType>
+				</xsd:element>
+
+				<!-- Current Year Distilled Spirits Credit Group -->
+				<xsd:element name="DistilledSpiritsCreditGrp" minOccurs="0">
+					<xsd:complexType>
+						<xsd:sequence>
+
+							<!-- Current Year Distilled Spirits Credit (Form 8906) -->
+							<xsd:element name="DistilledSpiritsCreditAmt">
+								<xsd:annotation>
+									<xsd:documentation>
+										<Description>Current year distilled spirits credit (Form 8906)</Description>
+										<LineNumber>Part III, line 1n(c)</LineNumber>
+									</xsd:documentation>
+								</xsd:annotation>
+								<xsd:complexType>
+									<xsd:simpleContent>
+										<xsd:extension base="USAmountNNType">
+											<xsd:attribute name="referenceDocumentId" type="IdListType"/>
+											<xsd:attribute name="referenceDocumentName" type="StringType" fixed="IRS8906"/>
+										</xsd:extension>
+									</xsd:simpleContent>
+								</xsd:complexType>
+							</xsd:element>
+
+							<xsd:choice minOccurs="0">
+
+								<!-- EIN Of Pass Through Entity -->
+								<xsd:element name="PassThroughEntityEIN" type="EINType">
+									<xsd:annotation>
+										<xsd:documentation>
+											<Description>EIN Of pass through entity</Description>
+											<LineNumber>Part III, line 1n(b)</LineNumber>
+										</xsd:documentation>
+									</xsd:annotation>
+								</xsd:element>
+
+								<!-- Missing EIN Reason -->
+								<xsd:element name="MissingEINReasonCd">
+									<xsd:annotation>
+										<xsd:documentation>
+											<Description>Missing EIN reason</Description>
+											<LineNumber>Part III, line 1n(b)</LineNumber>
+										</xsd:documentation>
+									</xsd:annotation>
+									<xsd:simpleType>
+										<xsd:restriction base="StringType">
+											<xsd:enumeration value="APPLD FOR"/>
+											<xsd:enumeration value="FOREIGNUS"/>
+										</xsd:restriction>
+									</xsd:simpleType>
+								</xsd:element>
+
+							</xsd:choice>
+
+						</xsd:sequence>
+					</xsd:complexType>
+				</xsd:element>
+
+				<!-- Current Year Non-Conventional Fuel Source Credit Group -->
+				<xsd:element name="CYNonconventionalFuelCreditGrp" minOccurs="0">
+					<xsd:complexType>
+						<xsd:sequence>
+
+							<!-- Current Year Non-Conventional Fuel Source Credit -->
+							<xsd:element name="CurrentYearNnconvFuelCrAmt" type="USAmountNNType">
+								<xsd:annotation>
+									<xsd:documentation>
+										<Description>Current year non-conventional fuel source credit</Description>
+										<LineNumber>Part III, line 1o(c)</LineNumber>
+									</xsd:documentation>
+								</xsd:annotation>
+							</xsd:element>
+
+							<xsd:choice minOccurs="0">
+
+								<!-- EIN Of Pass Through Entity -->
+								<xsd:element name="PassThroughEntityEIN" type="EINType">
+									<xsd:annotation>
+										<xsd:documentation>
+											<Description>EIN Of pass through entity</Description>
+											<LineNumber>Part III, line 1o(b)</LineNumber>
+										</xsd:documentation>
+									</xsd:annotation>
+								</xsd:element>
+
+								<!-- Missing EIN Reason -->
+								<xsd:element name="MissingEINReasonCd">
+									<xsd:annotation>
+										<xsd:documentation>
+											<Description>Missing EIN reason</Description>
+											<LineNumber>Part III, line 1o(b)</LineNumber>
+										</xsd:documentation>
+									</xsd:annotation>
+									<xsd:simpleType>
+										<xsd:restriction base="StringType">
+											<xsd:enumeration value="APPLD FOR"/>
+											<xsd:enumeration value="FOREIGNUS"/>
+										</xsd:restriction>
+									</xsd:simpleType>
+								</xsd:element>
+
+							</xsd:choice>
+
+						</xsd:sequence>
+					</xsd:complexType>
+				</xsd:element>
+
+				<!-- Current Year Energy Efficient Home Credit Group -->
+				<xsd:element name="CYEnergyEfficientHomeCreditGrp" minOccurs="0">
+					<xsd:complexType>
+						<xsd:sequence>
+
+							<!-- Current Year Energy Efficient Home Credit -->
+							<xsd:element name="CurrentYrEngyEfficientHmCrAmt">
+								<xsd:annotation>
+									<xsd:documentation>
+										<Description>Current year energy efficient home credit</Description>
+										<LineNumber>Part III, line 1p(c)</LineNumber>
+									</xsd:documentation>
+								</xsd:annotation>
+								<xsd:complexType>
+									<xsd:simpleContent>
+										<xsd:extension base="USAmountNNType">
+											<xsd:attribute name="referenceDocumentId" type="IdListType"/>
+											<xsd:attribute name="referenceDocumentName" type="StringType" fixed="IRS8908"/>
+										</xsd:extension>
+									</xsd:simpleContent>
+								</xsd:complexType>
+							</xsd:element>
+
+							<xsd:choice minOccurs="0">
+
+								<!-- EIN Of Pass Through Entity -->
+								<xsd:element name="PassThroughEntityEIN" type="EINType">
+									<xsd:annotation>
+										<xsd:documentation>
+											<Description>EIN Of pass through entity</Description>
+											<LineNumber>Part III, line 1p(b)</LineNumber>
+										</xsd:documentation>
+									</xsd:annotation>
+								</xsd:element>
+
+								<!-- Missing EIN Reason -->
+								<xsd:element name="MissingEINReasonCd">
+									<xsd:annotation>
+										<xsd:documentation>
+											<Description>Missing EIN reason</Description>
+											<LineNumber>Part III, line 1p(b)</LineNumber>
+										</xsd:documentation>
+									</xsd:annotation>
+									<xsd:simpleType>
+										<xsd:restriction base="StringType">
+											<xsd:enumeration value="APPLD FOR"/>
+											<xsd:enumeration value="FOREIGNUS"/>
+										</xsd:restriction>
+									</xsd:simpleType>
+								</xsd:element>
+
+							</xsd:choice>
+
+						</xsd:sequence>
+					</xsd:complexType>
+				</xsd:element>
+
+				<!-- Current Year Energy Efficient Appliance Credit Group -->
+				<xsd:element name="CYEnergyEfficientApplianceGrp" minOccurs="0">
+					<xsd:complexType>
+						<xsd:sequence>
+
+							<!-- Current Year Energy Efficient Appliance Credit -->
+							<xsd:element name="CYEngyEfficientApplianceAmt" type="USAmountNNType">
+								<xsd:annotation>
+									<xsd:documentation>
+										<Description>Current year energy efficient appliance credit</Description>
+										<LineNumber>Part III, line 1q(c)</LineNumber>
+									</xsd:documentation>
+								</xsd:annotation>
+							</xsd:element>
+
+							<xsd:choice minOccurs="0">
+
+								<!-- EIN Of Pass Through Entity -->
+								<xsd:element name="PassThroughEntityEIN" type="EINType">
+									<xsd:annotation>
+										<xsd:documentation>
+											<Description>EIN Of pass through entity</Description>
+											<LineNumber>Part III, line 1q(b)</LineNumber>
+										</xsd:documentation>
+									</xsd:annotation>
+								</xsd:element>
+
+								<!-- Missing EIN Reason -->
+								<xsd:element name="MissingEINReasonCd">
+									<xsd:annotation>
+										<xsd:documentation>
+											<Description>Missing EIN reason</Description>
+											<LineNumber>Part III, line 1q(b)</LineNumber>
+										</xsd:documentation>
+									</xsd:annotation>
+									<xsd:simpleType>
+										<xsd:restriction base="StringType">
+											<xsd:enumeration value="APPLD FOR"/>
+											<xsd:enumeration value="FOREIGNUS"/>
+										</xsd:restriction>
+									</xsd:simpleType>
+								</xsd:element>
+
+							</xsd:choice>
+
+						</xsd:sequence>
+					</xsd:complexType>
+				</xsd:element>
+
+				<!-- Current Year Alternative Motor Vehicle Credit Group -->
+				<xsd:element name="CYAlternativeMotorVehicleCrGrp" minOccurs="0">
+					<xsd:complexType>
+						<xsd:sequence>
+
+							<!-- Current Year Alternative Motor Vehicle Credit (Form 8910) -->
+							<xsd:element name="CurrentYearAltMtrVehCrAmt">
+								<xsd:annotation>
+									<xsd:documentation>
+										<Description>Current year alternative motor vehicle credit (Form 8910)</Description>
+										<LineNumber>Part III, line 1r(c)</LineNumber>
+									</xsd:documentation>
+								</xsd:annotation>
+								<xsd:complexType>
+									<xsd:simpleContent>
+										<xsd:extension base="USAmountNNType">
+											<xsd:attribute name="referenceDocumentId" type="IdListType"/>
+											<xsd:attribute name="referenceDocumentName" type="StringType" fixed="IRS8910"/>
+										</xsd:extension>
+									</xsd:simpleContent>
+								</xsd:complexType>
+							</xsd:element>
+
+							<xsd:choice minOccurs="0">
+
+								<!-- EIN Of Pass Through Entity -->
+								<xsd:element name="PassThroughEntityEIN" type="EINType">
+									<xsd:annotation>
+										<xsd:documentation>
+											<Description>EIN Of pass through entity</Description>
+											<LineNumber>Part III, line 1r(b)</LineNumber>
+										</xsd:documentation>
+									</xsd:annotation>
+								</xsd:element>
+
+								<!-- Missing EIN Reason -->
+								<xsd:element name="MissingEINReasonCd">
+									<xsd:annotation>
+										<xsd:documentation>
+											<Description>Missing EIN reason</Description>
+											<LineNumber>Part III, line 1r(b)</LineNumber>
+										</xsd:documentation>
+									</xsd:annotation>
+									<xsd:simpleType>
+										<xsd:restriction base="StringType">
+											<xsd:enumeration value="APPLD FOR"/>
+											<xsd:enumeration value="FOREIGNUS"/>
+										</xsd:restriction>
+									</xsd:simpleType>
+								</xsd:element>
+
+							</xsd:choice>
+
+						</xsd:sequence>
+					</xsd:complexType>
+				</xsd:element>
+
+				<!-- Current Year Alternative Fuel Vehicle Refueling Credit Group -->
+				<xsd:element name="CYAlternativeRefuelingCrGrp" minOccurs="0">
+					<xsd:complexType>
+						<xsd:sequence>
+
+							<!-- Current Year Alternative Fuel Vehicle Refueling Credit (Form 8911) -->
+							<xsd:element name="CurrentYearAltRefuelingCrAmt">
+								<xsd:annotation>
+									<xsd:documentation>
+										<Description>Current year alternative fuel vehicle refueling credit(Form 8911)</Description>
+										<LineNumber>Part III, line 1s(c)</LineNumber>
+									</xsd:documentation>
+								</xsd:annotation>
+								<xsd:complexType>
+									<xsd:simpleContent>
+										<xsd:extension base="USAmountNNType">
+											<xsd:attribute name="referenceDocumentId" type="IdListType"/>
+											<xsd:attribute name="referenceDocumentName" type="StringType" fixed="IRS8911"/>
+										</xsd:extension>
+									</xsd:simpleContent>
+								</xsd:complexType>
+							</xsd:element>
+
+							<xsd:choice minOccurs="0">
+
+								<!-- EIN Of Pass Through Entity -->
+								<xsd:element name="PassThroughEntityEIN" type="EINType">
+									<xsd:annotation>
+										<xsd:documentation>
+											<Description>EIN Of pass through entity</Description>
+											<LineNumber>Part III, line 1s(b)</LineNumber>
+										</xsd:documentation>
+									</xsd:annotation>
+								</xsd:element>
+
+								<!-- Missing EIN Reason -->
+								<xsd:element name="MissingEINReasonCd">
+									<xsd:annotation>
+										<xsd:documentation>
+											<Description>Missing EIN reason</Description>
+											<LineNumber>Part III, line 1s(b)</LineNumber>
+										</xsd:documentation>
+									</xsd:annotation>
+									<xsd:simpleType>
+										<xsd:restriction base="StringType">
+											<xsd:enumeration value="APPLD FOR"/>
+											<xsd:enumeration value="FOREIGNUS"/>
+										</xsd:restriction>
+									</xsd:simpleType>
+								</xsd:element>
+
+							</xsd:choice>
+
+						</xsd:sequence>
+					</xsd:complexType>
+				</xsd:element>
+				
+				<!-- Current Year Enhanced Oil Recovery Credit Group -->
+				<xsd:element name="CYEnhancedOilRecoveryCreditGrp" minOccurs="0">
+					<xsd:complexType>
+						<xsd:sequence>
+
+							<!-- Enhanced Oil Recovery Credit (Form 8830) -->
+							<xsd:element name="EnhancedOilRecoveryCreditAmt">
+								<xsd:annotation>
+									<xsd:documentation>
+										<Description>Enhanced oil recovery credit (Form 8830)</Description>
+										<LineNumber>Part III, line 1t(c)</LineNumber>
+									</xsd:documentation>
+								</xsd:annotation>
+								<xsd:complexType>
+									<xsd:simpleContent>
+										<xsd:extension base="USAmountNNType">
+											<xsd:attribute name="referenceDocumentId" type="IdListType"/>
+											<xsd:attribute name="referenceDocumentName" type="StringType" fixed="BinaryAttachment"/>
+										</xsd:extension>
+									</xsd:simpleContent>
+								</xsd:complexType>
+							</xsd:element>
+
+							<xsd:choice minOccurs="0">
+
+								<!-- EIN Of Pass Through Entity -->
+								<xsd:element name="PassThroughEntityEIN" type="EINType">
+									<xsd:annotation>
+										<xsd:documentation>
+											<Description>EIN Of pass through entity</Description>
+											<LineNumber>Part III, line 1t(b)</LineNumber>
+										</xsd:documentation>
+									</xsd:annotation>
+								</xsd:element>
+
+								<!-- Missing EIN Reason -->
+								<xsd:element name="MissingEINReasonCd">
+									<xsd:annotation>
+										<xsd:documentation>
+											<Description>Missing EIN reason</Description>
+											<LineNumber>Part III, line 1t(b)</LineNumber>
+										</xsd:documentation>
+									</xsd:annotation>
+									<xsd:simpleType>
+										<xsd:restriction base="StringType">
+											<xsd:enumeration value="APPLD FOR"/>
+											<xsd:enumeration value="FOREIGNUS"/>
+										</xsd:restriction>
+									</xsd:simpleType>
+								</xsd:element>
+
+							</xsd:choice>
+
+						</xsd:sequence>
+					</xsd:complexType>
+				</xsd:element>
+
+				<!-- Mine Rescue Team Training Credit Group -->
+				<xsd:element name="MineRescueTeamTrainingCrGrp" minOccurs="0">
+					<xsd:complexType>
+						<xsd:sequence>
+
+							<!-- Mine Rescue Team Training Credit -->
+							<xsd:element name="MineRescueTeamTrainingCrAmt">
+								<xsd:annotation>
+									<xsd:documentation>
+										<Description>Mine rescue team training credit</Description>
+										<LineNumber>Part III, line 1u(c)</LineNumber>
+									</xsd:documentation>
+								</xsd:annotation>
+								<xsd:complexType>
+									<xsd:simpleContent>
+										<xsd:extension base="USAmountNNType">
+											<xsd:attribute name="referenceDocumentId" type="IdListType"/>
+											<xsd:attribute name="referenceDocumentName" type="StringType" fixed="IRS8923"/>
+										</xsd:extension>
+									</xsd:simpleContent>
+								</xsd:complexType>
+							</xsd:element>
+
+							<xsd:choice minOccurs="0">
+
+								<!-- EIN Of Pass Through Entity -->
+								<xsd:element name="PassThroughEntityEIN" type="EINType">
+									<xsd:annotation>
+										<xsd:documentation>
+											<Description>EIN Of pass through entity</Description>
+											<LineNumber>Part III, line 1u(b)</LineNumber>
+										</xsd:documentation>
+									</xsd:annotation>
+								</xsd:element>
+
+								<!-- Missing EIN Reason -->
+								<xsd:element name="MissingEINReasonCd">
+									<xsd:annotation>
+										<xsd:documentation>
+											<Description>Missing EIN reason</Description>
+											<LineNumber>Part III, line 1u(b)</LineNumber>
+										</xsd:documentation>
+									</xsd:annotation>
+									<xsd:simpleType>
+										<xsd:restriction base="StringType">
+											<xsd:enumeration value="APPLD FOR"/>
+											<xsd:enumeration value="FOREIGNUS"/>
+										</xsd:restriction>
+									</xsd:simpleType>
+								</xsd:element>
+
+							</xsd:choice>
+
+						</xsd:sequence>
+					</xsd:complexType>
+				</xsd:element>
+
+				<!-- Agricultural Chemicals Security Credit Group -->
+				<xsd:element name="AgriculturalChemicalsCreditGrp" minOccurs="0">
+					<xsd:complexType>
+						<xsd:sequence>
+
+							<!-- Agricultural Chemicals Security Credit -->
+							<xsd:element name="AgriculturalChemicalsCreditAmt" type="USAmountNNType">
+								<xsd:annotation>
+									<xsd:documentation>
+										<Description>Agricultural chemicals security credit</Description>
+										<LineNumber>Part III, line 1v(c)</LineNumber>
+									</xsd:documentation>
+								</xsd:annotation>
+							</xsd:element>
+
+							<xsd:choice minOccurs="0">
+
+								<!-- EIN Of Pass Through Entity -->
+								<xsd:element name="PassThroughEntityEIN" type="EINType">
+									<xsd:annotation>
+										<xsd:documentation>
+											<Description>EIN Of pass through entity</Description>
+											<LineNumber>Part III, line 1v(b)</LineNumber>
+										</xsd:documentation>
+									</xsd:annotation>
+								</xsd:element>
+
+								<!-- Missing EIN Reason -->
+								<xsd:element name="MissingEINReasonCd">
+									<xsd:annotation>
+										<xsd:documentation>
+											<Description>Missing EIN reason</Description>
+											<LineNumber>Part III, line 1v(b)</LineNumber>
+										</xsd:documentation>
+									</xsd:annotation>
+									<xsd:simpleType>
+										<xsd:restriction base="StringType">
+											<xsd:enumeration value="APPLD FOR"/>
+											<xsd:enumeration value="FOREIGNUS"/>
+										</xsd:restriction>
+									</xsd:simpleType>
+								</xsd:element>
+
+							</xsd:choice>
+
+						</xsd:sequence>
+					</xsd:complexType>
+				</xsd:element>
+
+				<!-- Credit for Employer Differential Wage Payments Group -->
+				<xsd:element name="DifferentialWagePaymentsCrGrp" minOccurs="0">
+					<xsd:complexType>
+						<xsd:sequence>
+
+							<!-- Credit for Employer Differential Wage Payments -->
+							<xsd:element name="DifferentialWagePaymentsCrAmt">
+								<xsd:annotation>
+									<xsd:documentation>
+										<Description>Credit for employer differential wage payments</Description>
+										<LineNumber>Part III, line 1w(c)</LineNumber>
+									</xsd:documentation>
+								</xsd:annotation>
+								<xsd:complexType>
+									<xsd:simpleContent>
+										<xsd:extension base="USAmountNNType">
+											<xsd:attribute name="referenceDocumentId" type="IdListType"/>
+											<xsd:attribute name="referenceDocumentName" type="StringType" fixed="IRS8932"/>
+										</xsd:extension>
+									</xsd:simpleContent>
+								</xsd:complexType>
+							</xsd:element>
+
+							<xsd:choice minOccurs="0">
+
+								<!-- EIN Of Pass Through Entity -->
+								<xsd:element name="PassThroughEntityEIN" type="EINType">
+									<xsd:annotation>
+										<xsd:documentation>
+											<Description>EIN Of pass through entity</Description>
+											<LineNumber>Part III, line 1w(b)</LineNumber>
+										</xsd:documentation>
+									</xsd:annotation>
+								</xsd:element>
+
+								<!-- Missing EIN Reason -->
+								<xsd:element name="MissingEINReasonCd">
+									<xsd:annotation>
+										<xsd:documentation>
+											<Description>Missing EIN reason</Description>
+											<LineNumber>Part III, line 1w(b)</LineNumber>
+										</xsd:documentation>
+									</xsd:annotation>
+									<xsd:simpleType>
+										<xsd:restriction base="StringType">
+											<xsd:enumeration value="APPLD FOR"/>
+											<xsd:enumeration value="FOREIGNUS"/>
+										</xsd:restriction>
+									</xsd:simpleType>
+								</xsd:element>
+
+							</xsd:choice>
+
+						</xsd:sequence>
+					</xsd:complexType>
+				</xsd:element>
+
+				<!-- Carbon Dioxide Credit Group -->
+				<xsd:element name="CarbonDioxideCreditGrp" minOccurs="0">
+					<xsd:complexType>
+						<xsd:sequence>
+
+							<!-- Carbon Dioxide Credit -->
+							<xsd:element name="CarbonDioxideCreditAmt">
+								<xsd:annotation>
+									<xsd:documentation>
+										<Description>Carbon dioxide credit</Description>
+										<LineNumber>Part III, line 1x(c)</LineNumber>
+									</xsd:documentation>
+								</xsd:annotation>
+								<xsd:complexType>
+									<xsd:simpleContent>
+										<xsd:extension base="USAmountNNType">
+											<xsd:attribute name="referenceDocumentId" type="IdListType"/>
+											<xsd:attribute name="referenceDocumentName" type="StringType" fixed="IRS8933"/>
+										</xsd:extension>
+									</xsd:simpleContent>
+								</xsd:complexType>
+							</xsd:element>
+
+							<xsd:choice minOccurs="0">
+
+								<!-- EIN Of Pass Through Entity -->
+								<xsd:element name="PassThroughEntityEIN" type="EINType">
+									<xsd:annotation>
+										<xsd:documentation>
+											<Description>EIN Of pass through entity</Description>
+											<LineNumber>Part III, line 1x(b)</LineNumber>
+										</xsd:documentation>
+									</xsd:annotation>
+								</xsd:element>
+
+								<!-- Missing EIN Reason -->
+								<xsd:element name="MissingEINReasonCd">
+									<xsd:annotation>
+										<xsd:documentation>
+											<Description>Missing EIN reason</Description>
+											<LineNumber>Part III, line 1x(b)</LineNumber>
+										</xsd:documentation>
+									</xsd:annotation>
+									<xsd:simpleType>
+										<xsd:restriction base="StringType">
+											<xsd:enumeration value="APPLD FOR"/>
+											<xsd:enumeration value="FOREIGNUS"/>
+										</xsd:restriction>
+									</xsd:simpleType>
+								</xsd:element>
+
+							</xsd:choice>
+
+						</xsd:sequence>
+					</xsd:complexType>
+				</xsd:element>
+
+				<!-- Qualified Plug-in Electric Drive Motor Vehicle Credit Group -->
+				<xsd:element name="QlfyPlugInElecDriveMtrVehCrGrp" minOccurs="0">
+					<xsd:complexType>
+						<xsd:sequence>
+
+							<!-- Qualified Plug-in Electric Drive Motor Vehicle Credit (Form 8936) -->
+							<xsd:element name="QlfyPlugInElecDriveMtrVehCrAmt">
+								<xsd:annotation>
+									<xsd:documentation>
+										<Description>Qualified plug-in electric drive motor vehicle credit (Form 8936)</Description>
+										<LineNumber>Part III, line 1y(c)</LineNumber>
+									</xsd:documentation>
+								</xsd:annotation>
+								<xsd:complexType>
+									<xsd:simpleContent>
+										<xsd:extension base="USAmountNNType">
+											<xsd:attribute name="referenceDocumentId" type="IdListType"/>
+											<xsd:attribute name="referenceDocumentName" type="StringType" fixed="IRS8936"/>
+										</xsd:extension>
+									</xsd:simpleContent>
+								</xsd:complexType>
+							</xsd:element>
+
+							<xsd:choice minOccurs="0">
+
+								<!-- EIN Of Pass Through Entity -->
+								<xsd:element name="PassThroughEntityEIN" type="EINType">
+									<xsd:annotation>
+										<xsd:documentation>
+											<Description>EIN Of pass through entity</Description>
+											<LineNumber>Part III, line 1y(b)</LineNumber>
+										</xsd:documentation>
+									</xsd:annotation>
+								</xsd:element>
+
+								<!-- Missing EIN Reason -->
+								<xsd:element name="MissingEINReasonCd">
+									<xsd:annotation>
+										<xsd:documentation>
+											<Description>Missing EIN reason</Description>
+											<LineNumber>Part III, line 1y(b)</LineNumber>
+										</xsd:documentation>
+									</xsd:annotation>
+									<xsd:simpleType>
+										<xsd:restriction base="StringType">
+											<xsd:enumeration value="APPLD FOR"/>
+											<xsd:enumeration value="FOREIGNUS"/>
+										</xsd:restriction>
+									</xsd:simpleType>
+								</xsd:element>
+
+							</xsd:choice>
+
+						</xsd:sequence>
+					</xsd:complexType>
+				</xsd:element>
+
+				<!-- Qualified Plug-in Electric Vehicle Credit Group -->
+				<xsd:element name="AllowableQlfyElectricVehGrp" minOccurs="0">
+					<xsd:complexType>
+						<xsd:sequence>
+
+							<!-- Qualified Plug-in Electric Vehicle Credit -->
+							<xsd:element name="AllowableQualifiedElecVehAmt" type="USAmountNNType">
+								<xsd:annotation>
+									<xsd:documentation>
+										<Description>Qualified plug-in electric vehicle credit</Description>
+										<LineNumber>Part III, line 1z(c)</LineNumber>
+									</xsd:documentation>
+								</xsd:annotation>
+							</xsd:element>
+
+							<xsd:choice minOccurs="0">
+
+								<!-- EIN Of Pass Through Entity -->
+								<xsd:element name="PassThroughEntityEIN" type="EINType">
+									<xsd:annotation>
+										<xsd:documentation>
+											<Description>EIN Of pass through entity</Description>
+											<LineNumber>Part III, line 1z(b)</LineNumber>
+										</xsd:documentation>
+									</xsd:annotation>
+								</xsd:element>
+
+								<!-- Missing EIN Reason -->
+								<xsd:element name="MissingEINReasonCd">
+									<xsd:annotation>
+										<xsd:documentation>
+											<Description>Missing EIN reason</Description>
+											<LineNumber>Part III, line 1z(b)</LineNumber>
+										</xsd:documentation>
+									</xsd:annotation>
+									<xsd:simpleType>
+										<xsd:restriction base="StringType">
+											<xsd:enumeration value="APPLD FOR"/>
+											<xsd:enumeration value="FOREIGNUS"/>
+										</xsd:restriction>
+									</xsd:simpleType>
+								</xsd:element>
+
+							</xsd:choice>
+
+						</xsd:sequence>
+					</xsd:complexType>
+				</xsd:element>
+
+				<!-- Employee Retention Credit Group -->
+				<xsd:element name="EmployeeRetentionCreditGrp" minOccurs="0">
+					<xsd:complexType>
+						<xsd:sequence>
+
+							<!-- Employee Retention Credit -->
+							<xsd:element name="EmployeeRetentionCreditAmt">
+								<xsd:annotation>
+									<xsd:documentation>
+										<Description>Employee retention credit</Description>
+										<LineNumber>Part III, line 1aa(c)</LineNumber>
+									</xsd:documentation>
+								</xsd:annotation>
+								<xsd:complexType>
+									<xsd:simpleContent>
+										<xsd:extension base="USAmountNNType">
+											<xsd:attribute name="referenceDocumentId" type="IdListType"/>
+											<xsd:attribute name="referenceDocumentName" type="StringType" fixed="BinaryAttachment"/>
+										</xsd:extension>
+									</xsd:simpleContent>
+								</xsd:complexType>
+							</xsd:element>
+
+							<xsd:choice minOccurs="0">
+
+								<!-- EIN Of Pass Through Entity -->
+								<xsd:element name="PassThroughEntityEIN" type="EINType">
+									<xsd:annotation>
+										<xsd:documentation>
+											<Description>EIN Of pass through entity</Description>
+											<LineNumber>Part III, line 1aa(b)</LineNumber>
+										</xsd:documentation>
+									</xsd:annotation>
+								</xsd:element>
+
+								<!-- Missing EIN Reason -->
+								<xsd:element name="MissingEINReasonCd">
+									<xsd:annotation>
+										<xsd:documentation>
+											<Description>Missing EIN reason</Description>
+											<LineNumber>Part III, line 1aa(b)</LineNumber>
+										</xsd:documentation>
+									</xsd:annotation>
+									<xsd:simpleType>
+										<xsd:restriction base="StringType">
+											<xsd:enumeration value="APPLD FOR"/>
+											<xsd:enumeration value="FOREIGNUS"/>
+										</xsd:restriction>
+									</xsd:simpleType>
+								</xsd:element>
+
+							</xsd:choice>
+
+						</xsd:sequence>
+					</xsd:complexType>
+				</xsd:element>
+
+				<!-- General Credits From an Electing Large Partnership Group -->
+				<xsd:element name="CYGenBusCrElectingLgePrtshpGrp" minOccurs="0">
+					<xsd:complexType>
+						<xsd:sequence>
+
+							<!-- General Credits From an Electing Large Partnership (Schedule K-1(Form 1065-B)) -->
+							<xsd:element name="CYGenBusCrElectingLgePrtshpAmt">
+								<xsd:annotation>
+									<xsd:documentation>
+										<Description>General credits from an electing large partnership (schedule K-1(form 1065-B))</Description>
+										<LineNumber>Part III, line 1bb(c)</LineNumber>
+									</xsd:documentation>
+								</xsd:annotation>
+								<xsd:complexType>
+									<xsd:simpleContent>
+										<xsd:extension base="USAmountNNType">
+											<xsd:attribute name="referenceDocumentId" type="IdListType"/>
+											<xsd:attribute name="referenceDocumentName" type="StringType" fixed="IRS1065BScheduleK1"/>
+										</xsd:extension>
+									</xsd:simpleContent>
+								</xsd:complexType>
+							</xsd:element>
+
+							<xsd:choice minOccurs="0">
+
+								<!-- EIN Of Pass Through Entity -->
+								<xsd:element name="PassThroughEntityEIN" type="EINType">
+									<xsd:annotation>
+										<xsd:documentation>
+											<Description>EIN Of pass through entity</Description>
+											<LineNumber>Part III, line 1bb(b)</LineNumber>
+										</xsd:documentation>
+									</xsd:annotation>
+								</xsd:element>
+
+								<!-- Missing EIN Reason -->
+								<xsd:element name="MissingEINReasonCd">
+									<xsd:annotation>
+										<xsd:documentation>
+											<Description>Missing EIN reason</Description>
+											<LineNumber>Part III, line 1bb(b)</LineNumber>
+										</xsd:documentation>
+									</xsd:annotation>
+									<xsd:simpleType>
+										<xsd:restriction base="StringType">
+											<xsd:enumeration value="APPLD FOR"/>
+											<xsd:enumeration value="FOREIGNUS"/>
+										</xsd:restriction>
+									</xsd:simpleType>
+								</xsd:element>
+
+							</xsd:choice>
+
+						</xsd:sequence>
+					</xsd:complexType>
+				</xsd:element>
+
+				<!-- Other Current Year Credit Amount Group -->
+				<xsd:element name="OtherCurrentYearCreditAmtGrp" minOccurs="0">
+					<xsd:complexType>
+						<xsd:sequence>
+
+							<!-- Other Current Year Credit Amount -->
+							<xsd:element name="OtherCurrentYearCreditAmt">
+								<xsd:annotation>
+									<xsd:documentation>
+										<Description>Other current year credit amount</Description>
+										<LineNumber>Part III, line 1zz(c)</LineNumber>
+									</xsd:documentation>
+								</xsd:annotation>
+								<xsd:complexType>
+									<xsd:simpleContent>
+										<xsd:extension base="USAmountNNType">
+											<xsd:attribute name="referenceDocumentId" type="IdListType"/>
+											<xsd:attribute name="referenceDocumentName" type="StringType" fixed="BinaryAttachment"/>
+										</xsd:extension>
+									</xsd:simpleContent>
+								</xsd:complexType>
+							</xsd:element>
+
+							<xsd:choice minOccurs="0">
+
+								<!-- EIN Of Pass Through Entity -->
+								<xsd:element name="PassThroughEntityEIN" type="EINType">
+									<xsd:annotation>
+										<xsd:documentation>
+											<Description>EIN Of pass through entity</Description>
+											<LineNumber>Part III, line 1zz(b)</LineNumber>
+										</xsd:documentation>
+									</xsd:annotation>
+								</xsd:element>
+
+								<!-- Missing EIN Reason -->
+								<xsd:element name="MissingEINReasonCd">
+									<xsd:annotation>
+										<xsd:documentation>
+											<Description>Missing EIN reason</Description>
+											<LineNumber>Part III, line 1zz(b)</LineNumber>
+										</xsd:documentation>
+									</xsd:annotation>
+									<xsd:simpleType>
+										<xsd:restriction base="StringType">
+											<xsd:enumeration value="APPLD FOR"/>
+											<xsd:enumeration value="FOREIGNUS"/>
+										</xsd:restriction>
+									</xsd:simpleType>
+								</xsd:element>
+
+							</xsd:choice>
+
+						</xsd:sequence>
+					</xsd:complexType>
+				</xsd:element>
+
+				<!-- Current Year General Business Credit -->
+				<xsd:element name="CurrentYearGeneralBusCrAmt" type="USAmountType" minOccurs="0">
+					<xsd:annotation>
+						<xsd:documentation>
+							<Description>Current year general business credit</Description>
+							<LineNumber>Part III, line 2</LineNumber>
+						</xsd:documentation>
+					</xsd:annotation>
+				</xsd:element>
+
+				<!-- Enter Amount From F8844 Group -->
+				<xsd:element name="EnterAmountFromF8844Grp" minOccurs="0">
+					<xsd:complexType>
+						<xsd:sequence>
+
+							<!-- Enter Amount From F8844 -->
+							<xsd:element name="EnterAmountFromF8844Amt">
+								<xsd:annotation>
+									<xsd:documentation>
+										<Description>Enter amount from F8844</Description>
+										<LineNumber>Part III, line 3(c)</LineNumber>
+									</xsd:documentation>
+								</xsd:annotation>
+								<xsd:complexType>
+									<xsd:simpleContent>
+										<xsd:extension base="USAmountType">
+											<xsd:attribute name="referenceDocumentId" type="IdListType"/>
+											<xsd:attribute name="referenceDocumentName" type="StringType" fixed="IRS8844"/>
+										</xsd:extension>
+									</xsd:simpleContent>
+								</xsd:complexType>
+							</xsd:element>
+
+							<xsd:choice minOccurs="0">
+
+								<!-- EIN Of Pass Through Entity -->
+								<xsd:element name="PassThroughEntityEIN" type="EINType">
+									<xsd:annotation>
+										<xsd:documentation>
+											<Description>EIN Of pass through entity</Description>
+											<LineNumber>Part III, line 3(b)</LineNumber>
+										</xsd:documentation>
+									</xsd:annotation>
+								</xsd:element>
+
+								<!-- Missing EIN Reason -->
+								<xsd:element name="MissingEINReasonCd">
+									<xsd:annotation>
+										<xsd:documentation>
+											<Description>Missing EIN reason</Description>
+											<LineNumber>Part III, line 3(b)</LineNumber>
+										</xsd:documentation>
+									</xsd:annotation>
+									<xsd:simpleType>
+										<xsd:restriction base="StringType">
+											<xsd:enumeration value="APPLD FOR"/>
+											<xsd:enumeration value="FOREIGNUS"/>
+										</xsd:restriction>
+									</xsd:simpleType>
+								</xsd:element>
+
+							</xsd:choice>
+
+						</xsd:sequence>
+					</xsd:complexType>
+				</xsd:element>
+
+				<!-- Investment Credit Group -->
+				<xsd:element name="InvestmentCreditGrp" minOccurs="0">
+					<xsd:complexType>
+						<xsd:sequence>
+
+							<!-- Investment Credit (Form 3468, Part III) -->
+							<xsd:element name="InvestmentCreditAmt">
+								<xsd:annotation>
+									<xsd:documentation>
+										<Description>Investment Credit</Description>
+										<LineNumber>Part III, line 4a(c)</LineNumber>
+									</xsd:documentation>
+								</xsd:annotation>
+								<xsd:complexType>
+									<xsd:simpleContent>
+										<xsd:extension base="USAmountNNType">
+											<xsd:attribute name="referenceDocumentId" type="IdListType"/>
+											<xsd:attribute name="referenceDocumentName" type="StringType" fixed="IRS3468"/>
+										</xsd:extension>
+									</xsd:simpleContent>
+								</xsd:complexType>
+							</xsd:element>
+
+							<xsd:choice minOccurs="0">
+
+								<!-- EIN Of Pass Through Entity -->
+								<xsd:element name="PassThroughEntityEIN" type="EINType">
+									<xsd:annotation>
+										<xsd:documentation>
+											<Description>EIN Of pass through entity</Description>
+											<LineNumber>Part III, line 4a(b)</LineNumber>
+										</xsd:documentation>
+									</xsd:annotation>
+								</xsd:element>
+
+								<!-- Missing EIN Reason -->
+								<xsd:element name="MissingEINReasonCd">
+									<xsd:annotation>
+										<xsd:documentation>
+											<Description>Missing EIN reason</Description>
+											<LineNumber>Part III, line 4a(b)</LineNumber>
+										</xsd:documentation>
+									</xsd:annotation>
+									<xsd:simpleType>
+										<xsd:restriction base="StringType">
+											<xsd:enumeration value="APPLD FOR"/>
+											<xsd:enumeration value="FOREIGNUS"/>
+										</xsd:restriction>
+									</xsd:simpleType>
+								</xsd:element>
+
+							</xsd:choice>
+
+						</xsd:sequence>
+					</xsd:complexType>
+				</xsd:element>
+
+				<!-- Work Opportunity Credit From F5884 Group -->
+				<xsd:element name="WorkOpportunityCrFrom5884Grp" minOccurs="0">
+					<xsd:complexType>
+						<xsd:sequence>
+
+							<!-- Work Opportunity Credit From F5884 -->
+							<xsd:element name="WorkOpportunityCrFrom5884Amt">
+								<xsd:annotation>
+									<xsd:documentation>
+										<Description>Work opportunity credit from F5884</Description>
+										<LineNumber>Part III, line 4b(c)</LineNumber>
+									</xsd:documentation>
+								</xsd:annotation>
+								<xsd:complexType>
+									<xsd:simpleContent>
+										<xsd:extension base="USAmountNNType">
+											<xsd:attribute name="referenceDocumentId" type="IdListType"/>
+											<xsd:attribute name="referenceDocumentName" type="StringType" fixed="IRS5884"/>
+										</xsd:extension>
+									</xsd:simpleContent>
+								</xsd:complexType>
+							</xsd:element>
+
+							<xsd:choice minOccurs="0">
+
+								<!-- EIN Of Pass Through Entity -->
+								<xsd:element name="PassThroughEntityEIN" type="EINType">
+									<xsd:annotation>
+										<xsd:documentation>
+											<Description>EIN Of pass through entity</Description>
+											<LineNumber>Part III, line 4b(b)</LineNumber>
+										</xsd:documentation>
+									</xsd:annotation>
+								</xsd:element>
+
+								<!-- Missing EIN Reason -->
+								<xsd:element name="MissingEINReasonCd">
+									<xsd:annotation>
+										<xsd:documentation>
+											<Description>Missing EIN reason</Description>
+											<LineNumber>Part III, line 4b(b)</LineNumber>
+										</xsd:documentation>
+									</xsd:annotation>
+									<xsd:simpleType>
+										<xsd:restriction base="StringType">
+											<xsd:enumeration value="APPLD FOR"/>
+											<xsd:enumeration value="FOREIGNUS"/>
+										</xsd:restriction>
+									</xsd:simpleType>
+								</xsd:element>
+
+							</xsd:choice>
+
+						</xsd:sequence>
+					</xsd:complexType>
+				</xsd:element>
+
+				<!-- Biofuel Producer Credit Group -->
+				<xsd:element name="BiofuelProducerCreditGrp" minOccurs="0">
+					<xsd:complexType>
+						<xsd:sequence>
+
+							<!-- Biofuel Producer Credit -->
+							<xsd:element name="BiofuelProducerCreditAmt">
+								<xsd:annotation>
+									<xsd:documentation>
+										<Description>Biofuel producer credit</Description>
+										<LineNumber>Part III, line 4c(c)</LineNumber>
+									</xsd:documentation>
+								</xsd:annotation>
+								<xsd:complexType>
+									<xsd:simpleContent>
+										<xsd:extension base="USAmountType">
+											<xsd:attribute name="referenceDocumentId" type="IdListType"/>
+											<xsd:attribute name="referenceDocumentName" type="StringType" fixed="IRS6478"/>
+										</xsd:extension>
+									</xsd:simpleContent>
+								</xsd:complexType>
+							</xsd:element>
+
+							<xsd:choice minOccurs="0">
+
+								<!-- EIN Of Pass Through Entity -->
+								<xsd:element name="PassThroughEntityEIN" type="EINType">
+									<xsd:annotation>
+										<xsd:documentation>
+											<Description>EIN Of pass through entity</Description>
+											<LineNumber>Part III, line 4c(b)</LineNumber>
+										</xsd:documentation>
+									</xsd:annotation>
+								</xsd:element>
+
+								<!-- Missing EIN Reason -->
+								<xsd:element name="MissingEINReasonCd">
+									<xsd:annotation>
+										<xsd:documentation>
+											<Description>Missing EIN reason</Description>
+											<LineNumber>Part III, line 4c(b)</LineNumber>
+										</xsd:documentation>
+									</xsd:annotation>
+									<xsd:simpleType>
+										<xsd:restriction base="StringType">
+											<xsd:enumeration value="APPLD FOR"/>
+											<xsd:enumeration value="FOREIGNUS"/>
+										</xsd:restriction>
+									</xsd:simpleType>
+								</xsd:element>
+
+							</xsd:choice>
+
+						</xsd:sequence>
+					</xsd:complexType>
+				</xsd:element>
+
+				<!-- Low Income Housing Credit Group -->
+				<xsd:element name="LowIncomeHousingCreditGrp" minOccurs="0">
+					<xsd:complexType>
+						<xsd:sequence>
+
+							<!-- Low Income Housing Credit (Form 8586, Part III) -->
+							<xsd:element name="LowIncomeHousingCreditAmt">
+								<xsd:annotation>
+									<xsd:documentation>
+										<Description>Low income housing credit</Description>
+										<LineNumber>Part III, line 4d(c)</LineNumber>
+									</xsd:documentation>
+								</xsd:annotation>
+								<xsd:complexType>
+									<xsd:simpleContent>
+										<xsd:extension base="USAmountNNType">
+											<xsd:attribute name="referenceDocumentId" type="IdListType"/>
+											<xsd:attribute name="referenceDocumentName" type="StringType" fixed="IRS8586"/>
+										</xsd:extension>
+									</xsd:simpleContent>
+								</xsd:complexType>
+							</xsd:element>
+
+							<xsd:choice minOccurs="0">
+
+								<!-- EIN Of Pass Through Entity -->
+								<xsd:element name="PassThroughEntityEIN" type="EINType">
+									<xsd:annotation>
+										<xsd:documentation>
+											<Description>EIN Of pass through entity</Description>
+											<LineNumber>Part III, line 4d(b)</LineNumber>
+										</xsd:documentation>
+									</xsd:annotation>
+								</xsd:element>
+
+								<!-- Missing EIN Reason -->
+								<xsd:element name="MissingEINReasonCd">
+									<xsd:annotation>
+										<xsd:documentation>
+											<Description>Missing EIN reason</Description>
+											<LineNumber>Part III, line 4d(b)</LineNumber>
+										</xsd:documentation>
+									</xsd:annotation>
+									<xsd:simpleType>
+										<xsd:restriction base="StringType">
+											<xsd:enumeration value="APPLD FOR"/>
+											<xsd:enumeration value="FOREIGNUS"/>
+										</xsd:restriction>
+									</xsd:simpleType>
+								</xsd:element>
+
+							</xsd:choice>
+
+						</xsd:sequence>
+					</xsd:complexType>
+				</xsd:element>
+
+				<!-- Renewable Electricity and Coal Credit Group -->
+				<xsd:element name="RnwblElecCoalCrFromF8835Grp" minOccurs="0">
+					<xsd:complexType>
+						<xsd:sequence>
+
+							<!-- Renewable Electricity and Coal Credit (Form 8835) -->
+							<xsd:element name="RnwblElecCoalCrFromF8835Amt">
+								<xsd:annotation>
+									<xsd:documentation>
+										<Description>Renewable Electricity and Coal Credit (Form 8835)</Description>
+										<LineNumber>Part III, line 4e(c)</LineNumber>
+									</xsd:documentation>
+								</xsd:annotation>
+								<xsd:complexType>
+									<xsd:simpleContent>
+										<xsd:extension base="USAmountNNType">
+											<xsd:attribute name="referenceDocumentId" type="IdListType"/>
+											<xsd:attribute name="referenceDocumentName" type="StringType" fixed="IRS8835"/>
+										</xsd:extension>
+									</xsd:simpleContent>
+								</xsd:complexType>
+							</xsd:element>
+
+							<xsd:choice minOccurs="0">
+
+								<!-- EIN Of Pass Through Entity -->
+								<xsd:element name="PassThroughEntityEIN" type="EINType">
+									<xsd:annotation>
+										<xsd:documentation>
+											<Description>EIN Of pass through entity</Description>
+											<LineNumber>Part III, line 4e(b)</LineNumber>
+										</xsd:documentation>
+									</xsd:annotation>
+								</xsd:element>
+
+								<!-- Missing EIN Reason -->
+								<xsd:element name="MissingEINReasonCd">
+									<xsd:annotation>
+										<xsd:documentation>
+											<Description>Missing EIN reason</Description>
+											<LineNumber>Part III, line 4e(b)</LineNumber>
+										</xsd:documentation>
+									</xsd:annotation>
+									<xsd:simpleType>
+										<xsd:restriction base="StringType">
+											<xsd:enumeration value="APPLD FOR"/>
+											<xsd:enumeration value="FOREIGNUS"/>
+										</xsd:restriction>
+									</xsd:simpleType>
+								</xsd:element>
+
+							</xsd:choice>
+
+						</xsd:sequence>
+					</xsd:complexType>
+				</xsd:element>
+
+				<!-- Credit For Employer SS and Medicare Taxes Group -->
+				<xsd:element name="CrForEmployerSSMedicareTaxGrp" minOccurs="0">
+					<xsd:complexType>
+						<xsd:sequence>
+
+							<!-- Credit For Employer SS and Medicare Taxes -->
+							<xsd:element name="CreditForEmployerSSMedcrTxAmt">
+								<xsd:annotation>
+									<xsd:documentation>
+										<Description>Credit For Employer SS and Medicare Taxes</Description>
+										<LineNumber>Part III, line 4f(c)</LineNumber>
+									</xsd:documentation>
+								</xsd:annotation>
+								<xsd:complexType>
+									<xsd:simpleContent>
+										<xsd:extension base="USAmountNNType">
+											<xsd:attribute name="referenceDocumentId" type="IdListType"/>
+											<xsd:attribute name="referenceDocumentName" type="StringType" fixed="IRS8846"/>
+										</xsd:extension>
+									</xsd:simpleContent>
+								</xsd:complexType>
+							</xsd:element>
+
+							<xsd:choice minOccurs="0">
+
+								<!-- EIN Of Pass Through Entity -->
+								<xsd:element name="PassThroughEntityEIN" type="EINType">
+									<xsd:annotation>
+										<xsd:documentation>
+											<Description>EIN Of pass through entity</Description>
+											<LineNumber>Part III, line 4f(b)</LineNumber>
+										</xsd:documentation>
+									</xsd:annotation>
+								</xsd:element>
+
+								<!-- Missing EIN Reason -->
+								<xsd:element name="MissingEINReasonCd">
+									<xsd:annotation>
+										<xsd:documentation>
+											<Description>Missing EIN reason</Description>
+											<LineNumber>Part III, line 4f(b)</LineNumber>
+										</xsd:documentation>
+									</xsd:annotation>
+									<xsd:simpleType>
+										<xsd:restriction base="StringType">
+											<xsd:enumeration value="APPLD FOR"/>
+											<xsd:enumeration value="FOREIGNUS"/>
+										</xsd:restriction>
+									</xsd:simpleType>
+								</xsd:element>
+
+							</xsd:choice>
+
+						</xsd:sequence>
+					</xsd:complexType>
+				</xsd:element>
+
+				<!-- Qualified Railroad Track Maintenance Group -->
+				<xsd:element name="QualifiedRailroadTrackMaintGrp" minOccurs="0">
+					<xsd:complexType>
+						<xsd:sequence>
+
+							<!-- Qualified Railroad Track Maintenance -->
+							<xsd:element name="QualifiedRailroadTrackMaintAmt">
+								<xsd:annotation>
+									<xsd:documentation>
+										<Description>Qualified railroad track maintenance</Description>
+										<LineNumber>Part III, line 4g(c)</LineNumber>
+									</xsd:documentation>
+								</xsd:annotation>
+								<xsd:complexType>
+									<xsd:simpleContent>
+										<xsd:extension base="USAmountType">
+											<xsd:attribute name="referenceDocumentId" type="IdListType"/>
+											<xsd:attribute name="referenceDocumentName" type="StringType" fixed="IRS8900"/>
+										</xsd:extension>
+									</xsd:simpleContent>
+								</xsd:complexType>
+							</xsd:element>
+
+							<xsd:choice minOccurs="0">
+
+								<!-- EIN Of Pass Through Entity -->
+								<xsd:element name="PassThroughEntityEIN" type="EINType">
+									<xsd:annotation>
+										<xsd:documentation>
+											<Description>EIN Of pass through entity</Description>
+											<LineNumber>Part III, line 4g(b)</LineNumber>
+										</xsd:documentation>
+									</xsd:annotation>
+								</xsd:element>
+
+								<!-- Missing EIN Reason -->
+								<xsd:element name="MissingEINReasonCd">
+									<xsd:annotation>
+										<xsd:documentation>
+											<Description>Missing EIN reason</Description>
+											<LineNumber>Part III, line 4g(b)</LineNumber>
+										</xsd:documentation>
+									</xsd:annotation>
+									<xsd:simpleType>
+										<xsd:restriction base="StringType">
+											<xsd:enumeration value="APPLD FOR"/>
+											<xsd:enumeration value="FOREIGNUS"/>
+										</xsd:restriction>
+									</xsd:simpleType>
+								</xsd:element>
+
+							</xsd:choice>
+
+						</xsd:sequence>
+					</xsd:complexType>
+				</xsd:element>
+
+				<!-- Small Employer HIP Credit Amount Group -->
+				<xsd:element name="SmallEmployerHIPCreditAmtGrp" minOccurs="0">
+					<xsd:complexType>
+						<xsd:sequence>
+
+							<!-- Small Employer HIP Credit Amount -->
+							<xsd:element name="SmallEmployerHIPCreditAmt">
+								<xsd:annotation>
+									<xsd:documentation>
+										<Description>Small employer HIP credit amount</Description>
+										<LineNumber>Part III, line 4h(c)</LineNumber>
+									</xsd:documentation>
+								</xsd:annotation>
+								<xsd:complexType>
+									<xsd:simpleContent>
+										<xsd:extension base="USAmountType">
+											<xsd:attribute name="referenceDocumentId" type="IdListType"/>
+											<xsd:attribute name="referenceDocumentName" type="StringType" fixed="IRS8941"/>
+										</xsd:extension>
+									</xsd:simpleContent>
+								</xsd:complexType>
+							</xsd:element>
+
+							<xsd:choice minOccurs="0">
+
+								<!-- EIN Of Pass Through Entity -->
+								<xsd:element name="PassThroughEntityEIN" type="EINType">
+									<xsd:annotation>
+										<xsd:documentation>
+											<Description>EIN Of pass through entity</Description>
+											<LineNumber>Part III, line 4h(b)</LineNumber>
+										</xsd:documentation>
+									</xsd:annotation>
+								</xsd:element>
+
+								<!-- Missing EIN Reason -->
+								<xsd:element name="MissingEINReasonCd">
+									<xsd:annotation>
+										<xsd:documentation>
+											<Description>Missing EIN reason</Description>
+											<LineNumber>Part III, line 4h(b)</LineNumber>
+										</xsd:documentation>
+									</xsd:annotation>
+									<xsd:simpleType>
+										<xsd:restriction base="StringType">
+											<xsd:enumeration value="APPLD FOR"/>
+											<xsd:enumeration value="FOREIGNUS"/>
+										</xsd:restriction>
+									</xsd:simpleType>
+								</xsd:element>
+
+							</xsd:choice>
+
+						</xsd:sequence>
+					</xsd:complexType>
+				</xsd:element>
+
+				<!-- Credit for Increasing Research Activities Group -->
+				<xsd:element name="IncreasingResearchCrGrp" minOccurs="0">
+					<xsd:complexType>
+						<xsd:sequence>
+
+							<!-- Credit for Increasing Research Activities -->
+							<xsd:element name="ResearchActivitiesIncrCrAmt">
+								<xsd:annotation>
+									<xsd:documentation>
+										<Description>Credit for increasing research activities</Description>
+										<LineNumber>Part III, line 4i(c)</LineNumber>
+									</xsd:documentation>
+								</xsd:annotation>
+								<xsd:complexType>
+									<xsd:simpleContent>
+										<xsd:extension base="USAmountNNType">
+											<xsd:attribute name="referenceDocumentId" type="IdListType"/>
+											<xsd:attribute name="referenceDocumentName" type="StringType" fixed="IRS6765"/>
+										</xsd:extension>
+									</xsd:simpleContent>
+								</xsd:complexType>
+							</xsd:element>
+							
+							<xsd:choice minOccurs="0">
+
+								<!-- EIN Of Pass Through Entity -->
+								<xsd:element name="PassThroughEntityEIN" type="EINType">
+									<xsd:annotation>
+										<xsd:documentation>
+											<Description>EIN Of pass through entity</Description>
+											<LineNumber>Part III, line 4i(b)</LineNumber>
+										</xsd:documentation>
+									</xsd:annotation>
+								</xsd:element>
+
+								<!-- Missing EIN Reason -->
+								<xsd:element name="MissingEINReasonCd">
+									<xsd:annotation>
+										<xsd:documentation>
+											<Description>Missing EIN reason</Description>
+											<LineNumber>Part III, line 4i(b)</LineNumber>
+										</xsd:documentation>
+									</xsd:annotation>
+									<xsd:simpleType>
+										<xsd:restriction base="StringType">
+											<xsd:enumeration value="APPLD FOR"/>
+											<xsd:enumeration value="FOREIGNUS"/>
+										</xsd:restriction>
+									</xsd:simpleType>
+								</xsd:element>
+
+							</xsd:choice>
+							
+						</xsd:sequence>
+					</xsd:complexType>
+				</xsd:element>
+				
+				<!-- Employer Credit Paid Family Medical Leave Group -->
+				<xsd:element name="EmplrCrPdFamilyMedLeaveGrp" minOccurs="0">
+					<xsd:complexType>
+						<xsd:sequence>
+
+							<!-- Employer Credit Paid Family Medical Leave -->
+							<xsd:element name="EmplrCrPdFamilyMedLeaveAmt">
+								<xsd:annotation>
+									<xsd:documentation>
+										<Description>Employer credit paid family medical leave</Description>
+										<LineNumber>Part III, line 4j(c)</LineNumber>
+									</xsd:documentation>
+								</xsd:annotation>
+								<xsd:complexType>
+									<xsd:simpleContent>
+										<xsd:extension base="USAmountNNType">
+											<xsd:attribute name="referenceDocumentId" type="IdListType"/>
+											<xsd:attribute name="referenceDocumentName" type="StringType" fixed="BinaryAttachment"/>
+										</xsd:extension>
+									</xsd:simpleContent>
+								</xsd:complexType>
+							</xsd:element>
+							
+							<xsd:choice minOccurs="0">
+
+								<!-- EIN Of Pass Through Entity -->
+								<xsd:element name="PassThroughEntityEIN" type="EINType">
+									<xsd:annotation>
+										<xsd:documentation>
+											<Description>EIN Of pass through entity</Description>
+											<LineNumber>Part III, line 4j(b)</LineNumber>
+										</xsd:documentation>
+									</xsd:annotation>
+								</xsd:element>
+
+								<!-- Missing EIN Reason -->
+								<xsd:element name="MissingEINReasonCd">
+									<xsd:annotation>
+										<xsd:documentation>
+											<Description>Missing EIN reason</Description>
+											<LineNumber>Part III, line 4j(b)</LineNumber>
+										</xsd:documentation>
+									</xsd:annotation>
+									<xsd:simpleType>
+										<xsd:restriction base="StringType">
+											<xsd:enumeration value="APPLD FOR"/>
+											<xsd:enumeration value="FOREIGNUS"/>
+										</xsd:restriction>
+									</xsd:simpleType>
+								</xsd:element>
+
+							</xsd:choice>
+							
+						</xsd:sequence>
+					</xsd:complexType>
+				</xsd:element>
+				
+				<!-- Other Specified Credit Amount Group -->
+				<xsd:element name="OtherSpecifiedCreditAmtGrp" minOccurs="0">
+					<xsd:complexType>
+						<xsd:sequence>
+
+							<!-- Other Specified Credit Amount -->
+							<xsd:element name="OtherSpecifiedCreditAmt" type="USAmountType">
+								<xsd:annotation>
+									<xsd:documentation>
+										<Description>Other specified credit amount</Description>
+										<LineNumber>Part III, line 4z(c)</LineNumber>
+									</xsd:documentation>
+								</xsd:annotation>
+							</xsd:element>
+
+							<xsd:choice minOccurs="0">
+
+								<!-- EIN Of Pass Through Entity -->
+								<xsd:element name="PassThroughEntityEIN" type="EINType">
+									<xsd:annotation>
+										<xsd:documentation>
+											<Description>EIN Of pass through entity</Description>
+											<LineNumber>Part III, line 4z(b)</LineNumber>
+										</xsd:documentation>
+									</xsd:annotation>
+								</xsd:element>
+
+								<!-- Missing EIN Reason -->
+								<xsd:element name="MissingEINReasonCd">
+									<xsd:annotation>
+										<xsd:documentation>
+											<Description>Missing EIN reason</Description>
+											<LineNumber>Part III, line 4z(b)</LineNumber>
+										</xsd:documentation>
+									</xsd:annotation>
+									<xsd:simpleType>
+										<xsd:restriction base="StringType">
+											<xsd:enumeration value="APPLD FOR"/>
+											<xsd:enumeration value="FOREIGNUS"/>
+										</xsd:restriction>
+									</xsd:simpleType>
+								</xsd:element>
+
+							</xsd:choice>
+
+						</xsd:sequence>
+					</xsd:complexType>
+				</xsd:element>
+
+				<!-- Sum Of Allowable General Business Credit Amount -->
+				<xsd:element name="SumOfAllowableGeneralBusCrAmt" type="USAmountType" minOccurs="0">
+					<xsd:annotation>
+						<xsd:documentation>
+							<Description>Sum of allowable general business credit amount</Description>
+							<LineNumber>Part III, line 5c</LineNumber>
+						</xsd:documentation>
+					</xsd:annotation>
+				</xsd:element>
+
+				<!-- Total Business Credits Amount -->
+				<xsd:element name="TotalBusinessCreditsAmt" type="USAmountType" minOccurs="0">
+					<xsd:annotation>
+						<xsd:documentation>
+							<Description>Total Business Credits Amount</Description>
+							<LineNumber>Part III, line 6c</LineNumber>
+						</xsd:documentation>
+					</xsd:annotation>
+				</xsd:element>
+
+		</xsd:sequence>
+	</xsd:complexType>
+
+</xsd:schema>

@@ -1,0 +1,471 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.irs.gov/efile" targetNamespace="http://www.irs.gov/efile" elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.0">
+
+	<xsd:annotation>
+		<xsd:documentation>
+			<Description>IRS e-file Schema - IRS Form 4972 Tax on Lump-Sum Distributions</Description>
+			<TaxYear>2018</TaxYear>
+			<MaturityLevel>Final Release</MaturityLevel>
+			<ReleaseDate>February 13, 2019</ReleaseDate>
+		</xsd:documentation>
+	</xsd:annotation>
+	
+	<xsd:include schemaLocation="../../../Common/efileTypes.xsd"/>
+
+	<!--==================================================================-->
+	<!--============================ IRS4972 ============================-->
+	<!--==================================================================-->
+
+	<xsd:element name="IRS4972">
+		<xsd:annotation>
+			<xsd:documentation>IRS Form 4972</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:complexContent>
+				<xsd:extension base="IRS4972Type">
+					<xsd:attributeGroup ref="DocumentAttributes">
+						<xsd:annotation>
+							<xsd:documentation>Common return document attributes</xsd:documentation>
+						</xsd:annotation>
+					</xsd:attributeGroup>
+					<xsd:attribute name="documentName" type="xsd:string" fixed="IRS4972"/>
+				</xsd:extension>
+			</xsd:complexContent>
+		</xsd:complexType>
+	</xsd:element>
+
+	<xsd:complexType name="IRS4972Type">
+		<xsd:annotation>
+			<xsd:documentation>Content model for IRS 4972</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+
+			<xsd:element name="PersonNm" type="PersonNameType">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Person Name</Description>
+						<ELFFieldNumber>0010</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			
+			<xsd:element name="SSN" type="SSNType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>SSN</Description>
+						<ELFFieldNumber>0020</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!--Distribution Of Qualified Plan Indicator -->
+			<xsd:element name="DistributionOfQualifiedPlanInd" type="BooleanType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Distribution Of Qualified Plan Indicator</Description>
+						<LineNumber>1</LineNumber>
+						<ELFFieldNumber>0024 0026</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			
+			<!--Rollover Indicator -->
+			<xsd:element name="RolloverInd" type="BooleanType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Rollover Indicator</Description>
+						<LineNumber>2</LineNumber>
+						<ELFFieldNumber>0030 0040</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			
+			<!--Employee Beneficiary Distribution Indicator -->
+			<xsd:element name="EmployeeBeneficiaryDistriInd" type="BooleanType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Employee Beneficiary Distribution Indicator</Description>
+						<LineNumber>3</LineNumber>
+						<ELFFieldNumber>0042 0044</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!--Qualifying Aging 5 Year Member Indicator -->
+			<xsd:element name="QualifyingAge5YearMemberInd" type="BooleanType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Qualifying Aging 5 Year Member Indicator</Description>
+						<LineNumber>4</LineNumber>
+						<ELFFieldNumber>0084 0086</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!--Prior Year Distribution Indicator -->
+			<xsd:element name="PriorYearDistributionInd" type="BooleanType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Prior Year Distribution Indicator</Description>
+						<LineNumber>5a</LineNumber>
+						<ELFFieldNumber>0190 0200</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!--Beneficiary Distribution Indicator -->
+			<xsd:element name="BeneficiaryDistributionInd" type="BooleanType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Beneficiary Distribution Indicator</Description>
+						<LineNumber>5b</LineNumber>
+						<ELFFieldNumber>0201 0202</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!--Capital Gaining Election Amount -->
+			<xsd:element name="CapitalGainElectionAmt" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Capital Gaining Election Amount</Description>
+						<LineNumber>6</LineNumber>
+						<ELFFieldNumber>0210</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+				<xsd:complexType>
+					<xsd:simpleContent>
+						<xsd:extension base="USAmountType">
+							<!-- Capital Gain Election NUA Amount -->
+							<xsd:attribute name="capitalGainElectionNUAAmt" type="USAmountType">
+								<xsd:annotation>
+									<xsd:documentation>
+										<Description>Capital Gaining Election NUA Amount</Description>
+										<LineNumber>6</LineNumber>
+										<ELFFieldNumber>0206</ELFFieldNumber>
+									</xsd:documentation>
+								</xsd:annotation>
+							</xsd:attribute>
+							<xsd:attribute name="capitalGainElectionNUACd" type="StringType" fixed="NUA">
+								<xsd:annotation>
+									<xsd:documentation>
+										<Description>Capital Gaining Election NUA Code</Description>
+										<LineNumber>6</LineNumber>
+										<ELFFieldNumber>0204</ELFFieldNumber>
+									</xsd:documentation>
+								</xsd:annotation>
+							</xsd:attribute>
+						</xsd:extension>
+					</xsd:simpleContent>
+				</xsd:complexType>
+			</xsd:element>
+
+			<!--Capital Gaining Times Election Percentage Amount -->
+			<xsd:element name="CapitalGainTimesElectionPctAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Capital Gaining Times Election Percentage Amount</Description>
+						<LineNumber>7</LineNumber>
+						<ELFFieldNumber>0220</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			
+			<!--Lump Summary Distribution Ordinary Income Amount -->
+			<xsd:element name="LumpSumDistriOrdinaryIncmAmt" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Lump Summary Distribution Ordinary Income Amount</Description>
+						<LineNumber>8</LineNumber>
+						<ELFFieldNumber>0240</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+				<xsd:complexType>
+					<xsd:simpleContent>
+						<xsd:extension base="USAmountType">
+							<!-- Net Unrealized Appreciation Amount -->
+							<xsd:attribute name="netUnrealizedAppreciationAmt" type="USAmountType">
+								<xsd:annotation>
+									<xsd:documentation>
+										<Description>Net Unrealized Appreciation Amount</Description>
+										<LineNumber>8</LineNumber>
+										<ELFFieldNumber>0235</ELFFieldNumber>
+									</xsd:documentation>
+								</xsd:annotation>
+							</xsd:attribute>
+							<xsd:attribute name="netUnrealizedAppreciationCd" type="StringType" fixed="NUA">
+								<xsd:annotation>
+									<xsd:documentation>
+										<Description>Net Unrealized Appreciation Code</Description>
+										<LineNumber>8</LineNumber>
+										<ELFFieldNumber>0230</ELFFieldNumber>
+									</xsd:documentation>
+								</xsd:annotation>
+							</xsd:attribute>
+						</xsd:extension>
+					</xsd:simpleContent>
+				</xsd:complexType>
+			</xsd:element>
+
+			<!--Lump Summary Distribution Death Benefiting Exclusion Amount -->
+			<xsd:element name="LumpSumDistriDeathBnftExclAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Lump Summary Distribution Death Benefiting Exclusion Amount</Description>
+						<LineNumber>9</LineNumber>
+						<ELFFieldNumber>0250</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!--Lump Summary Distribution Total Taxable Amount -->
+			<xsd:element name="LumpSumDistriTotalTaxableAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Lump Summary Distribution Total Taxable Amount</Description>
+						<LineNumber>10</LineNumber>
+						<ELFFieldNumber>0260</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!--Annuity Actuarial Value Amount -->
+			<xsd:element name="AnnuityActuarialValueAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Annuity Actuarial Value Amount</Description>
+						<LineNumber>11</LineNumber>
+						<ELFFieldNumber>0270</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!--Lump Summary Distribution Adjustment Total Taxable Amount -->
+			<xsd:element name="LumpSumDistriAdjTotTaxableAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Lump Summary Distribution Adjustment Total Taxable Amount</Description>
+						<LineNumber>12</LineNumber>
+						<ELFFieldNumber>0280</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!--Lump Summary Distribution 50 Percentage Total Taxable Amount -->
+			<xsd:element name="LumpSumDistri50PctTotalTxblAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Lump Summary Distribution 50 Percentage Total Taxable Amount</Description>
+						<LineNumber>13</LineNumber>
+						<ELFFieldNumber>0290</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!--Lump Summary Net Adjustment Total Taxable Amount -->
+			<xsd:element name="LumpSumNetAdjTotalTaxableAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Lump Summary Net Adjustment Total Taxable Amount</Description>
+						<LineNumber>14</LineNumber>
+						<ELFFieldNumber>0300</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!--Lump Summary Distribution Prorated Taxable Amount -->
+			<xsd:element name="LumpSumDistriProratedTxblAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Lump Summary Distribution Prorated Taxable Amount</Description>
+						<LineNumber>15</LineNumber>
+						<ELFFieldNumber>0310</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!--Lump Summary Minimum Distribution Allowance Amount -->
+			<xsd:element name="LumpSumMinDistriAllowanceAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Lump Summary Minimum Distribution Allowance Amount</Description>
+						<LineNumber>16</LineNumber>
+						<ELFFieldNumber>0320</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!--Lump Summary Distribution Allowable Taxable Amount -->
+			<xsd:element name="LumpSumDistriAllowableTxblAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Lump Summary Distribution Allowable Taxable Amount</Description>
+						<LineNumber>17</LineNumber>
+						<ELFFieldNumber>0330</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!--Lump Distrib Federal Estate Tax Amount -->
+			<xsd:element name="LumpDistribFederalEstateTaxAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Lump Distrib Federal Estate Tax Amount</Description>
+						<LineNumber>18</LineNumber>
+						<ELFFieldNumber>0340</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!--Lump Summary Distribution Net Taxable Amount -->
+			<xsd:element name="LumpSumDistriNetTaxableAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Lump Summary Distribution Net Taxable Amount</Description>
+						<LineNumber>19</LineNumber>
+						<ELFFieldNumber>0350</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!--Lump Summary Distribution Actuarial Adjustment Percentage -->
+			<xsd:element name="LumpSumDistriActuarialAdjPct" type="RatioType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Lump Summary Distribution Actuarial Adjustment Percentage</Description>
+						<LineNumber>20</LineNumber>
+						<ELFFieldNumber>0351</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!--Lump Summary Distribution Minimum Allowed Percent Amount -->
+			<xsd:element name="LumpSumDistriMinAllwPercentAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Lump Summary Distribution Minimum Allowed Percent Amount</Description>
+						<LineNumber>21</LineNumber>
+						<ELFFieldNumber>0352</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!--Lump Summary Distribution Adjustment Actuarial Amount -->
+			<xsd:element name="LumpSumDistriAdjActuarialAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Lump Summary Distribution Adjustment Actuarial Amount</Description>
+						<LineNumber>22</LineNumber>
+						<ELFFieldNumber>0353</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!--Lump Summary Distribution Percentage Adjustment Taxable Amount -->
+			<xsd:element name="LumpSumDistriPctAdjTxblAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Lump Summary Distribution Percentage Adjustment Taxable Amount</Description>
+						<LineNumber>23</LineNumber>
+						<ELFFieldNumber>0605</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!--Lump Summary Distribution Tax On Percent Amount -->
+			<xsd:element name="LumpSumDistriTaxOnPercentAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Lump Summary Distribution Tax On Percent Amount</Description>
+						<LineNumber>24</LineNumber>
+						<ELFFieldNumber>0610</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!--Lump Summary Distribution Tentative Averaging Tax Amount -->
+			<xsd:element name="LumpSumDistriTentAvgTaxAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Lump Summary Distribution Tentative Averaging Tax Amount</Description>
+						<LineNumber>25</LineNumber>
+						<ELFFieldNumber>0620</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!--Lump Summary Distribution Taxable Adjustment Actuarial Amount -->
+			<xsd:element name="LumpSumDistriTxblAdjActrlAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Lump Summary Distribution Taxable Adjustment Actuarial Amount</Description>
+						<LineNumber>26</LineNumber>
+						<ELFFieldNumber>0660</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!--Adjusted Actuarial Amount -->
+			<xsd:element name="AdjustedActuarialAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Adjusted Actuarial Amount</Description>
+						<LineNumber>27</LineNumber>
+						<ELFFieldNumber>0670</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!--Lump Summary Distribution Adjustment Average Tax Amount -->
+			<xsd:element name="LumpSumDistriAdjAverageTaxAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Lump Summary Distribution Adjustment Average Tax Amount</Description>
+						<LineNumber>28</LineNumber>
+						<ELFFieldNumber>0680</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!--Lump Summary Residual Annuity Averaging Tax Amount -->
+			<xsd:element name="LumpSumRsdlAnnuityAvgTaxAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Lump Summary Residual Annuity Averaging Tax Amount</Description>
+						<LineNumber>29</LineNumber>
+						<ELFFieldNumber>0690</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!--Lump Summary Distribution Multiplier Recipients Code -->
+			<xsd:element name="LumpSumDistriMultRecipientsCd" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Lump Summary Distribution Multiplier Recipients Code</Description>
+						<LineNumber>29</LineNumber>
+						<ELFFieldNumber>0695</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+				<xsd:simpleType>
+					<xsd:restriction base="StringType">
+						<xsd:enumeration value="MRD"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			
+			<!--Lump Summary Distribution Tax Amount -->
+			<xsd:element name="LumpSumDistributionTaxAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Lump Summary Distribution Tax Amount</Description>
+						<LineNumber>30</LineNumber>
+						<ELFFieldNumber>0705</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+		</xsd:sequence>
+	</xsd:complexType>
+
+</xsd:schema>

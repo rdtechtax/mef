@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns="http://www.irs.gov/efile" xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.irs.gov/efile" elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.0">
+
+	<xsd:annotation>
+		<xsd:documentation>
+			<Description>IRS e-file Schema - Nontaxable Use of Fuels/Credit Card Users Statement</Description>
+			<TaxYear>2018</TaxYear>
+			<MaturityLevel>Final Release</MaturityLevel>
+			<ReleaseDate>February 13, 2019</ReleaseDate>
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:include schemaLocation="../../../Common/efileTypes.xsd"/>
+
+
+	<!-- =============================================================================== -->
+	<!-- ============  Nontaxable Use of Fuels/Credit Card Users Statement  ============ -->
+	<!-- =============================================================================== -->
+
+	<xsd:element name="NontxUseFuelsCrCardUsersStmt">
+		<xsd:annotation>
+			<xsd:documentation>Nontaxable use of fuels/credit card users statement</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:complexContent>
+				<xsd:extension base="NontxUseFuelsCrCardUsersStmtType">
+					<xsd:attributeGroup ref="DocumentAttributes">
+						<xsd:annotation>
+							<xsd:documentation>Common return document attributes</xsd:documentation>
+						</xsd:annotation>
+					</xsd:attributeGroup>
+					<xsd:attribute name="documentName" type="xsd:string" fixed="NontaxableUseFuelsCreditCardUsersStatement">
+						<xsd:annotation>
+							<xsd:documentation>IRS internal use only. To avoid error in the return, do not include the attribute name or value.</xsd:documentation>
+						</xsd:annotation>
+					</xsd:attribute>
+				</xsd:extension>
+			</xsd:complexContent>
+		</xsd:complexType>
+	</xsd:element>
+
+	<xsd:complexType name="NontxUseFuelsCrCardUsersStmtType">
+		<xsd:annotation>
+			<xsd:documentation>Content model for nontaxable use of fuels/credit card users statement</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+
+			<!-- Nontaxable Use Users Statement -->
+			<xsd:element name="NontaxableUseUsersStmt" type="NontaxableUseUsersStmtType" minOccurs="0" maxOccurs="unbounded">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Nontaxable use users statement</Description>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<!-- Type for Nontaxable Use Users Statement -->
+	<xsd:complexType name="NontaxableUseUsersStmtType">
+		<xsd:sequence>
+
+			<!-- Explanation -->
+			<xsd:element name="ShortExplanationTxt" type="ShortExplanationType" minOccurs="0"/>
+
+			<!-- Line Number -->
+			<xsd:element name="LineNum" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Line number</Description>
+					</xsd:documentation>
+				</xsd:annotation>
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:enumeration value="11a"/>
+						<xsd:enumeration value="11b"/>
+						<xsd:enumeration value="11c"/>
+						<xsd:enumeration value="11d"/>
+						<xsd:enumeration value="11e"/>
+						<xsd:enumeration value="11f"/>
+						<xsd:enumeration value="11g"/>
+						<xsd:enumeration value="13c"/>
+						<xsd:enumeration value="14a"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+
+			<!-- Credit Rate -->
+			<xsd:element name="CreditRt" type="RatioType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Credit rate</Description>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+		</xsd:sequence>
+	</xsd:complexType>
+
+</xsd:schema>

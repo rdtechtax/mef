@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema targetNamespace="http://www.irs.gov/efile" xmlns="http://www.irs.gov/efile" xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.0">
+
+	<xsd:annotation>
+		<xsd:documentation>
+			<Description>IRS e-file Individual Income Tax Schema - Overpayment Apply to Spouse Estimated Tax Statement</Description>
+			<Purpose>Per instructions page, attach a statement requesting us to apply it to your spouse's account. Include your spouse's social security number in the attached statement.</Purpose> 
+			<TaxYear>2018</TaxYear>
+			<MaturityLevel>Final Release</MaturityLevel>
+			<ReleaseDate>February 13, 2019</ReleaseDate>
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:include schemaLocation="../../../Common/efileTypes.xsd" />
+
+	<!-- ====================================================================== -->
+	<!-- ======== Overpayment Apply to Spouse Estimated Tax Statement ========= -->
+	<!-- ====================================================================== -->
+
+	<xsd:element name="OvpmtAppToSpouseEstTxStmt">
+		<xsd:annotation>
+			<xsd:documentation>Overpayment Apply to Spouse Estimated Tax Statement</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:complexContent>
+				<xsd:extension base="OvpmtAppToSpouseEstTxStmtType">
+					<xsd:attributeGroup ref="DocumentAttributes">
+						<xsd:annotation>
+							<xsd:documentation>Common return document attributes</xsd:documentation>
+						</xsd:annotation>
+					</xsd:attributeGroup>
+					<xsd:attribute name="documentName" type="StringType" fixed="OvpmtAppToSpouseEstimatedTaxStatement">
+						<xsd:annotation>
+							<xsd:documentation>IRS internal use only. To avoid error in the return, do not include the attribute name or value.</xsd:documentation>
+						</xsd:annotation>
+					</xsd:attribute>
+				</xsd:extension>
+			</xsd:complexContent>
+		</xsd:complexType>
+	</xsd:element>
+
+	<xsd:complexType name="OvpmtAppToSpouseEstTxStmtType">
+		<xsd:annotation>
+			<xsd:documentation>Content model fo rOverpayment Apply to Spouse Estimated Tax Statement</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+
+			<xsd:element name="OvpmtAppToEstTxExplanationTxt" type="LineExplanationType" minOccurs="0"/>
+			
+			<xsd:element name="OvpmtAppToEstTxOfSpouseSSN" type="SSNType" minOccurs="0"/>
+			
+			<xsd:element name="OvpmtAppToEstTxOfSpouseName" type="PersonFullNameType" minOccurs="0"/>
+
+		</xsd:sequence>
+	</xsd:complexType>
+
+</xsd:schema>

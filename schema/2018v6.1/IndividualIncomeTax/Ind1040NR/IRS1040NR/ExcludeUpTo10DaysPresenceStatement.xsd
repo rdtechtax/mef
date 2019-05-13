@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema targetNamespace="http://www.irs.gov/efile" xmlns="http://www.irs.gov/efile" xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.0">
+
+	<xsd:annotation>
+		<xsd:documentation>
+			<Description>IRS e-file U.S. Nonresident Alien Income Tax Schema - Exclude Up To 10 Days Presence Statement</Description>
+			<Purpose>Optional Statement - The taxpayer must file a statement with the IRS if they are excluding up to 10 days of presence in the United States for purposes of your residency starting date. Publication 519.</Purpose>
+			<TaxYear>2018</TaxYear>
+			<MaturityLevel>Final Release</MaturityLevel>
+			<ReleaseDate>February 13, 2019</ReleaseDate>
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:include schemaLocation="../../../Common/efileTypes.xsd" />
+
+	<!-- ====================================================== -->
+	<!-- ====== Exclude Up To 10 Days Presence Statement ====== -->
+	<!-- ====================================================== -->
+
+	<xsd:element name="ExcludeUpTo10DaysPresenceStmt">
+		<xsd:annotation>
+			<xsd:documentation>Exclude Up To 10 Days Presence Statement</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:complexContent>
+				<xsd:extension base="ExcludeUpTo10DaysPresenceStmtType">
+					<xsd:attributeGroup ref="DocumentAttributes">
+						<xsd:annotation>
+							<xsd:documentation>Common return document attributes</xsd:documentation>
+						</xsd:annotation>
+					</xsd:attributeGroup>
+					<xsd:attribute name="documentName" type="TextType" fixed="ExcludeUpTo10DaysPresenceStatement">
+						<xsd:annotation>
+							<xsd:documentation>IRS internal use only. To avoid error in the return, do not include the attribute name or value.</xsd:documentation>
+						</xsd:annotation>
+					</xsd:attribute>
+				</xsd:extension>
+			</xsd:complexContent>
+		</xsd:complexType>
+	</xsd:element>
+
+	<xsd:complexType name="ExcludeUpTo10DaysPresenceStmtType">
+		<xsd:annotation>
+			<xsd:documentation>Content model for Exclude Up To 10 Days Presence Statement</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<!-- Passport Issued -->
+			<xsd:element name="PassportIssuedGrp" minOccurs="0">
+				<xsd:complexType>
+					<xsd:sequence>
+						<!-- Country Name that issued Passport -->
+						<xsd:element name="CountryCd" type="CountryType" minOccurs="0"/>
+						<!-- Passport Number -->
+						<xsd:element name="PassportNum" minOccurs="0">
+							<xsd:simpleType>
+								<xsd:restriction base="TextType">
+									<xsd:maxLength value="20"></xsd:maxLength>
+								</xsd:restriction>
+							</xsd:simpleType>
+						</xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<!-- Tax Year -->
+			<xsd:element name="TaxYr" type="YearType" minOccurs="0"/>
+			<!-- First Date of U.S. Residency  -->
+			<xsd:element name="USPresenceBeginDt" type="DateType" minOccurs="0"/>
+			<!-- Non U.S. Residency Exclusion Dates -->
+			<xsd:element name="USPresenceExclusionDtDesc" type="LineExplanationType" minOccurs="0"/>
+			<!-- Foreign Country Closer Connection Description -->
+			<xsd:element name="FrgnCntryCloserConnectionDesc" type="ShortExplanationType" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+
+</xsd:schema>

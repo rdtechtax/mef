@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.irs.gov/efile" targetNamespace="http://www.irs.gov/efile" elementFormDefault="qualified" attributeFormDefault="unqualified">
+ <xsd:annotation>
+    <xsd:documentation>
+       <Description>IRS e-file Individual Income Tax Schema - Nonemployee Compensation in Excess of 1099 MISC Statement</Description>
+       <Purpose>If the total amounts that were reported in box 7 of Forms 1099-MISC are more than the total you are reporting on line 1, attach a statement explaining the difference</Purpose>
+       <TaxYear>2018</TaxYear>
+			<MaturityLevel>Final Release</MaturityLevel>
+			<ReleaseDate>February 13, 2019</ReleaseDate>
+    </xsd:documentation>
+ </xsd:annotation>
+
+<xsd:include schemaLocation="../../../Common/efileTypes.xsd"/>
+
+
+	<!-- ===================================================================================== -->
+	<!-- =================  Nonemployee Compensation in Excess of 1099 MISC Statement  ======= -->
+	<!-- ===================================================================================== -->
+
+	<xsd:element name="NonemplCompInExOf1099MISCStmt">
+		<xsd:annotation>
+			<xsd:documentation>Nonemployee Compensation in Excess of 1099 MISC Statement</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:complexContent>
+				<xsd:extension base="NonemplCompInExOf1099MISCStmtType">
+					<xsd:attributeGroup ref="DocumentAttributes">
+						<xsd:annotation>
+							<xsd:documentation>Common return document attributes</xsd:documentation>
+						</xsd:annotation>
+					</xsd:attributeGroup>
+					<xsd:attribute name="documentName" type="xsd:string" fixed="NonemployeeCompensationInExcessOf1099MISCStatement">
+						<xsd:annotation>
+							<xsd:documentation>IRS internal use only. To avoid error in the return, do not include the attribute name or value.</xsd:documentation>
+						</xsd:annotation>
+					</xsd:attribute>
+				</xsd:extension>
+			</xsd:complexContent>
+		</xsd:complexType>
+	</xsd:element>
+
+	<xsd:complexType name="NonemplCompInExOf1099MISCStmtType">
+		<xsd:annotation>
+			<xsd:documentation>Content model for Nonemployee Compensation in Excess of 1099 MISC Statement</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="Desc" type="ExplanationType" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+
+</xsd:schema>

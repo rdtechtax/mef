@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.irs.gov/efile" targetNamespace="http://www.irs.gov/efile" elementFormDefault="qualified" attributeFormDefault="unqualified">
+ <xsd:annotation>
+    <xsd:documentation>
+       <Description>IRS e-file Individual Income Tax Schema - Schedule C-EZ Worksheet</Description>
+       <Purpose>Use this worksheet to figure the Schedule C Deduction for Clergy and Religious Workers - Publication 517</Purpose>
+       <TaxYear>2018</TaxYear>
+       <MaturityLevel>Final Release</MaturityLevel>
+       <ReleaseDate>February 13, 2019</ReleaseDate>
+    </xsd:documentation>
+ </xsd:annotation>
+
+<xsd:include schemaLocation="../../../Common/efileTypes.xsd"/>
+
+
+	<!-- ========================================================== -->
+	<!-- =================  Deductions For ScheduleC or C-EZ Expense Worksheet  ======= -->
+	<!-- ========================================================== -->
+
+	<xsd:element name="ClergySchCBusinessDedWrksht">
+		<xsd:annotation>
+			<xsd:documentation>Deductions For ScheduleC or C-EZ Expense Worksheet</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:complexContent>
+				<xsd:extension base="ClergySchCBusinessDedWrkshtType">
+					<xsd:attributeGroup ref="DocumentAttributes">
+						<xsd:annotation>
+							<xsd:documentation>Common return document attributes</xsd:documentation>
+						</xsd:annotation>
+					</xsd:attributeGroup>
+					<xsd:attribute name="documentName" type="xsd:string" fixed="ClergyBusinessDeductionsWorksheet">
+						<xsd:annotation>
+							<xsd:documentation>IRS internal use only. To avoid error in the return, do not include the attribute name or value.</xsd:documentation>
+						</xsd:annotation>
+					</xsd:attribute>
+				</xsd:extension>
+			</xsd:complexContent>
+		</xsd:complexType>
+	</xsd:element>
+
+	<xsd:complexType name="ClergySchCBusinessDedWrkshtType">
+		<xsd:annotation>
+			<xsd:documentation>Content model for Deductions For ScheduleC or C-EZ Expense Worksheet</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+
+			<!-- SSN Of Minister -->
+			<xsd:element name="MinisterSSN" type="SSNType">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>SSN Of Ministerof proprietor</Description>
+						<ELFFieldNumber>0010</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Ministerial Tax Free Income Percent -->
+			<xsd:element name="MinisterialTaxFreeIncmPct" type="RatioType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Ministerial Tax Free Income Percent</Description>
+						<LineNumber>1</LineNumber>
+						<ELFFieldNumber>0020</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Business Miles Count -->
+			<xsd:element name="BusinessMilesCnt" type="IntegerType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Business Miles Count</Description>
+						<LineNumber>2</LineNumber>
+						<ELFFieldNumber>0030</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Fgr Sch C Ded Total Mileage Amt -->
+			<xsd:element name="FgrSchCDedTotalMileageAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Figure Sch C Ded Total Mileage Amt</Description>
+						<LineNumber>2</LineNumber>
+						<ELFFieldNumber>0040</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Meals And Entertainment Amount -->
+			<xsd:element name="MealsAndEntertainmentAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Meals And Entertainment Amount</Description>
+						<LineNumber>3</LineNumber>
+						<ELFFieldNumber>0050</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Fgr ScheduleC Total Meals And Entertainment Amount -->
+			<xsd:element name="FgrSchCTotMealsAndEntrmtAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Figure ScheduleC Total Meals And Entertainment Amount</Description>
+						<LineNumber>3</LineNumber>
+						<ELFFieldNumber>0060 0062</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+   <!-- Other Expenses Group -->
+   <xsd:element name="OtherExpenseDetail" minOccurs="0" maxOccurs="unbounded">
+    <xsd:complexType>
+     <xsd:sequence>
+             
+     <!-- Description -->
+     <xsd:element name="Desc" type="LineExplanationType" minOccurs="0">
+      <xsd:annotation>
+       <xsd:documentation>
+        <Description>Description</Description>
+        <LineNumber>4a-4e</LineNumber>
+        <ELFFieldNumber>0070 0090 0110 0130 0150</ELFFieldNumber>
+       </xsd:documentation>
+      </xsd:annotation>
+     </xsd:element>
+
+     <!-- Amount -->
+     	<xsd:element name="Amt" type="USAmountType" minOccurs="0">
+     	 <xsd:annotation>
+     	  <xsd:documentation>
+     	   <Description>Amount</Description>
+     	   <LineNumber>4a-4e</LineNumber>
+     	   <ELFFieldNumber>0080 0100 0120 0140 0160</ELFFieldNumber>
+     	  </xsd:documentation>
+     	 </xsd:annotation>
+     	</xsd:element>
+
+    	</xsd:sequence>
+    </xsd:complexType>
+   </xsd:element>
+
+			<!-- Figure ScheduleC Deduction Total Other Expense Amount -->
+			<xsd:element name="FgrSchCDedTotOthExpnsAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Figure ScheduleC Deduction Total Other Expense Amount</Description>
+						<LineNumber>4f</LineNumber>
+						<ELFFieldNumber>0170</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Figure ScheduleC Deduction Total Expenses Amount -->
+			<xsd:element name="FgrSchCDedTotalExpensesAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Figure ScheduleC Deduction Total Expenses Amount</Description>
+						<LineNumber>5</LineNumber>
+						<ELFFieldNumber>0180</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Figure ScheduleC Deduction Nondeduction Expense Amount -->
+			<xsd:element name="FgrSchCDedNondedExpenseAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Figure ScheduleC Deduction Nondeduction Expense Amount</Description>
+						<LineNumber>6</LineNumber>
+						<ELFFieldNumber>0190</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Total Other Expenses Amount -->
+			<xsd:element name="TotalOtherExpensesAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Total Other Expenses Amount</Description>
+						<LineNumber>7</LineNumber>
+						<ELFFieldNumber>0200 0183</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+		</xsd:sequence>
+	</xsd:complexType>
+
+</xsd:schema>

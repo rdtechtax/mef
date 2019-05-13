@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema targetNamespace="http://www.irs.gov/efile" xmlns="http://www.irs.gov/efile" xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.0">
+
+	<xsd:annotation>
+		<xsd:documentation>
+			<Description>IRS e-file U.S. Nonresident Alien Income Tax Schema - Partnership Interest Statement</Description>
+			<Purpose>Optional Statement - List the total value of all your partnership interests. If you hold an interest in one or more partnerships, you must attach a statement to Form 8854 that lists each partnership separately.</Purpose>
+			<TaxYear>2018</TaxYear>
+			<MaturityLevel>Final Release</MaturityLevel>
+			<ReleaseDate>February 13, 2019</ReleaseDate>
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:include schemaLocation="../../../Common/efileTypes.xsd" />
+
+	<!-- ============================================ -->
+	<!-- ====== Partnership Interest Statement ====== -->
+	<!-- ============================================ -->
+
+	<xsd:element name="PartnershipInterestStatement">
+		<xsd:annotation>
+			<xsd:documentation>Partnership Interest Statement</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:complexContent>
+				<xsd:extension base="PartnershipInterestStatementType">
+					<xsd:attributeGroup ref="DocumentAttributes">
+						<xsd:annotation>
+							<xsd:documentation>Common return document attributes</xsd:documentation>
+						</xsd:annotation>
+					</xsd:attributeGroup>
+					<xsd:attribute name="documentName" type="TextType" fixed="PartnershipInterestStatement">
+						<xsd:annotation>
+							<xsd:documentation>IRS internal use only. To avoid error in the return, do not include the attribute name or value.</xsd:documentation>
+						</xsd:annotation>
+					</xsd:attribute>
+				</xsd:extension>
+			</xsd:complexContent>
+		</xsd:complexType>
+	</xsd:element>
+
+	<xsd:complexType name="PartnershipInterestStatementType">
+		<xsd:annotation>
+			<xsd:documentation>Partnership Interest Statement</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<!-- Partnership Interest -->
+			<xsd:element name="PartnershipInterestGrp" minOccurs="0" maxOccurs="1000">
+				<xsd:complexType>
+					<xsd:sequence>
+						<!-- Business Name -->
+						<xsd:element name="BusinessName" type="BusinessNameType" minOccurs="0"/>
+						<!-- EIN -->
+						<xsd:element name="EIN" type="EINType" minOccurs="0"/>
+						<!-- Fair Market Value Amount -->
+						<xsd:element name="FairMarketValueAmt" type="USAmountType"/>
+						<!-- U.S. Adjusted Basis Amount -->
+						<xsd:element name="USAdjustedBasisAmt" type="USAmountType"/>
+						<!-- Gain Or Loss Amount -->
+						<xsd:element name="GainOrLossAmt" type="USAmountType"/>
+						<!-- Fair Market Value On Beginning Of U.S. Residency Amount -->
+						<xsd:element name="FMVBegngDtUSResAmt" type="USAmountType" minOccurs="0"/>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+
+</xsd:schema>

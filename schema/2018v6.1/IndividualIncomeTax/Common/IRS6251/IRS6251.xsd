@@ -1,0 +1,658 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.irs.gov/efile" targetNamespace="http://www.irs.gov/efile" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xsd:annotation>
+		<xsd:documentation>
+			<Description>IRS e-file Individual Income Tax Schema - IRS Form 6251 Alternative Minimum Tax - Individuals</Description>
+			<TaxYear>2018</TaxYear>
+			<MaturityLevel>Final Release</MaturityLevel>
+			<ReleaseDate>February 13, 2019</ReleaseDate>
+		</xsd:documentation>
+	</xsd:annotation>
+	<xsd:include schemaLocation="../../../Common/efileTypes.xsd"/>
+	<!-- =============================================================== -->
+	<!-- ======================= IRS Form 6251 ========================= -->
+	<!-- =============================================================== -->
+	<xsd:element name="IRS6251">
+		<xsd:annotation>
+			<xsd:documentation>IRS Form 6251</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:complexContent>
+				<xsd:extension base="IRS6251Type">
+					<xsd:attributeGroup ref="DocumentAttributes">
+						<xsd:annotation>
+							<xsd:documentation>Common return document attributes</xsd:documentation>
+						</xsd:annotation>
+					</xsd:attributeGroup>
+					<xsd:attribute name="documentName" type="xsd:string" fixed="IRS6251">
+						<xsd:annotation>
+							<xsd:documentation>IRS internal use only. To avoid error in the return, do not include the attribute name or value.</xsd:documentation>
+						</xsd:annotation>
+					</xsd:attribute>
+				</xsd:extension>
+			</xsd:complexContent>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:complexType name="IRS6251Type">
+		<xsd:annotation>
+			<xsd:documentation>Content model for Form 6251</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<!-- Part I Alternative Minimum Taxable Income -->
+			<!-- AGI Or AGI Less Deduction Amount -->
+			<xsd:element name="AGIOrAGILessDeductionAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>AGI Or AGI Less Deduction Amount</Description>
+						<LineNumber>1</LineNumber>
+						<ELFFieldNumber>0020</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Schedule A Taxes Amount -->
+			<xsd:element name="ScheduleATaxesAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Schedule A Taxes Amount</Description>
+						<LineNumber>2a</LineNumber>
+						<ELFFieldNumber>0040</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Total Refund Received Amount -->
+			<xsd:element name="TotalRefundReceivedAmt" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Total Refund Received Amount</Description>
+						<LineNumber>2b</LineNumber>
+						<ELFFieldNumber>0090 0100 0110</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+				<xsd:complexType>
+					<xsd:simpleContent>
+						<xsd:extension base="USAmountNNType">
+							<xsd:attribute name="referenceDocumentId" type="IdListType"/>
+							<xsd:attribute name="referenceDocumentName" type="StringType" fixed="DescriptionOfOtherRefundStmt">
+								<xsd:annotation>
+									<xsd:documentation>
+										<ELFFieldNumber>NL</ELFFieldNumber>
+									</xsd:documentation>
+								</xsd:annotation>
+							</xsd:attribute>
+						</xsd:extension>
+					</xsd:simpleContent>
+				</xsd:complexType>
+			</xsd:element>
+			<!-- Investment Interest Amount -->
+			<xsd:element name="InvestmentInterestAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Investment Interest Amount</Description>
+						<LineNumber>2c</LineNumber>
+						<ELFFieldNumber>0120</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Depletion Amount -->
+			<xsd:element name="DepletionAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Depletion Amount</Description>
+						<LineNumber>2d</LineNumber>
+						<ELFFieldNumber>0130</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Net Operating Loss Deduction Amount -->
+			<xsd:element name="NetOperatingLossDeductionAmt" type="USAmountPosType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Net Operating Loss Deduction Amount</Description>
+						<LineNumber>2e</LineNumber>
+						<ELFFieldNumber>0140</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Alternative Tax Net Operating Loss Deduction Amount -->
+			<xsd:element name="AltTaxNetOperatingLossDedAmt" type="USAmountNNType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Alt Tax Net Operating Loss Deduction Amount</Description>
+						<LineNumber>2f</LineNumber>
+						<ELFFieldNumber>0150</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Exempt Private Activity Bonds Amount -->
+			<xsd:element name="ExemptPrivateActivityBondsAmt" type="USAmountNNType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Exempt Private Activity Bonds Amount</Description>
+						<LineNumber>2g</LineNumber>
+						<ELFFieldNumber>0160</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Section 1202 Exclusion Amount-->
+			<xsd:element name="Section1202ExclusionAmt" type="USAmountNNType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Section 1202 Exclusion Amount</Description>
+						<LineNumber>2h</LineNumber>
+						<ELFFieldNumber>0170</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Incentive Stock Options Amount -->
+			<xsd:element name="IncentiveStockOptionsAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Incentive Stock Options Amount</Description>
+						<LineNumber>2i</LineNumber>
+						<ELFFieldNumber>0180</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Estates And Trusts Amount -->
+			<xsd:element name="EstatesAndTrustsAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Estates And Trusts Amount</Description>
+						<LineNumber>2j</LineNumber>
+						<ELFFieldNumber>0190</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Property Disposition Amount -->
+			<xsd:element name="PropertyDispositionAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Property Disposition Amount</Description>
+						<LineNumber>2k</LineNumber>
+						<ELFFieldNumber>0210</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Depreciation Amount -->
+			<xsd:element name="DepreciationAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Depreciation Amount</Description>
+						<LineNumber>2l</LineNumber>
+						<ELFFieldNumber>0220</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Passive Activity Amount -->
+			<xsd:element name="PassiveActivityAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Passive Activity Amount</Description>
+						<LineNumber>2m</LineNumber>
+						<ELFFieldNumber>0230</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Loss Limitation Amount -->
+			<xsd:element name="LossLimitationAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Loss Limitation Amount</Description>
+						<LineNumber>2n</LineNumber>
+						<ELFFieldNumber>0240</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Circulation Cost Amount -->
+			<xsd:element name="CirculationCostAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Circulation Cost Amount</Description>
+						<LineNumber>2o</LineNumber>
+						<ELFFieldNumber>0250</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Long Term Contract Amount -->
+			<xsd:element name="LongTermContractAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Long Term Contract Amount</Description>
+						<LineNumber>2p</LineNumber>
+						<ELFFieldNumber>0260</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Mining Costs Amount -->
+			<xsd:element name="MiningCostsAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Mining Costs Amount</Description>
+						<LineNumber>2q</LineNumber>
+						<ELFFieldNumber>0270</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Research Experimental Cost Amount -->
+			<xsd:element name="ResearchExperimentalCostAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Research Experimental Cost Amount</Description>
+						<LineNumber>2r</LineNumber>
+						<ELFFieldNumber>0280</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Installment Sale Income Amount -->
+			<xsd:element name="InstallmentSaleIncomeAmt" type="USAmountNNType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Installment Sale Income Amount</Description>
+						<LineNumber>2s</LineNumber>
+						<ELFFieldNumber>0290</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Intangible Drilling Cost Amount -->
+			<xsd:element name="IntangibleDrillingCostAmt" type="USAmountNNType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Intangible Drilling Cost Amount</Description>
+						<LineNumber>2t</LineNumber>
+						<ELFFieldNumber>0300</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Related Adjustment Amount -->
+			<xsd:element name="RelatedAdjustmentAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Related Adjustment Amount</Description>
+						<LineNumber>3</LineNumber>
+						<ELFFieldNumber>0310</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Alternative Minimum Taxable Income Amount -->
+			<xsd:element name="AlternativeMinTaxableIncomeAmt" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Alternative Minimum Taxable Income Amount</Description>
+						<LineNumber>4</LineNumber>
+						<ELFFieldNumber>0320</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+				<xsd:complexType>
+					<xsd:simpleContent>
+						<xsd:extension base="USAmountType">
+							<xsd:attribute name="residualInterestInREMICCd" type="StringType" fixed="SCH Q">
+								<xsd:annotation>
+									<xsd:documentation>
+										<ELFFieldNumber>0325</ELFFieldNumber>
+									</xsd:documentation>
+								</xsd:annotation>
+							</xsd:attribute>
+						</xsd:extension>
+					</xsd:simpleContent>
+				</xsd:complexType>
+			</xsd:element>
+			<!-- Part II Alternative Miminum Tax (AMT) -->
+			<!-- Alternative Minimum Tax Exempt Amount -->
+			<xsd:element name="AlternativeMinimumTaxExemptAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Alternative Minimum Tax Exempt Amount</Description>
+						<LineNumber>5</LineNumber>
+						<ELFFieldNumber>0330</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Adjusted Alternative Minimum Taxable Income Amount -->
+			<xsd:element name="AdjAlternativeMinTaxableIncAmt" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Adjusted Alternative Minimum Taxable Income Amount</Description>
+						<LineNumber>6</LineNumber>
+						<ELFFieldNumber>0350</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+				<xsd:complexType>
+					<xsd:simpleContent>
+						<xsd:extension base="USAmountNNType">
+							<xsd:attribute name="rPISpecialProcessingCd" type="StringType" fixed="RPI">
+								<xsd:annotation>
+									<xsd:documentation>
+										<ELFFieldNumber>NL</ELFFieldNumber>
+									</xsd:documentation>
+								</xsd:annotation>
+							</xsd:attribute>
+						</xsd:extension>
+					</xsd:simpleContent>
+				</xsd:complexType>
+			</xsd:element>
+			<!-- Tax On Alternative Minimum Taxable Income Amount -->
+			<xsd:element name="TaxOnAltMinTaxableIncAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Tax On Alternative Minimum Taxable Income Amount</Description>
+						<LineNumber>7</LineNumber>
+						<ELFFieldNumber>0360</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- AMT Foreign Tax Credit Amount -->
+			<xsd:element name="AMTForeignTaxCreditAmt" type="USAmountNNType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>AMT Foreign Tax Credit Amount</Description>
+						<LineNumber>8</LineNumber>
+						<ELFFieldNumber>0370</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Tentative Alternative Minimum Tax Amount-->
+			<xsd:element name="TentativeAlternativeMinTaxAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Tentative Alternative Minimum Tax Amount</Description>
+						<LineNumber>9</LineNumber>
+						<ELFFieldNumber>0380</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Adjusted Regular Tax Amount -->
+			<xsd:element name="AdjustedRegularTaxAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Adjusted Regular Tax Amount</Description>
+						<LineNumber>10</LineNumber>
+						<ELFFieldNumber>0390</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Alternative Minimum Tax Amount -->
+			<xsd:element name="AlternativeMinimumTaxAmt" type="USAmountNNType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Alternative Minimum Tax Amount</Description>
+						<LineNumber>11</LineNumber>
+						<ELFFieldNumber>0400</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Part III Tax Computation Using Maximum Capital Gains Rates -->
+			<!-- Reported Alternative Minimum Taxable Income Amount -->
+			<xsd:element name="ReportedAltMinTaxableIncAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Reported Alternative Minimum Taxable Income Amount</Description>
+						<LineNumber>12</LineNumber>
+						<ELFFieldNumber>0420</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Capital Gains Worksheet Amount -->
+			<xsd:element name="CapitalGainsWorksheetAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Capital Gains Worksheet Amount</Description>
+						<LineNumber>13</LineNumber>
+						<ELFFieldNumber>0430</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Unrecaptured Section 1250 Gain Amount -->
+			<xsd:element name="UnrecapturedSection1250GainAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Unrecaptured Section 1250 Gain Amount</Description>
+						<LineNumber>14</LineNumber>
+						<ELFFieldNumber>0440</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Sum Plus Unrecaptured Section 1250 Amount -->
+			<xsd:element name="SumPlusUnrecapturedSect1250Amt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Sum Plus Unrecaptured Section 1250 Amount</Description>
+						<LineNumber>15</LineNumber>
+						<ELFFieldNumber>0450</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Smaller Of Alternative Minimum Taxable Income Or Sum Amount -->
+			<xsd:element name="SmallerOfAltMinTxblIncOrSumAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Smaller Of Alternative Minimum Taxable Income Or Sum Amount</Description>
+						<LineNumber>16</LineNumber>
+						<ELFFieldNumber>0460</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Adjusted Alternative Minimum Taxable Income Less Gain Amount -->
+			<xsd:element name="AdjAltMinTaxableIncLessGainAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Adjusted Alternative Minimum Taxable Income Less Gain Amount</Description>
+						<LineNumber>17</LineNumber>
+						<ELFFieldNumber>0470</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Net Adjusted Alternative Minimum Taxable Income Times Percentage Amount -->
+			<xsd:element name="NetAdjAltMinTxblIncTimesPctAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Net Adjusted Alternative Minimum Taxable Income Times Percentage Amount</Description>
+						<LineNumber>18</LineNumber>
+						<ELFFieldNumber>0480</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Filing Status Limit Amount -->
+			<xsd:element name="FilingStatusLimitAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Filing Status Limit Amount</Description>
+						<LineNumber>19</LineNumber>
+						<ELFFieldNumber>0490</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Income Above Threshold Worksheet Amount -->
+			<xsd:element name="IncomeAboveThresholdWorkshtAmt" type="USAmountNNType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Income Above Threshold Worksheet Amount</Description>
+						<LineNumber>20</LineNumber>
+						<ELFFieldNumber>0500</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- From Schedule Amount Less Income Above Threshold Amount -->
+			<xsd:element name="FSAmtLessIncAboveThresholdAmt" type="USAmountNNType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>From Schedule Amount Less Income Above Threshold Amount</Description>
+						<LineNumber>21</LineNumber>
+						<ELFFieldNumber>0510</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Smaller Of Adjusted Alternative Minimum Or Schedule D Amount -->
+			<xsd:element name="SmllrOfAdjustedAltMinOrSchDAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Smaller Of Adjusted Alternative Minimum Or Schedule D Amount</Description>
+						<LineNumber>22</LineNumber>
+						<ELFFieldNumber>0520</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Smaller Of Above Threshold Or Alternative Minimum Gain Amount -->
+			<xsd:element name="SmllrAbvThrshldOrAltMinGainAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Smaller Of Above Threshold Or Alternative Minimum Gain Amount</Description>
+						<LineNumber>23</LineNumber>
+						<ELFFieldNumber>0530</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Smaller Of Net Adjusted Alternative Minimum Or Net Gain Amount -->
+			<xsd:element name="SmllrNetAdjAltMinOrNetGainAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Smaller Of Net Adjusted Alternative Minimum Or Net Gain Amount</Description>
+						<LineNumber>24</LineNumber>
+						<ELFFieldNumber>0540</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Filing Threshold Amount -->
+			<xsd:element name="FilingThresholdAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Enter the applicable amount for the filing status</Description>
+						<LineNumber>25</LineNumber>
+						<ELFFieldNumber>0540</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Line 26 - Use value from Line 21 'FSAmtLessIncAboveThresholdAmt' -->
+			<!-- Applicable Capital Gains Or Schedule D Worksheet Amount -->
+			<xsd:element name="ApplcblCapGainsOrSchDWrkshtAmt" type="USAmountNNType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Enter the applicable amount from the Qualified Dividends and Capital Gain Worksheet or the Schedule D Tax Worksheet</Description>
+						<LineNumber>27</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Add line 26 and line 27 -->
+			<xsd:element name="SumThresholdApplcblWrkshtAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Add line 26 and line 27</Description>
+						<LineNumber>28</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Subtract line 28 from line 25 -->
+			<xsd:element name="FlngThrshldLessThesholdSumAmt" type="USAmountNNType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Subtract line 28 from line 25</Description>
+						<LineNumber>29</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Enter the smaller of line 24 or 29 -->
+			<xsd:element name="SmllrAdjNetGainOrTxblIncAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Enter the smaller of line 24 or 29</Description>
+						<LineNumber>30</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Net Alternative Minimum Taxable Income Times Percentage Amount -->
+			<xsd:element name="NetAltMinTaxableIncTimesPctAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Multiply line 30 by 15% (.15)</Description>
+						<LineNumber>31</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Add lines 23 and 30 -->
+			<xsd:element name="SumOfSmllrAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Add lines 23 and 30</Description>
+						<LineNumber>32</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Subtract line 32 from 22 -->
+			<xsd:element name="ExcessOfSumAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Subtract line 32 from 22</Description>
+						<LineNumber>33</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Multiply line 33 by 20% (.20) -->
+			<xsd:element name="ExcessOfSumTimesPctAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Multiply line 33 by 20% (.20)</Description>
+						<LineNumber>34</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Add lines 17, 32, and 33 -->
+			<xsd:element name="TotalNetAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Add lines 17, 32, and 33</Description>
+						<LineNumber>35</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Net Smaller Schedule D Or Adjusted Net Gain Amount -->
+			<xsd:element name="NetSmallerSchDOrAdjNetGainAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Net Smaller Schedule D Or Adjusted Net Gain Amount</Description>
+						<LineNumber>36</LineNumber>
+						<ELFFieldNumber>0560</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Net Schedule D Or Adjusted Net Gain Times Percentage Amount -->
+			<xsd:element name="NetSchDOrAdjNetGainTimesPctAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Net Schedule D Or Adjusted Net Gain Times Percentage Amount</Description>
+						<LineNumber>37</LineNumber>
+						<ELFFieldNumber>0570</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Sum Of Alternative Minimum Tax Percentages Amount -->
+			<xsd:element name="SumOfAltMinTaxPercentagesAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Sum Of Alternative Minimum Tax Percentages Amount</Description>
+						<LineNumber>38</LineNumber>
+						<ELFFieldNumber>0580</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Net Alternative Minimum Taxable Income Times From Schedule Percentage Amount -->
+			<xsd:element name="NetAltMinTxblIncTimesFSPctAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Net Alternative Minimum Taxable Income Times From Schedule Percentage Amount</Description>
+						<LineNumber>39</LineNumber>
+						<ELFFieldNumber>0590</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Tax On Alternative Minimum Gain Amount -->
+			<xsd:element name="TaxOnAlternativeMinimumGainAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Tax On Alternative Minimum Gain Amount</Description>
+						<LineNumber>40</LineNumber>
+						<ELFFieldNumber>0600</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:schema>

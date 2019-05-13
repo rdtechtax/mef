@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.irs.gov/efile" targetNamespace="http://www.irs.gov/efile" elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.0">
+	<xsd:annotation>
+		<xsd:documentation>
+			<Description>IRS e-file Schema - IRS Form 3903 Moving Expenses</Description>
+			<TaxYear>2018</TaxYear>
+			<MaturityLevel>Final Release</MaturityLevel>
+			<ReleaseDate>February 13, 2019</ReleaseDate>
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:include schemaLocation="../../../Common/efileTypes.xsd"/>
+
+	<!-- ================================================================== -->
+	<!-- ======================== IRS Form 3903 =========================== -->
+	<!-- ================================================================== -->
+
+	<xsd:element name="IRS3903">
+		<xsd:annotation>
+			<xsd:documentation>IRS Form 3903</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:complexContent>
+				<xsd:extension base="IRS3903Type">
+					<xsd:attributeGroup ref="DocumentAttributes">
+						<xsd:annotation>
+							<xsd:documentation>Common return document attributes</xsd:documentation>
+						</xsd:annotation>
+					</xsd:attributeGroup>
+					<xsd:attribute name="documentName" type="xsd:string" fixed="IRS3903"/>
+				</xsd:extension>
+			</xsd:complexContent>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:complexType name="IRS3903Type">
+		<xsd:annotation>
+			<xsd:documentation>Content model for IRS Form 3903</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<!-- Military Move Code -->
+			<xsd:element name="MilitaryMoveCd" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Military Move Code</Description>
+						<ELFFieldNumber>0010</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+				<xsd:simpleType>
+					<xsd:restriction base="TextType">
+						<xsd:enumeration value="MILITARY MOVE"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<!--Transport Household Goods Amount -->
+			<xsd:element name="TransportHouseholdGoodsAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Transport Household Goods Amount</Description>
+						<LineNumber>1</LineNumber>
+						<ELFFieldNumber>0040</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!--Travel And Lodging Expense Amount -->
+			<xsd:element name="TravelAndLodgingExpenseAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Travel And Lodging Expense Amount</Description>
+						<LineNumber>2</LineNumber>
+						<ELFFieldNumber>0042</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!--Total Moving Expense Amount -->
+			<xsd:element name="TotalMovingExpenseAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Total Moving Expense Amount</Description>
+						<LineNumber>3</LineNumber>
+						<ELFFieldNumber>0044</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!--Total Employer Expenses Paid Amount -->
+			<xsd:element name="TotalEmployerExpensesPaidAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Total Employer Expenses Paid Amount</Description>
+						<LineNumber>4</LineNumber>
+						<ELFFieldNumber>0052</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!--Moving Expenses Deductible Indicator -->
+			<xsd:element name="MovingExpensesDeductibleInd" type="BooleanType">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Moving Expenses Deductible Indicator</Description>
+						<LineNumber>5</LineNumber>
+						<ELFFieldNumber>0060 0070</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!--Moving Deduction Amount -->
+			<xsd:element name="MovingDeductionAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Moving Deduction Amount</Description>
+						<LineNumber>5</LineNumber>
+						<ELFFieldNumber>0180</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:schema>

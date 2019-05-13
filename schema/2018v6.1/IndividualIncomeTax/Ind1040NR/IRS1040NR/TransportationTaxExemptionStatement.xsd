@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema targetNamespace="http://www.irs.gov/efile" xmlns="http://www.irs.gov/efile" xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.0">
+
+	<xsd:annotation>
+		<xsd:documentation>
+			<Description>IRS e-file Nonresident Alien Income Tax Schema - Transportation Tax Exemption Statement</Description>
+			<Purpose>Optional Statement - If the taxpayer is exempt from Transportation Tax outside of reasons listed on Form 8833, attach a statement identifying 1) country of residence 2) law and provisions under which you claim exemption from the tax.</Purpose>
+			<TaxYear>2018</TaxYear>
+			<MaturityLevel>Final Release</MaturityLevel>
+			<ReleaseDate>February 13, 2019</ReleaseDate>
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:include schemaLocation="../../../Common/efileTypes.xsd" />
+
+	<!-- ========================================================= -->
+	<!-- ====== Transportation Tax Exemption Statement ======= -->
+	<!-- ========================================================= -->
+
+	<xsd:element name="TransportationTaxExemptionStmt">
+		<xsd:annotation>
+			<xsd:documentation>Transportation Tax Exemption Statement</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:complexContent>
+				<xsd:extension base="TransportationTaxExemptionStmtType">
+					<xsd:attributeGroup ref="DocumentAttributes">
+						<xsd:annotation>
+							<xsd:documentation>Common return document attributes</xsd:documentation>
+						</xsd:annotation>
+					</xsd:attributeGroup>
+					<xsd:attribute name="documentName" type="TextType" fixed="TransportationTaxExemptionStatement">
+						<xsd:annotation>
+							<xsd:documentation>IRS internal use only. To avoid error in the return, do not include the attribute name or value.</xsd:documentation>
+						</xsd:annotation>
+					</xsd:attribute>
+				</xsd:extension>
+			</xsd:complexContent>
+		</xsd:complexType>
+	</xsd:element>
+
+	<xsd:complexType name="TransportationTaxExemptionStmtType">
+		<xsd:annotation>
+			<xsd:documentation>Content model for Transportation Tax Exemption Statement</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<!-- Country of Residence -->
+			<xsd:element name="ResidenceForeignCountryCd" type="CountryType" minOccurs="0"/>
+			<!-- Tax Law and Provisions Description -->
+			<xsd:element name="TaxLawProvisionDesc" type="ExplanationType" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+
+</xsd:schema>

@@ -1,0 +1,595 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.irs.gov/efile" targetNamespace="http://www.irs.gov/efile" elementFormDefault="qualified" attributeFormDefault="unqualified">
+
+	<xsd:annotation>
+		<xsd:documentation>
+			<Description>IRS e-file Individual Income Tax Schema - IRS Form 2106 Employee Business Expenses</Description>
+			<TaxYear>2018</TaxYear>
+			<MaturityLevel>Final Release</MaturityLevel>
+			<ReleaseDate>February 13, 2019</ReleaseDate>
+		</xsd:documentation>
+	</xsd:annotation>
+	
+	<xsd:include schemaLocation="../../../Common/efileTypes.xsd"/>
+	
+	<!-- ================================================================== -->
+	<!-- ======================== IRS Form 2106 =========================== -->
+	<!-- ================================================================== -->
+	
+	<xsd:element name="IRS2106">
+		<xsd:annotation>
+			<xsd:documentation>IRS Form 2106</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:complexContent>
+				<xsd:extension base="IRS2106Type">
+					<xsd:attributeGroup ref="DocumentAttributes">
+						<xsd:annotation>
+							<xsd:documentation>Common return document attributes</xsd:documentation>
+						</xsd:annotation>
+					</xsd:attributeGroup>
+					<xsd:attribute name="documentName" type="xsd:string" fixed="IRS2106">
+						<xsd:annotation>
+							<xsd:documentation>IRS internal use only. To avoid error in the return, do not include the attribute name or value.</xsd:documentation>
+						</xsd:annotation>
+					</xsd:attribute>
+				</xsd:extension>
+			</xsd:complexContent>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:complexType name="IRS2106Type">
+		<xsd:annotation>
+			<xsd:documentation>Content model for IRS Form 2106</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<!-- Name -->
+			<xsd:element name="PersonNm" type="PersonNameType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Name</Description>
+						<ELFFieldNumber>0007</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Occupation -->
+			<xsd:element name="OccupationTxt" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Occupation</Description>
+						<ELFFieldNumber>0008</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+				<xsd:simpleType>
+					<xsd:restriction base="TextType">
+						<xsd:maxLength value="25"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<!-- SSN of Taxpayer With Employee Business Expense -->
+			<xsd:element name="SSN" type="SSNType">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>SSN of Taxpayer With Employee Business Expense</Description>
+						<ELFFieldNumber>0009</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Part I Employee Business Expenses and Reimbursements	-->
+			<!-- Vehicle Expenses -->
+			<xsd:element name="VehicleExpenseAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Vehicle Expenses</Description>
+						<LineNumber>1A</LineNumber>
+						<ELFFieldNumber>0010</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Parking, Tolls, Local Transportation -->
+			<xsd:element name="ParkingFeesTollsLocalTransAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Parking, Tolls, Local Transportation</Description>
+						<LineNumber>2A</LineNumber>
+						<ELFFieldNumber>0013</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Travel Exp Away From Home Exclude Meals and Entertain -->
+			<xsd:element name="TravExpnsLessMealsEntrmtAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Travel Exp Away From Home Exclude Meals and Entertain</Description>
+						<LineNumber>3A</LineNumber>
+						<ELFFieldNumber>0017</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Other Business Expenses Excluding Meals and Entertain -->
+			<xsd:element name="BusExpnssLessMealsEntrmtAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Other Business Expenses Excluding Meals andEntertain</Description>
+						<LineNumber>4A</LineNumber>
+						<ELFFieldNumber>0023</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Meals and Entertainment Expenses -->
+			<xsd:element name="MealsAndEntertainmentAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Meals and Entertainment Expenses</Description>
+						<LineNumber>5B</LineNumber>
+						<ELFFieldNumber>0025</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Total Expenses Excluding Meals and Entertainment -->
+			<xsd:element name="TotExpnssLessMealsEntrmtAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Total Expenses Excluding Meals and Entertainment</Description>
+						<LineNumber>6A</LineNumber>
+						<ELFFieldNumber>0027</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Total Meals and Entertainment -->
+			<xsd:element name="TotalMealsAndEntrmtAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Total Meals and Entertainment</Description>
+						<LineNumber>6B</LineNumber>
+						<ELFFieldNumber>0031</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Other Reimbursements Not Reported on W-2 -->
+			<xsd:element name="OtherReimbNotRptOnW2Amt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Other Reimbursements Not Reported on W-2</Description>
+						<LineNumber>7A</LineNumber>
+						<ELFFieldNumber>0033</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Meals and Entertainment Reimburse Not Reported on W-2 -->
+			<xsd:element name="MealsEntrmtReimbNotRptW2Amt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Meals and Entertainment Reimburse Not Reported on W-2</Description>
+						<LineNumber>7B</LineNumber>
+						<ELFFieldNumber>0041</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Unreimbursed Business Expense -->
+			<xsd:element name="UnreimbursedBusinessExpenseAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Unreimbursed Business Expense</Description>
+						<LineNumber>8A</LineNumber>
+						<ELFFieldNumber>0100</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Unreimbursed Meals Expense -->
+			<xsd:element name="UnreimbursedMealsExpenseAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Unreimbursed Meals Expense</Description>
+						<LineNumber>8B</LineNumber>
+						<ELFFieldNumber>0105</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Allowable Business Deduction -->
+			<xsd:element name="AllowableBusinessDeductionAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Allowable Business Deduction</Description>
+						<LineNumber>9A</LineNumber>
+						<ELFFieldNumber>0115</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Allowable Meals Deduction -->
+			<xsd:element name="AllowableMealsDeductionAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Allowable Meals Deduction</Description>
+						<LineNumber>9B</LineNumber>
+						<ELFFieldNumber>0120</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Unreimbursed Employee Business Expense -->
+			<xsd:element name="UnreimEmployeeBusExpnsAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Unreimbursed Employee Business Expense</Description>
+						<LineNumber>10</LineNumber>
+						<ELFFieldNumber>0125</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Part II  Vehicle Expenses -->
+			<xsd:element name="VehicleExpensesGrp" minOccurs="0" maxOccurs="4">
+				<xsd:complexType>
+					<xsd:sequence>
+						<!-- Vehicle Date -->
+						<xsd:element name="VehiclePlacedInServiceDt" type="DateType" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Vehicle Date</Description>
+									<LineNumber>11</LineNumber>
+									<ELFFieldNumber>0134</ELFFieldNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						<!-- Total Miles -->
+						<xsd:element name="TotalMilesCnt" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Total Miles</Description>
+									<LineNumber>12</LineNumber>
+									<ELFFieldNumber>0135</ELFFieldNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+							<xsd:simpleType>
+								<xsd:restriction base="IntegerType">
+									<xsd:totalDigits value="12"/>
+								</xsd:restriction>
+							</xsd:simpleType>
+						</xsd:element>
+						<!-- Business Miles -->
+						<xsd:element name="BusinessMilesCnt" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Business Miles</Description>
+									<LineNumber>13</LineNumber>
+									<ELFFieldNumber>0145</ELFFieldNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+							<xsd:simpleType>
+								<xsd:restriction base="IntegerType">
+									<xsd:totalDigits value="12"/>
+								</xsd:restriction>
+							</xsd:simpleType>
+						</xsd:element>
+						<!-- Percent of Use -->
+						<xsd:element name="VehBusInvestmentUsePct" type="RatioType" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Percent of Use</Description>
+									<LineNumber>14</LineNumber>
+									<ELFFieldNumber>0155</ELFFieldNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						<!-- Average Distance -->
+						<xsd:element name="AverageDistanceCnt" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Average Distance</Description>
+									<LineNumber>15</LineNumber>
+									<ELFFieldNumber>0165</ELFFieldNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+							<xsd:simpleType>
+								<xsd:restriction base="IntegerType">
+									<xsd:totalDigits value="12"/>
+								</xsd:restriction>
+							</xsd:simpleType>
+						</xsd:element>
+						<!-- Miles Commuting -->
+						<xsd:element name="MilesCommutingCnt" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Miles Commuting</Description>
+									<LineNumber>16</LineNumber>
+									<ELFFieldNumber>0175</ELFFieldNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+							<xsd:simpleType>
+								<xsd:restriction base="IntegerType">
+									<xsd:totalDigits value="12"/>
+								</xsd:restriction>
+							</xsd:simpleType>
+						</xsd:element>
+						<!-- Other Personal Miles -->
+						<xsd:element name="OtherPersonalMilesCnt" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Other Personal Miles</Description>
+									<LineNumber>17</LineNumber>
+									<ELFFieldNumber>0185</ELFFieldNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+							<xsd:simpleType>
+								<xsd:restriction base="IntegerType">
+									<xsd:totalDigits value="12"/>
+								</xsd:restriction>
+							</xsd:simpleType>
+						</xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<!-- Vehicle Available Off Duty Hours -->
+			<xsd:element name="VehicleAvailableOffDutyHrsInd" type="BooleanType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Vehicle Available Off Duty Hours</Description>
+						<LineNumber>18</LineNumber>
+						<ELFFieldNumber>0280 0283</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Another Vehicle For Personal Use -->
+			<xsd:element name="AnotherVehicleForPrsnlUseInd" type="BooleanType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Another Vehicle For Personal Use</Description>
+						<LineNumber>19</LineNumber>
+						<ELFFieldNumber>0270 0275</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Evidence Support Deduction Ind. -->
+			<xsd:element name="EvidenceToSupportDeductionInd" type="BooleanType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Evidence Support Deduction Ind</Description>
+						<LineNumber>20</LineNumber>
+						<ELFFieldNumber>0290 0295</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Is Evidence Written Ind. -->
+			<xsd:element name="EvidenceWrittenInd" type="BooleanType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Is Evidence Written Ind</Description>
+						<LineNumber>21</LineNumber>
+						<ELFFieldNumber>0300 0305</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Standard Mileage Deduction -->
+			<xsd:element name="StandardMileageDeductionAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Standard Mileage Deduction</Description>
+						<LineNumber>22</LineNumber>
+						<ELFFieldNumber>0320</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Section C - Actual Expenses -->
+			<xsd:element name="ActualExpensesGrp" minOccurs="0" maxOccurs="4">
+				<xsd:complexType>
+					<xsd:sequence>
+						<!-- Gas Oil -->
+						<xsd:element name="VehicleGasRepairsInsAmt" type="USAmountType" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Gas Oil</Description>
+									<LineNumber>23</LineNumber>
+									<ELFFieldNumber>0325</ELFFieldNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						<!-- Rentals -->
+						<xsd:element name="VehicleRentalsAmt" type="USAmountType" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Rentals</Description>
+									<LineNumber>24a</LineNumber>
+									<ELFFieldNumber>0335</ELFFieldNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						<!-- Inclusion Amount -->
+						<xsd:element name="InclusionAmt" type="USAmountType" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Inclusion Amount</Description>
+									<LineNumber>24b</LineNumber>
+									<ELFFieldNumber>0345</ELFFieldNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						<!-- Rental minus Inclusion -->
+						<xsd:element name="RentalMinusInclusionAmt" type="USAmountType" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Rental minus Inclusion</Description>
+									<LineNumber>24c</LineNumber>
+									<ELFFieldNumber>0355</ELFFieldNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						<!-- Value -->
+						<xsd:element name="ValueEmplrProvidedVehicleAmt" type="USAmountType" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Value</Description>
+									<LineNumber>25</LineNumber>
+									<ELFFieldNumber>0358</ELFFieldNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						<!-- Motor Vehicle Expense -->
+						<xsd:element name="ActualVehicleExpenseAmt" type="USAmountType" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Motor Vehicle Expense</Description>
+									<LineNumber>26</LineNumber>
+									<ELFFieldNumber>0370</ELFFieldNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						<!-- Percent Business Expense -->
+						<xsd:element name="CalculatedBusinessExpenseAmt" type="USAmountType" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Percent Business Expense</Description>
+									<LineNumber>27</LineNumber>
+									<ELFFieldNumber>0375</ELFFieldNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						<!-- Depreciation -->
+						<xsd:element name="DepreciationAmt" type="USAmountType" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Depreciation</Description>
+									<LineNumber>28</LineNumber>
+									<ELFFieldNumber>0380</ELFFieldNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						<!-- Total Actual Expense -->
+						<xsd:element name="TotalActualExpenseAmt" type="USAmountType" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Total Actual Expense</Description>
+									<LineNumber>29</LineNumber>
+									<ELFFieldNumber>0383</ELFFieldNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<!-- Depreciation of Vehicles -->
+			<xsd:element name="DepreciationOfVehiclesGrp" minOccurs="0" maxOccurs="4">
+				<xsd:complexType>
+					<xsd:sequence>
+						<!-- Vehicle 1 Basis -->
+						<xsd:element name="VehicleBasisAmt" type="USAmountType" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Vehicle 1 Basis</Description>
+									<LineNumber>30</LineNumber>
+									<ELFFieldNumber>0490</ELFFieldNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						<!-- Vehicle 1 Section 179 Deduction -->
+						<xsd:element name="Section179DeductionAmt" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Vehicle 1 Section 179 Deduction</Description>
+									<LineNumber>31</LineNumber>
+									<ELFFieldNumber>0495</ELFFieldNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+							<xsd:complexType>
+								<xsd:simpleContent>
+									<xsd:extension base="USAmountType">
+										<xsd:attribute name="referenceDocumentId" type="IdListType"/>
+										<xsd:attribute name="referenceDocumentName" type="StringType" fixed="SpecialDepreciationAllowanceElectionOutStatement">
+											<xsd:annotation>
+												<xsd:documentation>
+													<ELFFieldNumber>NL</ELFFieldNumber>
+												</xsd:documentation>
+											</xsd:annotation>
+										</xsd:attribute>
+									</xsd:extension>
+								</xsd:simpleContent>
+							</xsd:complexType>
+						</xsd:element>
+						<!-- Depreciation Recovery Amount -->
+						<xsd:element name="DepreciationRecoveryAmt" type="USAmountType" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Depreciation Recovery Amount</Description>
+									<LineNumber>32</LineNumber>
+									<ELFFieldNumber>0505</ELFFieldNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						<!-- Vehicle 1 Depreciation Method -->
+						<xsd:element name="DepreciationMethodTypeTxt" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Vehicle 1 Depreciation Method</Description>
+									<LineNumber>33</LineNumber>
+									<ELFFieldNumber>0515</ELFFieldNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+							<xsd:simpleType>
+								<xsd:restriction base="TextType">
+									<xsd:maxLength value="35"/>
+								</xsd:restriction>
+							</xsd:simpleType>
+						</xsd:element>
+						<!-- Percentage -->
+						<xsd:element name="Pct" type="RatioType" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Percentage</Description>
+									<LineNumber>33</LineNumber>
+									<ELFFieldNumber>NL</ELFFieldNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						<!-- Calculated Depreciation Amount -->
+						<xsd:element name="CalculatedDepreciationAmt" type="USAmountType" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Calculated Depreciation Amount</Description>
+									<LineNumber>34</LineNumber>
+									<ELFFieldNumber>0530</ELFFieldNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						<!-- Depreciation Subtotal -->
+						<xsd:element name="DepreciationSubtotalAmt" type="USAmountType" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Depreciation Subtotal</Description>
+									<LineNumber>35</LineNumber>
+									<ELFFieldNumber>0540</ELFFieldNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						<!-- Limitation Amount -->
+						<xsd:element name="LimitationAmt" type="USAmountType" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Limitation Amount</Description>
+									<LineNumber>36</LineNumber>
+									<ELFFieldNumber>0544</ELFFieldNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						<!-- Limitation Multiplied By Use Amount -->
+						<xsd:element name="LimitationMultipliedByUseAmt" type="USAmountType" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Limitation Multiplied By Use Amount</Description>
+									<LineNumber>37</LineNumber>
+									<ELFFieldNumber>0546</ELFFieldNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						<!-- Depreciation Of Vehicle -->
+						<xsd:element name="DepreciationOfVehicleAmt" type="USAmountType" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Depreciation of Vehicle Amount</Description>
+									<LineNumber>38</LineNumber>
+									<ELFFieldNumber>0550</ELFFieldNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:schema>

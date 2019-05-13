@@ -1,0 +1,455 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.irs.gov/efile" targetNamespace="http://www.irs.gov/efile" elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.0">
+	<xsd:annotation>
+		<xsd:documentation>
+			<Description>IRS e-file Corporate Income Tax Schema - IRS Form 8082</Description>
+			<TaxYear>2018</TaxYear>
+			<MaturityLevel>Final Release</MaturityLevel>
+			<ReleaseDate>February 13, 2019</ReleaseDate>
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:include schemaLocation="../../../Common/efileTypes.xsd"/>
+
+	<!-- =============================================================== -->
+	<!-- =======================  IRS Form 8082=========================== -->
+	<!-- =============================================================== -->
+
+	<xsd:element name="IRS8082">
+		<xsd:annotation>
+			<xsd:documentation>IRS Form 8082</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:complexContent>
+				<xsd:extension base="IRS8082Type">
+					<xsd:attributeGroup ref="DocumentAttributes">
+						<xsd:annotation>
+							<xsd:documentation>Common return document attributes</xsd:documentation>
+						</xsd:annotation>
+					</xsd:attributeGroup>
+					<xsd:attribute name="documentName" type="xsd:string" fixed="IRS8082">
+						<xsd:annotation>
+							<xsd:documentation>IRS internal use only. To avoid error in the return, do not include the attribute name or value.</xsd:documentation>
+						</xsd:annotation>
+					</xsd:attribute>
+					
+					<xsd:attribute name="referenceDocumentId" type="IdListType"/>
+					<xsd:attribute name="referenceDocumentName" type="StringType" fixed="BinaryAttachment"/>
+				
+				</xsd:extension>
+			</xsd:complexContent>
+		</xsd:complexType>
+	</xsd:element>
+
+	<xsd:complexType name="IRS8082Type">
+		<xsd:annotation>
+			<xsd:documentation>Content model for IRS Form 8082</xsd:documentation>
+		</xsd:annotation>
+			<xsd:sequence>
+
+				<!-- =========== Part I: General Information =============== -->
+
+				<!-- Notice of Inconsistent Treatment  -->
+				<xsd:element name="NoticeOfInconsistentTrtmntInd" type="CheckboxType" minOccurs="0">
+					<xsd:annotation>
+						<xsd:documentation>
+							<Description>Check boxes that apply: Notice of inconsistent treatment</Description>
+							<LineNumber>Part I Line 1(a)</LineNumber>
+						</xsd:documentation>
+					</xsd:annotation>
+				</xsd:element>
+
+				<!-- Administrative Adjustment Request -->
+				<xsd:element name="AdministrativeAdjustmentReqInd" type="CheckboxType" minOccurs="0">
+					<xsd:annotation>
+						<xsd:documentation>
+							<Description>Check boxes that apply: Administrative Adjustment Request (AAR)</Description>
+							<LineNumber>Part I Line 1(b)</LineNumber>
+						</xsd:documentation>
+					</xsd:annotation>
+				</xsd:element>
+				
+				<!-- Check Applicable Box TEFRA AAR, ELP REMIC or BBA AAR:  -->
+				<xsd:choice minOccurs="0">
+				
+					<!-- TEFRA AAR -->
+					<xsd:element name="TEFRAAARInd" type="CheckboxType">
+						<xsd:annotation>
+							<xsd:documentation>
+								<Description>TEFRA AAR</Description>
+								<LineNumber>Part I Line 1(b)</LineNumber>
+							</xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+					
+					<!-- ELP REMIC -->
+					<xsd:element name="ELPREMICInd" type="CheckboxType">
+						<xsd:annotation>
+							<xsd:documentation>
+								<Description>ELP REMIC</Description>
+								<LineNumber>Part I Line 1(b)</LineNumber>
+							</xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+					
+					<!-- BBA AAR -->
+					<xsd:element name="BBAAARInd" type="CheckboxType">
+						<xsd:annotation>
+							<xsd:documentation>
+								<Description>BBA AAR</Description>
+								<LineNumber>Part I Line 1(b)</LineNumber>
+							</xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+					
+				</xsd:choice>
+				
+				<!-- Revocation Partnership Or Designated Individual Appointment Successor Representative -->
+				<xsd:element name="RvkPROrDesgIndivApptSccssrInd" minOccurs="0">
+					<xsd:annotation>
+						<xsd:documentation>
+							<Description>Revocation partnership or designated individual appointment successor representative</Description>
+							<LineNumber>Part I Line 1(b)A</LineNumber>
+						</xsd:documentation>
+					</xsd:annotation>
+					<xsd:complexType>
+						<xsd:simpleContent>
+							<xsd:extension base="BooleanType">
+								<xsd:attribute name="referenceDocumentId" type="IdListType"/>
+								<xsd:attribute name="referenceDocumentName" type="StringType" fixed="BinaryAttachment"/>
+							</xsd:extension>
+						</xsd:simpleContent>
+					</xsd:complexType>
+				</xsd:element>
+				
+				<!-- AAR Adjustment Imputed Underpayment -->
+				<xsd:element name="AARAdjImputedUnderpaymentInd" type="BooleanType" minOccurs="0">
+					<xsd:annotation>
+						<xsd:documentation>
+							<Description>AAR adjustment imputed underpayment</Description>
+							<LineNumber>Part I Line 1(b)B</LineNumber>
+						</xsd:documentation>
+					</xsd:annotation>
+				</xsd:element>
+				
+				<!-- Section 6227(b)(2) Electon -->
+				<xsd:element name="Section6227b2ElectonInd" type="BooleanType" minOccurs="0">
+					<xsd:annotation>
+						<xsd:documentation>
+							<Description>Section 6227(b)(2) electon</Description>
+							<LineNumber>Part I Line 1(b)C</LineNumber>
+						</xsd:documentation>
+					</xsd:annotation>
+				</xsd:element>
+				
+				<!-- Imputed Underpayment Modifications -->
+				<xsd:element name="ImputedUnderpaymentModifInd" minOccurs="0">
+					<xsd:annotation>
+						<xsd:documentation>
+							<Description>Imputed underpayment modifications</Description>
+							<LineNumber>Part I Line 1(b)E</LineNumber>
+						</xsd:documentation>
+					</xsd:annotation>
+					<xsd:complexType>
+						<xsd:simpleContent>
+							<xsd:extension base="BooleanType">
+								<xsd:attribute name="referenceDocumentId" type="IdListType"/>
+								<xsd:attribute name="referenceDocumentName" type="StringType" fixed="BinaryAttachment"/>
+							</xsd:extension>
+						</xsd:simpleContent>
+					</xsd:complexType>
+				</xsd:element>
+
+				<!-- Check Applicable Box to Identify Type of Pass-through Entity:  -->
+				<xsd:choice minOccurs="0">
+				
+					<!-- TEFRA Partnership -->
+					<xsd:element name="TEFRAPartnershipEntityInd" type="CheckboxType">
+						<xsd:annotation>
+							<xsd:documentation>
+								<Description>TEFRA partnership</Description>
+								<LineNumber>Part I Line 2(a)</LineNumber>
+							</xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+					
+					<!-- S corporation -->
+					<xsd:element name="SCorporationEntityInd" type="CheckboxType">
+						<xsd:annotation>
+							<xsd:documentation>
+								<Description>S corporation</Description>
+								<LineNumber>Part I Line 2(b)</LineNumber>
+							</xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+					
+					<!-- Estate -->
+					<xsd:element name="EstateEntityInd" type="CheckboxType">
+						<xsd:annotation>
+							<xsd:documentation>
+								<Description>Estate</Description>
+								<LineNumber>Part I Line 2(c)</LineNumber>
+							</xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+
+					<!-- Trust -->
+					<xsd:element name="TrustEntityInd" type="CheckboxType">
+						<xsd:annotation>
+							<xsd:documentation>
+								<Description>Trust</Description>
+								<LineNumber>Part I Line 2(d)</LineNumber>
+							</xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+
+					<!-- REMIC-->
+					<xsd:element name="REMICEntityInd" type="CheckboxType">
+						<xsd:annotation>
+							<xsd:documentation>
+								<Description>REMIC</Description>
+								<LineNumber>Part I Line 2(e)</LineNumber>
+							</xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+					
+					<!-- BBA Partnership -->
+					<xsd:element name="BBAPartnershipEntityInd" type="CheckboxType">
+						<xsd:annotation>
+							<xsd:documentation>
+								<Description>BBA partnership</Description>
+								<LineNumber>Part I Line 2(f)</LineNumber>
+							</xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+					
+				</xsd:choice>
+
+				<!-- Identifying Number of Pass-Through Entity or Missing EIN Reason -->
+				<xsd:choice minOccurs="0">
+
+					<!-- Identifying Number of Pass-Through Entity -->
+					<xsd:element name="PassThroughEntityEIN" type="EINType" minOccurs="0">
+						<xsd:annotation>
+							<xsd:documentation>
+								<Description>Identifying Number of Pass-Through Entity</Description>
+								<LineNumber>Part I Line 3</LineNumber>
+							</xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+
+					<!-- Missing EIN Reason -->
+					<xsd:element name="MissingEINReasonCd">
+						<xsd:annotation>
+							<xsd:documentation>
+								<Description>Missing EIN reason</Description>
+								<LineNumber>Part I Line 3</LineNumber>
+							</xsd:documentation>
+						</xsd:annotation>
+						<xsd:simpleType>
+							<xsd:restriction base="StringType">
+								<xsd:enumeration value="APPLD FOR"/>
+								<xsd:enumeration value="FOREIGNUS"/>
+							</xsd:restriction>
+						</xsd:simpleType>
+					</xsd:element>
+
+				</xsd:choice>
+
+				<!-- Name of Business -->
+				<xsd:element name="PassThroughEntityName" type="BusinessNameType" minOccurs="0">
+					<xsd:annotation>
+						<xsd:documentation>
+							<Description>Name of pass-through entity</Description>
+							<LineNumber>Part I Line 4</LineNumber>
+						</xsd:documentation>
+					</xsd:annotation>
+				</xsd:element>
+
+				<!-- Address and ZIP code of pass-through entity: choice between U.S. or foreign address -->
+				<xsd:choice minOccurs="0">
+					<!-- Pass-through Entity US Address -->
+					<xsd:element name="PassThroughEntityUSAddress" type="USAddressType">
+						<xsd:annotation>
+							<xsd:documentation>
+								<Description>US address and ZIP code of pass-through entity</Description>
+								<LineNumber>Part I Line 4</LineNumber>
+							</xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+
+					<!-- Pass-through Entity Foreign Address -->
+					<xsd:element name="PassThroughEntityFrgnAddress" type="ForeignAddressType">
+						<xsd:annotation>
+							<xsd:documentation>
+								<Description>Foreign address and ZIP code of pass-through entity</Description>
+								<LineNumber>Part I Line 4</LineNumber>
+							</xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+				</xsd:choice>
+
+				<!-- Internal Revenue Service Center where pass-through entity filed its return -->
+				<xsd:element name="ServiceCenterWhereRetFiledCd" type="IRSServiceCenterType" minOccurs="0">
+					<xsd:annotation>
+						<xsd:documentation>
+							<Description> Internal Revenue Service Center where pass-through entity filed its return</Description>
+							<LineNumber>Part I Line 5</LineNumber>
+						</xsd:documentation>
+					</xsd:annotation>
+				</xsd:element>
+
+				<!-- Tax year of pass-through entity (from) -->
+				<xsd:element name="TaxYearOfPassThruEntityFromDt" type="DateType" minOccurs="0">
+					<xsd:annotation>
+						<xsd:documentation>
+							<Description>Tax year of pass-through entity (from) </Description>
+							<LineNumber>Part I Line 6</LineNumber>
+						</xsd:documentation>
+					</xsd:annotation>
+				</xsd:element>
+
+				<!-- Tax year of pass-through entity (to) -->
+				<xsd:element name="TaxYearOfPassThruEntityToDt" type="DateType" minOccurs="0">
+					<xsd:annotation>
+						<xsd:documentation>
+							<Description>Tax year of pass-through entity (to)</Description>
+							<LineNumber>Part I Line 6</LineNumber>
+						</xsd:documentation>
+					</xsd:annotation>
+				</xsd:element>
+
+				<!-- Your tax year (from)-->
+				<xsd:element name="YourTaxYearFromDt" type="DateType" minOccurs="0">
+					<xsd:annotation>
+						<xsd:documentation>
+							<Description>Your tax year (from)</Description>
+							<LineNumber>Part I Line 7</LineNumber>
+						</xsd:documentation>
+					</xsd:annotation>
+				</xsd:element>
+
+				<!-- Your tax year (to) -->
+				<xsd:element name="YourTaxYearToDt" type="DateType" minOccurs="0">
+					<xsd:annotation>
+						<xsd:documentation>
+							<Description>Your tax year (to)</Description>
+							<LineNumber>Part I Line 7</LineNumber>
+						</xsd:documentation>
+					</xsd:annotation>
+				</xsd:element>
+
+				<!-- ======== Part II: Inconsistent or Administrative Adjustment Request (AAR) Items ======== -->
+
+				<!-- Define a Type of Repeating Group Type -->
+				<xsd:element name="InconOrAdminAdjRequestItems" type="InconOrAdminAdjItemType" minOccurs="0" maxOccurs="unbounded">
+				<xsd:annotation>
+						<xsd:documentation>
+							<Description>Inconsistent or administrative adjustment request (AAR) items</Description>
+							<LineNumber>Part II</LineNumber>
+						</xsd:documentation>
+					</xsd:annotation>
+				</xsd:element>
+
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<!--  Inconsistent or Administrative Adjustment Request (AAR) Items Type  -->
+	<xsd:complexType name="InconOrAdminAdjItemType">
+		<xsd:sequence>
+
+			<!-- Line Number   -->
+			<xsd:element name="ReferenceLineNum" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Line number</Description>
+						<LineNumber>Part II Line 8(a)</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+				<xsd:simpleType>
+					<xsd:restriction base="TextType">
+						<xsd:maxLength value="60"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+
+			<!-- Description of inconsistent or administrative adjustment request (AAR) items   -->
+			<xsd:element name="LineNumberDescOfInconItemTxt" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Description of inconsistent or administrative adjustment request (AAR) items </Description>
+						<LineNumber>Part II Line 8(a)</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+				<xsd:simpleType>
+					<xsd:restriction base="TextType">
+						<xsd:maxLength value="60"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+
+			<!-- Amount of Item-->
+			<xsd:element name="AmountOfItemInd" type="CheckboxType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Amount of Item</Description>
+						<LineNumber>Part II Line 8(b)</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Treatment of Item -->
+			<xsd:element name="TreatmentOfItemInd" type="CheckboxType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Treatment of Item</Description>
+						<LineNumber>Part II Line 8(b)</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Amount as shown on Schedule K-1, Schedule Q,or similar statement a foreign trust statement or your return -->
+			<xsd:element name="AdjustmentRequestAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Amount as shown on Schedule K-1, Schedule Q,or similar statement a foreign trust statement or your return</Description>
+						<LineNumber>Part II Line 8(c)</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Amount you are reporting -->
+			<xsd:element name="ReportingAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Amount you are reporting</Description>
+						<LineNumber>Part II Line 8(d)</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Difference between (c) and (d) -->
+			<xsd:element name="AdjustmentAndReportedDiffAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Difference between C and D</Description>
+						<LineNumber>Part II Line 8(e)</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- =========== Part III: Explanations ======== -->
+
+			<!-- Enter the Part II Item Number Before Each Explanation. -->
+			<xsd:element name="ExplanationTxt" type="ExplanationType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Enter the Part II item number before each explanation</Description>
+						<LineNumber>Part III</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:schema>

@@ -1,0 +1,368 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema targetNamespace="http://www.irs.gov/efile" xmlns="http://www.irs.gov/efile" xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.0">
+
+	<xsd:annotation>
+		<xsd:documentation>
+			<Description>IRS e-file  Individual Income Tax Schema - Return data schema for a 1040SS or 1040PR return</Description>
+			<TaxYear>2018</TaxYear>
+			<MaturityLevel>Final Release</MaturityLevel>
+			<ReleaseDate>February 13, 2019</ReleaseDate>
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:include schemaLocation="../../Common/efileTypes.xsd" />
+	<xsd:include schemaLocation="../../Common/BinaryAttachment.xsd" />
+
+	<xsd:include schemaLocation="IRS1040SSPR/IRS1040SSPR.xsd" />
+
+	<xsd:include schemaLocation="IRS499W2PR/IRS499W2PR.xsd" />
+	<xsd:include schemaLocation="../Common/IRS1040ScheduleH/IRS1040ScheduleH.xsd" />
+	<xsd:include schemaLocation="../Common/IRS4137/IRS4137.xsd" />	
+	<xsd:include schemaLocation="../../CorporateIncomeTax/Common/IRS4562/IRS4562.xsd" />
+	<xsd:include schemaLocation="../Common/IRS8862/IRS8862.xsd" />
+	<xsd:include schemaLocation="../Common/IRS8867/IRS8867.xsd" />
+	<xsd:include schemaLocation="../Common/IRS8885/IRS8885.xsd" />
+	<xsd:include schemaLocation="../Common/IRS8888/IRS8888.xsd" />
+	<xsd:include schemaLocation="../Common/IRS8919/IRS8919.xsd" />
+	<xsd:include schemaLocation="../Common/IRS8959/IRS8959.xsd" />
+	<xsd:include schemaLocation="../../InstallmentAgreement/9465/IRS9465/IRS9465.xsd" />
+	<xsd:include schemaLocation="../../CorporateIncomeTax/Common/IRSFormT/IRSFormT.xsd" />	
+	<xsd:include schemaLocation="IRSW2AS/IRSW2AS.xsd" />
+	<xsd:include schemaLocation="IRSW2GU/IRSW2GU.xsd" />
+	<xsd:include schemaLocation="IRSW2VI/IRSW2VI.xsd" />
+
+	<!-- Common Dependencies (supporting info, schedules, computations, and such) -->	
+	<xsd:include schemaLocation="../../CorporateIncomeTax/Common/Dependencies/50YearADSDeductionStatement.xsd" />
+	<xsd:include schemaLocation="../../CorporateIncomeTax/Common/Dependencies/50YearGDSDeductionStatement.xsd" />
+	<xsd:include schemaLocation="../Common/Dependencies/AllowableSEExpenseExplanationStatement.xsd" />
+	<xsd:include schemaLocation="../../CorporateIncomeTax/Common/Dependencies/AmortizationElectionStatement.xsd" />
+	<xsd:include schemaLocation="../../CorporateIncomeTax/Common/Dependencies/GeneralDependencyMedium.xsd" />
+	<xsd:include schemaLocation="../../CorporateIncomeTax/Common/Dependencies/GeneralDependencySmall.xsd" />
+	<xsd:include schemaLocation="../Common/Dependencies/InstallmentMethodSchedule.xsd" />
+	<xsd:include schemaLocation="../Common/Dependencies/IRSESPayment.xsd" />
+	<xsd:include schemaLocation="../../CorporateIncomeTax/Common/Dependencies/IRSPayment.xsd" />
+	<xsd:include schemaLocation="../Common/Dependencies/NonemployeeCompensationInExcessOf1099MISCStatement.xsd" />
+	<xsd:include schemaLocation="../Common/Dependencies/PenaltiesStatement.xsd" />
+	<xsd:include schemaLocation="../../CorporateIncomeTax/Common/Dependencies/Section168f1PropertyExplanationStatement.xsd" />
+	<xsd:include schemaLocation="../Common/Dependencies/SpecialDepreciationAllowanceElectionOutStatement.xsd" />
+
+	<!-- Includes for 1040SSPR (supporting info, schedules, computations, and such) -->
+	<xsd:include schemaLocation="IRS1040SSPR/AdditionalCarAndTruckSchedule.xsd" />
+	<xsd:include schemaLocation="IRS1040SSPR/ExtensionForBonaFideResidentsStatement.xsd" />
+	<xsd:include schemaLocation="IRS1040SSPR/OtherCostStatement.xsd" />
+	<xsd:include schemaLocation="IRS1040SSPR/W2CM.xsd" />
+
+	<!-- Includes for 1040 Schedule F and 1040SSPR (supporting info, schedules, computations, and such) -->
+	<xsd:include schemaLocation="../../CorporateIncomeTax/Common/IRS1040ScheduleF/CCCLoanDetailAccrualMethodStatement.xsd" />
+	<xsd:include schemaLocation="../../CorporateIncomeTax/Common/IRS1040ScheduleF/CCCLoanDetailCashMethodStatement.xsd" />
+	<xsd:include schemaLocation="../../CorporateIncomeTax/Common/IRS1040ScheduleF/ExplanationOfAdditionalInterestDeductionStatement.xsd" />
+	<xsd:include schemaLocation="../../CorporateIncomeTax/Common/IRS1040ScheduleF/Form1098RecipientsStatement.xsd" />
+	<xsd:include schemaLocation="../../CorporateIncomeTax/Common/IRS1040ScheduleF/PostponementOfCropInsuranceAndDisasterPaymentsStatement.xsd" />
+
+	<!-- Includes for Form T (Timber) (supporting info, schedules, computations, and such) -->
+	<xsd:include schemaLocation="../../CorporateIncomeTax/Common/IRSFormT/DedExpendForOtherSilviculturalActivitiesSch.xsd" />
+
+	<!-- Return 1040SSPR -->
+	<xsd:element name="ReturnData">
+		<xsd:annotation>
+			<xsd:documentation>1040SSPR Return Contents</xsd:documentation>
+		</xsd:annotation>
+
+		<xsd:complexType>
+			<xsd:sequence>
+
+				<!-- Form 1040-SS (PR) -->
+				<xsd:element ref="IRS1040SSPR">
+					<xsd:annotation>
+						<xsd:documentation>IRS Form 1040-SS (PR) - U.S. Individual Income Tax Return</xsd:documentation>
+					</xsd:annotation>
+				</xsd:element>
+
+				<!-- Form 1040 Schedule H -->
+				<xsd:element ref="IRS1040ScheduleH" minOccurs="0" maxOccurs="2">
+					<xsd:annotation>
+						<xsd:documentation>IRS Form 1040 Schedule H - Household Employment Taxes</xsd:documentation>
+					</xsd:annotation>
+				</xsd:element>
+
+				<!-- Form IRS499W2PR -->
+				<xsd:element ref="IRS499W2PR" minOccurs="0" maxOccurs="50">
+					<xsd:annotation>
+						<xsd:documentation>IRS Form IRS499W2PR - Record of Puerto Rico Withholding</xsd:documentation>
+					</xsd:annotation>
+				</xsd:element>
+
+				<!-- Form 4137 -->
+				<xsd:element ref="IRS4137" minOccurs="0" maxOccurs="2">
+					<xsd:annotation>
+						<xsd:documentation>IRS Form 4137 - Social Security and Medicare Tax on Unreported Tip Income</xsd:documentation>
+					</xsd:annotation>
+				</xsd:element>
+
+				<!-- Form 4562 -->
+				<xsd:element ref="IRS4562" minOccurs="0" maxOccurs="unbounded">
+					<xsd:annotation>
+						<xsd:documentation>IRS Form 4562 - Depreciation and Amortization (Including Information on Listed Property)</xsd:documentation>
+					</xsd:annotation>
+				</xsd:element>
+				
+				<!-- Form 8862 -->
+				<xsd:element ref="IRS8862" minOccurs="0">
+					<xsd:annotation>
+						<xsd:documentation>IRS Form 8862 - Information To Claim Certain Credits After Disallowance</xsd:documentation>
+					</xsd:annotation>
+				</xsd:element>
+
+				<!-- Form 8867 -->
+				<xsd:element ref="IRS8867" minOccurs="0" maxOccurs="4">
+					<xsd:annotation>
+						<xsd:documentation>IRS Form 8867 Paid Preparer’s Due Diligence Checklist Earned Income Credit (EIC), American Opportunity Tax Credit (AOTC), Child Tax Credit (CTC) (including the Additional Child Tax Credit (ACTC) and Credit for Other Dependents (ODC)), and Head of Household (HOH) Filing Status</xsd:documentation>
+					</xsd:annotation>
+				</xsd:element>
+
+				<!-- Form 8885 -->
+				<xsd:element ref="IRS8885" minOccurs="0" maxOccurs="2">
+					<xsd:annotation>
+						<xsd:documentation>IRS Form 8885 - Health Coverage Tax Credit</xsd:documentation>
+					</xsd:annotation>
+				</xsd:element>
+
+				<!-- Form 8888 -->
+				<xsd:element ref="IRS8888" minOccurs="0">
+					<xsd:annotation>
+						<xsd:documentation>IRS Form 8888 - Allocation of Refund (Including Savings Bond Purchases)</xsd:documentation>
+					</xsd:annotation>
+				</xsd:element>
+
+				<!-- Form 8919 -->
+				<xsd:element ref="IRS8919" minOccurs="0" maxOccurs="2">
+					<xsd:annotation>
+						<xsd:documentation>IRS Form 8919 - Uncollected Social Security and Medicare Tax on Wages</xsd:documentation>
+					</xsd:annotation>
+				</xsd:element>
+
+				<!-- Form 8959 -->
+				<xsd:element ref="IRS8959" minOccurs="0">
+					<xsd:annotation>
+						<xsd:documentation>IRS Form 8959 - Additional Medicare Tax</xsd:documentation>
+					</xsd:annotation>
+				</xsd:element> 
+
+				<!-- Form 9465 -->
+				<xsd:element ref="IRS9465" minOccurs="0">
+					<xsd:annotation>
+						<xsd:documentation>IRS Form 9465 - Installment Agreement Request</xsd:documentation>
+					</xsd:annotation>
+				</xsd:element>
+
+				<!-- Form T (Timber) -->
+				<xsd:element ref="IRSFormT" minOccurs="0" maxOccurs="10">
+					<xsd:annotation>
+						<xsd:documentation>IRS Form T (Timber) - Forest Activities Schedules</xsd:documentation>
+					</xsd:annotation>
+				</xsd:element>
+
+				<!-- Form W2AS -->
+				<xsd:element ref="IRSW2AS" minOccurs="0" maxOccurs="50">
+					<xsd:annotation>
+						<xsd:documentation>IRS Form W-2AS - American Somoa Wage and Tax Statement</xsd:documentation>
+					</xsd:annotation>
+				</xsd:element>
+
+				<!-- Form W2GU -->
+				<xsd:element ref="IRSW2GU" minOccurs="0" maxOccurs="50">
+					<xsd:annotation>
+						<xsd:documentation>IRS Form W-2GU - Guam Wage and Tax Statement</xsd:documentation>
+					</xsd:annotation>
+				</xsd:element>
+
+				<!-- Form W2VI -->
+				<xsd:element ref="IRSW2VI" minOccurs="0" maxOccurs="50">
+					<xsd:annotation>
+						<xsd:documentation>IRS Form W-2VI -U.S. Virgin Islands Wage and Tax Statement</xsd:documentation>
+					</xsd:annotation>
+				</xsd:element>
+
+			<!-- List of Dependencies by form -->
+
+				<!-- Form 1040-SS (PR) statement -->
+				<xsd:element ref="AddnlCarAndTruckExpnssSch" minOccurs="0">
+					<xsd:annotation>
+						<xsd:documentation>Additional Car And Truck Expenses Schedule</xsd:documentation>
+					</xsd:annotation>
+				</xsd:element>
+
+				<!-- Form 1040-SS (PR) statement -->
+				<xsd:element ref="ExtnsBonaFideResStatement" minOccurs="0">
+					<xsd:annotation>
+						<xsd:documentation>Extension for Bona fide residents of American Samoa, the CNMI, Guam, or the USVI</xsd:documentation>
+					</xsd:annotation>
+				</xsd:element>
+
+				<!-- Form 1040-SS (PR) statement -->
+				<xsd:element ref="OtherCostStatement" minOccurs="0">
+					<xsd:annotation>
+						<xsd:documentation>Other Cost Statement</xsd:documentation>
+					</xsd:annotation>
+				</xsd:element>
+
+				<!-- Form 1040 statement (common) -->
+				<xsd:element ref="PenaltiesStatement" minOccurs="0">
+					<xsd:annotation>
+						<xsd:documentation>Penalties Statement</xsd:documentation>
+					</xsd:annotation>
+				</xsd:element>
+
+				<!-- Form 1040-SS (PR) statement -->
+				<xsd:element ref="W2CM" minOccurs="0" maxOccurs="50">
+					<xsd:annotation>
+						<xsd:documentation>Form W-2CM</xsd:documentation>
+					</xsd:annotation>
+				</xsd:element>
+
+				<!-- Form 1040 Schedule C and Form 1040-SS (PR) statement -->
+				<xsd:element ref="InstallmentMethodSchedule" minOccurs="0" maxOccurs="8">
+					<xsd:annotation>
+						<xsd:documentation>Installment method schedule</xsd:documentation>
+					</xsd:annotation>
+				</xsd:element>
+
+				<!-- Form 1040 Schedule C and Form 1040-SS (PR) statement -->
+				<xsd:element ref="NonemplCompInExOf1099MISCStmt" minOccurs="0" maxOccurs="8">
+					<xsd:annotation>
+						<xsd:documentation>Nonemployee compensation in excess of 1099 misc statement</xsd:documentation>
+					</xsd:annotation>
+				</xsd:element>
+
+				<!-- Form 1040 Schedule F and Form 1040-SS (PR) statement -->
+				<xsd:element ref="CCCLoanDetailAccrualMethodStmt" minOccurs="0" maxOccurs="unbounded">
+					<xsd:annotation>
+						<xsd:documentation>Commodity Credit Corporation Loan Detail Accrual Method Statement</xsd:documentation>
+					</xsd:annotation>
+				</xsd:element>
+
+				<!-- Form 1040 Schedule F and Form 1040-SS (PR) statement -->
+				<xsd:element ref="CCCLoanDetailCashMethodStmt" minOccurs="0" maxOccurs="unbounded">
+					<xsd:annotation>
+						<xsd:documentation>Commodity Credit Corporation Loan Detail Cash Method Statement</xsd:documentation>
+					</xsd:annotation>
+				</xsd:element>
+
+				<!-- Form 1040 Schedule F and Form 1040-SS (PR) statement -->
+				<xsd:element ref="ExplnOfAddnlInterestDedStmt" minOccurs="0" maxOccurs="unbounded">
+					<xsd:annotation>
+						<xsd:documentation>Explanation of Additional Interest Deduction Statement</xsd:documentation>
+					</xsd:annotation>
+				</xsd:element>
+
+				<!-- Form 1040 Schedule F and Form 1040-SS (PR) statement -->
+				<xsd:element ref="Form1098RecipientsStatement" minOccurs="0" maxOccurs="unbounded">
+					<xsd:annotation>
+						<xsd:documentation>Form 1098 Recipients Statement</xsd:documentation>
+					</xsd:annotation>
+				</xsd:element>
+
+				<!-- Form 1040 Schedule F and Form 1040-SS (PR) statement -->
+				<xsd:element ref="PostponementCropInsDsstrStmt" minOccurs="0" maxOccurs="unbounded">
+					<xsd:annotation>
+						<xsd:documentation>Postponement Of Crop Insurance and Disaster Payments Statement</xsd:documentation>
+					</xsd:annotation>
+				</xsd:element>		
+
+				<!-- Form 1040 Schedule SE and Form 1040-SS (PR) statement -->
+				<xsd:element ref="AllowableSEExpenseExplnStmt" minOccurs="0" maxOccurs="2">
+					<xsd:annotation>
+						<xsd:documentation>Allowable SE Expense Explanation Statement</xsd:documentation>
+					</xsd:annotation>
+				</xsd:element>
+
+				<!-- Forms 2106 and 4562 statement -->
+				<xsd:element ref="SpclDeprecAllwncElectOutStmt" minOccurs="0" maxOccurs="unbounded">
+					<xsd:annotation>
+						<xsd:documentation>Special Depreciation Allowance Election Out Statement</xsd:documentation>
+					</xsd:annotation>
+				</xsd:element>
+
+				<!-- Form 4562 statement -->
+				<xsd:element ref="ADS50YearDeductionStatement" minOccurs="0" maxOccurs="unbounded">
+					<xsd:annotation>
+						<xsd:documentation>50 year ADS deduction statement</xsd:documentation>
+					</xsd:annotation>
+				</xsd:element>
+
+				<!-- Form 4562 statement -->
+				<xsd:element ref="AmortizationElectionStatement" minOccurs="0" maxOccurs="unbounded">
+					<xsd:annotation>
+						<xsd:documentation>Amortization election statement</xsd:documentation>
+					</xsd:annotation>
+				</xsd:element>
+
+				<!-- Form 4562 statement -->
+				<xsd:element ref="GDS50YearDeductionStatement" minOccurs="0" maxOccurs="unbounded">
+					<xsd:annotation>
+						<xsd:documentation>50 year GDS deduction statement</xsd:documentation>
+					</xsd:annotation>
+				</xsd:element>
+
+				<!-- Form 4562 statement -->
+				<xsd:element ref="Section168f1PropertyStatement" minOccurs="0" maxOccurs="unbounded">
+					<xsd:annotation>
+						<xsd:documentation>Section 168(f)(1) property explanation statement</xsd:documentation>
+					</xsd:annotation>
+				</xsd:element>
+
+				<!-- Form T (Timber) schedule -->
+				<xsd:element ref="DedExpendSilviculturalActySch" minOccurs="0" maxOccurs="unbounded">
+					<xsd:annotation>
+						<xsd:documentation>Currently Deductible Expenditures for Other Silvicultural Activities Schedule</xsd:documentation>
+					</xsd:annotation>
+				</xsd:element>
+
+				<!-- IRS Payment Record -->
+				<xsd:element ref="IRSPayment" minOccurs="0">
+					<xsd:annotation>
+						<xsd:documentation>IRS payment</xsd:documentation>
+					</xsd:annotation>
+				</xsd:element>
+
+				<!-- IRS ES Payment Record -->
+				<xsd:element ref="IRSESPayment" minOccurs="0" maxOccurs="4">
+					<xsd:annotation>
+						<xsd:documentation>IRS ES Payment</xsd:documentation>
+					</xsd:annotation>
+				</xsd:element>
+
+				<!-- General Dependency Small for any Form/Schedule -->
+				<xsd:element ref="GeneralDependencySmall" minOccurs="0" maxOccurs="unbounded">
+					<xsd:annotation>
+						<xsd:documentation>General Dependency Small (attachment not identified on the form or instructions)</xsd:documentation>
+					</xsd:annotation>
+				</xsd:element>
+
+				<!-- General Dependency Medium for any Form/Schedule -->
+				<xsd:element ref="GeneralDependencyMedium" minOccurs="0" maxOccurs="unbounded">
+					<xsd:annotation>
+						<xsd:documentation>General Dependency Medium (attachment not identified on the form or instructions)</xsd:documentation>
+					</xsd:annotation>
+				</xsd:element>
+
+				<!-- Binary Attachment -->
+				<xsd:element ref="BinaryAttachment" minOccurs="0" maxOccurs="unbounded">
+					<xsd:annotation>
+						<xsd:documentation>Binary Attachment</xsd:documentation>
+					</xsd:annotation>
+				</xsd:element>
+
+			</xsd:sequence>
+
+			<xsd:attributeGroup ref="ReturnDataAttributes">
+				<xsd:annotation>
+					<xsd:documentation>Common return data attributes</xsd:documentation>
+				</xsd:annotation>
+			</xsd:attributeGroup>
+
+		</xsd:complexType>
+
+	</xsd:element>
+
+</xsd:schema>

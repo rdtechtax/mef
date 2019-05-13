@@ -1,0 +1,746 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.irs.gov/efile" targetNamespace="http://www.irs.gov/efile" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xsd:annotation>
+		<xsd:documentation>
+			<Description>IRS e-file Individual Income Tax Schema - IRS Form 5329 Additional Taxes on Qualified Plans (Including IRAs) and Other Tax-Favored Accounts</Description>
+			<TaxYear>2018</TaxYear>
+			<MaturityLevel>Final Release</MaturityLevel>
+			<ReleaseDate>February 13, 2019</ReleaseDate>
+		</xsd:documentation>
+	</xsd:annotation>
+	<xsd:include schemaLocation="../../../Common/efileTypes.xsd"/>
+	<!-- =============================================================== -->
+	<!-- ====================== IRS Form 5329 ========================== -->
+	<!-- =============================================================== -->
+	<xsd:element name="IRS5329">
+		<xsd:annotation>
+			<xsd:documentation>IRS Form 5329</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:complexContent>
+				<xsd:extension base="IRS5329Type">
+					<xsd:attributeGroup ref="DocumentAttributes">
+						<xsd:annotation>
+							<xsd:documentation>Common return document attributes</xsd:documentation>
+						</xsd:annotation>
+					</xsd:attributeGroup>
+					<xsd:attribute name="documentName" type="xsd:string" fixed="IRS5329">
+						<xsd:annotation>
+							<xsd:documentation>IRS internal use only. To avoid error in the return, do not include the attribute name or value.</xsd:documentation>
+						</xsd:annotation>
+					</xsd:attribute>
+				</xsd:extension>
+			</xsd:complexContent>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:complexType name="IRS5329Type">
+		<xsd:annotation>
+			<xsd:documentation>Content model for Form 5329</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+		
+			<!-- Person Name -->
+			<xsd:element name="PersonNm" type="PersonNameType">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Person Name</Description>
+						<ELFFieldNumber>0010</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			
+			<!-- SSN -->
+			<xsd:element name="SSN" type="SSNType">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>SSN</Description>
+						<ELFFieldNumber>0020</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			
+			<!-- Amended Indicator -->
+			<xsd:element name="AmendedReturnInd" type="CheckboxType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Amended Indicator</Description>
+						<ELFFieldNumber>0070</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			
+			<!-- Part I - Additional Tax on Early Distributions -->
+			<!-- Early Distributions Amount-->
+			<xsd:element name="EarlyDistributionsAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Early Distributions Amount</Description>
+						<LineNumber>1</LineNumber>
+						<ELFFieldNumber>0072</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			
+			<!-- Early Distribution Exception Reason Cd -->
+			<xsd:element name="EarlyDistriExceptionReasonCd" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Early Distribution Exception Reason Code</Description>
+						<LineNumber>2</LineNumber>
+						<ELFFieldNumber>0073</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+				<xsd:simpleType>
+						<xsd:restriction base="NumericType">
+							<xsd:enumeration value="01"/>
+							<xsd:enumeration value="02"/>
+							<xsd:enumeration value="03"/>
+							<xsd:enumeration value="04"/>
+							<xsd:enumeration value="05"/>
+							<xsd:enumeration value="06"/>
+							<xsd:enumeration value="07"/>
+							<xsd:enumeration value="08"/>
+							<xsd:enumeration value="09"/>
+							<xsd:enumeration value="10"/>
+							<xsd:enumeration value="11"/>
+							<xsd:enumeration value="12"/>
+						</xsd:restriction>
+					</xsd:simpleType>
+			</xsd:element>
+			
+			<!-- Early Distribution Not Subject To Tax Amount -->
+			<xsd:element name="EarlyDistriNotSubjectToTaxAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Early Distribution Not Subject To Tax Amount</Description>
+						<LineNumber>2</LineNumber>
+						<ELFFieldNumber>0074</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			
+			<!-- Early Distribution Subject To Tax Amount -->
+			<xsd:element name="EarlyDistriSubjectToTaxAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Early Distribution Subject To Tax Amount</Description>
+						<LineNumber>3</LineNumber>
+						<ELFFieldNumber>0076</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			
+			<!-- IRA Early Distributions Tax Amount -->
+			<xsd:element name="IRAEarlyDistributionsTaxAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>IRA Early Distributions Tax Amount</Description>
+						<LineNumber>4</LineNumber>
+						<ELFFieldNumber>0078</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			
+			<!-- Part II - Additional Tax on Certain Distributions From Education Accounts and ABLE Accounts -->
+			
+			<!-- Educ Acct Distribution Amount -->
+			<xsd:element name="EducAcctDistributionAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Education Account Distribution Amount</Description>
+						<LineNumber>5</LineNumber>
+						<ELFFieldNumber>0081</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			
+			<!-- Educ Acct Distribution Not Subj To Tax Amount -->
+			<xsd:element name="EducAcctDistriNotSubjToTaxAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Education Account Distribution Not Subject To Tax Amount</Description>
+						<LineNumber>6</LineNumber>
+						<ELFFieldNumber>0084</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			
+			<!-- Educ Acct Distrb Subject To Tax Amount -->
+			<xsd:element name="EducAcctDistriSubjectToTaxAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Education Account Distribution Subject To Tax Amount</Description>
+						<LineNumber>7</LineNumber>
+						<ELFFieldNumber>0087</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			
+			<!-- Educ IRA Distributions Tax Amount -->
+			<xsd:element name="EducIRADistributionsTaxAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Education IRA Distributions Tax Amount</Description>
+						<LineNumber>8</LineNumber>
+						<ELFFieldNumber>0091</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			
+			<!-- Part III - Additional Tax on Excess Contributions to Traditional IRAs -->
+			
+			<!-- IRA Excess Contribution Prior Year Amount -->
+			<xsd:element name="IRAExcessContriPriorYearAmt" type="USAmountNNType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>IRA Excess Contributions Prior Year Amt</Description>
+						<LineNumber>9</LineNumber>
+						<ELFFieldNumber>0094</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			
+			<!-- IRA Excess Contribution Credit Amount -->
+			<xsd:element name="IRAExcessContriCreditAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>IRA Excess Contribution Credit Amount</Description>
+						<LineNumber>10</LineNumber>
+						<ELFFieldNumber>0100</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			
+			<!-- IRA Distribution Included In Income Amount -->
+			<xsd:element name="IRADistriIncludedInIncomeAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>IRA Distribution Included In Income Amount</Description>
+						<LineNumber>11</LineNumber>
+						<ELFFieldNumber>0110</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			
+			<!-- IRA Excess Contribution Withdrawn Amount -->
+			<xsd:element name="IRAExcessContriWithdrawnAmt" type="USAmountNNType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>IRA Excess Contribution Withdrawn Amount</Description>
+						<LineNumber>12</LineNumber>
+						<ELFFieldNumber>0120</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			
+			<!-- IRA Excess Contribution Adjustment Amount -->
+			<xsd:element name="IRAExcessContriAdjustmentAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>IRA Excess Contribution Adjustment Amount</Description>
+						<LineNumber>13</LineNumber>
+						<ELFFieldNumber>0130</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			
+			<!-- IRA Excess Contribution Prior Year Adjust Amount -->
+			<xsd:element name="IRAExcessContriPrYrAdjustAmt" type="USAmountNNType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>IRA Excess Contribution Pr Year Adjus tAmt</Description>
+						<LineNumber>14</LineNumber>
+						<ELFFieldNumber>0140</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			
+			<!-- IRA Excess Contribution Current Year Amount -->
+			<xsd:element name="IRAExcessContriCurrentYearAmt" type="USAmountNNType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>IRA Excess Contribution Current Year Amount</Description>
+						<LineNumber>15</LineNumber>
+						<ELFFieldNumber>0145</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			
+			<!-- IRA Excess Contribution Total Amount -->
+			<xsd:element name="IRAExcessContriTotalAmt" type="USAmountNNType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>IRA Excess Contribution Total Amount</Description>
+						<LineNumber>16</LineNumber>
+						<ELFFieldNumber>0150</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			
+			<!-- IRA Excess Contribution Tax Amount -->
+			<xsd:element name="IRAExcessContribTaxAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>IRA Excess Contribution Tax Amount</Description>
+						<LineNumber>17</LineNumber>
+						<ELFFieldNumber>0160</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			
+			<!-- Part IV - Additional Tax on Excess Contributions to Roth IRAs -->
+			
+			<!-- Roth IRA Excess Contribution Prior Year Amount -->
+			<xsd:element name="RothIRAExcessContriPriorYrAmt" type="USAmountNNType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Roth IRA Excess Contribution Prior Year Amount</Description>
+						<LineNumber>18</LineNumber>
+						<ELFFieldNumber>0200</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			
+			<!-- Roth IRA Excess Contribution Credit Amount -->
+			<xsd:element name="RothIRAExcessContriCreditAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Roth IRA Excess Contribution Credit Amount</Description>
+						<LineNumber>19</LineNumber>
+						<ELFFieldNumber>0210</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			
+			<!-- Roth IRA Distribution Included In CY Amount -->
+			<xsd:element name="RothIRADistriIncludedInCYAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Roth IRA Distribution Included In CY Amount</Description>
+						<LineNumber>20</LineNumber>
+						<ELFFieldNumber>0220</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			
+			<!-- Roth IRA Excess Contribution Adjust Amount-->
+			<xsd:element name="RothIRAExcessContriAdjustAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Roth IRA Excess Contribution Adjust Amount</Description>
+						<LineNumber>21</LineNumber>
+						<ELFFieldNumber>0230</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			
+			<!-- Roth IRA Excess Contribution PY Wthdrw Amount -->
+			<xsd:element name="RothIRAExcessContriPYWthdrwAmt" type="USAmountNNType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Roth IRA Excess Contribution PY Wthdrw Amount</Description>
+						<LineNumber>22</LineNumber>
+						<ELFFieldNumber>0240</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			
+			<!-- Roth IRA Excess Contribution CY Amount -->
+			<xsd:element name="RothIRAExcessContriCYAmt" type="USAmountNNType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Roth IRA Excess Contribution CY Amount</Description>
+						<LineNumber>23</LineNumber>
+						<ELFFieldNumber>0250</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			
+			<!-- Roth IRA Excess Contribution Total Amount -->
+			<xsd:element name="RothIRAExcessContriTotalAmt" type="USAmountNNType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Roth IRA Excess Contribution Total Amount</Description>
+						<LineNumber>24</LineNumber>
+						<ELFFieldNumber>0260</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			
+			<!-- Roth IRA Excess Contribution Tax Amount -->
+			<xsd:element name="RothIRAExcessContribTaxAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Roth IRA Excess Contribution Tax Amount</Description>
+						<LineNumber>25</LineNumber>
+						<ELFFieldNumber>0280</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			
+			<!-- Part V - Additional Tax on Excess Contributions to Coverdell ESAs -->
+			
+			<!-- ESA Excess Contribution Prior Year Amount -->
+			<xsd:element name="ESAExcessContriPriorYearAmt" type="USAmountNNType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>ESA Excess Contribution Prior Year Amount</Description>
+						<LineNumber>26</LineNumber>
+						<ELFFieldNumber>0490</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			
+			<!-- ESA Excess Contribution Credit Amount -->
+			<xsd:element name="ESAExcessContriCreditAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>ESA Excess Contribution Credit Amount</Description>
+						<LineNumber>27</LineNumber>
+						<ELFFieldNumber>0500</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			
+			<!-- ESA Distribution Included In CY Amount -->
+			<xsd:element name="ESADistriIncludedInCYAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>ESA Excess Contribution Credit Amount</Description>
+						<LineNumber>28</LineNumber>
+						<ELFFieldNumber>0510</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			
+			<!-- ESA Excess Contribution Adjustment Amount -->
+			<xsd:element name="ESAExcessContriAdjustmentAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>ESA Excess Contribution Adjustment Amount</Description>
+						<LineNumber>29</LineNumber>
+						<ELFFieldNumber>0520</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			
+			<!-- ESA Excess Contribution PY Wthdrw Amount -->
+			<xsd:element name="ESAExcessContriPYWthdrwAmt" type="USAmountNNType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>ESA Excess Contribution PY Wthdrw Amount</Description>
+						<LineNumber>30</LineNumber>
+						<ELFFieldNumber>0530</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			
+			<!-- ESA Excess Contribution CY Amount -->
+			<xsd:element name="ESAExcessContriCYAmt" type="USAmountNNType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>ESA Excess Contribution CY Amount</Description>
+						<LineNumber>31</LineNumber>
+						<ELFFieldNumber>0540</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			
+			<!-- ESA Excess Contribution Total Amount -->
+			<xsd:element name="ESAExcessContriTotalAmt" type="USAmountNNType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>ESA Excess Contribution Total Amount</Description>
+						<LineNumber>32</LineNumber>
+						<ELFFieldNumber>0550</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			
+			<!-- Educ IRA Excess Contribution Tax Amount -->
+			<xsd:element name="EducIRAExcessContribTaxAmt" type="USAmountNNType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Education IRA Excess Contribution Tax Amount</Description>
+						<LineNumber>33</LineNumber>
+						<ELFFieldNumber>0570</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			
+			<!-- Part VI - Additional Tax on Excess Contributions to Archer MSAs -->
+			
+			<!-- Archer MSA Excess Contribution Prior Year Amount -->
+			<xsd:element name="ArcherMSAExcessContriPrYrAmt" type="USAmountNNType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Archer MSA Excess Contribution Prior Year Amount</Description>
+						<LineNumber>34</LineNumber>
+						<ELFFieldNumber>0580</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			
+			<!-- Archer MSA Excess Contribution Credit Amount -->
+			<xsd:element name="ArcherMSAExcessContriCreditAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Archer MSA Excess Contribution Credit Amount</Description>
+						<LineNumber>35</LineNumber>
+						<ELFFieldNumber>0590</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			
+			<!-- Taxable Archer MSA Distribution Amount -->
+			<xsd:element name="TaxableArcherMSADistriAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Taxable Archer MSA Distribution Amount</Description>
+						<LineNumber>36</LineNumber>
+						<ELFFieldNumber>0600</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			
+			<!-- Archer MSA Excess Contribution Adj Amount -->
+			<xsd:element name="ArcherMSAExcessContriAdjAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Archer MSA Excess Contribution Adjusted Amount</Description>
+						<LineNumber>37</LineNumber>
+						<ELFFieldNumber>0610</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			
+			<!-- Archer MSA Excess Contribution PY Wthdrw Amount -->
+			<xsd:element name="ArcherMSAExContriPYWthdrwAmt" type="USAmountNNType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Archer MSA Excess Contribution Prior Year Withdraw Amount</Description>
+						<LineNumber>38</LineNumber>
+						<ELFFieldNumber>0620</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			
+			<!-- Archer MSA Excess Contribution CY Amount -->
+			<xsd:element name="ArcherMSAExcessContriCYAmt" type="USAmountNNType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Archer MSA Excess Contribution Current Year Amount</Description>
+						<LineNumber>39</LineNumber>
+						<ELFFieldNumber>0630</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			
+			<!-- Archer MSA Excess Contribution Total Amount -->
+			<xsd:element name="ArcherMSAExcessContriTotalAmt" type="USAmountNNType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Archer MSA Excess Contribution Total Amount</Description>
+						<LineNumber>40</LineNumber>
+						<ELFFieldNumber>0640</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			
+			<!-- MSA Excess Contribution Tax Amount -->
+			<xsd:element name="MSAExcessContribTaxAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>MSA Excess Contribution Tax Amount</Description>
+						<LineNumber>41</LineNumber>
+						<ELFFieldNumber>0660</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			
+			<!-- Part VII - Additional Tax on Excess Contributions to Health Savings Accounts (HSAs) -->
+			
+			<!-- HSA Excess Contribution Prior Year Amount -->
+			<xsd:element name="HSAExcessContriPriorYearAmt" type="USAmountNNType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>HSA Excess Contribution Prior Year Amount</Description>
+						<LineNumber>42</LineNumber>
+						<ELFFieldNumber>0675</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			
+			<!-- HSA Excess Contribution Credit Amount -->
+			<xsd:element name="HSAExcessContriCreditAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>HSA Excess Contribution Credit Amount</Description>
+						<LineNumber>43</LineNumber>
+						<ELFFieldNumber>0685</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			
+			<!-- Taxable HSA Distribution Amount -->
+			<xsd:element name="TaxableHSADistributionAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Taxable HSA Distribution Amount</Description>
+						<LineNumber>44</LineNumber>
+						<ELFFieldNumber>0695</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			
+			<!-- HSA Excess Contribution Adjustment Amount -->
+			<xsd:element name="HSAExcessContriAdjustmentAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>HSA Excess Contribution Adjustment Amount</Description>
+						<LineNumber>45</LineNumber>
+						<ELFFieldNumber>0705</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			
+			<!-- HSA Excess Contribution PY Adjusted Amount -->
+			<xsd:element name="HSAExcessContriPYAdjustedAmt" type="USAmountNNType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>HSA Excess Contribution Prior Year Adjusted Amount</Description>
+						<LineNumber>46</LineNumber>
+						<ELFFieldNumber>0715</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			
+			<!-- HSA Excess Contribution Current Year Amount -->
+			<xsd:element name="HSAExcessContriCurrentYearAmt" type="USAmountNNType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>HSA Excess Contribution Current Year Amount</Description>
+						<LineNumber>47</LineNumber>
+						<ELFFieldNumber>0725</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			
+			<!-- HSA Excess Contribution Total Amount -->
+			<xsd:element name="HSAExcessContriTotalAmt" type="USAmountNNType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>HSA Excess Contribution Total Amount</Description>
+						<LineNumber>48</LineNumber>
+						<ELFFieldNumber>0735</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			
+			<!-- HSA Excess Contribution Tax Amount -->
+			<xsd:element name="HSAExcessContribTaxAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>HSA Excess Contribution Tax Amount</Description>
+						<LineNumber>49</LineNumber>
+						<ELFFieldNumber>0750</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			
+			<!-- Part VIII - Additional Tax on Excess Contributions to ABLE Accounts -->
+			
+			<!-- ABLE Excess Contribution CY Amount -->
+			<xsd:element name="ABLEExcessContriCYAmt" type="USAmountNNType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>ABLE Excess Contribution CY Amount</Description>
+						<LineNumber>50</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			
+			<!-- ABLE Excess Contribution Tax Amount -->
+			<xsd:element name="ABLEExcessContribTaxAmt" type="USAmountNNType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>ABLE Excess Contribution Tax Amount</Description>
+						<LineNumber>51</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			
+			<!-- Part IX - Additional Tax on Excess Accumulation in Qualified Retirement Plans (Including IRAs) -->
+			
+			<!-- Qlfy Retire Plan Min Rqr Distribution Amount -->
+			<xsd:element name="QlfyRetirePlanMinRqrDistriAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Qualified Retirement Plan Minimum Required Distribution Amount</Description>
+						<LineNumber>52</LineNumber>
+						<ELFFieldNumber>0800</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			
+			<!-- Qlfy Retire Plan Actual Distribution Amount -->
+			<xsd:element name="QlfyRetirePlanActualDistriAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Qualified Retirement Plan Actual Distribution Amount</Description>
+						<LineNumber>53</LineNumber>
+						<ELFFieldNumber>0810</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			
+			<!-- Qlfy Retire Plan Excess Accum Amount -->
+			<xsd:element name="QlfyRetirePlanExcessAccumAmt" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Qualified Retirement Plan Excess Accumulation Amount</Description>
+						<LineNumber>54</LineNumber>
+						<ELFFieldNumber>0820</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+				<xsd:complexType>
+					<xsd:simpleContent>
+						<xsd:extension base="USAmountType">					
+							<!-- Waive Tax On Ex Accum QRP Stmt Cd -->
+							<xsd:attribute name="waiveTaxOnExAccumQRPStmtCd" type="TextType" fixed="RC">
+								<xsd:annotation>
+									<xsd:documentation>
+										<Description>Waive Tax On Excess Accumulated QRP Statement Code</Description>
+										<ELFFieldNumber>0814</ELFFieldNumber>
+									</xsd:documentation>
+								</xsd:annotation>
+							</xsd:attribute>							
+							<!-- Waive Tax On Ex Accum QRP Stmt Amount -->
+							<xsd:attribute name="waiveTaxOnExAccumQRPStmtAmt" type="USAmountType">
+								<xsd:annotation>
+									<xsd:documentation>
+										<Description>Waive Tax On Excess Accumulated QRP Statement Amount</Description>
+										<ELFFieldNumber>0818 0819</ELFFieldNumber>
+									</xsd:documentation>
+								</xsd:annotation>
+							</xsd:attribute>
+							<xsd:attribute name="referenceDocumentId" type="IdListType"/>
+							<xsd:attribute name="referenceDocumentName" type="StringType" fixed="WaiveTaxOnExcessAccumQRPStmt"/>
+						</xsd:extension>
+					</xsd:simpleContent>
+				</xsd:complexType>
+			</xsd:element>
+			
+			<!-- Rtmnt Annty Excess Contribution Tax Amount -->
+			<xsd:element name="RtmntAnntyExcessContribTaxAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Retirment Annuity Excess Contribution Tax Amount</Description>
+						<LineNumber>55</LineNumber>
+						<ELFFieldNumber>0850</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:schema>

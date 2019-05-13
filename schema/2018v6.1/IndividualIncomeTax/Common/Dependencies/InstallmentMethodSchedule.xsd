@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema targetNamespace="http://www.irs.gov/efile" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.irs.gov/efile" elementFormDefault="qualified" attributeFormDefault="unqualified">
+ <xsd:annotation>
+    <xsd:documentation>
+       <Description>IRS e-file Individual Income Tax Schema - Installment Method Schedule</Description>
+       <Purpose>If you use the installment method, attach a schedule to your return. Show separately for this tax year and the 3 preceding years: gross sales, cost of goods sold, gross profit, percentage of gross profit to gross sales, amounts collected, and gross profit on amounts collected</Purpose>
+       <TaxYear>2018</TaxYear>
+			<MaturityLevel>Final Release</MaturityLevel>
+			<ReleaseDate>February 13, 2019</ReleaseDate>
+    </xsd:documentation>
+ </xsd:annotation>
+
+<xsd:include schemaLocation="../../../Common/efileTypes.xsd"/>
+
+
+	<!-- ======================================================= -->
+	<!-- =================  Installment Method Schedule  ======= -->
+	<!-- ======================================================= -->
+
+	<xsd:element name="InstallmentMethodSchedule">
+		<xsd:annotation>
+			<xsd:documentation>Installment Method Schedule</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:complexContent>
+				<xsd:extension base="InstallmentMethodScheduleType">
+					<xsd:attributeGroup ref="DocumentAttributes">
+						<xsd:annotation>
+							<xsd:documentation>Common return document attributes</xsd:documentation>
+						</xsd:annotation>
+					</xsd:attributeGroup>
+					<xsd:attribute name="documentName" type="xsd:string" fixed="InstallmentMethodSchedule">
+						<xsd:annotation>
+							<xsd:documentation>IRS internal use only. To avoid error in the return, do not include the attribute name or value.</xsd:documentation>
+						</xsd:annotation>
+					</xsd:attribute>
+				</xsd:extension>
+			</xsd:complexContent>
+		</xsd:complexType>
+	</xsd:element>
+
+	<xsd:complexType name="InstallmentMethodScheduleType">
+		<xsd:annotation>
+			<xsd:documentation>Content model for Installment Method Schedule</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="CurrentYearAmts" type="YearAmtsType" minOccurs="0"/>
+			<xsd:element name="PriorYear1Amts" type="YearAmtsType" minOccurs="0"/>
+			<xsd:element name="PriorYear2Amts" type="YearAmtsType" minOccurs="0"/>
+			<xsd:element name="PriorYear3Amts" type="YearAmtsType" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="YearAmtsType">
+		<xsd:annotation>
+			<xsd:documentation>Reporting Year Amounts</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="GrossSalesAmt" type="USAmountType" minOccurs="0"/>
+			<xsd:element name="CostOfGoodsSoldAmt" type="USAmountType" minOccurs="0"/>
+			<xsd:element name="GrossProfitAmt" type="USAmountType" minOccurs="0"/>
+			<xsd:element name="GrossProfitsToGrossSalesPct" type="RatioType" minOccurs="0"/>
+			<xsd:element name="CollectedAmt" type="USAmountType" minOccurs="0"/>
+			<xsd:element name="GrossProfitOnCollectedAmt" type="USAmountType" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+
+
+</xsd:schema>

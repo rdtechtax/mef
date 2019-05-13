@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema targetNamespace="http://www.irs.gov/efile" xmlns="http://www.irs.gov/efile" xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.0">
+
+	<xsd:annotation>
+		<xsd:documentation>
+			<Description>IRS e-file U.S. Nonresident Alien Income Tax Schema - Qualify Foreign Government National Health Plan Statement</Description>
+			<Purpose>Optional Statement - Have you filed or will you file tax returns for current year in the countries listed on lines 9 and 10?</Purpose>
+			<TaxYear>2018</TaxYear>
+			<MaturityLevel>Final Release</MaturityLevel>
+			<ReleaseDate>February 13, 2019</ReleaseDate>
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:include schemaLocation="../../../Common/efileTypes.xsd" />
+
+	<!-- ========================================================================= -->
+	<!-- ====== Qualify Foreign Government National Health Plan Statement ======== -->
+	<!-- ========================================================================= -->
+
+	<xsd:element name="QlfyFrgnNatlHealthPlanStmt">
+		<xsd:annotation>
+			<xsd:documentation>Qualify Foreign Government National Health Plan Statement</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:complexContent>
+				<xsd:extension base="QlfyFrgnNatlHealthPlanStmtType">
+					<xsd:attributeGroup ref="DocumentAttributes">
+						<xsd:annotation>
+							<xsd:documentation>Common return document attributes</xsd:documentation>
+						</xsd:annotation>
+					</xsd:attributeGroup>
+					<xsd:attribute name="documentName" type="TextType" fixed="QlfyFrgnNatlHealthPlanStatement">
+						<xsd:annotation>
+							<xsd:documentation>IRS internal use only. To avoid error in the return, do not include the attribute name or value.</xsd:documentation>
+						</xsd:annotation>
+					</xsd:attribute>
+				</xsd:extension>
+			</xsd:complexContent>
+		</xsd:complexType>
+	</xsd:element>
+
+	<xsd:complexType name="QlfyFrgnNatlHealthPlanStmtType">
+		<xsd:annotation>
+			<xsd:documentation>Qualify Foreign Government National Health Plan Statement</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<!-- Other Information -->
+			<xsd:element name="QlfyFrgnNatlHealthPlanGrp" minOccurs="0" maxOccurs="20">
+				<xsd:complexType>
+					<xsd:sequence>
+						<!-- Foreign Country Or U.S. Possession Code -->
+						<xsd:element name="ForeignCountryOrUSPossessionCd" type="AllCountriesType"/>
+						<!-- Explanation of qualification for foreign government National Health Plan -->
+						<xsd:element name="ExplanationTxt" type="ExplanationType"/>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+
+</xsd:schema>

@@ -1,0 +1,1915 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema targetNamespace="http://www.irs.gov/efile" xmlns="http://www.irs.gov/efile" xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.0">
+
+	<xsd:annotation>
+		<xsd:documentation>
+			<Description>IRS e-file Individual Income Tax Schema - Form2210</Description>
+			<TaxYear>2018</TaxYear>
+			<MaturityLevel>Final Release</MaturityLevel>
+			<ReleaseDate>February 13, 2019</ReleaseDate>
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:include schemaLocation="../../../Common/efileTypes.xsd" />
+
+
+ <!-- ==========================================================+++===== -->
+ <!-- ======================  IRS FORM 2210 ============================ -->
+ <!-- ==========================================================+++===== -->
+
+
+	<xsd:element name="IRS2210">
+		<xsd:annotation>
+			<xsd:documentation>IRS FORM 2210</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:complexContent>
+				<xsd:extension base="IRS2210Type">
+					<xsd:attributeGroup ref="DocumentAttributes">
+						<xsd:annotation>
+							<xsd:documentation>Common return document attributes</xsd:documentation>
+						</xsd:annotation>
+					</xsd:attributeGroup>
+					<xsd:attribute name="documentName" type="xsd:string" fixed="IRS2210">
+						<xsd:annotation>
+							<xsd:documentation>IRS internal use only. To avoid error in the return, do not include the attribute name or value.</xsd:documentation>
+						</xsd:annotation>
+					</xsd:attribute>
+					<xsd:attribute name="referenceDocumentId" type="IdListType" />
+					<xsd:attribute name="referenceDocumentName" type="StringType" fixed="BinaryAttachment WaiverExplanationStatement">
+						<xsd:annotation>
+							<xsd:documentation>
+								<ELFFieldNumber>NL 0233 0669</ELFFieldNumber>
+							</xsd:documentation>
+						</xsd:annotation>
+					</xsd:attribute>
+				</xsd:extension>
+			</xsd:complexContent>
+		</xsd:complexType>
+	</xsd:element>
+
+	<xsd:complexType name="IRS2210Type">
+		<xsd:annotation>
+			<xsd:documentation>Content model for FORM 2210</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+
+		<!-- ===== Part I - Required Annual Payment ===== -->
+
+			<!-- Current Year Tax After Credits -->
+			<xsd:element name="CurrentYearTaxAfterCreditsAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Current year tax after credits</Description>
+						<LineNumber>1</LineNumber>
+						<ELFFieldNumber>0025</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Other Taxes -->
+			<xsd:element name="OtherTaxesAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Other taxes</Description>
+						<LineNumber>2</LineNumber>
+						<ELFFieldNumber>0035</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Refundable Credits -->
+			<xsd:element name="RefundableCreditsAmt" type="USAmountNNType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Refundable credits</Description>
+						<LineNumber>3</LineNumber>
+						<ELFFieldNumber>0045</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Current Year Tax -->
+			<xsd:element name="CurrentYearTaxAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Current year tax</Description>
+						<LineNumber>4</LineNumber>
+						<ELFFieldNumber>0055</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Current Year Tax Calculated Amount -->
+			<xsd:element name="CurrentYearTaxCalculatedAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Current year tax calculated amount</Description>
+						<LineNumber>5</LineNumber>
+						<ELFFieldNumber>0065</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Withholding Taxes -->
+			<xsd:element name="WithholdingTaxesAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Withholding taxes</Description>
+						<LineNumber>6</LineNumber>
+						<ELFFieldNumber>0075</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Net Tax Due -->
+			<xsd:element name="NetTaxDueAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Net tax due</Description>
+						<LineNumber>7</LineNumber>
+						<ELFFieldNumber>0085</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Annual Payment Based on Prior Year -->
+			<xsd:element name="AnnualPaymentBasedOnPriorYrAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Annual payment based on prior year</Description>
+						<LineNumber>8</LineNumber>
+						<ELFFieldNumber>0092</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Required Annual Payment -->
+			<xsd:element name="RequiredAnnualPaymentAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Required annual payment</Description>
+						<LineNumber>9</LineNumber>
+						<ELFFieldNumber>0106</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Owe Penalty Ind -->
+			<xsd:element name="OwePenaltyInd" type="BooleanType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Owe penalty ind</Description>
+						<LineNumber>9</LineNumber>
+						<ELFFieldNumber>0115 0125</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- ===== Part II - Reasons for Filing ===== -->
+
+
+					<!-- Waiver of Entire Penalty Indicator -->
+					<xsd:element name="WaiverOfEntirePenaltyInd" type="CheckboxType"  minOccurs="0" >
+						<xsd:annotation>
+							<xsd:documentation>
+								<Description>Waiver of entire penalty indicator</Description>
+								<LineNumber>A</LineNumber>
+								<ELFFieldNumber>0135</ELFFieldNumber>
+							</xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+
+					<!-- Waiver of Part of Penalty Indicator -->
+					<xsd:element name="WaiverOfPartOfPenaltyInd" type="CheckboxType" minOccurs="0">
+						<xsd:annotation>
+							<xsd:documentation>
+								<Description>Waiver of part of penalty indicator</Description>
+								<LineNumber>B</LineNumber>
+								<ELFFieldNumber>0145</ELFFieldNumber>
+							</xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+
+					<!-- Annualized Income Installment Method Indicator -->
+					<xsd:element name="AnnualizedIncomeMethodInd" type="CheckboxType" minOccurs="0">
+						<xsd:annotation>
+							<xsd:documentation>
+								<Description>Annualized income installment method indicator</Description>
+								<LineNumber>C</LineNumber>
+								<ELFFieldNumber>0155</ELFFieldNumber>
+							</xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+
+					<!-- Actually Withheld Indicator -->
+					<xsd:element name="ActuallyWithheldInd" type="CheckboxType" minOccurs="0">
+						<xsd:annotation>
+							<xsd:documentation>
+								<Description>Actually withheld indicator</Description>
+								<LineNumber>D</LineNumber>
+								<ELFFieldNumber>0165</ELFFieldNumber>
+							</xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+
+					<!-- Joint Return Indicator -->
+					<xsd:element name="JointReturnInd" type="CheckboxType" minOccurs="0">
+						<xsd:annotation>
+							<xsd:documentation>
+								<Description>Joint return indicator</Description>
+								<LineNumber>E</LineNumber>
+								<ELFFieldNumber>0170</ELFFieldNumber>
+							</xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+
+			<!-- ===== Part III - Short Method ===== -->
+
+			<!-- For 10, use value of 9 (RequiredAnnualPaymentAmt) -->
+			<!-- ELFFieldNumber 0185 ELFFieldNumber -->
+
+			<!-- For 11, use value of 6 (WithholdingTaxesAmt) -->
+			<!-- ELFFieldNumber 0187 ELFFieldNumber -->
+
+			<!-- Total Estimated Tax Payments -->
+			<xsd:element name="TotalEstimatedTaxPaymentsAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Total estimated tax payments</Description>
+						<LineNumber>12</LineNumber>
+						<ELFFieldNumber>0195</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Total Withholding Taxes and Estimated Tax Payments Amount -->
+			<xsd:element name="TotalWhTaxesAndESPaymentsAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Total withholding taxes and estimated tax payments amount</Description>
+						<LineNumber>13</LineNumber>
+						<ELFFieldNumber>0197</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Total Underpayment for Year -->
+			<xsd:element name="TotalUnderpaymentForYearAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Total underpayment for year</Description>
+						<LineNumber>14</LineNumber>
+						<ELFFieldNumber>0201</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Total Underpayment Calculated Amount -->
+			<xsd:element name="TotalUnderpaymentCalculatedAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Total underpayment calculated amount</Description>
+						<LineNumber>15</LineNumber>
+						<ELFFieldNumber>0205</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Due Date Paid Multiplied Amount -->
+			<xsd:element name="DueDatePaidMultipliedAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Due date paid multiplied amount</Description>
+						<LineNumber>16</LineNumber>
+						<ELFFieldNumber>0215</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Penalty -->
+			<xsd:element name="PenaltyAmt" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Penalty amount</Description>
+						<LineNumber>17</LineNumber>
+						<ELFFieldNumber>0245</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+				<xsd:complexType>
+					<xsd:simpleContent>
+						<xsd:extension base="USAmountType">
+							<xsd:attribute name="waivedLiteralShortMethodCd">
+								<xsd:annotation>
+									<xsd:documentation>
+										<ELFFieldNumber>0225</ELFFieldNumber>
+									</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="StringType">
+										<xsd:enumeration value="AMOUNT WAIVED" />
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:attribute>
+							<xsd:attribute name="waivedShortMethodAmt" type="USAmountType">
+								<xsd:annotation>
+									<xsd:documentation>
+										<ELFFieldNumber>0227</ELFFieldNumber>
+									</xsd:documentation>
+								</xsd:annotation>
+							</xsd:attribute>
+						</xsd:extension>
+					</xsd:simpleContent>
+				</xsd:complexType>
+			</xsd:element>
+
+			<!-- ===== Part IV - Regular Method ===== -->
+
+			<!-- Required Installment A -->
+			<xsd:element name="RequiredInstallmentAAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Required installment A</Description>
+						<LineNumber>18(a)</LineNumber>
+						<ELFFieldNumber>0265</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Required Installment B -->
+			<xsd:element name="RequiredInstallmentBAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Required installment B</Description>
+						<LineNumber>18(b)</LineNumber>
+						<ELFFieldNumber>0275</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Required Installment C -->
+			<xsd:element name="RequiredInstallmentCAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Required installment C</Description>
+						<LineNumber>18(c)</LineNumber>
+						<ELFFieldNumber>0285</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Required Installment D -->
+			<xsd:element name="RequiredInstallmentDAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Required installment D</Description>
+						<LineNumber>18(d)</LineNumber>
+						<ELFFieldNumber>0295</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Estimated Tax Paid and Withheld A -->
+			<xsd:element name="EstimatedTaxPdAndWithheldAAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Estimated tax paid and withheld A</Description>
+						<LineNumber>19(a)</LineNumber>
+						<ELFFieldNumber>0298</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Estimated Tax Paid and Withheld B -->
+			<xsd:element name="EstimatedTaxPdAndWithheldBAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Estimated tax paid and withheld B</Description>
+						<LineNumber>19(b)</LineNumber>
+						<ELFFieldNumber>0303</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Estimated Tax Paid and Withheld C -->
+			<xsd:element name="EstimatedTaxPdAndWithheldCAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Estimated tax paid and withheld C</Description>
+						<LineNumber>19(c)</LineNumber>
+						<ELFFieldNumber>0305</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Estimated Tax Paid and Withheld D -->
+			<xsd:element name="EstimatedTaxPdAndWithheldDAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Estimated tax paid and withheld D</Description>
+						<LineNumber>19(d)</LineNumber>
+						<ELFFieldNumber>0308</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- For 23a, use value of 19a (EstimatedTaxPdAndWithheldAAmt) -->
+			<!-- ELFFieldNumber 0315 ELFFieldNumber -->
+
+			<!-- Underpayment A -->
+			<xsd:element name="UnderpaymentAAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Underpayment A</Description>
+						<LineNumber>25(a)</LineNumber>
+						<ELFFieldNumber>0325</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Overpayment A -->
+			<xsd:element name="OverpaymentAAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Overpayment A</Description>
+						<LineNumber>26(a)</LineNumber>
+						<ELFFieldNumber>0335</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- For 20b, use value of 26a (OverpaymentAAmt) -->
+			<!-- ELFFieldNumber 0355 ELFFieldNumber -->
+
+			<!-- Tax To Be Applied B -->
+			<xsd:element name="TaxToBeAppliedBAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Tax to be applied B</Description>
+						<LineNumber>21(b)</LineNumber>
+						<ELFFieldNumber>0365</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Taxes Due Column B -->
+			<xsd:element name="TaxesDueColumnBAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Taxes due column B</Description>
+						<LineNumber>22(b)</LineNumber>
+						<ELFFieldNumber>0375</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Applied Overpayment B -->
+			<xsd:element name="AppliedOverpaymentBAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Applied overpayment B</Description>
+						<LineNumber>23(b)</LineNumber>
+						<ELFFieldNumber>0385</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Applied Underpayment B -->
+			<xsd:element name="AppliedUnderpaymentBAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Applied underpayment B</Description>
+						<LineNumber>24(b)</LineNumber>
+						<ELFFieldNumber>0395</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Underpayment B -->
+			<xsd:element name="UnderpaymentBAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Underpayment B</Description>
+						<LineNumber>25(b)</LineNumber>
+						<ELFFieldNumber>0405</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Overpayment B -->
+			<xsd:element name="OverpaymentBAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Overpayment B</Description>
+						<LineNumber>26(b)</LineNumber>
+						<ELFFieldNumber>0415</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- For 20c, use value of 26b (OverpaymentBAmt) -->
+			<!-- ELFFieldNumber 0435 ELFFieldNumber -->
+
+			<!-- Tax To Be Applied C -->
+			<xsd:element name="TaxToBeAppliedCAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Tax to be applied C</Description>
+						<LineNumber>21(c)</LineNumber>
+						<ELFFieldNumber>0445</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Taxes Due Column C -->
+			<xsd:element name="TaxesDueColumnCAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Taxes due column C</Description>
+						<LineNumber>22(c)</LineNumber>
+						<ELFFieldNumber>0455</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Applied Overpayment C -->
+			<xsd:element name="AppliedOverpaymentCAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Applied overpayment C</Description>
+						<LineNumber>23(c)</LineNumber>
+						<ELFFieldNumber>0465</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Applied Underpayment C -->
+			<xsd:element name="AppliedUnderpaymentCAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Applied underpayment C</Description>
+						<LineNumber>24(c)</LineNumber>
+						<ELFFieldNumber>0475</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Underpayment C -->
+			<xsd:element name="UnderpaymentCAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Underpayment C</Description>
+						<LineNumber>25(c)</LineNumber>
+						<ELFFieldNumber>0485</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Overpayment C -->
+			<xsd:element name="OverpaymentCAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Overpayment C</Description>
+						<LineNumber>26(c)</LineNumber>
+						<ELFFieldNumber>0495</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- For 20d, use value of 26c (OverpaymentCAmt) -->
+			<!-- ELFFieldNumber 0515 ELFFieldNumber -->
+
+			<!-- Tax To Be Applied D -->
+			<xsd:element name="TaxToBeAppliedDAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Tax to be applied D</Description>
+						<LineNumber>21(d)</LineNumber>
+						<ELFFieldNumber>0525</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Taxes Due Column D -->
+			<xsd:element name="TaxesDueColumnDAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Taxes due column D</Description>
+						<LineNumber>22(d)</LineNumber>
+						<ELFFieldNumber>0535</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Applied Overpayment D -->
+			<xsd:element name="AppliedOverpaymentDAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Applied overpayment D</Description>
+						<LineNumber>23(d)</LineNumber>
+						<ELFFieldNumber>0545</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Underpayment D -->
+			<xsd:element name="UnderpaymentDAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Underpayment D</Description>
+						<LineNumber>25(d)</LineNumber>
+						<ELFFieldNumber>0565</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		
+			<!-- Total Penalty -->
+			<xsd:element name="TotalPenaltyAmt" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Total penalty</Description>
+						<LineNumber>27</LineNumber>
+						<ELFFieldNumber>0671</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+				<xsd:complexType>
+					<xsd:simpleContent>
+						<xsd:extension base="USAmountType">
+							<xsd:attribute name="waivedLiteralRegularMethodCd">
+								<xsd:annotation>
+									<xsd:documentation>
+										<ELFFieldNumber>NL</ELFFieldNumber>
+									</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="StringType">
+										<xsd:enumeration value="AMOUNT WAIVED" />
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:attribute>
+							<xsd:attribute name="waivedRegularMethodAmt" type="USAmountType">
+								<xsd:annotation>
+									<xsd:documentation>
+										<ELFFieldNumber>0667</ELFFieldNumber>
+									</xsd:documentation>
+								</xsd:annotation>
+							</xsd:attribute>
+						</xsd:extension>
+					</xsd:simpleContent>
+				</xsd:complexType>
+			</xsd:element>
+
+			<!-- ===== Schedule AI - Part I ===== -->
+
+			<!-- AGI Amount Period A -->
+			<xsd:element name="AGIPeriodAAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>AGI amount period A</Description>
+						<LineNumber>1(a)</LineNumber>
+						<ELFFieldNumber>0900</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Annualized Income A -->
+			<xsd:element name="AnnualizedIncomeAAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Annualized income A</Description>
+						<LineNumber>3(a)</LineNumber>
+						<ELFFieldNumber>0905</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Itemized Deductions A -->
+			<xsd:element name="ItemizedDeductionsAAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Itemized deductions A</Description>
+						<LineNumber>4(a)</LineNumber>
+						<ELFFieldNumber>0910</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Annualized Itemized Deductions A -->
+			<xsd:element name="AnnualizedItemizedDedAAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Annualized itemized deductions A</Description>
+						<LineNumber>6(a)</LineNumber>
+						<ELFFieldNumber>0920</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Return Standard Deductions A -->
+			<xsd:element name="ReturnStandardDeductionAAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Return standard deductions A</Description>
+						<LineNumber>7(a)</LineNumber>
+						<ELFFieldNumber>0930</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Installment Deduction Amount A -->
+			<xsd:element name="InstallmentDeductionAAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Installment deduction amount A</Description>
+						<LineNumber>8(a)</LineNumber>
+						<ELFFieldNumber>0940</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			
+			<!-- Qualified Business Income Deduction A Amount -->
+			<xsd:element name="QualifiedBusinessIncomeDedAAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Qualified Business Income Deduction A Amount</Description>
+						<LineNumber>9(a)</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			
+			<!-- Aggregate Deduction A Amount -->
+			<xsd:element name="AggregateDeductionAAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Aggregate deduction A amount</Description>
+						<LineNumber>10(a)</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Net Income Amount A -->
+			<xsd:element name="NetIncomeAAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Net income amount A</Description>
+						<LineNumber>11(a)</LineNumber>
+						<ELFFieldNumber>0950</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Exemption Claimed Amt A -->
+			<xsd:element name="ExemptionClaimedAAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Exemption claimed amt A</Description>
+						<LineNumber>12(a)</LineNumber>
+						<ELFFieldNumber>0960</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Taxable Income Amt A -->
+			<xsd:element name="TaxableIncomeAAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Taxable income amt A</Description>
+						<LineNumber>13(a)</LineNumber>
+						<ELFFieldNumber>0970</ELFFieldNumber>
+				     </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Tentative Tax Amt A -->
+			<xsd:element name="TentativeTaxAAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Tentative tax amt A</Description>
+						<LineNumber>14(a)</LineNumber>
+						<ELFFieldNumber>0980</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- For 15a use value of 36a Schedule AI, Part II (AnnualizedSelfEmploymentTxAAmt) -->
+			<!-- Enter the combined total from line 36a if there are two F2210, Schedule AI, Part II -->
+			<!-- ELFFieldNumber 0990 ELFFieldNumber -->
+
+			<!-- Other Taxes A -->
+			<xsd:element name="OtherTaxesAAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Other taxes A</Description>
+						<LineNumber>16(a)</LineNumber>
+						<ELFFieldNumber>1000</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Tax Before Credits A -->
+			<xsd:element name="TaxBeforeCreditsAAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Tax before credits A</Description>
+						<LineNumber>17(a)</LineNumber>
+						<ELFFieldNumber>1010</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Allowed Credits A -->
+			<xsd:element name="AllowedCreditsAAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Allowed credits A</Description>
+						<LineNumber>18(a)</LineNumber>
+						<ELFFieldNumber>1020</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Net Tax Due Amount A -->
+			<xsd:element name="NetTaxDueAAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Net tax due amount A</Description>
+						<LineNumber>19(a)</LineNumber>
+						<ELFFieldNumber>1030</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Applicable Tax Due Amount A -->
+			<xsd:element name="ApplicableTaxDueAAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Applicable tax due amount A</Description>
+						<LineNumber>21(a)</LineNumber>
+						<ELFFieldNumber>1040</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Tax Due Amount A -->
+			<xsd:element name="TaxDueAAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Tax due amount A</Description>
+						<LineNumber>23(a)</LineNumber>
+						<ELFFieldNumber>1050</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Installment Tax Amount A -->
+			<xsd:element name="InstallmentTaxAAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Installment tax amount A</Description>
+						<LineNumber>24(a)</LineNumber>
+						<ELFFieldNumber>1060</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Aggregate Tax Due Amount A -->
+			<xsd:element name="AggregateTaxDueAAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Aggregate tax due amount A</Description>
+						<LineNumber>26(a)</LineNumber>
+						<ELFFieldNumber>1070</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Annualized Income Installment Amount A -->
+			<xsd:element name="AnnualizedIncomeInstallAAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Annualized income installment amount A</Description>
+						<LineNumber>27(a)</LineNumber>
+						<ELFFieldNumber>1080</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- AGI Amount Period B -->
+			<xsd:element name="AGIPeriodBAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>AGI amount period B</Description>
+						<LineNumber>1(b)</LineNumber>
+						<ELFFieldNumber>1090</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Annualized Income B -->
+			<xsd:element name="AnnualizedIncomeBAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Annualized income B</Description>
+						<LineNumber>3(b)</LineNumber>
+						<ELFFieldNumber>1100</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Itemized Deductions B -->
+			<xsd:element name="ItemizedDeductionsBAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Itemized deductions B</Description>
+						<LineNumber>4(b)</LineNumber>
+						<ELFFieldNumber>1110</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Annualized Itemized Deductions B -->
+			<xsd:element name="AnnualizedItemizedDedBAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Annualized itemized deductions B</Description>
+						<LineNumber>6(b)</LineNumber>
+						<ELFFieldNumber>1120</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Return Standard Deduction B -->
+			<xsd:element name="ReturnStandardDeductionBAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Return standard deduction B</Description>
+						<LineNumber>7(b)</LineNumber>
+						<ELFFieldNumber>1130</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Installment Deduction Amount B -->
+			<xsd:element name="InstallmentDeductionBAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Installment deduction amount B</Description>
+						<LineNumber>8(b)</LineNumber>
+						<ELFFieldNumber>1140</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			
+			<!-- Qualified Business Income Deduction B Amount -->
+			<xsd:element name="QualifiedBusinessIncomeDedBAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Qualified Business Income Deduction B Amount</Description>
+						<LineNumber>9(b)</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			
+			<!-- Aggregate Deduction B Amount -->
+			<xsd:element name="AggregateDeductionBAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Aggregate deduction B amount</Description>
+						<LineNumber>10(b)</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Net Income Amount B -->
+			<xsd:element name="NetIncomeBAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Net income amount B</Description>
+						<LineNumber>11(b)</LineNumber>
+						<ELFFieldNumber>1150</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Exemption Claimed Amt B -->
+			<xsd:element name="ExemptionClaimedBAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Exemption claimed amt B</Description>
+						<LineNumber>12(b)</LineNumber>
+						<ELFFieldNumber>1160</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Taxable Income Amt B -->
+			<xsd:element name="TaxableIncomeBAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Taxable income amt B</Description>
+						<LineNumber>13(b)</LineNumber>
+						<ELFFieldNumber>1170</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Tentative Tax Amt B -->
+			<xsd:element name="TentativeTaxBAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Tentative tax amt B</Description>
+						<LineNumber>14(b)</LineNumber>
+						<ELFFieldNumber>1180</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- For 15b use value of 36b Schedule AI, Part II (AnnualizedSelfEmploymentTxBAmt) -->
+			<!-- Enter the combined total from line 36b if there are two F2210, Schedule AI, Part II -->
+			<!-- ELFFieldNumber 1190 ELFFieldNumber -->
+
+			<!-- Other Taxes B -->
+			<xsd:element name="OtherTaxesBAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Other taxes B</Description>
+						<LineNumber>16(b)</LineNumber>
+						<ELFFieldNumber>1200</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Tax Before Credits B -->
+			<xsd:element name="TaxBeforeCreditsBAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Tax before credits B</Description>
+						<LineNumber>17(b)</LineNumber>
+						<ELFFieldNumber>1210</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Allowed Credits B -->
+			<xsd:element name="AllowedCreditsBAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Allowed credits B</Description>
+						<LineNumber>18(b)</LineNumber>
+						<ELFFieldNumber>1220</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Net Tax Due Amount B -->
+			<xsd:element name="NetTaxDueBAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Net tax due amount B</Description>
+						<LineNumber>19(b)</LineNumber>
+						<ELFFieldNumber>1230</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Applicable Tax Due Amount B -->
+			<xsd:element name="ApplicableTaxDueBAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Applicable tax due amount B</Description>
+						<LineNumber>21(b)</LineNumber>
+						<ELFFieldNumber>1240</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- For 22b use value of 27a (AnnualizedIncomeInstallAAmt) -->
+			<!-- ELFFieldNumber 1250 ELFFieldNumber -->
+
+			<!-- Tax Due Amount B -->
+			<xsd:element name="TaxDueBAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Tax due amount B</Description>
+						<LineNumber>23(b)</LineNumber>
+						<ELFFieldNumber>1260</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Installment Tax Amount B -->
+			<xsd:element name="InstallmentTaxBAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Installment tax amount B</Description>
+						<LineNumber>24(b)</LineNumber>
+						<ELFFieldNumber>1270</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Accumulated Adjusted Tax Amount B -->
+			<xsd:element name="AccumulatedAdjustedTaxBAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Accumulated adjusted tax amount B</Description>
+						<LineNumber>25(b)</LineNumber>
+						<ELFFieldNumber>1280</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Aggregate Tax Due Amount B -->
+			<xsd:element name="AggregateTaxDueBAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Aggregate tax due amount B</Description>
+						<LineNumber>26(b)</LineNumber>
+						<ELFFieldNumber>1290</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Annualized Income Installment Amount B -->
+			<xsd:element name="AnnualizedIncomeInstallBAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Annualized income installment amount B</Description>
+						<LineNumber>27(b)</LineNumber>
+						<ELFFieldNumber>1300</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- AGI Amount Period C -->
+			<xsd:element name="AGIPeriodCAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>AGI amount period C</Description>
+						<LineNumber>1(c)</LineNumber>
+						<ELFFieldNumber>1310</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Annualized Income C -->
+			<xsd:element name="AnnualizedIncomeCAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Annualized income C</Description>
+						<LineNumber>3(c)</LineNumber>
+						<ELFFieldNumber>1320</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Itemized Deductions C -->
+			<xsd:element name="ItemizedDeductionsCAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Itemized deductions C</Description>
+						<LineNumber>4(c)</LineNumber>
+						<ELFFieldNumber>1330</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Annualized Itemized Deductions C -->
+			<xsd:element name="AnnualizedItemizedDedCAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Annualized itemized deductions C</Description>
+						<LineNumber>6(c)</LineNumber>
+						<ELFFieldNumber>1340</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Return Standard Deduction C -->
+			<xsd:element name="ReturnStandardDeductionCAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Return standard deduction C</Description>
+						<LineNumber>7(c)</LineNumber>
+						<ELFFieldNumber>1350</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Installment Deduction Amount C -->
+			<xsd:element name="InstallmentDeductionCAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Installment deduction amount C</Description>
+						<LineNumber>8(c)</LineNumber>
+						<ELFFieldNumber>1360</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			
+			<!-- Qualified Business Income Deduction C Amount -->
+			<xsd:element name="QualifiedBusinessIncomeDedCAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Qualified Business Income Deduction C Amount</Description>
+						<LineNumber>9(c)</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			
+			<!-- Aggregate Deduction C Amount -->
+			<xsd:element name="AggregateDeductionCAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Aggregate deduction C amount</Description>
+						<LineNumber>10(c)</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Net Income Amount C -->
+			<xsd:element name="NetIncomeCAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Net income amount C</Description>
+						<LineNumber>11(c)</LineNumber>
+						<ELFFieldNumber>1370</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Exemption Claimed Amt C -->
+			<xsd:element name="ExemptionClaimedCAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Exemption claimed amt C</Description>
+						<LineNumber>12(c)</LineNumber>
+						<ELFFieldNumber>1380</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Taxable Income Amt C -->
+			<xsd:element name="TaxableIncomeCAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Taxable income amt C</Description>
+						<LineNumber>13(c)</LineNumber>
+						<ELFFieldNumber>1390</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Tentative Tax amt C -->
+			<xsd:element name="TentativeTaxCAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Tentative tax amt C</Description>
+						<LineNumber>14(c)</LineNumber>
+						<ELFFieldNumber>1400</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- For 15c use value of 36c Schedule AI, Part II (AnnualizedSelfEmploymentTxCAmt) -->
+			<!-- Enter the combined total from line 36c if there are two F2210, Schedule AI, Part II -->
+			<!-- ELFFieldNumber 1410 ELFFieldNumber -->
+
+			<!-- Other Taxes C -->
+			<xsd:element name="OtherTaxesCAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Other taxes C</Description>
+						<LineNumber>16(c)</LineNumber>
+						<ELFFieldNumber>1420</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Tax Before Credits C -->
+			<xsd:element name="TaxBeforeCreditsCAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Tax before credits C</Description>
+						<LineNumber>17(c)</LineNumber>
+						<ELFFieldNumber>1430</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Allowed Credits C -->
+			<xsd:element name="AllowedCreditsCAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Allowed credits C</Description>
+						<LineNumber>18(c)</LineNumber>
+						<ELFFieldNumber>1440</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Net Tax Due Amount C -->
+			<xsd:element name="NetTaxDueCAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Net tax due amount C</Description>
+						<LineNumber>19(c)</LineNumber>
+						<ELFFieldNumber>1450</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Applicable Tax Due Amount C -->
+			<xsd:element name="ApplicableTaxDueCAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Applicable tax due amount C</Description>
+						<LineNumber>21(c)</LineNumber>
+						<ELFFieldNumber>1460</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- For 22c use value of 27b (AnnualizedIncomeInstallBAmt) -->
+			<!-- ELFFieldNumber 1470 ELFFieldNumber -->
+
+			<!-- Tax Due Amount C -->
+			<xsd:element name="TaxDueCAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Tax due amount C</Description>
+						<LineNumber>23(c)</LineNumber>
+						<ELFFieldNumber>1480</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Installment Tax Amount C -->
+			<xsd:element name="InstallmentTaxCAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Installment tax amount C</Description>
+						<LineNumber>24(c)</LineNumber>
+						<ELFFieldNumber>1490</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Accumulated Adjusted Tax Amount C -->
+			<xsd:element name="AccumulatedAdjustedTaxCAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Accumulated adjusted tax amount C</Description>
+						<LineNumber>25(c)</LineNumber>
+						<ELFFieldNumber>1500</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Aggregate Tax Due Amount C -->
+			<xsd:element name="AggregateTaxDueCAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Aggregate tax due amount C</Description>
+						<LineNumber>26(c)</LineNumber>
+						<ELFFieldNumber>1510</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Annualized Income Installment Amount C -->
+			<xsd:element name="AnnualizedIncomeInstallCAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Annualized income installment amount C</Description>
+						<LineNumber>27(c)</LineNumber>
+						<ELFFieldNumber>1520</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- AGI Amount Period D -->
+			<xsd:element name="AGIPeriodDAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>AGI amount period D</Description>
+						<LineNumber>1(d)</LineNumber>
+						<ELFFieldNumber>1530</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Annulized Income D -->
+			<xsd:element name="AnnualizedIncomeDAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Annulized income D</Description>
+						<LineNumber>3(d)</LineNumber>
+						<ELFFieldNumber>1540</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Itemized Deductions D -->
+			<xsd:element name="ItemizedDeductionsDAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Itemized deductions D</Description>
+						<LineNumber>4(d)</LineNumber>
+						<ELFFieldNumber>1550</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Annulized Itemized Deductions D -->
+			<xsd:element name="AnnualizedItemizedDedDAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Annulized itemized deductions D</Description>
+						<LineNumber>6(d)</LineNumber>
+						<ELFFieldNumber>1560</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Return Standard Deduction D -->
+			<xsd:element name="ReturnStandardDeductionDAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Return standard deduction D</Description>
+						<LineNumber>7(d)</LineNumber>
+						<ELFFieldNumber>1570</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Installment Deduction Amount D -->
+			<xsd:element name="InstallmentDeductionDAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Installment deduction amount D</Description>
+						<LineNumber>8(d)</LineNumber>
+						<ELFFieldNumber>1580</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>	
+			
+			<!-- Qualified Business Income Deduction D Amount -->
+			<xsd:element name="QualifiedBusinessIncomeDedDAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Qualified Business Income Deduction D Amount</Description>
+						<LineNumber>9(d)</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			
+			<!-- Aggregate Deduction D Amount -->
+			<xsd:element name="AggregateDeductionDAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Aggregate deduction D amount</Description>
+						<LineNumber>10(d)</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Net Income Amount D -->
+			<xsd:element name="NetIncomeDAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Net income amount D</Description>
+						<LineNumber>11(d)</LineNumber>
+						<ELFFieldNumber>1590</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Exemption Claimed Amt D -->
+			<xsd:element name="ExemptionClaimedDAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Exemption claimed amt D</Description>
+						<LineNumber>12(d)</LineNumber>
+						<ELFFieldNumber>1600</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Taxable Income Amt D -->
+			<xsd:element name="TaxableIncomeDAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Taxable income amt D</Description>
+						<LineNumber>13(d)</LineNumber>
+						<ELFFieldNumber>1610</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Tentative Tax Amt D -->
+			<xsd:element name="TentativeTaxDAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Tentative tax amt D</Description>
+						<LineNumber>14(d)</LineNumber>
+						<ELFFieldNumber>1620</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- For 15d use value of 36d Schedule AI, Part II (AnnualizedSelfEmploymentTxDAmt) -->
+			<!-- Enter the combined total from line 36d if there are two F2210, Schedule AI, Part II -->
+			<!-- ELFFieldNumber 1630 ELFFieldNumber -->
+
+			<!-- Other Taxes D -->
+			<xsd:element name="OtherTaxesDAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Other taxes D</Description>
+						<LineNumber>16(d)</LineNumber>
+						<ELFFieldNumber>1640</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Tax Before Credits D -->
+			<xsd:element name="TaxBeforeCreditsDAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Tax before credits D</Description>
+						<LineNumber>17(d)</LineNumber>
+						<ELFFieldNumber>1650</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Allowed Credits D -->
+			<xsd:element name="AllowedCreditsDAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Allowed credits D</Description>
+						<LineNumber>18(d)</LineNumber>
+						<ELFFieldNumber>1660</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Net Tax Due Amount D -->
+			<xsd:element name="NetTaxDueDAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Net tax due amount D</Description>
+						<LineNumber>19(d)</LineNumber>
+						<ELFFieldNumber>1670</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Applicable Tax Due Amount D -->
+			<xsd:element name="ApplicableTaxDueDAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Applicable tax due amount D</Description>
+						<LineNumber>21(d)</LineNumber>
+						<ELFFieldNumber>1680</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- For 22d use value of 27c (AnnualizedIncomeInstallCAmt) -->
+			<!-- ELFFieldNumber 1690 ELFFieldNumber -->
+
+			<!-- Tax Due Amount D  -->
+			<xsd:element name="TaxDueDAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Tax due amount D</Description>
+						<LineNumber>23(d)</LineNumber>
+						<ELFFieldNumber>1700</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Installment Tax Amount D -->
+			<xsd:element name="InstallmentTaxDAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Installment tax amount D</Description>
+						<LineNumber>24(d)</LineNumber>
+						<ELFFieldNumber>1710</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Accumulated Adjusted Tax Amount D -->
+			<xsd:element name="AccumulatedAdjustedTaxDAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Accumulated adjusted tax amount D</Description>
+						<LineNumber>25(d)</LineNumber>
+						<ELFFieldNumber>1720</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Aggregate Tax Due Amount D -->
+			<xsd:element name="AggregateTaxDueDAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Aggregate tax due amount D</Description>
+						<LineNumber>26(d)</LineNumber>
+						<ELFFieldNumber>1730</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Annualized Income Installment Amount D -->
+			<xsd:element name="AnnualizedIncomeInstallDAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Annualized income installment amount D</Description>
+						<LineNumber>27(d)</LineNumber>
+						<ELFFieldNumber>1740</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<xsd:element name="SEWorksheetByQtr" minOccurs="0" maxOccurs="2">
+			<xsd:complexType>
+				<xsd:sequence>
+
+				<!-- Net Self-Employment Earnings A -->
+				<xsd:element name="NetSelfEmploymentEarningsAAmt" type="USAmountType" minOccurs="0">
+					<xsd:annotation>
+						<xsd:documentation>
+							<Description>Net self-employment earnings A</Description>
+							<LineNumber>28(a)</LineNumber>
+							<ELFFieldNumber>1750</ELFFieldNumber>
+						</xsd:documentation>
+					</xsd:annotation>
+				</xsd:element>
+
+				<!-- SST/RRT Wages A -->
+				<xsd:element name="SSTRRTWagesAAmt" type="USAmountType" minOccurs="0">
+					<xsd:annotation>
+						<xsd:documentation>
+							<Description>SST/RRT wages A</Description>
+							<LineNumber>30(a)</LineNumber>
+							<ELFFieldNumber>1760</ELFFieldNumber>
+						</xsd:documentation>
+					</xsd:annotation>
+				</xsd:element>
+
+				<!-- Net Prorated Social Security Tax Limit A  -->
+				<xsd:element name="NetProratedSSTLimitAAmt" type="USAmountType" minOccurs="0">
+					<xsd:annotation>
+						<xsd:documentation>
+							<Description>Net prorated social security tax limit A</Description>
+							<LineNumber>31(a)</LineNumber>
+							<ELFFieldNumber>1770</ELFFieldNumber>
+						</xsd:documentation>
+					</xsd:annotation>
+				</xsd:element>
+
+				<!-- Annualized SST/RRT Wages A  -->
+				<xsd:element name="AnnualizedSSTRRTWagesAAmt" type="USAmountType" minOccurs="0">
+					<xsd:annotation>
+						<xsd:documentation>
+							<Description>Annualized SST/RRT wages A</Description>
+							<LineNumber>33(a)</LineNumber>
+							<ELFFieldNumber>1780</ELFFieldNumber>
+						</xsd:documentation>
+					</xsd:annotation>
+				</xsd:element>
+
+				<!-- Annualized Net Self-Employment Earnings A -->
+				<xsd:element name="AnnualizedNetSEEarningsAAmt" type="USAmountType" minOccurs="0">
+					<xsd:annotation>
+						<xsd:documentation>
+							<Description>Annualized net self-employment earnings A</Description>
+							<LineNumber>35(a)</LineNumber>
+							<ELFFieldNumber>1790</ELFFieldNumber>
+						</xsd:documentation>
+					</xsd:annotation>
+				</xsd:element>
+
+				<!-- Annualized SE Tax A -->
+				<xsd:element name="AnnualizedSelfEmploymentTxAAmt" type="USAmountType" minOccurs="0">
+					<xsd:annotation>
+						<xsd:documentation>
+							<Description>Annualized SE Tax A</Description>
+							<LineNumber>36(a)</LineNumber>
+							<ELFFieldNumber>1800</ELFFieldNumber>
+						</xsd:documentation>
+					</xsd:annotation>
+				</xsd:element>
+
+				<!-- Net Self-Employment Earnings B -->
+				<xsd:element name="NetSelfEmploymentEarningsBAmt" type="USAmountType" minOccurs="0">
+					<xsd:annotation>
+						<xsd:documentation>
+							<Description>Net self-employment earnings B</Description>
+							<LineNumber>28(b)</LineNumber>
+							<ELFFieldNumber>1810</ELFFieldNumber>
+						</xsd:documentation>
+					</xsd:annotation>
+				</xsd:element>
+
+				<!-- SST/RRT Wages B -->
+				<xsd:element name="SSTRRTWagesBAmt" type="USAmountType" minOccurs="0">
+					<xsd:annotation>
+						<xsd:documentation>
+							<Description>SST/RRT wages B</Description>
+							<LineNumber>30(b)</LineNumber>
+							<ELFFieldNumber>1820</ELFFieldNumber>
+						</xsd:documentation>
+					</xsd:annotation>
+				</xsd:element>
+
+				<!-- Net Prorated Social Security Tax Limit B  -->
+				<xsd:element name="NetProratedSSTLimitBAmt" type="USAmountType" minOccurs="0">
+					<xsd:annotation>
+						<xsd:documentation>
+							<Description>Net prorated social security tax limit B</Description>
+							<LineNumber>31(b)</LineNumber>
+							<ELFFieldNumber>1830</ELFFieldNumber>
+						</xsd:documentation>
+					</xsd:annotation>
+				</xsd:element>
+
+				<!-- Annualized SST/RRT Wages B  -->
+				<xsd:element name="AnnualizedSSTRRTWagesBAmt" type="USAmountType" minOccurs="0">
+					<xsd:annotation>
+						<xsd:documentation>
+							<Description>Annualized SST/RRT wages B</Description>
+							<LineNumber>33(b)</LineNumber>
+							<ELFFieldNumber>1840</ELFFieldNumber>
+						</xsd:documentation>
+					</xsd:annotation>
+				</xsd:element>
+
+				<!-- Annualized Net Self-Employment Earnings B -->
+				<xsd:element name="AnnualizedNetSEEarningsBAmt" type="USAmountType" minOccurs="0">
+					<xsd:annotation>
+						<xsd:documentation>
+							<Description>Annualized net self-employment earnings B</Description>
+							<LineNumber>35(b)</LineNumber>
+							<ELFFieldNumber>1850</ELFFieldNumber>
+						</xsd:documentation>
+					</xsd:annotation>
+				</xsd:element>
+
+				<!-- Annualized Self-Employment Tax B -->
+				<xsd:element name="AnnualizedSelfEmploymentTxBAmt" type="USAmountType" minOccurs="0">
+					<xsd:annotation>
+						<xsd:documentation>
+							<Description>Annualized self-employment Tax B</Description>
+							<LineNumber>36(b)</LineNumber>
+							<ELFFieldNumber>1860</ELFFieldNumber>
+						</xsd:documentation>
+					</xsd:annotation>
+				</xsd:element>
+
+				<!-- Net Self-Employment Earnings C -->
+				<xsd:element name="NetSelfEmploymentEarningsCAmt" type="USAmountType" minOccurs="0">
+					<xsd:annotation>
+						<xsd:documentation>
+							<Description>Net self-employment earnings C</Description>
+							<LineNumber>28(c)</LineNumber>
+							<ELFFieldNumber>1870</ELFFieldNumber>
+						</xsd:documentation>
+					</xsd:annotation>
+				</xsd:element>
+
+				<!-- SST/RRT Wages C -->
+				<xsd:element name="SSTRRTWagesCAmt" type="USAmountType" minOccurs="0">
+					<xsd:annotation>
+						<xsd:documentation>
+							<Description>SST/RRT wages C</Description>
+							<LineNumber>30(c)</LineNumber>
+							<ELFFieldNumber>1880</ELFFieldNumber>
+						</xsd:documentation>
+					</xsd:annotation>
+				</xsd:element>
+
+				<!-- Net Prorated Social Security Tax Limit C  -->
+				<xsd:element name="NetProratedSSTLimitCAmt" type="USAmountType" minOccurs="0">
+					<xsd:annotation>
+						<xsd:documentation>
+							<Description>Net prorated social security tax limit C</Description>
+							<LineNumber>31(c)</LineNumber>
+							<ELFFieldNumber>1890</ELFFieldNumber>
+						</xsd:documentation>
+					</xsd:annotation>
+				</xsd:element>
+
+				<!-- Annualized SST/RRT Wages C  -->
+				<xsd:element name="AnnualizedSSTRRTWagesCAmt" type="USAmountType" minOccurs="0">
+					<xsd:annotation>
+						<xsd:documentation>
+							<Description>Annualized SST/RRT wages C</Description>
+							<LineNumber>33(c)</LineNumber>
+							<ELFFieldNumber>1900</ELFFieldNumber>
+						</xsd:documentation>
+					</xsd:annotation>
+				</xsd:element>
+
+				<!-- Annualized Net Self-Employment Earnings C -->
+				<xsd:element name="AnnualizedNetSEEarningsCAmt" type="USAmountType" minOccurs="0">
+					<xsd:annotation>
+						<xsd:documentation>
+							<Description>Annualized net self-employment earnings C</Description>
+							<LineNumber>35(c)</LineNumber>
+							<ELFFieldNumber>1910</ELFFieldNumber>
+						</xsd:documentation>
+					</xsd:annotation>
+				</xsd:element>
+
+				<!-- Annualized Self-Employment Tax C -->
+				<xsd:element name="AnnualizedSelfEmploymentTxCAmt" type="USAmountType" minOccurs="0">
+					<xsd:annotation>
+						<xsd:documentation>
+							<Description>Annualized self-employment tax C</Description>
+							<LineNumber>36(c)</LineNumber>
+							<ELFFieldNumber>1920</ELFFieldNumber>
+						</xsd:documentation>
+					</xsd:annotation>
+				</xsd:element>
+
+				<!-- Net Self-Employment Earnings D -->
+				<xsd:element name="NetSelfEmploymentEarningsDAmt" type="USAmountType" minOccurs="0">
+					<xsd:annotation>
+						<xsd:documentation>
+							<Description>Net self-employment earnings D</Description>
+							<LineNumber>28(d)</LineNumber>
+							<ELFFieldNumber>1930</ELFFieldNumber>
+						</xsd:documentation>
+					</xsd:annotation>
+				</xsd:element>
+
+				<!-- SST/RRT Wages D -->
+				<xsd:element name="SSTRRTWagesDAmt" type="USAmountType" minOccurs="0">
+					<xsd:annotation>
+						<xsd:documentation>
+							<Description>SST/RRT wages D</Description>
+							<LineNumber>30(d)</LineNumber>
+							<ELFFieldNumber>1940</ELFFieldNumber>
+						</xsd:documentation>
+					</xsd:annotation>
+				</xsd:element>
+
+				<!-- Net Prorated Social Security Tax Limit D  -->
+				<xsd:element name="NetProratedSSTLimitDAmt" type="USAmountType" minOccurs="0">
+					<xsd:annotation>
+						<xsd:documentation>
+							<Description>Net prorated social security tax limit D</Description>
+							<LineNumber>31(d)</LineNumber>
+							<ELFFieldNumber>1950</ELFFieldNumber>
+						</xsd:documentation>
+					</xsd:annotation>
+				</xsd:element>
+
+				<!-- Annualized SST/RRT Wages D  -->
+				<xsd:element name="AnnualizedSSTRRTWagesDAmt" type="USAmountType" minOccurs="0">
+					<xsd:annotation>
+						<xsd:documentation>
+							<Description>Annualized SST/RRT wages D</Description>
+							<LineNumber>33(d)</LineNumber>
+							<ELFFieldNumber>1960</ELFFieldNumber>
+						</xsd:documentation>
+					</xsd:annotation>
+				</xsd:element>
+				
+
+				<!-- Annualized Net Self-Employment Earnings D -->
+				<xsd:element name="AnnualizedNetSEEarningsDAmt" type="USAmountType" minOccurs="0">
+					<xsd:annotation>
+						<xsd:documentation>
+							<Description>Annualized net self-employment earnings D</Description>
+							<LineNumber>35(d)</LineNumber>
+							<ELFFieldNumber>1970</ELFFieldNumber>
+						</xsd:documentation>
+					</xsd:annotation>
+				</xsd:element>
+
+				<!-- Annualized Self-Employment Tax D -->
+				<xsd:element name="AnnualizedSelfEmploymentTxDAmt" type="USAmountType" minOccurs="0">
+					<xsd:annotation>
+						<xsd:documentation>
+							<Description>Annualized self-employment tax D</Description>
+							<LineNumber>36(d)</LineNumber>
+							<ELFFieldNumber>1980</ELFFieldNumber>
+						</xsd:documentation>
+					</xsd:annotation>
+				</xsd:element>
+
+		</xsd:sequence>
+	</xsd:complexType>
+	</xsd:element>
+
+    </xsd:sequence>
+ </xsd:complexType>
+
+</xsd:schema>
+

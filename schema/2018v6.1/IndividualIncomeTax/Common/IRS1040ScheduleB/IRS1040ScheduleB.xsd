@@ -1,0 +1,520 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.irs.gov/efile" targetNamespace="http://www.irs.gov/efile" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xsd:annotation>
+		<xsd:documentation>
+			<Description>IRS e-file Individual Income Tax Schema - IRS 1040 Schedule B Interest and Ordinary Dividends</Description>
+			<TaxYear>2018</TaxYear>
+			<MaturityLevel>Final Release</MaturityLevel>
+			<ReleaseDate>February 13, 2019</ReleaseDate>
+		</xsd:documentation>
+	</xsd:annotation>
+	<xsd:include schemaLocation="../../../Common/efileTypes.xsd"/>
+	<!-- =============================================================== -->
+	<!-- ===================== IRS 1040 Schedule B ===================== -->
+	<!-- =============================================================== -->
+	<xsd:element name="IRS1040ScheduleB">
+		<xsd:annotation>
+			<xsd:documentation>IRS 1040 Schedule B</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:complexContent>
+				<xsd:extension base="IRS1040ScheduleBType">
+					<xsd:attributeGroup ref="DocumentAttributes">
+						<xsd:annotation>
+							<xsd:documentation>Common return document attributes</xsd:documentation>
+						</xsd:annotation>
+					</xsd:attributeGroup>
+					<xsd:attribute name="documentName" type="xsd:string" fixed="IRS1040ScheduleB">
+						<xsd:annotation>
+							<xsd:documentation>IRS internal use only. To avoid error in the return, do not include the attribute name or value.</xsd:documentation>
+						</xsd:annotation>
+					</xsd:attribute>
+				</xsd:extension>
+			</xsd:complexContent>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:complexType name="IRS1040ScheduleBType">
+		<xsd:annotation>
+			<xsd:documentation>Content model for Schedule B</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<!-- Part I Interest -->
+			<!-- Part I. Seller Financed Table -->
+			<xsd:element name="Form1040SchBPartIGroup1" type="Form1040SchBPartIGroup1Type" minOccurs="0" maxOccurs="unbounded">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Seller Financed Table</Description>
+						<LineNumber>Part I</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Total Seller Financed Mortgage Amount -->
+			<xsd:element name="TotalSellerFinancedMortgIntAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Total Seller Financed Mortgage Amount</Description>
+						<LineNumber>1</LineNumber>
+						<ELFFieldNumber>0025</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Part I. Interest Table -->
+			<xsd:element name="Form1040SchBPartIGroup2" type="Form1040SchBPartIGroup2Type" minOccurs="0" maxOccurs="unbounded">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Interest Table</Description>
+						<LineNumber>Part I</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Interest Subtotal -->
+			<xsd:element name="InterestSubtotalAmt" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Interest Subtotal</Description>
+						<LineNumber>1</LineNumber>
+						<ELFFieldNumber>0220</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+				<xsd:complexType>
+					<xsd:simpleContent>
+						<xsd:extension base="USAmountType">
+							<xsd:attribute name="interestSubtotalLiteralCd" use="required">
+								<xsd:simpleType>
+									<xsd:restriction base="StringType">
+										<xsd:enumeration value="INTEREST SUBTOTAL"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:attribute>
+						</xsd:extension>
+					</xsd:simpleContent>
+				</xsd:complexType>
+			</xsd:element>
+			<!-- Nominee Interest Amount -->
+			<xsd:element name="NomineeInterestAmt" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Nominee Interest Amount</Description>
+						<ELFFieldNumber>0240</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+				<xsd:complexType>
+					<xsd:simpleContent>
+						<xsd:extension base="USAmountType">
+							<xsd:attribute name="nomineeInterestLiteralCd" use="required">
+								<xsd:simpleType>
+									<xsd:restriction base="StringType">
+										<xsd:enumeration value="NOMINEE DISTRIBUTION"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:attribute>
+						</xsd:extension>
+					</xsd:simpleContent>
+				</xsd:complexType>
+			</xsd:element>
+			<!-- Accrued Interest Amount -->
+			<xsd:element name="AccruedInterestAmt" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Accrued Interest Amount</Description>
+						<LineNumber>1</LineNumber>
+						<ELFFieldNumber>0260</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+				<xsd:complexType>
+					<xsd:simpleContent>
+						<xsd:extension base="USAmountType">
+							<xsd:attribute name="accruedInterestLiteralCd" use="required">
+								<xsd:simpleType>
+									<xsd:restriction base="StringType">
+										<xsd:enumeration value="ACCRUED INTEREST"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:attribute>
+						</xsd:extension>
+					</xsd:simpleContent>
+				</xsd:complexType>
+			</xsd:element>
+			<!-- Accrued Market Discount Amount -->
+			<xsd:element name="AccruedMarketDiscountAmt" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Accrued Market Discount Amount</Description>
+						<LineNumber>1</LineNumber>
+						<ELFFieldNumber>0264</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+				<xsd:complexType>
+					<xsd:simpleContent>
+						<xsd:extension base="USAmountType">
+							<xsd:attribute name="accruedMarketDiscountLiteralCd" use="required">
+								<xsd:simpleType>
+									<xsd:restriction base="StringType">
+										<xsd:enumeration value="ACCRUED MARKET DISCOUNT"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:attribute>
+						</xsd:extension>
+					</xsd:simpleContent>
+				</xsd:complexType>
+			</xsd:element>
+			<!-- OID Amount -->
+			<xsd:element name="OriginalIssueDiscountAdjAmt" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>OID Amount</Description>
+						<LineNumber>1</LineNumber>
+						<ELFFieldNumber>0282</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+				<xsd:complexType>
+					<xsd:simpleContent>
+						<xsd:extension base="USAmountType">
+							<xsd:attribute name="originalIssueDiscountAdjLitCd" use="required">
+								<xsd:simpleType>
+									<xsd:restriction base="StringType">
+										<xsd:enumeration value="OID ADJUSTMENT"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:attribute>
+						</xsd:extension>
+					</xsd:simpleContent>
+				</xsd:complexType>
+			</xsd:element>
+			<!-- ABP Amount -->
+			<xsd:element name="AmortizableBondPremAdjAmt" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>ABP Amount</Description>
+						<LineNumber>1</LineNumber>
+						<ELFFieldNumber>0284</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+				<xsd:complexType>
+					<xsd:simpleContent>
+						<xsd:extension base="USAmountType">
+							<xsd:attribute name="amortizableBondPremiumAdjLitCd" use="required">
+								<xsd:simpleType>
+									<xsd:restriction base="StringType">
+										<xsd:enumeration value="ABP ADJUSTMENT"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:attribute>
+						</xsd:extension>
+					</xsd:simpleContent>
+				</xsd:complexType>
+			</xsd:element>
+			<!-- Taxable Interest Subtotal -->
+			<xsd:element name="TaxableInterestSubtotalAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Taxable Interest Subtotal</Description>
+						<LineNumber>2</LineNumber>
+						<ELFFieldNumber>0288</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Excludable Savings Bond Interest -->
+			<xsd:element name="ExcludableSavingsBondIntAmt" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Excludable Savings Bond Interest</Description>
+						<LineNumber>3</LineNumber>
+						<ELFFieldNumber>0289</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+				<xsd:complexType>
+					<xsd:simpleContent>
+						<xsd:extension base="USAmountType">
+							<xsd:attribute name="referenceDocumentId" type="IdListType"/>
+							<xsd:attribute name="referenceDocumentName" type="StringType" fixed="IRS8815">
+								<xsd:annotation>
+									<xsd:documentation>
+										<ELFFieldNumber>NL0290</ELFFieldNumber>
+									</xsd:documentation>
+								</xsd:annotation>
+							</xsd:attribute>
+						</xsd:extension>
+					</xsd:simpleContent>
+				</xsd:complexType>
+			</xsd:element>
+			<!-- Taxable Interest -->
+			<xsd:element name="CalculatedTotalTaxableIntAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Taxable Interest</Description>
+						<LineNumber>4</LineNumber>
+						<ELFFieldNumber>NL0295</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Part II Ordinary Dividends -->
+			<!-- Part II. Ordinary Dividends Table -->
+			<xsd:element name="Form1040SchBPartII" type="Form1040SchBPartIIGroup1Type" minOccurs="0" maxOccurs="unbounded">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Ordinary Dividends Table</Description>
+						<LineNumber>Part II</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Ordinary Dividend Subtotal -->
+			<xsd:element name="OrdinaryDividendSubtotalAmt" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Ordinary Dividend Subtotal</Description>
+						<LineNumber>5</LineNumber>
+						<ELFFieldNumber>0499</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+				<xsd:complexType>
+					<xsd:simpleContent>
+						<xsd:extension base="USAmountType">
+							<xsd:attribute name="dividendSubtotalLiteralCd" use="required">
+								<xsd:simpleType>
+									<xsd:restriction base="StringType">
+										<xsd:enumeration value="DIVIDEND SUBTOTAL"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:attribute>
+						</xsd:extension>
+					</xsd:simpleContent>
+				</xsd:complexType>
+			</xsd:element>
+			<!-- Nominee Dividend Amount -->
+			<xsd:element name="NomineeDividendAmt" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Nominee Dividend Amount</Description>
+						<LineNumber>5</LineNumber>
+						<ELFFieldNumber>0520</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+				<xsd:complexType>
+					<xsd:simpleContent>
+						<xsd:extension base="USAmountType">
+							<xsd:attribute name="nomineeDividendLiteralCd" use="required">
+								<xsd:simpleType>
+									<xsd:restriction base="StringType">
+										<xsd:enumeration value="NOMINEE DISTRIBUTION"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:attribute>
+						</xsd:extension>
+					</xsd:simpleContent>
+				</xsd:complexType>
+			</xsd:element>
+			<!-- Restricted Stock Dividend Amount -->
+			<xsd:element name="RestrictedStockDividendAmt" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Restricted Stock Dividend Amount</Description>
+						<LineNumber>5</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+				<xsd:complexType>
+					<xsd:simpleContent>
+						<xsd:extension base="USAmountType">
+							<xsd:attribute name="restrictedStockDivLiteralCd" use="required">
+								<xsd:simpleType>
+									<xsd:restriction base="TextType">
+										<xsd:enumeration value="DIVIDENDS ON RESTRICTED STOCK"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:attribute>
+						</xsd:extension>
+					</xsd:simpleContent>
+				</xsd:complexType>
+			</xsd:element>
+			<!-- Total Ordinary Dividends -->
+			<xsd:element name="TotalOrdinaryDividendsAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Total Ordinary Dividends</Description>
+						<LineNumber>6</LineNumber>
+						<ELFFieldNumber>0525</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Part III Foreign Accounts and Trusts -->
+			<!-- Account Form Literal -->
+			<xsd:element name="Form8814LiteralCd" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Account Form Literal</Description>
+						<LineNumber>7a</LineNumber>
+						<ELFFieldNumber>0587</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+				<xsd:simpleType>
+					<xsd:restriction base="StringType">
+						<xsd:enumeration value="FORM8814"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<!-- Foreign Accounts Question Indicator -->
+			<xsd:element name="ForeignAccountsQuestionInd" type="BooleanType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Foreign Accounts Question</Description>
+						<LineNumber>7a</LineNumber>
+						<ELFFieldNumber>0590 0595</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Financial Crimes Enforcement Network Form 114 Indicator -->
+			<xsd:element name="FinCENForm114Ind" type="BooleanType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Financial Crimes Enforcement Network Form 114 Indicator</Description>
+						<LineNumber>7a</LineNumber>
+						<ELFFieldNumber>0597 0598</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Foreign Country -->
+			<xsd:element name="ForeignCountryCd" type="CountryType" minOccurs="0" maxOccurs="25">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Foreign Country</Description>
+						<LineNumber>7b</LineNumber>
+						<ELFFieldNumber>0600</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Trust Form Literal -->
+			<xsd:element name="TrustFormLiteralCd" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Trust Form Literal</Description>
+						<LineNumber>8</LineNumber>
+						<ELFFieldNumber>0608</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+				<xsd:simpleType>
+					<xsd:restriction base="StringType">
+						<xsd:enumeration value="FORM8814"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<!-- Foreign Trust Question Indicator -->
+			<xsd:element name="ForeignTrustQuestionInd" type="BooleanType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Foreign Trust Question</Description>
+						<LineNumber>8</LineNumber>
+						<ELFFieldNumber>0610 0615</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	<!-- =========================================================================== -->
+	<!-- ============= Local types, types for repeating groups etc. ================ -->
+	<!-- =========================================================================== -->
+	<!-- Type for Part I, Line 1 -->
+	<xsd:complexType name="Form1040SchBPartIGroup1Type">
+		<xsd:sequence>
+			<!-- Seller Financed Mortgage Name -->
+			<xsd:element name="SellerFinancedNm" type="PersonNameType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Seller Financed Mortgage Name</Description>
+						<LineNumber>1</LineNumber>
+						<ELFFieldNumber>0010</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Seller Financed Address -->
+			<xsd:choice minOccurs="0">
+				<xsd:element name="SellerFinancedAddressUS" type="OtherUSAddressType">
+					<xsd:annotation>
+						<xsd:documentation>
+							<Description>Seller Financed Address</Description>
+							<LineNumber>1</LineNumber>
+							<ELFFieldNumber>0011</ELFFieldNumber>
+						</xsd:documentation>
+					</xsd:annotation>
+				</xsd:element>
+				<xsd:element name="SellerFinancedAddressForeign" type="OtherForeignAddressType">
+					<xsd:annotation>
+						<xsd:documentation>
+							<Description>Seller Financed Address</Description>
+							<LineNumber>1</LineNumber>
+							<ELFFieldNumber>0011</ELFFieldNumber>
+						</xsd:documentation>
+					</xsd:annotation>
+				</xsd:element>
+			</xsd:choice>
+			<!-- Seller Financed SSN -->
+			<xsd:element name="SellerFinancedSSN" type="SSNType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Seller Financed TIN</Description>
+						<LineNumber>1</LineNumber>
+						<ELFFieldNumber>0012</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Seller Financed Mortgage Amount -->
+			<xsd:element name="SellerFinancedMortgageIntAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Seller Financed Mortgage Amount</Description>
+						<LineNumber>1</LineNumber>
+						<ELFFieldNumber>0015</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	<!-- Type For Part I, Line 1 -->
+	<xsd:complexType name="Form1040SchBPartIGroup2Type">
+		<xsd:sequence>
+			<!-- Interest Payer Name -->
+			<xsd:element name="InterestPayerName" type="BusinessNameType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Interest Payer</Description>
+						<LineNumber>1</LineNumber>
+						<ELFFieldNumber>0030</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Interest Amount -->
+			<xsd:element name="InterestAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Interest Amount</Description>
+						<LineNumber>1</LineNumber>
+						<ELFFieldNumber>0040</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	<!-- Type For Part 2, Line 5 -->
+	<xsd:complexType name="Form1040SchBPartIIGroup1Type">
+		<xsd:sequence>
+			<xsd:element name="DividendPayerNameBusiness" type="BusinessNameType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Dividend Payer Name Business</Description>
+						<LineNumber>5</LineNumber>
+						<ELFFieldNumber>0300</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Dividend Amount -->
+			<xsd:element name="DividendAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Dividend Amount</Description>
+						<LineNumber>5</LineNumber>
+						<ELFFieldNumber>0310</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:schema>

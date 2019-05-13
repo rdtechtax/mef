@@ -1,0 +1,369 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.irs.gov/efile" targetNamespace="http://www.irs.gov/efile" elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.0">
+	<xsd:annotation>
+		<xsd:documentation>
+			<Description>IRS e-file Schema - IRS Form 8867 Paid Preparer’s Due Diligence Checklist Earned Income Credit (EIC), American Opportunity Tax Credit (AOTC), Child Tax Credit (CTC) (including the Additional Child Tax Credit (ACTC) and Credit for Other Dependents (ODC)), and Head of Household (HOH) Filing Status</Description>
+			<TaxYear>2018</TaxYear>
+			<MaturityLevel>Final Release</MaturityLevel>
+			<ReleaseDate>February 13, 2019</ReleaseDate>
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:include schemaLocation="../../../Common/efileTypes.xsd"/>
+
+	<!-- =====================================================================-->
+	<!-- ========================== IRS Form 8867 ============================-->
+	<!-- =====================================================================-->
+
+	<xsd:element name="IRS8867">
+		<xsd:annotation>
+			<xsd:documentation>IRS Form 8867</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:complexContent>
+				<xsd:extension base="IRS8867Type">
+					<xsd:attributeGroup ref="DocumentAttributes">
+						<xsd:annotation>
+							<xsd:documentation>Common return document attributes</xsd:documentation>
+						</xsd:annotation>
+					</xsd:attributeGroup>
+					<xsd:attribute name="documentName" type="xsd:string" fixed="IRS8867"/>
+				</xsd:extension>
+			</xsd:complexContent>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:complexType name="IRS8867Type">
+		<xsd:annotation>
+			<xsd:documentation>Content model for IRS Form 8867</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+
+			<!-- Preparer Person Name -->
+			<xsd:element name="PreparerPersonNm" type="PersonNameType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Preparer Person Name</Description>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Preparer PTIN -->
+			<xsd:element name="PTIN" type="PTINType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Preparer PTIN</Description>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			
+			<!-- Part I Due Diligence Requirements -->
+
+			<!-- Earned Income Credit Claimed Indicator -->
+			<xsd:element name="EICClaimedInd" type="CheckboxType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Earned Income Credit Claimed Indicator</Description>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			
+			<!-- Child Tax Credit and/or Additional Child Tax Credit or Other Dependent Claimed Indicator -->
+			<xsd:element name="CTCACTCODCClaimedInd" type="CheckboxType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Child Tax Credit and/or Additional Child Tax Credit or Other Dependent Claimed Indicator</Description>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			
+			<!-- American Opportunity Tax Credit Claimed Indicator -->
+			<xsd:element name="AOTCClaimedInd" type="CheckboxType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>American Opportunity Tax Credit Claimed Indicator</Description>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			
+			<!-- Head of Household Filing Status Indicator -->
+			<xsd:element name="HOHFilingStatusInd" type="CheckboxType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Head of Household Filing Status Indicator</Description>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			
+			<!-- Taxpayer Provided Or Obtained Information Indicator -->
+			<xsd:element name="TxpyrProvidedOrObtainedInfoInd" type="BooleanType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Taxpayer Provided Or Obtained Information Indicator</Description>
+						<LineNumber>1</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>			
+						
+			<!-- Complete Applicable Worksheet Code -->
+			<xsd:element name="CompleteApplicableWorksheetCd" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Complete Applicable Worksheet Code</Description>
+						<LineNumber>2</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+				<xsd:simpleType>
+					<xsd:restriction base="TextType">
+						<xsd:enumeration value="YES"/>
+						<xsd:enumeration value="NO"/>
+						<xsd:enumeration value="N/A"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			
+			<!-- Satisfy Knowledge Requirement Indicator -->
+			<xsd:element name="SatisfyKnowledgeRequirementInd" type="BooleanType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Satisfy Knowledge Requirement Indicator</Description>
+						<LineNumber>3</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			
+			<!-- Incorrect, Incomplete, Or Inconsistent Information Indicator -->
+			<xsd:element name="IncorIncmplInconInfoInd" type="BooleanType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Incorrect, Incomplete, Or Inconsistent Information Indicator</Description>
+						<LineNumber>4</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			
+			<!-- Make Inquiry Indicator -->
+			<xsd:element name="MakeInquiryInd" type="BooleanType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Make Inquiry Indicator</Description>
+						<LineNumber>4a</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			
+			<!-- Document Inquiry Indicator -->
+			<xsd:element name="DocumentInquiryInd" type="BooleanType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Document Inquiry Indicator</Description>
+						<LineNumber>4b</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			
+			<!-- Satisfy Record Retention Requirement Indicator -->
+			<xsd:element name="SatisfyRecordRetentionRqrInd" type="BooleanType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Satisfy Record Retention Requirement Indicator</Description>
+						<LineNumber>5</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			
+			<!-- Work Paper Document Name -->
+			<xsd:element name="WorkPaperDocumentNm" type="ExplanationType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Work Paper Document Name</Description>
+						<LineNumber>5</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			
+			<!-- Substantiate Credit Eligibility Indicator -->
+			<xsd:element name="SubstantiateCrEligibilityInd" type="BooleanType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Substantiate Credit Eligibility Indicator</Description>
+						<LineNumber>6</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			
+			<!-- Previous Disallowed Or Reduced Credit Code -->
+			<xsd:element name="PrevDisallowedOrReducedCrCd" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Previous Disallowed Or Reduced Credit Code</Description>
+						<LineNumber>7</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+				<xsd:simpleType>
+					<xsd:restriction base="TextType">
+						<xsd:enumeration value="YES"/>
+						<xsd:enumeration value="NO"/>
+						<xsd:enumeration value="N/A"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			
+			<!-- Complete Required Recertification Form Code -->
+			<xsd:element name="CompleteRequiredRecertFormCd" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Complete Required Recertification Form Code</Description>
+						<LineNumber>7a</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+				<xsd:simpleType>
+					<xsd:restriction base="TextType">
+						<xsd:enumeration value="YES"/>
+						<xsd:enumeration value="NO"/>
+						<xsd:enumeration value="N/A"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			
+			<!-- Question To Prepare Complete And Correct Schedule C Code -->
+			<xsd:element name="QstnToCompleteCorrectSchCCd" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Question To Prepare Complete And Correct Schedule C Code</Description>
+						<LineNumber>8</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+				<xsd:simpleType>
+					<xsd:restriction base="TextType">
+						<xsd:enumeration value="YES"/>
+						<xsd:enumeration value="NO"/>
+						<xsd:enumeration value="N/A"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			
+			<!-- Part II Due Diligence Questions for Returns Claiming EIC (If the return does not claim EIC, go to Part III.) -->
+			
+			<!-- Earned Income Credit Eligible Claim Qualified Child Indicator -->
+			<xsd:element name="EICEligibleClaimQlfyChildInd" type="BooleanType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Earned Income Credit Eligible Claim Qualified Child Indicator</Description>
+						<LineNumber>9a</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			
+			<!-- Explain Live With Child Required For Claim Indicator -->
+			<xsd:element name="ExplainLiveWithChldRqrClaimInd" type="BooleanType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Explain Live With Child Required For Claim Indicator</Description>
+						<LineNumber>9b</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			
+			<!-- Explain Tiebreaker Rules Code -->
+			<xsd:element name="ExplainTiebreakerRulesCd" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Explain Tiebreaker Rules Code</Description>
+						<LineNumber>9c</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+				<xsd:simpleType>
+					<xsd:restriction base="TextType">
+						<xsd:enumeration value="YES"/>
+						<xsd:enumeration value="NO"/>
+						<xsd:enumeration value="N/A"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			
+			<!-- Part III Due Diligence Questions for Returns Claiming CTC/ACTC/ODC (If the return does not claim CTC, ACTC, or ODC go to Part IV.) -->
+			
+			<!-- US Citizen or National Indicator -->
+			<xsd:element name="USCitizenOrNationalInd" type="BooleanType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>US Citizen or National Indicator</Description>
+						<LineNumber>10</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			
+			<!-- Explain Live With Child Requirement Code -->
+			<xsd:element name="ExplainLiveWithChldRqrClaimCd" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Explain Live With Child Requirement Code</Description>
+						<LineNumber>11</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+				<xsd:simpleType>
+					<xsd:restriction base="TextType">
+						<xsd:enumeration value="YES"/>
+						<xsd:enumeration value="NO"/>
+						<xsd:enumeration value="N/A"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			
+			<!-- Explain Rule Claim Credit Divorce Parents 8332 Code -->
+			<xsd:element name="ExplainRuleClmCrDivPrnts8332Cd" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description> Explain Rule Claim Credit Divorce Parents 8332 Code</Description>
+						<LineNumber>12</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+				<xsd:simpleType>
+					<xsd:restriction base="TextType">
+						<xsd:enumeration value="YES"/>
+						<xsd:enumeration value="NO"/>
+						<xsd:enumeration value="N/A"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+		
+			<!-- Part IV Due Diligence Questions for Returns Claiming AOTC (If the return does not claim AOTC, go to Part V.) -->		
+			
+			<!-- Substantiation Provided Qualified Tuition Expenses Indicator -->
+			<xsd:element name="SubstProvQlfyTuitionExpnssInd" type="BooleanType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Substantiation Provided Qualified Tuition Expenses Indicator</Description>
+						<LineNumber>13</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			
+			<!-- Part V  Due Diligence Questions for Claiming HOH (If the return does not claim HOH filing status, go to Part VI.) -->	
+			
+			<!-- Eligibile Claim Head of Household Indicator -->
+			<xsd:element name="EligibleClaimHOHInd" type="BooleanType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Eligibile Claim Head of Household Indicator</Description>
+						<LineNumber>14</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			
+			<!-- Part VI Eligibility Certification -->	
+			
+			<!-- Credit Eligibility Certification -->
+			<xsd:element name="CrEligibilityCertificationInd" type="BooleanType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Eligibility Certification Indicator</Description>
+						<LineNumber>15</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+		</xsd:sequence>
+	</xsd:complexType>
+
+</xsd:schema>

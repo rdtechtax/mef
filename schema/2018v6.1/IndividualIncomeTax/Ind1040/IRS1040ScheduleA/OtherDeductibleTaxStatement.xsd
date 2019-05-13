@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns="http://www.irs.gov/efile" xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.irs.gov/efile" elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.0">
+
+	<xsd:annotation>
+		<xsd:documentation>
+			<Description>IRS e-file Individual Income Tax Schema - Other Deductibles Tax Statement Statement</Description>
+			<Purpose>If you had any deductible tax not listed on line 5, 6, or 7, list the type and amount of tax. Enter only one total on line 8. Include on this line income tax you paid to a foreign country or U.S. possession</Purpose>
+			<TaxYear>2018</TaxYear>
+			<MaturityLevel>Final Release</MaturityLevel>
+			<ReleaseDate>February 13, 2019</ReleaseDate>
+		</xsd:documentation>
+	</xsd:annotation>
+	
+	<xsd:include schemaLocation="../../../Common/efileTypes.xsd"/>
+	
+	<!-- ============================================================== -->
+	<!-- =========  Other Deductible Tax Statement ========== -->
+	<!-- ============================================================== -->
+	
+	<xsd:element name="OtherDeductibleTaxStmt">
+		<xsd:annotation>
+			<xsd:documentation>Other deductible tax statement</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:complexContent>
+				<xsd:extension base="OtherDeductibleTaxStmtType">
+					<xsd:attributeGroup ref="DocumentAttributes">
+						<xsd:annotation>
+							<xsd:documentation>Common return document attributes</xsd:documentation>
+						</xsd:annotation>
+					</xsd:attributeGroup>
+					<xsd:attribute name="documentName" type="xsd:string" fixed="OtherDeductibleTaxStatement">
+						<xsd:annotation>
+							<xsd:documentation>IRS internal use only. To avoid error in the return, do not include the attribute name or value.</xsd:documentation>
+						</xsd:annotation>
+					</xsd:attribute>
+				</xsd:extension>
+			</xsd:complexContent>
+		</xsd:complexType>
+	</xsd:element>
+	
+	<xsd:complexType name="OtherDeductibleTaxStmtType">
+		<xsd:annotation>
+			<xsd:documentation>Content model for other deductible tax statement</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+		
+			<xsd:element name="OtherDeductibleTaxGrp" type="USItemizedEntryType" minOccurs="0" maxOccurs="unbounded"/>
+			
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:schema>

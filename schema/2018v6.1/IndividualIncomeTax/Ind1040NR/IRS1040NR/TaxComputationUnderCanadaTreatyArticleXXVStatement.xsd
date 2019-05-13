@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema targetNamespace="http://www.irs.gov/efile" xmlns="http://www.irs.gov/efile" xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.0">
+
+	<xsd:annotation>
+		<xsd:documentation>
+			<Description>IRS e-file Nonresident Alien Income Tax Schema - Tax Computation Under Canada Treaty Article XXV Statement</Description>
+			<Purpose>Optional Statement - Citizens/residents of Canada use this statement to figure their 1040NR Tax based upon a hypothetical 1040 tax computed on married filing joint tax rates. The taxpayers must include worldwide income in their 1040 tax computation.</Purpose>
+			<TaxYear>2018</TaxYear>
+			<MaturityLevel>Final Release</MaturityLevel>
+			<ReleaseDate>February 13, 2019</ReleaseDate>
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:include schemaLocation="../../../Common/efileTypes.xsd" />
+
+	<!-- ========================================================= -->
+	<!-- ====== Tax Computation Under Canada Treaty Article XXV Statement ======= -->
+	<!-- ========================================================= -->
+
+	<xsd:element name="TxCmptUndCanadaTrtyArtXXVStmt">
+		<xsd:annotation>
+			<xsd:documentation>Tax Computation Under Canada Treaty Article XXV Statement</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:complexContent>
+				<xsd:extension base="TxCmptUndCanadaTrtyArtXXVStmtType">
+					<xsd:attributeGroup ref="DocumentAttributes">
+						<xsd:annotation>
+							<xsd:documentation>Common return document attributes</xsd:documentation>
+						</xsd:annotation>
+					</xsd:attributeGroup>
+					<xsd:attribute name="documentName" type="TextType" fixed="TaxComputationUnderCanadaTreatyArticleXXVStatement">
+						<xsd:annotation>
+							<xsd:documentation>IRS internal use only. To avoid error in the return, do not include the attribute name or value.</xsd:documentation>
+						</xsd:annotation>
+					</xsd:attribute>
+				</xsd:extension>
+			</xsd:complexContent>
+		</xsd:complexType>
+	</xsd:element>
+
+	<xsd:complexType name="TxCmptUndCanadaTrtyArtXXVStmtType">
+		<xsd:annotation>
+			<xsd:documentation>Content model for Tax Computation Under Canada Treaty Article XXV Statement</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<!-- Name of Spouse -->
+			<xsd:element name="SpouseName" type="PersonFullNameType" minOccurs="0"/>
+			<!-- Filer Worldwide Income -->
+			<xsd:element name="FilerWorldwideIncomeGrp" minOccurs="0">
+				<xsd:complexType>
+					<xsd:sequence>
+						<!-- Income Type and Amount -->
+						<xsd:element name="IncomeTypeAndAmt" type="USItemizedEntryType" minOccurs="0" maxOccurs="50"/>
+						<!-- Total Income Amount -->
+						<xsd:element name="TotalIncomeAmt" type="USAmountType" minOccurs="0"/>
+						<!-- Deduction Type and Amount -->
+						<xsd:element name="DeductionsOrCreditsTypeAndAmt" type="USItemizedEntryType" minOccurs="0" maxOccurs="50"/>
+						<!-- Total Deduction Amount -->
+						<xsd:element name="TotalDeductionAmt" type="USAmountType" minOccurs="0"/>
+						<!-- Total Taxable Income Amount -->
+						<xsd:element name="TotalTaxableIncomeAmt" type="USAmountType" minOccurs="0"/>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<!-- Spouse Worldwide Income -->
+			<xsd:element name="SpouseWorldwideIncomeGrp" minOccurs="0">
+				<xsd:complexType>
+					<xsd:sequence>
+						<!-- Income Type and Amount -->
+						<xsd:element name="IncomeTypeAndAmt" type="USItemizedEntryType" minOccurs="0" maxOccurs="50"/>
+						<!-- Total Income Amount -->
+						<xsd:element name="TotalIncomeAmt" type="USAmountType" minOccurs="0"/>
+						<!-- Deduction Type and Amount -->
+						<xsd:element name="DeductionsOrCreditsTypeAndAmt" type="USItemizedEntryType" minOccurs="0" maxOccurs="50"/>
+						<!-- Total Deduction Amount -->
+						<xsd:element name="TotalDeductionAmt" type="USAmountType" minOccurs="0"/>
+						<!-- Total Taxable Income Amount -->
+						<xsd:element name="TotalTaxableIncomeAmt" type="USAmountType" minOccurs="0"/>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<!-- Total Filer and Spouse Worldwide Taxable Income Amount -->
+			<xsd:element name="TotFlrSpsWorldwideTxblIncmAmt" type="USAmountType" minOccurs="0"/>
+			<!-- Additional explanation if needed by filer -->
+			<xsd:element name="AdditionalExplanationTxt" type="ShortExplanationType" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+
+</xsd:schema>

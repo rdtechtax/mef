@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema targetNamespace="http://www.irs.gov/efile" xmlns="http://www.irs.gov/efile" xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.0">
+
+	<xsd:annotation>
+		<xsd:documentation>
+			<Description>IRS e-file U.S. Nonresident Alien Income Tax Schema - Gross Income Exclusion Statement</Description>
+			<Purpose>Optional Statement - If taxpayer has no gross income for the current year, do not complete the schedules for Form 1040NR. Instead, attach a list of the kinds of exclusions to claim and the amount of each. 1040NR Instructions.</Purpose>
+			<TaxYear>2018</TaxYear>
+			<MaturityLevel>Final Release</MaturityLevel>
+			<ReleaseDate>February 13, 2019</ReleaseDate>
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:include schemaLocation="../../../Common/efileTypes.xsd" />
+
+	<!-- ============================================== -->
+	<!-- ====== Gross Income Exclusion Statement ====== -->
+	<!-- ============================================== -->
+
+	<xsd:element name="GrossIncomeExclusionStatement">
+		<xsd:annotation>
+			<xsd:documentation>Gross Income Exclusion Statement</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:complexContent>
+				<xsd:extension base="GrossIncomeExclusionStatementType">
+					<xsd:attributeGroup ref="DocumentAttributes">
+						<xsd:annotation>
+							<xsd:documentation>Common return document attributes</xsd:documentation>
+						</xsd:annotation>
+					</xsd:attributeGroup>
+					<xsd:attribute name="documentName" type="TextType" fixed="GrossIncomeExclusionStatement">
+						<xsd:annotation>
+							<xsd:documentation>IRS internal use only. To avoid error in the return, do not include the attribute name or value.</xsd:documentation>
+						</xsd:annotation>
+					</xsd:attribute>
+				</xsd:extension>
+			</xsd:complexContent>
+		</xsd:complexType>
+	</xsd:element>
+
+	<xsd:complexType name="GrossIncomeExclusionStatementType">
+		<xsd:annotation>
+			<xsd:documentation>Content model for Gross Income Exclusion Statement</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<!-- Type and Amount of Exclusion -->
+			<xsd:element name="ExclusionTypeAndAmt" type="USItemizedEntryType" minOccurs="0" maxOccurs="50"/>
+		</xsd:sequence>
+	</xsd:complexType>
+
+</xsd:schema>

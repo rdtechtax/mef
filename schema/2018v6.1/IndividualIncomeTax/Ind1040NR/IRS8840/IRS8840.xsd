@@ -1,0 +1,760 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.irs.gov/efile" targetNamespace="http://www.irs.gov/efile" elementFormDefault="qualified" attributeFormDefault="unqualified">
+
+	<xsd:annotation>
+		<xsd:documentation>
+			<Description>IRS e-file U.S. Nonresident Alien Income Tax Schema - IRS Form 8840 Closer Connection Exception Statement for Aliens</Description>
+			<TaxYear>2018</TaxYear>
+			<MaturityLevel>Final Release</MaturityLevel>
+			<ReleaseDate>February 13, 2019</ReleaseDate>
+		</xsd:documentation>
+	</xsd:annotation>
+	
+	<xsd:include schemaLocation="../../../Common/efileTypes.xsd"/>
+	
+	<!-- ====================================================================== -->
+	<!-- ============================ IRS Form 8840 =========================== -->
+	<!-- ====================================================================== -->
+	
+	<xsd:element name="IRS8840">
+		<xsd:annotation>
+			<xsd:documentation>IRS Form 8840</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:complexContent>
+				<xsd:extension base="IRS8840Type">
+					<xsd:attributeGroup ref="DocumentAttributes">
+						<xsd:annotation>
+							<xsd:documentation>Common return document attributes</xsd:documentation>
+						</xsd:annotation>
+					</xsd:attributeGroup>
+					<xsd:attribute name="documentName" type="xsd:string" fixed="IRS8840">
+						<xsd:annotation>
+							<xsd:documentation>IRS internal use only. To avoid error in the return do not include the attribute name or value.</xsd:documentation>
+						</xsd:annotation>
+					</xsd:attribute>
+				</xsd:extension>
+			</xsd:complexContent>
+		</xsd:complexType>
+	</xsd:element>
+	
+	<xsd:complexType name="IRS8840Type">
+		<xsd:annotation>
+			<xsd:documentation>Content model for Form 8840</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			
+			<!-- =============== Part I General Information =============== -->
+			
+			<!-- U.S. Immigration Status -->
+			<xsd:element name="USImmigrationStatusGrp" minOccurs="0" maxOccurs="20">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:choice>
+							<!-- Non-Immigrant Visa Type Code -->
+							<xsd:element name="NonImmigrantVisaTypeCd">
+								<xsd:annotation>
+									<xsd:documentation>
+										<Description>Non-immigrant visa type code</Description>
+										<LineNumber>Pt I, Line 1</LineNumber>
+									</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="TextType">
+										<xsd:enumeration value="A1"/>
+										<xsd:enumeration value="A2"/>
+										<xsd:enumeration value="A3"/>
+										<xsd:enumeration value="B1"/>
+										<xsd:enumeration value="B2"/>
+										<xsd:enumeration value="B1/B2"/>
+										<xsd:enumeration value="C1"/>
+										<xsd:enumeration value="C1/D"/>
+										<xsd:enumeration value="C2"/>
+										<xsd:enumeration value="C3"/>
+										<xsd:enumeration value="CW1"/>
+										<xsd:enumeration value="CW2"/>
+										<xsd:enumeration value="D"/>
+										<xsd:enumeration value="E1"/>
+										<xsd:enumeration value="E2"/>
+										<xsd:enumeration value="E2C"/>
+										<xsd:enumeration value="E3"/>
+										<xsd:enumeration value="E3D"/>
+										<xsd:enumeration value="E3R"/>
+										<xsd:enumeration value="F1"/>
+										<xsd:enumeration value="F2"/>
+										<xsd:enumeration value="F3"/>
+										<xsd:enumeration value="G1"/>
+										<xsd:enumeration value="G2"/>
+										<xsd:enumeration value="G3"/>
+										<xsd:enumeration value="G4"/>
+										<xsd:enumeration value="G5"/>
+										<xsd:enumeration value="H1B"/>
+										<xsd:enumeration value="H1B1"/>
+										<xsd:enumeration value="H1C"/>
+										<xsd:enumeration value="H2A"/>
+										<xsd:enumeration value="H2B"/>
+										<xsd:enumeration value="H3"/>
+										<xsd:enumeration value="H4"/>
+										<xsd:enumeration value="I"/>
+										<xsd:enumeration value="J1"/>
+										<xsd:enumeration value="J2"/>
+										<xsd:enumeration value="K1"/>
+										<xsd:enumeration value="K2"/>
+										<xsd:enumeration value="K3"/>
+										<xsd:enumeration value="K4"/>
+										<xsd:enumeration value="L1"/>
+										<xsd:enumeration value="L2"/>
+										<xsd:enumeration value="M1"/>
+										<xsd:enumeration value="M2"/>
+										<xsd:enumeration value="M3"/>
+										<xsd:enumeration value="N8"/>
+										<xsd:enumeration value="N9"/>
+										<xsd:enumeration value="NATO 1"/>
+										<xsd:enumeration value="NATO 2"/>
+										<xsd:enumeration value="NATO 3"/>
+										<xsd:enumeration value="NATO 4"/>
+										<xsd:enumeration value="NATO 5"/>
+										<xsd:enumeration value="NATO 6"/>
+										<xsd:enumeration value="NATO 7"/>
+										<xsd:enumeration value="O1"/>
+										<xsd:enumeration value="O2"/>
+										<xsd:enumeration value="O3"/>
+										<xsd:enumeration value="P1"/>
+										<xsd:enumeration value="P2"/>
+										<xsd:enumeration value="P3"/>
+										<xsd:enumeration value="P4"/>
+										<xsd:enumeration value="Q1"/>
+										<xsd:enumeration value="R1"/>
+										<xsd:enumeration value="R2"/>
+										<xsd:enumeration value="S5"/>
+										<xsd:enumeration value="S6"/>
+										<xsd:enumeration value="S7"/>
+										<xsd:enumeration value="T1"/>
+										<xsd:enumeration value="T2"/>
+										<xsd:enumeration value="T3"/>
+										<xsd:enumeration value="T4"/>
+										<xsd:enumeration value="T5"/>
+										<xsd:enumeration value="TN"/>
+										<xsd:enumeration value="TD"/>
+										<xsd:enumeration value="U1"/>
+										<xsd:enumeration value="U2"/>
+										<xsd:enumeration value="U3"/>
+										<xsd:enumeration value="U4"/>
+										<xsd:enumeration value="U5"/>
+										<xsd:enumeration value="V1"/>
+										<xsd:enumeration value="V2"/>
+										<xsd:enumeration value="V3"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<!-- Immigrant Visa Type Code -->
+							<xsd:element name="ImmigrantVisaTypeCd">
+								<xsd:annotation>
+									<xsd:documentation>
+										<Description>Immigrant visa type code</Description>
+										<LineNumber>Pt I, Line 1</LineNumber>
+									</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="TextType">
+										<xsd:enumeration value="IR1"/>
+										<xsd:enumeration value="IR2"/>
+										<xsd:enumeration value="IR3"/>
+										<xsd:enumeration value="IH3"/>
+										<xsd:enumeration value="IR4"/>
+										<xsd:enumeration value="IH4"/>
+										<xsd:enumeration value="IR5"/>
+										<xsd:enumeration value="CR1"/>
+										<xsd:enumeration value="CR2"/>
+										<xsd:enumeration value="IW1"/>
+										<xsd:enumeration value="IW2"/>
+										<xsd:enumeration value="IB1"/>
+										<xsd:enumeration value="IB2"/>
+										<xsd:enumeration value="IB3"/>
+										<xsd:enumeration value="VI5"/>
+										<xsd:enumeration value="AM1"/>
+										<xsd:enumeration value="AM2"/>
+										<xsd:enumeration value="AM3"/>
+										<xsd:enumeration value="SB1"/>
+										<xsd:enumeration value="SC1"/>
+										<xsd:enumeration value="SC2"/>
+										<xsd:enumeration value="SI1"/>
+										<xsd:enumeration value="SI2"/>
+										<xsd:enumeration value="SI3"/>
+										<xsd:enumeration value="SM1"/>
+										<xsd:enumeration value="SM2"/>
+										<xsd:enumeration value="SM3"/>
+										<xsd:enumeration value="SQ1"/>
+										<xsd:enumeration value="SQ2"/>
+										<xsd:enumeration value="SQ3"/>
+										<xsd:enumeration value="SU2"/>
+										<xsd:enumeration value="SU3"/>
+										<xsd:enumeration value="SU5"/>
+										<xsd:enumeration value="F11"/>
+										<xsd:enumeration value="F12"/>
+										<xsd:enumeration value="B11"/>
+										<xsd:enumeration value="B12"/>
+										<xsd:enumeration value="F21"/>
+										<xsd:enumeration value="F22"/>
+										<xsd:enumeration value="F23"/>
+										<xsd:enumeration value="F24"/>
+										<xsd:enumeration value="F25"/>
+										<xsd:enumeration value="C21"/>
+										<xsd:enumeration value="C22"/>
+										<xsd:enumeration value="C23"/>
+										<xsd:enumeration value="C24"/>
+										<xsd:enumeration value="C25"/>
+										<xsd:enumeration value="B21"/>
+										<xsd:enumeration value="B22"/>
+										<xsd:enumeration value="B23"/>
+										<xsd:enumeration value="B24"/>
+										<xsd:enumeration value="B25"/>
+										<xsd:enumeration value="FX1"/>
+										<xsd:enumeration value="FX2"/>
+										<xsd:enumeration value="FX3"/>
+										<xsd:enumeration value="CX1"/>
+										<xsd:enumeration value="CX2"/>
+										<xsd:enumeration value="CX3"/>
+										<xsd:enumeration value="BX1"/>
+										<xsd:enumeration value="BX2"/>
+										<xsd:enumeration value="BX3"/>
+										<xsd:enumeration value="F31"/>
+										<xsd:enumeration value="F32"/>
+										<xsd:enumeration value="F33"/>
+										<xsd:enumeration value="C31"/>
+										<xsd:enumeration value="C32"/>
+										<xsd:enumeration value="C33"/>
+										<xsd:enumeration value="B31"/>
+										<xsd:enumeration value="B32"/>
+										<xsd:enumeration value="B33"/>
+										<xsd:enumeration value="F41"/>
+										<xsd:enumeration value="F42"/>
+										<xsd:enumeration value="F43"/>
+										<xsd:enumeration value="E11"/>
+										<xsd:enumeration value="E12"/>
+										<xsd:enumeration value="E13"/>
+										<xsd:enumeration value="E14"/>
+										<xsd:enumeration value="E15"/>
+										<xsd:enumeration value="E21"/>
+										<xsd:enumeration value="E22"/>
+										<xsd:enumeration value="E23"/>
+										<xsd:enumeration value="E31"/>
+										<xsd:enumeration value="E32"/>
+										<xsd:enumeration value="E34"/>
+										<xsd:enumeration value="E35"/>
+										<xsd:enumeration value="EW3"/>
+										<xsd:enumeration value="EW4"/>
+										<xsd:enumeration value="EW5"/>
+										<xsd:enumeration value="BC1"/>
+										<xsd:enumeration value="BC2"/>
+										<xsd:enumeration value="BC3"/>
+										<xsd:enumeration value="SD1"/>
+										<xsd:enumeration value="SD2"/>
+										<xsd:enumeration value="SD3"/>
+										<xsd:enumeration value="SE1"/>
+										<xsd:enumeration value="SE2"/>
+										<xsd:enumeration value="SE3"/>
+										<xsd:enumeration value="SF1"/>
+										<xsd:enumeration value="SF2"/>
+										<xsd:enumeration value="SG1"/>
+										<xsd:enumeration value="SG2"/>
+										<xsd:enumeration value="SH1"/>
+										<xsd:enumeration value="SH2"/>
+										<xsd:enumeration value="SJ1"/>
+										<xsd:enumeration value="SJ2"/>
+										<xsd:enumeration value="SK1"/>
+										<xsd:enumeration value="SK2"/>
+										<xsd:enumeration value="SK3"/>
+										<xsd:enumeration value="SK4"/>
+										<xsd:enumeration value="SL1"/>
+										<xsd:enumeration value="SN1"/>
+										<xsd:enumeration value="SN2"/>
+										<xsd:enumeration value="SN3"/>
+										<xsd:enumeration value="SN4"/>
+										<xsd:enumeration value="SP"/>
+										<xsd:enumeration value="SR1"/>
+										<xsd:enumeration value="SR2"/>
+										<xsd:enumeration value="SR3"/>
+										<xsd:enumeration value="C51"/>
+										<xsd:enumeration value="C52"/>
+										<xsd:enumeration value="C53"/>
+										<xsd:enumeration value="T51"/>
+										<xsd:enumeration value="T52"/>
+										<xsd:enumeration value="T53"/>
+										<xsd:enumeration value="R51"/>
+										<xsd:enumeration value="R52"/>
+										<xsd:enumeration value="R53"/>
+										<xsd:enumeration value="I51"/>
+										<xsd:enumeration value="I52"/>
+										<xsd:enumeration value="I53"/>
+										<xsd:enumeration value="DV1"/>
+										<xsd:enumeration value="DV2"/>
+										<xsd:enumeration value="DV3"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<!-- U.S. Immigrant Status Description -->
+							<xsd:element name="USImmigrationStatusDesc">
+								<xsd:annotation>
+									<xsd:documentation>
+										<Description>U.S. immigrant status description</Description>
+										<LineNumber>Pt I, Line 1</LineNumber>
+									</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="TextType">
+										<xsd:maxLength value="50"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+						</xsd:choice>
+						<!-- Entered U.S. Date -->
+						<xsd:element name="EnteredUSDt" type="DateType">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Entered U.S. date</Description>
+									<LineNumber>Pt I, Line 1</LineNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			
+			<!-- Citizen Country Code -->
+			<xsd:element name="CitizenCountryCd" type="AllCountriesType" minOccurs="0" maxOccurs="20">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Citizen country code</Description>
+						<LineNumber>Pt I, Line 2</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			
+			<!-- Passport Issued -->
+			<xsd:element name="PassportIssuedGrp" minOccurs="0" maxOccurs="20">
+				<xsd:complexType>
+					<xsd:sequence>
+						<!-- Country Code -->
+						<xsd:element name="CountryCd" type="CountryType">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Country code</Description>
+									<LineNumber>Pt I, Line 3</LineNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						<!-- Passport Number -->
+						<xsd:element name="PassportNum">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Passport number</Description>
+									<LineNumber>Pt I, Line 4</LineNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+							<xsd:simpleType>
+								<xsd:restriction base="TextType">
+									<xsd:maxLength value="20"/>
+								</xsd:restriction>
+							</xsd:simpleType>
+						</xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			
+			<!-- Number Of Days Physically Present In U.S. Count -->
+			<xsd:element name="PhysicallyPresUSPYDayCnt" type="NumberOfDaysType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Number of days physically present in U.S. count</Description>
+						<LineNumber>Pt I, Line 5</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			
+			<!-- Number Of Days Physically Present In U.S. Count -->
+			<xsd:element name="PhysicallyPresUSPYLess1DayCnt" type="NumberOfDaysType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Number of days physically present in U.S. count</Description>
+						<LineNumber>Pt I, Line 5</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			
+			<!-- Number Of Days Physically Present In U.S. Count -->
+			<xsd:element name="PhysicallyPresUSPYLess2DayCnt" type="NumberOfDaysType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Number of days physically present in U.S. count</Description>
+						<LineNumber>Pt I, Line 5</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			
+			<!-- Applied To Be Lawful Permanent Resident Of U.S. Indicator -->
+			<xsd:element name="AppLawfulPermanentResidentInd" type="BooleanType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Applied to be lawful permanent resident of U.S. indicator</Description>
+						<LineNumber>Pt I, Line 6</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- =============== Part II Closer Connection to One Foreign Country =============== -->
+			
+			<!-- Tax Home Country Code -->
+			<xsd:element name="TaxHomeCountryCd" type="AllCountriesType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Tax home country code</Description>
+						<LineNumber>Pt II, Line 7</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			
+			<!-- Closer Connection Country Code -->
+			<xsd:element name="CloserConnectionCountryCd" type="CountryType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Closer connection country code</Description>
+						<LineNumber>Pt II, Line 8</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			
+			<!-- =============== Part III Closer Connection to Two Foreign Countries ============== -->
+			
+			<!-- Tax Home On First Day Of Prior Year Country Code -->
+			<xsd:element name="FirstDayPYTaxHomeCountryCd" type="AllCountriesType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Tax home on first day of prior year country code</Description>
+						<LineNumber>Pt III, Line 9</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			
+			<!-- Home During Remainder Of Prior Year Country Code -->
+			<xsd:element name="LocRemainderPYTaxHomeCountryCd" type="AllCountriesType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description></Description>
+						<LineNumber>Pt III, Line 10</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			
+			<!-- Closer Connection To Foreign Country Indicator -->
+			<xsd:element name="CloserConnectionFrgnCntryInd" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Closer connection to foreign country indicator</Description>
+						<LineNumber>Pt III, Line 11</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+				<xsd:complexType>
+					<xsd:simpleContent>
+						<xsd:extension base="BooleanType">
+							<xsd:attribute name="referenceDocumentId" type="IdListType"/>
+							<xsd:attribute name="referenceDocumentName" type="TextType" fixed="CloserConnectionStatement"/>
+						</xsd:extension>
+					</xsd:simpleContent>
+				</xsd:complexType>
+			</xsd:element>
+			
+			<!-- Subject To Tax As Resident Under Internal Law Of Country Indicator -->
+			<xsd:element name="TaxResidentInternalLawCntryInd" type="BooleanType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Subject to tax as resident under internal law of country indicator</Description>
+						<LineNumber>Pt III, Line 12</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			
+			<!-- Tax Return Filed For Tax Home Country Indicator -->
+			<xsd:element name="TaxReturnFldTaxHomeCountryInd" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Subject to tax as resident under internal law of country indicator</Description>
+						<LineNumber>Pt III, Line 13</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+				<xsd:complexType>
+					<xsd:simpleContent>
+						<xsd:extension base="BooleanType">
+							<xsd:attribute name="referenceDocumentId" type="IdListType"/>
+							<xsd:attribute name="referenceDocumentName" type="TextType" fixed="BinaryAttachment TaxVerificationStatement NotSubjectToTaxExplanationStatement"/>
+						</xsd:extension>
+					</xsd:simpleContent>
+				</xsd:complexType>
+			</xsd:element>
+			
+			<!-- =============== Part IV Significant Contacts with Foreign Country or Countries in 2014 ============== -->
+			
+			<!-- Permanent Home Country Code -->
+			<xsd:element name="PermanentHomeCountryCd" type="AllCountriesType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Permanent home country code</Description>
+						<LineNumber>Pt IV, Line 14</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			
+			<!-- Multiple Permanent Home -->
+			<xsd:element name="MultiplePermanentHomeGrp" minOccurs="0" maxOccurs="10">
+				<xsd:complexType>
+					<xsd:sequence>
+						<!-- Permanent Home Country Code -->
+						<xsd:element name="PermanentHomeCountryCd" type="AllCountriesType" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Permanent home country code</Description>
+									<LineNumber>Pt IV, Line 15</LineNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						<!-- Short Explanation -->
+						<xsd:element name="ShortExplanationTxt" type="ShortExplanationType" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Short explanation</Description>
+									<LineNumber>Pt IV, Line 15</LineNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			
+			<!-- Family Location Country Code -->
+			<xsd:element name="FamilyLocationCountryCd" type="AllCountriesType" minOccurs="0" maxOccurs="10">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Family location country code</Description>
+						<LineNumber>Pt IV, Line 16</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			
+			<!-- Automobile Location Country Code -->
+			<xsd:element name="AutomobileLocationCountryCd" type="AllCountriesType" minOccurs="0" maxOccurs="10">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Automobile location country code</Description>
+						<LineNumber>Pt IV, Line 17</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			
+			<!-- Automobile Registered Country Code -->
+			<xsd:element name="AutomobileRegdCountryCd" type="AllCountriesType" minOccurs="0" maxOccurs="10">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Automobile registered country code</Description>
+						<LineNumber>Pt IV, Line 18</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			
+			<!-- Personal Belongings Location Country Code -->
+			<xsd:element name="PersonalBelongingsLocCountryCd" type="AllCountriesType" minOccurs="0" maxOccurs="10">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Personal belongings location country code</Description>
+						<LineNumber>Pt IV, Line 19</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			
+			<!-- Personal Banking Activity Location Country Code -->
+			<xsd:element name="PrsnlBankingActyLocCountryCd" type="AllCountriesType" minOccurs="0" maxOccurs="10">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Personal banking activity location country code</Description>
+						<LineNumber>Pt IV, Line 20a - 20d</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			
+			<!-- Business Activity Location Other Than Tax Home Indicator -->
+			<xsd:element name="BusActyLocOthThanTaxHomeInd" type="BooleanType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Business activity location other than tax home indicator</Description>
+						<LineNumber>Pt IV, Line 21</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			
+			<!-- Business Activity Location Other Than Tax Home Country Code -->
+			<xsd:element name="BusActyLocOthThanTxHmCountryCd" type="AllCountriesType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Business activity location other than tax home country code</Description>
+						<LineNumber>Pt IV, Line 21</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			
+			<!-- Driver's License Issued Country Code -->
+			<xsd:element name="DriversLicenseIssdCountryCd" type="AllCountriesType" minOccurs="0" maxOccurs="10">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Driver's license issued country code</Description>
+						<LineNumber>Pt IV, Line 22a</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			
+			<!-- Second Driver's License Issued Country Code -->
+			<xsd:element name="SndDriversLicenseIssdCountryCd" type="AllCountriesType" minOccurs="0" maxOccurs="10">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Second driver's license issued country code</Description>
+						<LineNumber>Pt IV, Line 22b</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			
+			<!-- Registered To Vote Country Code -->
+			<xsd:element name="RegisteredToVoteCountryCd" type="AllCountriesType" minOccurs="0" maxOccurs="10">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Registered to vote country code</Description>
+						<LineNumber>Pt IV, Line 23</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			
+			<!-- Foreign Tax Residence Country Code -->
+			<xsd:element name="ForeignTaxResidenceCountryCd" type="AllCountriesType" minOccurs="0" maxOccurs="10">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Foreign Tax residence country code</Description>
+						<LineNumber>Pt IV, Line 24</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			
+			<!-- Form W-8BEN Or Other W-8 Form Completed Indicator -->
+			<xsd:element name="FormW8BENOrOtherW8CompletedInd" type="BooleanType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Form W-8BEN or other W-8 form completed indicator</Description>
+						<LineNumber>Pt IV, Line 25a</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			
+			<!-- Form W-9 Completed Indicator -->
+			<xsd:element name="FormW9CompletedInd" type="BooleanType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Form W-9 completed indicator</Description>
+						<LineNumber>Pt IV, Line 25b</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			
+			<!-- Form 1078 Completed Indicator -->
+			<xsd:element name="Form1078CompletedInd" type="BooleanType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Form 1078 completed indicator</Description>
+						<LineNumber>Pt IV, Line 25c</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			
+			<!-- Other U.S. Official Form Completed Indicator -->
+			<xsd:element name="OthUSOfficialFormCompletedInd" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Other U.S. official form completed indicator</Description>
+						<LineNumber>Pt IV, Line 25d</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+				<xsd:complexType>
+					<xsd:simpleContent>
+						<xsd:extension base="BooleanType">
+							<xsd:attribute name="referenceDocumentId" type="IdListType"/>
+							<xsd:attribute name="referenceDocumentName" type="TextType" fixed="OfficialUSFormStatement"/>
+						</xsd:extension>
+					</xsd:simpleContent>
+				</xsd:complexType>
+			</xsd:element>
+			
+			<!-- Personal, Financial, And Legal Documents Location Country Code -->
+			<xsd:element name="DocumentLocationCountryCd" type="AllCountriesType" minOccurs="0" maxOccurs="20">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Personal, financial, and legal documents location country code</Description>
+						<LineNumber>Pt IV, Line 26</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			
+			<!-- Majority Of Income Derived From Country Code -->
+			<xsd:element name="MajorityIncomeDerivedCountryCd" type="AllCountriesType" minOccurs="0" maxOccurs="20">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Majority of income derived from country code</Description>
+						<LineNumber>Pt IV, Line 27</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			
+			<!-- Income From U.S. Sources Indicator -->
+			<xsd:element name="IncomeFromUSSourceInd" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Income from U.S. sources indicator</Description>
+						<LineNumber>Pt IV, Line 28</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+				<xsd:complexType>
+					<xsd:simpleContent>
+						<xsd:extension base="BooleanType">
+							<xsd:attribute name="referenceDocumentId" type="IdListType"/>
+							<xsd:attribute name="referenceDocumentName" type="TextType" fixed="IncomeFromUSSourceStatement"/>
+						</xsd:extension>
+					</xsd:simpleContent>
+				</xsd:complexType>
+			</xsd:element>
+			
+			<!-- Investment Location Country Code -->
+			<xsd:element name="InvestmentLocationCountryCd" type="AllCountriesType" minOccurs="0" maxOccurs="20">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Investment location country code</Description>
+						<LineNumber>Part IV, Line 29</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			
+			<!-- Qualified For National Health Plan Sponsored By Foreign Government Indicator -->
+			<xsd:element name="QlfyFrgnNationalHealthPlanInd" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Qualified for national health plan sponsored by foreign government indicator</Description>
+						<LineNumber>Part IV, Line 30</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+				<xsd:complexType>
+					<xsd:simpleContent>
+						<xsd:extension base="BooleanType">
+							<xsd:attribute name="referenceDocumentId" type="IdListType"/>
+							<xsd:attribute name="referenceDocumentName" type="TextType" fixed="QlfyFrgnNatlHealthPlanStatement BinaryAttachment NotQlfyFrgnNatlHealthPlanStatement OtherInformationStatement"/>
+						</xsd:extension>
+					</xsd:simpleContent>
+				</xsd:complexType>
+			</xsd:element>
+			
+		</xsd:sequence>
+	</xsd:complexType>
+
+</xsd:schema>

@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema targetNamespace="http://www.irs.gov/efile" xmlns="http://www.irs.gov/efile" xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.0">
+
+	<xsd:annotation>
+		<xsd:documentation>
+			<Description>IRS e-file U.S. Nonresident Alien Income Tax Schema - Deferred Property Tax Election Statement</Description>
+			<Purpose>Optional Statement - Complete this column only for those properties for which you are electing to defer the payment of tax. First, complete Section C to line 14. On a separate attachment, allocate the amount of tax eligible for deferral among all gain properties listed on line 8.</Purpose>
+			<TaxYear>2018</TaxYear>
+			<MaturityLevel>Final Release</MaturityLevel>
+			<ReleaseDate>February 13, 2019</ReleaseDate>
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:include schemaLocation="../../../Common/efileTypes.xsd" />
+
+	<!-- ====================================================== -->
+	<!-- ====== Deferred Property Tax Election Statement ====== -->
+	<!-- ====================================================== -->
+
+	<xsd:element name="DeferredPropertyTaxElectStmt">
+		<xsd:annotation>
+			<xsd:documentation>Deferred Property Tax Election Statement</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:complexContent>
+				<xsd:extension base="DeferredPropertyTaxElectStmtType">
+					<xsd:attributeGroup ref="DocumentAttributes">
+						<xsd:annotation>
+							<xsd:documentation>Common return document attributes</xsd:documentation>
+						</xsd:annotation>
+					</xsd:attributeGroup>
+					<xsd:attribute name="documentName" type="TextType" fixed="DeferredPropertyTaxElectionStatement">
+						<xsd:annotation>
+							<xsd:documentation>IRS internal use only. To avoid error in the return, do not include the attribute name or value.</xsd:documentation>
+						</xsd:annotation>
+					</xsd:attribute>
+				</xsd:extension>
+			</xsd:complexContent>
+		</xsd:complexType>
+	</xsd:element>
+
+	<xsd:complexType name="DeferredPropertyTaxElectStmtType">
+		<xsd:annotation>
+			<xsd:documentation>Deferred Property Tax Election Statement</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<!-- Deferred Property Tax Election -->
+			<xsd:element name="DeferredPropertyTaxElectGrp" minOccurs="0" maxOccurs="20">
+				<xsd:complexType>
+					<xsd:sequence>
+						<!-- Property Description -->
+						<xsd:element name="PropertyDesc" type="LineExplanationType"/>
+						<!-- Gain After Allocation Exclusion Amount -->
+						<xsd:element name="GainAfterAllocationExclAmt" type="USAmountType"/>
+						<!-- Total Built-In Gain Amount -->
+						<xsd:element name="TotalBuiltInGainAmt" type="USAmountType"/>
+						<!-- Tax Eligible For Deferral Amount -->
+						<xsd:element name="TaxEligibleForDeferralAmt" type="USAmountType"/>
+						<!-- Deferred Tax Amount -->
+						<xsd:element name="DeferredTaxAmt" type="USAmountType"/>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+
+</xsd:schema>

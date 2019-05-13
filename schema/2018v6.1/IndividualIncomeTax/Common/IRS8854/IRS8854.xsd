@@ -1,0 +1,2058 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.irs.gov/efile" targetNamespace="http://www.irs.gov/efile" elementFormDefault="qualified" attributeFormDefault="unqualified">
+
+	<xsd:annotation>
+		<xsd:documentation>
+			<Description>IRS e-file U.S. Nonresident Alien Income Tax Schema - IRS Form 8854 Initial and Annual Expatriation Statement</Description>
+			<TaxYear>2018</TaxYear>
+			<MaturityLevel>Final Release</MaturityLevel>
+			<ReleaseDate>February 13, 2019</ReleaseDate>
+		</xsd:documentation>
+	</xsd:annotation>
+	
+	<xsd:include schemaLocation="../../../Common/efileTypes.xsd"/>
+	
+	<!-- ====================================================================== -->
+	<!-- ============================ IRS Form 8854 =========================== -->
+	<!-- ====================================================================== -->
+	
+	<xsd:element name="IRS8854">
+		<xsd:annotation>
+			<xsd:documentation>IRS Form 8854</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:complexContent>
+				<xsd:extension base="IRS8854Type">
+					<xsd:attributeGroup ref="DocumentAttributes">
+						<xsd:annotation>
+							<xsd:documentation>Common return document attributes</xsd:documentation>
+						</xsd:annotation>
+					</xsd:attributeGroup>
+					<xsd:attribute name="documentName" type="xsd:string" fixed="IRS8854">
+						<xsd:annotation>
+							<xsd:documentation>IRS internal use only. To avoid error in the return do not include the attribute name or value.</xsd:documentation>
+						</xsd:annotation>
+					</xsd:attribute>
+					<xsd:attribute name="referenceDocumentId" type="IdListType">
+						<xsd:annotation>
+							<xsd:documentation>List of document ID's of forms, schedules, supporting info. etc. attached to this form</xsd:documentation>
+						</xsd:annotation>
+					</xsd:attribute>
+					<xsd:attribute name="referenceDocumentName" type="TextType" fixed="BinaryAttachment"/>
+				</xsd:extension>
+			</xsd:complexContent>
+		</xsd:complexType>
+	</xsd:element>
+	
+	<xsd:complexType name="IRS8854Type">
+		<xsd:annotation>
+			<xsd:documentation>Content model for Form 8854</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+		
+			<!-- =============== Part I General Information. For all filers. =============== -->
+			
+			<!-- After Expatriation Mailing Address and Phone -->
+			<xsd:element name="AfterExptrtMailAddrPhoneGrp">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:choice>
+							<!-- U.S. Address -->
+							<xsd:element name="USAddress" type="USAddressType">
+								<xsd:annotation>
+									<xsd:documentation>
+										<Description>U.S. address</Description>
+										<LineNumber>Part I Line 1</LineNumber>
+									</xsd:documentation>
+								</xsd:annotation>
+							</xsd:element>
+							<!-- Foreign Address -->
+							<xsd:element name="ForeignAddress" type="ForeignAddressType">
+								<xsd:annotation>
+									<xsd:documentation>
+										<Description>Foreign address</Description>
+										<LineNumber>Part I Line 1</LineNumber>
+									</xsd:documentation>
+								</xsd:annotation>
+							</xsd:element>
+						</xsd:choice>
+						<xsd:choice>
+							<!-- U.S. Telephone Number -->
+							<xsd:element name="USTelephoneNum" type="PhoneNumberType">
+								<xsd:annotation>
+									<xsd:documentation>
+										<Description>U.S. telephone number</Description>
+										<LineNumber>Part I Line 1</LineNumber>
+									</xsd:documentation>
+								</xsd:annotation>
+							</xsd:element>
+							<!-- Foreign Phone Number -->
+							<xsd:element name="ForeignPhoneNum" type="ForeignPhoneNumberType">
+								<xsd:annotation>
+									<xsd:documentation>
+										<Description>Foreign phone number</Description>
+										<LineNumber>Part I Line 1</LineNumber>
+									</xsd:documentation>
+								</xsd:annotation>
+							</xsd:element>
+						</xsd:choice>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+
+			<!-- Foreign Residence Address -->
+			<xsd:element name="ForeignResidenceAddress" type="ForeignAddressType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Foreign residence address</Description>
+						<LineNumber>Part I Line 2</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			
+			<!-- Foreign Tax Residence Country Code -->
+			<xsd:element name="ForeignTaxResidenceCountryCd" type="CountryType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Foreign tax residence country code</Description>
+						<LineNumber>Part I Line 3</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			
+			<xsd:choice>
+				<!-- Expatriation Date Period 1 Indicator -->
+				<xsd:element name="ExptrtDatePeriod1Ind" type="CheckboxType">
+					<xsd:annotation>
+						<xsd:documentation>
+							<Description>Expatriation date period 1 indicator</Description>
+							<LineNumber>Part I Line 4</LineNumber>
+						</xsd:documentation>
+					</xsd:annotation>
+				</xsd:element>
+				<!-- Expatriation Date Period 2 Indicator -->
+				<xsd:element name="ExptrtDatePeriod2Ind" type="CheckboxType">
+					<xsd:annotation>
+						<xsd:documentation>
+							<Description>Expatriation date period 2 indicator</Description>
+							<LineNumber>Part I Line 4</LineNumber>
+						</xsd:documentation>
+					</xsd:annotation>
+				</xsd:element>
+				<!-- Expatriation Date Period Prior Year Indicator -->
+				<xsd:element name="ExptrtDatePeriodPYInd" type="CheckboxType">
+					<xsd:annotation>
+						<xsd:documentation>
+							<Description>Expatriation date period prior year indicator</Description>
+							<LineNumber>Part I Line 4</LineNumber>
+						</xsd:documentation>
+					</xsd:annotation>
+				</xsd:element>
+			</xsd:choice>
+			
+			<xsd:choice>
+				<!-- Expatriation Notification For Citizen -->
+				<xsd:element name="ExptrtNotificationCitizenGrp">
+					<xsd:complexType>
+						<xsd:sequence>
+							<!-- Expatriation Notification For Citizen Indicator -->
+							<xsd:element name="ExptrtNotificationCitizenInd" type="CheckboxType">
+								<xsd:annotation>
+									<xsd:documentation>
+										<Description>Expatriation notification for citizen indicator</Description>
+										<LineNumber>Part I Line 5</LineNumber>
+									</xsd:documentation>
+								</xsd:annotation>
+							</xsd:element>
+							<!-- Date Expatriation Notification Given To Department Of State -->
+							<xsd:element name="ExptrtNotifToDeptOfStateDt" type="DateType">
+								<xsd:annotation>
+									<xsd:documentation>
+										<Description>Date expatriation notification given to department of state</Description>
+										<LineNumber>Part I Line 5</LineNumber>
+									</xsd:documentation>
+								</xsd:annotation>
+							</xsd:element>
+						</xsd:sequence>
+					</xsd:complexType>
+				</xsd:element>
+				<!-- Expatriation Notification For Long-Term Resident -->
+				<xsd:element name="ExptrtNotifLongTermResidentGrp">
+					<xsd:complexType>
+						<xsd:sequence>
+							<!-- Expatriation Notification For Long-Term Resident Indicator -->
+							<xsd:element name="ExptrtNotifLongTermResidentInd" type="CheckboxType">
+								<xsd:annotation>
+									<xsd:documentation>
+										<Description>Expatriation notification for long-term resident indicator</Description>
+										<LineNumber>Part I Line 5</LineNumber>
+									</xsd:documentation>
+								</xsd:annotation>
+							</xsd:element>
+							<!-- Date Expatriation Notification Given To Department Of Homeland Security -->
+							<xsd:element name="ExptrtNotifToDeptHomelandSecDt" type="DateType">
+								<xsd:annotation>
+									<xsd:documentation>
+										<Description>Date expatriation notification given to department of homeland security</Description>
+										<LineNumber>Part I Line 5</LineNumber>
+									</xsd:documentation>
+								</xsd:annotation>
+							</xsd:element>
+						</xsd:sequence>
+					</xsd:complexType>
+				</xsd:element>
+				<!-- Expatriation Notification For Long-Term Dual Resident -->
+				<xsd:element name="ExptrtNotifLongTermDualResGrp">
+					<xsd:complexType>
+						<xsd:sequence>
+							<!-- Expatriation Notification For Long-Term Dual Resident Indicator -->
+							<xsd:element name="ExptrtNotifLongTermDualResInd" type="CheckboxType">
+								<xsd:annotation>
+									<xsd:documentation>
+										<Description>Expatriation notification for long-term dual resident indicator</Description>
+										<LineNumber>Part I Line 5</LineNumber>
+									</xsd:documentation>
+								</xsd:annotation>
+							</xsd:element>
+							<!-- Date Expatriation Notification Given By Long-Term Dual Resident -->
+							<xsd:element name="ExptrtNotifLongTermDualResDt" type="DateType">
+								<xsd:annotation>
+									<xsd:documentation>
+										<Description>Date expatriation notification given by long-term dual resident</Description>
+										<LineNumber>Part I Line 5</LineNumber>
+									</xsd:documentation>
+								</xsd:annotation>
+							</xsd:element>
+						</xsd:sequence>
+					</xsd:complexType>
+				</xsd:element>
+			</xsd:choice>
+			
+			<!-- Number Of Days Physically Present In U.S. Count -->
+			<xsd:element name="PhysicallyPresUSPYDayCnt" type="NumberOfDaysType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Number of days physically present in U.S. count</Description>
+						<LineNumber>Part I Line 6</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			
+			<!-- Country Citizenship -->
+			<xsd:element name="CountryCitizenshipGrp" minOccurs="0" maxOccurs="2">
+				<xsd:complexType>
+					<xsd:sequence>
+						<!-- Country Code -->
+						<xsd:element name="CountryCd" type="CountryType">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Country code</Description>
+									<LineNumber>Part I Line 7a</LineNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						<!-- Citizenship Date -->
+						<xsd:element name="CitizenshipDt" type="DateType">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Citizenship date</Description>
+									<LineNumber>Part I Line 7b</LineNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			
+			<xsd:choice minOccurs="0">
+				<!-- U.S. Citizen By Birth Indicator -->
+				<xsd:element name="USCitizenByBirthInd" type="CheckboxType">
+					<xsd:annotation>
+						<xsd:documentation>
+							<Description>U.S. citizen by birth indicator</Description>
+							<LineNumber>Part I Line 8</LineNumber>
+						</xsd:documentation>
+					</xsd:annotation>
+				</xsd:element>
+				<!-- U.S. Citizen By Naturalization Indicator -->
+				<xsd:element name="USCitizenByNaturalizationInd" type="CheckboxType">
+					<xsd:annotation>
+						<xsd:documentation>
+							<Description>U.S. citizen by naturalization indicator</Description>
+							<LineNumber>Part I Line 8</LineNumber>
+						</xsd:documentation>
+					</xsd:annotation>
+				</xsd:element>
+			</xsd:choice>
+			
+			<!-- =============== Part II For Persons Who Expatriated After June, 3, 2004, and Before June 17, 2008 =============== -->
+			
+			<!-- Expatriation Period 1 -->
+			<xsd:element name="ExptrtPeriod1Grp" minOccurs="0">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:choice>
+							<!-- Form 8854 Not Filed During Period 1 Indicator -->
+							<xsd:element name="Form8854FiledDurPeriodNoInd" type="CheckboxType">
+								<xsd:annotation>
+									<xsd:documentation>
+										<Description>Form 8854 not filed during period 1 indicator</Description>
+										<LineNumber>Part II Line 1</LineNumber>
+									</xsd:documentation>
+								</xsd:annotation>
+							</xsd:element>
+							<!-- Form 8854 Filed -->
+							<xsd:element name="Form8854FiledGrp">
+								<xsd:complexType>
+									<xsd:sequence>
+										<!-- Form 8854 Filed During Period 1 Indicator -->
+										<xsd:element name="Form8854FiledDurPeriodYesInd" type="CheckboxType">
+											<xsd:annotation>
+												<xsd:documentation>
+													<Description>Form 8854 filed during period 1 indicator</Description>
+													<LineNumber>Part II Line 1</LineNumber>
+												</xsd:documentation>
+											</xsd:annotation>
+										</xsd:element>
+										<!-- Form 8854 Filed Tax Year -->
+										<xsd:element name="Form8854FiledTaxYr" type="YearType">
+											<xsd:annotation>
+												<xsd:documentation>
+													<Description>Form 8854 filed tax year</Description>
+													<LineNumber>Part II Line 1</LineNumber>
+												</xsd:documentation>
+											</xsd:annotation>
+										</xsd:element>
+										<!-- Present In U.S. From 30 To 60 Days Indicator -->
+										<xsd:element name="USPresence30To60DaysInd" type="BooleanType">
+											<xsd:annotation>
+												<xsd:documentation>
+													<Description>Present in U.S. from 30 to 60 days indicator</Description>
+													<LineNumber>Part II Line 2</LineNumber>
+												</xsd:documentation>
+											</xsd:annotation>
+										</xsd:element>
+										<!-- Performing Services For Unrelated Employer Indicator -->
+										<xsd:element name="UnrelatedEmployerServicesInd" type="BooleanType" minOccurs="0">
+											<xsd:annotation>
+												<xsd:documentation>
+													<Description>Performing services for unrelated employer indicator</Description>
+													<LineNumber>Part II Line 2a</LineNumber>
+												</xsd:documentation>
+											</xsd:annotation>
+										</xsd:element>
+										<!-- Citizen Or Resident Of Birth Country Indicator -->
+										<xsd:element name="CitizenOrResCountryOfBirthInd" type="BooleanType" minOccurs="0">
+											<xsd:annotation>
+												<xsd:documentation>
+													<Description>Citizen or resident of birth country indicator</Description>
+													<LineNumber>Part II Line 2b</LineNumber>
+												</xsd:documentation>
+											</xsd:annotation>
+										</xsd:element>
+									</xsd:sequence>
+								</xsd:complexType>
+							</xsd:element>
+						</xsd:choice>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			
+			<!-- =============== Part III For Persons Who Expatriated After June 16, 2008, and Before January 1, 2015 =============== -->
+			
+			<!-- Expatriation Period 2 -->
+			<xsd:element name="ExptrtPeriod2Grp" minOccurs="0">
+				<xsd:complexType>
+					<xsd:sequence>
+						<!-- Property Tax Deferred From Prior Year Form 8854 -->
+						<xsd:element name="PropTaxDeferredPYFrm8854Grp" minOccurs="0" maxOccurs="20">
+							<xsd:complexType>
+								<xsd:sequence>
+									<!-- Property Description -->
+									<xsd:element name="PropertyDesc" type="LineExplanationType">
+										<xsd:annotation>
+											<xsd:documentation>
+												<Description>Property description</Description>
+												<LineNumber>Part III Line 1a</LineNumber>
+											</xsd:documentation>
+										</xsd:annotation>
+									</xsd:element>
+									<!-- Mark-To-Market Gain Or Loss Amount -->
+									<xsd:element name="MarkToMarketGainOrLossAmt" type="USAmountType">
+										<xsd:annotation>
+											<xsd:documentation>
+												<Description>Mark-To-Market Gain Or Loss Amount</Description>
+												<LineNumber>Part III Line 1b</LineNumber>
+											</xsd:documentation>
+										</xsd:annotation>
+									</xsd:element>
+									<!-- Deferred Tax Amount -->
+									<xsd:element name="DeferredTaxAmt" type="USAmountType">
+										<xsd:annotation>
+											<xsd:documentation>
+												<Description>Deferred Tax Amount</Description>
+												<LineNumber>Part III Line 1c</LineNumber>
+											</xsd:documentation>
+										</xsd:annotation>
+									</xsd:element>
+									<!-- Disposition Date -->
+									<xsd:element name="DispositionDt" type="DateType" minOccurs="0">
+										<xsd:annotation>
+											<xsd:documentation>
+												<Description>Disposition date</Description>
+												<LineNumber>Part III Line 1d</LineNumber>
+											</xsd:documentation>
+										</xsd:annotation>
+									</xsd:element>
+								</xsd:sequence>
+							</xsd:complexType>
+						</xsd:element>
+						<!-- Eligible Deferred Compensation Items Distribution -->
+						<xsd:element name="EligDeferredCompItemsDistriGrp">
+							<xsd:complexType>
+								<xsd:sequence>
+									<!-- Distribution Received Indicator -->
+									<xsd:element name="DistributionReceivedInd" type="BooleanType">
+										<xsd:annotation>
+											<xsd:documentation>
+												<Description>Distribution received indicator</Description>
+												<LineNumber>Part III Line 2</LineNumber>
+											</xsd:documentation>
+										</xsd:annotation>
+									</xsd:element>
+									<!-- Distribution Amount -->
+									<xsd:element name="DistributionAmt" type="USAmountType" minOccurs="0">
+										<xsd:annotation>
+											<xsd:documentation>
+												<Description>Distribution amount</Description>
+												<LineNumber>Part III Line 2</LineNumber>
+											</xsd:documentation>
+										</xsd:annotation>
+									</xsd:element>
+									<!-- Total Tax Withheld Amount -->
+									<xsd:element name="TotalTaxWithheldAmt" type="USAmountType" minOccurs="0">
+										<xsd:annotation>
+											<xsd:documentation>
+												<Description>Total tax withheld amount</Description>
+												<LineNumber>Part III Line 2</LineNumber>
+											</xsd:documentation>
+										</xsd:annotation>
+									</xsd:element>
+								</xsd:sequence>
+							</xsd:complexType>
+						</xsd:element>
+						<!-- Nongrantor Trust Distribution -->
+						<xsd:element name="NongrantorTrustDistriGrp">
+							<xsd:complexType>
+								<xsd:sequence>
+									<!-- Distribution Received Indicator -->
+									<xsd:element name="DistributionReceivedInd" type="BooleanType">
+										<xsd:annotation>
+											<xsd:documentation>
+												<Description>Distribution received indicator</Description>
+												<LineNumber>Part III Line 3</LineNumber>
+											</xsd:documentation>
+										</xsd:annotation>
+									</xsd:element>
+									<!-- Distribution Amount -->
+									<xsd:element name="DistributionAmt" type="USAmountType" minOccurs="0">
+										<xsd:annotation>
+											<xsd:documentation>
+												<Description>Distribution amount</Description>
+												<LineNumber>Part III Line 3</LineNumber>
+											</xsd:documentation>
+										</xsd:annotation>
+									</xsd:element>
+									<!-- Total Tax Withheld Amount -->
+									<xsd:element name="TotalTaxWithheldAmt" type="USAmountType" minOccurs="0">
+										<xsd:annotation>
+											<xsd:documentation>
+												<Description>Total tax withheld amount</Description>
+												<LineNumber>Part III Line 3</LineNumber>
+											</xsd:documentation>
+										</xsd:annotation>
+									</xsd:element>
+								</xsd:sequence>
+							</xsd:complexType>
+						</xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			
+			<!-- =============== Part IV For Persons Who Expatriated During 2015 =============== -->
+			
+			<!-- Section A Expatriation Information -->
+			<xsd:element name="ExpatriationInformationGrp" minOccurs="0">
+				<xsd:complexType>
+					<xsd:sequence>
+						<!-- U.S. Income Tax For 1st Year Before Expatriation Amount -->
+						<xsd:element name="USIncomeTax1stYearBfrExptrtAmt" type="USAmountType">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>U.S. income tax for 1st year before expatriation amount</Description>
+									<LineNumber>Part IV Section A Line 1</LineNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						<!-- U.S. Income Tax For 2nd Year Before Expatriation Amount -->
+						<xsd:element name="USIncomeTax2ndYearBfrExptrtAmt" type="USAmountType">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>U.S. income tax for 2nd year before expatriation amount</Description>
+									<LineNumber>Part IV Section A Line 1</LineNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						<!-- U.S. Income Tax For 3rd Year Before Expatriation Amount -->
+						<xsd:element name="USIncomeTax3rdYearBfrExptrtAmt" type="USAmountType">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>U.S. income tax for 3rd year before expatriation amount</Description>
+									<LineNumber>Part IV Section A Line 1</LineNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						<!-- U.S. Income Tax For 4th Year Before Expatriation Amount -->
+						<xsd:element name="USIncomeTax4thYearBfrExptrtAmt" type="USAmountType">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>U.S. income tax for 4th year before expatriation amount</Description>
+									<LineNumber>Part IV Section A Line 1</LineNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						<!-- U.S. Income Tax For 5th Year Before Expatriation Amount -->
+						<xsd:element name="USIncomeTax5thYearBfrExptrtAmt" type="USAmountType">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>U.S. income tax for 5th year before expatriation amount</Description>
+									<LineNumber>Part IV Section A Line 1</LineNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						<!-- Net Worth On Expatriation Date Amount -->
+						<xsd:element name="NetWorthOnExptrtDateAmt" type="USAmountType">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Net worth on expatriation date amount</Description>
+									<LineNumber>Part IV Section A Line 2</LineNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						<!-- Dual Citizen By Birth Of U.S. And Other Country Indicator -->
+						<xsd:element name="DualCitizenBirthUSOthCntryInd" type="BooleanType">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Dual citizen by birth of U.S. and other country indicator</Description>
+									<LineNumber>Part IV Section A Line 3</LineNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						<!-- U.S. Resident For No More Than 10 Of Last 15 Tax Years Indicator -->
+						<xsd:element name="USResNoMoreThan10Of15YrInd" type="BooleanType" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>U.S. resident for no more than 10 of last 15 tax years indicator</Description>
+									<LineNumber>Part IV Section A Line 4</LineNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						<!-- Under 18 When Expatriated And U.S. Resident For Less Than 10 Years Indicator -->
+						<xsd:element name="Under18USResLessThan10YrInd" type="BooleanType">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Under 18 when expatriated and U.S. resident for less than 10 years indicator</Description>
+									<LineNumber>Part IV Section A Line 5</LineNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						<!-- In Compliance With Tax Obligations For 5 Preceding Tax Years Indicator -->
+						<xsd:element name="InCompliance5PrecTaxYearInd" type="BooleanType">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>In compliance with tax obligations for 5 preceding tax years indicator</Description>
+									<LineNumber>Part IV Section A Line 6</LineNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			
+			<!-- Section B Property Owned On Date Of Expatriation -->
+			<xsd:element name="PropertyOwnedDtExpatriationGrp" minOccurs="0">
+				<xsd:complexType>
+					<xsd:sequence>
+						<!-- Eligible Deferred Compensation Items Indicator -->
+						<xsd:element name="EligibleDeferredCompItemsInd" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Eligible deferred compensation items indicator</Description>
+									<LineNumber>Part IV Section B Line 7a</LineNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+							<xsd:complexType>
+								<xsd:simpleContent>
+									<xsd:extension base="BooleanType">
+										<xsd:attribute name="referenceDocumentId" type="IdListType"/>
+										<xsd:attribute name="referenceDocumentName" type="TextType" fixed="EligibleDeferredCompensationItemStatement"/>
+									</xsd:extension>
+								</xsd:simpleContent>
+							</xsd:complexType>
+						</xsd:element>
+						<!-- Ineligible Deferred Compensation Items Indicator -->
+						<xsd:element name="IneligibleDeferredCompItemsInd" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Ineligible deferred compensation items indicator</Description>
+									<LineNumber>Part IV Section B Line 7b</LineNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+							<xsd:complexType>
+								<xsd:simpleContent>
+									<xsd:extension base="BooleanType">
+										<xsd:attribute name="referenceDocumentId" type="IdListType"/>
+										<xsd:attribute name="referenceDocumentName" type="TextType" fixed="IneligibleDeferredCompensationItemStatement"/>
+									</xsd:extension>
+								</xsd:simpleContent>
+							</xsd:complexType>
+						</xsd:element>
+						<!-- Specified Tax Deferred Accounts Indicator -->
+						<xsd:element name="SpecifiedTaxDeferredAccountInd" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Specified tax deferred accounts indicator</Description>
+									<LineNumber>Part IV Section B Line 7c</LineNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+							<xsd:complexType>
+								<xsd:simpleContent>
+									<xsd:extension base="BooleanType">
+										<xsd:attribute name="referenceDocumentId" type="IdListType"/>
+										<xsd:attribute name="referenceDocumentName" type="TextType" fixed="SpecifiedTaxDeferredAccountsStatement"/>
+									</xsd:extension>
+								</xsd:simpleContent>
+							</xsd:complexType>
+						</xsd:element>
+						<!-- Nongrantor Trust Interest Indicator -->
+						<xsd:element name="NongrantorTrustInterestInd" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Nongrantor trust interest indicator</Description>
+									<LineNumber>Part IV Section B Line 7d</LineNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+							<xsd:complexType>
+								<xsd:simpleContent>
+									<xsd:extension base="BooleanType">
+										<xsd:attribute name="referenceDocumentId" type="IdListType"/>
+										<xsd:attribute name="referenceDocumentName" type="TextType" fixed="NongrantorTrustStatement"/>
+									</xsd:extension>
+								</xsd:simpleContent>
+							</xsd:complexType>
+						</xsd:element>
+						<!-- Section 877A Election Indicator -->
+						<xsd:element name="Section877AElectionInd" type="CheckboxType" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Section 877A election indicator</Description>
+									<LineNumber>Part IV Section B Line 7d</LineNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						<!-- Mark To Market Property Sale -->
+						<xsd:element name="MarkToMarketPropertySaleGrp" minOccurs="0" maxOccurs="20">
+							<xsd:complexType>
+								<xsd:sequence>
+									<!-- Property Description -->
+									<xsd:element name="PropertyDesc" type="LineExplanationType">
+										<xsd:annotation>
+											<xsd:documentation>
+												<Description>Property description</Description>
+												<LineNumber>Part IV Section B Line 8a</LineNumber>
+											</xsd:documentation>
+										</xsd:annotation>
+									</xsd:element>
+									<!-- Fair Market Value On Day Before Expatriation Amount -->
+									<xsd:element name="FairMarketValueDayBfrExptrtAmt" type="USAmountType">
+										<xsd:annotation>
+											<xsd:documentation>
+												<Description>Fair market value on day before expatriation amount</Description>
+												<LineNumber>Part IV Section B Line 8b</LineNumber>
+											</xsd:documentation>
+										</xsd:annotation>
+									</xsd:element>
+									<!-- Cost Or Other Basis -->
+									<xsd:element name="CostOrOtherBasisGrp">
+										<xsd:complexType>
+											<xsd:sequence>
+												<!-- Cost Or Other Basis Amount -->
+												<xsd:element name="CostOrOtherBasisAmt" type="USAmountType">
+													<xsd:annotation>
+														<xsd:documentation>
+															<Description>Cost or other basis amount</Description>
+															<LineNumber>Part IV Section B Line 8c</LineNumber>
+														</xsd:documentation>
+													</xsd:annotation>
+												</xsd:element>
+												<!-- Basis Irrevocable Election Code -->
+												<xsd:element name="BasisIrrevocableElectionCd" minOccurs="0">
+													<xsd:annotation>
+														<xsd:documentation>
+															<Description>Basis irrevocable election code</Description>
+															<LineNumber>Part IV Section B Line 8c</LineNumber>
+														</xsd:documentation>
+													</xsd:annotation>
+													<xsd:simpleType>
+														<xsd:restriction base="TextType">
+															<xsd:enumeration value="(h)(2)"/>
+														</xsd:restriction>
+													</xsd:simpleType>
+												</xsd:element>
+											</xsd:sequence>
+										</xsd:complexType>
+									</xsd:element>
+									<!-- Gain Or Loss Amount -->
+									<xsd:element name="GainOrLossAmt" type="USAmountType">
+										<xsd:annotation>
+											<xsd:documentation>
+												<Description>Gain or loss amount</Description>
+												<LineNumber>Part IV Section B Line 8d</LineNumber>
+											</xsd:documentation>
+										</xsd:annotation>
+									</xsd:element>
+									<!-- Gain After Allocation Of Exclusion Amount -->
+									<xsd:element name="GainAfterAllocationExclAmt">
+										<xsd:annotation>
+											<xsd:documentation>
+												<Description>Gain after allocation of exclusion amount</Description>
+												<LineNumber>Part IV Section B Line 8e</LineNumber>
+											</xsd:documentation>
+										</xsd:annotation>
+										<xsd:complexType>
+											<xsd:simpleContent>
+												<xsd:extension base="USAmountType">
+													<xsd:attribute name="referenceDocumentId" type="IdListType"/>
+													<xsd:attribute name="referenceDocumentName" type="TextType" fixed="Form8854ComputationStatement"/>
+												</xsd:extension>
+											</xsd:simpleContent>
+										</xsd:complexType>
+									</xsd:element>
+									<!-- Form Or Schedule Gain Or Loss Reported Code -->
+									<xsd:element name="FormOrSchGainAssetReportedCd">
+										<xsd:annotation>
+											<xsd:documentation>
+												<Description>Form or schedule gain or loss reported code</Description>
+												<LineNumber>Part IV Section B Line 8f</LineNumber>
+											</xsd:documentation>
+										</xsd:annotation>
+										<xsd:simpleType>
+											<xsd:restriction base="TextType">
+												<xsd:enumeration value="F4797"/>
+												<xsd:enumeration value="F8949"/>
+												<xsd:enumeration value="F1040 SCHD"/>
+											</xsd:restriction>
+										</xsd:simpleType>
+									</xsd:element>
+									<!-- Deferred Tax Amount -->
+									<xsd:element name="DeferredTaxAmt" minOccurs="0">
+										<xsd:annotation>
+											<xsd:documentation>
+												<Description>Deferred tax amount</Description>
+												<LineNumber>Part IV Section B Line 8g</LineNumber>
+											</xsd:documentation>
+										</xsd:annotation>
+										<xsd:complexType>
+											<xsd:simpleContent>
+												<xsd:extension base="USAmountType">
+													<xsd:attribute name="referenceDocumentId" type="IdListType"/>
+													<xsd:attribute name="referenceDocumentName" type="TextType" fixed="DeferredPropertyTaxElectionStatement"/>
+												</xsd:extension>
+											</xsd:simpleContent>
+										</xsd:complexType>
+									</xsd:element>
+								</xsd:sequence>
+							</xsd:complexType>
+						</xsd:element>
+						<!-- Total Gain Or Loss Amount -->
+						<xsd:element name="TotalGainOrLossAmt" type="USAmountType">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Total gain or loss amount</Description>
+									<LineNumber>Part IV Section B Line 9d</LineNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						<!-- Total Gain After Allocation Of Exclusion Amount -->
+						<xsd:element name="TotGainAfterAllocationExclAmt" type="USAmountType">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Total gain after allocation of exclusion amount</Description>
+									<LineNumber>Part IV Section B Line 9e</LineNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						<!-- Total Tax Deferred Amount -->
+						<xsd:element name="TotalTaxDeferredAmt" type="USAmountType" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Total tax deferred amount</Description>
+									<LineNumber>Part IV Section B Line 10g</LineNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			
+			<!-- Section C Deferral of Tax -->
+			<xsd:element name="ExptrtTaxDeferralGrp" minOccurs="0">
+				<xsd:complexType>
+					<xsd:sequence>
+						<!-- Tax Deferred Under Section 877A(b) Election Indicator -->
+						<xsd:element name="TaxDeferSect877AbElectionInd" type="BooleanType">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Tax deferred under section 877A(b) election indicator</Description>
+									<LineNumber>Part IV Section C Line 11</LineNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						<!-- Total Tax With Section 877A(a) Amount -->
+						<xsd:element name="TotalTaxWithSect877AaAmt" type="USAmountType" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Total tax with section 877A(a) amount</Description>
+									<LineNumber>Part IV Section C Line 12</LineNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						<!-- Total Tax Without Section 877A(a) Amount -->
+						<xsd:element name="TotalTaxWithoutSect877AaAmt" type="USAmountType" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Total tax without section 877A(a) amount</Description>
+									<LineNumber>Part IV Section C Line 13</LineNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						<!-- Tax Eligible For Deferral Amount -->
+						<xsd:element name="TaxEligibleForDeferralAmt" type="USAmountType" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Tax eligible for deferral amount</Description>
+									<LineNumber>Part IV Section C Line 14</LineNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			
+			<!-- =============== Part V Balance Sheet and Income Statement =============== -->
+			
+			<!-- Schedule A	Balance Sheet -->
+			<xsd:element name="IRS8854ScheduleA" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Schedule A Balance Sheet</Description>
+					</xsd:documentation>
+				</xsd:annotation>
+				<xsd:complexType>
+					<xsd:complexContent>
+						<xsd:extension base="IRS8854ScheduleAType">
+							<xsd:attribute name="referenceDocumentId" type="IdListType" />
+							<xsd:attribute name="referenceDocumentName" type="StringType" fixed="ChangePreOrPostExpatriationDateStatement" />
+						</xsd:extension>
+					</xsd:complexContent>
+				</xsd:complexType>
+			</xsd:element>
+			
+			<!-- IRS 8854 Schedule B -->
+			<xsd:element name="IRS8854ScheduleB" minOccurs="0">
+				<xsd:complexType>
+					<xsd:sequence>
+						<!-- Gross Income Net Effectively Connected With U.S. Trade Or Business -->
+						<xsd:element name="GrossIncmNECUSTrdBusGrp" minOccurs="0">
+							<xsd:complexType>
+								<xsd:sequence>
+									<!-- Interest Amount -->
+									<xsd:element name="InterestAmt" type="USAmountType" minOccurs="0">
+										<xsd:annotation>
+											<xsd:documentation>
+												<Description>Interest amount</Description>
+												<LineNumber>1a</LineNumber>
+											</xsd:documentation>
+										</xsd:annotation>
+									</xsd:element>
+									<!-- Dividend Amount -->
+									<xsd:element name="DividendAmt" type="USAmountType" minOccurs="0">
+										<xsd:annotation>
+											<xsd:documentation>
+												<Description>Dividend amount</Description>
+												<LineNumber>1b</LineNumber>
+											</xsd:documentation>
+										</xsd:annotation>
+									</xsd:element>
+									<!-- Royalty Amount -->
+									<xsd:element name="RoyaltyAmt" type="USAmountType" minOccurs="0">
+										<xsd:annotation>
+											<xsd:documentation>
+												<Description>Royalty amount</Description>
+												<LineNumber>1c</LineNumber>
+											</xsd:documentation>
+										</xsd:annotation>
+									</xsd:element>
+									<!-- Pension Distribution Amount -->
+									<xsd:element name="PensionDistributionAmt" type="USAmountType" minOccurs="0">
+										<xsd:annotation>
+											<xsd:documentation>
+												<Description>Pension distribution amount</Description>
+												<LineNumber>1d</LineNumber>
+											</xsd:documentation>
+										</xsd:annotation>
+									</xsd:element>
+									<!-- Other Amount -->
+									<xsd:element name="OtherAmt" type="USAmountType" minOccurs="0">
+										<xsd:annotation>
+											<xsd:documentation>
+												<Description>Other amount</Description>
+												<LineNumber>1e</LineNumber>
+											</xsd:documentation>
+										</xsd:annotation>
+									</xsd:element>
+									<!-- Total Amount -->
+									<xsd:element name="TotalAmt" type="USAmountType" minOccurs="0">
+										<xsd:annotation>
+											<xsd:documentation>
+												<Description>Total amount</Description>
+												<LineNumber>1f</LineNumber>
+											</xsd:documentation>
+										</xsd:annotation>
+									</xsd:element>
+								</xsd:sequence>
+							</xsd:complexType>
+						</xsd:element>
+						<!-- Gross Income Effectively Connected With Conduct Of U.S. Amount -->
+						<xsd:element name="GrossIncomeEffCnnctUSAmt" type="USAmountType" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Gross income effectively connected with conduct of U.S. amount</Description>
+									<LineNumber>2</LineNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						<!-- Income From Performance Of Services Amount -->
+						<xsd:element name="IncomeFromPerfServiceAmt" type="USAmountType" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Income from performance of services amount</Description>
+									<LineNumber>3</LineNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						<!-- Gain From Sale Of Property In U.S. Amount -->
+						<xsd:element name="GainFromSalePropertyInUSAmt" type="USAmountType" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Gain from sale of property in U.S. amount</Description>
+									<LineNumber>4a</LineNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						<!-- Gain From Sale Of Stock Issued In U.S. Amount -->
+						<xsd:element name="GainFromSaleStockIssueInUSAmt" type="USAmountType" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Gain from sale of stock issued in U.S. amount</Description>
+									<LineNumber>4b</LineNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						<!-- Gain From Sale Of Debt Obligations Of U.S. Amount -->
+						<xsd:element name="GainSaleDebtObligNotCnnctUSAmt" type="USAmountType" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Gain from sale of debt obligations of U.S. amount</Description>
+									<LineNumber>4c</LineNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						<!-- Total Gains From Sale Or Exchange Amount -->
+						<xsd:element name="TotGainsFromSaleOrExchangeAmt" type="USAmountType" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Total gains from sale or exchange amount</Description>
+									<LineNumber>4d</LineNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						<!-- Income Or Gain From Foreign Corporation Amount -->
+						<xsd:element name="IncomeOrGainFromForeignCorpAmt" type="USAmountType" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Income Or Gain From Foreign Corporation Amount</Description>
+									<LineNumber>5</LineNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						<!-- Gain On Certain Exchange Of Property Amount -->
+						<xsd:element name="GainCertainExchangePropAmt" type="USAmountType" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Gain on certain exchange of property amount</Description>
+									<LineNumber>6</LineNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						<!-- Income Received Or Accrued By Certain Foreign Corporations Amount -->
+						<xsd:element name="IncmRcvdOrAccrCrtnFrgnCorpAmt" type="USAmountType" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Income received or accrued by certain foreign corporations amount</Description>
+									<LineNumber>7</LineNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						<!-- Sum Of Income On Schedule B Amount -->
+						<xsd:element name="SumOfIncomeOnSchBAmt" type="USAmountType" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Sum of income on Schedule B amount</Description>
+									<LineNumber>8</LineNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						<!-- Gross Income From All Other Sources Amount -->
+						<xsd:element name="GrossIncomeFromOtherSourcesAmt" type="USAmountType" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Gross income from all other sources amount</Description>
+									<LineNumber>9</LineNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						<!-- Total Income On Income Statement Amount -->
+						<xsd:element name="TotalIncomeOnIncomeStmtAmt" type="USAmountType" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Total income on income statement amount</Description>
+									<LineNumber>10</LineNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+					
+		</xsd:sequence>
+	</xsd:complexType>
+	
+	<xsd:complexType name="IRS8854ScheduleAType">
+		<xsd:sequence>
+			<!-- Cash Including Bank Deposits -->
+			<xsd:element name="CashIncludingBankDepositsGrp" minOccurs="0">
+				<xsd:complexType>
+					<xsd:sequence>
+						<!-- Fair Market Value Amount -->
+						<xsd:element name="FairMarketValueAmt" type="USAmountType">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Fair market value amount</Description>
+									<LineNumber>Part V Line 1 (a)</LineNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						<!-- U.S. Adjusted Basis Amount -->
+						<xsd:element name="USAdjustedBasisAmt" type="USAmountType">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>U.S. adjusted basis amount</Description>
+									<LineNumber>Part V Line 1 (b)</LineNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						<!-- Gain Or Loss Amount -->
+						<xsd:element name="GainOrLossAmt" type="USAmountType">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Gain or loss amount</Description>
+									<LineNumber>Part V Line 1 (c)</LineNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						<!-- Fair Market Value On Beginning Date Of U.S. Residency Amount -->
+						<xsd:element name="FMVBegngDtUSResAmt" type="USAmountType" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Fair market value on beginning date of U.S. residency amount</Description>
+									<LineNumber>Part V Line 1 (d)</LineNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<!-- Marketable Stock And Securities Issued By U.S. Companies -->
+			<xsd:element name="MrktblStockSecIssdByUSCoGrp" minOccurs="0">
+				<xsd:complexType>
+					<xsd:sequence>
+						<!-- Fair Market Value Amount -->
+						<xsd:element name="FairMarketValueAmt" type="USAmountType">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Fair market value amount</Description>
+									<LineNumber>Part V Line 2 (a)</LineNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						<!-- U.S. Adjusted Basis Amount -->
+						<xsd:element name="USAdjustedBasisAmt" type="USAmountType">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>U.S. adjusted basis amount</Description>
+									<LineNumber>Part V Line 2 (b)</LineNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						<!-- Gain Or Loss Amount -->
+						<xsd:element name="GainOrLossAmt" type="USAmountType">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Gain or loss amount</Description>
+									<LineNumber>Part V Line 2 (c)</LineNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						<!-- Fair Market Value On Beginning Date Of U.S. Residency Amount -->
+						<xsd:element name="FMVBegngDtUSResAmt" type="USAmountType" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Fair market value on beginning date of U.S. residency amount</Description>
+									<LineNumber>Part V Line 2 (d)</LineNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<!-- Marketable Stock And Securities Issued By Foreign Companies -->
+			<xsd:element name="MrktblStockSecIssdFrgnCoGrp" minOccurs="0">
+				<xsd:complexType>
+					<xsd:sequence>
+						<!-- Fair Market Value Amount -->
+						<xsd:element name="FairMarketValueAmt" type="USAmountType">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Fair market value amount</Description>
+									<LineNumber>Part V Line 3 (a)</LineNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						<!-- U.S. Adjusted Basis Amount -->
+						<xsd:element name="USAdjustedBasisAmt" type="USAmountType">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>U.S. adjusted basis amount</Description>
+									<LineNumber>Part V Line 3 (b)</LineNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						<!-- Gain Or Loss Amount -->
+						<xsd:element name="GainOrLossAmt" type="USAmountType">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Gain or loss amount</Description>
+									<LineNumber>Part V Line 3 (c)</LineNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						<!-- Fair Market Value On Beginning Date Of U.S. Residency Amount -->
+						<xsd:element name="FMVBegngDtUSResAmt" type="USAmountType" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Fair market value on beginning date of U.S. residency amount</Description>
+									<LineNumber>Part V Line 3 (d)</LineNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<!-- Nonmarketable Stock And Securities Issued By U.S. Companies -->
+			<xsd:element name="NonmrktblStockSecIssdUSCoGrp" minOccurs="0">
+				<xsd:complexType>
+					<xsd:sequence>
+						<!-- Fair Market Value Amount -->
+						<xsd:element name="FairMarketValueAmt" type="USAmountType">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Fair market value amount</Description>
+									<LineNumber>Part V Line 4 (a)</LineNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						<!-- U.S. Adjusted Basis Amount -->
+						<xsd:element name="USAdjustedBasisAmt" type="USAmountType">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>U.S. adjusted basis amount</Description>
+									<LineNumber>Part V Line 4 (b)</LineNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						<!-- Gain Or Loss Amount -->
+						<xsd:element name="GainOrLossAmt" type="USAmountType">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Gain or loss amount</Description>
+									<LineNumber>Part V Line 4 (c)</LineNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						<!-- Fair Market Value On Beginning Date Of U.S. Residency Amount -->
+						<xsd:element name="FMVBegngDtUSResAmt" type="USAmountType" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Fair market value on beginning date of U.S. residency amount</Description>
+									<LineNumber>Part V Line 4 (d)</LineNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<!-- Nonmarketable Stock And Securities Issued By Foreign Companies -->
+			<xsd:element name="NonmrktblStockSecIssdFrgnCoGrp" minOccurs="0">
+				<xsd:complexType>
+					<xsd:sequence>
+						<!-- Fair Market Value Amount -->
+						<xsd:element name="FairMarketValueAmt" type="USAmountType">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Fair market value amount</Description>
+									<LineNumber>Part V Line 5 (a)</LineNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						<!-- U.S. Adjusted Basis Amount -->
+						<xsd:element name="USAdjustedBasisAmt" type="USAmountType">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>U.S. adjusted basis amount</Description>
+									<LineNumber>Part V Line 5 (b)</LineNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						<!-- Gain Or Loss Amount -->
+						<xsd:element name="GainOrLossAmt" type="USAmountType">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Gain or loss amount</Description>
+									<LineNumber>Part V Line 5 (c)</LineNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						<!-- Fair Market Value On Beginning Date Of U.S. Residency Amount -->
+						<xsd:element name="FMVBegngDtUSResAmt" type="USAmountType" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Fair market value on beginning date of U.S. residency amount</Description>
+									<LineNumber>Part V Line 5 (d)</LineNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<!-- Separate State Stock Issued By Foreign Companies -->
+			<xsd:element name="SepStateStockIssdFrgnCoGrp" minOccurs="0" maxOccurs="100">
+				<xsd:complexType>
+					<xsd:sequence>
+						<!-- Fair Market Value Amount -->
+						<xsd:element name="FairMarketValueAmt" type="USAmountType">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Fair market value amount</Description>
+									<LineNumber>Part V Line 5a (a)</LineNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						<!-- U.S. Adjusted Basis Amount -->
+						<xsd:element name="USAdjustedBasisAmt" type="USAmountType">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>U.S. adjusted basis amount</Description>
+									<LineNumber>Part V Line 5a (b)</LineNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						<!-- Gain Or Loss Amount -->
+						<xsd:element name="GainOrLossAmt" type="USAmountType">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Gain or loss amount</Description>
+									<LineNumber>Part V Line 5a (c)</LineNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						<!-- Fair Market Value On Beginning Date Of U.S. Residency Amount -->
+						<xsd:element name="FMVBegngDtUSResAmt" type="USAmountType" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Fair market value on beginning date of U.S. residency amount</Description>
+									<LineNumber>Part V Line 5a (d)</LineNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						<!-- Foreign Entity Description -->
+						<xsd:element name="ForeignEntityDesc" type="LineExplanationType" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Foreign Entity Description</Description>
+									<LineNumber>Part V Line 5b</LineNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<!-- Pensions From Services Performed In U.S. -->
+			<xsd:element name="PensionFromSrvcPerfInUSGrp" minOccurs="0">
+				<xsd:complexType>
+					<xsd:sequence>
+						<!-- Fair Market Value Amount -->
+						<xsd:element name="FairMarketValueAmt" type="USAmountType">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Fair market value amount</Description>
+									<LineNumber>Part V Line 6 (a)</LineNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						<!-- U.S. Adjusted Basis Amount -->
+						<xsd:element name="USAdjustedBasisAmt" type="USAmountType">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>U.S. adjusted basis amount</Description>
+									<LineNumber>Part V Line 6 (b)</LineNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						<!-- Gain Or Loss Amount -->
+						<xsd:element name="GainOrLossAmt" type="USAmountType">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Gain or loss amount</Description>
+									<LineNumber>Part V Line 6 (c)</LineNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						<!-- Fair Market Value On Beginning Date Of U.S. Residency Amount -->
+						<xsd:element name="FMVBegngDtUSResAmt" type="USAmountType" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Fair market value on beginning date of U.S. residency amount</Description>
+									<LineNumber>Part V Line 6 (d)</LineNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<!-- Pensions From Services Performed Outside U.S. -->
+			<xsd:element name="PensionFromSrvcPerfOutsdUSGrp" minOccurs="0">
+				<xsd:complexType>
+					<xsd:sequence>
+						<!-- Fair Market Value Amount -->
+						<xsd:element name="FairMarketValueAmt" type="USAmountType">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Fair market value amount</Description>
+									<LineNumber>Part V Line 7 (a)</LineNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						<!-- U.S. Adjusted Basis Amount -->
+						<xsd:element name="USAdjustedBasisAmt" type="USAmountType">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>U.S. adjusted basis amount</Description>
+									<LineNumber>Part V Line 7 (b)</LineNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						<!-- Gain Or Loss Amount -->
+						<xsd:element name="GainOrLossAmt" type="USAmountType">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Gain or loss amount</Description>
+									<LineNumber>Part V Line 7 (c)</LineNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						<!-- Fair Market Value On Beginning Date Of U.S. Residency Amount -->
+						<xsd:element name="FMVBegngDtUSResAmt" type="USAmountType" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Fair market value on beginning date of U.S. residency amount</Description>
+									<LineNumber>Part V Line 7 (d)</LineNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<!-- Total Partnership Interest -->
+			<xsd:element name="TotalPartnershipInterestGrp" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Total Partnership Interest</Description>
+						<LineNumber>Part V Line 8</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+				<xsd:complexType>
+					<xsd:complexContent>
+						<xsd:extension base="TotalPartnershipInterestGrpType">
+							<xsd:attribute name="referenceDocumentId" type="IdListType"/>
+							<xsd:attribute name="referenceDocumentName" type="StringType" fixed="PartnershipInterestStatement"/>
+						</xsd:extension>
+					</xsd:complexContent>
+				</xsd:complexType>
+			</xsd:element>
+			<!-- Total Assets Held By Trusts Under Section 671 Thru 679 -->
+			<xsd:element name="TotAssetsHeldByTrSect671679Grp" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Total Assets Held By Trusts Under Section 671 Thru 679</Description>
+						<LineNumber>Part V Line 9</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+				<xsd:complexType>
+					<xsd:complexContent>
+						<xsd:extension base="TotAssetsHeldByTrSect671679GrpType">
+							<xsd:attribute name="referenceDocumentId" type="IdListType"/>
+							<xsd:attribute name="referenceDocumentName" type="StringType" fixed="OwnedTrustValueStatement"/>
+						</xsd:extension>
+					</xsd:complexContent>
+				</xsd:complexType>
+			</xsd:element>
+			<!-- Total Beneficial Interests In Nongrantor Trusts -->
+			<xsd:element name="TotNongrantorTrBnfclIntGrp" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Total Beneficial Interests In Nongrantor Trusts</Description>
+						<LineNumber>Part V Line 10</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+				<xsd:complexType>
+					<xsd:complexContent>
+						<xsd:extension base="TotNongrantorTrBnfclIntGrpType">
+							<xsd:attribute name="referenceDocumentId" type="IdListType"/>
+							<xsd:attribute name="referenceDocumentName" type="StringType" fixed="NongrantorTrustsBeneficialInterestStatement"/>
+						</xsd:extension>
+					</xsd:complexContent>
+				</xsd:complexType>
+			</xsd:element>
+			<!-- Intangibles Used In U.S. -->
+			<xsd:element name="IntangiblesUsedInUSGrp" minOccurs="0">
+				<xsd:complexType>
+					<xsd:sequence>
+						<!-- Fair Market Value Amount -->
+						<xsd:element name="FairMarketValueAmt" type="USAmountType">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Fair market value amount</Description>
+									<LineNumber>Part V Line 11 (a)</LineNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						<!-- U.S. Adjusted Basis Amount -->
+						<xsd:element name="USAdjustedBasisAmt" type="USAmountType">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>U.S. adjusted basis amount</Description>
+									<LineNumber>Part V Line 11 (b)</LineNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						<!-- Gain Or Loss Amount -->
+						<xsd:element name="GainOrLossAmt" type="USAmountType">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Gain or loss amount</Description>
+									<LineNumber>Part V Line 11 (c)</LineNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						<!-- Fair Market Value On Beginning Date Of U.S. Residency Amount -->
+						<xsd:element name="FMVBegngDtUSResAmt" type="USAmountType" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Fair market value on beginning date of U.S. residency amount</Description>
+									<LineNumber>Part V Line 11 (d)</LineNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<!-- Intangibles Used Outside U.S. -->
+			<xsd:element name="IntangiblesUsedOutsideUSGrp" minOccurs="0">
+				<xsd:complexType>
+					<xsd:sequence>
+						<!-- Fair Market Value Amount -->
+						<xsd:element name="FairMarketValueAmt" type="USAmountType">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Fair market value amount</Description>
+									<LineNumber>Part V Line 12 (a)</LineNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						<!-- U.S. Adjusted Basis Amount -->
+						<xsd:element name="USAdjustedBasisAmt" type="USAmountType">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>U.S. adjusted basis amount</Description>
+									<LineNumber>Part V Line 12 (b)</LineNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						<!-- Gain Or Loss Amount -->
+						<xsd:element name="GainOrLossAmt" type="USAmountType">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Gain or loss amount</Description>
+									<LineNumber>Part V Line 12 (c)</LineNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						<!-- Fair Market Value On Beginning Date Of U.S. Residency Amount -->
+						<xsd:element name="FMVBegngDtUSResAmt" type="USAmountType" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Fair market value on beginning date of U.S. residency amount</Description>
+									<LineNumber>Part V Line 12 (d)</LineNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<!-- Loans To U.S. Persons -->
+			<xsd:element name="LoansToUSPersonsGrp" minOccurs="0">
+				<xsd:complexType>
+					<xsd:sequence>
+						<!-- Fair Market Value Amount -->
+						<xsd:element name="FairMarketValueAmt" type="USAmountType">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Fair market value amount</Description>
+									<LineNumber>Part V Line 13 (a)</LineNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						<!-- U.S. Adjusted Basis Amount -->
+						<xsd:element name="USAdjustedBasisAmt" type="USAmountType">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>U.S. adjusted basis amount</Description>
+									<LineNumber>Part V Line 13 (b)</LineNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						<!-- Gain Or Loss Amount -->
+						<xsd:element name="GainOrLossAmt" type="USAmountType">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Gain or loss amount</Description>
+									<LineNumber>Part V Line 13 (c)</LineNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						<!-- Fair Market Value On Beginning Date Of U.S. Residency Amount -->
+						<xsd:element name="FMVBegngDtUSResAmt" type="USAmountType" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Fair market value on beginning date of U.S. residency amount</Description>
+									<LineNumber>Part V Line 13 (d)</LineNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<!-- Loans To Foreign Persons -->
+			<xsd:element name="LoansToForeignPersonsGrp" minOccurs="0">
+				<xsd:complexType>
+					<xsd:sequence>
+						<!-- Fair Market Value Amount -->
+						<xsd:element name="FairMarketValueAmt" type="USAmountType">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Fair market value amount</Description>
+									<LineNumber>Part V Line 14 (a)</LineNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						<!-- U.S. Adjusted Basis Amount -->
+						<xsd:element name="USAdjustedBasisAmt" type="USAmountType">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>U.S. adjusted basis amount</Description>
+									<LineNumber>Part V Line 14 (b)</LineNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						<!-- Gain Or Loss Amount -->
+						<xsd:element name="GainOrLossAmt" type="USAmountType">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Gain or loss amount</Description>
+									<LineNumber>Part V Line 14 (c)</LineNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						<!-- Fair Market Value On Beginning Date Of U.S. Residency Amount -->
+						<xsd:element name="FMVBegngDtUSResAmt" type="USAmountType" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Fair market value on beginning date of U.S. residency amount</Description>
+									<LineNumber>Part V Line 14 (d)</LineNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<!-- Real Property Located In U.S. -->
+			<xsd:element name="RealPropertyLocatedInUSGrp" minOccurs="0">
+				<xsd:complexType>
+					<xsd:sequence>
+						<!-- Fair Market Value Amount -->
+						<xsd:element name="FairMarketValueAmt" type="USAmountType">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Fair market value amount</Description>
+									<LineNumber>Part V Line 15 (a)</LineNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						<!-- U.S. Adjusted Basis Amount -->
+						<xsd:element name="USAdjustedBasisAmt" type="USAmountType">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>U.S. adjusted basis amount</Description>
+									<LineNumber>Part V Line 15 (b)</LineNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						<!-- Gain Or Loss Amount -->
+						<xsd:element name="GainOrLossAmt" type="USAmountType">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Gain or loss amount</Description>
+									<LineNumber>Part V Line 15 (c)</LineNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						<!-- Fair Market Value On Beginning Date Of U.S. Residency Amount -->
+						<xsd:element name="FMVBegngDtUSResAmt" type="USAmountType" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Fair market value on beginning date of U.S. residency amount</Description>
+									<LineNumber>Part V Line 15 (d)</LineNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<!-- Real Property Located Outside U.S. -->
+			<xsd:element name="RealPropertyLocatedOutsdUSGrp" minOccurs="0">
+				<xsd:complexType>
+					<xsd:sequence>
+						<!-- Fair Market Value Amount -->
+						<xsd:element name="FairMarketValueAmt" type="USAmountType">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Fair market value amount</Description>
+									<LineNumber>Part V Line 16 (a)</LineNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						<!-- U.S. Adjusted Basis Amount -->
+						<xsd:element name="USAdjustedBasisAmt" type="USAmountType">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>U.S. adjusted basis amount</Description>
+									<LineNumber>Part V Line 16 (b)</LineNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						<!-- Gain Or Loss Amount -->
+						<xsd:element name="GainOrLossAmt" type="USAmountType">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Gain or loss amount</Description>
+									<LineNumber>Part V Line 16 (c)</LineNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						<!-- Fair Market Value On Beginning Date Of U.S. Residency Amount -->
+						<xsd:element name="FMVBegngDtUSResAmt" type="USAmountType" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Fair market value on beginning date of U.S. residency amount</Description>
+									<LineNumber>Part V Line 16 (d)</LineNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<!-- Business Property Located In U.S. -->
+			<xsd:element name="BusinessPropertyInUSGrp" minOccurs="0">
+				<xsd:complexType>
+					<xsd:sequence>
+						<!-- Fair Market Value Amount -->
+						<xsd:element name="FairMarketValueAmt" type="USAmountType">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Fair market value amount</Description>
+									<LineNumber>Part V Line 17 (a)</LineNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						<!-- U.S. Adjusted Basis Amount -->
+						<xsd:element name="USAdjustedBasisAmt" type="USAmountType">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>U.S. adjusted basis amount</Description>
+									<LineNumber>Part V Line 17 (b)</LineNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						<!-- Gain Or Loss Amount -->
+						<xsd:element name="GainOrLossAmt" type="USAmountType">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Gain or loss amount</Description>
+									<LineNumber>Part V Line 17 (c)</LineNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						<!-- Fair Market Value On Beginning Date Of U.S. Residency Amount -->
+						<xsd:element name="FMVBegngDtUSResAmt" type="USAmountType" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Fair market value on beginning date of U.S. residency amount</Description>
+									<LineNumber>Part V Line 17 (d)</LineNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<!-- Business Property Located Outside U.S. -->
+			<xsd:element name="BusinessPropertyOutsideUSGrp" minOccurs="0">
+				<xsd:complexType>
+					<xsd:sequence>
+						<!-- Fair Market Value Amount -->
+						<xsd:element name="FairMarketValueAmt" type="USAmountType">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Fair market value amount</Description>
+									<LineNumber>Part V Line 18 (a)</LineNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						<!-- U.S. Adjusted Basis Amount -->
+						<xsd:element name="USAdjustedBasisAmt" type="USAmountType">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>U.S. adjusted basis amount</Description>
+									<LineNumber>Part V Line 18 (b)</LineNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						<!-- Gain Or Loss Amount -->
+						<xsd:element name="GainOrLossAmt" type="USAmountType">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Gain or loss amount</Description>
+									<LineNumber>Part V Line 18 (c)</LineNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						<!-- Fair Market Value On Beginning Date Of U.S. Residency Amount -->
+						<xsd:element name="FMVBegngDtUSResAmt" type="USAmountType" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Fair market value on beginning date of U.S. residency amount</Description>
+									<LineNumber>Part V Line 18 (d)</LineNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<!-- Total Other Assets Not Included -->
+			<xsd:element name="TotalOtherAssetsNotIncludedGrp" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Total Other Assets Not Included</Description>
+						<LineNumber>Part V Line 19</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+				<xsd:complexType>
+					<xsd:complexContent>
+						<xsd:extension base="TotalOtherAssetsNotIncludedGrpType">
+							<xsd:attribute name="referenceDocumentId" type="IdListType"/>
+							<xsd:attribute name="referenceDocumentName" type="StringType" fixed="OtherAssetsNotIncludedStatement"/>
+						</xsd:extension>
+					</xsd:complexContent>
+				</xsd:complexType>
+			</xsd:element>
+			<!-- Total Assets Detail -->
+			<xsd:element name="TotalAssetsDetail" minOccurs="0">
+				<xsd:complexType>
+					<xsd:sequence>
+						<!-- Fair Market Value Amount -->
+						<xsd:element name="FairMarketValueAmt" type="USAmountType">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Fair market value amount</Description>
+									<LineNumber>Part V Line 20 (a)</LineNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						<!-- U.S. Adjusted Basis Amount -->
+						<xsd:element name="USAdjustedBasisAmt" type="USAmountType">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>U.S. adjusted basis amount</Description>
+									<LineNumber>Part V Line 20 (b)</LineNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						<!-- Gain Or Loss Amount -->
+						<xsd:element name="GainOrLossAmt" type="USAmountType">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Gain or loss amount</Description>
+									<LineNumber>Part V Line 20 (c)</LineNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						<!-- Fair Market Value On Beginning Date Of U.S. Residency Amount -->
+						<xsd:element name="FMVBegngDtUSResAmt" type="USAmountType" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Fair market value on beginning date of U.S. residency amount</Description>
+									<LineNumber>Part V Line 20 (d)</LineNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<!-- Installment Obligations Liability Amount -->
+			<xsd:element name="InstallmentObligLiabilityAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Installment obligations liability amount</Description>
+						<LineNumber>Part V Line 21 (a)</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Mortgage Liability Amount -->
+			<xsd:element name="MortgageLiabilityAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Mortgage liability amount</Description>
+						<LineNumber>Part V Line 22 (a)</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Other Liability Amount -->
+			<xsd:element name="OtherLiabilityAmt" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Other liability amount</Description>
+						<LineNumber>Part V Line 23 (a)</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+				<xsd:complexType>
+					<xsd:simpleContent>
+						<xsd:extension base="USAmountType">
+							<xsd:attribute name="referenceDocumentId" type="IdListType"/>
+							<xsd:attribute name="referenceDocumentName" type="TextType" fixed="OtherLiabilitiesStatement"/>
+						</xsd:extension>
+					</xsd:simpleContent>
+				</xsd:complexType>
+			</xsd:element>
+			<!-- Total Liability Amount -->
+			<xsd:element name="TotalLiabilityAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Total liability amount</Description>
+						<LineNumber>Part V Line 24 (a)</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Net Worth Amount -->
+			<xsd:element name="NetWorthAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Net worth amount</Description>
+						<LineNumber>Part V Line 25 (a)</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<!-- Type for Part V Line 8 Total Partnership Interest -->
+	<xsd:complexType name="TotalPartnershipInterestGrpType">
+		<xsd:sequence>
+			<!-- Fair Market Value Amount -->
+			<xsd:element name="FairMarketValueAmt" type="USAmountType">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Fair market value amount</Description>
+						<LineNumber>Part V Line 8 (a)</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- U.S. Adjusted Basis Amount -->
+			<xsd:element name="USAdjustedBasisAmt" type="USAmountType">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>U.S. adjusted basis amount</Description>
+						<LineNumber>Part V Line 8 (b)</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Gain Or Loss Amount -->
+			<xsd:element name="GainOrLossAmt" type="USAmountType">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Gain or loss amount</Description>
+						<LineNumber>Part V Line 8 (c)</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Fair Market Value On Beginning Date Of U.S. Residency Amount -->
+			<xsd:element name="FMVBegngDtUSResAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Fair market value on beginning date of U.S. residency amount</Description>
+						<LineNumber>Part V Line 8 (d)</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<!-- Type for Part V Line 9 Total Assets Held By Trusts Under Section 671 Thru 679 -->
+	<xsd:complexType name="TotAssetsHeldByTrSect671679GrpType">
+		<xsd:sequence>
+			<!-- Fair Market Value Amount -->
+			<xsd:element name="FairMarketValueAmt" type="USAmountType">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Fair market value amount</Description>
+						<LineNumber>Part V Line 9 (a)</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- U.S. Adjusted Basis Amount -->
+			<xsd:element name="USAdjustedBasisAmt" type="USAmountType">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>U.S. adjusted basis amount</Description>
+						<LineNumber>Part V Line 9 (b)</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Gain Or Loss Amount -->
+			<xsd:element name="GainOrLossAmt" type="USAmountType">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Gain or loss amount</Description>
+						<LineNumber>Part V Line 9 (c)</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Fair Market Value On Beginning Date Of U.S. Residency Amount -->
+			<xsd:element name="FMVBegngDtUSResAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Fair market value on beginning date of U.S. residency amount</Description>
+						<LineNumber>Part V Line 9 (d)</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<!-- Type for Part V Line 10 Total Beneficial Interests In Nongrantor Trusts -->
+	<xsd:complexType name="TotNongrantorTrBnfclIntGrpType">
+		<xsd:sequence>
+			<!-- Fair Market Value Amount -->
+			<xsd:element name="FairMarketValueAmt" type="USAmountType">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Fair market value amount</Description>
+						<LineNumber>Part V Line 10 (a)</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<!-- Type for Part V Line 19 Total Other Assets Not Included -->
+	<xsd:complexType name="TotalOtherAssetsNotIncludedGrpType">
+		<xsd:sequence>
+			<!-- Fair Market Value Amount -->
+			<xsd:element name="FairMarketValueAmt" type="USAmountType">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Fair market value amount</Description>
+						<LineNumber>Part V Line 19 (a)</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- U.S. Adjusted Basis Amount -->
+			<xsd:element name="USAdjustedBasisAmt" type="USAmountType">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>U.S. adjusted basis amount</Description>
+						<LineNumber>Part V Line 19 (b)</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Gain Or Loss Amount -->
+			<xsd:element name="GainOrLossAmt" type="USAmountType">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Gain or loss amount</Description>
+						<LineNumber>Part V Line 19 (c)</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Fair Market Value On Beginning Date Of U.S. Residency Amount -->
+			<xsd:element name="FMVBegngDtUSResAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Fair market value on beginning date of U.S. residency amount</Description>
+						<LineNumber>Part V Line 19 (d)</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+
+</xsd:schema>

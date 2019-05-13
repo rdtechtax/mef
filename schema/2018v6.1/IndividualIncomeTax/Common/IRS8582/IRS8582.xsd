@@ -1,0 +1,987 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.irs.gov/efile" targetNamespace="http://www.irs.gov/efile" elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.0">
+	<xsd:annotation>
+		<xsd:documentation>
+			<Description>IRS e-file Schema - IRS Form 8582</Description>
+			<TaxYear>2018</TaxYear>
+			<MaturityLevel>Final Release</MaturityLevel>
+			<ReleaseDate>February 13, 2019</ReleaseDate>
+		</xsd:documentation>
+	</xsd:annotation>
+	<xsd:include schemaLocation="../../../Common/efileTypes.xsd"/>
+	<!--==================================================================-->
+	<!--============================ IRS8582 ============================-->
+	<!--==================================================================-->
+	<xsd:element name="IRS8582">
+		<xsd:annotation>
+			<xsd:documentation>IRS Form 8582</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:complexContent>
+				<xsd:extension base="IRS8582Type">
+					<xsd:attributeGroup ref="DocumentAttributes">
+						<xsd:annotation>
+							<xsd:documentation>Common return document attributes</xsd:documentation>
+						</xsd:annotation>
+					</xsd:attributeGroup>
+					<xsd:attribute name="documentName" type="xsd:string" fixed="IRS8582">
+						<xsd:annotation>
+							<xsd:documentation>IRS internal use only. To avoid error in the return, do not include the attribute name or value.</xsd:documentation>
+						</xsd:annotation>
+					</xsd:attribute>
+				</xsd:extension>
+			</xsd:complexContent>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:complexType name="IRS8582Type">
+		<xsd:annotation>
+			<xsd:documentation>Content model for IRS8582</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<!--Rental Realty Income Amount -->
+			<xsd:element name="RentalRealtyIncomeAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Rental Realty Income Amount</Description>
+						<LineNumber>1a</LineNumber>
+						<ELFFieldNumber>0010</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!--Rental Realty Loss Amount -->
+			<xsd:element name="RentalRealtyLossAmt" type="USAmountNNType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Rental Realty Loss Amount</Description>
+						<LineNumber>1b</LineNumber>
+						<ELFFieldNumber>0020</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!--Prior Year Unallowed Rental Loss Amount -->
+			<xsd:element name="PYUnallowedRentalLossAmt" type="USAmountNNType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Prior Year Unallowed Rental Loss Amount</Description>
+						<LineNumber>1c</LineNumber>
+						<ELFFieldNumber>0030</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!--Net Rental Realty Amount -->
+			<xsd:element name="NetRentalRealtyAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Net Rental Realty Amount</Description>
+						<LineNumber>1d</LineNumber>
+						<ELFFieldNumber>0035</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!--Revitalization Deduction Amount -->
+			<xsd:element name="RevitalizationDeductionAmt" type="USAmountNNType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Revitalization Deduction Amount</Description>
+						<LineNumber>2a</LineNumber>
+						<ELFFieldNumber>0040</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!--Prior Year Revitalization Amount -->
+			<xsd:element name="PriorYearRevitalizationAmt" type="USAmountNNType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Prior Year Revitalization Amount</Description>
+						<LineNumber>2b</LineNumber>
+						<ELFFieldNumber>0045</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!--Net Revitalization Amount -->
+			<xsd:element name="NetRevitalizationAmt" type="USAmountNNType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Net Revitalization Amount</Description>
+						<LineNumber>2c</LineNumber>
+						<ELFFieldNumber>0050</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!--Other Activity Income Amount -->
+			<xsd:element name="OtherActivityIncomeAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Other Activity Income Amount</Description>
+						<LineNumber>3a</LineNumber>
+						<ELFFieldNumber>0055</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!--Other Activity Loss Amount -->
+			<xsd:element name="OtherActivityLossAmt" type="USAmountNNType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Other Activity Loss Amount</Description>
+						<LineNumber>3b</LineNumber>
+						<ELFFieldNumber>0060</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!--Prior Year Unallowed Other Loss Amount -->
+			<xsd:element name="PriorYearUnallowedOtherLossAmt" type="USAmountNNType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Prior Year Unallowed Other Loss Amount</Description>
+						<LineNumber>3c</LineNumber>
+						<ELFFieldNumber>0065</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!--Net Other Activity Amount -->
+			<xsd:element name="NetOtherActivityAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Net Other Activity Amount</Description>
+						<LineNumber>3d</LineNumber>
+						<ELFFieldNumber>0070</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!--Total Passive Activity Amount -->
+			<xsd:element name="TotalPassiveActivityAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Total Passive Activity Amount</Description>
+						<LineNumber>4</LineNumber>
+						<ELFFieldNumber>0080</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Part II Special Allowance for Rental Real Estate Activities with Active Participation -->
+			<!--Rental Realty Loss Limit Amount -->
+			<xsd:element name="RentalRealtyLossLimitAmt" type="USAmountNNType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Rental Realty Loss Limit Amount</Description>
+						<LineNumber>5</LineNumber>
+						<ELFFieldNumber>0090</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!--Maximum Allowed Income Amount -->
+			<xsd:element name="MaximumAllowedIncomeAmt" type="USAmountNNType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Maximum Allowed Income Amount</Description>
+						<LineNumber>6</LineNumber>
+						<ELFFieldNumber>0095</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!--Modified Adjusted Gross Income Amount -->
+			<xsd:element name="ModifiedAGIAmt" type="USAmountNNType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Modified Adjusted Gross Income Amount</Description>
+						<LineNumber>7</LineNumber>
+						<ELFFieldNumber>0105</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!--Modified Adjusted Gross Income Difference Amount -->
+			<xsd:element name="ModifiedAGIDifferenceAmt" type="USAmountNNType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Modified Adjusted Gross Income Difference Amount</Description>
+						<LineNumber>8</LineNumber>
+						<ELFFieldNumber>0115</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!--Percent Net Special Allowance Amount -->
+			<xsd:element name="PercentNetSpecialAllowanceAmt" type="USAmountNNType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Percent Net Special Allowance Amount</Description>
+						<LineNumber>9</LineNumber>
+						<ELFFieldNumber>0125</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!--Allowed Rental Realty Loss Amount -->
+			<xsd:element name="AllowedRentalRealtyLossAmt" type="USAmountNNType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Allowed Rental Realty Loss Amount</Description>
+						<LineNumber>10</LineNumber>
+						<ELFFieldNumber>0135</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!--Part III Specal Allowance for Commercial Revitalization Deductions From Real Estate Activities -->
+			<!--Standard Allowance Amount -->
+			<xsd:element name="StandardAllowanceAmt" type="USAmountNNType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Standard Allowance Amount</Description>
+						<LineNumber>11</LineNumber>
+						<ELFFieldNumber>0140</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!--Rental Allowance Amount -->
+			<xsd:element name="RentalAllowanceAmt" type="USAmountNNType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Rental Allowance Amount</Description>
+						<LineNumber>12</LineNumber>
+						<ELFFieldNumber>0150</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!--Special Revitalization Amount -->
+			<xsd:element name="SpecialRevitalizationAmt" type="USAmountNNType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Special Revitalization Amount</Description>
+						<LineNumber>13</LineNumber>
+						<ELFFieldNumber>0160</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!--Final Revitalization Amount -->
+			<xsd:element name="FinalRevitalizationAmt" type="USAmountNNType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Final Revitalization Amount</Description>
+						<LineNumber>14</LineNumber>
+						<ELFFieldNumber>0170</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!--Part IV Total Losses Allowed -->
+			<!--Total Income Amount -->
+			<xsd:element name="TotalIncomeAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Total Income Amount</Description>
+						<LineNumber>15</LineNumber>
+						<ELFFieldNumber>0230</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!--Total Losses Allowed Amount -->
+			<xsd:element name="TotalLossesAllowedAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Total Losses Allowed Amount</Description>
+						<LineNumber>16</LineNumber>
+						<ELFFieldNumber>0235</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!--Worksheet 1 Passive Rental Real Estate Activities-->
+			<xsd:element name="ParentWrkshtRentalActGrp" minOccurs="0">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="WrkshtRentalActGrp" minOccurs="0" maxOccurs="unbounded">
+							<xsd:complexType>
+								<xsd:sequence>
+									<!--Passive Activity Name -->
+									<xsd:element name="PassiveActivityNm" type="ShortDescriptionType" minOccurs="0">
+										<xsd:annotation>
+											<xsd:documentation>
+												<Description>Passive Activity Name</Description>
+												<LineNumber>W1</LineNumber>
+												<ELFFieldNumber>0250 0310 0370 0430 0490</ELFFieldNumber>
+											</xsd:documentation>
+										</xsd:annotation>
+									</xsd:element>
+									<!--Current Year Net Income Amount -->
+									<xsd:element name="CurrentYearNetIncomeAmt" type="USAmountType" minOccurs="0">
+										<xsd:annotation>
+											<xsd:documentation>
+												<Description>Current Year Net Income Amount</Description>
+												<LineNumber>W1-(a)</LineNumber>
+												<ELFFieldNumber>0260 0320 0380 0440 0500</ELFFieldNumber>
+											</xsd:documentation>
+										</xsd:annotation>
+									</xsd:element>
+									<!--Current Year Net Loss Amount -->
+									<xsd:element name="CurrentYearNetLossAmt" type="USAmountType" minOccurs="0">
+										<xsd:annotation>
+											<xsd:documentation>
+												<Description>Current Year Net Loss Amount</Description>
+												<LineNumber>W1-(b)</LineNumber>
+												<ELFFieldNumber>0270 0330 0390 0450 0510</ELFFieldNumber>
+											</xsd:documentation>
+										</xsd:annotation>
+									</xsd:element>
+									<!--Prior Year Rental Unallowed Amount -->
+									<xsd:element name="PriorYearRentalUnallowedAmt" type="USAmountType" minOccurs="0">
+										<xsd:annotation>
+											<xsd:documentation>
+												<Description>Prior Year Rental Unallowed Amount</Description>
+												<LineNumber>W1-(c)</LineNumber>
+												<ELFFieldNumber>0280 0340 0400 0460 0520</ELFFieldNumber>
+											</xsd:documentation>
+										</xsd:annotation>
+									</xsd:element>
+									<!--Overall Gaining Amount -->
+									<xsd:element name="OverallGainAmt" type="USAmountType" minOccurs="0">
+										<xsd:annotation>
+											<xsd:documentation>
+												<Description>Overall Gaining Amount</Description>
+												<LineNumber>W1-(d)</LineNumber>
+												<ELFFieldNumber>0290 0350 0410 0470 0530</ELFFieldNumber>
+											</xsd:documentation>
+										</xsd:annotation>
+									</xsd:element>
+									<!--Overall Loss Amount -->
+									<xsd:element name="OverallLossAmt" type="USAmountType" minOccurs="0">
+										<xsd:annotation>
+											<xsd:documentation>
+												<Description>Overall Loss Amount</Description>
+												<LineNumber>W1-(e)</LineNumber>
+												<ELFFieldNumber>0300 0360 0420 0480 0540</ELFFieldNumber>
+											</xsd:documentation>
+										</xsd:annotation>
+									</xsd:element>
+								</xsd:sequence>
+							</xsd:complexType>
+						</xsd:element>
+						<!--Total Current Year Net Income Amount -->
+						<xsd:element name="TotalCurrentYearNetIncomeAmt" type="USAmountType" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Total Current Year Net Income Amount</Description>
+									<LineNumber>W1-(a)</LineNumber>
+									<ELFFieldNumber>0550</ELFFieldNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						<!--Total Current Year Net Loss Amount -->
+						<xsd:element name="TotalCurrentYearNetLossAmt" type="USAmountType" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Total Current Year Net Loss Amount</Description>
+									<LineNumber>W1-(b)</LineNumber>
+									<ELFFieldNumber>0560</ELFFieldNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						<!--Total Prior Year Rental Unallowed Amount -->
+						<xsd:element name="TotalPriorYrRentalUnallowedAmt" type="USAmountType" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Total Prior Year Rental Unallowed Amount</Description>
+									<LineNumber>W1-(c)</LineNumber>
+									<ELFFieldNumber>0570</ELFFieldNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<!--Worksheet 2 Commercial Revitilization Deductions -->
+			<xsd:element name="ParentWrkshtCommercialGrp" minOccurs="0">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="WrkshtCommercialGrp" minOccurs="0" maxOccurs="unbounded">
+							<xsd:complexType>
+								<xsd:sequence>
+									<!--Commercial Activity Name -->
+									<xsd:element name="CommercialActivityNm" type="ShortDescriptionType" minOccurs="0">
+										<xsd:annotation>
+											<xsd:documentation>
+												<Description>Commercial Activity Name</Description>
+												<LineNumber>W2</LineNumber>
+												<ELFFieldNumber>0600 0640 0680 0720</ELFFieldNumber>
+											</xsd:documentation>
+										</xsd:annotation>
+									</xsd:element>
+									<!--Current Year Deductions Amount -->
+									<xsd:element name="CurrentYearDeductionsAmt" type="USAmountType" minOccurs="0">
+										<xsd:annotation>
+											<xsd:documentation>
+												<Description>Current Year Deductions Amount</Description>
+												<LineNumber>W2-(a)</LineNumber>
+												<ELFFieldNumber>0610 0650 0690 0730</ELFFieldNumber>
+											</xsd:documentation>
+										</xsd:annotation>
+									</xsd:element>
+									<!--Sector 179 Deductable Depreciation Processing Year Amount -->
+									<xsd:element name="Sect179DedDepreciationPYAmt" type="USAmountType" minOccurs="0">
+										<xsd:annotation>
+											<xsd:documentation>
+												<Description>Sector 179 Deductable Depreciation Processing Year Amount</Description>
+												<LineNumber>W2-(b)</LineNumber>
+												<ELFFieldNumber>0620 0660 0700 0740</ELFFieldNumber>
+											</xsd:documentation>
+										</xsd:annotation>
+									</xsd:element>
+									<!--Overall Loss Amount -->
+									<xsd:element name="OverallLossAmt" type="USAmountType" minOccurs="0">
+										<xsd:annotation>
+											<xsd:documentation>
+												<Description>Overall Loss Amount</Description>
+												<LineNumber>W2-(c)</LineNumber>
+												<ELFFieldNumber>0630 0670 0710 0750</ELFFieldNumber>
+											</xsd:documentation>
+										</xsd:annotation>
+									</xsd:element>
+								</xsd:sequence>
+							</xsd:complexType>
+						</xsd:element>
+						<!--Revitalization Deduction Amount -->
+						<xsd:element name="RevitalizationDeductionAmt" type="USAmountType" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Revitalization Deduction Amount</Description>
+									<LineNumber>W2-(a)</LineNumber>
+									<ELFFieldNumber>0760</ELFFieldNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						<!--Prior Year Revitalization Amount -->
+						<xsd:element name="PriorYearRevitalizationAmt" type="USAmountType" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Prior Year Revitalization Amount</Description>
+									<LineNumber>W2-(b)</LineNumber>
+									<ELFFieldNumber>0770</ELFFieldNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<!--Worksheet 3 Passive Rental Real Estate with no Active Participation-->
+			<xsd:element name="ParentWrkshtPassiveGrp" minOccurs="0">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="WrkshtPassiveGrp" minOccurs="0" maxOccurs="unbounded">
+							<xsd:complexType>
+								<xsd:sequence>
+									<!--Non Participate Activity Name -->
+									<xsd:element name="NonParticipateActivityNm" type="ShortDescriptionType" minOccurs="0">
+										<xsd:annotation>
+											<xsd:documentation>
+												<Description>Non Participate Activity Name</Description>
+												<LineNumber>W3</LineNumber>
+												<ELFFieldNumber>0900 0960 1030 1090 1150</ELFFieldNumber>
+											</xsd:documentation>
+										</xsd:annotation>
+									</xsd:element>
+									<!--Current Year Net Income Amount -->
+									<xsd:element name="CurrentYearNetIncomeAmt" type="USAmountType" minOccurs="0">
+										<xsd:annotation>
+											<xsd:documentation>
+												<Description>Current Year Net Income Amount</Description>
+												<LineNumber>W3-(a)</LineNumber>
+												<ELFFieldNumber>0910 0970 1040 1100 1160</ELFFieldNumber>
+											</xsd:documentation>
+										</xsd:annotation>
+									</xsd:element>
+									<!--Current Year Net Loss Amount -->
+									<xsd:element name="CurrentYearNetLossAmt" type="USAmountType" minOccurs="0">
+										<xsd:annotation>
+											<xsd:documentation>
+												<Description>Current Year Net Loss Amount</Description>
+												<LineNumber>W3-(b)</LineNumber>
+												<ELFFieldNumber>0920 0980 1050 1110 1170</ELFFieldNumber>
+											</xsd:documentation>
+										</xsd:annotation>
+									</xsd:element>
+									<!--Prior Year Unallowed Losses Amount -->
+									<xsd:element name="PriorYearUnallowedLossesAmt" type="USAmountType" minOccurs="0">
+										<xsd:annotation>
+											<xsd:documentation>
+												<Description>Prior Year Unallowed Losses Amount</Description>
+												<LineNumber>W3-(c)</LineNumber>
+												<ELFFieldNumber>0930 1000 1060 1120 1180</ELFFieldNumber>
+											</xsd:documentation>
+										</xsd:annotation>
+									</xsd:element>
+									<!--Overall Gain Amount -->
+									<xsd:element name="OverallGainAmt" type="USAmountType" minOccurs="0">
+										<xsd:annotation>
+											<xsd:documentation>
+												<Description>Overall Gain Amount</Description>
+												<LineNumber>W3-(d)</LineNumber>
+												<ELFFieldNumber>0940 1010 1070 1130 1190</ELFFieldNumber>
+											</xsd:documentation>
+										</xsd:annotation>
+									</xsd:element>
+									<!--Overall Loss Amount -->
+									<xsd:element name="OverallLossAmt" type="USAmountType" minOccurs="0">
+										<xsd:annotation>
+											<xsd:documentation>
+												<Description>Overall Loss Amount</Description>
+												<LineNumber>W3-(e)</LineNumber>
+												<ELFFieldNumber>0950 1020 1080 1140 1200</ELFFieldNumber>
+											</xsd:documentation>
+										</xsd:annotation>
+									</xsd:element>
+								</xsd:sequence>
+							</xsd:complexType>
+						</xsd:element>
+						<!--Total Other Current Year Income Amount -->
+						<xsd:element name="TotalOtherCurrentYearIncomeAmt" type="USAmountType" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Total Other Current Year Income Amount</Description>
+									<LineNumber>W3-(a)</LineNumber>
+									<ELFFieldNumber>1210</ELFFieldNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						<!--Total Other Current Year Loss Amount -->
+						<xsd:element name="TotalOtherCurrentYearLossAmt" type="USAmountType" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Total Other Current Year Loss Amount</Description>
+									<LineNumber>W3-(b)</LineNumber>
+									<ELFFieldNumber>1220</ELFFieldNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						<!--Total Other Processing Year Unallowed Amount -->
+						<xsd:element name="TotalOtherPYUnallowedAmt" type="USAmountType" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Total Other Processing Year Unallowed Amount</Description>
+									<LineNumber>W3-(c)</LineNumber>
+									<ELFFieldNumber>1550</ELFFieldNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<!--Worksheet 4 Allocate Special Allowance-->
+			<xsd:element name="ParentWrkshtAllowanceGrp" minOccurs="0">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="WrkshtAllowanceGrp" minOccurs="0" maxOccurs="unbounded">
+							<xsd:complexType>
+								<xsd:sequence>
+									<!--Special Allowance Activity Name -->
+									<xsd:element name="SpecialAllowanceActivityNm" minOccurs="0">
+										<xsd:annotation>
+											<xsd:documentation>
+												<Description>Special Allowance Activity Name</Description>
+												<LineNumber>W4</LineNumber>
+												<ELFFieldNumber>1560 1620 1680 1740 1800</ELFFieldNumber>
+											</xsd:documentation>
+										</xsd:annotation>
+										<xsd:simpleType>
+											<xsd:restriction base="TextType">
+												<xsd:maxLength value="25"/>
+											</xsd:restriction>
+										</xsd:simpleType>
+									</xsd:element>
+									<!--Reporting Form Or Schedule Name -->
+									<xsd:element name="ReportingFormOrScheduleNm" type="ShortDescriptionType" minOccurs="0">
+										<xsd:annotation>
+											<xsd:documentation>
+												<Description>Reporting Form Or Schedule Name</Description>
+												<LineNumber>W4</LineNumber>
+												<ELFFieldNumber>1570 1630 1690 1750 1810</ELFFieldNumber>
+											</xsd:documentation>
+										</xsd:annotation>
+									</xsd:element>
+									<!--F8582 Worksheet Losses Amount -->
+									<xsd:element name="F8582WrkshtLossesAmt" type="USAmountType" minOccurs="0">
+										<xsd:annotation>
+											<xsd:documentation>
+												<Description>F8582 Worksheet Losses Amount</Description>
+												<LineNumber>W4(a)</LineNumber>
+												<ELFFieldNumber>1580 1640 1700 1760 1820</ELFFieldNumber>
+											</xsd:documentation>
+										</xsd:annotation>
+									</xsd:element>
+									<!--Losses Percentage -->
+									<xsd:element name="LossesPct" type="RatioType" minOccurs="0">
+										<xsd:annotation>
+											<xsd:documentation>
+												<Description>Losses Percentage</Description>
+												<LineNumber>W4(b)</LineNumber>
+												<ELFFieldNumber>1590 1650 1710 1770 1830</ELFFieldNumber>
+											</xsd:documentation>
+										</xsd:annotation>
+									</xsd:element>
+									<!--Special Allowance Amount -->
+									<xsd:element name="SpecialAllowanceAmt" type="USAmountType" minOccurs="0">
+										<xsd:annotation>
+											<xsd:documentation>
+												<Description>Special Allowance Amount</Description>
+												<LineNumber>W4(c)</LineNumber>
+												<ELFFieldNumber>1600 1660 1720 1780 1840</ELFFieldNumber>
+											</xsd:documentation>
+										</xsd:annotation>
+									</xsd:element>
+									<!--Net Special Allowance Amount -->
+									<xsd:element name="NetSpecialAllowanceAmt" type="USAmountType" minOccurs="0">
+										<xsd:annotation>
+											<xsd:documentation>
+												<Description>Net Special Allowance Amount</Description>
+												<LineNumber>W4(d)</LineNumber>
+												<ELFFieldNumber>1610 1640 1730 1790 1850</ELFFieldNumber>
+											</xsd:documentation>
+										</xsd:annotation>
+									</xsd:element>
+								</xsd:sequence>
+							</xsd:complexType>
+						</xsd:element>
+						<!--Total Loss Amount -->
+						<xsd:element name="TotalLossAmt" type="USAmountType" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Total Loss Amount</Description>
+									<LineNumber>W4(a)</LineNumber>
+									<ELFFieldNumber>1860</ELFFieldNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						<!--Total Special Allowance Amount -->
+						<xsd:element name="TotalSpecialAllowanceAmt" type="USAmountType" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Total Special Allowance Amount</Description>
+									<LineNumber>W4(c)</LineNumber>
+									<ELFFieldNumber>1870</ELFFieldNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						<!--Total Net Special Allowance Amount -->
+						<xsd:element name="TotalNetSpecialAllowanceAmt" type="USAmountType" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Total Net Special Allowance Amount</Description>
+									<LineNumber>W4(d)</LineNumber>
+									<ELFFieldNumber>1880</ELFFieldNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<!--Worksheet 5 Overall Loss-->
+			<xsd:element name="ParentWrkshtLossGrp" minOccurs="0">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="WrkshtLossGrp" minOccurs="0" maxOccurs="unbounded">
+							<xsd:complexType>
+								<xsd:sequence>
+									<!--Unallowed Loss Activity Name -->
+									<xsd:element name="UnallowedLossActivityNm" type="ShortDescriptionType" minOccurs="0">
+										<xsd:annotation>
+											<xsd:documentation>
+												<Description>Unallowed Loss Activity Name</Description>
+												<LineNumber>W5</LineNumber>
+												<ELFFieldNumber>1900 1950 2020 2050 2100</ELFFieldNumber>
+											</xsd:documentation>
+										</xsd:annotation>
+									</xsd:element>
+									<!--Reporting Form Or Schedule Name -->
+									<xsd:element name="ReportingFormOrScheduleNm" minOccurs="0">
+										<xsd:annotation>
+											<xsd:documentation>
+												<Description>Reporting Form Or Schedule Name</Description>
+												<LineNumber>W5</LineNumber>
+												<ELFFieldNumber>1910 1960 2010 2060 2110</ELFFieldNumber>
+											</xsd:documentation>
+										</xsd:annotation>
+										<xsd:simpleType>
+											<xsd:restriction base="TextType">
+												<xsd:maxLength value="10"/>
+											</xsd:restriction>
+										</xsd:simpleType>
+									</xsd:element>
+									<!--F8582 Worksheet Losses Amount -->
+									<xsd:element name="F8582WrkshtLossesAmt" type="USAmountType" minOccurs="0">
+										<xsd:annotation>
+											<xsd:documentation>
+												<Description>F8582 Worksheet Losses Amount</Description>
+												<LineNumber>W5(a)</LineNumber>
+												<ELFFieldNumber>1920 1970 2020 2070 2120</ELFFieldNumber>
+											</xsd:documentation>
+										</xsd:annotation>
+									</xsd:element>
+									<!--Losses Percentage -->
+									<xsd:element name="LossesPct" type="RatioType" minOccurs="0">
+										<xsd:annotation>
+											<xsd:documentation>
+												<Description>Losses Percentage</Description>
+												<LineNumber>W5(b)</LineNumber>
+												<ELFFieldNumber>1930 1980 2030 2080 2130</ELFFieldNumber>
+											</xsd:documentation>
+										</xsd:annotation>
+									</xsd:element>
+									<!--Prior Year Unallowed Losses Amount -->
+									<xsd:element name="PriorYearUnallowedLossesAmt" type="USAmountType" minOccurs="0">
+										<xsd:annotation>
+											<xsd:documentation>
+												<Description>Prior Year Unallowed Losses Amount</Description>
+												<LineNumber>W5(c)</LineNumber>
+												<ELFFieldNumber>1940 1990 2040 2090 2140</ELFFieldNumber>
+											</xsd:documentation>
+										</xsd:annotation>
+									</xsd:element>
+								</xsd:sequence>
+							</xsd:complexType>
+						</xsd:element>
+						<!--Total Allocation Loss Amount -->
+						<xsd:element name="TotalAllocationLossAmt" type="USAmountType" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Total Allocation Loss Amount</Description>
+									<LineNumber>W5(a)</LineNumber>
+									<ELFFieldNumber>2150</ELFFieldNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						<!--Total Loss Amount -->
+						<xsd:element name="TotalLossAmt" type="USAmountType" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Total Loss Amount</Description>
+									<LineNumber>W5(c)</LineNumber>
+									<ELFFieldNumber>2155</ELFFieldNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<!--Worksheet 6 Loss Listed Activity on One Form-->
+			<xsd:element name="ParentWrkshtListActivityGrp" minOccurs="0">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="WrkshtListActivityGrp" minOccurs="0" maxOccurs="unbounded">
+							<xsd:complexType>
+								<xsd:sequence>
+									<!--Allowed Loss Activity Name -->
+									<xsd:element name="AllowedLossActivityNm" type="ShortDescriptionType" minOccurs="0">
+										<xsd:annotation>
+											<xsd:documentation>
+												<Description>Allowed Loss Activity Name</Description>
+												<LineNumber>W6</LineNumber>
+												<ELFFieldNumber>0170 2220 2270 2320 2370</ELFFieldNumber>
+											</xsd:documentation>
+										</xsd:annotation>
+									</xsd:element>
+									<!--Reporting Form Or Schedule Name -->
+									<xsd:element name="ReportingFormOrScheduleNm" minOccurs="0">
+										<xsd:annotation>
+											<xsd:documentation>
+												<Description>Reporting Form Or Schedule Name</Description>
+												<LineNumber>W6</LineNumber>
+												<ELFFieldNumber>2180 2230 2280 2330 2380</ELFFieldNumber>
+											</xsd:documentation>
+										</xsd:annotation>
+										<xsd:simpleType>
+											<xsd:restriction base="TextType">
+												<xsd:maxLength value="10"/>
+											</xsd:restriction>
+										</xsd:simpleType>
+									</xsd:element>
+									<!--F8582 Worksheet Losses Amount -->
+									<xsd:element name="F8582WrkshtLossesAmt" type="USAmountType" minOccurs="0">
+										<xsd:annotation>
+											<xsd:documentation>
+												<Description>F8582 Worksheet Losses Amount</Description>
+												<LineNumber>W6(a)</LineNumber>
+												<ELFFieldNumber>2190 2240 2290 2340 2390</ELFFieldNumber>
+											</xsd:documentation>
+										</xsd:annotation>
+									</xsd:element>
+									<!--Prior Year Unallowed Losses Amount -->
+									<xsd:element name="PriorYearUnallowedLossesAmt" type="USAmountType" minOccurs="0">
+										<xsd:annotation>
+											<xsd:documentation>
+												<Description>Prior Year Unallowed Losses Amount</Description>
+												<LineNumber>W6(b)</LineNumber>
+												<ELFFieldNumber>2200 2250 2300 2350 2400</ELFFieldNumber>
+											</xsd:documentation>
+										</xsd:annotation>
+									</xsd:element>
+									<!--F8582 Worksheet Allowed Losses Amount -->
+									<xsd:element name="F8582WrkshtAllowedLossesAmt" type="USAmountType" minOccurs="0">
+										<xsd:annotation>
+											<xsd:documentation>
+												<Description>F8582 Worksheet Allowed Losses Amount</Description>
+												<LineNumber>W6(c)</LineNumber>
+												<ELFFieldNumber>2210 2260 2310 2360 2410</ELFFieldNumber>
+											</xsd:documentation>
+										</xsd:annotation>
+									</xsd:element>
+								</xsd:sequence>
+							</xsd:complexType>
+						</xsd:element>
+						<!--Total Loss Amount -->
+						<xsd:element name="TotalLossAmt" type="USAmountType" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Total Loss Amount</Description>
+									<LineNumber>W6(a)</LineNumber>
+									<ELFFieldNumber>2420</ELFFieldNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						<!--Total Unallowed Loss Amount -->
+						<xsd:element name="TotalUnallowedLossAmt" type="USAmountType" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Total Unallowed Loss Amount</Description>
+									<LineNumber>W6(b)</LineNumber>
+									<ELFFieldNumber>2430</ELFFieldNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						<!--Total Allowed Loss Amount -->
+						<xsd:element name="TotalAllowedLossAmt" type="USAmountType" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Total Allowed Loss Amount</Description>
+									<LineNumber>W6(c)</LineNumber>
+									<ELFFieldNumber>2440</ELFFieldNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<!--Worksheet 7 Loss Listed Activity Multiple Forms-->
+			<xsd:element name="ParentWrkshtLossActivityGrp" minOccurs="0" maxOccurs="unbounded">
+				<xsd:complexType>
+					<xsd:sequence>
+						<!--Multiple Loss Activity Name -->
+						<xsd:element name="MultipleLossActivityNm" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Multiple Loss Activity Name</Description>
+									<LineNumber>W7</LineNumber>
+									<ELFFieldNumber>2458</ELFFieldNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+							<xsd:simpleType>
+								<xsd:restriction base="TextType">
+									<xsd:maxLength value="25"/>
+								</xsd:restriction>
+							</xsd:simpleType>
+						</xsd:element>
+						<xsd:element name="WrkshtLossActivityGrp" minOccurs="0" maxOccurs="unbounded">
+							<xsd:complexType>
+								<xsd:sequence>
+									<!--Reporting Form Or Schedule Name -->
+									<xsd:element name="ReportingFormOrScheduleNm" type="ShortDescriptionType" minOccurs="0">
+										<xsd:annotation>
+											<xsd:documentation>
+												<Description>Reporting Form Or Schedule Name</Description>
+												<LineNumber>W7-1</LineNumber>
+												<ELFFieldNumber>2461 2541 2620</ELFFieldNumber>
+											</xsd:documentation>
+										</xsd:annotation>
+									</xsd:element>
+									<!--Net Loss Amount -->
+									<xsd:element name="NetLossAmt" type="USAmountType" minOccurs="0">
+										<xsd:annotation>
+											<xsd:documentation>
+												<Description>Net Loss Amount</Description>
+												<LineNumber>W7-1a(a)</LineNumber>
+												<ELFFieldNumber>2470 2550 2630</ELFFieldNumber>
+											</xsd:documentation>
+										</xsd:annotation>
+									</xsd:element>
+									<!--Net Income Amount -->
+									<xsd:element name="NetIncomeAmt" type="USAmountType" minOccurs="0">
+										<xsd:annotation>
+											<xsd:documentation>
+												<Description>Net Income Amount</Description>
+												<LineNumber>W7-1b(a)</LineNumber>
+												<ELFFieldNumber>2490 2570 2650</ELFFieldNumber>
+											</xsd:documentation>
+										</xsd:annotation>
+									</xsd:element>
+									<!--Net Income Loss Amount -->
+									<xsd:element name="NetIncomeLossAmt" type="USAmountType" minOccurs="0">
+										<xsd:annotation>
+											<xsd:documentation>
+												<Description>Net Income Loss Amount</Description>
+												<LineNumber>W7-1c(b)</LineNumber>
+												<ELFFieldNumber>2500 2580 2660</ELFFieldNumber>
+											</xsd:documentation>
+										</xsd:annotation>
+									</xsd:element>
+									<!--Losses Percentage -->
+									<xsd:element name="LossesPct" type="RatioType" minOccurs="0">
+										<xsd:annotation>
+											<xsd:documentation>
+												<Description>Losses Percentage</Description>
+												<LineNumber>W7-1c(c)</LineNumber>
+												<ELFFieldNumber>2510 2590 2670</ELFFieldNumber>
+											</xsd:documentation>
+										</xsd:annotation>
+									</xsd:element>
+									<!--Prior Year Unallowed Losses Amount -->
+									<xsd:element name="PriorYearUnallowedLossesAmt" type="USAmountType" minOccurs="0">
+										<xsd:annotation>
+											<xsd:documentation>
+												<Description>Prior Year Unallowed Losses Amount</Description>
+												<LineNumber>W7-1c(d)</LineNumber>
+												<ELFFieldNumber>2520 2600 2680</ELFFieldNumber>
+											</xsd:documentation>
+										</xsd:annotation>
+									</xsd:element>
+									<!--F8582 Worksheet Losses Amount -->
+									<xsd:element name="F8582WrkshtLossesAmt" type="USAmountType" minOccurs="0">
+										<xsd:annotation>
+											<xsd:documentation>
+												<Description>F8582 Worksheet Losses Amount</Description>
+												<LineNumber>W7-1c(e)</LineNumber>
+												<ELFFieldNumber>2530 2610 2690</ELFFieldNumber>
+											</xsd:documentation>
+										</xsd:annotation>
+									</xsd:element>
+								</xsd:sequence>
+							</xsd:complexType>
+						</xsd:element>
+						<!--Total Net Income Loss Amount -->
+						<xsd:element name="TotalNetIncomeLossAmt" type="USAmountType" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Total Net Income Loss Amount</Description>
+									<LineNumber>W7(b)</LineNumber>
+									<ELFFieldNumber>2700</ELFFieldNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						<!--Total Unallowed Amount -->
+						<xsd:element name="TotalUnallowedAmt" type="USAmountType" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Total Unallowed Amount</Description>
+									<LineNumber>W7(d)</LineNumber>
+									<ELFFieldNumber>2710</ELFFieldNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						<!--Total Allowed Amount -->
+						<xsd:element name="TotalAllowedAmt" type="USAmountType" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Total Allowed Amount</Description>
+									<LineNumber>W7(e)</LineNumber>
+									<ELFFieldNumber>2720</ELFFieldNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:schema>

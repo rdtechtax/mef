@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema targetNamespace="http://www.irs.gov/efile" xmlns="http://www.irs.gov/efile"
+xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.0">
+
+	<xsd:annotation>
+		<xsd:documentation>
+			<Description>IRS e-file Individual Income Tax Schema - Child Taxable Interest Statement</Description>
+			<Purpose>(1) If your child received, as a nominee, interest that actually belongs to another person, enter the amount and "ND" (for nominee distribution) on the dotted line next to line 1a. Do not include amounts received as a nominee in the total for line 1a.  (2) If your child had accrued interest that was paid to the seller of a bond, amortizable bond premium (ABP) allowed as a reduction to interest income, or if any original issue discount (OID) is less than the amount shown on your child's Form 1099-OID, enter the nontaxable amount on the dotted line next to line 1a and "Accrued interest," "ABP adjustment," or "OID adjustment," whichever applies. Do not include any nontaxable amounts in the total for line 1a.</Purpose>
+			<TaxYear>2018</TaxYear>
+			<MaturityLevel>Final Release</MaturityLevel>
+			<ReleaseDate>February 13, 2019</ReleaseDate>
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:include schemaLocation="../../../Common/efileTypes.xsd" />
+
+	<!-- ================================================================ -->
+	<!-- =============== Child Taxable Interest Statement =============== -->
+	<!-- ================================================================ -->
+
+	<xsd:element name="ChildTaxableInterestStmt">
+		<xsd:annotation>
+			<xsd:documentation>Child Taxable Interest Statement</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:complexContent>
+				<xsd:extension base="ChildTaxableInterestStmtType">
+					<xsd:attributeGroup ref="DocumentAttributes">
+						<xsd:annotation>
+							<xsd:documentation>Common return document attributes</xsd:documentation>
+						</xsd:annotation>
+					</xsd:attributeGroup>
+					<xsd:attribute name="documentName" type="StringType" fixed="ChildTaxableInterestStatement">
+						<xsd:annotation>
+							<xsd:documentation>IRS internal use only. To avoid error in the return, do not include the attribute name or value.</xsd:documentation>
+						</xsd:annotation>
+					</xsd:attribute>
+				</xsd:extension>
+			</xsd:complexContent>
+		</xsd:complexType>
+	</xsd:element>
+
+	<xsd:complexType name="ChildTaxableInterestStmtType">
+		<xsd:annotation>
+			<xsd:documentation>Content model for Child Taxable Interest Statement</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+
+			<xsd:element name="ChildTaxableIntNomneDistriGrp" minOccurs="0">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="NomineeDistributionCd">
+							<xsd:annotation>
+								<xsd:documentation>
+									<ELFNumber>0060</ELFNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+							<xsd:simpleType>
+								<xsd:restriction base="StringType">
+									<xsd:enumeration value="ND"/>
+								</xsd:restriction>
+							</xsd:simpleType>
+						</xsd:element>
+						<xsd:element name="NomineeDistributionAmt" type="USAmountNNType">
+							<xsd:annotation>
+								<xsd:documentation>
+									<ELFNumber>0070</ELFNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+
+			<xsd:element name="ChildNonTaxableInterestGrp" minOccurs="0" maxOccurs="3">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="ChildNonTaxableInterestTypeCd">
+							<xsd:annotation>
+								<xsd:documentation>
+									<ELFNumber>0080</ELFNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+							<xsd:simpleType>
+								<xsd:restriction base="StringType">
+									<xsd:enumeration value="ACCRUED INTEREST"/>
+									<xsd:enumeration value="ABP ADJUSTMENT"/>
+									<xsd:enumeration value="OID ADJUSTMENT"/>
+								</xsd:restriction>
+							</xsd:simpleType>
+						</xsd:element>
+						<xsd:element name="ChildNonTaxableInterestAmt" type="USAmountNNType">
+							<xsd:annotation>
+								<xsd:documentation>
+									<ELFNumber>0090</ELFNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+		
+		</xsd:sequence>
+	</xsd:complexType>
+		
+</xsd:schema>

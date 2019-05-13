@@ -1,0 +1,572 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.irs.gov/efile" targetNamespace="http://www.irs.gov/efile" elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.0">
+	<xsd:annotation>
+		<xsd:documentation>
+			<Description>IRS e-file Schema - IRS Form 8801 Credit for Prior Year Minimum Tax - Individuals, Estates, and Trusts</Description>
+			<TaxYear>2018</TaxYear>
+			<MaturityLevel>Final Release</MaturityLevel>
+			<ReleaseDate>February 13, 2019</ReleaseDate>
+		</xsd:documentation>
+	</xsd:annotation>
+	<xsd:include schemaLocation="../../../Common/efileTypes.xsd"/>
+	<!-- ==================================================================-->
+	<!-- ========================  IRS Form 8801  =========================-->
+	<!-- ==================================================================-->
+	<xsd:element name="IRS8801">
+		<xsd:annotation>
+			<xsd:documentation>IRS Form 8801</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:complexContent>
+				<xsd:extension base="IRS8801Type">
+					<xsd:attributeGroup ref="DocumentAttributes">
+						<xsd:annotation>
+							<xsd:documentation>Common return document attributes</xsd:documentation>
+						</xsd:annotation>
+					</xsd:attributeGroup>
+					<xsd:attribute name="documentName" type="xsd:string" fixed="IRS8801">
+						<xsd:annotation>
+							<xsd:documentation>IRS internal use only. To avoid error in the return, do not include the attribute name or value.</xsd:documentation>
+						</xsd:annotation>
+					</xsd:attribute>
+				</xsd:extension>
+			</xsd:complexContent>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:complexType name="IRS8801Type">
+		<xsd:annotation>
+			<xsd:documentation>Content model for IRS Form 8801</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<!-- Part I Net Minimum Tax on Exclusion Items -->
+			<!-- Net Minimum Tax Taxable Income Loss Amount -->
+			<xsd:element name="NetMinTaxTaxableIncomeLossAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Net Minimum Tax Taxable Income Loss Amount</Description>
+						<LineNumber>1</LineNumber>
+						<ELFFieldNumber>0020</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Net Minimum Tax Exclusion Items Amount -->
+			<xsd:element name="NetMinTaxExclusionItemsAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Net Minimum Tax Exclusion Items Amount</Description>
+						<LineNumber>2</LineNumber>
+						<ELFFieldNumber>0030</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Minimum Tax Credit Net Operating Loss Deduction Amount -->
+			<xsd:element name="MinTaxCreditNetOprLossDedAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Minimum Tax Credit Net Operating Loss Deduction Amount</Description>
+						<LineNumber>3</LineNumber>
+						<ELFFieldNumber>0040</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Summary Minimum Tax Credit Loss And Deduction Amount -->
+			<xsd:element name="SumMinTaxCreditLossAndDedAmt" type="USAmountNNType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Summary Minimum Tax Credit Loss And Deduction Amount</Description>
+						<LineNumber>4</LineNumber>
+						<ELFFieldNumber>0050</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Minimum Tax Credit Exemption Amount -->
+			<xsd:element name="MinTaxCreditExemptionAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Minimum Tax Credit Exemption Amount</Description>
+						<LineNumber>5</LineNumber>
+						<ELFFieldNumber>0060</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Minimum Tax Credit Phase Output Amount -->
+			<xsd:element name="MinTaxCreditPhaseOutAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Minimum Tax Credit Phase Output Amount</Description>
+						<LineNumber>6</LineNumber>
+						<ELFFieldNumber>0070</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Net Minimum Tax Credit Minus Phase Output Amount -->
+			<xsd:element name="NetMinTaxCrMinusPhaseOutAmt" type="USAmountNNType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Net Minimum Tax Credit Minus Phase Output Amount</Description>
+						<LineNumber>7</LineNumber>
+						<ELFFieldNumber>0080</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Net Minimum Tax Credit Times Decimal Amount -->
+			<xsd:element name="NetMinTaxCrTimesDecimalAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Net Minimum Tax Credit Times Decimal Amount</Description>
+						<LineNumber>8</LineNumber>
+						<ELFFieldNumber>0090</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Net Minimum Tax Minus Exemption Amount -->
+			<xsd:element name="NetMinTaxMinusExemptionAmt" type="USAmountNNType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Net Minimum Tax Minus Exemption Amount</Description>
+						<LineNumber>9</LineNumber>
+						<ELFFieldNumber>0100</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Net Minimum Tax Lesser Loss And Deduction Amount -->
+			<xsd:element name="NetMinTaxLessLossAndDedAmt" type="USAmountNNType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Net Minimum Tax Lesser Loss And Deduction Amount</Description>
+						<LineNumber>10</LineNumber>
+						<ELFFieldNumber>0110</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Net Minimum Tax Times Tax Rate Amount -->
+			<xsd:element name="NetMinTaxTimesTaxRateAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Net Minimum Tax Times Tax Rate Amount</Description>
+						<LineNumber>11</LineNumber>
+						<ELFFieldNumber>0120</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Minimum Tax Foreign Tax Credit Exclusion Items Amount -->
+			<xsd:element name="MinTaxForeignTaxCrExclItemsAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Minimum Tax Foreign Tax Credit Exclusion Items Amount</Description>
+						<LineNumber>12</LineNumber>
+						<ELFFieldNumber>0130</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Tentative Minimum Tax On Exclusion Items Amount -->
+			<xsd:element name="TentativeMinTaxOnExclItemsAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Tentative Minimum Tax On Exclusion Items Amount</Description>
+						<LineNumber>13</LineNumber>
+						<ELFFieldNumber>0140</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Processing Year Minimum Tax Applicable Retained Tax Amount -->
+			<xsd:element name="PYMinTaxApplicableRtnTaxAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Processing Year Minimum Tax Applicable Retained Tax Amount</Description>
+						<LineNumber>14</LineNumber>
+						<ELFFieldNumber>0150</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Net Minimum Tax On Exclusion Items Amount -->
+			<xsd:element name="NetMinTaxOnExclusionItemsAmt" type="USAmountNNType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Net Minimum Tax On Exclusion Items Amount</Description>
+						<LineNumber>15</LineNumber>
+						<ELFFieldNumber>0160</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!--  Part II - Minimum Tax Credit and Carryforward to 2019 -->
+			<!-- Processing Year Alternative Minimum Tax Amount -->
+			<xsd:element name="PYAlternativeMinimumTaxAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Processing Year Alternative Minimum Tax Amount</Description>
+						<LineNumber>16</LineNumber>
+						<ELFFieldNumber>0170</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!--  Line 17: Please use value from Line 15 -->
+			<!-- Net Alternative Minimum Tax Amount -->
+			<xsd:element name="NetAlternativeMinimumTaxAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Net Alternative Minimum Tax Amount</Description>
+						<LineNumber>18</LineNumber>
+						<ELFFieldNumber>0190</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- AMT Prior Year Carryforward Amount -->
+			<xsd:element name="AMTPriorYearCarryforwardAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>AMT Prior Year Carryforward Amount</Description>
+						<LineNumber>19</LineNumber>
+						<ELFFieldNumber>0200</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Qualifying Electronic Vehicle Processing Year Unallowed Credit Amount -->
+			<xsd:element name="QlfyElecVehPYUnallowedCrAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Qualifying Electronic Vehicle Processing Year Unallowed Credit Amount</Description>
+						<LineNumber>20</LineNumber>
+						<ELFFieldNumber>0210</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- AMT Carryforward Plus Negative Amount -->
+			<xsd:element name="AMTCarryforwardPlusNegativeAmt" type="USAmountPosType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>AMT Carryforward Plus Negative Amount</Description>
+						<LineNumber>21</LineNumber>
+						<ELFFieldNumber>0220</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Current Year Regulation Tax Liability Minus Allowable Credit Amount -->
+			<xsd:element name="CYRegTaxLiabiMinusAllwblCrAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Current Year Regulation Tax Liability Minus Allowable Credit Amount</Description>
+						<LineNumber>22</LineNumber>
+						<ELFFieldNumber>0230</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Current Year Tentative Minimum Tax Amount -->
+			<xsd:element name="CYTentativeMinimumTaxAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Current Year Tentative Minimum Tax Amount</Description>
+						<LineNumber>23</LineNumber>
+						<ELFFieldNumber>0240</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Tentative Minimum Tax Minus Regulation Tax Liability Amount -->
+			<xsd:element name="TentMinTaxMinusRegTaxLiabAmt" type="USAmountNNType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Tentative Minimum Tax Minus Regulation Tax Liability Amount</Description>
+						<LineNumber>24</LineNumber>
+						<ELFFieldNumber>0250</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Minimum AMT Credit Amount -->
+			<xsd:element name="MinAMTCrAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Minimum AMT Credit Amount</Description>
+						<LineNumber>25</LineNumber>
+						<ELFFieldNumber>0260</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- AMT Credit Carryforward To Next Year Amount -->
+			<xsd:element name="AMTCrCarryforwardToNextYearAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>AMT Credit Carryforward To Next Year Amount</Description>
+						<LineNumber>26</LineNumber>
+						<ELFFieldNumber>0280</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Part III Tax Computation Using Maximum Capital Gains Rates -->
+			<!-- Net Minimum Tax Less Deductions Amount -->
+			<xsd:element name="NetMinTaxLessDeductionsAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Net Minimum Tax Less Deductions Amount</Description>
+						<LineNumber>27</LineNumber>
+						<ELFFieldNumber>0300</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Processing Year Minimum Tax Applicable Capitalized Gain Amount -->
+			<xsd:element name="PYMinTaxApplicableCapGainAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Processing Year Minimum Tax Applicable Capitalized Gain Amount</Description>
+						<LineNumber>28</LineNumber>
+						<ELFFieldNumber>0310</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Processing Year Unrecaptured Section 1250 Gain Amount -->
+			<xsd:element name="PYUnrecapturedS1250GainAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Processing Year Unrecaptured Section 1250 Gain Amount</Description>
+						<LineNumber>29</LineNumber>
+						<ELFFieldNumber>0320</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Smaller Processing Year Schedule D Gain Or Worksheet Amount -->
+			<xsd:element name="SmallerPYSchDGainOrWrkshtAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Smaller Processing Year Schedule D Gain Or Worksheet Amount</Description>
+						<LineNumber>30</LineNumber>
+						<ELFFieldNumber>0330</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Smaller Net AMT Or Gain Amount -->
+			<xsd:element name="SmallerNetAMTOrGainAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Smaller Net AMT Or Gain Amount</Description>
+						<LineNumber>31</LineNumber>
+						<ELFFieldNumber>0350</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- AMT Less Smaller Of Tax Or Gain Amount -->
+			<xsd:element name="AMTLessSmallerOfTaxOrGainAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>AMT Less Smaller Of Tax Or Gain Amount</Description>
+						<LineNumber>32</LineNumber>
+						<ELFFieldNumber>0360</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Net Adjustment AMT Taxable Incorporated Times Percentage Amount -->
+			<xsd:element name="NetAdjAMTTxblIncTimesPctAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Net Adjustment AMT Taxable Incorporated Times Percentage Amount</Description>
+						<LineNumber>33</LineNumber>
+						<ELFFieldNumber>0370</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Maximum Capitalized Gains Applicable Limit Amount -->
+			<xsd:element name="MaxCapGainsApplicableLimitAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Maximum Capitalized Gains Applicable Limit Amount</Description>
+						<LineNumber>34</LineNumber>
+						<ELFFieldNumber>0375</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- AMT Prior Year Applicable Gain Amount -->
+			<xsd:element name="AMTPriorYearApplicableGainAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>AMT Prior Year Applicable Gain Amount</Description>
+						<LineNumber>35</LineNumber>
+						<ELFFieldNumber>0385</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Maximum Capitalized Gain Minus Applicable Limit Amount -->
+			<xsd:element name="MaxCapGainMinusApplcblLimitAmt" type="USAmountNNType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Maximum Capitalized Gain Minus Applicable Limit Amount</Description>
+						<LineNumber>36</LineNumber>
+						<ELFFieldNumber>0387</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Smaller Net Minimum Tax Or Applicable Gain Amount -->
+			<xsd:element name="SmllrNetMinTaxOrApplcblGainAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Smaller Net Minimum Tax Or Applicable Gain Amount</Description>
+						<LineNumber>37</LineNumber>
+						<ELFFieldNumber>0390</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Smaller Calculated Net Or Gain Amount -->
+			<xsd:element name="SmallerCalculatedNetOrGainAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Smaller Calculated Net Or Gain Amount</Description>
+						<LineNumber>38</LineNumber>
+						<ELFFieldNumber>0400</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Gain Minus Smaller Net Amount -->
+			<xsd:element name="GainMinusSmallerNetAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Gain Minus Smaller Net Amount</Description>
+						<LineNumber>39</LineNumber>
+						<ELFFieldNumber>0440</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Filing Threshold Amount -->
+			<xsd:element name="FilingThresholdAmt" type="USAmountNNType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Filing Threshold Amount</Description>
+						<LineNumber>40</LineNumber>
+						<ELFFieldNumber>0524</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Net Processing Year Or Net Or Total Gain Amount -->
+			<!-- Line 41 - Use value from Line 36 'MaxCapGainMinusApplcblLimitAmt' -->
+			<!-- Applicable Capital Gains or Schedule D Worksheet Amount -->
+			<xsd:element name="ApplcblCapGainsOrSchDWrkshtAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Applicable Capital Gains or Schedule D Worksheet Amount</Description>
+						<LineNumber>42</LineNumber>
+						<ELFFieldNumber>0545</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Summary Threshold Applicable Worksheet Amount -->
+			<xsd:element name="SumThresholdApplcblWrkshtAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Summary Threshold Applicable Worksheet Amount</Description>
+						<LineNumber>43</LineNumber>
+						<ELFFieldNumber>0550</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Filing Threshold Less Threshold Summary Amount -->
+			<xsd:element name="FlngThrshldLessThesholdSumAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Filing Threshold Less Threshold Summary Amount</Description>
+						<LineNumber>44</LineNumber>
+						<ELFFieldNumber>0600</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Smaller Adjusted Net Gain or Taxable Income Amount -->
+			<xsd:element name="SmllrAdjNetGainOrTxblIncAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Smaller Adjusted Net Gain or Taxable Income Amount</Description>
+						<LineNumber>45</LineNumber>
+						<ELFFieldNumber>0610</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Net Alternative Minimum Taxable Incorporated Times Percentage Amount -->
+			<xsd:element name="NetAltMinTaxableIncTimesPctAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Net Alternative Minimum Taxable Incorporated Times Percentage Amount</Description>
+						<LineNumber>46</LineNumber>
+						<ELFFieldNumber>0610</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Summary of Smaller Amount -->
+			<xsd:element name="SumOfSmllrAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Summary of Smaller Amount</Description>
+						<LineNumber>47</LineNumber>
+						<ELFFieldNumber/>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Excess of Summary Amount -->
+			<xsd:element name="ExcessOfSumAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Excess of Summary Amount</Description>
+						<LineNumber>48</LineNumber>
+						<ELFFieldNumber/>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Excess of Summary Times Percentage Amount -->
+			<xsd:element name="ExcessOfSumTimesPctAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Excess of Summary Times Percentage Amount</Description>
+						<LineNumber>49</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Total Net Amount -->
+			<xsd:element name="TotalNetAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Total Net Amount</Description>
+						<LineNumber>50</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Net Smaller Schedule D or Adjusted Net Gain Amount -->
+			<xsd:element name="NetSmallerSchDOrAdjNetGainAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Net Smaller Schedule D or Adjusted Net Gain Amount</Description>
+						<LineNumber>51</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Net Schedule D or Adjusted Net Gain Times Percentage Amount -->
+			<xsd:element name="NetSchDOrAdjNetGainTimesPctAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Net Schedule D or Adjusted Net Gain Times Percentage Amount</Description>
+						<LineNumber>52</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- Summary of Alternative Tax Percentage Amount-->
+			<xsd:element name="SumOfAltMinTaxPercentagesAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Summary of Alternative Tax Percentage Amount</Description>
+						<LineNumber>53</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!--Net Alternative Minimum Taxable Incorporated Times Percentage Amount-->
+			<xsd:element name="NetAltMinTxblIncTimesFSPctAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Net Alternative Minimum Taxable Incorporated Times Percentage Amount</Description>
+						<LineNumber>54</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!--Tax on Alternative Minimum Gain Amount-->
+			<xsd:element name="TaxOnAlternativeMinimumGainAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Tax on Alternative Minimum Gain Amount</Description>
+						<LineNumber>55</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:schema>

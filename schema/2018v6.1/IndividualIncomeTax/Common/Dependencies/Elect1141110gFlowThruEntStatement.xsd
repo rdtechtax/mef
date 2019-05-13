@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.irs.gov/efile" targetNamespace="http://www.irs.gov/efile" elementFormDefault="qualified" attributeFormDefault="unqualified">
+ <xsd:annotation>
+    <xsd:documentation>
+       <Description>IRS e-file Individual Income Tax Schema - Election 1.1411-10(g) Flow Through Entities Statement</Description>
+       <Purpose>The 1.1411-10(g) election is an NIIT election associated with income from certain CFCs and QEFs.  The election may be made by an entity that holds an interest in a CFC or QEF, which would include flow-through entities filing Form 1040, 1041, 1065, 1065B, 1120S, 1041 Sch K-1, 1120S Sch K-1, 1065 Sch K-1, 1065B Sch K-1.</Purpose>
+       <TaxYear>2018</TaxYear>
+       <MaturityLevel>Final Release</MaturityLevel>
+       <ReleaseDate>February 13, 2019</ReleaseDate>
+    </xsd:documentation>
+ </xsd:annotation>
+ <xsd:include schemaLocation="../../../Common/efileTypes.xsd"/>
+
+ <!-- ==================================================================================== -->
+ <!-- === Election of Regulations Section 1.1411-10(g) Flow-Through Entities Statement === -->
+ <!-- ==================================================================================== -->
+
+ <xsd:element name="Elect1141110gFlowThruEntStmt">
+    <xsd:annotation>
+       <xsd:documentation>Election of Regulations Section 1.1411-10(g) Flow-Through Entities Statement</xsd:documentation>
+    </xsd:annotation>
+    
+    <xsd:complexType>
+       <xsd:complexContent>
+          <xsd:extension base="Elect1141110gFlowThruEntStmtType">
+             <xsd:attributeGroup ref="DocumentAttributes">
+                <xsd:annotation>
+                   <xsd:documentation>Common return document attributes</xsd:documentation>
+                </xsd:annotation>
+             </xsd:attributeGroup>
+             <xsd:attribute name="documentName" type="xsd:string" fixed="Elect1141110gFlowThruEntStatement">
+                <xsd:annotation>
+                   <xsd:documentation>IRS internal use only. To avoid error in the return, do not include the attribute name or value.</xsd:documentation>
+                </xsd:annotation>
+             </xsd:attribute>
+          </xsd:extension>
+       </xsd:complexContent>
+    </xsd:complexType>
+ </xsd:element>
+ 
+ <xsd:complexType name="Elect1141110gFlowThruEntStmtType">
+    <xsd:annotation>
+       <xsd:documentation>Content model for Election of Regulations Section 1.1411-10(g) Flow-Through Entities Statement</xsd:documentation>
+    </xsd:annotation>
+    
+    <xsd:sequence>
+       
+        <!-- Elect1141110gFlowThruEntGrp -->
+        <xsd:element name="Elect1141110gFlowThruEntGrp" minOccurs="0">
+        <xsd:complexType>
+        <xsd:sequence>
+
+            <!-- Entity Name -->
+            <xsd:element name="EntityName" type="BusinessNameType" minOccurs="0">
+             <xsd:annotation>
+              <xsd:documentation>
+               <Description>Entity Name</Description>
+              </xsd:documentation>
+             </xsd:annotation>
+            </xsd:element>
+
+            <!-- Entity EIN -->
+            <xsd:element name="EntityEIN" type="EINType" minOccurs="0">
+             <xsd:annotation>
+              <xsd:documentation>
+               <Description>Entity EIN</Description>
+              </xsd:documentation>
+             </xsd:annotation>
+            </xsd:element>
+
+            <!-- Person Name -->
+            <xsd:element name="PersonNm" type="PersonNameType" minOccurs="0">
+             <xsd:annotation>
+              <xsd:documentation>
+               <Description>Person Name</Description>
+              </xsd:documentation>
+             </xsd:annotation>
+            </xsd:element>
+
+            <!-- SSN -->
+            <xsd:element name="SSN" type="SSNType" minOccurs="0">
+             <xsd:annotation>
+              <xsd:documentation>
+               <Description>SSN</Description>
+              </xsd:documentation>
+             </xsd:annotation>
+            </xsd:element>
+
+            <!-- Elect Under Regulations Section 1.1411 Text -->
+            <xsd:element name="ElectUnderRegsSect11411Txt" type="ExplanationType" minOccurs="0">
+             <xsd:annotation>
+              <xsd:documentation>
+               <Description>Elect Under Regulations Section 1.1411 Text</Description>
+              </xsd:documentation>
+             </xsd:annotation>
+            </xsd:element>
+
+            <!-- Business Name -->
+            <xsd:element name="BusinessName" type="BusinessNameType" minOccurs="0">
+             <xsd:annotation>
+              <xsd:documentation>
+               <Description>Business Name</Description>
+              </xsd:documentation>
+             </xsd:annotation>
+            </xsd:element>
+
+            <!-- EIN -->
+            <xsd:element name="EIN" type="EINType" minOccurs="0">
+             <xsd:annotation>
+              <xsd:documentation>
+               <Description>EIN</Description>
+              </xsd:documentation>
+             </xsd:annotation>
+            </xsd:element>
+
+            <!-- Foreign Entity Identification Group -->
+            <xsd:element name="ForeignEntityIdentificationGrp" type="ForeignEntityIdentificationGrpType" minOccurs="0">
+             <xsd:annotation>
+              <xsd:documentation>
+               <Description>Foreign Entity Identification Group</Description>
+              </xsd:documentation>
+             </xsd:annotation>
+            </xsd:element>
+            <!-- Foreign Entity Identification Group end-->
+
+        </xsd:sequence>
+        </xsd:complexType>
+        </xsd:element>
+        <!-- Elect1141110gFlowThruEntGrp end-->
+
+   </xsd:sequence>
+ </xsd:complexType>
+ <!--Elect1141110gFlowThruEntStmtType end-->
+
+</xsd:schema>
+

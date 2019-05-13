@@ -1,0 +1,438 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.irs.gov/efile" targetNamespace="http://www.irs.gov/efile" elementFormDefault="qualified" attributeFormDefault="unqualified">
+
+	<xsd:annotation>
+		<xsd:documentation>
+			<Description>IRS e-file Individual Income Tax Schema - IRS 1040 Schedule A Itemized Deductions</Description>
+			<TaxYear>2018</TaxYear>
+			<MaturityLevel>Final Release</MaturityLevel>
+			<ReleaseDate>February 13, 2019</ReleaseDate>
+		</xsd:documentation>
+	</xsd:annotation>
+	
+	<xsd:include schemaLocation="../../../Common/efileTypes.xsd"/>
+
+ <!-- =============================================================== -->
+ <!-- ==================== IRS 1040 Schedule A ====================== -->
+ <!-- =============================================================== -->
+
+
+	 <xsd:element name="IRS1040ScheduleA">
+		<xsd:annotation>
+			<xsd:documentation>IRS 1040 Schedule A</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+		<xsd:complexContent>
+			<xsd:extension base="IRS1040ScheduleAType">
+				<xsd:attributeGroup ref="DocumentAttributes">
+					<xsd:annotation>
+						<xsd:documentation>Common return document attributes</xsd:documentation>
+					</xsd:annotation>
+				</xsd:attributeGroup>
+				<xsd:attribute name="documentName" type="xsd:string" fixed="IRS1040ScheduleA">
+					<xsd:annotation>
+						<xsd:documentation>IRS internal use only. To avoid error in the return, do not include the attribute name or value.</xsd:documentation>
+					</xsd:annotation>
+				</xsd:attribute>
+				<xsd:attribute name="referenceDocumentId" type="IdListType"/>
+				<xsd:attribute name="referenceDocumentName" type="StringType" fixed="BinaryAttachment"/>
+			</xsd:extension>
+		</xsd:complexContent>
+		</xsd:complexType>
+	 </xsd:element>
+
+	 <xsd:complexType name="IRS1040ScheduleAType">
+		<xsd:annotation>
+			<xsd:documentation>Content model for IRS 1040 Schedule A</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<!-- Medical and Dental Expenses Section -->
+			<!-- Medical and Dental Expenses -->
+			<xsd:element name="MedicalAndDentalExpensesAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Medical and Dental Expenses</Description>
+						<LineNumber>1</LineNumber>
+						<ELFFieldNumber>0015</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- AGI Amount - data appears on lines 2 and 25 -->
+			<xsd:element name="TaxReturnAGIAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>AGI Amount</Description>
+						<LineNumber>2 and 25</LineNumber>
+						<ELFFieldNumber>0065 0450</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Medical Allowance -->
+			<xsd:element name="CalculatedMedicalAllowanceAmt" type="USAmountType"  minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Medical Allowance</Description>
+						<LineNumber>3</LineNumber>
+						<ELFFieldNumber>0070</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Total Medical and Dental -->
+			<xsd:element name="TotalMedicalAndDentalExpnssAmt" type="USAmountNNType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Total Medical and Dental</Description>
+						<LineNumber>4</LineNumber>
+						<ELFFieldNumber>0080</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Taxes You Paid Section -->
+				<!-- General Sales Taxes Box -->
+				<xsd:element name="StateAndLocalSalesTaxInd" type="CheckboxType" minOccurs="0">
+					<xsd:annotation>
+						<xsd:documentation> 
+							<Description>General Sales Taxes Box</Description>
+							<LineNumber>5a</LineNumber>
+							<ELFFieldNumber>0085</ELFFieldNumber>
+						</xsd:documentation>
+					</xsd:annotation>
+				</xsd:element>
+
+			<!-- State and Local Taxes -->
+			<xsd:element name="StateAndLocalTaxAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>State and Local Taxes</Description>
+						<LineNumber>5a</LineNumber>
+						<ELFFieldNumber>0090</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Real Estate Taxes -->
+			<xsd:element name="RealEstateTaxesAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Real Estate Taxes</Description>
+						<LineNumber>5b</LineNumber>
+						<ELFFieldNumber>0100</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Personal Property Taxes Amount -->
+			<xsd:element name="PersonalPropertyTaxesAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Personal property taxes</Description>
+						<LineNumber>5c</LineNumber>
+						<ELFFieldNumber>0110</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			
+			<!-- Total State And Local Tax Amount -->
+			<xsd:element name="TotalStateAndLocalTaxAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Total state and local tax amount</Description>
+						<LineNumber>5d</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			
+			<!-- State And Local Tax Limitation Amount -->
+			<xsd:element name="StateAndLocalTaxLimitationAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>State and local tax limitation amount</Description>
+						<LineNumber>5e</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Other Taxes Type -->
+			<xsd:element name="OtherTaxesAmt" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Other taxes amount</Description>
+						<LineNumber>6</LineNumber>
+						<ELFFieldNumber>0140</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+				<xsd:complexType>
+					<xsd:simpleContent>
+						<xsd:extension base="USAmountType">
+							<xsd:attribute name="referenceDocumentId" type="IdListType"/>
+							<xsd:attribute name="referenceDocumentName" type="StringType" fixed="OtherDeductibleTaxStatement">
+								<xsd:annotation>
+									<xsd:documentation>
+										<ELFFieldNumber>0130</ELFFieldNumber>
+									</xsd:documentation>
+								</xsd:annotation>
+							</xsd:attribute>
+						</xsd:extension>
+					</xsd:simpleContent>
+				</xsd:complexType>
+			</xsd:element>
+
+			<!-- Total Taxes -->
+			<xsd:element name="TotalTaxesPaidAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Total Taxes</Description>
+						<LineNumber>7</LineNumber>
+						<ELFFieldNumber>0150</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Interest You Paid Section -->
+			
+			<!-- Home Mortgage Not Used Indicator -->
+			<xsd:element name="HomeMortgNotUsedInd" type="CheckboxType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Home mortgage not used indicator</Description>
+						<LineNumber>8</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			
+			<!-- Mortgage Interest to Financial Institutions -->
+			<xsd:element name="RptHomeMortgIntAndPointsAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Mortgage Interest to Financial Institutions</Description>
+						<LineNumber>8a</LineNumber>
+						<ELFFieldNumber>0160</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Mortgage Interest Amount not Reported on Form 1098 -->
+			<xsd:element name="Form1098HomeMortgIntNotRptAmt" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Total Indiv Mortgage Interest Amount</Description>
+						<LineNumber>8b</LineNumber>
+						<ELFFieldNumber>0195</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+				<xsd:complexType>
+					<xsd:simpleContent>
+						<xsd:extension base="USAmountType">
+							<xsd:attribute name="referenceDocumentId" type="IdListType"/>
+							<xsd:attribute name="referenceDocumentName" type="StringType" fixed="Form1098RecipientNameAndAddressStatement Form1098RecipientNameTINAndAddressStatement">
+								<xsd:annotation>
+									<xsd:documentation>
+										<ELFFieldNumber>0200</ELFFieldNumber>
+									</xsd:documentation>
+								</xsd:annotation>
+							</xsd:attribute>
+						</xsd:extension>
+					</xsd:simpleContent>
+				</xsd:complexType>				
+			</xsd:element>
+
+			<!-- Deductible Points -->
+			<xsd:element name="Form1098PointsNotReportedAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Deductible Points</Description>
+						<LineNumber>8c</LineNumber>
+						<ELFFieldNumber>0203</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			
+                        <!-- Reserved LineNumber 8d-->
+			
+			<!-- Total Home Mortgage Interest And Points Amount -->
+			<xsd:element name="TotalHomeMortgIntAndPointsAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Total home mortgage interest and points amount</Description>
+						<LineNumber>8e</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Investment Interest -->
+			<xsd:element name="InvestmentInterestAmt" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Investment Interest</Description>
+						<LineNumber>9</LineNumber>
+						<ELFFieldNumber>0207</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+				<xsd:complexType>
+					<xsd:simpleContent>
+						<xsd:extension base="USAmountType">
+							<xsd:attribute name="referenceDocumentId" type="IdListType"/>
+							<xsd:attribute name="referenceDocumentName" type="StringType" fixed="IRS4952">
+								<xsd:annotation>
+									<xsd:documentation>
+										<ELFFieldNumber>NL0217</ELFFieldNumber>
+									</xsd:documentation>
+								</xsd:annotation>
+							</xsd:attribute>
+						</xsd:extension>
+					</xsd:simpleContent>
+				</xsd:complexType>
+			</xsd:element>
+
+			<!-- Total Interest -->
+			<xsd:element name="TotalInterestPaidAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Total Interest</Description>
+						<LineNumber>10</LineNumber>
+						<ELFFieldNumber>0290</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Gifts to Charity Section -->
+			<!-- Gifts Cash/Check -->
+			<xsd:element name="GiftsByCashOrCheckAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Gifts Cash/Check</Description>
+						<LineNumber>11</LineNumber>
+						<ELFFieldNumber>0350</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Non-Cash, Check Contribution -->
+			<xsd:element name="OtherThanByCashOrCheckAmt" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Non-Cash, Check Contribution</Description>
+						<LineNumber>12</LineNumber>
+						<ELFFieldNumber>0360</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+				<xsd:complexType>
+					<xsd:simpleContent>
+						<xsd:extension base="USAmountType">
+							<xsd:attribute name="referenceDocumentId" type="IdListType"/>
+							<xsd:attribute name="referenceDocumentName" type="StringType" fixed="IRS8283">
+								<xsd:annotation>
+									<xsd:documentation>
+										<ELFFieldNumber>NL0365</ELFFieldNumber>
+									</xsd:documentation>
+								</xsd:annotation>
+							</xsd:attribute>
+						</xsd:extension>
+					</xsd:simpleContent>
+				</xsd:complexType>
+			</xsd:element>
+
+			<!-- Carryover Prior Year -->
+			<xsd:element name="CarryoverFromPriorYearAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Carryover Prior Year</Description>
+						<LineNumber>13</LineNumber>
+						<ELFFieldNumber>0370</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Total Contributions -->   
+			<xsd:element name="TotalCharitableContriAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Total Contributions</Description>
+						<LineNumber>14</LineNumber>
+						<ELFFieldNumber>0380</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Calculate Adjust Gross Income Minus Total Net Loss Amount -->
+			<xsd:element name="CalcAdjGroIncmMnsTotNetLossAmt" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Calculate Adjust Gross Income Minus Total Net Loss Amount</Description>
+						<LineNumber>15</LineNumber>
+						<ELFFieldNumber>0390</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+				<xsd:complexType>
+					<xsd:simpleContent>
+						<xsd:extension base="USAmountType">
+							<xsd:attribute name="referenceDocumentId" type="IdListType"/>
+							<xsd:attribute name="referenceDocumentName" type="StringType" fixed="IRS4684">
+								<xsd:annotation>
+									<xsd:documentation>
+										<ELFFieldNumber>NL0393</ELFFieldNumber>
+									</xsd:documentation>
+								</xsd:annotation>
+							</xsd:attribute>
+						</xsd:extension>
+					</xsd:simpleContent>
+				</xsd:complexType>
+			</xsd:element>
+
+			<!-- Other Miscellaneous Deductions Section -->
+			<!-- Other Miscellaneous Deductions -->
+			<xsd:element name="OtherMiscellaneousDedAmt" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Other Miscellaneous Deductions</Description>
+						<LineNumber>16</LineNumber>
+						<ELFFieldNumber>0495</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+				<xsd:complexType>
+					<xsd:simpleContent>
+						<xsd:extension base="USAmountType">
+							<xsd:attribute name="referenceDocumentId" type="IdListType"/>
+							<xsd:attribute name="referenceDocumentName" type="StringType" fixed="OtherMiscellaneousDeductionsStatement">
+								<xsd:annotation>
+									<xsd:documentation>
+										<ELFFieldNumber>0475</ELFFieldNumber>
+									</xsd:documentation>
+								</xsd:annotation>
+							</xsd:attribute>
+						</xsd:extension>
+					</xsd:simpleContent>
+				</xsd:complexType>
+			</xsd:element>
+
+			<!-- Total Itemized Deductions Section -->
+			<!-- Total Itemized Deductions -->
+			<xsd:element name="TotalItemizedDeductionsAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Total Itemized Deductions</Description>
+						<LineNumber>17</LineNumber>
+						<ELFFieldNumber>0520</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Itemize Deductions Less Than Standard Deduction -->
+			<xsd:element name="ItmzdDedLessThanStdDedInd" type="CheckboxType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Itemize Deductions Less Than Standard Deduction</Description>
+						<LineNumber>18</LineNumber>
+						<ELFFieldNumber>0530</ELFFieldNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+		</xsd:sequence>
+	</xsd:complexType>
+
+</xsd:schema>

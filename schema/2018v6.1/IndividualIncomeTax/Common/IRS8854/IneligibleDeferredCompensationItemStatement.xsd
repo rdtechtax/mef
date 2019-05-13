@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema targetNamespace="http://www.irs.gov/efile" xmlns="http://www.irs.gov/efile" xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.0">
+
+	<xsd:annotation>
+		<xsd:documentation>
+			<Description>IRS e-file U.S. Nonresident Alien Income Tax Schema - Ineligible Deferred Compensation Item Statement</Description>
+			<Purpose>Optional Statement - If you have more than one ineligible deferred compensation item, you must attach a statement to the form that separately identifies each ineligible deferred compensation item and provides the present value of such ineligible deferred compensation item as of the day before your expatriation date.</Purpose>
+			<TaxYear>2018</TaxYear>
+			<MaturityLevel>Final Release</MaturityLevel>
+			<ReleaseDate>February 13, 2019</ReleaseDate>
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:include schemaLocation="../../../Common/efileTypes.xsd" />
+
+	<!-- ============================================================= -->
+	<!-- ====== Ineligible Deferred Compensation Item Statement ====== -->
+	<!-- ============================================================= -->
+
+	<xsd:element name="InlgblDeferredCompItemStmt">
+		<xsd:annotation>
+			<xsd:documentation>Ineligible Deferred Compensation Item Statement</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:complexContent>
+				<xsd:extension base="InlgblDeferredCompItemStmtType">
+					<xsd:attributeGroup ref="DocumentAttributes">
+						<xsd:annotation>
+							<xsd:documentation>Common return document attributes</xsd:documentation>
+						</xsd:annotation>
+					</xsd:attributeGroup>
+					<xsd:attribute name="documentName" type="TextType" fixed="IneligibleDeferredCompensationItemStatement">
+						<xsd:annotation>
+							<xsd:documentation>IRS internal use only. To avoid error in the return, do not include the attribute name or value.</xsd:documentation>
+						</xsd:annotation>
+					</xsd:attribute>
+				</xsd:extension>
+			</xsd:complexContent>
+		</xsd:complexType>
+	</xsd:element>
+
+	<xsd:complexType name="InlgblDeferredCompItemStmtType">
+		<xsd:annotation>
+			<xsd:documentation>Ineligible Deferred Compensation Item Statement</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<!-- Ineligible Deferred Compensation Item -->
+			<xsd:element name="InlgblDeferredCompItemGrp" minOccurs="0" maxOccurs="1000">
+				<xsd:complexType>
+					<xsd:sequence>
+						<!-- Description -->
+						<xsd:element name="Desc" type="LineExplanationType"/>
+						<!-- Amount -->
+						<xsd:element name="Amt" type="USAmountType"/>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+
+</xsd:schema>

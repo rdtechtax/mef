@@ -1,0 +1,287 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<xsd:schema targetNamespace="http://www.irs.gov/efile" xmlns="http://www.irs.gov/efile" xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.0">
+
+	<xsd:annotation>
+		<xsd:documentation>
+			<Description>IRS e-file Schema - IRS Form 8965 Health Coverage Exemptions</Description>
+			<TaxYear>2018</TaxYear>
+			<MaturityLevel>Final Release</MaturityLevel>
+			<ReleaseDate>February 13, 2019</ReleaseDate>
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:include schemaLocation="../../../Common/efileTypes.xsd"/>
+
+	<!--==================================================================-->
+	<!--========================== IRS Form 8965 =========================-->
+	<!--==================================================================-->
+
+	<xsd:element name="IRS8965">
+		<xsd:annotation>
+			<xsd:documentation>IRS Form 8965</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:complexContent>
+				<xsd:extension base="IRS8965Type">
+					<xsd:attributeGroup ref="DocumentAttributes">
+						<xsd:annotation>
+							<xsd:documentation>Common return document attributes</xsd:documentation>
+						</xsd:annotation>
+					</xsd:attributeGroup>
+					<xsd:attribute name="documentName" type="xsd:string" fixed="IRS8965"/>
+				</xsd:extension>
+			</xsd:complexContent>
+		</xsd:complexType>
+	</xsd:element>
+
+	<xsd:complexType name="IRS8965Type">
+		<xsd:annotation>
+			<xsd:documentation>Content model for Form 8965</xsd:documentation>
+		</xsd:annotation>
+
+		<xsd:sequence>
+
+			<!--Part I Marketplace-Granted Coverage Exemptions for Individuals -->
+
+			<xsd:element name="ObtndExemptCvrTaxHsldGrp" minOccurs="0" maxOccurs="100">
+				<xsd:complexType>
+					<xsd:sequence>
+
+						<!--Person Name -->
+						<xsd:element name="PersonNm" type="PersonNameType">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Person Name</Description>
+									<LineNumber>Lines 1 to 6, Column (a)</LineNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+
+						<!-- SSN -->
+						<xsd:element name="SSN" type="SSNType" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>SSN</Description>
+									<LineNumber>Lines 1 to 6, Column (b)</LineNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						
+						<!--Exemption Certificate Number -->
+						<xsd:element name="ExemptionCertificateNum">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Exemption Certificate Number</Description>
+									<LineNumber>Lines 1 to 6, Column (c)</LineNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+							<xsd:simpleType>
+								<xsd:restriction base="AlphaNumericType">
+									<xsd:minLength value="1"/>
+									<xsd:maxLength value="7"/>
+								</xsd:restriction>
+							</xsd:simpleType>
+						</xsd:element>
+			
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+
+			<!--Part II Coverage Exemptions for Your Household Claimed on Your Return -->
+
+			<!-- Income Below Filing Threshold Indicator -->
+			<xsd:element name="IncmBelowFlngThresholdInd" type="CheckboxType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Income Below Filing Threshold Indicator</Description>
+						<LineNumber>Line 7</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!--Part III Coverage Exemptions for Individuals Claimed on Your Return -->
+
+			<xsd:element name="RequestExemptCvrTaxHsldGrp" minOccurs="0" maxOccurs="100">
+				<xsd:complexType>
+					<xsd:sequence>
+			
+						<!--Person Name -->
+						<xsd:element name="PersonNm" type="PersonNameType">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Person Name</Description>
+									<LineNumber>Lines 8 to 13, Column (a)</LineNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+
+						<!-- SSN -->
+						<xsd:element name="SSN" type="SSNType" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>SSN</Description>
+									<LineNumber>Lines 8 to 13, Column (b)</LineNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+
+						<!--Exemption Reason Code -->
+						<xsd:element name="ExemptionReasonCd">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Exemption Type</Description>
+									<LineNumber>Lines 8 to 13, Column (c)</LineNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+							<xsd:simpleType>
+								<xsd:restriction base="StringType">
+									<xsd:enumeration value="A"/>
+									<xsd:enumeration value="B"/>
+									<xsd:enumeration value="C"/>
+									<xsd:enumeration value="D"/>
+									<xsd:enumeration value="E"/>
+									<xsd:enumeration value="F"/>
+									<xsd:enumeration value="G"/>
+									<xsd:enumeration value="H"/>
+								</xsd:restriction>
+							</xsd:simpleType>
+						</xsd:element>
+
+						<!-- choice of FullYearInd or MonthIndicatorGrp -->
+						<xsd:choice>
+
+							<!--Full Year Indicator -->
+							<xsd:element name="FullYearInd" type="CheckboxType">
+								<xsd:annotation>
+									<xsd:documentation>
+										<Description>Full Year Indicator</Description>
+										<LineNumber>Lines 8 to 13, Column (d)</LineNumber>
+									</xsd:documentation>
+								</xsd:annotation>
+							</xsd:element>
+
+							<xsd:element name="MonthIndicatorGrp">
+								<xsd:complexType>
+									<xsd:sequence>
+										<!--January Indicator -->
+										<xsd:element name="JanuaryInd" type="CheckboxType" minOccurs="0">
+											<xsd:annotation>
+												<xsd:documentation>
+													<Description>January Indicator</Description>
+													<LineNumber>Lines 8 to 13, Column (e)</LineNumber>
+												</xsd:documentation>
+											</xsd:annotation>
+										</xsd:element>	
+										<!--February Indicator -->
+										<xsd:element name="FebruaryInd" type="CheckboxType" minOccurs="0">
+											<xsd:annotation>
+												<xsd:documentation>
+													<Description>February Indicator</Description>
+													<LineNumber>Lines 8 to 13, Column (f)</LineNumber>
+												</xsd:documentation>
+											</xsd:annotation>
+										</xsd:element>
+										<!--March Indicator -->
+										<xsd:element name="MarchInd" type="CheckboxType" minOccurs="0">
+											<xsd:annotation>
+												<xsd:documentation>
+													<Description>March Indicator</Description>
+													<LineNumber>Lines 8 to 13, Column (g)</LineNumber>
+												</xsd:documentation>
+											</xsd:annotation>
+										</xsd:element>
+										<!--April Indicator -->
+										<xsd:element name="AprilInd" type="CheckboxType" minOccurs="0">
+											<xsd:annotation>
+												<xsd:documentation>
+													<Description>April Indicator</Description>
+													<LineNumber>Lines 8 to 13, Column (h)</LineNumber>
+												</xsd:documentation>
+											</xsd:annotation>
+										</xsd:element>
+										<!--May Indicator -->
+										<xsd:element name="MayInd" type="CheckboxType" minOccurs="0">
+											<xsd:annotation>
+												<xsd:documentation>
+													<Description>May Indicator</Description>
+													<LineNumber>Lines 8 to 13, Column (i)</LineNumber>
+												</xsd:documentation>
+											</xsd:annotation>
+										</xsd:element>
+										<!--June Indicator -->
+										<xsd:element name="JuneInd" type="CheckboxType" minOccurs="0">
+											<xsd:annotation>
+												<xsd:documentation>
+													<Description>June Indicator</Description>
+													<LineNumber>Lines 8 to 13, Column (j)</LineNumber>
+												</xsd:documentation>
+											</xsd:annotation>
+										</xsd:element>
+										<!--July Indicator -->
+										<xsd:element name="JulyInd" type="CheckboxType" minOccurs="0">
+											<xsd:annotation>
+												<xsd:documentation>
+													<Description>July Indicator</Description>
+													<LineNumber>Lines 8 to 13, Column (k)</LineNumber>
+												</xsd:documentation>
+											</xsd:annotation>
+										</xsd:element>
+										<!--August Indicator -->
+										<xsd:element name="AugustInd" type="CheckboxType" minOccurs="0">
+											<xsd:annotation>
+												<xsd:documentation>
+													<Description>August Indicator</Description>
+													<LineNumber>Lines 8 to 13, Column (l)</LineNumber>
+												</xsd:documentation>
+											</xsd:annotation>
+										</xsd:element>
+										<!--September Indicator -->
+										<xsd:element name="SeptemberInd" type="CheckboxType" minOccurs="0">
+											<xsd:annotation>
+												<xsd:documentation>
+													<Description>September Indicator</Description>
+													<LineNumber>Lines 8 to 13, Column (m)</LineNumber>
+												</xsd:documentation>
+											</xsd:annotation>
+										</xsd:element>
+										<!--October Indicator -->
+										<xsd:element name="OctoberInd" type="CheckboxType" minOccurs="0">
+											<xsd:annotation>
+												<xsd:documentation>
+													<Description>October Indicator</Description>
+													<LineNumber>Lines 8 to 13, Column (n)</LineNumber>
+												</xsd:documentation>
+											</xsd:annotation>
+										</xsd:element>
+										<!--November Indicator -->
+										<xsd:element name="NovemberInd" type="CheckboxType" minOccurs="0">
+											<xsd:annotation>
+												<xsd:documentation>
+													<Description>November Indicator</Description>
+													<LineNumber>Lines 8 to 13, Column (o)</LineNumber>
+												</xsd:documentation>
+											</xsd:annotation>
+										</xsd:element>
+										<!--December Indicator -->
+										<xsd:element name="DecemberInd" type="CheckboxType" minOccurs="0">
+											<xsd:annotation>
+												<xsd:documentation>
+													<Description>December Indicator</Description>
+													<LineNumber>Lines 8 to 13, Column (p)</LineNumber>
+												</xsd:documentation>
+											</xsd:annotation>
+										</xsd:element>
+									</xsd:sequence>
+								</xsd:complexType>
+							</xsd:element>
+
+						</xsd:choice>
+						
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			
+		</xsd:sequence>
+	</xsd:complexType>
+	
+</xsd:schema>

@@ -1,0 +1,511 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.irs.gov/efile" targetNamespace="http://www.irs.gov/efile" elementFormDefault="qualified" attributeFormDefault="unqualified">
+
+	<xsd:annotation>
+		<xsd:documentation>
+			<Description>IRS e-file Individual Income Tax Schema - IRS Form 8863 Education Credits (American Opportunity and Lifetime Learning Credits)</Description>
+			<TaxYear>2018</TaxYear>
+			<MaturityLevel>Final Release</MaturityLevel>
+			<ReleaseDate>February 13, 2019</ReleaseDate>
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:include schemaLocation="../../../Common/efileTypes.xsd"/>
+
+	<!-- ================================================================= -->
+	<!-- ======================= IRS Form 8863 =========================== -->
+	<!-- ================================================================= -->
+
+	<xsd:element name="IRS8863">
+		<xsd:annotation>
+			<xsd:documentation>IRS Form 8863</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:complexContent>
+				<xsd:extension base="IRS8863Type">
+					<xsd:attributeGroup ref="DocumentAttributes">
+						<xsd:annotation>
+							<xsd:documentation>Common return document attributes</xsd:documentation>
+						</xsd:annotation>
+					</xsd:attributeGroup>
+					<xsd:attribute name="documentName" type="xsd:string" fixed="IRS8863">
+						<xsd:annotation>
+							<xsd:documentation>IRS internal use only. To avoid error in the return, do not include the attribute name or value.</xsd:documentation>
+						</xsd:annotation>
+					</xsd:attribute>
+				</xsd:extension>
+			</xsd:complexContent>
+		</xsd:complexType>
+	</xsd:element>
+	
+	<xsd:complexType name="IRS8863Type">
+		<xsd:annotation>
+			<xsd:documentation>Content model for IRS Form 8863</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+
+			<!-- ========= PART I - Refundable American Opportunity Credit ========= -->		
+
+			<!-- Refundable American Opportunity Credit Group-->
+			<xsd:element name="RefundableAmerOppCreditGroup" minOccurs="0">
+				<xsd:complexType>
+					<xsd:sequence>
+
+						<!-- Tentative American Opportunity Credit -->
+						<xsd:element name="TentativeAmerOppCreditAmt" type="USAmountType" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Tentative American Opportunity Credit</Description>
+									<LineNumber>1</LineNumber>
+									<ELFFieldNumber>0211</ELFFieldNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+
+						<!-- Enter Specified Amount For Filing Status Amount -->
+						<xsd:element name="EnterSpecifiedAmountForFSAmt" type="USAmountType" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Enter Specified Amount For Filing Status Amount</Description>
+									<LineNumber>2</LineNumber>
+									<ELFFieldNumber>0490</ELFFieldNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+
+						<!-- Modified AGI Amount -->
+						<xsd:element name="ModifiedAGIAmt" type="USAmountType" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Modified AGI Amount</Description>
+									<LineNumber>3</LineNumber>
+									<ELFFieldNumber>0500</ELFFieldNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						
+						<!-- Subtract AGI From Amount -->
+						<xsd:element name="SubtractAGIFromAmt" type="USAmountType" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Subtract AGI From Amount</Description>
+									<LineNumber>4</LineNumber>
+									<ELFFieldNumber>0510</ELFFieldNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+
+						<!-- Specified Amount Per Filing Status Amount -->
+						<xsd:element name="SpecifiedAmtPerFSAmt" type="USAmountType" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Specified Amount Per Filing Status Amount</Description>
+									<LineNumber>5</LineNumber>
+									<ELFFieldNumber>0515</ELFFieldNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+			
+						<!-- Calculated Tentative Education Ratio -->
+						<xsd:element name="CalcTentativeEducationRt" type="RatioType" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Calculated Tentative Education Ratio</Description>
+									<LineNumber>6</LineNumber>
+									<ELFFieldNumber>NL</ELFFieldNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						
+						<!-- Refundable American Opportunity Credit Under Age 24 Indicator -->
+						<xsd:element name="RefundableAmerOppCrUnder24Ind" type="CheckboxType" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Refundable American Opportunity Credit Under Age 24 Indicator</Description>
+									<LineNumber>7</LineNumber>
+									<ELFFieldNumber>0529</ELFFieldNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+
+						<!-- Calculated Tentative Education Credit Amount -->
+						<xsd:element name="CalcTentativeEducationCrAmt" type="USAmountType" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Calculated Tentative Education Credit Amount</Description>
+									<LineNumber>7</LineNumber>
+									<ELFFieldNumber>0529</ELFFieldNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+			
+						<!-- Refundable American Opportunity Credit Amount -->
+						<xsd:element name="RefundableAmerOppCreditAmt" type="USAmountType" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Refundable American Opportunity Credit Amount</Description>
+									<LineNumber>8</LineNumber>
+									<ELFFieldNumber>0540</ELFFieldNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+
+			<!-- ========= PART II - Nonrefundable Education Credits ========= -->
+
+			<!-- Nonrefundable Education Credits Group-->
+			<xsd:element name="NonrefundableEducationCrGroup" minOccurs="0">
+				<xsd:complexType>
+					<xsd:sequence>
+
+						<!-- Tentative Education Credit Less Refundable Credit Amount -->
+						<xsd:element name="TentativeEducCrLessRfdblCrAmt" type="USAmountType" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Tentative Education Credit Less Refundable Credit Amount</Description>
+									<LineNumber>9</LineNumber>
+									<ELFFieldNumber>0550</ELFFieldNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						
+						<!-- Total Qualified Expenses Amount -->
+						<xsd:element name="TotalQualifiedExpensesAmt" type="USAmountType" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Total Qualified Expenses Amount</Description>
+									<LineNumber>10</LineNumber>
+									<ELFFieldNumber>0450</ELFFieldNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+			
+						<!-- Smaller Of Total Expenses Or Specified Amount -->
+						<xsd:element name="SmllrOfTotExpnssOrSpcfdAmt" type="USAmountType" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Smaller Of Total Expenses Or Specified Amount</Description>
+									<LineNumber>11</LineNumber>
+									<ELFFieldNumber>0460</ELFFieldNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+			
+						<!-- Tentative Lifetime Learning Credit Amount -->
+						<xsd:element name="TentLifetimeLearningCreditAmt" type="USAmountType" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Tentative Lifetime Learning Credit Amount</Description>
+									<LineNumber>12</LineNumber>
+									<ELFFieldNumber>0470</ELFFieldNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+
+						<!-- Enter Specified Amount For Filing Status Amount -->
+						<xsd:element name="EnterSpecifiedAmountForFSAmt" type="USAmountType" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Enter Specified Amount For Filing Status Amount</Description>
+									<LineNumber>13</LineNumber>
+									<ELFFieldNumber>0570</ELFFieldNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+
+						<!-- Modified AGI Amount -->
+						<xsd:element name="ModifiedAGIAmt" type="USAmountType" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Modified AGI Amount</Description>
+									<LineNumber>14</LineNumber>
+									<ELFFieldNumber>0580</ELFFieldNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+				
+						<!-- Subtract AGI From Amount -->
+						<xsd:element name="SubtractAGIFromAmt" type="USAmountType" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Subtract AGI From Amount</Description>
+									<LineNumber>15</LineNumber>
+									<ELFFieldNumber>0590</ELFFieldNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+	
+						<!-- Specified Amount Per Filing Status Amount -->
+						<xsd:element name="SpecifiedAmtPerFSAmt" type="USAmountType" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Specified Amount Per Filing Status Amount</Description>
+									<LineNumber>16</LineNumber>
+									<ELFFieldNumber>0600</ELFFieldNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+				
+						<!-- Calculated Tentative Education Ratio -->
+						<xsd:element name="CalcTentativeEducationRt" type="RatioType" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Calculated Tentative Education Ratio</Description>
+									<LineNumber>17</LineNumber>
+									<ELFFieldNumber>0610</ELFFieldNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+	
+						<!-- Calculated Tentative Education Credit Amount -->
+						<xsd:element name="CalcTentativeEducationCrAmt" type="USAmountType" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Calculated Tentative Education Credit Amount</Description>
+									<LineNumber>18</LineNumber>
+									<ELFFieldNumber>0620</ELFFieldNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+			
+						<!-- Nonrefundable Education Credit Amount -->
+						<xsd:element name="NonrefundableEducationCrAmt" type="USAmountNNType" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Nonrefundable Education Credit Amount</Description>
+									<LineNumber>19</LineNumber>
+									<ELFFieldNumber>0670</ELFFieldNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+	
+			<!-- ========= PART III - Student and Educational Institution Information ========= -->
+
+			<xsd:element name="StudentAndEducationalInstnGrp" maxOccurs="25">
+				<xsd:complexType>
+					<xsd:sequence>
+					
+						<!--  Student's Full Name -->
+						<xsd:element name="StudentName" type="PersonFullNameType">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Student's Full Name</Description>
+									<LineNumber>20</LineNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+
+						<!-- Student's Name Control -->
+						<xsd:element name="StudentNameControlTxt" type="PersonNameControlType">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Student's Name Control</Description>
+									<LineNumber>20</LineNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+
+						<!-- Student's SSN -->
+						<xsd:element name="StudentSSN" type="SSNType">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Student's SSN</Description>
+									<LineNumber>21</LineNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+
+						<!-- Educational Institution Group, Lines 22a(1) - 22a(4) ... -->
+						<xsd:element name="EducationalInstitutionGroup" type="EducationalInstitutionGrpType" maxOccurs="unbounded"/>
+
+						<!-- Prior Year Credit Claimed Indicator -->
+						<xsd:element name="PriorYearCreditClaimedInd" type="BooleanType">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Prior Year Credit Claimed Indicator</Description>
+									<LineNumber>23</LineNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+
+						<!-- Academic Period Eligible Student Indicator -->
+						<xsd:element name="AcademicPdEligibleStudentInd" type="BooleanType" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Academic Period Eligible Student Indicator</Description>
+									<LineNumber>24</LineNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+
+						<!-- Post Secondary Education Indicator -->
+						<xsd:element name="PostSecondaryEducationInd" type="BooleanType" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Post Secondary Education Indicator</Description>
+									<LineNumber>25</LineNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+
+						<!-- Drug Felony Conviction Indicator -->
+						<xsd:element name="DrugFelonyConvictionInd" type="BooleanType" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Drug Felony Conviction Indicator</Description>
+									<LineNumber>26</LineNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+							
+						<xsd:choice>
+
+							<!-- Choice of American Opportunity Credit (Lines 27-30) -->
+							<xsd:sequence>
+
+								<!-- American Opportunity Qualified Expenses Amount -->
+								<xsd:element name="AmerOppQualifiedExpensesAmt" type="USAmountType" minOccurs="0">
+									<xsd:annotation>
+										<xsd:documentation>
+											<Description>American Opportunity Qualified Expenses Amount</Description>
+											<LineNumber>27</LineNumber>
+											<ELFFieldNumber>0040</ELFFieldNumber>
+										</xsd:documentation>
+									</xsd:annotation>
+								</xsd:element>
+
+								<!-- American OpportunityQualified Expenses Less Allowable Amount -->
+								<xsd:element name="AmerOppQlfyExpnssLessAllwblAmt" type="USAmountType" minOccurs="0">
+									<xsd:annotation>
+										<xsd:documentation>
+											<Description>American Opportunity Qualified Expenses Less Allowable Amount</Description>
+											<LineNumber>28</LineNumber>
+											<ELFFieldNumber>0740</ELFFieldNumber>
+										</xsd:documentation>
+									</xsd:annotation>
+								</xsd:element>
+
+								<!-- American Opportunity Allowable Expenses Times Percent Amount -->
+								<xsd:element name="AmerOppAllwblExpnssTimesPctAmt" type="USAmountType" minOccurs="0">
+									<xsd:annotation>
+										<xsd:documentation>
+											<Description>American Opportunity Allowable Expenses Times Percent Amount</Description>
+											<LineNumber>29</LineNumber>
+											<ELFFieldNumber>0060</ELFFieldNumber>
+										</xsd:documentation>
+									</xsd:annotation>
+								</xsd:element>
+
+								<!-- American Opportunity Credit Net Calculated Expenses Amount -->
+								<xsd:element name="AmerOppCreditNetCalcExpnssAmt" type="USAmountType">
+									<xsd:annotation>
+										<xsd:documentation>
+											<Description>American Opportunity Credit Net Calculated Expenses Amount</Description>
+											<LineNumber>30</LineNumber>
+											<ELFFieldNumber>0070</ELFFieldNumber>
+										</xsd:documentation>
+									</xsd:annotation>
+								</xsd:element>
+
+							</xsd:sequence>
+
+							<!-- Choice of Lifetime Learning Credit (Line 31) -->
+							<!-- Lifetime Qualified Expenses Amount -->
+							<xsd:element name="LifetimeQualifiedExpensesAmt" type="USAmountType">
+								<xsd:annotation>
+									<xsd:documentation>
+										<Description>Lifetime Qualified Expenses Amount</Description>
+										<LineNumber>31</LineNumber>
+										<ELFFieldNumber>0280</ELFFieldNumber>
+									</xsd:documentation>
+								</xsd:annotation>
+							</xsd:element>
+
+						</xsd:choice>
+
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+						 
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<!-- ==================================================================== -->
+	<!-- =========== Local types, types for repeating groups etc. =========== -->
+	<!-- ==================================================================== -->
+	
+	<xsd:complexType name="EducationalInstitutionGrpType">
+		<xsd:sequence>
+
+			<!-- Institution Name -->
+			<xsd:element name="InstitutionName" type="BusinessNameType">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Institution Name</Description>
+						<LineNumber>22a 22b ...</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<xsd:choice>
+				<!-- Institution US Address -->
+				<xsd:element name="USAddress" type="USAddressType">
+					<xsd:annotation>
+						<xsd:documentation>
+							<Description>Institution US Address</Description>
+							<LineNumber>22a(1) 22b(1) ...</LineNumber>
+						</xsd:documentation>
+					</xsd:annotation>
+				</xsd:element>
+				<!-- Institution Foreign Address -->
+				<xsd:element name="ForeignAddress" type="ForeignAddressType">
+					<xsd:annotation>
+						<xsd:documentation>
+							<Description>Institution Foreign Address</Description>
+							<LineNumber>22a(1) 22b(1) ...</LineNumber>
+						</xsd:documentation>
+					</xsd:annotation>
+				</xsd:element>
+			</xsd:choice>
+
+			<!-- Current Year Form 1098-T Received Indicator -->
+			<xsd:element name="CurrentYear1098TReceivedInd" type="BooleanType">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Current Year Form 1098-T Received Indicator</Description>
+						<LineNumber>22a(2) 22b(2) ...</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Prior Year Form 1098-T Received Indicator -->
+			<xsd:element name="PriorYear1098TReceivedInd" type="BooleanType">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Prior Year Form 1098-T Received Indicator</Description>
+						<LineNumber>22a(3) 22b(3) ...</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<!-- Institution EIN -->
+			<xsd:element name="EIN" type="EINType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Institution EIN</Description>
+						<LineNumber>22a(4) 22b(4) ...</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+		</xsd:sequence>
+	</xsd:complexType>
+	
+</xsd:schema>

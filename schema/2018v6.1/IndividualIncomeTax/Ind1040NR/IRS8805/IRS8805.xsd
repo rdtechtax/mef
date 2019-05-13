@@ -1,0 +1,461 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.irs.gov/efile" targetNamespace="http://www.irs.gov/efile" elementFormDefault="qualified" attributeFormDefault="unqualified">
+
+	<xsd:annotation>
+		<xsd:documentation>
+			<Description>IRS e-file U.S. Nonresident Alien Income Tax Schema - IRS Form 8805 Foreign Partner's Information Statement of Section 1446 Withholding Tax</Description>
+			<TaxYear>2018</TaxYear>
+			<MaturityLevel>Final Release</MaturityLevel>
+			<ReleaseDate>February 13, 2019</ReleaseDate>
+		</xsd:documentation>
+	</xsd:annotation>
+	
+	<xsd:include schemaLocation="../../../Common/efileTypes.xsd"/>
+	
+	<!-- ====================================================================== -->
+	<!-- ============================ IRS Form 8805 =========================== -->
+	<!-- ====================================================================== -->
+	
+	<xsd:element name="IRS8805">
+		<xsd:annotation>
+			<xsd:documentation>IRS Form 8805</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:complexContent>
+				<xsd:extension base="IRS8805Type">
+					<xsd:attributeGroup ref="DocumentAttributes">
+						<xsd:annotation>
+							<xsd:documentation>Common return document attributes</xsd:documentation>
+						</xsd:annotation>
+					</xsd:attributeGroup>
+					<xsd:attribute name="documentName" type="xsd:string" fixed="IRS8805">
+						<xsd:annotation>
+							<xsd:documentation>IRS internal use only. To avoid error in the return do not include the attribute name or value.</xsd:documentation>
+						</xsd:annotation>
+					</xsd:attribute>
+					<xsd:attribute name="referenceDocumentId" type="IdListType">
+						<xsd:annotation>
+							<xsd:documentation>List of document ID's of forms, schedules, supporting info. etc. attached to this form</xsd:documentation>
+						</xsd:annotation>
+					</xsd:attribute>
+					<xsd:attribute name="referenceDocumentName" type="TextType" fixed="GeneralDependencySmall"/>
+				</xsd:extension>
+			</xsd:complexContent>
+		</xsd:complexType>
+	</xsd:element>
+	
+	<xsd:complexType name="IRS8805Type">
+		<xsd:annotation>
+			<xsd:documentation>Content model for Form 8805</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+		
+			<!-- Tax Period Begin Date -->
+			<xsd:element name="TaxPeriodBeginDt" type="DateType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Tax period begin date</Description>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			
+			<!-- Tax Period End Date -->
+			<xsd:element name="TaxPeriodEndDt" type="DateType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Tax period end date</Description>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			
+			<!-- Foreign Partner's Section 1446 Withholding Tax -->
+			<xsd:element name="Sect1446WTForeignPartnerGrp">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:choice>
+							<!-- Partner Name -->
+							<xsd:element name="PartnerName" type="BusinessNameType">
+								<xsd:annotation>
+									<xsd:documentation>
+										<Description>Partner name</Description>
+										<LineNumber>1a</LineNumber>
+									</xsd:documentation>
+								</xsd:annotation>
+							</xsd:element>
+							<!-- Partner Person Name -->
+							<xsd:element name="PartnerPersonNm" type="PersonNameType">
+								<xsd:annotation>
+									<xsd:documentation>
+										<Description>Partner person name</Description>
+										<LineNumber>1a</LineNumber>
+									</xsd:documentation>
+								</xsd:annotation>
+							</xsd:element>
+						</xsd:choice>
+						<xsd:choice>
+							<!-- Partner SSN -->
+							<xsd:element name="PartnerSSN" type="SSNType">
+								<xsd:annotation>
+									<xsd:documentation>
+										<Description>Partner SSN</Description>
+										<LineNumber>1b</LineNumber>
+									</xsd:documentation>
+								</xsd:annotation>
+							</xsd:element>
+							<!-- Partner EIN -->
+							<xsd:element name="PartnerEIN" type="EINType">
+								<xsd:annotation>
+									<xsd:documentation>
+										<Description>Partner EIN</Description>
+										<LineNumber>1b</LineNumber>
+									</xsd:documentation>
+								</xsd:annotation>
+							</xsd:element>
+							<!-- Missing SSN/EIN Reason Code -->
+							<xsd:element name="MissingSSNEINReasonCd">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Missing SSN/EIN reason code</Description>
+									<LineNumber>1b</LineNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+							<xsd:simpleType>
+								<xsd:restriction base="TextType">
+									<xsd:enumeration value="APPLD FOR"/>
+									<xsd:enumeration value="FOREIGNUS"/>
+								</xsd:restriction>
+							</xsd:simpleType>
+							</xsd:element>
+						</xsd:choice>
+						<xsd:choice>
+							<!-- Partner U.S. Address -->
+							<xsd:element name="PartnerUSAddress" type="USAddressType">
+								<xsd:annotation>
+									<xsd:documentation>
+										<Description>Partner U.S. address</Description>
+										<LineNumber>1c</LineNumber>
+									</xsd:documentation>
+								</xsd:annotation>
+							</xsd:element>
+							<!-- Partner Foreign Address -->
+							<xsd:element name="PartnerForeignAddress" type="ForeignAddressType">
+								<xsd:annotation>
+									<xsd:documentation>
+										<Description>Partner foreign address</Description>
+										<LineNumber>1c</LineNumber>
+									</xsd:documentation>
+								</xsd:annotation>
+							</xsd:element>
+						</xsd:choice>
+						
+						<!-- Account Number -->
+						<xsd:element name="AccountNum" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Account number</Description>
+									<LineNumber>2</LineNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+							<xsd:simpleType>
+								<xsd:restriction base="TextType">
+									<xsd:maxLength value="35"/>
+								</xsd:restriction>
+							</xsd:simpleType>
+						</xsd:element>
+						
+						<!-- Partner Type Code -->
+						<xsd:element name="PartnerTypeCd" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Partner type code</Description>
+									<LineNumber>3</LineNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+							<xsd:simpleType>
+								<xsd:restriction base="TextType">
+									<xsd:enumeration value="INDIVIDUAL"/>
+									<xsd:enumeration value="CORPORATION"/>
+									<xsd:enumeration value="PARTNERSHIP"/>
+									<xsd:enumeration value="TRUST"/>
+									<xsd:enumeration value="ESTATE"/>
+								</xsd:restriction>
+							</xsd:simpleType>
+						</xsd:element>
+						
+						<!-- Foreign Country or U.S. Possession Code -->
+						<xsd:element name="ForeignCountryOrUSPossessionCd" type="AllCountriesType" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Foreign country or U.S. possession code</Description>
+									<LineNumber>4</LineNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			
+			<!-- Partnership Name-->
+			<xsd:element name="PartnershipName" type="BusinessNameType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Partnership name</Description>
+						<LineNumber>5a</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			
+			<xsd:choice>
+				<!-- Partnership EIN -->
+				<xsd:element name="PartnershipEIN" type="EINType">
+					<xsd:annotation>
+						<xsd:documentation>
+							<Description>Partnership EIN</Description>
+							<LineNumber>5b</LineNumber>
+						</xsd:documentation>
+					</xsd:annotation>
+				</xsd:element>
+				<!-- Partnership Missing EIN Reason Code -->
+				<xsd:element name="PartnershipMissingEINReasonCd">
+					<xsd:annotation>
+						<xsd:documentation>
+							<Description>Partnership missing EIN reason code</Description>
+							<LineNumber>5b</LineNumber>
+						</xsd:documentation>
+					</xsd:annotation>
+					<xsd:simpleType>
+						<xsd:restriction base="TextType">
+							<xsd:enumeration value="APPLD FOR"/>
+							<xsd:enumeration value="FOREIGNUS"/>
+						</xsd:restriction>
+					</xsd:simpleType>
+				</xsd:element>
+			</xsd:choice>
+			
+			<xsd:choice>
+				<!-- Partnership U.S. Address -->
+				<xsd:element name="PartnershipUSAddress" type="USAddressType">
+					<xsd:annotation>
+						<xsd:documentation>
+							<Description>Partnership U.S. address</Description>
+							<LineNumber>5c</LineNumber>
+						</xsd:documentation>
+					</xsd:annotation>
+				</xsd:element>
+				<!-- Partnership Foreign Address -->
+				<xsd:element name="PartnershipForeignAddress" type="ForeignAddressType">
+					<xsd:annotation>
+						<xsd:documentation>
+							<Description>Partnership foreign address</Description>
+							<LineNumber>5c</LineNumber>
+						</xsd:documentation>
+					</xsd:annotation>
+				</xsd:element>
+			</xsd:choice>
+			
+			<xsd:choice>
+				<!-- Same As Above Code -->
+				<xsd:element name="SameAsAboveCd" minOccurs="0">
+					<xsd:annotation>
+						<xsd:documentation>
+							<Description>Same as above code</Description>
+							<LineNumber>6</LineNumber>
+						</xsd:documentation>
+					</xsd:annotation>
+					<xsd:simpleType>
+						<xsd:restriction base="TextType">
+							<xsd:enumeration value="SAME"/>
+						</xsd:restriction>
+					</xsd:simpleType>
+				</xsd:element>
+				<!-- Section 1446 Withholding Agent -->
+				<xsd:element name="Section1446WithholdingAgentGrp" minOccurs="0">
+					<xsd:complexType>
+						<xsd:sequence>
+							<!-- Business Name -->
+							<xsd:element name="BusinessName" type="BusinessNameType">
+								<xsd:annotation>
+									<xsd:documentation>
+										<Description>Business name</Description>
+										<LineNumber>6</LineNumber>
+									</xsd:documentation>
+								</xsd:annotation>
+							</xsd:element>
+							<xsd:choice>
+								<!-- EIN -->
+								<xsd:element name="EIN" type="EINType">
+									<xsd:annotation>
+										<xsd:documentation>
+											<Description>EIN</Description>
+											<LineNumber>7</LineNumber>
+										</xsd:documentation>
+									</xsd:annotation>
+								</xsd:element>
+								<!-- Missing EIN Reason Code -->
+								<xsd:element name="MissingEINReasonCd">
+									<xsd:annotation>
+										<xsd:documentation>
+											<Description>Missing EIN reason code</Description>
+											<LineNumber>7</LineNumber>
+										</xsd:documentation>
+									</xsd:annotation>
+									<xsd:simpleType>
+										<xsd:restriction base="TextType">
+											<xsd:enumeration value="APPLD FOR"/>
+											<xsd:enumeration value="FOREIGNUS"/>
+										</xsd:restriction>
+									</xsd:simpleType>
+								</xsd:element>
+							</xsd:choice>
+						</xsd:sequence>
+					</xsd:complexType>
+				</xsd:element>
+			</xsd:choice>
+			
+			<!-- Own An Interest In One or More Partnerships Indicator -->
+			<xsd:element name="OwnIntGreaterOnePartnershipInd" type="CheckboxType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Own an interest in one or more partnerships indicator</Description>
+						<LineNumber>8a</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			
+			<!-- Effectively Connected Taxable Income Exempt From U.S. Tax Indicator -->
+			<xsd:element name="ECTIExemptInd" type="CheckboxType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Effectively connected taxable income exempt from U.S. tax indicator</Description>
+						<LineNumber>8b</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			
+			<!-- Effectively Connected Taxable Income Allocable To Partner Amount -->
+			<xsd:element name="AllocableECTIAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Effectively connected taxable income allocable to partner amount</Description>
+						<LineNumber>9</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			
+			<!-- Total Tax Credit Allowed To Partner Amount -->
+			<xsd:element name="TotalAllowedTaxCreditAmt" type="USAmountType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Total tax credit allowed to partner amount</Description>
+						<LineNumber>10</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			
+			<!-- ===== Schedule T - Beneficiary Information ==== -->
+			
+			<!-- Beneficiary Information -->
+			<xsd:element name="BeneficiaryInformationGrp" minOccurs="0">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:choice>
+							<!-- Beneficiary Business Name -->
+							<xsd:element name="BeneficiaryBusinessName" type="BusinessNameType">
+								<xsd:annotation>
+									<xsd:documentation>
+										<Description>Beneficiary business name</Description>
+										<LineNumber>Schedule T Line 11a</LineNumber>
+									</xsd:documentation>
+								</xsd:annotation>
+							</xsd:element>
+							<!-- Beneficiary Person Name -->
+							<xsd:element name="BeneficiaryPersonNm" type="PersonNameType">
+								<xsd:annotation>
+									<xsd:documentation>
+										<Description>Beneficiary person name</Description>
+										<LineNumber>Schedule T Line 11a</LineNumber>
+									</xsd:documentation>
+								</xsd:annotation>
+							</xsd:element>
+						</xsd:choice>
+						<xsd:choice>
+							<!-- SSN -->
+							<xsd:element name="SSN" type="SSNType">
+								<xsd:annotation>
+									<xsd:documentation>
+										<Description>SSN</Description>
+										<LineNumber>Schedule T Line 11b</LineNumber>
+									</xsd:documentation>
+								</xsd:annotation>
+							</xsd:element>
+							<!-- EIN -->
+							<xsd:element name="EIN" type="EINType">
+								<xsd:annotation>
+									<xsd:documentation>
+										<Description>EIN</Description>
+										<LineNumber>Schedule T Line 11b</LineNumber>
+									</xsd:documentation>
+								</xsd:annotation>
+							</xsd:element>
+							<!-- Missing SSN/EIN Reason Code-->
+							<xsd:element name="MissingSSNEINReasonCd">
+								<xsd:annotation>
+									<xsd:documentation>
+										<Description>Missing SSN/EIN reason code</Description>
+										<LineNumber>Schedule T Line 11b</LineNumber>
+									</xsd:documentation>
+								</xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="TextType">
+										<xsd:enumeration value="APPLD FOR"/>
+										<xsd:enumeration value="FOREIGNUS"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+						</xsd:choice>
+						<xsd:choice>
+							<!-- U.S. Address-->
+							<xsd:element name="USAddress" type="USAddressType">
+								<xsd:annotation>
+									<xsd:documentation>
+										<Description>U.S. address</Description>
+										<LineNumber>Schedule T Line 11c</LineNumber>
+									</xsd:documentation>
+								</xsd:annotation>
+							</xsd:element>
+							<!-- Foreign Address -->
+							<xsd:element name="ForeignAddress" type="ForeignAddressType">
+								<xsd:annotation>
+									<xsd:documentation>
+										<Description>Foreign address</Description>
+										<LineNumber>Schedule T Line 11c</LineNumber>
+									</xsd:documentation>
+								</xsd:annotation>
+							</xsd:element>
+						</xsd:choice>
+						<!-- Allocable Effectively Connected Taxable Income Included In Gross Income Amount -->
+						<xsd:element name="AllocableECTIIncldGrossIncmAmt" type="USAmountType" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Allocable effectively connected taxable income included in gross income amount</Description>
+									<LineNumber>12</LineNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						<!-- Total Allowed Tax Credit Amount -->
+						<xsd:element name="TotalAllowedTaxCreditAmt" type="USAmountType" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Total allowed tax credit amount</Description>
+									<LineNumber>13</LineNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+
+		</xsd:sequence>
+	</xsd:complexType>
+
+</xsd:schema>

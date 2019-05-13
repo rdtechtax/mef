@@ -1,0 +1,1539 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.irs.gov/efile" targetNamespace="http://www.irs.gov/efile" elementFormDefault="qualified" attributeFormDefault="unqualified">
+
+	<xsd:annotation>
+		<xsd:documentation>
+			<Description>IRS e-file U.S. Nonresident Alien Income Tax Schema - IRS Form 8843 Statement for Exempt Individuals and Individuals With a Medical Condition</Description>
+			<TaxYear>2018</TaxYear>
+			<MaturityLevel>Final Release</MaturityLevel>
+			<ReleaseDate>February 13, 2019</ReleaseDate>
+		</xsd:documentation>
+	</xsd:annotation>
+	
+	<xsd:include schemaLocation="../../../Common/efileTypes.xsd"/>
+	
+	<!-- ====================================================================== -->
+	<!-- ============================ IRS Form 8843 =========================== -->
+	<!-- ====================================================================== -->
+	
+	<xsd:element name="IRS8843">
+		<xsd:annotation>
+			<xsd:documentation>IRS Form 8843</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:complexContent>
+				<xsd:extension base="IRS8843Type">
+					<xsd:attributeGroup ref="DocumentAttributes">
+						<xsd:annotation>
+							<xsd:documentation>Common return document attributes</xsd:documentation>
+						</xsd:annotation>
+					</xsd:attributeGroup>
+					<xsd:attribute name="documentName" type="xsd:string" fixed="IRS8843">
+						<xsd:annotation>
+							<xsd:documentation>IRS internal use only. To avoid error in the return do not include the attribute name or value.</xsd:documentation>
+						</xsd:annotation>
+					</xsd:attribute>
+				</xsd:extension>
+			</xsd:complexContent>
+		</xsd:complexType>
+	</xsd:element>
+	
+	<xsd:complexType name="IRS8843Type">
+		<xsd:annotation>
+			<xsd:documentation>Content model for Form 8843</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			
+			<!-- =============== Part I General Information =============== -->
+			
+			<xsd:choice>
+				<!-- Form 1040NR Information Code -->
+				<xsd:element name="Form1040NRInformationCd">
+					<xsd:annotation>
+						<xsd:documentation>
+							<Description>Form 1040NR information code</Description>
+							<LineNumber>Part I</LineNumber>
+						</xsd:documentation>
+					</xsd:annotation>
+					<xsd:simpleType>
+						<xsd:restriction base="TextType">
+							<xsd:enumeration value="INFORMATION PROVIDED ON FORM 1040NR"/>
+						</xsd:restriction>
+					</xsd:simpleType>
+				</xsd:element>
+				<!-- Exempt Individual Or Individual With Medical Condition General Information -->
+				<xsd:element name="ExmptIndivOrMedicalGenInfoGrp">
+					<xsd:complexType>
+						<xsd:sequence>
+							<!-- U.S. Immigration Status -->
+							<xsd:element name="USImmigrationStatusGrp" minOccurs="0" maxOccurs="20">
+								<xsd:complexType>
+									<xsd:sequence>
+										<xsd:choice>
+											<!-- Non-Immigrant Visa Type Code -->
+											<xsd:element name="NonImmigrantVisaTypeCd">
+												<xsd:annotation>
+													<xsd:documentation>
+														<Description>Non-immigrant visa type code</Description>
+														<LineNumber>1a</LineNumber>
+													</xsd:documentation>
+												</xsd:annotation>
+												<xsd:simpleType>
+													<xsd:restriction base="TextType">
+														<xsd:enumeration value="A1"/>
+														<xsd:enumeration value="A2"/>
+														<xsd:enumeration value="A3"/>
+														<xsd:enumeration value="B1"/>
+														<xsd:enumeration value="B2"/>
+														<xsd:enumeration value="B1/B2"/>
+														<xsd:enumeration value="C1"/>
+														<xsd:enumeration value="C1/D"/>
+														<xsd:enumeration value="C2"/>
+														<xsd:enumeration value="C3"/>
+														<xsd:enumeration value="CW1"/>
+														<xsd:enumeration value="CW2"/>
+														<xsd:enumeration value="D"/>
+														<xsd:enumeration value="E1"/>
+														<xsd:enumeration value="E2"/>
+														<xsd:enumeration value="E2C"/>
+														<xsd:enumeration value="E3"/>
+														<xsd:enumeration value="E3D"/>
+														<xsd:enumeration value="E3R"/>
+														<xsd:enumeration value="F1"/>
+														<xsd:enumeration value="F2"/>
+														<xsd:enumeration value="F3"/>
+														<xsd:enumeration value="G1"/>
+														<xsd:enumeration value="G2"/>
+														<xsd:enumeration value="G3"/>
+														<xsd:enumeration value="G4"/>
+														<xsd:enumeration value="G5"/>
+														<xsd:enumeration value="H1B"/>
+														<xsd:enumeration value="H1B1"/>
+														<xsd:enumeration value="H1C"/>
+														<xsd:enumeration value="H2A"/>
+														<xsd:enumeration value="H2B"/>
+														<xsd:enumeration value="H3"/>
+														<xsd:enumeration value="H4"/>
+														<xsd:enumeration value="I"/>
+														<xsd:enumeration value="J1"/>
+														<xsd:enumeration value="J2"/>
+														<xsd:enumeration value="K1"/>
+														<xsd:enumeration value="K2"/>
+														<xsd:enumeration value="K3"/>
+														<xsd:enumeration value="K4"/>
+														<xsd:enumeration value="L1"/>
+														<xsd:enumeration value="L2"/>
+														<xsd:enumeration value="M1"/>
+														<xsd:enumeration value="M2"/>
+														<xsd:enumeration value="M3"/>
+														<xsd:enumeration value="N8"/>
+														<xsd:enumeration value="N9"/>
+														<xsd:enumeration value="NATO 1"/>
+														<xsd:enumeration value="NATO 2"/>
+														<xsd:enumeration value="NATO 3"/>
+														<xsd:enumeration value="NATO 4"/>
+														<xsd:enumeration value="NATO 5"/>
+														<xsd:enumeration value="NATO 6"/>
+														<xsd:enumeration value="NATO 7"/>
+														<xsd:enumeration value="O1"/>
+														<xsd:enumeration value="O2"/>
+														<xsd:enumeration value="O3"/>
+														<xsd:enumeration value="P1"/>
+														<xsd:enumeration value="P2"/>
+														<xsd:enumeration value="P3"/>
+														<xsd:enumeration value="P4"/>
+														<xsd:enumeration value="Q1"/>
+														<xsd:enumeration value="R1"/>
+														<xsd:enumeration value="R2"/>
+														<xsd:enumeration value="S5"/>
+														<xsd:enumeration value="S6"/>
+														<xsd:enumeration value="S7"/>
+														<xsd:enumeration value="T1"/>
+														<xsd:enumeration value="T2"/>
+														<xsd:enumeration value="T3"/>
+														<xsd:enumeration value="T4"/>
+														<xsd:enumeration value="T5"/>
+														<xsd:enumeration value="TN"/>
+														<xsd:enumeration value="TD"/>
+														<xsd:enumeration value="U1"/>
+														<xsd:enumeration value="U2"/>
+														<xsd:enumeration value="U3"/>
+														<xsd:enumeration value="U4"/>
+														<xsd:enumeration value="U5"/>
+														<xsd:enumeration value="V1"/>
+														<xsd:enumeration value="V2"/>
+														<xsd:enumeration value="V3"/>
+													</xsd:restriction>
+												</xsd:simpleType>
+											</xsd:element>
+											<!-- Immigrant Visa Type Code -->
+											<xsd:element name="ImmigrantVisaTypeCd">
+												<xsd:annotation>
+													<xsd:documentation>
+														<Description>Immigrant visa type code</Description>
+														<LineNumber>1a</LineNumber>
+													</xsd:documentation>
+												</xsd:annotation>
+												<xsd:simpleType>
+													<xsd:restriction base="TextType">
+														<xsd:enumeration value="IR1"/>
+														<xsd:enumeration value="IR2"/>
+														<xsd:enumeration value="IR3"/>
+														<xsd:enumeration value="IH3"/>
+														<xsd:enumeration value="IR4"/>
+														<xsd:enumeration value="IH4"/>
+														<xsd:enumeration value="IR5"/>
+														<xsd:enumeration value="CR1"/>
+														<xsd:enumeration value="CR2"/>
+														<xsd:enumeration value="IW1"/>
+														<xsd:enumeration value="IW2"/>
+														<xsd:enumeration value="IB1"/>
+														<xsd:enumeration value="IB2"/>
+														<xsd:enumeration value="IB3"/>
+														<xsd:enumeration value="VI5"/>
+														<xsd:enumeration value="AM1"/>
+														<xsd:enumeration value="AM2"/>
+														<xsd:enumeration value="AM3"/>
+														<xsd:enumeration value="SB1"/>
+														<xsd:enumeration value="SC1"/>
+														<xsd:enumeration value="SC2"/>
+														<xsd:enumeration value="SI1"/>
+														<xsd:enumeration value="SI2"/>
+														<xsd:enumeration value="SI3"/>
+														<xsd:enumeration value="SM1"/>
+														<xsd:enumeration value="SM2"/>
+														<xsd:enumeration value="SM3"/>
+														<xsd:enumeration value="SQ1"/>
+														<xsd:enumeration value="SQ2"/>
+														<xsd:enumeration value="SQ3"/>
+														<xsd:enumeration value="SU2"/>
+														<xsd:enumeration value="SU3"/>
+														<xsd:enumeration value="SU5"/>
+														<xsd:enumeration value="F11"/>
+														<xsd:enumeration value="F12"/>
+														<xsd:enumeration value="B11"/>
+														<xsd:enumeration value="B12"/>
+														<xsd:enumeration value="F21"/>
+														<xsd:enumeration value="F22"/>
+														<xsd:enumeration value="F23"/>
+														<xsd:enumeration value="F24"/>
+														<xsd:enumeration value="F25"/>
+														<xsd:enumeration value="C21"/>
+														<xsd:enumeration value="C22"/>
+														<xsd:enumeration value="C23"/>
+														<xsd:enumeration value="C24"/>
+														<xsd:enumeration value="C25"/>
+														<xsd:enumeration value="B21"/>
+														<xsd:enumeration value="B22"/>
+														<xsd:enumeration value="B23"/>
+														<xsd:enumeration value="B24"/>
+														<xsd:enumeration value="B25"/>
+														<xsd:enumeration value="FX1"/>
+														<xsd:enumeration value="FX2"/>
+														<xsd:enumeration value="FX3"/>
+														<xsd:enumeration value="CX1"/>
+														<xsd:enumeration value="CX2"/>
+														<xsd:enumeration value="CX3"/>
+														<xsd:enumeration value="BX1"/>
+														<xsd:enumeration value="BX2"/>
+														<xsd:enumeration value="BX3"/>
+														<xsd:enumeration value="F31"/>
+														<xsd:enumeration value="F32"/>
+														<xsd:enumeration value="F33"/>
+														<xsd:enumeration value="C31"/>
+														<xsd:enumeration value="C32"/>
+														<xsd:enumeration value="C33"/>
+														<xsd:enumeration value="B31"/>
+														<xsd:enumeration value="B32"/>
+														<xsd:enumeration value="B33"/>
+														<xsd:enumeration value="F41"/>
+														<xsd:enumeration value="F42"/>
+														<xsd:enumeration value="F43"/>
+														<xsd:enumeration value="E11"/>
+														<xsd:enumeration value="E12"/>
+														<xsd:enumeration value="E13"/>
+														<xsd:enumeration value="E14"/>
+														<xsd:enumeration value="E15"/>
+														<xsd:enumeration value="E21"/>
+														<xsd:enumeration value="E22"/>
+														<xsd:enumeration value="E23"/>
+														<xsd:enumeration value="E31"/>
+														<xsd:enumeration value="E32"/>
+														<xsd:enumeration value="E34"/>
+														<xsd:enumeration value="E35"/>
+														<xsd:enumeration value="EW3"/>
+														<xsd:enumeration value="EW4"/>
+														<xsd:enumeration value="EW5"/>
+														<xsd:enumeration value="BC1"/>
+														<xsd:enumeration value="BC2"/>
+														<xsd:enumeration value="BC3"/>
+														<xsd:enumeration value="SD1"/>
+														<xsd:enumeration value="SD2"/>
+														<xsd:enumeration value="SD3"/>
+														<xsd:enumeration value="SE1"/>
+														<xsd:enumeration value="SE2"/>
+														<xsd:enumeration value="SE3"/>
+														<xsd:enumeration value="SF1"/>
+														<xsd:enumeration value="SF2"/>
+														<xsd:enumeration value="SG1"/>
+														<xsd:enumeration value="SG2"/>
+														<xsd:enumeration value="SH1"/>
+														<xsd:enumeration value="SH2"/>
+														<xsd:enumeration value="SJ1"/>
+														<xsd:enumeration value="SJ2"/>
+														<xsd:enumeration value="SK1"/>
+														<xsd:enumeration value="SK2"/>
+														<xsd:enumeration value="SK3"/>
+														<xsd:enumeration value="SK4"/>
+														<xsd:enumeration value="SL1"/>
+														<xsd:enumeration value="SN1"/>
+														<xsd:enumeration value="SN2"/>
+														<xsd:enumeration value="SN3"/>
+														<xsd:enumeration value="SN4"/>
+														<xsd:enumeration value="SP"/>
+														<xsd:enumeration value="SR1"/>
+														<xsd:enumeration value="SR2"/>
+														<xsd:enumeration value="SR3"/>
+														<xsd:enumeration value="C51"/>
+														<xsd:enumeration value="C52"/>
+														<xsd:enumeration value="C53"/>
+														<xsd:enumeration value="T51"/>
+														<xsd:enumeration value="T52"/>
+														<xsd:enumeration value="T53"/>
+														<xsd:enumeration value="R51"/>
+														<xsd:enumeration value="R52"/>
+														<xsd:enumeration value="R53"/>
+														<xsd:enumeration value="I51"/>
+														<xsd:enumeration value="I52"/>
+														<xsd:enumeration value="I53"/>
+														<xsd:enumeration value="DV1"/>
+														<xsd:enumeration value="DV2"/>
+														<xsd:enumeration value="DV3"/>
+													</xsd:restriction>
+												</xsd:simpleType>
+											</xsd:element>
+											<!-- U.S. Immigration Status Description -->
+											<xsd:element name="USImmigrationStatusDesc">
+												<xsd:annotation>
+													<xsd:documentation>
+														<Description>U.S. immigration status description</Description>
+														<LineNumber>1a</LineNumber>
+													</xsd:documentation>
+												</xsd:annotation>
+												<xsd:simpleType>
+													<xsd:restriction base="TextType">
+														<xsd:maxLength value="50"/>
+													</xsd:restriction>
+												</xsd:simpleType>
+											</xsd:element>
+										</xsd:choice>
+										<!-- Entered U.S. Date -->
+										<xsd:element name="EnteredUSDt" type="DateType">
+											<xsd:annotation>
+												<xsd:documentation>
+													<Description>Entered U.S. date</Description>
+													<LineNumber>1a</LineNumber>
+												</xsd:documentation>
+											</xsd:annotation>
+										</xsd:element>
+									</xsd:sequence>
+								</xsd:complexType>
+							</xsd:element>
+							<!-- Non-Immigrant Status -->
+							<xsd:element name="NonimmigrantStatusGrp" minOccurs="0">
+								<xsd:complexType>
+									<xsd:sequence>
+										<!-- Visa Change Description -->
+										<xsd:element name="VisaChangeDesc" minOccurs="0">
+											<xsd:annotation>
+												<xsd:documentation>
+													<Description>Visa change description</Description>
+													<LineNumber>1b</LineNumber>
+												</xsd:documentation>
+											</xsd:annotation>
+											<xsd:simpleType>
+												<xsd:restriction base="TextType">
+													<xsd:maxLength value="30"/>
+												</xsd:restriction>
+											</xsd:simpleType>
+										</xsd:element>
+										<!-- Visa Change Date -->
+										<xsd:element name="VisaChangeDt" type="DateType" minOccurs="0">
+											<xsd:annotation>
+												<xsd:documentation>
+													<Description>Visa change date</Description>
+													<LineNumber>1b</LineNumber>
+												</xsd:documentation>
+											</xsd:annotation>
+										</xsd:element>
+									</xsd:sequence>
+								</xsd:complexType>
+							</xsd:element>
+							<!-- Citizen Country Code -->
+							<xsd:element name="CitizenCountryCd" type="AllCountriesType" minOccurs="0" maxOccurs="5">
+								<xsd:annotation>
+									<xsd:documentation>
+										<Description>Citizen country code</Description>
+										<LineNumber>2</LineNumber>
+									</xsd:documentation>
+								</xsd:annotation>
+							</xsd:element>
+							<!-- Passport Issued -->
+							<xsd:element name="PassportIssuedGrp" minOccurs="0" maxOccurs="20">
+								<xsd:complexType>
+									<xsd:sequence>
+										<!-- Country Code -->
+										<xsd:element name="CountryCd" type="CountryType">
+											<xsd:annotation>
+												<xsd:documentation>
+													<Description>Country code</Description>
+													<LineNumber>3a</LineNumber>
+												</xsd:documentation>
+											</xsd:annotation>
+										</xsd:element>
+										<!-- Passport Number -->
+										<xsd:element name="PassportNum">
+											<xsd:annotation>
+												<xsd:documentation>
+													<Description>Passport number</Description>
+													<LineNumber>3b</LineNumber>
+												</xsd:documentation>
+											</xsd:annotation>
+											<xsd:simpleType>
+												<xsd:restriction base="TextType">
+													<xsd:maxLength value="20"/>
+												</xsd:restriction>
+											</xsd:simpleType>
+										</xsd:element>
+									</xsd:sequence>
+								</xsd:complexType>
+							</xsd:element>
+							<!-- Number Of Days Physically Present In U.S. Count -->
+							<xsd:element name="PhysicallyPresUSPYDayCnt" type="NumberOfDaysType" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>
+										<Description>Number of days physically present in U.S. count</Description>
+										<LineNumber>4a</LineNumber>
+									</xsd:documentation>
+								</xsd:annotation>
+							</xsd:element>
+							<!-- Number Of Days Physically Present In U.S. Count -->
+							<xsd:element name="PhysicallyPresUSPYLess1DayCnt" type="NumberOfDaysType" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>
+										<Description>Number of days physically present in U.S. count</Description>
+										<LineNumber>4a</LineNumber>
+									</xsd:documentation>
+								</xsd:annotation>
+							</xsd:element>
+							<!-- Number Of Days Physically Present In U.S. Count -->
+							<xsd:element name="PhysicallyPresUSPYLess2DayCnt" type="NumberOfDaysType" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>
+										<Description>Number of days physically present in U.S. count</Description>
+										<LineNumber>4a</LineNumber>
+									</xsd:documentation>
+								</xsd:annotation>
+							</xsd:element>
+							<!-- Number Of Days Excluded For Purpose Of Substantial Presence Test -->
+							<xsd:element name="SubstPresenceTestExclDaysCnt" type="NumberOfDaysType" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>
+										<Description>Number of days excluded for purpose of substantial presence test</Description>
+										<LineNumber>4b</LineNumber>
+									</xsd:documentation>
+								</xsd:annotation>
+							</xsd:element>
+						</xsd:sequence>
+					</xsd:complexType>
+				</xsd:element>
+			</xsd:choice>
+			
+			<!-- =============== Part II Teachers and Trainees =============== -->
+			
+			<!-- Teachers Or Trainee Exempt Individual -->
+			<xsd:element name="TeacherOrTraineeExemptIndivGrp" minOccurs="0" maxOccurs="20">
+				<xsd:complexType>
+					<xsd:sequence>
+						<!-- Academic Institution Detail -->
+						<xsd:element name="AcademicInstitutionDetail" minOccurs="0">
+							<xsd:complexType>
+								<xsd:sequence>
+									<!-- Institution Name -->
+									<xsd:element name="InstitutionName" type="BusinessNameType" minOccurs="0">
+										<xsd:annotation>
+											<xsd:documentation>
+												<Description>Institution name</Description>
+												<LineNumber>5</LineNumber>
+											</xsd:documentation>
+										</xsd:annotation>
+									</xsd:element>
+									<xsd:choice>
+										<!-- U.S. Address -->
+										<xsd:element name="USAddress" type="USAddressType" minOccurs="0">
+											<xsd:annotation>
+												<xsd:documentation>
+													<Description>U.S. address</Description>
+													<LineNumber>5</LineNumber>
+												</xsd:documentation>
+											</xsd:annotation>
+										</xsd:element>
+										<!-- Foreign Address -->
+										<xsd:element name="ForeignAddress" type="ForeignAddressType" minOccurs="0">
+											<xsd:annotation>
+												<xsd:documentation>
+													<Description>Foreign address</Description>
+													<LineNumber>5</LineNumber>
+												</xsd:documentation>
+											</xsd:annotation>
+										</xsd:element>
+									</xsd:choice>
+									<xsd:choice>
+										<!-- Phone Number -->
+										<xsd:element name="PhoneNum" type="PhoneNumberType" minOccurs="0">
+											<xsd:annotation>
+												<xsd:documentation>
+													<Description>Phone number</Description>
+													<LineNumber>5</LineNumber>
+												</xsd:documentation>
+											</xsd:annotation>
+										</xsd:element>
+										<!-- Foreign Phone Number -->
+										<xsd:element name="ForeignPhoneNum" type="ForeignPhoneNumberType" minOccurs="0">
+											<xsd:annotation>
+												<xsd:documentation>
+													<Description>Foreign phone number</Description>
+													<LineNumber>5</LineNumber>
+												</xsd:documentation>
+											</xsd:annotation>
+										</xsd:element>
+									</xsd:choice>
+								</xsd:sequence>
+							</xsd:complexType>
+						</xsd:element>
+						<!-- Academic Or Specialized Program Director Detail -->
+						<xsd:element name="AcademicOrSpclProgDirDetail" minOccurs="0">
+							<xsd:complexType>
+								<xsd:sequence>
+									<!-- Person Name -->
+									<xsd:element name="PersonNm" type="PersonNameType" minOccurs="0">
+										<xsd:annotation>
+											<xsd:documentation>
+												<Description>Person name</Description>
+												<LineNumber>6</LineNumber>
+											</xsd:documentation>
+										</xsd:annotation>
+									</xsd:element>
+									<xsd:choice>
+										<!-- U.S. Address -->
+										<xsd:element name="USAddress" type="USAddressType" minOccurs="0">
+											<xsd:annotation>
+												<xsd:documentation>
+													<Description>U.S. address</Description>
+													<LineNumber>6</LineNumber>
+												</xsd:documentation>
+											</xsd:annotation>
+										</xsd:element>
+										<!-- Foreign Address -->
+										<xsd:element name="ForeignAddress" type="ForeignAddressType" minOccurs="0">
+											<xsd:annotation>
+												<xsd:documentation>
+													<Description>Foreign address</Description>
+													<LineNumber>6</LineNumber>
+												</xsd:documentation>
+											</xsd:annotation>
+										</xsd:element>
+									</xsd:choice>
+									<xsd:choice>
+										<!-- Phone Number -->
+										<xsd:element name="PhoneNum" type="PhoneNumberType" minOccurs="0">
+											<xsd:annotation>
+												<xsd:documentation>
+													<Description>Phone number</Description>
+													<LineNumber>6</LineNumber>
+												</xsd:documentation>
+											</xsd:annotation>
+										</xsd:element>
+										<!-- Foreign Phone Number -->
+										<xsd:element name="ForeignPhoneNum" type="ForeignPhoneNumberType" minOccurs="0">
+											<xsd:annotation>
+												<xsd:documentation>
+													<Description>Foreign phone number</Description>
+													<LineNumber>6</LineNumber>
+												</xsd:documentation>
+											</xsd:annotation>
+										</xsd:element>
+									</xsd:choice>
+								</xsd:sequence>
+							</xsd:complexType>
+						</xsd:element>
+						<!-- Current Tax Year Less 1 Teacher Visa -->
+						<xsd:element name="CurrTYLess1TeacherVisaGrp" minOccurs="0">
+							<xsd:complexType>
+								<xsd:sequence>
+									<!-- Teacher Or Trainee Visa Type Code -->
+									<xsd:element name="TeacherOrTraineeVisaTypeCd" minOccurs="0">
+										<xsd:annotation>
+											<xsd:documentation>
+												<Description>Teacher or trainee visa type code</Description>
+												<LineNumber>7</LineNumber>
+											</xsd:documentation>
+										</xsd:annotation>
+										<xsd:simpleType>
+											<xsd:restriction base="TextType">
+												<xsd:enumeration value="J-1"/>
+												<xsd:enumeration value="J-2"/>
+												<xsd:enumeration value="Q-1"/>
+												<xsd:enumeration value="Q-2"/>
+												<xsd:enumeration value="Q-3"/>
+											</xsd:restriction>
+										</xsd:simpleType>
+									</xsd:element>
+									<!-- Visa Type Change -->
+									<xsd:element name="VisaTypeChangeGrp" minOccurs="0">
+										<xsd:complexType>
+											<xsd:sequence>
+												<!-- Visa Change Description -->
+												<xsd:element name="VisaChangeDesc">
+													<xsd:annotation>
+														<xsd:documentation>
+															<Description>Visa change description</Description>
+															<LineNumber>7</LineNumber>
+														</xsd:documentation>
+													</xsd:annotation>
+													<xsd:simpleType>
+														<xsd:restriction base="TextType">
+															<xsd:maxLength value="30"/>
+														</xsd:restriction>
+													</xsd:simpleType>
+												</xsd:element>
+												<!-- Visa Change Date -->
+												<xsd:element name="VisaChangeDt" type="DateType">
+													<xsd:annotation>
+														<xsd:documentation>
+															<Description>Visa change date</Description>
+															<LineNumber>7</LineNumber>
+														</xsd:documentation>
+													</xsd:annotation>
+												</xsd:element>
+											</xsd:sequence>
+										</xsd:complexType>
+									</xsd:element>
+								</xsd:sequence>
+							</xsd:complexType>
+						</xsd:element>
+						<!-- Current Tax Year Less 2 Teacher Visa -->
+						<xsd:element name="CurrTYLess2TeacherVisaGrp" minOccurs="0">
+							<xsd:complexType>
+								<xsd:sequence>
+									<!-- Teacher Or Trainee Visa Type Code -->
+									<xsd:element name="TeacherOrTraineeVisaTypeCd" minOccurs="0">
+										<xsd:annotation>
+											<xsd:documentation>
+												<Description>Teacher or trainee visa type code</Description>
+												<LineNumber>7</LineNumber>
+											</xsd:documentation>
+										</xsd:annotation>
+										<xsd:simpleType>
+											<xsd:restriction base="TextType">
+												<xsd:enumeration value="J-1"/>
+												<xsd:enumeration value="J-2"/>
+												<xsd:enumeration value="Q-1"/>
+												<xsd:enumeration value="Q-2"/>
+												<xsd:enumeration value="Q-3"/>
+											</xsd:restriction>
+										</xsd:simpleType>
+									</xsd:element>
+									<!-- Visa Type Change -->
+									<xsd:element name="VisaTypeChangeGrp" minOccurs="0">
+										<xsd:complexType>
+											<xsd:sequence>
+												<!-- Visa Change Description -->
+												<xsd:element name="VisaChangeDesc">
+													<xsd:annotation>
+														<xsd:documentation>
+															<Description>Visa change description</Description>
+															<LineNumber>7</LineNumber>
+														</xsd:documentation>
+													</xsd:annotation>
+													<xsd:simpleType>
+														<xsd:restriction base="TextType">
+															<xsd:maxLength value="30"/>
+														</xsd:restriction>
+													</xsd:simpleType>
+												</xsd:element>
+												<!-- Visa Change Date -->
+												<xsd:element name="VisaChangeDt" type="DateType">
+													<xsd:annotation>
+														<xsd:documentation>
+															<Description>Visa change date</Description>
+															<LineNumber>7</LineNumber>
+														</xsd:documentation>
+													</xsd:annotation>
+												</xsd:element>
+											</xsd:sequence>
+										</xsd:complexType>
+									</xsd:element>
+								</xsd:sequence>
+							</xsd:complexType>
+						</xsd:element>
+						<!-- Current Tax Year Less 3 Teacher Visa -->
+						<xsd:element name="CurrTYLess3TeacherVisaGrp" minOccurs="0">
+							<xsd:complexType>
+								<xsd:sequence>
+									<!-- Teacher Or Trainee Visa Type Code -->
+									<xsd:element name="TeacherOrTraineeVisaTypeCd" minOccurs="0">
+										<xsd:annotation>
+											<xsd:documentation>
+												<Description>Teacher or trainee visa type code</Description>
+												<LineNumber>7</LineNumber>
+											</xsd:documentation>
+										</xsd:annotation>
+										<xsd:simpleType>
+											<xsd:restriction base="TextType">
+												<xsd:enumeration value="J-1"/>
+												<xsd:enumeration value="J-2"/>
+												<xsd:enumeration value="Q-1"/>
+												<xsd:enumeration value="Q-2"/>
+												<xsd:enumeration value="Q-3"/>
+											</xsd:restriction>
+										</xsd:simpleType>
+									</xsd:element>
+									<!-- Visa Type Change -->
+									<xsd:element name="VisaTypeChangeGrp" minOccurs="0">
+										<xsd:complexType>
+											<xsd:sequence>
+												<!-- Visa Change Description -->
+												<xsd:element name="VisaChangeDesc">
+													<xsd:annotation>
+														<xsd:documentation>
+															<Description>Visa change description</Description>
+															<LineNumber>7</LineNumber>
+														</xsd:documentation>
+													</xsd:annotation>
+													<xsd:simpleType>
+														<xsd:restriction base="TextType">
+															<xsd:maxLength value="30"/>
+														</xsd:restriction>
+													</xsd:simpleType>
+												</xsd:element>
+												<!-- Visa Change Date -->
+												<xsd:element name="VisaChangeDt" type="DateType">
+													<xsd:annotation>
+														<xsd:documentation>
+															<Description>Visa change date</Description>
+															<LineNumber>7</LineNumber>
+														</xsd:documentation>
+													</xsd:annotation>
+												</xsd:element>
+											</xsd:sequence>
+										</xsd:complexType>
+									</xsd:element>
+								</xsd:sequence>
+							</xsd:complexType>
+						</xsd:element>
+						<!-- Current Tax Year Less 4 Teacher Visa -->
+						<xsd:element name="CurrTYLess4TeacherVisaGrp" minOccurs="0">
+							<xsd:complexType>
+								<xsd:sequence>
+									<!-- Teacher Or Trainee Visa Type Code -->
+									<xsd:element name="TeacherOrTraineeVisaTypeCd" minOccurs="0">
+										<xsd:annotation>
+											<xsd:documentation>
+												<Description>Teacher or trainee visa type code</Description>
+												<LineNumber>7</LineNumber>
+											</xsd:documentation>
+										</xsd:annotation>
+										<xsd:simpleType>
+											<xsd:restriction base="TextType">
+												<xsd:enumeration value="J-1"/>
+												<xsd:enumeration value="J-2"/>
+												<xsd:enumeration value="Q-1"/>
+												<xsd:enumeration value="Q-2"/>
+												<xsd:enumeration value="Q-3"/>
+											</xsd:restriction>
+										</xsd:simpleType>
+									</xsd:element>
+									<!-- Visa Type Change -->
+									<xsd:element name="VisaTypeChangeGrp" minOccurs="0">
+										<xsd:complexType>
+											<xsd:sequence>
+												<!-- Visa Change Description -->
+												<xsd:element name="VisaChangeDesc">
+													<xsd:annotation>
+														<xsd:documentation>
+															<Description>Visa change description</Description>
+															<LineNumber>7</LineNumber>
+														</xsd:documentation>
+													</xsd:annotation>
+													<xsd:simpleType>
+														<xsd:restriction base="TextType">
+															<xsd:maxLength value="30"/>
+														</xsd:restriction>
+													</xsd:simpleType>
+												</xsd:element>
+												<!-- Visa Change Date -->
+												<xsd:element name="VisaChangeDt" type="DateType">
+													<xsd:annotation>
+														<xsd:documentation>
+															<Description>Visa change date</Description>
+															<LineNumber>7</LineNumber>
+														</xsd:documentation>
+													</xsd:annotation>
+												</xsd:element>
+											</xsd:sequence>
+										</xsd:complexType>
+									</xsd:element>
+								</xsd:sequence>
+							</xsd:complexType>
+						</xsd:element>
+						<!-- Current Tax Year Less 5 Teacher Visa -->
+						<xsd:element name="CurrTYLess5TeacherVisaGrp" minOccurs="0">
+							<xsd:complexType>
+								<xsd:sequence>
+									<!-- Teacher Or Trainee Visa Type Code -->
+									<xsd:element name="TeacherOrTraineeVisaTypeCd" minOccurs="0">
+										<xsd:annotation>
+											<xsd:documentation>
+												<Description>Teacher or trainee visa type code</Description>
+												<LineNumber>7</LineNumber>
+											</xsd:documentation>
+										</xsd:annotation>
+										<xsd:simpleType>
+											<xsd:restriction base="TextType">
+												<xsd:enumeration value="J-1"/>
+												<xsd:enumeration value="J-2"/>
+												<xsd:enumeration value="Q-1"/>
+												<xsd:enumeration value="Q-2"/>
+												<xsd:enumeration value="Q-3"/>
+											</xsd:restriction>
+										</xsd:simpleType>
+									</xsd:element>
+									<!-- Visa Type Change -->
+									<xsd:element name="VisaTypeChangeGrp" minOccurs="0">
+										<xsd:complexType>
+											<xsd:sequence>
+												<!-- Visa Change Description -->
+												<xsd:element name="VisaChangeDesc">
+													<xsd:annotation>
+														<xsd:documentation>
+															<Description>Visa change description</Description>
+															<LineNumber>7</LineNumber>
+														</xsd:documentation>
+													</xsd:annotation>
+													<xsd:simpleType>
+														<xsd:restriction base="TextType">
+															<xsd:maxLength value="30"/>
+														</xsd:restriction>
+													</xsd:simpleType>
+												</xsd:element>
+												<!-- Visa Change Date -->
+												<xsd:element name="VisaChangeDt" type="DateType">
+													<xsd:annotation>
+														<xsd:documentation>
+															<Description>Visa change date</Description>
+															<LineNumber>7</LineNumber>
+														</xsd:documentation>
+													</xsd:annotation>
+												</xsd:element>
+											</xsd:sequence>
+										</xsd:complexType>
+									</xsd:element>
+								</xsd:sequence>
+							</xsd:complexType>
+						</xsd:element>
+						<!-- Current Tax Year Less 6 Teacher Visa -->
+						<xsd:element name="CurrTYLess6TeacherVisaGrp" minOccurs="0">
+							<xsd:complexType>
+								<xsd:sequence>
+									<!-- Teacher Or Trainee Visa Type Code -->
+									<xsd:element name="TeacherOrTraineeVisaTypeCd" minOccurs="0">
+										<xsd:annotation>
+											<xsd:documentation>
+												<Description>Teacher or trainee visa type code</Description>
+												<LineNumber>7</LineNumber>
+											</xsd:documentation>
+										</xsd:annotation>
+										<xsd:simpleType>
+											<xsd:restriction base="TextType">
+												<xsd:enumeration value="J-1"/>
+												<xsd:enumeration value="J-2"/>
+												<xsd:enumeration value="Q-1"/>
+												<xsd:enumeration value="Q-2"/>
+												<xsd:enumeration value="Q-3"/>
+											</xsd:restriction>
+										</xsd:simpleType>
+									</xsd:element>
+									<!-- Visa Type Change -->
+									<xsd:element name="VisaTypeChangeGrp" minOccurs="0">
+										<xsd:complexType>
+											<xsd:sequence>
+												<!-- Visa Change Description -->
+												<xsd:element name="VisaChangeDesc">
+													<xsd:annotation>
+														<xsd:documentation>
+															<Description>Visa change description</Description>
+															<LineNumber>7</LineNumber>
+														</xsd:documentation>
+													</xsd:annotation>
+													<xsd:simpleType>
+														<xsd:restriction base="TextType">
+															<xsd:maxLength value="30"/>
+														</xsd:restriction>
+													</xsd:simpleType>
+												</xsd:element>
+												<!-- Visa Change Date -->
+												<xsd:element name="VisaChangeDt" type="DateType">
+													<xsd:annotation>
+														<xsd:documentation>
+															<Description>Visa change date</Description>
+															<LineNumber>7</LineNumber>
+														</xsd:documentation>
+													</xsd:annotation>
+												</xsd:element>
+											</xsd:sequence>
+										</xsd:complexType>
+									</xsd:element>
+								</xsd:sequence>
+							</xsd:complexType>
+						</xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			
+			<!-- Present In U.S. As Teacher, Trainee, Or Student For 2 Of The Last 6 Prior Calendar Years Indicator -->
+			<xsd:element name="TeacherTraineeStdnt2of6PrCYInd" type="BooleanType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Present in U.S. as teacher, trainee, or student for 2 of the last 6 prior calendar years indicator</Description>
+						<LineNumber>8</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			
+			<!-- =============== Part III Students =============== -->
+			
+			<!-- Student Exempt Individual -->
+			<xsd:element name="StudentExemptIndivGrp" minOccurs="0" maxOccurs="20">
+				<xsd:complexType>
+					<xsd:sequence>
+						<!-- Academic Institution Detail -->
+						<xsd:element name="AcademicInstitutionDetail" minOccurs="0">
+							<xsd:complexType>
+								<xsd:sequence>
+									<!-- Institution Name -->
+									<xsd:element name="InstitutionName" type="BusinessNameType" minOccurs="0">
+										<xsd:annotation>
+											<xsd:documentation>
+												<Description>Institution name</Description>
+												<LineNumber>9</LineNumber>
+											</xsd:documentation>
+										</xsd:annotation>
+									</xsd:element>
+									<xsd:choice>
+										<!-- U.S. Address -->
+										<xsd:element name="USAddress" type="USAddressType" minOccurs="0">
+											<xsd:annotation>
+												<xsd:documentation>
+													<Description>U.S. address</Description>
+													<LineNumber>9</LineNumber>
+												</xsd:documentation>
+											</xsd:annotation>
+										</xsd:element>
+										<!-- Foreign Address -->
+										<xsd:element name="ForeignAddress" type="ForeignAddressType" minOccurs="0">
+											<xsd:annotation>
+												<xsd:documentation>
+													<Description>Foreign address</Description>
+													<LineNumber>9</LineNumber>
+												</xsd:documentation>
+											</xsd:annotation>
+										</xsd:element>
+									</xsd:choice>
+									<xsd:choice>
+										<!-- Phone Number -->
+										<xsd:element name="PhoneNum" type="PhoneNumberType" minOccurs="0">
+											<xsd:annotation>
+												<xsd:documentation>
+													<Description>Phone number</Description>
+													<LineNumber>9</LineNumber>
+												</xsd:documentation>
+											</xsd:annotation>
+										</xsd:element>
+										<!-- Foreign Phone Number -->
+										<xsd:element name="ForeignPhoneNum" type="ForeignPhoneNumberType" minOccurs="0">
+											<xsd:annotation>
+												<xsd:documentation>
+													<Description>Foreign phone number</Description>
+													<LineNumber>9</LineNumber>
+												</xsd:documentation>
+											</xsd:annotation>
+										</xsd:element>
+									</xsd:choice>
+								</xsd:sequence>
+							</xsd:complexType>
+						</xsd:element>
+						<!-- Academic Or Specialized Program Director Detail -->
+						<xsd:element name="AcademicOrSpclProgDirDetail" minOccurs="0">
+							<xsd:complexType>
+								<xsd:sequence>
+									<!-- Person Name -->
+									<xsd:element name="PersonNm" type="PersonNameType" minOccurs="0">
+										<xsd:annotation>
+											<xsd:documentation>
+												<Description>Person name</Description>
+												<LineNumber>10</LineNumber>
+											</xsd:documentation>
+										</xsd:annotation>
+									</xsd:element>
+									<xsd:choice>
+										<!-- U.S. Address -->
+										<xsd:element name="USAddress" type="USAddressType" minOccurs="0">
+											<xsd:annotation>
+												<xsd:documentation>
+													<Description>U.S. address</Description>
+													<LineNumber>10</LineNumber>
+												</xsd:documentation>
+											</xsd:annotation>
+										</xsd:element>
+										<!-- Foreign Address -->
+										<xsd:element name="ForeignAddress" type="ForeignAddressType" minOccurs="0">
+											<xsd:annotation>
+												<xsd:documentation>
+													<Description>Foreign address</Description>
+													<LineNumber>10</LineNumber>
+												</xsd:documentation>
+											</xsd:annotation>
+										</xsd:element>
+									</xsd:choice>
+									<xsd:choice>
+										<!-- Phone Number -->
+										<xsd:element name="PhoneNum" type="PhoneNumberType" minOccurs="0">
+											<xsd:annotation>
+												<xsd:documentation>
+													<Description>Phone number</Description>
+													<LineNumber>10</LineNumber>
+												</xsd:documentation>
+											</xsd:annotation>
+										</xsd:element>
+										<!-- Foreign Phone Number -->
+										<xsd:element name="ForeignPhoneNum" type="ForeignPhoneNumberType" minOccurs="0">
+											<xsd:annotation>
+												<xsd:documentation>
+													<Description>Foreign phone number</Description>
+													<LineNumber>10</LineNumber>
+												</xsd:documentation>
+											</xsd:annotation>
+										</xsd:element>
+									</xsd:choice>
+								</xsd:sequence>
+							</xsd:complexType>
+						</xsd:element>
+						<!-- Current Tax Year Less 1 Teacher Visa -->
+						<xsd:element name="CurrTYLess1StudentVisaGrp" minOccurs="0">
+							<xsd:complexType>
+								<xsd:sequence>
+									<!-- Student Type Visa Code -->
+									<xsd:element name="StudentTypeVisaCd" minOccurs="0">
+										<xsd:annotation>
+											<xsd:documentation>
+												<Description>Student type visa code</Description>
+												<LineNumber>11</LineNumber>
+											</xsd:documentation>
+										</xsd:annotation>
+										<xsd:simpleType>
+											<xsd:restriction base="TextType">
+												<xsd:enumeration value="F-1"/>
+												<xsd:enumeration value="F-2"/>
+												<xsd:enumeration value="J-1"/>
+												<xsd:enumeration value="J-2"/>
+												<xsd:enumeration value="M-1"/>
+												<xsd:enumeration value="M-2"/>
+												<xsd:enumeration value="Q-1"/>
+												<xsd:enumeration value="Q-2"/>
+												<xsd:enumeration value="Q-3"/>
+											</xsd:restriction>
+										</xsd:simpleType>
+									</xsd:element>
+									<!-- Visa Type Change -->
+									<xsd:element name="VisaTypeChangeGrp" minOccurs="0">
+										<xsd:complexType>
+											<xsd:sequence>
+												<!-- Visa Change Description -->
+												<xsd:element name="VisaChangeDesc">
+													<xsd:annotation>
+														<xsd:documentation>
+															<Description>Visa change description</Description>
+															<LineNumber>11</LineNumber>
+														</xsd:documentation>
+													</xsd:annotation>
+													<xsd:simpleType>
+														<xsd:restriction base="TextType">
+															<xsd:maxLength value="30"/>
+														</xsd:restriction>
+													</xsd:simpleType>
+												</xsd:element>
+												<!-- Visa Change Date -->
+												<xsd:element name="VisaChangeDt" type="DateType">
+													<xsd:annotation>
+														<xsd:documentation>
+															<Description>Visa change date</Description>
+															<LineNumber>11</LineNumber>
+														</xsd:documentation>
+													</xsd:annotation>
+												</xsd:element>
+											</xsd:sequence>
+										</xsd:complexType>
+									</xsd:element>
+								</xsd:sequence>
+							</xsd:complexType>
+						</xsd:element>
+						<!-- Current Tax Year Less 2 Teacher Visa -->
+						<xsd:element name="CurrTYLess2StudentVisaGrp" minOccurs="0">
+							<xsd:complexType>
+								<xsd:sequence>
+									<!-- Student Type Visa Code -->
+									<xsd:element name="StudentTypeVisaCd" minOccurs="0">
+										<xsd:annotation>
+											<xsd:documentation>
+												<Description>Student type visa code</Description>
+												<LineNumber>11</LineNumber>
+											</xsd:documentation>
+										</xsd:annotation>
+										<xsd:simpleType>
+											<xsd:restriction base="TextType">
+												<xsd:enumeration value="F-1"/>
+												<xsd:enumeration value="F-2"/>
+												<xsd:enumeration value="J-1"/>
+												<xsd:enumeration value="J-2"/>
+												<xsd:enumeration value="M-1"/>
+												<xsd:enumeration value="M-2"/>
+												<xsd:enumeration value="Q-1"/>
+												<xsd:enumeration value="Q-2"/>
+												<xsd:enumeration value="Q-3"/>
+											</xsd:restriction>
+										</xsd:simpleType>
+									</xsd:element>
+									<!-- Visa Type Change -->
+									<xsd:element name="VisaTypeChangeGrp" minOccurs="0">
+										<xsd:complexType>
+											<xsd:sequence>
+												<!-- Visa Change Description -->
+												<xsd:element name="VisaChangeDesc">
+													<xsd:annotation>
+														<xsd:documentation>
+															<Description>Visa change description</Description>
+															<LineNumber>11</LineNumber>
+														</xsd:documentation>
+													</xsd:annotation>
+													<xsd:simpleType>
+														<xsd:restriction base="TextType">
+															<xsd:maxLength value="30"/>
+														</xsd:restriction>
+													</xsd:simpleType>
+												</xsd:element>
+												<!-- Visa Change Date -->
+												<xsd:element name="VisaChangeDt" type="DateType">
+													<xsd:annotation>
+														<xsd:documentation>
+															<Description>Visa change date</Description>
+															<LineNumber>11</LineNumber>
+														</xsd:documentation>
+													</xsd:annotation>
+												</xsd:element>
+											</xsd:sequence>
+										</xsd:complexType>
+									</xsd:element>
+								</xsd:sequence>
+							</xsd:complexType>
+						</xsd:element>
+						<!-- Current Tax Year Less 3 Teacher Visa -->
+						<xsd:element name="CurrTYLess3StudentVisaGrp" minOccurs="0">
+							<xsd:complexType>
+								<xsd:sequence>
+									<!-- Student Type Visa Code -->
+									<xsd:element name="StudentTypeVisaCd" minOccurs="0">
+										<xsd:annotation>
+											<xsd:documentation>
+												<Description>Student type visa code</Description>
+												<LineNumber>11</LineNumber>
+											</xsd:documentation>
+										</xsd:annotation>
+										<xsd:simpleType>
+											<xsd:restriction base="TextType">
+												<xsd:enumeration value="F-1"/>
+												<xsd:enumeration value="F-2"/>
+												<xsd:enumeration value="J-1"/>
+												<xsd:enumeration value="J-2"/>
+												<xsd:enumeration value="M-1"/>
+												<xsd:enumeration value="M-2"/>
+												<xsd:enumeration value="Q-1"/>
+												<xsd:enumeration value="Q-2"/>
+												<xsd:enumeration value="Q-3"/>
+											</xsd:restriction>
+										</xsd:simpleType>
+									</xsd:element>
+									<!-- Visa Type Change -->
+									<xsd:element name="VisaTypeChangeGrp" minOccurs="0">
+										<xsd:complexType>
+											<xsd:sequence>
+												<!-- Visa Change Description -->
+												<xsd:element name="VisaChangeDesc">
+													<xsd:annotation>
+														<xsd:documentation>
+															<Description>Visa change description</Description>
+															<LineNumber>11</LineNumber>
+														</xsd:documentation>
+													</xsd:annotation>
+													<xsd:simpleType>
+														<xsd:restriction base="TextType">
+															<xsd:maxLength value="30"/>
+														</xsd:restriction>
+													</xsd:simpleType>
+												</xsd:element>
+												<!-- Visa Change Date -->
+												<xsd:element name="VisaChangeDt" type="DateType">
+													<xsd:annotation>
+														<xsd:documentation>
+															<Description>Visa change date</Description>
+															<LineNumber>11</LineNumber>
+														</xsd:documentation>
+													</xsd:annotation>
+												</xsd:element>
+											</xsd:sequence>
+										</xsd:complexType>
+									</xsd:element>
+								</xsd:sequence>
+							</xsd:complexType>
+						</xsd:element>
+						<!-- Current Tax Year Less 4 Teacher Visa -->
+						<xsd:element name="CurrTYLess4StudentVisaGrp" minOccurs="0">
+							<xsd:complexType>
+								<xsd:sequence>
+									<!-- Student Type Visa Code -->
+									<xsd:element name="StudentTypeVisaCd" minOccurs="0">
+										<xsd:annotation>
+											<xsd:documentation>
+												<Description>Student type visa code</Description>
+												<LineNumber>11</LineNumber>
+											</xsd:documentation>
+										</xsd:annotation>
+										<xsd:simpleType>
+											<xsd:restriction base="TextType">
+												<xsd:enumeration value="F-1"/>
+												<xsd:enumeration value="F-2"/>
+												<xsd:enumeration value="J-1"/>
+												<xsd:enumeration value="J-2"/>
+												<xsd:enumeration value="M-1"/>
+												<xsd:enumeration value="M-2"/>
+												<xsd:enumeration value="Q-1"/>
+												<xsd:enumeration value="Q-2"/>
+												<xsd:enumeration value="Q-3"/>
+											</xsd:restriction>
+										</xsd:simpleType>
+									</xsd:element>
+									<!-- Visa Type Change -->
+									<xsd:element name="VisaTypeChangeGrp" minOccurs="0">
+										<xsd:complexType>
+											<xsd:sequence>
+												<!-- Visa Change Description -->
+												<xsd:element name="VisaChangeDesc">
+													<xsd:annotation>
+														<xsd:documentation>
+															<Description>Visa change description</Description>
+															<LineNumber>11</LineNumber>
+														</xsd:documentation>
+													</xsd:annotation>
+													<xsd:simpleType>
+														<xsd:restriction base="TextType">
+															<xsd:maxLength value="30"/>
+														</xsd:restriction>
+													</xsd:simpleType>
+												</xsd:element>
+												<!-- Visa Change Date -->
+												<xsd:element name="VisaChangeDt" type="DateType">
+													<xsd:annotation>
+														<xsd:documentation>
+															<Description>Visa change date</Description>
+															<LineNumber>11</LineNumber>
+														</xsd:documentation>
+													</xsd:annotation>
+												</xsd:element>
+											</xsd:sequence>
+										</xsd:complexType>
+									</xsd:element>
+								</xsd:sequence>
+							</xsd:complexType>
+						</xsd:element>
+						<!-- Current Tax Year Less 5 Teacher Visa -->
+						<xsd:element name="CurrTYLess5StudentVisaGrp" minOccurs="0">
+							<xsd:complexType>
+								<xsd:sequence>
+									<!-- Student Type Visa Code -->
+									<xsd:element name="StudentTypeVisaCd" minOccurs="0">
+										<xsd:annotation>
+											<xsd:documentation>
+												<Description>Student type visa code</Description>
+												<LineNumber>11</LineNumber>
+											</xsd:documentation>
+										</xsd:annotation>
+										<xsd:simpleType>
+											<xsd:restriction base="TextType">
+												<xsd:enumeration value="F-1"/>
+												<xsd:enumeration value="F-2"/>
+												<xsd:enumeration value="J-1"/>
+												<xsd:enumeration value="J-2"/>
+												<xsd:enumeration value="M-1"/>
+												<xsd:enumeration value="M-2"/>
+												<xsd:enumeration value="Q-1"/>
+												<xsd:enumeration value="Q-2"/>
+												<xsd:enumeration value="Q-3"/>
+											</xsd:restriction>
+										</xsd:simpleType>
+									</xsd:element>
+									<!-- Visa Type Change -->
+									<xsd:element name="VisaTypeChangeGrp" minOccurs="0">
+										<xsd:complexType>
+											<xsd:sequence>
+												<!-- Visa Change Description -->
+												<xsd:element name="VisaChangeDesc">
+													<xsd:annotation>
+														<xsd:documentation>
+															<Description>Visa change description</Description>
+															<LineNumber>11</LineNumber>
+														</xsd:documentation>
+													</xsd:annotation>
+													<xsd:simpleType>
+														<xsd:restriction base="TextType">
+															<xsd:maxLength value="30"/>
+														</xsd:restriction>
+													</xsd:simpleType>
+												</xsd:element>
+												<!-- Visa Change Date -->
+												<xsd:element name="VisaChangeDt" type="DateType">
+													<xsd:annotation>
+														<xsd:documentation>
+															<Description>Visa change date</Description>
+															<LineNumber>11</LineNumber>
+														</xsd:documentation>
+													</xsd:annotation>
+												</xsd:element>
+											</xsd:sequence>
+										</xsd:complexType>
+									</xsd:element>
+								</xsd:sequence>
+							</xsd:complexType>
+						</xsd:element>
+						<!-- Current Tax Year Less 6 Teacher Visa -->
+						<xsd:element name="CurrTYLess6StudentVisaGrp" minOccurs="0">
+							<xsd:complexType>
+								<xsd:sequence>
+									<!-- Student Type Visa Code -->
+									<xsd:element name="StudentTypeVisaCd" minOccurs="0">
+										<xsd:annotation>
+											<xsd:documentation>
+												<Description>Student type visa code</Description>
+												<LineNumber>11</LineNumber>
+											</xsd:documentation>
+										</xsd:annotation>
+										<xsd:simpleType>
+											<xsd:restriction base="TextType">
+												<xsd:enumeration value="F-1"/>
+												<xsd:enumeration value="F-2"/>
+												<xsd:enumeration value="J-1"/>
+												<xsd:enumeration value="J-2"/>
+												<xsd:enumeration value="M-1"/>
+												<xsd:enumeration value="M-2"/>
+												<xsd:enumeration value="Q-1"/>
+												<xsd:enumeration value="Q-2"/>
+												<xsd:enumeration value="Q-3"/>
+											</xsd:restriction>
+										</xsd:simpleType>
+									</xsd:element>
+									<!-- Visa Type Change -->
+									<xsd:element name="VisaTypeChangeGrp" minOccurs="0">
+										<xsd:complexType>
+											<xsd:sequence>
+												<!-- Visa Change Description -->
+												<xsd:element name="VisaChangeDesc">
+													<xsd:annotation>
+														<xsd:documentation>
+															<Description>Visa change description</Description>
+															<LineNumber>11</LineNumber>
+														</xsd:documentation>
+													</xsd:annotation>
+													<xsd:simpleType>
+														<xsd:restriction base="TextType">
+															<xsd:maxLength value="30"/>
+														</xsd:restriction>
+													</xsd:simpleType>
+												</xsd:element>
+												<!-- Visa Change Date -->
+												<xsd:element name="VisaChangeDt" type="DateType">
+													<xsd:annotation>
+														<xsd:documentation>
+															<Description>Visa change date</Description>
+															<LineNumber>11</LineNumber>
+														</xsd:documentation>
+													</xsd:annotation>
+												</xsd:element>
+											</xsd:sequence>
+										</xsd:complexType>
+									</xsd:element>
+								</xsd:sequence>
+							</xsd:complexType>
+						</xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+					
+			<!-- Present In U.S. As Teacher, Trainee, Or Student For Greater Than 5 Calendar Years Indicator -->
+			<xsd:element name="TeacherTraineeStdntGrtr5CYInd" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Present in U.S. as teacher, trainee, or student for greater than 5 calendar years indicator</Description>
+						<LineNumber>12</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+				<xsd:complexType>
+					<xsd:simpleContent>
+						<xsd:extension base="BooleanType">
+							<xsd:attribute name="referenceDocumentId" type="IdListType"/>
+							<xsd:attribute name="referenceDocumentName" type="TextType" fixed="PresentInUnitedStatesYesStatement"/>
+						</xsd:extension>
+					</xsd:simpleContent>
+				</xsd:complexType>
+			</xsd:element>
+			
+			<!-- Applied For Lawful Permanent Resident Status Indicator -->
+			<xsd:element name="AppLawfulPermanentResidentInd" type="BooleanType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Applied for lawful permanent resident status indicator</Description>
+						<LineNumber>13</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			
+			<!-- Applied For Lawful Permanent Resident Status Explanation -->
+			<xsd:element name="AppLawfulPermanentResExplnTxt" type="LineExplanationType" minOccurs="0" maxOccurs="100">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Applied for lawful permanent resident status indicator</Description>
+						<LineNumber>14</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			
+			<!-- =============== Part IV Professional Athletes =============== -->
+			
+			<!-- Charitable Sporting Events Competed In -->
+			<xsd:element name="USChrtblSportEvtCompetitionGrp" minOccurs="0" maxOccurs="20">
+				<xsd:complexType>
+					<xsd:sequence>
+						<!-- Event Name -->
+						<xsd:element name="EventNameTxt" type="LineExplanationType">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Event name</Description>
+									<LineNumber>15</LineNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						<!-- Charitable Event Date -->
+						<xsd:element name="CharitableEventDt" type="DateType">
+							<xsd:annotation>
+								<xsd:documentation>
+									<Description>Charitable event date</Description>
+									<LineNumber>15</LineNumber>
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			
+			<!-- Sporting Event Benefiting Charitable Organization -->
+			<xsd:element name="SportEvtBnftCharitableOrgGrp" minOccurs="0" maxOccurs="20">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Sporting Event Benefiting Charitable Organization</Description>
+					</xsd:documentation>
+				</xsd:annotation>
+				<xsd:complexType>
+					<xsd:complexContent>
+						<xsd:extension base="SportEvtBnftCharitableOrgType">
+							<xsd:attribute name="referenceDocumentId" type="IdListType" />
+							<xsd:attribute name="referenceDocumentName" type="StringType" fixed="ContributeCharitableInformationStatement" />
+						</xsd:extension>
+					</xsd:complexContent>
+				</xsd:complexType>
+			</xsd:element>
+			
+			<!-- =============== Part V Individuals With a Medical Condition or Medical Problem =============== -->
+			
+			<!-- Medical Condition Description -->
+			<xsd:element name="MedicalConditionDesc" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Medical condition description</Description>
+						<LineNumber>17a</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+				<xsd:complexType>
+					<xsd:simpleContent>
+						<xsd:extension base="LineExplanationType">
+							<xsd:attribute name="referenceDocumentId" type="IdListType"/>
+							<xsd:attribute name="referenceDocumentName" type="TextType" fixed="BinaryAttachment"/>
+						</xsd:extension>
+					</xsd:simpleContent>
+				</xsd:complexType>
+			</xsd:element>
+			
+			<!-- Intended U.S. Departure Date -->
+			<xsd:element name="IntendedUSDepartureDt" type="DateType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Intended U.S. departure date</Description>
+						<LineNumber>17b</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			
+			<!-- Departed U.S. Date -->
+			<xsd:element name="DepartedUSDt" type="DateType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Departed U.S. date</Description>
+						<LineNumber>17c</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			
+		</xsd:sequence>
+	</xsd:complexType>
+	
+	<xsd:complexType name="SportEvtBnftCharitableOrgType">
+		<xsd:sequence>
+			<!-- Organization Business Name -->
+			<xsd:element name="OrganizationBusinessName" type="BusinessNameType">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Organization business name</Description>
+						<LineNumber>16</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<!-- EIN -->
+			<xsd:element name="EIN" type="EINType">
+				<xsd:annotation>
+					<xsd:documentation>
+						<Description>Employer identification number</Description>
+						<LineNumber>16</LineNumber>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+
+</xsd:schema>
